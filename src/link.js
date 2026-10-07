@@ -47,10 +47,13 @@ export async function pair(code) {
 
 /** The signed-in member, if this is someone's own phone or laptop rather than a store mirror. */
 export let member = null;
+/** True for the founder or a store's own user: the people who may change how the mirror is set up. */
+export let staff = false;
 export async function whoIsHere() {
   try {
     const me = await (await fetch("/api/me", { headers: auth(), signal: timeout(15000) })).json();
     member = me.user?.role === "member" ? me : null;
+    staff = me.user?.role === "founder" || me.user?.role === "retailer";
   } catch {
     member = null;
   }

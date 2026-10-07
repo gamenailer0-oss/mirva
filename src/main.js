@@ -103,7 +103,16 @@ const caption = (text) => replay($("#caption"), text);
 
 // True when a shopper is at the screen: a paired store mirror, or a member's own device.
 // Then nothing about keys, dollars or settings belongs on the glass.
-const forShopper = () => !!(link.pairedTo() || link.member);
+// On a public address that is everyone except the founder and a store's own staff.
+const forShopper = () => !!(link.pairedTo() || link.member || (S.config?.open === false && !link.staff));
+// On a public address a look is made only for a member, a paired store mirror, or staff.
+const mustJoin = () => S.config?.open === false && !link.member && !link.pairedTo() && !link.staff;
+function askToJoin() {
+  caption("Join free to see this on you. It takes a minute.");
+  const t = $("#toast");
+  t.replaceChildren(h("span", { text: "Membership is free, and your pictures stay yours." }), h("a", { href: "/account?join=1", text: "Join free" }));
+  t.hidden = false;
+}
 const RESTING = "Try-on is resting just now. Please try again in a little while.";
 
 function friendly(e) {
@@ -596,6 +605,7 @@ async function thumbOf(blob, width = 300) {
 // Model: one portrait of the shopper in the piece, lit like a studio photograph.
 async function modelShot(p, { retake = false } = {}) {
   mirror.touch();
+  if (mustJoin()) return askToJoin();
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Portraits are off. Add your Decart key to the .env file and restart.");
   const ticket = ++S.ticket;
@@ -645,6 +655,7 @@ async function modelShot(p, { retake = false } = {}) {
 // Studio: the piece on her, live, in the mirror.
 async function studio(p) {
   mirror.touch();
+  if (mustJoin()) return askToJoin();
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Live try-on is off. Add your Decart key to the .env file and restart.");
   // At home, live video is a Private perk: it costs by the second and no store is paying for it.
