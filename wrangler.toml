@@ -1,0 +1,39 @@
+# MIRVA on Cloudflare: one Worker that serves the pages in public/ and runs the app in worker/.
+# Free plan is enough to start. The two ids below are filled in by `npm run cloud:setup`.
+name = "mirva"
+main = "worker/index.mjs"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+html_handling = "none"
+not_found_handling = "none"
+run_worker_first = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mirva"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+[[kv_namespaces]]
+binding = "FILES"
+id = "00000000000000000000000000000000"
+
+[triggers]
+crons = ["17 */6 * * *"]
+
+[observability]
+enabled = true
+
+# Settings, not secrets. The Decart key and the setup key are secrets: `npx wrangler secret put NAME`.
+[vars]
+MIRVA_SESSION_SECONDS = "120"
+MIRVA_IDLE_SECONDS = "60"
+MIRVA_SHOTS_PER_HOUR = "30"
+MIRVA_SESSIONS_PER_HOUR = "20"
+# The most the try-on engine may cost in one day, in US dollars, before MIRVA says it is resting.
+MIRVA_DAILY_USD = "5"
+MIRVA_PAYMENTS = "off"

@@ -1,0 +1,126 @@
+/* The store's site, and the page MIRVA prepares for one store. Builds on brand.css. */
+
+.brandmark .for { font: 400 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding-left: 10px; border-left: 1px solid var(--line); }
+.head { max-width: 24em; margin-bottom: clamp(36px, 5vw, 72px); }
+.ticks { display: grid; gap: 12px; }
+.ticks li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: baseline; }
+.ticks li::before { content: ""; width: 14px; height: 8px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(-45deg); opacity: .7; }
+.center { text-align: center; justify-items: center; margin-inline: auto; }
+.r-hero [data-reveal], .p-hero [data-reveal] { opacity: 1; transform: none; transition: none; animation: enter var(--slow) var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
+@keyframes enter { from { opacity: 0; transform: translateY(18px); } }
+
+/* ---------- hero: the glass and the tablet, side by side as they stand in a store ---------- */
+.r-hero { padding: clamp(56px, 8vw, 110px) 0 clamp(64px, 9vw, 120px); overflow: hidden; }
+.r-hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
+.r-hero .display { font-size: clamp(40px, 6.2vw, 88px); }
+.duo { position: relative; display: grid; justify-items: center; padding: 0 0 40px 0; }
+.duo-glass { width: clamp(200px, 22vw, 290px); }
+.crest { position: absolute; top: 13%; left: 0; right: 0; text-align: center; z-index: 3; }
+.crest .wm { display: block; font: 500 clamp(13px, 1.3vw, 17px)/1 var(--serif); letter-spacing: .34em; margin-right: -.34em; }
+.crest .by { display: block; margin-top: 7px; font: 400 9px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; opacity: .75; }
+.duo-line { position: absolute; left: 10%; right: 10%; top: 40%; font-size: clamp(18px, 1.9vw, 25px); z-index: 3; }
+.duo-tablet { position: absolute; right: 0; bottom: 0; width: min(250px, 62%); padding: 18px; border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line), 0 40px 80px -40px rgba(12, 16, 24, .5); display: grid; gap: 12px; z-index: 6; }
+.duo-tablet .voice { font-size: 19px; line-height: 1.15; }
+.duo-tablet .chip { min-height: 30px; padding: 0 11px; font-size: 12px; }
+.duo-tablet .row { gap: 6px; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.trio i { display: block; aspect-ratio: 3 / 4; border-radius: 9px; }
+
+/* ---------- four kinds of store ---------- */
+.seg { margin-bottom: var(--s5); }
+.seg .chip { min-height: 46px; padding: 0 20px; font-size: 15.5px; }
+.seg .chip[aria-selected="true"] { background: var(--ink); color: var(--panel); box-shadow: none; }
+.seg-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
+.seg-panel .subtitle { font-size: clamp(24px, 2.8vw, 36px); }
+.seg-panel.swap > * { animation: enter var(--calm) var(--ease) both; }
+.seg-plan { display: grid; gap: 4px; padding-top: var(--s5); border-top: 1px solid var(--line); }
+.seg-plan b { font: 400 30px/1.1 var(--serif); }
+
+/* ---------- the visit ---------- */
+.visit { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
+.visit li { display: grid; gap: 10px; align-content: start; padding-top: var(--s4); border-top: 1px solid var(--ink); }
+.visit .n { font: 400 15px/1 var(--serif); color: var(--muted); }
+.visit .subtitle { font-size: 24px; }
+
+/* ---------- your catalogue ---------- */
+.try { display: grid; grid-template-columns: 1fr auto; gap: var(--s2); max-width: 520px; }
+.try .input { background: rgba(255, 255, 255, .06); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.try .input:focus { box-shadow: inset 0 0 0 1.5px var(--pearl); }
+.dark .formnote { color: #f0b0a8; }
+.ready { display: grid; gap: var(--s4); align-content: start; animation: enter var(--slow) var(--ease) both; --panel: #151924; }
+.ready-wait { display: grid; justify-items: center; }
+.ready-wait .glass { width: clamp(180px, 20vw, 250px); }
+
+/* ---------- what you learn ---------- */
+.dash { display: grid; gap: var(--s5); }
+.funnel { display: grid; gap: 14px; }
+.funnel > div { display: grid; grid-template-columns: 76px 1fr; gap: 2px 14px; align-items: baseline; }
+.funnel b { font: 400 26px/1 var(--serif); }
+.funnel span { color: var(--muted); font-size: 14.5px; }
+.funnel i { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: var(--ink); transform-origin: left; transform: scaleX(var(--v)); }
+.missed li { display: flex; justify-content: space-between; gap: var(--s4); padding: 11px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.missed b { font-weight: 500; white-space: nowrap; }
+
+/* ---------- plans ---------- */
+.plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); margin-bottom: var(--s7); }
+.plan { display: grid; gap: var(--s4); align-content: start; padding: clamp(20px, 2.2vw, 28px); border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); transition: transform var(--calm) var(--ease), box-shadow var(--calm); }
+.plan.suggested { box-shadow: 0 0 0 1.5px var(--ink); }
+.plan h3 { font: 400 28px/1 var(--serif); }
+.plan .fee { font: 400 clamp(26px, 2.6vw, 34px)/1 var(--serif); }
+.plan .fee small { display: block; margin-top: 6px; font: 400 13px/1.3 var(--sans); color: var(--muted); }
+.plan dl { display: grid; gap: 9px; font-size: 14.5px; }
+.plan dl div { display: flex; justify-content: space-between; gap: var(--s3); padding-top: 9px; border-top: 1px solid var(--line); }
+.plan dt { color: var(--muted); }
+.plan dd { text-align: right; }
+.terms p + p { margin-top: 8px; }
+
+/* ---------- the sum ---------- */
+.calc { margin-top: var(--s3); }
+.result { display: grid; gap: var(--s4); align-content: start; position: sticky; top: 96px; box-shadow: none; }
+.result .big { font: 400 clamp(56px, 7vw, 96px)/.95 var(--serif); }
+.figures { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s5); }
+.figures dt { font: 500 11px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.figures dd { font: 400 24px/1.2 var(--serif); margin-top: 4px; }
+
+/* ---------- pilot, promises, contact ---------- */
+.steps { display: grid; gap: var(--s5); counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 44px 1fr; gap: var(--s4); }
+.steps li::before { counter-increment: s; content: counter(s, decimal-leading-zero); font: 400 22px/1.2 var(--serif); color: var(--muted); }
+.promises { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+.promises li { display: grid; gap: var(--s3); align-content: start; padding-top: var(--s5); border-top: 1px solid var(--line); }
+.promises .subtitle { font-size: 25px; }
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.sent { display: grid; gap: var(--s4); align-content: center; min-height: 320px; animation: enter var(--slow) var(--ease) both; }
+
+/* ---------- the page prepared for one store ---------- */
+.p-hero { padding: clamp(56px, 8vw, 110px) 0 clamp(48px, 7vw, 90px); }
+.p-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
+.p-glass { width: clamp(220px, 24vw, 320px); justify-self: center; }
+.p-glass .crest .wm { color: var(--pearl); }
+.p-glass .tint { position: absolute; inset: 0; background: radial-gradient(80% 50% at 50% 100%, color-mix(in oklab, var(--store, #8d95a6) 55%, transparent), transparent 70%); z-index: 1; }
+.rail { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1.2vw, 16px); }
+.rail figure { display: grid; gap: 8px; }
+.rail img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: var(--r-md); background: var(--card); }
+.rail figcaption { font-size: 13px; line-height: 1.3; color: var(--muted); }
+.noticed { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: clamp(14px, 2vw, 24px); }
+.noticed .card { display: grid; gap: var(--s3); align-content: start; }
+.noticed .fig { font: 400 clamp(40px, 4.6vw, 60px)/1 var(--serif); }
+.store-accent { color: var(--store-text, inherit); }
+
+@media (max-width: 1000px) {
+  .plans { grid-template-columns: 1fr 1fr; }
+  .visit { grid-template-columns: 1fr 1fr; }
+  .rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .r-hero-grid, .p-hero-grid, .seg-panel { grid-template-columns: 1fr; }
+  .duo { max-width: 380px; margin-inline: auto; width: 100%; }
+  .promises { grid-template-columns: 1fr 1fr; }
+  .result { position: static; }
+}
+@media (max-width: 560px) {
+  .plans, .visit, .promises { grid-template-columns: 1fr; }
+  .try { grid-template-columns: 1fr; }
+  .figures { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) { .brandmark .for { display: none; } }

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en" data-mood="porcelain">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="MIRVA for stores: a stylist that asks three questions, picks three looks from your own rails and shows each one on the shopper. See it on your own catalogue in a minute.">
+<meta name="theme-color" content="#e7eaf0">
+<title>MIRVA for stores — your best stylist, in every store</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/brand.css">
+<link rel="stylesheet" href="/retail/retail.css">
+<link rel="modulepreload" href="/dist/retail.js">
+</head>
+<body data-page="retail">
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="nav" id="nav">
+  <a class="brandmark" href="/retail">
+    <svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>MIRVA</span><span class="for">for stores</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+  <nav class="nav-links" id="navLinks" aria-label="Main">
+    <a href="#visit">A visit</a>
+    <a href="#yours">Your catalogue</a>
+    <a href="#learn">What you learn</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#pilot">Pilot</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="btn ghost small hide-s" href="/console">Store console</a>
+    <a class="btn small" href="#talk">Book a demo</a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 1 -->
+  <section class="r-hero band">
+    <div class="wrap r-hero-grid">
+      <div class="stack">
+        <p class="kicker" data-reveal>MIRVA for stores</p>
+        <h1 class="display" data-reveal style="--i:1">Your best stylist, <em>in every store, on every shift.</em></h1>
+        <p class="lede" data-reveal style="--i:2">MIRVA asks a shopper three questions, picks three looks from your own rails, and shows her each one on herself. You see what she tried, what she kept, and which size you didn't have.</p>
+        <div class="row" data-reveal style="--i:3">
+          <a class="btn" href="#yours">See it on your catalogue</a>
+          <a class="btn ghost" href="#talk">Book a demo</a>
+        </div>
+      </div>
+      <div class="duo" data-reveal style="--i:2" aria-hidden="true">
+        <div class="glass duo-glass">
+          <svg class="halo breathe" viewBox="0 0 200 44"><path class="track" d="M14 38Q100 -8 186 38" pathLength="100"/><path class="arc" d="M14 38Q100 -8 186 38" pathLength="100"/></svg>
+          <div class="crest"><span class="wm">YOUR STORE</span><span class="by">styled by MIRVA</span></div>
+          <p class="voice duo-line">This is you in it.</p>
+        </div>
+        <div class="duo-tablet">
+          <p class="voice">What are we shopping for?</p>
+          <div class="row"><span class="chip on">A wedding</span><span class="chip">Eid</span><span class="chip">Work</span></div>
+          <div class="trio"><i class="swatch" style="--a:#3aa58c;--b:#0b3029"></i><i class="swatch" style="--a:#f6efdf;--b:#a98c56"></i><i class="swatch" style="--a:#5a356f;--b:#120d1f"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. the same product, told four ways -->
+  <section class="section tight" id="you">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>Start with your kind of store</p>
+        <h2 class="title" data-reveal style="--i:1">Which of these <em>is closest to you?</em></h2>
+      </div>
+      <div class="row seg" role="tablist" aria-label="Kind of store" data-reveal>
+        <button class="chip" type="button" role="tab" data-seg="formal" aria-selected="true">A formal-wear house</button>
+        <button class="chip" type="button" role="tab" data-seg="chain" aria-selected="false">A chain of stores</button>
+        <button class="chip" type="button" role="tab" data-seg="boutique" aria-selected="false">An owner-led boutique</button>
+        <button class="chip" type="button" role="tab" data-seg="unstitched" aria-selected="false">An unstitched label</button>
+      </div>
+      <div class="seg-panel card" id="segPanel" role="tabpanel" aria-live="polite" data-reveal>
+        <div class="stack">
+          <p class="kicker" id="segKicker">Where the sale is lost</p>
+          <p class="subtitle voice" id="segPain">The sale happens at the fitting room, and on a Saturday there is a queue for it.</p>
+          <p class="muted" id="segAnswer">The mirror gives every shopper a first fitting without a room: three formal looks on her in about a minute, so the fitting room is kept for the one she means to buy.</p>
+        </div>
+        <div class="stack">
+          <ul class="ticks" id="segPoints"><li>Portraits in your formal pieces, lit to sell them</li><li>Fewer fittings that end in nothing</li><li>A record of what was tried and left behind</li></ul>
+          <div class="seg-plan"><span class="kicker">Where most stores like yours start</span><b id="segPlan">Studio</b><a class="link arrow" href="#pricing">See the plans </a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="section band" id="visit">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>A visit, start to finish</p>
+        <h2 class="title" data-reveal style="--i:1">About four minutes. <em>No staff needed to begin.</em></h2>
+      </div>
+      <ol class="visit">
+        <li data-reveal><span class="n">01</span><h3 class="subtitle">She arrives.</h3><p class="muted">The mirror is a mirror until she steps up. Your name is on it, not ours.</p></li>
+        <li data-reveal style="--i:1"><span class="n">02</span><h3 class="subtitle">It asks.</h3><p class="muted">The occasion, the mood, the budget. Three taps, or one sentence.</p></li>
+        <li data-reveal style="--i:2"><span class="n">03</span><h3 class="subtitle">It chooses.</h3><p class="muted">Three looks from your catalogue, with a reason for each and the sizes you have.</p></li>
+        <li data-reveal style="--i:3"><span class="n">04</span><h3 class="subtitle">She wears it.</h3><p class="muted">As a studio portrait in fifteen seconds, or live in the glass, turning to see it move.</p></li>
+        <li data-reveal style="--i:4"><span class="n">05</span><h3 class="subtitle">She keeps it.</h3><p class="muted">One scan sends the looks to her phone, with what goes with them: the trouser, the dupatta, the shoes.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="section dark" id="yours">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="kicker" data-reveal>Your catalogue</p>
+        <h2 class="title" data-reveal style="--i:1">See MIRVA dressed <em>as your store.</em></h2>
+        <p class="lede" data-reveal style="--i:2">Type your store's web address. MIRVA reads your public catalogue, takes your name, and opens a mirror stocked with your own pieces. It takes about a minute, and nobody will call you.</p>
+        <form class="try" id="tryForm" data-reveal style="--i:3" novalidate>
+          <label class="sr" for="tryInput">Your store's web address</label>
+          <input class="input" id="tryInput" name="domain" placeholder="yourstore.com" autocomplete="url" inputmode="url" spellcheck="false" autocapitalize="off">
+          <button class="btn" type="submit">Dress it</button>
+        </form>
+        <p class="formnote" id="tryNote" role="status"></p>
+        <p class="fine" data-reveal style="--i:4">Works straight away for stores on Shopify. On another platform? Send us a product export and we load it for your demo.</p>
+      </div>
+      <div class="ready card" id="tryReady" hidden>
+        <p class="kicker">Ready</p>
+        <p class="subtitle voice" id="tryName"></p>
+        <p class="muted" id="tryFacts"></p>
+        <div class="row"><a class="btn" id="tryMirror" href="/mirror">Open your mirror</a><a class="btn ghost" id="tryPitch" href="/retail">The page we prepared for you</a></div>
+      </div>
+      <div class="ready-wait" id="tryWait" aria-hidden="true">
+        <div class="glass"><svg class="halo breathe" id="tryHalo" viewBox="0 0 200 44"><path class="track" d="M14 38Q100 -8 186 38" pathLength="100"/><path class="arc" d="M14 38Q100 -8 186 38" pathLength="100"/></svg><div class="crest"><span class="wm" id="tryWord">YOUR STORE</span><span class="by">styled by MIRVA</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="section" id="learn">
+    <div class="wrap split wide-left">
+      <div class="dash card" data-reveal aria-label="An example of the store console, with sample numbers">
+        <div class="row" style="justify-content:space-between"><p class="kicker">This month</p><span class="badge soft">Sample numbers</span></div>
+        <div class="funnel">
+          <div><b class="num">1,108</b><span>stepped up</span><i style="--v:1"></i></div>
+          <div><b class="num">771</b><span>saw three looks</span><i style="--v:.70"></i></div>
+          <div><b class="num">612</b><span>tried one on</span><i style="--v:.55"></i></div>
+          <div><b class="num">338</b><span>kept a look</span><i style="--v:.31"></i></div>
+          <div><b class="num">186</b><span>sent it to a phone</span><i style="--v:.17"></i></div>
+        </div>
+        <hr class="rule">
+        <p class="kicker">Asked for, and not on the rail</p>
+        <ul class="missed"><li><span>Embroidered raw silk suit</span><b>Size M · 14 asks</b></li><li><span>Velvet, floor length</span><b>Size S · 9 asks</b></li><li><span>Printed kaftan</span><b>Size L · 6 asks</b></li></ul>
+      </div>
+      <div class="stack">
+        <p class="kicker" data-reveal>What you learn</p>
+        <h2 class="title" data-reveal style="--i:1">The questions your till <em>can't answer.</em></h2>
+        <p class="lede" data-reveal style="--i:2">A till knows what sold. MIRVA knows what was wanted: what she came in for, what she tried and left, and the size she asked for that wasn't there.</p>
+        <ul class="ticks" data-reveal style="--i:3">
+          <li>Occasions shoppers are buying for, week by week</li>
+          <li>Pieces tried often and kept rarely</li>
+          <li>Sizes asked for that were out of stock</li>
+          <li>What the try-ons cost to run, to the rupee</li>
+        </ul>
+        <a class="link arrow" href="/console" data-reveal style="--i:4">Open the demo console </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="section band" id="pricing">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>Pricing</p>
+        <h2 class="title" data-reveal style="--i:1">A monthly fee for each store. <em>Nothing per shopper until you're busy.</em></h2>
+      </div>
+      <div class="plans" id="plans"><noscript><p>Assist Rs.35,000, Studio Rs.95,000, Flagship Rs.160,000, Boutique Rs.50,000 plus 2% of matched sales. Each a store a month.</p></noscript></div>
+      <div class="cols terms" data-reveal>
+        <div><p class="kicker">What a session is</p><p class="muted">One shopper who reaches at least one look, with up to four portraits or live looks of her own. Browsing costs nothing.</p></div>
+        <div><p class="kicker">Beyond the allowance</p><p class="muted" id="extraLine">Rs.90 a session, up to a monthly cap that you set.</p></div>
+        <div><p class="kicker">Term</p><p class="muted">Twelve months, billed each quarter in advance, in rupees. Mirrors are leased, installed and replaced by MIRVA.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="section" id="worth">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="kicker" data-reveal>Is it worth it for you</p>
+        <h2 class="title" data-reveal style="--i:1">Do the sum <em>with your own numbers.</em></h2>
+        <p class="lede" data-reveal style="--i:2">We won't promise you an uplift. This shows how small it would have to be for MIRVA to pay for itself, and what it would cost you if nothing changed.</p>
+        <form class="calc form" id="calc" data-reveal style="--i:3">
+          <div class="form-2">
+            <label class="field"><span>Plan</span><select name="plan"></select></label>
+            <label class="field"><span>Stores</span><input name="stores" type="number" min="1" max="500" value="2" inputmode="numeric"></label>
+            <label class="field"><span>Shoppers a day, each store</span><input name="visitors" type="number" min="1" max="5000" value="120" inputmode="numeric"></label>
+            <label class="field"><span>Share who use MIRVA, %</span><input name="share" type="number" min="1" max="100" value="15" inputmode="numeric"></label>
+            <label class="field"><span>Of those, how many buy today, %</span><input name="conversion" type="number" min="1" max="100" value="18" inputmode="numeric"></label>
+            <label class="field"><span>Average bill, Rs.</span><input name="ticket" type="number" min="100" max="2000000" step="500" value="22000" inputmode="numeric"></label>
+            <label class="field"><span>Your gross margin, %</span><input name="margin" type="number" min="1" max="100" value="50" inputmode="numeric"></label>
+          </div>
+          <p class="fine">Starting points only. Every number here is yours to change.</p>
+        </form>
+      </div>
+      <div class="result card dark" id="result" data-reveal style="--i:1" aria-live="polite">
+        <p class="kicker">To pay for itself</p>
+        <p class="big num" id="rBreak">—</p>
+        <p class="muted" id="rBreakLine"></p>
+        <hr class="rule">
+        <dl class="figures">
+          <div><dt>MIRVA, a month</dt><dd class="num" id="rFee">—</dd></div>
+          <div><dt>Sessions you'd use</dt><dd class="num" id="rSessions">—</dd></div>
+          <div><dt>One extra sale in every</dt><dd class="num" id="rOneIn">—</dd></div>
+          <div><dt>Setup, once</dt><dd class="num" id="rSetup">—</dd></div>
+        </dl>
+        <p class="fine" id="rNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="section band" id="pilot">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="kicker" data-reveal>The pilot</p>
+        <h2 class="title" data-reveal style="--i:1">Thirty days. One store. <em>A written result.</em></h2>
+        <p class="lede" data-reveal style="--i:2">Before either of us signs for a year, we agree what success means, in numbers, and measure it in one of your stores.</p>
+        <a class="btn" href="#talk" data-reveal style="--i:3">Ask about a pilot</a>
+      </div>
+      <ol class="steps" data-reveal style="--i:1">
+        <li><div><b>Before day one.</b><p class="muted">We load your catalogue, agree the measures, and install the mirror. Your staff get twenty minutes of training.</p></div></li>
+        <li><div><b>Days 1 to 30.</b><p class="muted">The mirror runs in the store. You see the numbers every day in your console; we review them with you every week.</p></div></li>
+        <li><div><b>Day 30.</b><p class="muted">A short written report against the measures we agreed. You decide whether to keep it. If not, we take the mirror away.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="section tight">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>Your shoppers, your data</p>
+        <h2 class="title" data-reveal style="--i:1">Built for a country where <em>a woman's photograph matters.</em></h2>
+      </div>
+      <ul class="promises">
+        <li data-reveal><h3 class="subtitle">Nothing is recorded.</h3><p class="muted">The camera is a mirror. A single frame leaves it only when she asks for a look, and a store mirror stores no portraits.</p></li>
+        <li data-reveal style="--i:1"><h3 class="subtitle">Her choice, every time.</h3><p class="muted">A notice at the mirror says what happens in plain words. Nothing reaches her phone unless she scans the code herself.</p></li>
+        <li data-reveal style="--i:2"><h3 class="subtitle">Your numbers stay yours.</h3><p class="muted">What happens in your stores is never used to sell for another retailer, and no other retailer sees it.</p></li>
+        <li data-reveal style="--i:3"><h3 class="subtitle">You hold the controls.</h3><p class="muted">Pair or unpair a mirror from your console, hide a piece, change how MIRVA dresses for you. No call to us needed.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section tight band">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="kicker" data-reveal>Straight answers</p>
+        <h2 class="title" data-reveal style="--i:1">What people <em>ask us first.</em></h2>
+      </div>
+      <div data-reveal style="--i:1">
+        <details class="faq"><summary>How accurate is the picture?</summary><div>It is a likeness, good enough to choose with. Colour, cut and drape come out well. Fine embroidery and small prints come out close, not exact. It helps a shopper decide what to try; it does not replace the fitting.</div></details>
+        <details class="faq"><summary>What do you need from us?</summary><div>Your catalogue with one clear front picture of each piece, a spot near the entrance with a power socket, and a wired or strong Wi-Fi connection. We bring and install the mirror.</div></details>
+        <details class="faq"><summary>Does it connect to our till or stock system?</summary><div>Not yet. Today MIRVA reads the sizes and stock on your website. For Boutique, a sale is matched by a code at the till. A direct connection is something we would build with a first chain partner.</div></details>
+        <details class="faq"><summary>What if the internet drops?</summary><div>Portraits and live looks need a connection. If it drops, the mirror says so in plain words and carries on when the line is back. We test the store's line before we install anything.</div></details>
+        <details class="faq"><summary>Is it in Urdu?</summary><div>The mirror speaks English today. Urdu is next, written by a native speaker rather than translated by a machine.</div></details>
+        <details class="faq"><summary>Who is behind MIRVA?</summary><div>MIRVA is new and small, and built in Lahore. That is why the first stores get the founder's phone number and a say in what is built next.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="section" id="talk">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="kicker" data-reveal>Talk to us</p>
+        <h2 class="title" data-reveal style="--i:1">Fifteen minutes, <em>on your own catalogue.</em></h2>
+        <p class="lede" data-reveal style="--i:2">Leave your details and you'll hear from the founder within two working days, with a time to show you MIRVA dressed as your store.</p>
+      </div>
+      <form class="card form" id="leadForm" data-reveal style="--i:1" novalidate>
+        <div class="form-2">
+          <label class="field"><span>Your name</span><input name="name" autocomplete="name" required maxlength="80"></label>
+          <label class="field"><span>Store or company</span><input name="company" autocomplete="organization" required maxlength="100"></label>
+          <label class="field"><span>Your role</span><input name="role" autocomplete="organization-title" maxlength="60"></label>
+          <label class="field"><span>City</span><input name="city" autocomplete="address-level2" maxlength="40" value="Lahore"></label>
+          <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+          <label class="field"><span>Phone or WhatsApp</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24"></label>
+          <label class="field"><span>Number of stores</span><input name="stores" type="number" min="0" max="5000" inputmode="numeric"></label>
+          <label class="field"><span>Plan you're curious about</span><select name="plan"><option value="">Not sure yet</option><option value="assist">Assist</option><option value="studio">Studio</option><option value="flagship">Flagship</option><option value="boutique">Boutique</option></select></label>
+        </div>
+        <label class="field"><span>Anything we should know</span><textarea name="message" maxlength="1200" placeholder="Your busiest days, what your fitting rooms are like, what you'd want to measure"></textarea></label>
+        <label class="trap" aria-hidden="true">Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label>
+        <input type="hidden" name="segment" value="formal">
+        <input type="hidden" name="source" value="retail site">
+        <p class="formnote" role="alert"></p>
+        <button class="btn" type="submit">Send</button>
+        <p class="fine">We use these details to reply to you, and for nothing else.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="stack close">
+        <a class="brandmark" href="/retail"><svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>MIRVA</span></a>
+        <p class="fine">The mirror that styles you.<br>Made in Lahore.</p>
+      </div>
+      <div><h3>Stores</h3><ul><li><a href="#yours">See it on your catalogue</a></li><li><a href="#pricing">Pricing</a></li><li><a href="/console">Store console</a></li></ul></div>
+      <div><h3>Shoppers</h3><ul><li><a href="/">What shoppers see</a></li><li><a href="/membership">Membership</a></li><li><a href="/mirror">The mirror</a></li></ul></div>
+      <div><h3>The small print</h3><ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></div>
+    </div>
+    <div class="foot-note fine"><span>© 2026 MIRVA</span><span>Demo looks come from stores' public catalogues and are shown as a concept. MIRVA is not affiliated with those stores.</span></div>
+  </div>
+</footer>
+<script type="module" src="/dist/retail.js"></script>
+</body>
+</html>

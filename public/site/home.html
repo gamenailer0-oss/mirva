@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" data-mood="porcelain">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="MIRVA is the mirror that styles you. Say the occasion, see three looks from the store's own rails, and wear each one on yourself before you ask for a size.">
+<meta name="theme-color" content="#06070a">
+<title>MIRVA — the mirror that styles you</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/brand.css">
+<link rel="stylesheet" href="/site/site.css">
+<link rel="modulepreload" href="/dist/site.js">
+</head>
+<body data-page="home">
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="nav on-dark" id="nav">
+  <a class="brandmark" href="/" aria-label="MIRVA, home">
+    <svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>MIRVA</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+  <nav class="nav-links" id="navLinks" aria-label="Main">
+    <a href="/#how">How it works</a>
+    <a href="/membership">Membership</a>
+    <a href="/#privacy">Your pictures</a>
+    <a href="/retail">For stores</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="btn ghost small hide-s" href="/account" data-account>Sign in</a>
+    <a class="btn small" href="/mirror">Open the mirror</a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 1. A mirror in a dark room -->
+  <section class="hero dark">
+    <div class="wrap hero-grid">
+      <div class="hero-copy stack">
+        <p class="kicker" data-reveal>A new kind of fitting room</p>
+        <h1 class="display" data-reveal style="--i:1">The mirror that <em>styles you.</em></h1>
+        <p class="lede" data-reveal style="--i:2">Tell it the occasion. It finds three looks on the store's own rails and shows you each one on yourself, before you ask anyone for a size.</p>
+        <div class="row" data-reveal style="--i:3">
+          <a class="btn" href="/account?join=1">Join free</a>
+          <a class="btn ghost" href="/mirror">Try it at home</a>
+        </div>
+        <p class="fine" data-reveal style="--i:4">Free for shoppers, for good. Your pictures stay yours.</p>
+      </div>
+
+      <div class="hero-stage" data-reveal style="--i:2" aria-hidden="true">
+        <div class="glass hero-glass">
+          <svg class="halo" viewBox="0 0 200 44">
+            <path class="track" d="M14 38Q100 -8 186 38" pathLength="100"/>
+            <path class="arc" d="M14 38Q100 -8 186 38" pathLength="100"/>
+            <path class="arc spark" d="M14 38Q100 -8 186 38" pathLength="100"/>
+          </svg>
+          <svg class="figure" viewBox="0 0 240 427" preserveAspectRatio="xMidYMax meet">
+            <defs>
+              <linearGradient id="silk" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#3aa58c"/><stop offset=".55" stop-color="#17614f"/><stop offset="1" stop-color="#0b3029"/></linearGradient>
+              <linearGradient id="ivory" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#f6efdf"/><stop offset=".6" stop-color="#dccdaa"/><stop offset="1" stop-color="#a98c56"/></linearGradient>
+              <linearGradient id="velvet" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#5a356f"/><stop offset=".55" stop-color="#2c1b3f"/><stop offset="1" stop-color="#120d1f"/></linearGradient>
+              <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4154"/><stop offset="1" stop-color="#232838"/></linearGradient>
+            </defs>
+            <!-- the shopper, as the mirror sees her before a look is on -->
+            <ellipse cx="120" cy="414" rx="62" ry="5" fill="#000" opacity=".35"/>
+            <g class="body" fill="url(#skin)">
+              <ellipse cx="120" cy="58" rx="15" ry="19"/>
+              <path d="M114 74h12v26h-12z"/>
+              <path d="M102 98Q120 106 138 98L156 106Q163 112 165 126L172 246 163 248 153 150 152 300 88 300 87 150 77 248 68 246 75 126Q77 112 84 106Z"/>
+              <path d="M92 300 90 412h14l12-112ZM124 300l12 112h14l-2-112Z"/>
+            </g>
+            <!-- look one: a straight kameez in raw silk, trousers, a dupatta over one shoulder -->
+            <g class="look l1">
+              <path d="M90 314 88 412h18l10-98ZM124 314l10 98h18l-2-98Z" fill="#0f4238"/>
+              <path d="M100 98Q120 108 140 98L158 106Q166 112 168 126L176 246 164 248 154 150 156 318 84 318 86 150 76 248 64 246 72 126Q74 112 82 106Z" fill="url(#silk)"/>
+              <path d="M108 101Q120 126 132 101M120 114v44" fill="none" stroke="#e7d39a" stroke-width="1.3"/>
+              <path d="M84 308h72M64.600 238l11.800 2M163.600 240l11.800-2" stroke="#e7d39a" stroke-width="1.1" opacity=".85"/>
+              <path d="M84 104Q70 204 88 334l13-2Q84 204 97 100Z" fill="#9fe0cd" opacity=".4"/>
+            </g>
+            <!-- look two: a kaftan in ivory charmeuse -->
+            <g class="look l2">
+              <path d="M102 98Q120 106 138 98L190 196 178 262 166 244 170 406 70 406 74 244 62 262 50 196Z" fill="url(#ivory)"/>
+              <path d="M110 100 120 138 130 100" fill="none" stroke="#8c6f37" stroke-width="1.3"/>
+              <path d="M120 138v268" stroke="#8c6f37" stroke-width=".7" opacity=".45"/>
+              <path d="M70 394h100M54 200l10 54M186 200l-10 54" fill="none" stroke="#8c6f37" stroke-width="1.3" opacity=".65"/>
+            </g>
+            <!-- look three: a floor-length velvet with a flared skirt -->
+            <g class="look l3">
+              <path d="M100 98Q120 108 140 98L158 106Q166 112 168 126L176 246 164 248 154 150 150 192Q190 300 196 408L44 408Q50 300 90 192L86 150 76 248 64 246 72 126Q74 112 82 106Z" fill="url(#velvet)"/>
+              <path d="M108 101Q120 124 132 101" fill="none" stroke="#d9b56a" stroke-width="1.4"/>
+              <path d="M90 192h60" stroke="#d9b56a" stroke-width="1.3"/>
+              <path d="M46 398h148" stroke="#d9b56a" stroke-width="2" opacity=".8"/>
+              <path d="M120 192v214M104 192Q84 300 78 406M136 192q20 108 26 214" fill="none" stroke="#0c0916" stroke-width=".8" opacity=".5"/>
+            </g>
+          </svg>
+          <div class="hero-cap">
+            <p class="tag"><span class="c c1">Embroidered raw silk</span><span class="c c2">Printed charmeuse kaftan</span><span class="c c3">Velvet, floor length</span></p>
+            <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">Softer. For a dinner.</span><span class="c c3">And one for the walima.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. How it goes -->
+  <section class="section band" id="how">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>How it goes</p>
+        <h2 class="title" data-reveal style="--i:1">Three questions. Three looks. <em>One of them is yours.</em></h2>
+      </div>
+      <ol class="beats">
+        <li data-reveal>
+          <div class="beat-art">
+            <p class="voice ask">What are we shopping for?</p>
+            <div class="row"><span class="chip on">A wedding</span><span class="chip">Eid</span><span class="chip">A dinner</span><span class="chip">Work</span></div>
+          </div>
+          <p class="kicker">One</p>
+          <h3 class="subtitle">Say what it's for.</h3>
+          <p class="muted">An occasion, a mood, a budget. Tap, or type it the way you'd say it to a friend.</p>
+        </li>
+        <li data-reveal style="--i:1">
+          <div class="beat-art">
+            <div class="trio">
+              <div><i class="swatch" style="--a:#3aa58c;--b:#0b3029"></i><span class="badge">My pick</span></div>
+              <div><i class="swatch" style="--a:#f6efdf;--b:#a98c56"></i></div>
+              <div><i class="swatch" style="--a:#5a356f;--b:#120d1f"></i><span class="badge soft">A stretch</span></div>
+            </div>
+          </div>
+          <p class="kicker">Two</p>
+          <h3 class="subtitle">Three looks, not three hundred.</h3>
+          <p class="muted">Chosen from what the store really has, in your size, with one honest reason for each.</p>
+        </li>
+        <li data-reveal style="--i:2">
+          <div class="beat-art on-glass">
+            <div class="modes"><div class="on"><b>Model</b><span>A portrait of you in it</span></div><div><b>Studio</b><span>Live, in the mirror</span></div></div>
+          </div>
+          <p class="kicker">Three</p>
+          <h3 class="subtitle">Wear it two ways.</h3>
+          <p class="muted">A studio portrait of you in the piece, or the piece on you in live video, so you can turn and see it move.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. It remembers -->
+  <section class="section" id="remembers">
+    <div class="wrap split">
+      <div class="phone" data-reveal aria-hidden="true">
+        <div class="phone-top"><span class="kicker">Your wardrobe</span><span class="fine">3 kept</span></div>
+        <ul class="kept">
+          <li><i class="swatch" style="--a:#3aa58c;--b:#0b3029"></i><div><b>Embroidered raw silk suit</b><span>Size M · kept at the mirror</span></div></li>
+          <li><i class="swatch" style="--a:#f6efdf;--b:#a98c56"></i><div><b>Printed charmeuse kaftan</b><span>Size L · portrait saved</span></div></li>
+          <li><i class="swatch" style="--a:#5a356f;--b:#120d1f"></i><div><b>Velvet, floor length</b><span>Size M · two votes so far</span></div></li>
+        </ul>
+        <div class="phone-foot"><span class="chip on">Ask for opinions</span></div>
+      </div>
+      <div class="stack">
+        <p class="kicker" data-reveal>Membership</p>
+        <h2 class="title" data-reveal style="--i:1">It remembers, <em>so you don't have to.</em></h2>
+        <p class="lede" data-reveal style="--i:2">Keep a look in the mirror and it is on your phone before you reach the door. Your sizes come with you. So does the one you nearly bought.</p>
+        <ul class="ticks" data-reveal style="--i:3">
+          <li>Every look you keep, in one wardrobe</li>
+          <li>Your sizes, ready at any MIRVA mirror</li>
+          <li>Six portraits a month at home, on us</li>
+        </ul>
+        <div class="row" data-reveal style="--i:4"><a class="btn" href="/account?join=1">Join free</a><a class="link arrow" href="/membership">What membership gives you </a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Second opinions -->
+  <section class="section band" id="opinions">
+    <div class="wrap split wide-left">
+      <div class="stack">
+        <p class="kicker" data-reveal>Second opinions</p>
+        <h2 class="title" data-reveal style="--i:1">Ask the people <em>you'd ask anyway.</em></h2>
+        <p class="lede" data-reveal style="--i:2">You were going to send a photo to the family group. Send one link instead. They tap the look they like, and you see who chose what.</p>
+        <p class="fine" data-reveal style="--i:3">No app for them to install. The link closes by itself after three days.</p>
+      </div>
+      <div class="vote card" data-reveal style="--i:1" aria-hidden="true">
+        <p class="voice ask">Which one for Saturday?</p>
+        <div class="vote-pair">
+          <div class="chosen"><i class="swatch" style="--a:#3aa58c;--b:#0b3029"></i><b>3 votes</b><span>Ami, Hira, Zoya</span></div>
+          <div><i class="swatch" style="--a:#5a356f;--b:#120d1f"></i><b>1 vote</b><span>Mahnoor</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Your pictures -->
+  <section class="section dark" id="privacy">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>Your pictures</p>
+        <h2 class="title" data-reveal style="--i:1">A mirror, <em>not a camera.</em></h2>
+      </div>
+      <ul class="promises">
+        <li data-reveal><h3 class="subtitle">Nothing is recorded.</h3><p class="muted">The camera shows you to yourself. One frame leaves the mirror only when you ask for a look.</p></li>
+        <li data-reveal style="--i:1"><h3 class="subtitle">Store mirrors keep nothing.</h3><p class="muted">A portrait made in a store is shown, then gone, unless you send it to your own phone.</p></li>
+        <li data-reveal style="--i:2"><h3 class="subtitle">You can delete everything.</h3><p class="muted">Your wardrobe, your portraits, your account. From your phone, in one step, without asking anyone.</p></li>
+        <li data-reveal style="--i:3"><h3 class="subtitle">Stores don't share you.</h3><p class="muted">What you tried in one store is never used to sell to you in another.</p></li>
+      </ul>
+      <p class="fine" data-reveal><a href="/privacy">Read the privacy notice</a></p>
+    </div>
+  </section>
+
+  <!-- 6. Membership -->
+  <section class="section" id="join">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>Membership</p>
+        <h2 class="title" data-reveal style="--i:1">Free, <em>and it stays free.</em></h2>
+        <p class="lede" data-reveal style="--i:2">Stores pay for MIRVA. Shoppers don't. There is one more tier, by invitation, for people who want a stylist's time as well.</p>
+      </div>
+      <div class="tiers">
+        <article class="card tier" data-reveal>
+          <p class="kicker">MIRVA</p>
+          <p class="price">Free</p>
+          <ul class="ticks"><li>Your wardrobe of kept looks</li><li>Sizes remembered</li><li>Six portraits a month at home</li><li>Voting links for family and friends</li></ul>
+          <a class="btn wide" href="/account?join=1">Join free</a>
+        </article>
+        <article class="card tier dark" data-reveal style="--i:1">
+          <p class="kicker">MIRVA Private</p>
+          <p class="price">By invitation</p>
+          <ul class="ticks"><li>A booked hour with a stylist</li><li>First sight of collections that sell out</li><li>Pieces held for you for 48 hours</li><li>Alterations collected and delivered</li></ul>
+          <a class="btn wide" href="/membership#private">How Private works</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Where -->
+  <section class="section tight band">
+    <div class="wrap split">
+      <div class="stack" data-reveal>
+        <p class="kicker">Where to find one</p>
+        <h2 class="subtitle">MIRVA is new. The first store mirrors are planned for Lahore.</h2>
+        <p class="muted">Until one is near you, the mirror works at home with the camera on your phone or laptop.</p>
+        <a class="btn" href="/mirror">Open the mirror</a>
+      </div>
+      <div class="stack" data-reveal style="--i:1">
+        <p class="kicker">Run a store?</p>
+        <h2 class="subtitle">See MIRVA dressed in your own catalogue, in about a minute.</h2>
+        <p class="muted">Your products, your name, your colours. No meeting needed to look.</p>
+        <a class="btn ghost" href="/retail">MIRVA for stores</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="stack close">
+        <a class="brandmark" href="/"><svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>MIRVA</span></a>
+        <p class="fine">The mirror that styles you.<br>Made in Lahore.</p>
+      </div>
+      <div><h3>Shoppers</h3><ul><li><a href="/mirror">Open the mirror</a></li><li><a href="/membership">Membership</a></li><li><a href="/account">Your wardrobe</a></li></ul></div>
+      <div><h3>Stores</h3><ul><li><a href="/retail">MIRVA for stores</a></li><li><a href="/retail#pricing">Pricing</a></li><li><a href="/console">Store console</a></li></ul></div>
+      <div><h3>The small print</h3><ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></div>
+    </div>
+    <div class="foot-note fine"><span>© 2026 MIRVA</span><span>Demo looks come from stores' public catalogues and are shown as a concept. MIRVA is not affiliated with those stores.</span></div>
+  </div>
+</footer>
+<script type="module" src="/dist/site.js"></script>
+</body>
+</html>

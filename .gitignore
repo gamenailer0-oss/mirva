@@ -1,0 +1,21 @@
+node_modules/
+.env
+.cache/
+public/dist/
+
+.data/
+
+# Cloudflare
+.wrangler/
+.dev.vars
+worker/schema.sql
+
+# Catalogues read from other companies' sites stay off the record unless a store has agreed
+brands/*/
+!brands/sapphire/
+
+# Fetched or built on install
+public/models/
+
+# The working handbook (sales tactics, cost margins, draft contracts) stays private
+docs/

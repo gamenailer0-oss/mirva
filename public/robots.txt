@@ -1,0 +1,10 @@
+# The public pages are the shopper's site and the store's site. Everything personal stays out of search.
+User-agent: *
+Disallow: /api/
+Disallow: /account
+Disallow: /claim/
+Disallow: /b/
+Disallow: /for/
+Disallow: /console
+Disallow: /hq
+Disallow: /mirror

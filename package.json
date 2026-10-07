@@ -1,0 +1,30 @@
+{
+  "name": "mirva",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "MIRVA — the mirror that styles you. The mirror, the shopper and store sites, and the platform behind them.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/build.mjs && node server.mjs",
+    "dev": "node scripts/build.mjs --watch & node server.mjs",
+    "snapshot": "node scripts/snapshot-sapphire.mjs",
+    "test": "node scripts/build.mjs && node --test",
+    "seed": "node scripts/seed.mjs",
+    "cloud:schema": "node scripts/cloud-schema.mjs",
+    "cloud:dev": "node scripts/build.mjs && node scripts/cloud-schema.mjs && wrangler d1 execute mirva --local --file worker/schema.sql && wrangler dev --port 8788",
+    "cloud:deploy": "node scripts/build.mjs && wrangler deploy",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@decartai/sdk": "latest",
+    "@mediapipe/tasks-vision": "^1.1.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "cheerio": "^1.0.0",
+    "esbuild": "^0.25.0",
+    "wrangler": "^4.148.0"
+  }
+}

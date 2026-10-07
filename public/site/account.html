@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-mood="porcelain">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Your MIRVA wardrobe: the looks you kept, your sizes, and the opinions you asked for.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#e7eaf0">
+<title>Your wardrobe — MIRVA</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/brand.css">
+<link rel="stylesheet" href="/site/site.css">
+<link rel="modulepreload" href="/dist/site.js">
+</head>
+<body data-page="account" class="band">
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="nav" id="nav">
+  <a class="brandmark" href="/" aria-label="MIRVA, home">
+    <svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>MIRVA</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+  <nav class="nav-links" id="navLinks" aria-label="Main">
+    <a href="/#how">How it works</a>
+    <a href="/membership">Membership</a>
+    <a href="/#privacy">Your pictures</a>
+    <a href="/retail">For stores</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="btn small" href="/mirror">Open the mirror</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="account" id="account" aria-live="polite">
+    <div class="wrap"><div class="spinner-line" role="progressbar" aria-label="Opening your wardrobe"></div></div>
+  </section>
+  <noscript><div class="wrap"><p>Your wardrobe needs JavaScript to open.</p></div></noscript>
+</main>
+<script type="module" src="/dist/site.js"></script>
+</body>
+</html>
