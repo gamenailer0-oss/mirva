@@ -7,6 +7,8 @@ and the platform behind them.
 The demo store is Sapphire, read from its public site. This is a concept demo and is not
 affiliated with or endorsed by Sapphire, or by any store whose catalogue is loaded into it.
 
+Live: https://mirva.gamenailer0-1a9.workers.dev
+
 ## Run it
 
 ```bash
