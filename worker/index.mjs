@@ -4,12 +4,15 @@ import { createApp } from "../lib/app.mjs";
 import { databaseLimiter } from "../lib/auth.mjs";
 import sapphireBrand from "../brands/sapphire/brand.json";
 import sapphireCatalogue from "../brands/sapphire/catalogue.json";
+import lawrencepurBrand from "../brands/lawrencepur/brand.json";
+import lawrencepurCatalogue from "../brands/lawrencepur/catalogue.json";
 
-// Catalogues that ship with the code. Sapphire's is a concept demo built from its public site, with no
-// agreement behind it. The founder chose to show it publicly; the mirror labels it a concept demo, and
-// the founder's desk can take it off the public list at any time.
+// Catalogues that ship with the code. Sapphire's and Lawrencepur's are concept demos built from their public
+// sites, with no agreement behind them. The founder chose to show them publicly; the mirror labels each a concept
+// demo, and the founder's desk can take either off the public list at any time.
 const BUILT_IN = {
   sapphire: { brand: sapphireBrand, catalogue: sapphireCatalogue },
+  lawrencepur: { brand: lawrencepurBrand, catalogue: lawrencepurCatalogue },
 };
 
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));

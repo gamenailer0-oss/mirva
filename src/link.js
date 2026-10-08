@@ -55,7 +55,8 @@ export async function whoIsHere() {
     member = me.user?.role === "member" ? me : null;
     staff = me.user?.role === "founder" || me.user?.role === "retailer";
   } catch {
-    member = null;
+    // The line is down for a moment: whoever was signed in a moment ago still is. (Forgetting her here made the next
+    // look ask her to join, on a public address, because a refresh of her allowance had not got through.)
   }
   return member;
 }

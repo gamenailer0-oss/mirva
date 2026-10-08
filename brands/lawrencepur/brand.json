@@ -1,0 +1,15 @@
+{
+ "id": "lawrencepur",
+ "name": "Lawrencepur",
+ "wordmark": "LAWRENCEPUR",
+ "byline": "styled by MIRVA",
+ "mood": "noir",
+ "accent": "#3B3B5A",
+ "currency": "Rs.",
+ "source": "https://lawrencepur.com",
+ "imageHosts": ["cdn.shopify.com"],
+ "enhancePrompt": false,
+ "visibility": "public",
+ "audience": "men",
+ "notice": "Concept demo built on Lawrencepur's public catalogue. Not affiliated with or endorsed by Lawrencepur."
+}

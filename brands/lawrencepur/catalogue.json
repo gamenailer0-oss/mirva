@@ -1,0 +1,3727 @@
+{
+ "takenAt": "2026-10-08T22:23:33.944Z",
+ "source": "https://lawrencepur.com",
+ "products": [
+  {
+   "id": "7742198546689",
+   "name": "Dedum Black Plain 2-Piece Suit",
+   "price": 47000,
+   "url": "https://lawrencepur.com/products/plain-black-wool-blend-stretch-regular-fit-classic-suit",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_f8a08371-0001-445a-9db5-b839e23e4fad.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_f8a08371-0001-445a-9db5-b839e23e4fad.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_3_23123abd-a424-4b16-a46d-82b737ffa746.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_2_ff3ffe46-ff65-4553-9acd-db1dad775a2b.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_1_6fb9a557-9354-4b08-ba7e-799d78c26021.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_4_41498d01-94f6-49db-927b-5cbcd8bd6ced.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Black",
+   "fabric": "Dedum",
+   "description": "black two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "58/44",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a black two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/7742198546689.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8776828322049",
+   "name": "Umber Brown Plain Tropical Exclusive 2-Piece Suit",
+   "price": 45000,
+   "url": "https://lawrencepur.com/products/suit-tropical-exclusive-p-umber-brown-plain-24-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-040-0-010.png",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-040-0-010.png",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-040-0-010.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Umber Brown",
+   "fabric": "Tropical Exclusive",
+   "description": "umber brown two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with an umber brown two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8776828322049.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8880636625153",
+   "name": "Men's White Wool Rich Tropical Classic 2-Piece Suit",
+   "price": 40000,
+   "url": "https://lawrencepur.com/products/suit-tropical-classic-p-white-plain-13-08",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00266.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00266.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00276_addf8e1c-f562-4ebc-9750-12e96937c9a7.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "White",
+   "fabric": "Wool Rich Tropical Classic",
+   "description": "white wool-rich two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a white wool-rich two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8880636625153.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8916816199937",
+   "name": "Blue 2 Piece Suit - Tropical Exclusive Poly Wool",
+   "price": 45000,
+   "url": "https://lawrencepur.com/products/suit-tropical-exclusive-p-blue-plain-19-9",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/18_d86d66ef-479e-42e0-961e-929e4eed4e0f.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/18_d86d66ef-479e-42e0-961e-929e4eed4e0f.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/15_b9da6041-8081-45e9-8747-1faa4c1c8004.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/17_79f20467-c54a-4bc7-842c-ff87734f4b5e.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-030-0-004-J23.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-030-0-004-J23_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-030-0-004-J23_2.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Blue",
+   "fabric": "Poly Wool Tropical Exclusive",
+   "description": "blue wool-blend two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a blue wool-blend two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8916816199937.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8916990853377",
+   "name": "Formal 2 Piece Suit - Medium Grey Plain",
+   "price": 38000,
+   "url": "https://lawrencepur.com/products/suit-imp-garment-medium-grey-plain-19-09",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/71.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/71.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/38_8bc18c8c-0296-4d27-80bd-fae2652d07e7.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Medium Grey",
+   "fabric": "",
+   "description": "medium grey two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a medium grey two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8916990853377.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9252758126849",
+   "name": "2-Piece Formal Suit Beige Plain",
+   "price": 25540,
+   "url": "https://lawrencepur.com/products/2pc-suit-imp-garment-beige-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1305.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1305.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1311.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1303.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1302.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Beige",
+   "fabric": "",
+   "description": "beige two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "58/44",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a beige two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9252758126849.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7895862771969",
+   "name": "Florence Black Plain Formal 2 Piece Suit",
+   "price": 70000,
+   "url": "https://lawrencepur.com/products/plain-florence-black-suit-regular",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1936_1080x1920_4b011711-93a5-4e00-8024-6c8aeb5abcbd.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1936_1080x1920_4b011711-93a5-4e00-8024-6c8aeb5abcbd.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1951_1080x1920_1dd2694e-4f9d-46f6-809f-2b62d2525984.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1942_1080x1920_1c219d70-8c92-44c5-9ea3-35cb17f5a61b.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1944_1080x1920_7efcbf21-d8b9-41fe-bd09-5bd3da018db2.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1945_1080x1920_bb04fc5b-21bb-4b90-9e86-1fd0d24f4be0.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1941_1080x1920_f6dfe9cf-5691-4562-8b82-0d1b07fad0d6.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Black",
+   "fabric": "Florence",
+   "description": "black two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a black two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/7895862771969.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8916816331009",
+   "name": "Navy Blue 2 Piece Suit - Bellini Super 100’s",
+   "price": 55000,
+   "url": "https://lawrencepur.com/products/suit-bellini-blue-plain-19-9",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/11_9c71e589-866c-4df5-abcc-affac46fa4ad.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/11_9c71e589-866c-4df5-abcc-affac46fa4ad.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/10_0044d7ef-6bda-4a38-8c54-75badf889b40.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Navy Blue",
+   "fabric": "Bellini Super 100’s",
+   "description": "navy blue two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a navy blue two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8916816331009.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8880636592385",
+   "name": "Men's Brown Wool Rich Tropical Classic 2-Piece Suit",
+   "price": 40000,
+   "url": "https://lawrencepur.com/products/suit-tropical-classic-p-brown-plain-13-08",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00437_9d73556f-f61c-4ce9-b3e2-6326770aafaf.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00437_9d73556f-f61c-4ce9-b3e2-6326770aafaf.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Brown",
+   "fabric": "Wool Rich Tropical Classic",
+   "description": "brown wool-rich two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a brown wool-rich two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8880636592385.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9130505601281",
+   "name": "2pc Formal Suit - Dedum Grey Plain",
+   "price": 47000,
+   "url": "https://lawrencepur.com/products/suit-dedum-grey-plain-lgsu-010049",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_4f18bbc1-52e5-46ca-b83a-278490ad0a04.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_4f18bbc1-52e5-46ca-b83a-278490ad0a04.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_2_cb575a7b-6751-49f2-b8c1-34829331cfb0.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_1_e042f194-4eb0-4e16-9a57-f2d51d4a88e4.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_3_52484beb-7be7-4e6d-a68f-3246a54ba3cf.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_4_74d10e13-62c0-49af-8d93-6ca3831d4041.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Grey",
+   "fabric": "Dedum",
+   "description": "grey two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "44/30",
+     "inStock": false
+    },
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "58/44",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a grey two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9130505601281.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9017018450177",
+   "name": "Exotic Black 2-Piece Formal Suit",
+   "price": 65000,
+   "url": "https://lawrencepur.com/products/exotic-black-featherlite-2-piece-suit",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-12201-010-0-000_1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-12201-010-0-000_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-12201-010-0-000_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-12201-010-0-000_3.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Black",
+   "fabric": "Exotic Black",
+   "description": "black two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a black two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9017018450177.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7895862837505",
+   "name": "Florence Grey Plain Formal 2 Piece Suit",
+   "price": 70000,
+   "url": "https://lawrencepur.com/products/plain-florence-charcoal-grey-suit-regular",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_c7f1d6f5-af57-4f8e-a238-1b349774c7d9.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_c7f1d6f5-af57-4f8e-a238-1b349774c7d9.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_1_cee82544-cd5b-4312-9225-d3f02b44290f.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_3_a5588095-f2ed-4794-b97a-f37fd6acc792.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_2_0340a80f-67b9-44c4-a10a-d63eb917f2f4.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_4_af519fd6-d3b3-42c3-b0de-249c822f0ab9.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Grey",
+   "fabric": "Florence",
+   "description": "grey two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "44/30",
+     "inStock": false
+    },
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a grey two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/7895862837505.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8776828289281",
+   "name": "Espresso Brown Plain Tropical Exclusive 2-Piece Suit",
+   "price": 45000,
+   "url": "https://lawrencepur.com/products/suit-tropical-exclusive-p-espresso-brown-plain-24-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-040-0-009_af87623c-e57a-4b87-9b8c-09854bf75043.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-040-0-009_af87623c-e57a-4b87-9b8c-09854bf75043.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-040-0-009.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Espresso Brown",
+   "fabric": "Tropical Exclusive",
+   "description": "espresso brown two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "44/30",
+     "inStock": false
+    },
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with an espresso brown two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8776828289281.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8917750644993",
+   "name": "Dark Blue Plain 2-Piece Formal Suit",
+   "price": 45000,
+   "url": "https://lawrencepur.com/products/suit-imp-garment-dark-blue-plain-19-09",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05433_4c9c00d9-62d3-4c43-9c9e-7c0eb88d62d4.png",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05433_4c9c00d9-62d3-4c43-9c9e-7c0eb88d62d4.png",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05528_9c640794-188c-4874-bc38-aaae185456ca.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05526_3f3663fb-9ad0-4cd2-86af-39306f56061b.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05449.png",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05523.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Dark Blue",
+   "fabric": "",
+   "description": "dark blue two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a dark blue two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8917750644993.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9347239706881",
+   "name": "Men's Graphite Grey Plain Wool Rich Tropical Classic 2-Piece Suit",
+   "price": 40000,
+   "url": "https://lawrencepur.com/products/mens-graphite-grey-plain-wool-rich-tropical-classic-2-piece-suit",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-02111-020-0-013.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-02111-020-0-013.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/02_30b84a16-c5f2-472b-b974-d71010ae17d2.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Graphite Grey",
+   "fabric": "Wool Rich Tropical Classic",
+   "description": "graphite grey wool-rich two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a graphite grey wool-rich two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9347239706881.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8916816396545",
+   "name": "Navy Blue Checked 2 Piece Suit - Bellini Super 100’s",
+   "price": 55000,
+   "url": "https://lawrencepur.com/products/suit-bellini-navy-blue-checks-19-9",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05505_1c851f36-bb31-46aa-9c14-0b0c0111399b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05505_1c851f36-bb31-46aa-9c14-0b0c0111399b.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05528_9c640794-188c-4874-bc38-aaae185456ca.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05526_3f3663fb-9ad0-4cd2-86af-39306f56061b.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC05523.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 3.5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Navy Blue",
+   "fabric": "Bellini Super 100’s",
+   "description": "navy blue checked two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": false
+    },
+    {
+     "label": "54/40",
+     "inStock": false
+    },
+    {
+     "label": "56/42",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a navy blue checked two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8916816396545.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930878095617",
+   "name": "Formal 2 Piece Suit - Chocolate Brown Plain",
+   "price": 38000,
+   "url": "https://lawrencepur.com/products/suit-imp-garment-chocolate-brown-plain-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01388.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01388.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01393.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01395.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01391.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Chocolate Brown",
+   "fabric": "",
+   "description": "chocolate brown two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a chocolate brown two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8930878095617.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8880636494081",
+   "name": "Men's Black Wool Rich Tropical Classic 2-Piece Suit",
+   "price": 40000,
+   "url": "https://lawrencepur.com/products/suit-tropical-classic-p-black-plain-13-08",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-02111-010-0-000.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-02111-010-0-000.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-02111-010-0-000-2.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Black",
+   "fabric": "Wool Rich Tropical Classic",
+   "description": "black wool-rich two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "58/44",
+     "inStock": false
+    },
+    {
+     "label": "60/46",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a black wool-rich two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8880636494081.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8776828158209",
+   "name": "Grey Plain Tropical Exclusive 2-Piece Suit",
+   "price": 45000,
+   "url": "https://lawrencepur.com/products/suit-tropical-exclusive-p-grey-plain-24-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/6_1f7a9dd0-5e4f-4b5c-bddd-17f77191838d.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/6_1f7a9dd0-5e4f-4b5c-bddd-17f77191838d.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2220-03111-020-0-006.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Grey",
+   "fabric": "Tropical Exclusive",
+   "description": "grey two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "58/44",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a grey two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/8776828158209.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9124250026241",
+   "name": "Florence Blue Plain Formal 2 Piece Suit",
+   "price": 70000,
+   "url": "https://lawrencepur.com/products/suit-florence-blue-plain-17-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1900_1080x1920_517a3da9-cfce-47fa-a850-390b85d36d71.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1900_1080x1920_517a3da9-cfce-47fa-a850-390b85d36d71.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1905_1080x1920_9db1a9f8-581f-46bb-adde-b4dc0dcf6ce0.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1902_1080x1920_d14c996a-6819-43b7-aba4-2a990176a3d4.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1926_1080x1920_7a337f11-d5f4-4557-b41f-d9365bdbf824.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1921_1080x1920_6d16ebf3-676a-4c92-9bb4-f4d8b122b791.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1907_1080x1920_8ccf3436-ffb8-46b5-bedf-ef2b7a1c74d2.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Blue",
+   "fabric": "Florence",
+   "description": "blue two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "56/41",
+     "inStock": false
+    },
+    {
+     "label": "58/44",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a blue two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9124250026241.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9252758225153",
+   "name": "2-Piece Formal Suit Dark Brown Plain",
+   "price": 25540,
+   "url": "https://lawrencepur.com/products/2pc-suit-imp-garment-dark-brown-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1284.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1284.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1287.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1285.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Dark Brown",
+   "fabric": "",
+   "description": "dark brown two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    },
+    {
+     "label": "58/44",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a dark brown two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9252758225153.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9124426744065",
+   "name": "Florence Dark Grey Plain Formal 2 Piece Suit",
+   "price": 70000,
+   "url": "https://lawrencepur.com/products/suit-florence-grey-plain-16-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_3.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_4.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "two-piece suit",
+   "colour": "Dark Grey",
+   "fabric": "Florence",
+   "description": "dark grey two-piece suit with a jacket and matching trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": false
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a dark grey two-piece suit with a jacket and matching trousers.",
+   "ref": "/refs/lawrencepur/9124426744065.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930879209729",
+   "name": "Brown Plain 3 Piece Suit - Tropical Classic Poly Wool",
+   "price": 50000,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-tropical-classic-p-brown-plain-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01376.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01376.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01383.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01382.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01375.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Brown",
+   "fabric": "Poly Wool Tropical Classic",
+   "description": "brown wool-blend three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a brown wool-blend three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8930879209729.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8606083973377",
+   "name": "Royal Blue Plain 3-Piece Suit",
+   "price": 22043,
+   "url": "https://lawrencepur.com/products/3-pcs-s3-pcs-suit-new-imp-garment-royal-blue-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2980-01507-030-0-002.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2980-01507-030-0-002.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Royal Blue",
+   "fabric": "",
+   "description": "royal blue three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a royal blue three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8606083973377.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8558153236737",
+   "name": "Tropical Exclusive Black 3Pcs Formal Suit for Men",
+   "price": 58000,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-tropical-exclusive-p-black-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2980.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2980.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Black",
+   "fabric": "Tropical Exclusive",
+   "description": "black three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "44-R/30",
+     "inStock": false
+    },
+    {
+     "label": "46-R/32",
+     "inStock": false
+    },
+    {
+     "label": "48-R/34",
+     "inStock": false
+    },
+    {
+     "label": "50-R/36",
+     "inStock": true
+    },
+    {
+     "label": "52-R/38",
+     "inStock": true
+    },
+    {
+     "label": "54-R/40",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a black three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8558153236737.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930879144193",
+   "name": "Grey Plain 3 Piece Suit - Tropical Classic Poly Wool",
+   "price": 50000,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-tropical-classic-p-grey-plain-09-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01508.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01508.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01512.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01516.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01518.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01520.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Grey",
+   "fabric": "Poly Wool Tropical Classic",
+   "description": "grey wool-blend three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a grey wool-blend three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8930879144193.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8606084006145",
+   "name": "Chocolate Brown Plain 3-Piece Suit",
+   "price": 22043,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-new-imp-garments-chocolate-brown-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2980-01507-040-0-001.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2980-01507-040-0-001.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Chocolate Brown",
+   "fabric": "",
+   "description": "chocolate brown three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": false
+    },
+    {
+     "label": "54/40",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a chocolate brown three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8606084006145.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930879078657",
+   "name": "Black Plain 3 Piece Suit - Tropical Classic Poly Wool",
+   "price": 50000,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-tropical-classic-p-black-plain-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/8_0d093f83-5bb8-471f-a10b-f50dcf61c951.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/8_0d093f83-5bb8-471f-a10b-f50dcf61c951.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01472.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/7_f1e4469b-53a6-414c-af74-8412337fa8fa.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Black",
+   "fabric": "Poly Wool Tropical Classic",
+   "description": "black wool-blend three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": true
+    },
+    {
+     "label": "48/34",
+     "inStock": true
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    },
+    {
+     "label": "56/42",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a black wool-blend three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8930879078657.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8916816593153",
+   "name": "Grey 3 Piece Suit - Tropical Classic Poly Wool",
+   "price": 50000,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-tropical-classic-p-grey-plain-19-9",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/46.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/46.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/43_be737488-218f-4f7d-b45a-70796fa34df4.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/44_bdd16001-fec0-4e96-8788-c1141820e6fd.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Grey",
+   "fabric": "Poly Wool Tropical Classic",
+   "description": "grey wool-blend three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "48/34",
+     "inStock": false
+    },
+    {
+     "label": "50/36",
+     "inStock": true
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a grey wool-blend three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8916816593153.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930879176961",
+   "name": "Blue Plain 3 Piece Suit - Tropical Classic Poly Wool",
+   "price": 50000,
+   "url": "https://lawrencepur.com/products/3-pcs-suit-tropical-classic-p-blue-plain-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01529.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01529.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01540.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01543.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "suits",
+   "formality": 5,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "three-piece suit",
+   "colour": "Blue",
+   "fabric": "Poly Wool Tropical Classic",
+   "description": "blue wool-blend three-piece suit with a jacket, matching waistcoat and trousers",
+   "sizes": [
+    {
+     "label": "46/32",
+     "inStock": false
+    },
+    {
+     "label": "48/34",
+     "inStock": false
+    },
+    {
+     "label": "50/36",
+     "inStock": false
+    },
+    {
+     "label": "52/38",
+     "inStock": true
+    },
+    {
+     "label": "54/40",
+     "inStock": false
+    },
+    {
+     "label": "56/42",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a blue wool-blend three-piece suit with a jacket, matching waistcoat and trousers.",
+   "ref": "/refs/lawrencepur/8930879176961.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7742196711681",
+   "name": "Cherry Red Houndstooth Worsted Tweed Classic Blazer",
+   "price": 35000,
+   "url": "https://lawrencepur.com/products/cherry-red-houndstooth-worsted-tweed-jacket",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Blazer----2210-00220-070-5-001----Shirt-2250-00500-050-6-001------Pants-2370-03030-040-0-30.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Blazer----2210-00220-070-5-001----Shirt-2250-00500-050-6-001------Pants-2370-03030-040-0-30.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Blazer-2210-00220-070-5-001-Shirt-2250-00500-050-6-001------Pants-2370-03030-040-0-30.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Blazer--2210-00220-070-5-001-Shirt-2250-00500-050-6-001------Pants-2370-03030-040-0-30.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Cherry Red",
+   "fabric": "Worsted Tweed",
+   "description": "cherry red houndstooth tweed classic blazer with flap pockets",
+   "sizes": [
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a cherry red houndstooth tweed classic blazer with flap pockets.",
+   "ref": "/refs/lawrencepur/7742196711681.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7742197203201",
+   "name": "Double Breasted Blazer - Maroon Superior Serge Super 70’s",
+   "price": 35000,
+   "url": "https://lawrencepur.com/products/plain-twill-maroon-merino-wool-regular-fit-superior-serge-classic-blazers",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-com_garments_0042_1S5A6761.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-com_garments_0042_1S5A6761.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-com_garments_0046_1S5A6764.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-com_garments_0043_1S5A6759.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-com_garments_0044_1S5A6756.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-com_garments_0045_1S5A6754.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/16_bba5aa57-94ef-453c-b643-8c10ebf3e625.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "double-breasted blazer",
+   "colour": "Maroon",
+   "fabric": "Superior Serge Super 70’s",
+   "description": "maroon serge double-breasted blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a maroon serge double-breasted blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/7742197203201.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8056770035969",
+   "name": "Black Formal Blazer - Gaberdine Super 100’s",
+   "price": 40400,
+   "url": "https://lawrencepur.com/products/plain-black-pure-100-wool-regular-fit-gaberdine-classic-blazers",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/37_2dfb5835-bb45-432c-8454-911b5c899dc1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/37_2dfb5835-bb45-432c-8454-911b5c899dc1.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/36.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/34.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/35_52e78fc6-bafb-49bb-a994-1a586ddbac19.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "blazer",
+   "colour": "Black",
+   "fabric": "Gaberdine Super 100’s",
+   "description": "black gaberdine blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "46-R",
+     "inStock": true
+    },
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black gaberdine blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/8056770035969.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8056770068737",
+   "name": "Blue Plain Gaberdine Super 100's Classic Blazer",
+   "price": 40400,
+   "url": "https://lawrencepur.com/products/plain-navy-pure-100-wool-regular-fit-gaberdine-classic-blazers-1",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/02_bd70c16a-e5f8-4b6f-9333-787239150407.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/02_bd70c16a-e5f8-4b6f-9333-787239150407.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/01_d7722733-75f5-4c2d-acc1-be49a8bb574c.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Blue",
+   "fabric": "Gaberdine Super 100's",
+   "description": "blue gaberdine classic blazer with two buttons and flap pockets",
+   "sizes": [
+    {
+     "label": "46-R",
+     "inStock": true
+    },
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a blue gaberdine classic blazer with two buttons and flap pockets.",
+   "ref": "/refs/lawrencepur/8056770068737.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9371939635457",
+   "name": "Blazer - Tropical Exclusive Brown Plain",
+   "price": 31000,
+   "url": "https://lawrencepur.com/products/blazer-tropical-exclusive-p-brown-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A6951.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A6951.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6947.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0002_1S5A6946.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6945.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0004_1S5A6943.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0005_1S5A6942.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "blazer",
+   "colour": "Brown",
+   "fabric": "Tropical Exclusive",
+   "description": "brown blazer with two buttons and flap pockets",
+   "sizes": [
+    {
+     "label": "48",
+     "inStock": true
+    },
+    {
+     "label": "50",
+     "inStock": true
+    },
+    {
+     "label": "52",
+     "inStock": true
+    },
+    {
+     "label": "54",
+     "inStock": true
+    },
+    {
+     "label": "56",
+     "inStock": true
+    },
+    {
+     "label": "58",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a brown blazer with two buttons and flap pockets.",
+   "ref": "/refs/lawrencepur/9371939635457.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9397646328065",
+   "name": "Blazer - Signature Tweed Charcoal Grey Plain",
+   "price": 20000,
+   "url": "https://lawrencepur.com/products/jacket-signature-tweed-charcoal-grey-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A7007.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A7007.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A7000.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A7002.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0002_1S5A6999.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0004_1S5A7005.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "blazer",
+   "colour": "Charcoal Grey",
+   "fabric": "Signature Tweed",
+   "description": "charcoal grey tweed blazer with two buttons and flap pockets",
+   "sizes": [
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": true
+    },
+    {
+     "label": "60-R",
+     "inStock": true
+    },
+    {
+     "label": "62-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a charcoal grey tweed blazer with two buttons and flap pockets.",
+   "ref": "/refs/lawrencepur/9397646328065.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9397652390145",
+   "name": "Blazer - Premium Linen White Plain",
+   "price": 30000,
+   "url": "https://lawrencepur.com/products/jacket-premium-linen-white-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/6_6c52bc38-0148-4a31-b5e2-8b24c609430f.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/6_6c52bc38-0148-4a31-b5e2-8b24c609430f.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_2d6c3576-9896-47ad-874f-aadf3e2c5d25.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/4_1694381f-84d5-47e8-ade3-7cebfc2d4030.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/5_108f4047-b395-4e92-89d5-58381e4e3c00.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_f1e9bac8-5e85-4096-bc5d-35c5b4c5f007.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_6efff92d-bd37-4392-9bc1-676714d96ae1.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 2.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "blazer",
+   "colour": "White",
+   "fabric": "Premium Linen",
+   "description": "white linen blazer with two buttons and flap pockets",
+   "sizes": [
+    {
+     "label": "48",
+     "inStock": true
+    },
+    {
+     "label": "50",
+     "inStock": true
+    },
+    {
+     "label": "52",
+     "inStock": true
+    },
+    {
+     "label": "54",
+     "inStock": true
+    },
+    {
+     "label": "56",
+     "inStock": true
+    },
+    {
+     "label": "58",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a white linen blazer with two buttons and flap pockets.",
+   "ref": "/refs/lawrencepur/9397652390145.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930877833473",
+   "name": "Self Stripes Worsted Tweed Classic Blazer",
+   "price": 35000,
+   "url": "https://lawrencepur.com/products/jacket-worsted-tweed-brown-slf-stp-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01743_0d212a25-cb2c-4582-a06e-85119818f26a.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01743_0d212a25-cb2c-4582-a06e-85119818f26a.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01740_d66714cd-f310-4539-96a4-cf30231ffb61.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01742_13654a50-00d5-470b-a12d-83f7f50671c4.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "",
+   "fabric": "Worsted Tweed",
+   "description": "striped tweed classic blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": true
+    },
+    {
+     "label": "60-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a striped tweed classic blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/8930877833473.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9124249927937",
+   "name": "Beige Plain, Poly Linen, Classic Blazer",
+   "price": 19900,
+   "url": "https://lawrencepur.com/products/jacket-linen-beige-plain-17-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/lawrencepur_yellow_summer_linen_blazer.png",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/lawrencepur_yellow_summer_linen_blazer.png",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/LINEN_BLAZER.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2210-33904-040-0-001_4.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2210-33904-040-0-001_3.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 2.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Beige",
+   "fabric": "Poly Linen",
+   "description": "beige linen classic blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "48",
+     "inStock": true
+    },
+    {
+     "label": "50",
+     "inStock": true
+    },
+    {
+     "label": "52",
+     "inStock": false
+    },
+    {
+     "label": "54",
+     "inStock": false
+    },
+    {
+     "label": "56",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a beige linen classic blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/9124249927937.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9148048507137",
+   "name": "Premium Linen Pale Purple Plain Classic Blazer",
+   "price": 30000,
+   "url": "https://lawrencepur.com/products/jacket-premium-linen-light-purple-plain-j05c",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1847.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1847.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1845_1080x1920_6f9ddf61-307f-48b8-ace2-3fe88d4ae6a9.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1854_1080x1920_f72d5055-aa94-4f66-8d01-e6cab67efe58.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1857_1080x1920_1f66517f-8224-41c2-bef2-21ce03df0f3e.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 2.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Pale Purple",
+   "fabric": "Premium Linen",
+   "description": "pale purple linen classic blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "48",
+     "inStock": false
+    },
+    {
+     "label": "50",
+     "inStock": true
+    },
+    {
+     "label": "52",
+     "inStock": true
+    },
+    {
+     "label": "54",
+     "inStock": true
+    },
+    {
+     "label": "56",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a pale purple linen classic blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/9148048507137.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8056770003201",
+   "name": "Black Plain Exotic Black Featherlite Super 100's Classic Blazer",
+   "price": 43600,
+   "url": "https://lawrencepur.com/products/jacket-exotic-black-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Black_Plain_Exotic_Black_Featherlite_Super_100_s_Classic_Blazer.png",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Black_Plain_Exotic_Black_Featherlite_Super_100_s_Classic_Blazer.png",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/02_27a643d4-11d0-4eca-be4f-f13ce613504d.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 2.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Black",
+   "fabric": "Exotic Black",
+   "description": "black classic blazer with two buttons and flap pockets",
+   "sizes": [
+    {
+     "label": "46-R",
+     "inStock": true
+    },
+    {
+     "label": "48",
+     "inStock": true
+    },
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56",
+     "inStock": false
+    },
+    {
+     "label": "58",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": false
+    },
+    {
+     "label": "60",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black classic blazer with two buttons and flap pockets.",
+   "ref": "/refs/lawrencepur/8056770003201.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8930877964545",
+   "name": "Green Herringbone Worsted Tweed Classic Blazer",
+   "price": 35000,
+   "url": "https://lawrencepur.com/products/jacket-worsted-tweed-cedar-herringbone-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01923.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01923.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01926.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01925.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01921.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC01928.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Green",
+   "fabric": "Worsted Tweed",
+   "description": "green herringbone tweed classic blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": true
+    },
+    {
+     "label": "58-R",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a green herringbone tweed classic blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/8930877964545.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8776307769601",
+   "name": "Classic Blazer- Featherlight Grey Checks",
+   "price": 28200,
+   "url": "https://lawrencepur.com/products/jacket-featherlight-grey-checks-23-4",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2210-04201-020-5-004_dc350d7a-968d-441c-8f99-eda0a9bee554.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2210-04201-020-5-004_dc350d7a-968d-441c-8f99-eda0a9bee554.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 2.5,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Grey",
+   "fabric": "Featherlight",
+   "description": "grey checked classic blazer, worn over a shirt",
+   "sizes": [
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": true
+    },
+    {
+     "label": "56-R",
+     "inStock": false
+    },
+    {
+     "label": "58-R",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a grey checked classic blazer, worn over a shirt.",
+   "ref": "/refs/lawrencepur/8776307769601.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8056769970433",
+   "name": "Blue Plain Tropical Exclusive Poly Wool Classic Blazer",
+   "price": 31000,
+   "url": "https://lawrencepur.com/products/jacket-tropical-exclusive-p-blue-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_a16e71c1-08da-4809-9a1e-5a71d68b8775.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_a16e71c1-08da-4809-9a1e-5a71d68b8775.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2a.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_4d0b6449-19ce-4461-a00d-6e3b7ba8f78d.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "blazers",
+   "formality": 3,
+   "tradition": "fusion",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "classic blazer",
+   "colour": "Blue",
+   "fabric": "Poly Wool Tropical Exclusive",
+   "description": "blue wool-blend classic blazer with two buttons and flap pockets",
+   "sizes": [
+    {
+     "label": "44-R",
+     "inStock": true
+    },
+    {
+     "label": "46-R",
+     "inStock": true
+    },
+    {
+     "label": "48-R",
+     "inStock": true
+    },
+    {
+     "label": "50-R",
+     "inStock": true
+    },
+    {
+     "label": "52-R",
+     "inStock": true
+    },
+    {
+     "label": "54-R",
+     "inStock": false
+    },
+    {
+     "label": "56-R",
+     "inStock": false
+    },
+    {
+     "label": "58-R",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a blue wool-blend classic blazer with two buttons and flap pockets.",
+   "ref": "/refs/lawrencepur/8056769970433.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9148048736513",
+   "name": "Waist Coat - Lyla Deep Green Plain",
+   "price": 13700,
+   "url": "https://lawrencepur.com/products/waist-coat-lyla-p-deep-green-plain-w04d",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1626_1080x1920_39b2a9e9-77fd-4456-944d-19cd0f7d1cd8.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1626_1080x1920_39b2a9e9-77fd-4456-944d-19cd0f7d1cd8.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1615.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1627_1080x1920_40a9e73f-b1de-4d67-9ea9-42ffa25cef54.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1619_1080x1920_263d4b14-9aec-4180-a0fa-16dd2c3fa518.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1618_1080x1920_bd47f77e-a891-405d-b599-d5dd63e88c47.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "waistcoat",
+   "colour": "Deep Green",
+   "fabric": "",
+   "description": "deep green waistcoat, worn over a shirt",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    },
+    {
+     "label": "3XL",
+     "inStock": true
+    },
+    {
+     "label": "4XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a deep green waistcoat, worn over a shirt.",
+   "ref": "/refs/lawrencepur/9148048736513.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7928941641985",
+   "name": "Stripes Orange & Brown Wool Rich Worsted Tweed - Winter Waist Coat",
+   "price": 18500,
+   "url": "https://lawrencepur.com/products/stripes-orange-brown-wool-rich-worsted-tweed-waist-coats",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/03_2eaef4d2-d4a3-484d-a4bb-faa8d22306ad.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/03_2eaef4d2-d4a3-484d-a4bb-faa8d22306ad.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/01_b299d33c-f7ba-4838-afec-ace7983686df.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/02_4be53bbb-7fc8-4372-919d-ab5b91a4e089.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "ban-collar waistcoat",
+   "colour": "Orange & Brown",
+   "fabric": "Wool Rich Worsted Tweed",
+   "description": "orange & brown striped tweed ban-collar waistcoat with six buttons",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    },
+    {
+     "label": "3XL",
+     "inStock": true
+    },
+    {
+     "label": "4XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an orange & brown striped tweed ban-collar waistcoat with six buttons.",
+   "ref": "/refs/lawrencepur/7928941641985.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7895862706433",
+   "name": "Plain Black Gaberdine - Winter Waist Coat",
+   "price": 21800,
+   "url": "https://lawrencepur.com/products/plain-black-gaberdine-waist-coat",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/2_7f1d69ec-ab72-49b9-9144-0fb94fe64328.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/2_7f1d69ec-ab72-49b9-9144-0fb94fe64328.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "ban-collar waistcoat",
+   "colour": "Black",
+   "fabric": "Gaberdine",
+   "description": "black gaberdine ban-collar waistcoat with six buttons",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black gaberdine ban-collar waistcoat with six buttons.",
+   "ref": "/refs/lawrencepur/7895862706433.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9124250157313",
+   "name": "Waist Coat - Dedum Blue Plain",
+   "price": 17500,
+   "url": "https://lawrencepur.com/products/waist-coat-dedum-blue-plain-17-04",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1653_0a856013-e7b1-47a1-a509-252f0c70c947.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1653_0a856013-e7b1-47a1-a509-252f0c70c947.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1650_1080x1920_aec0249e-e1f5-4d18-aa87-761bbea88e71.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1657_1080x1920_64f3409e-f2ad-4db7-b57f-4e60bfc657a1.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "waistcoat",
+   "colour": "Blue",
+   "fabric": "Dedum",
+   "description": "blue waistcoat, worn over a shirt",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a waist coat - dedum blue plain, waistcoat.",
+   "ref": "/refs/lawrencepur/9124250157313.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7742200480001",
+   "name": "Plain Twill Maroon Merino Wool Superior Serge - Winter Waist Coat",
+   "price": 20000,
+   "url": "https://lawrencepur.com/products/plain-twill-maroon-merino-wool-superior-serge-waist-coat",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_918758f0-d9a7-47f4-8897-9d3ff0bc945b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_918758f0-d9a7-47f4-8897-9d3ff0bc945b.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_90b13b8a-c631-40bd-ab8a-08594904d067.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_2437fe94-e035-4741-a393-bdfea3f28aed.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/4_acf7e46d-f07e-4592-b8b9-5912969a1a8e.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/2_554d0df1-3c7d-4b7b-aeff-de281185fa02.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/1_b4aec18f-6eee-4f0f-8211-f3627b5d84e6.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "ban-collar waistcoat",
+   "colour": "Maroon",
+   "fabric": "Merino Wool Superior Serge",
+   "description": "maroon serge ban-collar waistcoat with six buttons",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    },
+    {
+     "label": "2XL",
+     "inStock": false
+    },
+    {
+     "label": "3XL",
+     "inStock": false
+    },
+    {
+     "label": "4XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a maroon serge ban-collar waistcoat with six buttons.",
+   "ref": "/refs/lawrencepur/7742200480001.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7998336696577",
+   "name": "Plain-Grey, Wool Blend Tropical Classic Waist Coat",
+   "price": 14300,
+   "url": "https://lawrencepur.com/products/plain-grey-wool-blend-tropical-classic-waist-coat",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/2_2b4fe92c-65f3-4908-a331-13c639671496.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/2_2b4fe92c-65f3-4908-a331-13c639671496.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/1_8ae0a612-8a2d-46eb-bec0-d377823a1723.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "ban-collar waistcoat",
+   "colour": "Grey",
+   "fabric": "Wool Blend Tropical Classic",
+   "description": "grey wool-blend ban-collar waistcoat with six buttons",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": false
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    },
+    {
+     "label": "3XL",
+     "inStock": false
+    },
+    {
+     "label": "4XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a grey wool-blend ban-collar waistcoat with six buttons.",
+   "ref": "/refs/lawrencepur/7998336696577.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9130505634049",
+   "name": "Waist Coat - Superior Serge Blue Plain",
+   "price": 20000,
+   "url": "https://lawrencepur.com/products/waist-coat-superior-serge-blue-plain-lgwc-008472",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_67f1ec30-cc1d-43db-a199-92a4450ea041.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_5_67f1ec30-cc1d-43db-a199-92a4450ea041.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_1_c621cc00-85af-471f-bace-41bd7eaeee19.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_2_4d959b86-0e5c-4c4b-b669-c30953b727e1.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_3_f7e602c8-580c-4316-a340-1fcf05f1c815.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Lawrencepur_4_f054518e-175f-4968-8fcd-917c02f09971.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "waistcoat",
+   "colour": "Blue",
+   "fabric": "Superior Serge",
+   "description": "blue serge waistcoat, worn over a shirt",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "2XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a blue serge waistcoat, worn over a shirt.",
+   "ref": "/refs/lawrencepur/9130505634049.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8060396765441",
+   "name": "Textured White Kashghar - Winter Waist Coat",
+   "price": 12100,
+   "url": "https://lawrencepur.com/products/waist-coat-kashghar-white-textured",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/02_5b2ff10b-5a52-4f92-b9b2-c7c88daa4ae1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/02_5b2ff10b-5a52-4f92-b9b2-c7c88daa4ae1.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/01_d5288d12-54fb-40b9-a8bf-53c511fed7b0.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "ban-collar waistcoat",
+   "colour": "White",
+   "fabric": "Kashghar",
+   "description": "white textured ban-collar waistcoat with six buttons",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": false
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    },
+    {
+     "label": "XXL",
+     "inStock": false
+    },
+    {
+     "label": "3XL",
+     "inStock": false
+    },
+    {
+     "label": "4XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a white textured ban-collar waistcoat with six buttons.",
+   "ref": "/refs/lawrencepur/8060396765441.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7967510626561",
+   "name": "Multi Checks French Beige Wool Rich Worsted Tweed - Winter Waist Coat",
+   "price": 18500,
+   "url": "https://lawrencepur.com/products/multi-checks-french-beige-wool-rich-worsted-tweed-classic-waist-coat",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/02_9472294e-b9a1-4c95-90f8-187e44572399.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/02_9472294e-b9a1-4c95-90f8-187e44572399.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/products/01_913ecd1d-e733-4499-bb87-e3c021090bba.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "ban-collar waistcoat",
+   "colour": "French Beige",
+   "fabric": "Wool Rich Worsted Tweed",
+   "description": "french beige checked tweed ban-collar waistcoat with six buttons",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": false
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    },
+    {
+     "label": "XXL",
+     "inStock": false
+    },
+    {
+     "label": "2XL",
+     "inStock": false
+    },
+    {
+     "label": "3XL",
+     "inStock": false
+    },
+    {
+     "label": "4XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a french beige checked tweed ban-collar waistcoat with six buttons.",
+   "ref": "/refs/lawrencepur/7967510626561.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9148048539905",
+   "name": "Waist Coat - Lyla Black Plain",
+   "price": 13700,
+   "url": "https://lawrencepur.com/products/waist-coat-lyla-p-black-plain-w01",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1702.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1702.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1715_1080x1920_a176e0a3-f160-4d28-a248-b3c6d84a0711.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1703_1080x1920_953bf199-9633-4dbe-aed4-e108cac11c62.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1705_1080x1920_31c5d3d9-1953-433e-a60b-e880e7768a43.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "waistcoats",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "waistcoat",
+   "colour": "Black",
+   "fabric": "",
+   "description": "black waistcoat, worn over a shirt",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    },
+    {
+     "label": "3XL",
+     "inStock": true
+    },
+    {
+     "label": "4XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a waist coat - lyla black plain, waistcoat.",
+   "ref": "/refs/lawrencepur/9148048539905.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8667572338945",
+   "name": "Shalwar Kameez - Sharda White Plain",
+   "price": 9500,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-sharda-white-plain-19-12",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00862_5faacd25-6124-4674-9d44-3037f696cf06.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00862_5faacd25-6124-4674-9d44-3037f696cf06.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00856_7bdc6f64-60ea-4a13-bdb4-7d94e70dce00.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00863_b4c60cef-0628-4dd0-b04a-82e784b0aff2.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00853_13110399-4a4a-4af7-ab2f-ec5ae785b8dc.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "White",
+   "fabric": "",
+   "description": "white shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a white shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/8667572338945.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8784943350017",
+   "name": "Bluish Zinc Satpara Summer Wash & Wear Shalwar Kameez",
+   "price": 10500,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-satpara-bluish-zinc-plain-10-5",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2260-22107-030-0-005.webp",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2260-22107-030-0-005.webp",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2260-22107-030-0-005_2.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Bluish Zinc",
+   "fabric": "Wash & Wear",
+   "description": "bluish zinc shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a bluish zinc shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/8784943350017.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9403015856385",
+   "name": "Shalwar Kameez - Kashghar Plus Navy Blue Bird Eye Textured",
+   "price": 14600,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-kashghar-plus-navy-blue-bird-eye-textured",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6487.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6487.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A6492.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0002_1S5A6483.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6496.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0004_1S5A6494.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Navy Blue",
+   "fabric": "Kashghar Plus",
+   "description": "navy blue bird's-eye shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a navy blue bird's-eye shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9403015856385.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9403021459713",
+   "name": "Shalwar Kameez - Kashghar Red Textured",
+   "price": 16900,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-kashghar-red-textured",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6377.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6377.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A6384.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0002_1S5A6389.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6387.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Red",
+   "fabric": "Kashghar",
+   "description": "red textured shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a red textured shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9403021459713.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7742207394049",
+   "name": "Black Plain Luxury Egyptian Cotton Shalwar Kameez",
+   "price": 11890,
+   "url": "https://lawrencepur.com/products/plain-black-luxury-egyptian-cotton-shalwar-kameez1",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1566_1080x1920_4d18ff1a-3783-49bf-b3fc-32ff5be95a9e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1566_1080x1920_4d18ff1a-3783-49bf-b3fc-32ff5be95a9e.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1568_1080x1920_423a388c-bc4b-49c9-9991-776d65020217.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1571_1080x1920_68854bfa-17a2-4012-ad21-03ad4c99e102.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1576_1080x1920_98e48078-14c8-43d6-917a-d076f8a808e8.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Black",
+   "fabric": "Egyptian Cotton",
+   "description": "black cotton shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a black cotton shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/7742207394049.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8667572601089",
+   "name": "Shalwar Kameez - Baltoro Chocolate Brown Plain",
+   "price": 10130,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-baltoro-chocolate-brown-plain-19-12",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00631.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00631.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00623.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00636.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00624_347a8107-5c05-41ed-837d-b414ffe29556.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Chocolate Brown",
+   "fabric": "",
+   "description": "chocolate brown shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a chocolate brown shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/8667572601089.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9024780599553",
+   "name": "Saltoro Summer Wash & Wear Shalwar Kameez",
+   "price": 10050,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-saltoromens-sumer-washnwear",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03326_Edit.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03326_Edit.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03344.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03347.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03319.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "",
+   "fabric": "Wash & Wear",
+   "description": "shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9024780599553.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9024780894465",
+   "name": "Light Pink Saltoro Summer Wash & Wear Shalwar Kameez",
+   "price": 10050,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-saltoro-light-pink-plainmens-sumer-washnwear",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03299_Edit.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03299_Edit.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03309.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03304.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03293.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC03287.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Light Pink",
+   "fabric": "Wash & Wear",
+   "description": "light pink shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a light pink shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9024780894465.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9176959516929",
+   "name": "Shalwar Kameez - Signature PV Maroon Plain",
+   "price": 6300,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-signature-pv-maroon-plain-festive",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_bab4cafe-dace-4c55-b3fe-d9631e18cdf0.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_bab4cafe-dace-4c55-b3fe-d9631e18cdf0.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_3c474cd5-223f-494a-a366-a0e0214435ab.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_0972e148-c686-47dc-b586-1691c1a3b33b.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Maroon",
+   "fabric": "",
+   "description": "maroon shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a maroon shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9176959516929.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9403013955841",
+   "name": "Shalwar Kameez - Kashghar Plus Iron Grey Bird Eye Textured",
+   "price": 14600,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-kashghar-plus-iron-grey-bird-eye-textured",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6301_217640a4-bacc-486e-af1e-abab12d66f10.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6301_217640a4-bacc-486e-af1e-abab12d66f10.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0005_1S5A6314_158d1023-bab4-4451-8168-46717149465a.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A6309_da748393-efc9-43db-a6ef-5fa03be178a3.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6305_3addaffe-7de5-4ea6-b740-dfef57d6e8dc.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0002_1S5A6303_622615d7-decf-43a0-9ae5-c41c6afc0a31.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0004_1S5A6300_6e190792-e0c1-491b-9fe1-2e51c68aa150.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 3.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Iron Grey",
+   "fabric": "Kashghar Plus",
+   "description": "iron grey bird's-eye shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": false
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with an iron grey bird's-eye shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9403013955841.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9147198439681",
+   "name": "The Boski Edition – White Shalwar Kameez",
+   "price": 33000,
+   "url": "https://lawrencepur.com/products/mens-boski-shalwar-kameez-half-white",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1524.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1524.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00429_96a33a18-5a98-46ae-89c3-24962ee57d59.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC00452_622bb666-6ee5-4d87-bf43-817c8537cbbb.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1527_1080x1920_e61b495c-44ab-4539-a87c-6deb10aa81de.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1S5A1535_1080x1920_8b0c037e-c665-46b6-9297-7f84b7d6184c.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "White",
+   "fabric": "Boski",
+   "description": "white boski shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": false
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a white boski shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9147198439681.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9403017593089",
+   "name": "Shalwar Kameez - Kashghar Peacock Blue Textured",
+   "price": 16900,
+   "url": "https://lawrencepur.com/products/shalwar-kameez-kashghar-peacock-blue-textured",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6324.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0003_1S5A6324.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0000_1S5A6333.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0001_1S5A6331.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0002_1S5A6327.jpg",
+    "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/E-comgarments_0004_1S5A6336.jpg"
+   ],
+   "season": "Ready to wear",
+   "lane": "eastern",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "shalwar kameez",
+   "colour": "Peacock Blue",
+   "fabric": "Kashghar",
+   "description": "peacock blue textured shalwar kameez, a kameez shirt with matching shalwar",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a peacock blue textured shalwar kameez, a kameez shirt with matching shalwar.",
+   "ref": "/refs/lawrencepur/9403017593089.jpg",
+   "refHow": "mask"
+  }
+ ],
+ "addons": [
+  {
+   "id": "9316361306369",
+   "name": "Ties - 100% Silk Dark Purple Design",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-dark-purple-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0096__DSC0039.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "dark purple"
+  },
+  {
+   "id": "9316361175297",
+   "name": "Ties - 100% Silk Orange Design",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-orange-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0012__DSC9990.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "orange"
+  },
+  {
+   "id": "9316361142529",
+   "name": "Ties - 100% Silk Red Pattern",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-red-pattern",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0081__DSC0145.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "red"
+  },
+  {
+   "id": "9316361109761",
+   "name": "Ties - 100% Silk Burgundy Design",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-burgundy-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0058__DSC0241.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "burgundy"
+  },
+  {
+   "id": "9316361044225",
+   "name": "Ties - 100% Silk Wine Design",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-wine-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0078__DSC0176.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "wine"
+  },
+  {
+   "id": "9316361011457",
+   "name": "Ties - 100% Silk Peach Stripes",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-peach-stripes",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0050__DSC9706.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "peach"
+  },
+  {
+   "id": "9316360945921",
+   "name": "Ties - 100% Silk Dark Green Design",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-dark-green-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0016__DSC9958.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": "dark green"
+  },
+  {
+   "id": "9316360880385",
+   "name": "Ties - 100% Silk Pistachio Stripes",
+   "price": 3990,
+   "url": "https://lawrencepur.com/products/ties-100-silk-pistachio-stripes",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0025__DSC9891.jpg",
+   "kind": "tie",
+   "gender": "men",
+   "colour": ""
+  },
+  {
+   "id": "9316361634049",
+   "name": "Pocket Square - 100% Silk Light Purple Design",
+   "price": 2250,
+   "url": "https://lawrencepur.com/products/pocket-square-100-silk-light-purple-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0002__DSC0282.jpg",
+   "kind": "pocketsquare",
+   "gender": "men",
+   "colour": "light purple"
+  },
+  {
+   "id": "9316361568513",
+   "name": "Pocket Square - 100% Silk Red Design",
+   "price": 2250,
+   "url": "https://lawrencepur.com/products/pocket-square-100-silk-red-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0003__DSC0356.jpg",
+   "kind": "pocketsquare",
+   "gender": "men",
+   "colour": "red"
+  },
+  {
+   "id": "9316361535745",
+   "name": "Pocket Square - 100% Silk Maroon Design",
+   "price": 2250,
+   "url": "https://lawrencepur.com/products/pocket-square-100-silk-maroon-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0007__DSC0323.jpg",
+   "kind": "pocketsquare",
+   "gender": "men",
+   "colour": "maroon"
+  },
+  {
+   "id": "9316361502977",
+   "name": "Pocket Square - 100% Silk Egg White Design",
+   "price": 2250,
+   "url": "https://lawrencepur.com/products/pocket-square-100-silk-egg-white-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0009__DSC0306.jpg",
+   "kind": "pocketsquare",
+   "gender": "men",
+   "colour": "white"
+  },
+  {
+   "id": "9316361470209",
+   "name": "Pocket Square - 100% Silk Beige Design",
+   "price": 2250,
+   "url": "https://lawrencepur.com/products/pocket-square-100-silk-beige-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0000__DSC0300_330039d7-fdf3-49eb-890d-29f50eb48359.jpg",
+   "kind": "pocketsquare",
+   "gender": "men",
+   "colour": "beige"
+  },
+  {
+   "id": "9316361437441",
+   "name": "Pocket Square - 100% Silk Medium Blue Design",
+   "price": 2250,
+   "url": "https://lawrencepur.com/products/pocket-square-100-silk-medium-blue-design",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/Accessories_1200x1200__0008__DSC0316_a3a23272-0fa7-4d13-a6d2-c525fd9adc33.jpg",
+   "kind": "pocketsquare",
+   "gender": "men",
+   "colour": "medium blue"
+  },
+  {
+   "id": "8867901767937",
+   "name": "Double-Sided Leather Belt – Black & Medium Brown Reversible",
+   "price": 6150,
+   "url": "https://lawrencepur.com/products/belt-leather-double-sided-black-medium-brown-design-30-7",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/4430-70500-010-8-006_1.jpg",
+   "kind": "belt",
+   "gender": "men",
+   "colour": "black & medium brown"
+  },
+  {
+   "id": "8861693411585",
+   "name": "Belt - Leather Brown Plain",
+   "price": 6150,
+   "url": "https://lawrencepur.com/products/belt-leather-brown-plain-21-7",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/4430-70505-040-0-001_2.jpg",
+   "kind": "belt",
+   "gender": "men",
+   "colour": "brown"
+  },
+  {
+   "id": "8861693378817",
+   "name": "Belt - Leather Black Plain",
+   "price": 6150,
+   "url": "https://lawrencepur.com/products/belt-leather-black-plain-21-7",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/4430-70505-010-0-012_2.jpg",
+   "kind": "belt",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8861693280513",
+   "name": "Double-Sided Leather Belt – Black & Chocolate Brown Reversible",
+   "price": 6150,
+   "url": "https://lawrencepur.com/products/belt-leather-double-sided-black-chocolate-brown-plain-21-7",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/4430-70500-010-0-006_3.jpg",
+   "kind": "belt",
+   "gender": "men",
+   "colour": "black & chocolate brown"
+  },
+  {
+   "id": "9181735256321",
+   "name": "Lawrencepur Heritage Genuine Leather Bi-Fold Wallet",
+   "price": 2400,
+   "url": "https://lawrencepur.com/products/wallet-wallet-dark-brown-plain1",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_cfc356eb-8c27-4a61-b92b-eecec8ef25b2.jpg",
+   "kind": "wallet",
+   "gender": "men",
+   "colour": ""
+  },
+  {
+   "id": "9181735321857",
+   "name": "Lawrencepur Two Tone Black Leather Bi-Fold Wallet",
+   "price": 2900,
+   "url": "https://lawrencepur.com/products/wallet-wallet-dark-brown-design4",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_5d6ae735-fef1-4378-944f-72627cb2273e.jpg",
+   "kind": "wallet",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "9143779229953",
+   "name": "Lawrencepur Dark Brown Bi Fold Leather Wallet",
+   "price": 2900,
+   "url": "https://lawrencepur.com/products/lawrencepur-brown-leather-wallet",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_4e787c51-35f5-46e1-a418-6a9ee2a5789d.jpg",
+   "kind": "wallet",
+   "gender": "men",
+   "colour": "dark brown"
+  },
+  {
+   "id": "9181735289089",
+   "name": "Lawrencepur Horizon Contrast Bi-Fold Wallet",
+   "price": 2400,
+   "url": "https://lawrencepur.com/products/wallet-wallet-dark-brown-plain3",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_daae6a5a-129c-45c7-a01c-b7e06ff8b90a.jpg",
+   "kind": "wallet",
+   "gender": "men",
+   "colour": ""
+  },
+  {
+   "id": "8823237738753",
+   "name": "Blue Mercerized Cotton Socks with Design",
+   "price": 720,
+   "url": "https://lawrencepur.com/products/socks-mercerized-cotton-blue-design-25-june",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_ad700c97-52ee-485b-a0a6-00d3550c742d.jpg",
+   "kind": "socks",
+   "gender": "men",
+   "colour": "blue"
+  },
+  {
+   "id": "8823237673217",
+   "name": "Black Mercerized Cotton Socks with Design",
+   "price": 720,
+   "url": "https://lawrencepur.com/products/socks-mercerized-cotton-black-design-25-june",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/3_a091bd48-7f4a-4d84-8fe7-53516da9a88f.jpg",
+   "kind": "socks",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8823237705985",
+   "name": "Charcoal Grey Mercerized Cotton Socks",
+   "price": 720,
+   "url": "https://lawrencepur.com/products/socks-mercerized-cotton-charcoal-grey-plain-25-june",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_70b26278-b6a9-4ba4-9711-d65fe7b32c2c.jpg",
+   "kind": "socks",
+   "gender": "men",
+   "colour": "charcoal grey"
+  },
+  {
+   "id": "8158403232001",
+   "name": "Plain Grey Worsted Flanne Formal Trouser",
+   "price": 15000,
+   "url": "https://lawrencepur.com/products/trouser-worsted-flannel-grey-plain10",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2200-04102-020-0-004.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "grey"
+  },
+  {
+   "id": "8158403264769",
+   "name": "Plain Blue Worsted Flanne Formal Trouser",
+   "price": 15000,
+   "url": "https://lawrencepur.com/products/trouser-worsted-flannel-blue-plain10",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2200-04102-030-0-001.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "blue"
+  },
+  {
+   "id": "8158403330305",
+   "name": "Plain Brown Worsted Flanne Formal Trouser",
+   "price": 15000,
+   "url": "https://lawrencepur.com/products/trouser-worsted-flannel-brown-plain10",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/2_25004b27-c208-4790-9a47-4883def4dd80.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "brown"
+  },
+  {
+   "id": "8092697362689",
+   "name": "Plain Maroon, Tropicle Exclusive Wool Blend Formal Trouser",
+   "price": 15000,
+   "url": "https://lawrencepur.com/products/trouser-tropical-exclusive-p-maroon-plain",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/1_5816ed25-96b4-48f3-9044-a779fa3c23e4.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "maroon"
+  },
+  {
+   "id": "8007512654081",
+   "name": "Plain-Black, Tropicle Exclusive Wool Blend Formal Trouser",
+   "price": 15000,
+   "url": "https://lawrencepur.com/products/plain-black-tropical-exclusive-wool-blend-trouser-1",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/01_570216f7-029d-4ae7-b1a6-9ddf2ffdb0ba.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8930877669633",
+   "name": "Trouser - Worsted Flannel Brown Plain",
+   "price": 15000,
+   "url": "https://lawrencepur.com/products/trouser-worsted-flannel-brown-plain-10-oct",
+   "image": "https://cdn.shopify.com/s/files/1/0647/7093/2993/files/DSC02036.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "brown"
+  }
+ ]
+}

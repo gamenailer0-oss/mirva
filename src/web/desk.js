@@ -8,7 +8,7 @@ const root = $("#desk");
 const S = { me: null, tab: "", brand: "", brands: [], days: 30, filter: "all" };
 const TABS = desk === "hq"
   ? [["today", "Today"], ["tryons", "Try-ons"], ["enquiries", "Enquiries"], ["stores", "Stores"], ["members", "Members"], ["outbox", "Outbox"], ["log", "Log"]]
-  : [["overview", "Overview"], ["catalogue", "Catalogue"], ["mirrors", "Mirrors"], ["look", "Look and feel"]];
+  : [["overview", "Overview"], ["catalogue", "Catalogue"], ["mirrors", "Mirrors"], ["limits", "Limits"], ["look", "Look and feel"]];
 
 const num = (n) => Math.round(Number(n) || 0).toLocaleString("en-PK");
 const pct = (a, b) => (b ? Math.round((a / b) * 100) + "%" : "—");
@@ -211,9 +211,13 @@ const VIEWS = {
             el("dt", { text: "Live looks" }), el("dd", { class: "num", text: `${num((spend.live?.seconds || 0) / 60)} min · ${money((spend.live?.usd || 0) * 277)}` }),
             el("dt", { text: "Together" }), el("dd", { class: "num", text: money(o.spend.pkr) }),
             o.plan && [el("dt", { text: "Plan" }), el("dd", { text: `${o.plan.name}, ${plural(o.plan.stores, "store")} (${o.plan.status})` })],
-            o.plan && [el("dt", { text: "Sessions" }), el("dd", { class: "num", text: `${num(f.tried)} of ${num(o.plan.sessions)} in the allowance` })],
+            // Sessions are this calendar month at the store's paired mirrors, the way the allowance is counted.
+            o.plan && [el("dt", { text: "Sessions this month" }), el("dd", { class: "num", text: `${num(o.plan.used)} of ${num(o.plan.sessions)} in the allowance` })],
+            o.plan && [el("dt", { text: "Over the allowance" }), el("dd", { class: "num", text: o.plan.over ? `${num(o.plan.over)} · ${money(o.plan.overagePkr)} at ${money(o.plan.overage)} each` : `None. Each extra session is ${money(o.plan.overage)}` })],
+            o.plan && [el("dt", { text: "Overage cap" }), el("dd", { text: o.plan.overageCap ? `Up to ${num(o.plan.overageCap)} extra, ${money(o.plan.overageCap * o.plan.overage)} at most` : "None: mirrors stop at the allowance" })],
             o.plan && [el("dt", { text: "Fee" }), el("dd", { class: "num", text: `${money(o.plan.monthly)} a month` })],
           ),
+          o.plan && el("a", { class: "link muted small", href: "#limits", text: "Change the limits", onclick: (e) => (e.preventDefault(), go("limits")) }),
         ),
       ),
     );
@@ -294,6 +298,81 @@ const VIEWS = {
     );
   },
 
+  // What try-ons may cost at the store's mirrors, in the store's own hands: a budget for each mirror a day,
+  // and how far past the monthly allowance of sessions the store is willing to go.
+  async limits() {
+    const L = await api(`/api/console/limits?brand=${S.brand}`);
+    const s = L.sessions;
+    const usd = (n) => "$" + (Number.isInteger(Number(n)) ? String(Number(n)) : Number(n).toFixed(2));
+    const pkr = (n) => money(Math.round(Number(n) * 277));
+
+    const hint = el("span", { class: "hint" });
+    const daily = el("input", { name: "mirrorDailyUsd", type: "number", inputMode: "decimal", min: L.minDailyUsd, max: L.maxDailyUsd, step: "0.5", value: String(L.mirrorDailyUsd), required: true });
+    const showDaily = () => (hint.textContent = Number(daily.value) > 0 ? `${usd(daily.value)} is about ${pkr(daily.value)} a day for each mirror.` : "");
+    daily.addEventListener("input", showDaily);
+    showDaily();
+    const dailyForm = el("form", { class: "panel form" },
+      el("h2", { text: "What one mirror may spend in a day" }),
+      el("label", { class: "field" }, el("span", { text: "Daily budget for each mirror, in dollars" }), daily, hint),
+      el("p", { class: "fine", text: `Portraits cost about ${usd(0.02)} each and a live look about ${usd(0.02)} a second. When a mirror has spent its budget it stops making portraits and live looks until midnight, Pakistan time. The stylist keeps working. The budget is from ${usd(L.minDailyUsd)} to ${usd(L.maxDailyUsd)}; MIRVA sets it to ${usd(L.defaultDailyUsd)} until you change it. Each mirror also pauses for a while after ${L.tryOnsPerHour} try-ons in an hour.` }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save the budget" }),
+    );
+    onSubmit(dailyForm, async (d) => {
+      await api("/api/console/limits", { brand: S.brand, mirrorDailyUsd: d.mirrorDailyUsd });
+      toast("Saved. Mirrors use the new budget straight away.");
+      go("limits");
+    });
+
+    const extra = el("input", { name: "overageSessions", type: "number", inputMode: "numeric", min: 0, max: L.overageMax, step: "1", value: String(L.overageSessions), required: true });
+    const extraHint = el("span", { class: "hint" });
+    const showExtra = () => {
+      const n = Math.max(0, Math.round(Number(extra.value) || 0));
+      extraHint.textContent = n ? `Up to ${num(n)} extra sessions, ${money(n * L.overagePkr)} at most, billed after the month ends.` : "Mirrors stop when the allowance is used, and start again on the 1st.";
+    };
+    extra.addEventListener("input", showExtra);
+    showExtra();
+    const extraForm = el("form", { class: "panel form" },
+      el("h2", { text: "If the month's sessions run out" }),
+      el("label", { class: "field" }, el("span", { text: "Extra sessions you will pay for" }), extra, extraHint),
+      el("p", { class: "fine", text: `${L.plan ? `Your ${L.plan.name} plan includes ${num(s.allowance)} sessions a month for ${plural(L.plan.stores, "store")}. ` : ""}A session is one shopper who reaches at least one look, with up to four personal renders. Each session past the allowance is ${money(L.overagePkr)}. Zero stops the mirrors when the allowance is used; the stylist keeps working.` }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save the cap" }),
+    );
+    onSubmit(extraForm, async (d) => {
+      await api("/api/console/limits", { brand: S.brand, overageSessions: d.overageSessions });
+      toast("Saved.");
+      go("limits");
+    });
+
+    const month = el("section", { class: "panel" },
+      el("h2", { text: "Sessions this month" }),
+      s
+        ? [
+            el("p", { class: "lead", text: `${num(s.used)} of ${num(s.allowance)}` }),
+            el("div", { class: "gauge", role: "img", "aria-label": `${num(s.used)} of ${num(s.allowance)} sessions used`, style: `--v:${Math.min(1, s.used / Math.max(1, s.allowance))}` }, el("i")),
+            el("p", { class: "muted small", text: s.over ? `${num(s.over)} over the allowance: ${money(s.overPkr)} at ${money(L.overagePkr)} each.` : `${num(Math.max(0, s.allowance - s.used))} left in the allowance.` }),
+            s.stopped && el("p", { class: "formnote", text: "The mirrors have stopped making try-ons for the month. The stylist still works." }),
+          ]
+        : el("p", { class: "muted", text: "No plan is on record for this store yet, so there is no monthly allowance to count against. The daily budget below still applies." }),
+    );
+    const today = el("section", { class: "panel" },
+      el("h2", { text: "Today at each mirror" }),
+      L.mirrors.length
+        ? el("div", { class: "rows" }, L.mirrors.map((m) => el("div", { class: "rowitem plain" },
+            el("div", {}, el("div", { text: m.name }), el("div", { class: "sub", text: m.store || (m.paired ? "Paired" : "Not paired yet") })),
+            el("div", { class: "row" }, m.hit && el("span", { class: "badge warn", text: "Rested for today" }), el("b", { class: "num", text: `${usd(m.spentUsd)} of ${usd(L.mirrorDailyUsd)}` })),
+          )))
+        : empty("No mirrors yet. Add one on the Mirrors page."),
+    );
+    fill(work(),
+      head("Limits"),
+      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "What try-ons are allowed to cost at your mirrors. The daily budget is a ceiling on each mirror, so a busy day or a stuck screen cannot run up a bill. The cap on extra sessions decides whether a busy month can go past your plan, and what that would cost you." }),
+      el("div", { class: "grid2" }, month, today),
+      el("div", { class: "grid2" }, dailyForm, extraForm),
+    );
+  },
+
   async look() {
     const { brand } = await api(`/api/console/catalogue?brand=${S.brand}`);
     const state = { mood: brand.mood || "porcelain", accent: brand.accent || "#0C1018", byline: brand.byline || "styled by MIRVA" };
@@ -337,14 +416,18 @@ const VIEWS = {
     count("outbox", o.waiting.outbox);
     count("members", o.waiting.invites);
     const days = [...o.usage.reduce((m, r) => m.set(r.date, { date: r.date, usd: (m.get(r.date)?.usd || 0) + r.usd }), new Map()).values()].map((d) => ({ ...d, pkr: Math.round(d.usd * 277) }));
+    // What the server says first (the try-on account out of credit leads, then stores and mirrors at their limits, then a day of unusual spend), then the rest.
     const needs = [
-      o.leads.new && `${plural(o.leads.new, "new enquiry", "new enquiries")} to answer.`,
-      o.waiting.invites && `${plural(o.waiting.invites, "member")} asking about Private.`,
-      o.waiting.outbox && `${plural(o.waiting.outbox, "message")} written and not sent. No email sender is connected yet.`,
-      !o.system.live && "No Decart key is loaded, so try-on is off.",
-      o.system.openMirror && "The mirror is open to anyone who can reach this address. Fine on this laptop. Set MIRVA_OPEN_MIRROR=0 before it goes online.",
-      o.system.payments === "test" && "Payments are in test mode. No money can move.",
-    ].filter(Boolean);
+      ...(o.needs || []).map((n) => ({ text: n.text, bad: n.kind === "credit" || n.kind === "store-over" })),
+      ...[
+        o.leads.new && `${plural(o.leads.new, "new enquiry", "new enquiries")} to answer.`,
+        o.waiting.invites && `${plural(o.waiting.invites, "member")} asking about Private.`,
+        o.waiting.outbox && `${plural(o.waiting.outbox, "message")} written and not sent. No email sender is connected yet.`,
+        !o.system.live && "No Decart key is loaded, so try-on is off.",
+        o.system.openMirror && "The mirror is open to anyone who can reach this address. Fine on this laptop. Set MIRVA_OPEN_MIRROR=0 before it goes online.",
+        o.system.payments === "test" && "Payments are in test mode. No money can move.",
+      ].filter(Boolean).map((text) => ({ text })),
+    ];
     fill(work(), 
       head("Today"),
       el("div", { class: "tiles" },
@@ -358,11 +441,11 @@ const VIEWS = {
         jump(tile("Prefer", prefer, tried && prefer !== "Even" ? `${pct(Math.max(...ways.map((w) => w.count)), tried)} of try-ons. Open Try-ons` : "Open Try-ons", 7), "tryons"),
       ),
       el("div", { class: "grid2" },
-        panel("Needs you", el("ul", { class: "warns" }, needs.length ? needs.map((t) => el("li", { text: t })) : el("li", { class: "ok", text: "Nothing is waiting." }))),
+        panel("Needs you", el("ul", { class: "warns" }, needs.length ? needs.map((n) => el("li", { class: n.bad ? "bad" : "", text: n.text })) : el("li", { class: "ok", text: "Nothing is waiting." }))),
         panel("Real try-on spend, day by day", chart(days, "pkr"), el("p", { class: "fine", text: "In rupees, at Decart's list price. Sample activity is left out." })),
       ),
       el("div", { class: "grid2" },
-        panel("Stores", o.retailers.length ? el("div", { class: "rows" }, o.retailers.map((r) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: r.name }), el("div", { class: "sub", text: `${cap(r.plan)} · ${plural(r.stores, "store")} · ${r.status}` })), el("b", { class: "num", text: money(r.monthly) })))) : empty("No stores yet.")),
+        panel("Stores", o.retailers.length ? el("div", { class: "rows" }, o.retailers.map((r) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: r.name }), el("div", { class: "sub", text: `${cap(r.plan)} · ${plural(r.stores, "store")} · ${r.status}${r.sessions ? ` · ${num(r.sessions.used)} of ${num(r.sessions.allowance)} sessions` : ""}` })), el("b", { class: "num", text: money(r.monthly) })))) : empty("No stores yet.")),
         panel("The system",
           el("dl", { class: "kv" },
             el("dt", { text: "Try-on" }), el("dd", { text: o.system.live ? `On · ${o.system.model}` : "Off" }),

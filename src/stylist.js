@@ -59,7 +59,9 @@ export function pickLooks(products, brief, ctx = {}) {
   const occasion = OCCASIONS.find((o) => o.id === brief.occasion);
   const target = Math.min(5, Math.max(1, (occasion?.formality ?? 3) + (brief.formalityShift || 0)));
   const fit = TRADITION_FIT[brief.mood] || TRADITION_FIT.between;
-  const who = brief.who || "women";
+  // A store that dresses one gender only (a men's tailor) is asked for that gender, whatever the brief began with.
+  const asked = brief.who || "women";
+  const who = products.some((p) => p.gender === asked) ? asked : products[0]?.gender || asked;
   const shown = ctx.shown || new Set();
   const avoid = ctx.avoidColours || new Set();
 
@@ -144,6 +146,8 @@ export function parseAsk(text, products = []) {
 
   if (/\b(him|his|men|mens|man|husband|brother|father|dad|groom|boyfriend)\b/.test(t)) patch.who = "men";
   if (/\b(her|women|womens|woman|wife|sister|mother|mom|bride|me|myself)\b/.test(t) && !patch.who) patch.who = "women";
+  // A store that does not carry that gender (a men's tailor asked "for me") keeps the brief it has.
+  if (patch.who && products.length && !products.some((p) => p.gender === patch.who)) delete patch.who;
 
   const have = new Set(products.map((p) => colourFamily(p.colour)));
   const colour = COLOUR_WORDS.find((c) => has(c));
@@ -226,9 +230,12 @@ const NEUTRALS = new Set(["black", "white", "beige", "brown", "grey", "gold", "s
 const SHOE = /(sandal|heel|flat|pump|slide|khussa|shoe|mule|loafer|sneaker)/i;
 const BAG = /(bag|tote|clutch|wallet|pouch)/i;
 const WRAP = /(dupatta|shawl|stole|scarf|cape)/i;
+// What finishes a suit in a tailor's store. Their shelf name is trusted: a wallet is a wallet, not a bag.
+const TAILORING = new Set(["tie", "pocketsquare", "cufflinks", "belt", "wallet", "socks"]);
 
 /** What an add-on is, whatever shelf the store filed it on. */
 export function kindOf(a) {
+  if (TAILORING.has(a.kind)) return a.kind;
   if (SHOE.test(a.name)) return "shoes";
   if (BAG.test(a.name)) return "bag";
   if (/dupatta/i.test(a.name)) return "dupatta";
@@ -236,7 +243,10 @@ export function kindOf(a) {
   return a.kind;
 }
 
-const KIND_LABEL = { dupatta: "Dupatta", shawl: "Shawl", bottoms: "Trousers", shoes: "Shoes", bag: "Bag", fragrance: "Fragrance", accessory: "Accessory" };
+const KIND_LABEL = {
+  dupatta: "Dupatta", shawl: "Shawl", bottoms: "Trousers", shoes: "Shoes", bag: "Bag", fragrance: "Fragrance", accessory: "Accessory",
+  tie: "Tie", pocketsquare: "Pocket square", cufflinks: "Cufflinks", belt: "Belt", wallet: "Wallet", socks: "Socks",
+};
 
 /**
  * Up to three add-ons for a piece. One of each kind, chosen for what the piece lacks
@@ -257,6 +267,14 @@ export function addOns(product, addons = [], max = 3) {
   if (eastern && !hasDupatta) wants.push("dupatta");
   if (!eastern || product.formality <= 3) wants.push("shawl");
   wants.push("shoes", "bag", "fragrance");
+  // A tailor's store (ties, pocket squares, belts on its shelves) finishes a suit with those. A store without them,
+  // Sapphire among them, never takes this branch, so what it is offered does not move.
+  if (pool.some((a) => TAILORING.has(a.kind))) {
+    wants.length = 0;
+    if (!hasBottom) wants.push("bottoms");
+    if (/suit|blazer|jacket|waist\s?coat/i.test(name)) wants.push("tie", "pocketsquare", "belt");
+    wants.push("wallet", "socks");
+  }
 
   const score = (a) => {
     const c = colourFamily(a.colour || "");

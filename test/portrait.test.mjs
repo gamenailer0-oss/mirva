@@ -281,16 +281,19 @@ test("a busy engine answers 'busy' and costs nothing", async () => {
   assert.deepEqual(await kinds(db, who), ["portrait"], "the call that worked was metered once");
 });
 
-test("a refused key or an empty account is told plainly, and costs nothing", async () => {
+test("a refused key is told plainly, an empty account is 'resting', and neither costs anything", async () => {
   const { app, db } = await makeApp({ openMirror: true });
   engine = () => new Response("nope", { status: 401 });
   const refused = await shot(app, { fields: portraitFields() });
   assert.equal(refused.status, 502);
   assert.match(refused.body.error, /refused the key/);
+  // The shopper is not told about the account; the founder is (see safeguards.test.mjs).
   engine = () => new Response("pay up", { status: 402 });
   const broke = await shot(app, { fields: portraitFields(), ip: "10.2.0.4" });
-  assert.equal(broke.status, 502);
-  assert.match(broke.body.error, /out of credit/);
+  assert.equal(broke.status, 503);
+  assert.equal(broke.body.limit, "resting");
+  assert.match(broke.body.error, /resting just now/);
+  assert.equal(broke.body.busy, undefined, "not 'busy', so the browser does not retry it");
   engine = () => new Response("no", { status: 400 });
   assert.equal((await shot(app, { fields: portraitFields(), ip: "10.2.0.5" })).status, 502);
   assert.equal((await db.get("SELECT COUNT(*) AS n FROM usage")).n, 0);

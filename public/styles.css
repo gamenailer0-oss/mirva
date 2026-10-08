@@ -409,8 +409,10 @@ a.chip { text-decoration: none; }
 .addon-why { font-size: 10px; color: var(--accent-text); line-height: 1.15; }
 .detail-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; align-items: center; }
 
-.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 10px; margin-top: 16px; }
-.grid .look { animation: none; content-visibility: auto; contain-intrinsic-size: auto 290px; }
+/* The estimate for a card that is not drawn yet is a height only. (As `contain-intrinsic-size: auto 290px` it also set a
+   290px width, so every column was at least that wide: the second column ran off the screen and the cards were giants.) */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; margin-top: 16px; }
+.grid .look { animation: none; content-visibility: auto; contain-intrinsic-block-size: auto 290px; min-width: 0; }
 .grid .look .shot { aspect-ratio: 4 / 5; }
 
 .ask {
@@ -457,20 +459,55 @@ a.chip { text-decoration: none; }
 
 /* ---------- narrow screens: the mirror on top, the tablet below ---------- */
 @media (max-width: 980px) {
-  body { overflow: auto; }
-  .app { height: auto; min-height: 100dvh; grid-template-columns: minmax(0, 1fr); }
-  .wardrobe { flex-direction: row; padding: 10px 16px; border-right: 0; border-bottom: 1px solid var(--line); gap: 12px; }
+  /* A normal mobile page: the page itself scrolls, with momentum, and nothing inside it is a scroll area to get stuck in.
+     The glass is at most about 62% of the screen, so the stylist is always in reach below it. */
+  html, body { height: auto; }
+  body { overflow: visible; }
+  .app {
+    height: auto; min-height: 100vh; min-height: 100dvh;
+    grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr);
+    padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+  }
+  .wardrobe { flex-direction: row; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; border-right: 0; border-bottom: 1px solid var(--line); gap: 12px; }
   .wardrobe-title { margin: 0; }
-  .saved { flex-direction: row; overflow-x: auto; }
+  .saved { flex-direction: row; overflow-x: auto; overflow-y: hidden; }
   .saved:empty::before { width: auto; margin: 0; }
-  .kept { width: 40px; }
+  .kept { width: 44px; }
   .wardrobe-foot { flex-direction: row; margin-left: auto; }
   .stage { padding: 14px 16px; }
-  .glass { height: auto; width: min(100%, 420px); }
-  .glass[data-shape="landscape"] { width: 100%; }
-  .tablet { border-left: 0; border-top: 1px solid var(--line); padding: 16px 16px 14px; }
+  .glass { width: auto; height: min(62vh, calc((100vw - 32px) * 16 / 9)); scroll-margin-top: 8px; }
+  .glass[data-shape="landscape"] { width: 100%; height: auto; }
+  .tablet { border-left: 0; border-top: 1px solid var(--line); padding: 16px 16px calc(14px + env(safe-area-inset-bottom)); contain: none; }
   .pane { overflow: visible; }
   .addon-row { grid-template-columns: minmax(0, 1fr); }
+}
+/* The small viewport height does not change as the browser's address bar slides away, so the glass never resizes under a scrolling thumb. */
+@supports (height: 1svh) {
+  @media (max-width: 980px) {
+    .glass { height: min(62svh, calc((100vw - 32px) * 16 / 9)); }
+    .glass[data-shape="landscape"] { height: auto; }
+  }
+}
+/* A phone on its side: the glass stays in view on the left and the page scrolls past the stylist on the right. */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 600px) {
+  .app {
+    grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "stage wardrobe" "stage tablet";
+  }
+  .stage { grid-area: stage; position: sticky; top: 0; align-self: start; height: 100vh; padding: 10px 8px 10px 12px; }
+  .wardrobe { grid-area: wardrobe; padding-top: 10px; }
+  .tablet { grid-area: tablet; border-top: 0; border-left: 1px solid var(--line); }
+  .glass { height: calc(100vh - 20px); }
+  .glass[data-shape="landscape"] { width: min(44vw, calc((100vh - 20px) * 16 / 9)); height: auto; }
+  .modes span { display: none; }
+  .modes button { padding: 8px 12px; }
+}
+@supports (height: 1svh) {
+  @media (max-width: 980px) and (orientation: landscape) and (max-height: 600px) {
+    .stage { height: 100svh; }
+    .glass { height: calc(100svh - 20px); }
+    .glass[data-shape="landscape"] { width: min(44vw, calc((100svh - 20px) * 16 / 9)); height: auto; }
+  }
 }
 @media (max-width: 420px) {
   .looks { gap: 8px; }
@@ -500,3 +537,42 @@ a.chip { text-decoration: none; }
 .notice a { color: inherit; }
 /* Links in a line of small print: the text stays small, the touch area around it is 44px tall. */
 .notice .tap { display: inline-block; padding: 15px 8px; margin: -15px -8px; font: inherit; color: inherit; background: none; border: 0; text-decoration: underline; cursor: pointer; }
+
+/* ---------- phone refinements (after the base rules, so they win) ---------- */
+@media (max-width: 980px) {
+  /* 44px to hit, in both directions */
+  .mark-link { display: grid; place-items: center; width: 44px; height: 44px; margin: -9px -9px -9px -9px; }
+  .modes button { min-height: 44px; }
+  .glass-btn { padding: 9px 14px; letter-spacing: .09em; }
+  .glass-btn.icon { min-width: 44px; }
+  .size { min-width: 44px; }
+  .ask { min-height: 52px; }
+  .ask button { width: 44px; height: 44px; }
+  .toast button, .toast a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .addon { min-height: 64px; }
+  .kept { overflow: visible; }
+  .kept > button:first-child { border-radius: 10px; overflow: hidden; }
+  .kept .drop { width: 44px; height: 44px; top: -15px; right: -15px; background: none; opacity: 1; display: grid; place-items: center; line-height: 1; font-size: 0; }
+  .kept .drop::before { content: "\00d7"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(8, 10, 14, .82); color: #fff; font-size: 14px; }
+  .saved { padding: 15px 15px 2px 2px; }
+  /* 16px in a field: iOS does not zoom the page in when it is tapped, and so never leaves it zoomed */
+  .ask input, .import input, .select { font-size: 16px; min-height: 44px; }
+  .ask input { padding: 10px 0; }
+  .ask button { flex: none; }
+  /* Once the glass has scrolled out of sight the ask bar docks at the bottom of the screen (src/main.js marks the page
+     "glass-away"), so the stylist is never a long way off, however far down the Catalogue is. While the glass is in view
+     it stays where it is, and never lies across the tabs. */
+  .ask { margin-top: 12px; box-shadow: 0 0 0 1px var(--line) inset, 0 12px 28px -14px rgba(8, 10, 16, .4); }
+  .glass-away .ask { position: sticky; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 6; }
+  /* When the camera has stopped, "Try the camera again" is the one thing to tap. It sits above the caption and the
+     buttons (which used to lie across it on a short glass, so a tap on it landed on the caption), and clear of them. */
+  .cam-lost { z-index: 11; padding-bottom: 34%; }
+  /* focus and scroll-into-view keep what they bring up clear of that bar */
+  html { scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+  /* a dialog scrolls inside itself and hands nothing on to the page behind it */
+  .sheet { overscroll-behavior: contain; max-height: calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+}
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 600px) {
+  /* the glass never leaves the screen on its side, so the bar is always docked */
+  .ask { position: sticky; bottom: calc(6px + env(safe-area-inset-bottom)); z-index: 6; }
+}

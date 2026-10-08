@@ -90,6 +90,10 @@ body.desk { background: var(--bg); font-size: 15.5px; }
 .warns li { display: grid; grid-template-columns: 10px 1fr; gap: 12px; align-items: baseline; font-size: 14.5px; }
 .warns li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--warn); transform: translateY(-1px); }
 .warns li.ok::before { background: var(--good); }
+.warns li.bad::before { background: var(--bad); }
+.warns li.bad { font-weight: 500; }
+.gauge { height: 6px; border-radius: 6px; background: var(--line); overflow: hidden; }
+.gauge i { display: block; height: 100%; border-radius: 6px; background: var(--ink); transform-origin: left; transform: scaleX(var(--v, 0)); transition: transform var(--slow) var(--ease); }
 .kv { display: grid; grid-template-columns: auto 1fr; gap: 7px 18px; font-size: 14.5px; }
 .kv dt { color: var(--muted); }
 

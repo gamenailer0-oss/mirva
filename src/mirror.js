@@ -1,5 +1,5 @@
 // The mirror: camera in, a clean portrait frame out, and the live try-on session on top.
-// Events: awake, state, picture, wearing, tick, idle, presence, link, queue, ended, fault, shape, camera, abandoned
+// Events: awake, state, picture, wearing, tick, idle, presence, link, queue, ended, fault, shape, camera, abandoned, failed
 import { framing, warmUp, ready } from "./vision.js";
 
 const SHAPES = { portrait: [720, 1280], landscape: [1280, 720] };
@@ -9,6 +9,7 @@ const HIDDEN_SECONDS = 4; // ...and this long after the window goes out of sight
 const WATCH_MS = 1200; // how often the mirror checks who is in it
 const WATCH_LIVE_MS = 2500; // while a look is live the page is busy enough; this is still well inside AWAY_SECONDS
 const STALL_MS = 2000; // a camera that has sent no new frame for this long is frozen
+const PREPARE_SECONDS = 20; // how long the token, the garment picture and the engine's code get, before the engine is even dialled
 const CONNECT_SECONDS = 20; // how long the engine gets to answer
 const QUEUE_SECONDS = 120; // ...or, once it reports a place in line, how long it may take
 const PICTURE_SECONDS = 12; // a connected look with no picture by now is not coming
@@ -16,8 +17,14 @@ const RECONNECT_SECONDS = 20; // the engine redials a dropped line; if that take
 const LOOK_SIDE = 512; // the pose check looks at a copy this big on its long side
 
 // The try-on engine is the heaviest part of the app. Load it when it is first wanted.
+// A load that failed (a dropped connection on the first tap) is forgotten, so the next tap loads it again instead of
+// being handed the same failure until the page is reloaded.
 let sdk = null;
-const engine = () => (sdk ??= import("@decartai/sdk"));
+const engine = () =>
+  (sdk ??= import("@decartai/sdk").catch((e) => {
+    sdk = null;
+    throw e;
+  }));
 
 // A worker's timer keeps its pace when the window is behind another one. The page's own timers
 // drop to once a second there, which starved the engine of frames and froze the live look.
@@ -80,6 +87,10 @@ export class Mirror extends EventTarget {
   }
   get isLive() {
     return this.state === "live" || this.state === "connecting";
+  }
+  /** Seconds of live video so far this sitting, the look that is running now included. */
+  get liveSeconds() {
+    return this.totalSeconds + (this.startedAt ? (performance.now() - this.startedAt) / 1000 : 0);
   }
   /** Start loading the engine before it is needed, so the first tap is quicker. */
   preload() {
@@ -401,16 +412,21 @@ export class Mirror extends EventTarget {
     if (this.queued) {
       worn = this.queued;
       this.queued = null;
-      await this.#apply(this.rt, worn.state);
+      if (!this.rt) return; // taken off in the meantime: there is nothing to put it on
+      const rt = this.rt;
+      await this.#apply(rt, worn.state);
+      if (this.rt !== rt) return; // ...or taken off while it was being applied
     }
     this.#worn(worn.product);
   }
 
   async #swap(first) {
     let next = first;
-    while (next) {
+    while (next && this.rt) {
+      const rt = this.rt;
       this.queued = null;
-      await this.#apply(this.rt, next.state);
+      await this.#apply(rt, next.state);
+      if (this.rt !== rt) return; // the look ended while the garment was being swapped: it is not worn
       this.#worn(next.product);
       next = this.rt ? this.queued : null;
     }
@@ -436,10 +452,19 @@ export class Mirror extends EventTarget {
     let rt = null;
     let granted = null;
     let place = 0;
+    // Everything before the engine is dialled (the token, the garment picture, the engine's code) has PREPARE_SECONDS.
+    // Without a limit one request that never answers leaves the glass connecting for good.
+    let prepTimer;
+    const tooSlow = new Promise((_, reject) => (prepTimer = setTimeout(() => reject(Object.assign(new Error("The connection is slow."), { kind: "slow" })), PREPARE_SECONDS * 1000)));
+    tooSlow.catch(() => {});
     try {
-      const [{ createDecartClient, models, createConsoleLogger }, res] = await Promise.all([engine(), fetch("/api/token", { method: "POST", headers: { "content-type": "application/json", ...this.auth() }, body: JSON.stringify({ brand: this.brandId }) })]);
+      const [{ createDecartClient, models, createConsoleLogger }, res] = await Promise.race([
+        Promise.all([engine(), fetch("/api/token", { method: "POST", headers: { "content-type": "application/json", ...this.auth() }, body: JSON.stringify({ brand: this.brandId }), signal: AbortSignal.timeout?.(PREPARE_SECONDS * 1000) })]),
+        tooSlow,
+      ]);
       const body = await res.json().catch(() => ({}));
-      if (!res.ok || !body.apiKey) throw new Error(body.error || "Could not start the live look.");
+      // The server's own sentence and its reason (`limit`) travel with the error, so the glass can say it as it is.
+      if (!res.ok || !body.apiKey) throw Object.assign(new Error(body.error || "Could not start the live look."), { status: res.status, limit: body.limit });
       granted = body.grant ?? null;
       if (stale()) throw new Error("cancelled");
       // The server may grant less than a full session: a member at home has a monthly allowance.
@@ -455,7 +480,8 @@ export class Mirror extends EventTarget {
         }
       })();
       const client = createDecartClient({ apiKey: body.apiKey, ...(debug ? { logger: createConsoleLogger("debug") } : {}) });
-      const image = await state.image; // the garment was fetched while the token was
+      const image = await Promise.race([state.image, tooSlow]); // the garment was fetched while the token was
+      clearTimeout(prepTimer);
       if (stale()) throw new Error("cancelled");
       // The engine gets its own copy of the track: the SDK ends the track it is given
       // when a session closes, which would otherwise switch off the mirror itself.
@@ -519,14 +545,24 @@ export class Mirror extends EventTarget {
       this.#set("live");
       if (document.hidden) this.#visibility();
     } catch (e) {
-      this.queued = null;
+      clearTimeout(prepTimer);
+      // A newer look may already be on its way: what it has queued is not this attempt's to clear.
+      if (!stale()) this.queued = null;
       try {
         rt?.disconnect();
       } catch {}
       feed?.getTracks().forEach((t) => t.stop());
       // The server set the meter to the whole allowance when it gave the token. Tell it nothing ran.
       if (granted != null) this.#emit("abandoned", { grant: granted });
-      if (!stale()) this.#set(this.out ? "awake" : "asleep");
+      if (!stale()) {
+        // A picture that had begun to arrive is not a look. Let go of it, so nothing frozen is left on the glass.
+        clearInterval(this.firstFrame);
+        this.pictured = false;
+        this.live.pause();
+        this.live.srcObject = null;
+        this.#set(this.out ? "awake" : "asleep");
+        this.#emit("failed", { error: e });
+      }
       throw e;
     }
   }

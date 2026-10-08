@@ -13,6 +13,7 @@ worker/schema.sql
 # Catalogues read from other companies' sites stay off the record unless a store has agreed
 brands/*/
 !brands/sapphire/
+!brands/lawrencepur/
 
 # Fetched or built on install
 public/models/

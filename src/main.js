@@ -52,7 +52,7 @@ const api = async (path, options) => {
   }
 };
 
-const LANES = { formal: "Formal", festive: "Festive", outfits: "Outfits", smart: "Smart casual", fusion: "Fusion", casual: "Casual", unstitched: "Unstitched", west: "Western", men: "Men" };
+const LANES = { formal: "Formal", festive: "Festive", outfits: "Outfits", smart: "Smart casual", fusion: "Fusion", casual: "Casual", unstitched: "Unstitched", west: "Western", men: "Men", suits: "Suits", blazers: "Blazers", waistcoats: "Waistcoats", eastern: "Eastern" };
 
 const S = {
   config: null,
@@ -76,6 +76,8 @@ const S = {
   extras: new Map(), // pid -> Set of add-on ids the shopper added
   developing: null, // the "being made" sequence on the glass, while something is generated
   ticket: 0,
+  shooting: 0, // portraits being made right now
+  visit: { looks: 0, portraits: 0, base: 0 }, // what this shopper has used since Start over (see visitLimits)
   lane: "all",
   garments: new Map(),
   refs: new Map(),
@@ -114,9 +116,34 @@ function askToJoin() {
   t.hidden = false;
 }
 const RESTING = "Try-on is resting just now. Please try again in a little while.";
+const FULL_LINE = "That's a full fitting. Tap Start over for the next one, or ask the staff.";
+const CAMERA_DOWN_LINE = "The camera has stopped. Tap Try the camera again, then pick a look.";
+
+// What one shopper may use of a store mirror before the next one: the server says (`visit` in /api/config), and a paired
+// mirror whose server has not said uses these. Anyone else is not held to a visit. A number that is absent, null or not
+// above zero means no limit on that.
+const VISIT_DEFAULTS = { liveLooks: 4, liveSeconds: 240, portraits: 8, resetSeconds: 60 };
+function visitLimits() {
+  const given = S.config?.visit;
+  const v = given && typeof given === "object" ? given : link.pairedTo() ? VISIT_DEFAULTS : null;
+  if (!v) return null;
+  const n = (x) => (Number(x ?? 0) > 0 ? Number(x) : 0);
+  return { liveLooks: n(v.liveLooks), liveSeconds: n(v.liveSeconds), portraits: n(v.portraits), resetSeconds: n(v.resetSeconds) };
+}
+const resetVisit = () => Object.assign(S.visit, { looks: 0, portraits: 0, base: mirror ? mirror.liveSeconds : 0 });
+const liveUsed = () => mirror.liveSeconds - S.visit.base;
+// True when this shopper has had what a visit allows of that kind of try-on.
+function fullFitting(kind) {
+  const v = visitLimits();
+  if (!v) return false;
+  if (kind === "portrait") return !!v.portraits && S.visit.portraits >= v.portraits;
+  return (!!v.liveLooks && S.visit.looks >= v.liveLooks) || (!!v.liveSeconds && liveUsed() >= v.liveSeconds);
+}
 
 function friendly(e) {
   const m = String(e?.message || e || "");
+  // The server refused on purpose (a daily, monthly or per-visit ceiling) and said why: say that, as it is.
+  if (e?.limit && m) return m;
   if (e?.kind === "slow") return "The connection is slow. Check it, then tap a look to try again.";
   if (e?.kind === "busy") return "The studio is busy just now. Please try again in a little while.";
   if (e?.name === "NotAllowedError") return "The camera is blocked. Allow it in the address bar, or use a photo.";
@@ -158,6 +185,7 @@ function forgetPortraits() {
   S.portrait = null;
   S.view = "mirror";
   $("#portrait").hidden = true;
+  if (!S.wearing) $("#wearing").hidden = true; // the name and price of a portrait that is no longer on the glass
 }
 
 async function loadBrand(id) {
@@ -187,13 +215,14 @@ async function loadBrand(id) {
 
 // ---------- conversation ----------
 function startConversation() {
-  S.brief = { who: "women", formalityShift: 0 };
+  S.brief = { who: S.brand?.audience === "men" ? "men" : "women", formalityShift: 0 };
   S.step = "occasion";
   link.newVisit();
   S.looks = [];
   S.shown = new Set();
   S.avoid = new Set();
   S.selected = null;
+  resetVisit();
   const kept = S.mem.saved[0];
   say(kept && S.mem.visits > 1 ? line("welcomeBack", { name: spoken(kept.name) }) : line("hello"));
   renderConversation();
@@ -283,7 +312,7 @@ function renderConversation() {
     if (m) chips.append(chip(m.label, () => go("mood", line("mood")), "on"));
     if (S.brief.budget) chips.append(chip(`Under ${money(S.brief.budget)}`, () => go("budget", line("budget")), "on"));
     if (S.brief.colour) chips.append(chip(sentence(S.brief.colour), () => ((S.brief.colour = null), suggest()), "on"));
-    if (S.brief.who === "men") chips.append(chip("For him", () => ((S.brief.who = "women"), S.shown.clear(), suggest()), "on"));
+    if (S.brief.who === "men" && hasWomen) chips.append(chip("For him", () => ((S.brief.who = "women"), S.shown.clear(), suggest()), "on"));
     for (const [kind, label] of [["less", "Less formal"], ["more", "More formal"], ["cheaper", "Lower price"], ["colour", "Another colour"], ["three", "Three more"]])
       refineBox.append(chip(label, () => refine(kind)));
   }
@@ -492,8 +521,19 @@ function needMirror(p) {
   btn.classList.add("nudge");
 }
 
+// On a phone the glass is above the looks. A look tapped from far down the page (the Catalogue is a long way) would
+// answer somewhere out of sight, so the page eases back up to the glass.
+function showGlass() {
+  if (!matchMedia("(max-width: 980px)").matches) return;
+  const r = glass.getBoundingClientRect();
+  const seen = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
+  if (seen >= r.height * 0.6) return;
+  glass.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+}
+
 function choose(p) {
   mirror.touch();
+  showGlass();
   S.selected = p;
   link.track("look_open", { product: p.id });
   if (S.step === "looks") renderDetail();
@@ -556,6 +596,7 @@ function develop(p, kind) {
   reel.hidden = false;
   requestAnimationFrame(() => reel.classList.add("on"));
   const me = {
+    kind: "model",
     cancel() {
       if (S.developing !== me) return;
       clearInterval(timer);
@@ -587,6 +628,7 @@ function seeHerself() {
   box.hidden = false;
   requestAnimationFrame(() => box.classList.add("on"));
   const me = {
+    kind: "studio",
     hint: (text) => replay($("#seeingHint"), text || ""),
     queue(place) {
       clearInterval(timer);
@@ -638,6 +680,9 @@ function afterUnveil(p) {
 }
 
 function showPortrait(entry, pid) {
+  // A portrait on the glass is the answer: nothing still "being made" belongs over it (a Studio wait that was cut short
+  // by a portrait that was already there used to stay, and keep the controls under it out of reach).
+  S.developing?.cancel();
   const img = $("#portrait");
   img.src = entry.url;
   img.hidden = false;
@@ -683,8 +728,15 @@ async function modelShot(p, { retake = false } = {}) {
   if (mustJoin()) return askToJoin();
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Portraits are off. Add your Decart key to the .env file and restart.");
+  // A portrait already made is shown again for free; a new one is a try-on, and a visit has only so many.
+  const fresh = retake || !S.portraits.has(p.id);
+  if (fresh && mirror.cameraDown) return caption(CAMERA_DOWN_LINE);
+  if (fresh && fullFitting("portrait")) return caption(FULL_LINE);
   const ticket = ++S.ticket;
-  if (mirror.isLive) mirror.stop("switch");
+  if (mirror.isLive) {
+    mirror.stop("switch");
+    if (S.developing?.kind === "studio") S.developing.cancel(); // that wait was for a look that is no longer coming
+  }
   const cached = !retake && S.portraits.get(p.id);
   if (cached) {
     showPortrait(cached, p.id);
@@ -692,7 +744,13 @@ async function modelShot(p, { retake = false } = {}) {
   }
   if (mirror.presence.known && !mirror.presence.present) return caption("Step into the mirror so I can see you.");
   hidePortrait();
-  const pass = await import("./portrait.js");
+  let pass;
+  try {
+    pass = await import("./portrait.js");
+  } catch (e) {
+    console.error(e);
+    return caption(friendly(e));
+  }
   if (mirror.source.kind === "camera") {
     await countdown();
     if (ticket !== S.ticket) return;
@@ -709,6 +767,7 @@ async function modelShot(p, { retake = false } = {}) {
   if (ticket !== S.ticket) return;
   if (look.dim) return caption(pass.DIM_LINE);
   const dev = develop(p, "model");
+  S.shooting++;
   caption(line("putting"));
   try {
     const ref = await reference(p); // null: nothing clean could be made, so the garment is told in words alone
@@ -722,9 +781,10 @@ async function modelShot(p, { retake = false } = {}) {
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
     const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: null };
     link.track("portrait", { product: p.id });
+    S.visit.portraits++;
     if (link.member) link.whoIsHere().then(showMember);
     S.portraits.set(p.id, entry);
-    if (ticket !== S.ticket) return; // she moved on; it is kept for when she comes back
+    if (ticket !== S.ticket) return dev.cancel(); // she moved on; it is kept for when she comes back (and the wait over it is let go, unless it is someone else's by now)
     dev.cancel();
     showPortrait(entry, p.id);
     caption(ref ? "This is you in it." : "This is you in it, drawn from the description.");
@@ -763,9 +823,11 @@ async function modelShot(p, { retake = false } = {}) {
     }
   } catch (e) {
     console.error(e);
+    dev.cancel(); // does nothing if another look has taken the glass since
     if (ticket !== S.ticket) return;
-    dev.cancel();
     caption(friendly(e));
+  } finally {
+    S.shooting--;
   }
 }
 
@@ -777,12 +839,15 @@ async function studio(p) {
   if (!S.config.live) return caption(forShopper() ? RESTING : "Live try-on is off. Add your Decart key to the .env file and restart.");
   // At home, live video is a Private perk: it costs by the second and no store is paying for it.
   if (link.member && !link.member.tier.liveSecondsPerMonth) return (S.mode = "model"), caption("Live Studio is in MIRVA stores. At home, I'll make you a portrait."), modelShot(p);
+  if (mirror.cameraDown) return caption(CAMERA_DOWN_LINE);
+  if (fullFitting("live")) return caption(FULL_LINE);
   if (mirror.presence.known && !mirror.presence.present) return caption("Step into the mirror so I can see you.");
   const ticket = ++S.ticket;
   hidePortrait();
   const swapping = mirror.state === "live" && hasPicture();
+  let wait = null;
   if (swapping) sweep(true);
-  else seeHerself();
+  else wait = seeHerself();
   caption(line("putting"));
   syncGlass();
   // The garment starts coming the moment the tap lands, alongside the token and the connection.
@@ -792,7 +857,9 @@ async function studio(p) {
     await mirror.wear(p, blob);
     if (swapping) setTimeout(() => ticket === S.ticket && sweep(false), 700);
   } catch (e) {
-    if (ticket !== S.ticket) return;
+    wait?.cancel(); // the wait this tap began ends with it, whoever has the glass now (it does nothing if another has taken it over)
+    // A look taken off while it was still connecting, or one that a later tap has replaced, has nothing to report.
+    if (ticket !== S.ticket || e?.message === "cancelled") return;
     console.error(e);
     sweep(false);
     S.developing?.cancel();
@@ -806,6 +873,7 @@ const ENDED = {
   camera: "The camera stopped, so I ended the live look.",
   hidden: "I ended the live look while this window was out of sight. Tap a look to carry on.",
   nopicture: "That didn't come through. Tap the look to try again.",
+  visit: FULL_LINE,
 };
 
 function wireMirror() {
@@ -837,6 +905,7 @@ function wireMirror() {
   });
   mirror.addEventListener("wearing", ({ detail: { product } }) => {
     S.wearing = product;
+    S.visit.looks++;
     link.track("live_start", { product: product.id });
     $("#wearingName").textContent = product.name;
     $("#wearingPrice").textContent = money(product.price);
@@ -864,6 +933,22 @@ function wireMirror() {
     note.hidden = !note.textContent;
   });
   mirror.addEventListener("abandoned", ({ detail: { grant } }) => link.track("live_end", { value: 0, grant, meta: "failed" }));
+  // A look that never got going (the token was refused, the engine did not answer, the line dropped on the way in).
+  // Whatever it had begun to put on the glass goes, so the next tap starts from a clean glass.
+  mirror.addEventListener("failed", () => {
+    glass.classList.remove("has-picture");
+    $("#toast").hidden = true;
+    $("#lineNote").hidden = true;
+    $("#haloArc").style.strokeDashoffset = "0";
+    if (S.view !== "portrait") $("#wearing").hidden = true;
+    S.wearing = null;
+    S.unveil = null;
+    sweep(false);
+    if (S.developing?.kind === "studio") S.developing.cancel();
+    syncGlass();
+    markCards();
+    renderDetail();
+  });
   mirror.addEventListener("camera", ({ detail: { state, error } }) => {
     const lost = state === "lost";
     $("#camLost").hidden = !lost;
@@ -878,6 +963,9 @@ function wireMirror() {
     $("#meterCost").textContent = `$${d.cost.toFixed(2)}`;
     $("#meter").title = `About ${money(d.cost * S.config.usdToPkr)} so far`;
     $("#haloArc").style.strokeDashoffset = String(Math.min(100, (d.elapsed / d.cap) * 100));
+    // A visit's live seconds are a ceiling too: the look that crosses it ends there.
+    const v = visitLimits();
+    if (v?.liveSeconds && liveUsed() >= v.liveSeconds) mirror.stop("visit");
   });
   mirror.addEventListener("idle", ({ detail: { grace } }) => {
     const t = $("#toast");
@@ -915,6 +1003,7 @@ function wireMirror() {
   mirror.addEventListener("shape", ({ detail: { shape, wearing } }) => {
     glass.dataset.shape = shape;
     forgetPortraits();
+    if (!wearing) S.developing?.cancel(); // it was still connecting: there is no look to bring back, so no wait to keep
     syncGlass();
     if (wearing) studio(wearing);
   });
@@ -1029,6 +1118,47 @@ function showTab(name) {
   $("#catalogue").hidden = name !== "catalogue";
 }
 
+// ---------- the next shopper ----------
+// "Start over". In a store it is the next shopper: nothing of the last one stays on the glass, and the visit's count
+// starts again. The mirror does the same by itself when nobody has been in front of it, or touched it, for a while.
+function startOver() {
+  S.ticket++; // whatever was still being made for the last shopper is dropped, not shown to the next
+  S.developing?.cancel();
+  if (link.pairedTo()) {
+    if (mirror.isLive) mirror.stop("user");
+    forgetPortraits();
+    S.mem = memory.load(S.brand.id);
+    S.extras.clear();
+    S.mode = null;
+    S.pending = null;
+    S.lane = "all";
+    renderSaved();
+    renderCatalogue();
+    $("#compare").hidden = true;
+    $("#toast").hidden = true;
+    $("#askInput").value = "";
+  }
+  showTab("foryou");
+  startConversation(); // also starts the visit's count again
+  if (link.pairedTo() && mirror.awake) caption(line("awake"));
+}
+
+// Has anything been done at this mirror that the next shopper should not find?
+const used = () =>
+  S.mem.saved.length || S.portraits.size || S.extras.size || S.mode || S.selected || S.step !== "occasion" || S.view === "portrait" || mirror.isLive || S.visit.looks || S.visit.portraits || $("#askInput").value;
+
+function resetByItself() {
+  const secs = visitLimits()?.resetSeconds;
+  if (!link.pairedTo() || !secs || !mirror?.awake || mirror.cameraDown || document.hidden) return;
+  // Only when the pose check knows nobody is there, and nothing has been touched, for the whole time.
+  if (!mirror.presence.known || mirror.presence.present) return;
+  const now = performance.now();
+  if (now - mirror.lastTouch < secs * 1000 || now - mirror.lastSeen < secs * 1000) return;
+  if (document.querySelector("dialog[open]") || !$("#compare").hidden) return;
+  if (!used()) return;
+  startOver();
+}
+
 // ---------- adapt sheet ----------
 async function openAdapt() {
   const brands = await api("/api/brands");
@@ -1105,19 +1235,7 @@ function wireUI() {
     } else mirror.stop("user");
   });
   $("#shapeBtn").addEventListener("click", () => mirror.setShape(mirror.shape === "portrait" ? "landscape" : "portrait"));
-  $("#restartBtn").addEventListener("click", () => {
-    // In a store, "Start over" is the next shopper: nothing of the last one stays on the glass.
-    if (link.pairedTo()) {
-      if (mirror.isLive) mirror.stop("user");
-      forgetPortraits();
-      S.mem = memory.load(S.brand.id);
-      S.extras.clear();
-      S.mode = null;
-      renderSaved();
-    }
-    showTab("foryou");
-    startConversation();
-  });
+  $("#restartBtn").addEventListener("click", startOver);
   $("#compareBtn").addEventListener("click", openCompare);
   $("#sendAllBtn").addEventListener("click", () => openSend(S.mem.saved));
   $("#adaptBtn").addEventListener("click", openAdapt);
@@ -1235,6 +1353,8 @@ async function boot() {
       paired = "!" + e.message;
     }
   }
+  // The server tells a store mirror what one visit may use, and it could not know this screen was one when it was asked.
+  if (paired && !paired.startsWith("!")) Object.assign(S.config, await api("/api/config").catch(() => ({})));
   const want = query.get("brand") || link.pairedTo()?.brand || memory.lastBrand.get();
   // A store loaded from a link is not on the public list, so the link's own id is tried before any fallback.
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
@@ -1248,7 +1368,25 @@ async function boot() {
   await loadBrand(first.id);
   syncGlass();
   if (paired) caption(paired.startsWith("!") ? paired.slice(1) : `This screen is now the mirror "${paired}".`);
-  window.mirva = { S, mirror }; // a handle for the console while this is a prototype
+  window.mirva = { S, mirror, visitLimits }; // a handle for the console while this is a prototype
+  // On a phone the ask bar docks at the bottom of the screen once the glass has scrolled away (see styles.css).
+  if ("IntersectionObserver" in window)
+    new IntersectionObserver(([e]) => document.body.classList.toggle("glass-away", e.intersectionRatio < 0.5), { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(glass);
+  setInterval(resetByItself, 1000);
+  setInterval(unstick, 1000);
+}
+
+// The last safety net. A "being made" wait over the glass hides the controls under it, so one that outlives the work it
+// stands for would leave the mirror unable to start the next look. Each way that can happen is closed where it happens;
+// this closes one that nobody foresaw, after three quiet seconds.
+let quiet = 0;
+function unstick() {
+  const stuck = S.developing && !mirror.isLive && !S.shooting;
+  quiet = stuck ? quiet + 1 : 0;
+  if (quiet < 3) return;
+  quiet = 0;
+  console.warn("A wait on the glass had nothing left to wait for; it was cleared.");
+  S.developing.cancel();
 }
 
 addEventListener("offline", () => caption("The connection dropped. Portraits and live looks will wait until it's back."));
