@@ -7,11 +7,12 @@ const desk = document.body.dataset.desk; // "console" | "hq"
 const root = $("#desk");
 const S = { me: null, tab: "", brand: "", brands: [], days: 30, filter: "all" };
 const TABS = desk === "hq"
-  ? [["today", "Today"], ["enquiries", "Enquiries"], ["stores", "Stores"], ["members", "Members"], ["outbox", "Outbox"], ["log", "Log"]]
+  ? [["today", "Today"], ["tryons", "Try-ons"], ["enquiries", "Enquiries"], ["stores", "Stores"], ["members", "Members"], ["outbox", "Outbox"], ["log", "Log"]]
   : [["overview", "Overview"], ["catalogue", "Catalogue"], ["mirrors", "Mirrors"], ["look", "Look and feel"]];
 
 const num = (n) => Math.round(Number(n) || 0).toLocaleString("en-PK");
 const pct = (a, b) => (b ? Math.round((a / b) * 100) + "%" : "—");
+const mins = (n) => (Number(n) || 0).toLocaleString("en-PK", { maximumFractionDigits: 1 });
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : "");
 const stamp = (ms) => new Date(ms).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 const work = () => $("#work");
@@ -31,6 +32,15 @@ const head = (title, ...right) => el("div", { class: "work-head" }, el("h1", { t
 const panel = (title, ...kids) => el("section", { class: "panel" }, el("h2", { text: title }), kids);
 const tile = (label, value, small, i = 0) => el("div", { class: "tile", style: `--i:${i}` }, el("span", { class: "k", text: label }), el("b", { class: "v", text: value }), small && el("small", { text: small }));
 const empty = (text) => el("p", { class: "muted", text });
+// A tile that opens another section of the desk.
+function jump(node, tab) {
+  node.tabIndex = 0;
+  node.setAttribute("role", "link");
+  node.style.cursor = "pointer";
+  node.addEventListener("click", () => go(tab));
+  node.addEventListener("keydown", (e) => e.key === "Enter" && go(tab));
+  return node;
+}
 function hbars(items, format = num) {
   const top = Math.max(1, ...items.map((x) => x.value));
   return el("div", { class: "hbars" }, items.map((x) => el("div", {}, el("span", { text: x.label }), el("b", { text: format(x.value) + (x.note ? "  " + x.note : "") }), el("i", { style: `--v:${x.value / top}` }))));
@@ -319,7 +329,10 @@ const VIEWS = {
 
   // =================================================================== the founder's desk
   async today() {
-    const o = await api("/api/hq/overview");
+    const [o, week] = await Promise.all([api("/api/hq/overview"), api("/api/hq/tryons?days=7").catch(() => null)]);
+    const ways = week && [week.modes.model, week.modes.studio];
+    const tried = ways ? week.modes.model.count + week.modes.studio.count : 0;
+    const prefer = !tried ? "—" : ways[0].count === ways[1].count ? "Even" : ways[0].count > ways[1].count ? "Model" : "Studio";
     count("enquiries", o.leads.new);
     count("outbox", o.waiting.outbox);
     count("members", o.waiting.invites);
@@ -341,6 +354,8 @@ const VIEWS = {
         tile("Members", num(o.members.total), `${num(o.members.week)} joined this week`, 3),
         tile("Looks kept", num(o.members.looks), `${num(o.members.votes)} votes on ${num(o.members.boards)} questions`, 4),
         tile("Try-on spend, 30 days", money(o.spend.pkr), `$${o.spend.usd.toFixed(2)} at list price`, 5),
+        jump(tile("Try-ons, 7 days", num(tried), tried ? `${num(week.modes.model.count)} portraits, ${num(week.modes.studio.count)} live looks` : "None yet. Open Try-ons", 6), "tryons"),
+        jump(tile("Prefer", prefer, tried && prefer !== "Even" ? `${pct(Math.max(...ways.map((w) => w.count)), tried)} of try-ons. Open Try-ons` : "Open Try-ons", 7), "tryons"),
       ),
       el("div", { class: "grid2" },
         panel("Needs you", el("ul", { class: "warns" }, needs.length ? needs.map((t) => el("li", { text: t })) : el("li", { class: "ok", text: "Nothing is waiting." }))),
@@ -358,6 +373,57 @@ const VIEWS = {
           ),
         ),
       ),
+    );
+  },
+
+  async tryons() {
+    const t = await api(`/api/hq/tryons?days=${S.days}`);
+    const { shoppers: s, modes: m } = t;
+    const all = m.model.count + m.studio.count;
+    const per = (a, b) => (a || b ? `${num(a)} from members, ${num(b)} from mirrors with no sign-in` : "none yet");
+    const cost = (x) => `${money(x.pkr)} · $${x.usd.toFixed(2)}`;
+    fill(work(),
+      head("Try-ons", [7, 30, 90].map((d) => el("button", { class: "chip" + (S.days === d ? " on" : ""), type: "button", text: `${d} days`, onclick: () => ((S.days = d), go("tryons")) }))),
+      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "Model is a portrait of the shopper in the piece. Studio is the live look in the mirror. The seeded sample is left out." }),
+      el("div", { class: "tiles" },
+        tile("Shoppers", num(s.total), `${num(s.joined)} joined in ${S.days} days`, 0),
+        tile("Tried on", num(s.active), `${pct(s.active, s.total)} of shoppers, in ${S.days} days`, 1),
+        tile("Portraits", num(m.model.count), per(s.portraits.members, s.portraits.mirrors), 2),
+        tile("Live looks", num(m.studio.count), per(s.live.members, s.live.mirrors), 3),
+      ),
+      !all
+        ? panel("No try-ons yet", empty(`Nobody has made a portrait or a live look in the last ${S.days} days.`))
+        : [
+            el("div", { class: "grid2" },
+              panel("Model or Studio",
+                hbars([{ label: "Model, portraits", value: m.model.count, note: pct(m.model.count, all) }, { label: "Studio, live looks", value: m.studio.count, note: pct(m.studio.count, all) }]),
+                el("dl", { class: "kv" },
+                  el("dt", { text: "Shoppers who used Model" }), el("dd", { class: "num", text: num(m.model.people) }),
+                  el("dt", { text: "Shoppers who used Studio" }), el("dd", { class: "num", text: num(m.studio.people) }),
+                  el("dt", { text: "Used both" }), el("dd", { class: "num", text: num(m.both) }),
+                  el("dt", { text: "Live minutes" }), el("dd", { class: "num", text: mins(m.studio.minutes) }),
+                  el("dt", { text: "Cost of Model" }), el("dd", { class: "num", text: cost(m.model) }),
+                  el("dt", { text: "Cost of Studio" }), el("dd", { class: "num", text: cost(m.studio) }),
+                ),
+              ),
+              panel("Day by day", chart(t.byDay, "portraits", "live"), el("div", { class: "legend" }, el("span", {}, el("i", { class: "soft" }), "Portraits"), el("span", {}, el("i"), "Live looks")), el("p", { class: "fine", text: "Pakistan time." })),
+            ),
+            panel("Tried most, across all stores",
+              t.top.length
+                ? el("div", { class: "rows" }, t.top.map((p) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: p.name }), el("div", { class: "sub", text: `${p.brandName} · kept ${plural(p.keeps, "time")}${p.keeps ? ` (${pct(p.keeps, p.tries)})` : ""}` })), el("b", { class: "num", text: plural(p.tries, "try-on") }))))
+                : empty("No piece has been tried yet."),
+            ),
+            panel("Shoppers who tried on most",
+              t.members.length
+                ? el("div", { class: "tbl-wrap" },
+                    el("table", { class: "tbl" },
+                      el("thead", {}, el("tr", {}, ["Name", "Email", "Tier", "Portraits", "Live looks", "Live minutes", "Looks kept", "Last seen"].map((h, i) => el("th", { scope: "col", class: i >= 3 && i <= 6 ? "n" : "", text: h })))),
+                      el("tbody", {}, t.members.map((r) => el("tr", {}, el("td", { text: r.name }), el("td", { text: r.email }), el("td", {}, el("span", { class: "badge " + (r.tier === "private" ? "" : "soft"), text: r.tier })), el("td", { class: "n", text: num(r.portraits) }), el("td", { class: "n", text: num(r.live) }), el("td", { class: "n", text: mins(r.minutes) }), el("td", { class: "n", text: num(r.kept) }), el("td", { text: r.seen ? when(r.seen) : "—" })))),
+                    ),
+                  )
+                : empty("No member has made a try-on in this period. The try-ons above came from mirrors with no sign-in."),
+            ),
+          ],
     );
   },
 

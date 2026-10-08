@@ -137,6 +137,16 @@ export function nav() {
 let mePromise;
 export const whoAmI = (fresh = false) => (mePromise = !fresh && mePromise ? mePromise : api("/api/me").catch(() => ({ user: null })));
 
+// Ends this browser's sign-in and goes to the front page. If the request fails the shopper is told, not left guessing.
+export async function signOut(to = "/") {
+  try {
+    await api("/api/auth/signout", {});
+  } catch (e) {
+    return toast(e.message);
+  }
+  location.href = to;
+}
+
 // A button that shows it is working, and cannot be pressed twice.
 export async function busy(button, work) {
   if (button.getAttribute("aria-busy") === "true") return;

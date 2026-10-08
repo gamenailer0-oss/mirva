@@ -1,5 +1,5 @@
 // A member's account: the door (join, sign in, reset), then the wardrobe, the opinions asked for, and the settings.
-import { $, $$, el, api, money, plural, when, until, toast, whoAmI, busy, onSubmit, local, copy, fill, picture } from "./ui.js";
+import { $, $$, el, api, money, plural, when, until, toast, whoAmI, busy, onSubmit, local, copy, fill, picture, signOut } from "./ui.js";
 
 const root = () => $("#account");
 const params = new URLSearchParams(location.search);
@@ -137,7 +137,10 @@ async function home() {
       el("div", { class: "me-head" },
         el("div", { class: "stack close" },
           el("p", { class: "kicker", text: `${tier.name} member · since ${new Date(user.joined).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}` }),
-          el("h1", { class: "title" }, greeting + ", ", el("em", { text: user.name.split(" ")[0] + "." })),
+          el("div", { class: "row signed" },
+            el("h1", { class: "title" }, greeting + ", ", el("em", { text: user.name.split(" ")[0] + "." })),
+            el("button", { class: "link muted", type: "button", text: "Sign out", onclick: () => signOut() }),
+          ),
         ),
         el("div", { class: "allow" },
           ring(left / tier.portraitsPerMonth, C),
@@ -354,7 +357,7 @@ function you() {
     el("p", { class: "muted", text: "Everything MIRVA holds about you is on this page. You can take a copy, or remove all of it." }),
     el("div", { class: "row" },
       el("button", { class: "btn ghost small", type: "button", text: "Download my data", onclick: (e) => busy(e.currentTarget, exportData) }),
-      el("button", { class: "btn ghost small", type: "button", text: "Sign out", onclick: async () => (await api("/api/auth/signout", {}), (location.href = "/")) }),
+      el("button", { class: "btn ghost small", type: "button", text: "Sign out", onclick: () => signOut() }),
     ),
     el("button", { class: "link muted", type: "button", text: "Delete my account", onclick: confirmDelete }),
   );

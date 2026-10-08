@@ -1,5 +1,5 @@
 // The shopper's site: quiet pages, with the account and the voting board loaded only where they are used.
-import { $, $$, api, nav, reveal, whoAmI, toast, busy, connection } from "./ui.js";
+import { $, $$, el, api, nav, reveal, whoAmI, toast, busy, connection, signOut } from "./ui.js";
 
 document.documentElement.classList.add("js");
 nav();
@@ -8,12 +8,21 @@ connection();
 
 const page = document.body.dataset.page;
 
+// Signed in: the account link says where it goes, a quiet "Sign out" sits beside it, and the phone menu gets both.
 whoAmI().then(({ user }) => {
+  if (!user) return;
+  const label = user.role === "member" ? "Your wardrobe" : "Your desk";
+  const href = user.role === "member" ? "/account" : user.role === "founder" ? "/hq" : "/console";
+  $("#nav")?.classList.add("signed");
   for (const a of $$("[data-account]")) {
-    if (!user) continue;
-    a.textContent = user.role === "member" ? "Your wardrobe" : "Your desk";
-    a.href = user.role === "member" ? "/account" : user.role === "founder" ? "/hq" : "/console";
+    a.textContent = label;
+    a.href = href;
+    a.after(el("button", { class: "link muted nav-out hide-s", type: "button", text: "Sign out", onclick: () => signOut() }));
   }
+  $("#navLinks")?.append(
+    el("a", { class: "menu-only", href, text: label }),
+    el("button", { class: "menu-only", type: "button", text: "Sign out", onclick: () => signOut() }),
+  );
 });
 
 if (page === "account") import("./account.js").then((m) => m.start());

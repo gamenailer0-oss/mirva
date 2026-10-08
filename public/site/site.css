@@ -178,3 +178,27 @@
 .hero [data-reveal], .page-head [data-reveal] { opacity: 1; transform: none; transition: none; animation: enter var(--slow) var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
 @keyframes enter { from { opacity: 0; transform: translateY(18px); } }
 .boardbody { display: grid; gap: var(--s6); }
+
+/* Signing out. Beside the account button on a wide bar; a row of its own, with the wardrobe, in the phone menu. */
+.row.signed { align-items: baseline; gap: var(--s2) var(--s4); }
+.nav-out { padding: 10px 4px; font-size: 14px; white-space: nowrap; }
+.nav-links .menu-only { display: none; }
+/* With "Your wardrobe" and "Sign out" beside the mirror button, a bar under about 1040px does not fit on one line,
+   so a signed-in shopper gets the phone menu a little earlier than brand.css gives it (900px). */
+@media (min-width: 901px) and (max-width: 1040px) {
+  .nav.signed .nav-links { position: fixed; inset: 64px 0 auto 0; flex-direction: column; gap: 0; padding: var(--s3) clamp(20px, 5vw, 56px) var(--s5); background: var(--bg); border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity var(--calm), transform var(--calm) var(--ease); }
+  .nav.signed .nav-links a { padding: 14px 0; font-size: 18px; color: var(--ink); border-bottom: 1px solid var(--line); }
+  .nav.signed.open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
+  .nav.signed .nav-toggle { display: inline-flex; margin-left: auto; }
+  .nav.signed .nav-cta .hide-s { display: none; }
+  .nav.signed .nav-links .menu-only { display: block; width: 100%; min-height: 44px; padding: 14px 0; text-align: left; font-size: 18px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+}
+@media (min-width: 1041px) and (max-width: 1140px) {
+  .nav, .nav-links { gap: var(--s4); }
+  .nav-links a { white-space: nowrap; }
+  .nav-cta .btn.small { padding: 0 18px; }
+  .nav-out { padding: 10px 2px; font-size: 13px; }
+}
+@media (max-width: 900px) {
+  .nav-links .menu-only { display: block; width: 100%; min-height: 44px; padding: 14px 0; text-align: left; font-size: 18px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+}

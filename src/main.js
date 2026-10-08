@@ -1188,8 +1188,23 @@ function showMember(me) {
   const node = $("#memberLine");
   if (!me) return void (node.hidden = true);
   const left = Math.max(0, me.tier.portraitsPerMonth - me.usage.portraits);
-  node.replaceChildren(`${me.user.name.split(" ")[0]}'s mirror. ${left} of ${me.tier.portraitsPerMonth} portraits left this month. `, h("a", { href: "/account", text: "Your wardrobe" }));
+  node.replaceChildren(
+    `${me.user.name.split(" ")[0]}'s mirror. ${left} of ${me.tier.portraitsPerMonth} portraits left this month. `,
+    h("a", { class: "tap", href: "/account", text: "Your wardrobe" }),
+    " ",
+    h("button", { class: "tap", type: "button", text: "Sign out", onclick: signOut }),
+  );
   node.hidden = false;
+}
+
+// The mirror then opens as anyone's: the member's name and portrait count are gone with the sign-in.
+async function signOut() {
+  try {
+    await api("/api/auth/signout", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
+  } catch (e) {
+    return caption(e.message);
+  }
+  location.reload();
 }
 
 // Nothing to wear yet: no store has opened its mirror at this address.

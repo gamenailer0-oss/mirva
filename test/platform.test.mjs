@@ -3,6 +3,7 @@
 import test, { before, after } from "node:test";
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { DatabaseSync } from "node:sqlite";
 import http from "node:http";
 import { mkdtempSync, rmSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -825,7 +826,7 @@ test("the console and the founder's desk are closed to people who are signed out
     ["GET", "/api/console/brands"], ["GET", "/api/console/overview"], ["GET", "/api/console/overview?brand=sapphire"], ["GET", "/api/console/catalogue"], ["GET", "/api/console/devices"],
     ["POST", "/api/console/devices"], ["POST", "/api/console/devices/code"], ["POST", "/api/console/devices/remove"], ["POST", "/api/console/catalogue/hide"], ["POST", "/api/console/brand"],
     ["GET", "/api/console/anything-else"],
-    ["GET", "/api/hq/overview"], ["GET", "/api/hq/leads"], ["GET", "/api/hq/members"], ["GET", "/api/hq/invites"], ["GET", "/api/hq/outbox"], ["GET", "/api/hq/audit"],
+    ["GET", "/api/hq/overview"], ["GET", "/api/hq/leads"], ["GET", "/api/hq/members"], ["GET", "/api/hq/invites"], ["GET", "/api/hq/outbox"], ["GET", "/api/hq/audit"], ["GET", "/api/hq/tryons"],
     ["POST", "/api/hq/leads/update"], ["POST", "/api/hq/retailers"], ["POST", "/api/hq/retailers/user"], ["POST", "/api/hq/invites/decide"], ["POST", "/api/hq/outbox/sent"],
   ];
   const anon = visitor();
@@ -876,6 +877,70 @@ test("the founder's overview counts leads, members and the system", async () => 
   assert.deepEqual(after.spend, { usd: 0, pkr: 0 });
   assert.ok(after.waiting.outbox > 0, "mail is waiting to be sent");
   assert.ok(!JSON.stringify(after).includes("s1$"), "no password hash on the founder's desk either");
+});
+
+test("the founder's try-ons count portraits and live looks by who made them, and leave the sample out", async () => {
+  const desk = await founder();
+  const read = async (days = 30) => (await desk.get(`/api/hq/tryons?days=${days}`)).body;
+  const before = await read();
+  assert.deepEqual(Object.keys(before).sort(), ["byDay", "days", "members", "modes", "shoppers", "top"]);
+  assert.equal((await read(5000)).days, 365, "the window is capped");
+  assert.equal((await read(7)).byDay.length, 8, "a day for every day in the window, empty ones too");
+
+  const one = await member("model");
+  const two = await member("studio");
+  const db = new DatabaseSync(join(main.data, "mirva.db"));
+  const put = (kind, who, { seconds = 0, usd = 0, sample = 0, ago = 0 } = {}) =>
+    db.prepare("INSERT INTO usage (at, kind, brand, device, user, seconds, usd, sample) VALUES (?,?,?,?,?,?,?,?)").run(Date.now() - ago, kind, "sapphire", null, who?.id ?? null, seconds, usd, sample);
+  put("portrait", one, { usd: 0.05 });
+  put("portrait", one, { usd: 0.05 });
+  put("backdrop", one, { usd: 0.02 }); // part of a portrait: costs, but is not a try-on of its own
+  put("portrait", two, { usd: 0.05, ago: 2 * 86400e3 });
+  put("live", two, { seconds: 90, usd: 0.4 });
+  put("live", null, { seconds: 30, usd: 0.1 }); // a mirror with no sign-in
+  put("portrait", null, { usd: 0.05 });
+  put("portrait", two, { usd: 9, sample: 1 }); // seeded sample: never counted
+  db.close();
+  const mirror = visitor();
+  await one.post("/api/events", { brand: "sapphire", visit: "tryons-1", events: [{ kind: "portrait", product: A.id }, { kind: "live_start", product: A.id }, { kind: "keep", product: A.id }, { kind: "portrait", product: B.id }] });
+  await mirror.post("/api/events", { brand: "sapphire", visit: "tryons-2", events: [{ kind: "portrait", product: A.id }] });
+
+  const after = await read();
+  const diff = (a, b) => a - b;
+  assert.equal(diff(after.shoppers.total, before.shoppers.total), 2);
+  assert.equal(diff(after.shoppers.joined, before.shoppers.joined), 2);
+  assert.equal(diff(after.shoppers.active, before.shoppers.active), 2);
+  assert.equal(diff(after.shoppers.portraits.members, before.shoppers.portraits.members), 3);
+  assert.equal(diff(after.shoppers.portraits.mirrors, before.shoppers.portraits.mirrors), 1);
+  assert.equal(diff(after.shoppers.live.members, before.shoppers.live.members), 1);
+  assert.equal(diff(after.shoppers.live.mirrors, before.shoppers.live.mirrors), 1);
+  assert.equal(diff(after.modes.model.count, before.modes.model.count), 4, "the backdrop and the sample are not portraits");
+  assert.equal(diff(after.modes.studio.count, before.modes.studio.count), 2);
+  assert.equal(diff(after.modes.model.people, before.modes.model.people), 2);
+  assert.equal(diff(after.modes.studio.people, before.modes.studio.people), 1);
+  assert.equal(diff(after.modes.both, before.modes.both), 1, "one member used both ways");
+  assert.ok(Math.abs(after.modes.model.usd - before.modes.model.usd - 0.22) < 1e-9, "a backdrop is part of Model's cost, the sample is not");
+  assert.ok(Math.abs(after.modes.studio.usd - before.modes.studio.usd - 0.5) < 1e-9);
+  assert.ok(Math.abs(after.modes.studio.minutes - before.modes.studio.minutes - 2) < 1e-9);
+  assert.ok(Math.abs(after.modes.model.share + after.modes.studio.share - 1) < 0.002);
+
+  const today = after.byDay.at(-1);
+  const twoDaysAgo = before.byDay.at(-3);
+  assert.equal(today.date, new Date(Date.now() + 5 * 3600e3).toISOString().slice(0, 10), "days are Pakistan days");
+  assert.equal(today.portraits - before.byDay.at(-1).portraits, 3);
+  assert.equal(today.live - before.byDay.at(-1).live, 2);
+  assert.equal(after.byDay.at(-3).portraits - twoDaysAgo.portraits, 1, "two days ago is its own bar");
+
+  const piece = after.top.find((p) => p.product === A.id);
+  assert.equal(piece.name, A.name);
+  assert.equal(piece.brandName, sapphire.name);
+  assert.ok(piece.tries >= 3 && piece.keeps >= 1);
+  assert.ok(after.top.length <= 10 && after.top.every((p, i, all) => !i || all[i - 1].tries >= p.tries), "most tried first");
+
+  const row = after.members.find((r) => r.email === one.email);
+  assert.deepEqual({ portraits: row.portraits, live: row.live, minutes: row.minutes, kept: row.kept }, { portraits: 2, live: 0, minutes: 0, kept: 0 });
+  assert.equal(after.members.find((r) => r.email === two.email).minutes, 1.5);
+  assert.ok(!JSON.stringify(after).includes("s1$") && after.members.every((r) => !("pass" in r)));
 });
 
 test("the founder can list members and read the audit trail", async () => {
