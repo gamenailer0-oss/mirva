@@ -48,7 +48,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the outfit with a printed multi charmeuse kaftan featuring a round neckline."
+   "prompt": "Substitute the outfit with a printed multi charmeuse kaftan featuring a round neckline.",
+   "ref": "/refs/sapphire/1TNW26FTV101_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "1TNW26FTV106_999",
@@ -95,7 +97,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the outfit with a printed white charmeuse kaftan featuring a round neckline."
+   "prompt": "Substitute the outfit with a printed white charmeuse kaftan featuring a round neckline.",
+   "ref": "/refs/sapphire/1TNW26FTV106_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3SFW26STV101_999",
@@ -141,7 +145,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered green bright raw silk peshwas and flared pants paired with a matching organza dupatta."
+   "prompt": "Substitute the outfit with an embroidered green bright raw silk peshwas and flared pants paired with a matching organza dupatta.",
+   "ref": "/refs/sapphire/3SFW26STV101_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3SFW26STV108_999",
@@ -188,7 +194,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered pink bright raw silk peshwas and matching bright raw silk sharara."
+   "prompt": "Substitute the outfit with an embroidered pink bright raw silk peshwas and matching bright raw silk sharara.",
+   "ref": "/refs/sapphire/3SFW26STV108_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3SFW26STV104_999",
@@ -235,7 +243,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered yellow bright raw silk peshwas and flared pants paired with a matching organza dupatta."
+   "prompt": "Substitute the outfit with an embroidered yellow bright raw silk peshwas and flared pants paired with a matching organza dupatta.",
+   "ref": "/refs/sapphire/3SFW26STV104_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "2SFW26STV105_999",
@@ -282,7 +292,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered blue thai silk straight shirt and matching thai silk flared pants."
+   "prompt": "Substitute the outfit with an embroidered blue thai silk straight shirt and matching thai silk flared pants.",
+   "ref": "/refs/sapphire/2SFW26STV105_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PELXS26V836",
@@ -309,7 +321,9 @@
    "fabric": "Blended Grip Silk",
    "description": "orange three-piece embroidered ensemble featuring a blended grip silk shirt paired with a blended organza dupatta and blended grip silk trousers",
    "sizes": [],
-   "prompt": "Substitute the outfit with an orange three-piece embroidered ensemble featuring a blended grip silk shirt paired with a blended organza dupatta and blended grip silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with an orange three-piece embroidered ensemble featuring a blended grip silk shirt paired with a blended organza dupatta and blended grip silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/3PELXS26V836.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PELXS26V737",
@@ -336,7 +350,9 @@
    "fabric": "Blended Raw Silk",
    "description": "maroon three-piece embroidered ensemble featuring a blended raw silk shirt paired with a silk dupatta and viscose raw silk trousers",
    "sizes": [],
-   "prompt": "Substitute the outfit with a maroon three-piece embroidered ensemble featuring a blended raw silk shirt paired with a silk dupatta and viscose raw silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a maroon three-piece embroidered ensemble featuring a blended raw silk shirt paired with a silk dupatta and viscose raw silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/3PELXS26V737.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PELXS26V835",
@@ -363,7 +379,9 @@
    "fabric": "Blended Grip Silk",
    "description": "plum three-piece embroidered ensemble featuring a blended grip silk shirt paired with a blended organza dupatta and blended grip silk trousers",
    "sizes": [],
-   "prompt": "Substitute the outfit with a plum three-piece embroidered ensemble featuring a blended grip silk shirt paired with a blended organza dupatta and blended grip silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a plum three-piece embroidered ensemble featuring a blended grip silk shirt paired with a blended organza dupatta and blended grip silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/3PELXS26V835.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PELXS26V86",
@@ -390,7 +408,9 @@
    "fabric": "Velvet",
    "description": "purple three-piece embroidered ensemble featuring a velvet shirt and dupatta paired with viscose raw silk trousers",
    "sizes": [],
-   "prompt": "Substitute the outfit with a mustard three-piece embroidered ensemble featuring a velvet shirt and dupatta paired with viscose raw silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a mustard three-piece embroidered ensemble featuring a velvet shirt and dupatta paired with viscose raw silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PELXS26V86.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PELXS26V817",
@@ -417,7 +437,9 @@
    "fabric": "Dobby",
    "description": "olive green three-piece embroidered ensemble featuring a dobby shirt paired with a bemberg tissue dupatta and cotton trousers",
    "sizes": [],
-   "prompt": "Substitute the outfit with an olive green three-piece embroidered ensemble featuring a dobby shirt paired with a bemberg tissue dupatta and cotton trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with an olive green three-piece embroidered ensemble featuring a dobby shirt paired with a bemberg tissue dupatta and cotton trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/3PELXS26V817.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PELXS26V75",
@@ -442,7 +464,9 @@
    "fabric": "Blended Chiffon",
    "description": "pink three-piece embroidered ensemble featuring a blended chiffon shirt and dupatta paired with viscose raw silk trousers",
    "sizes": [],
-   "prompt": "Substitute the outfit with a pink three-piece embroidered ensemble featuring a blended chiffon shirt and dupatta paired with viscose raw silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a pink three-piece embroidered ensemble featuring a blended chiffon shirt and dupatta paired with viscose raw silk trousers, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PELXS26V75.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCFMGASV964_999",
@@ -490,7 +514,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a printed maroon khaddar straight shirt and matching farshi shalwar."
+   "prompt": "Substitute the outfit with a printed maroon khaddar straight shirt and matching farshi shalwar.",
+   "ref": "/refs/sapphire/3PCFMGASV964_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCFMGCA0590_999",
@@ -537,7 +563,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered beige khaddar A-line shirt and khaddar culottes paired with a matching khaddar dupatta."
+   "prompt": "Substitute the outfit with an embroidered beige khaddar A-line shirt and khaddar culottes paired with a matching khaddar dupatta.",
+   "ref": "/refs/sapphire/3PCFMGCA0590_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCFMGASV960_999",
@@ -583,7 +611,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a printed blue khaddar boxy shirt and straight pants paired with a matching dupatta."
+   "prompt": "Substitute the outfit with a printed blue khaddar boxy shirt and straight pants paired with a matching dupatta.",
+   "ref": "/refs/sapphire/3PCFMGASV960_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCFMGASV961_999",
@@ -629,7 +659,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a printed brown khaddar A-line shirt and matching culottes."
+   "prompt": "Substitute the outfit with a printed brown khaddar A-line shirt and matching culottes.",
+   "ref": "/refs/sapphire/3PCFMGASV961_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCFMGASV957_999",
@@ -675,7 +707,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a printed off white khaddar A-line shirt and straight pants paired with a matching dupatta."
+   "prompt": "Substitute the outfit with a printed off white khaddar A-line shirt and straight pants paired with a matching dupatta.",
+   "ref": "/refs/sapphire/3PCFMGASV957_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCCRCASV975_999",
@@ -721,7 +755,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered beige fine voile A-line shirt and cambric culottes paired with a matching cambric dupatta."
+   "prompt": "Substitute the outfit with an embroidered beige fine voile A-line shirt and cambric culottes paired with a matching cambric dupatta.",
+   "ref": "/refs/sapphire/3PCCRCASV975_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "2PCSTFASV99S_999",
@@ -769,7 +805,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with an embroidered plum bedford A-line shirt featuring a ban neckline with slit detail."
+   "prompt": "Substitute the upper body garment with an embroidered plum bedford A-line shirt featuring a ban neckline with slit detail.",
+   "ref": "/refs/sapphire/2PCSTFASV99S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "2PCSTCSV978S_999",
@@ -817,7 +855,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the upper body garment with an embroidered purple bedford straight shirt featuring a v-neckline."
+   "prompt": "Substitute the upper body garment with an embroidered purple bedford straight shirt featuring a v-neckline.",
+   "ref": "/refs/sapphire/2PCSTCSV978S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "2PCRCASV928S_999",
@@ -865,7 +905,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with an embroidered sage green khaddar straight shirt featuring a shawl collared neckline."
+   "prompt": "Substitute the upper body garment with an embroidered sage green khaddar straight shirt featuring a shawl collared neckline.",
+   "ref": "/refs/sapphire/2PCRCASV928S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "1PCCRCSV923S_999",
@@ -911,7 +953,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with an embroidered red cross hatch straight shirt and matching cambric straight pants."
+   "prompt": "Substitute the outfit with an embroidered red cross hatch straight shirt and matching cambric straight pants.",
+   "ref": "/refs/sapphire/1PCCRCSV923S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "1PCRCASV914S_999",
@@ -958,7 +1002,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with an embroidered maroon khaddar straight shirt featuring a v-neckline."
+   "prompt": "Substitute the upper body garment with an embroidered maroon khaddar straight shirt featuring a v-neckline.",
+   "ref": "/refs/sapphire/1PCRCASV914S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "2PCSTCRC081S_999",
@@ -1005,7 +1051,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the upper body garment with an embroidered blue viscose marina drop shoulder shirt featuring a ban neckline with v-slit."
+   "prompt": "Substitute the upper body garment with an embroidered blue viscose marina drop shoulder shirt featuring a ban neckline with v-slit.",
+   "ref": "/refs/sapphire/2PCSTCRC081S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "PR2CASTV106W_999",
@@ -1053,7 +1101,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the upper body garment with a printed white poplin top featuring a v-neckline."
+   "prompt": "Substitute the upper body garment with a printed white poplin top featuring a v-neckline.",
+   "ref": "/refs/sapphire/PR2CASTV106W_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "PRW26CTV108S_999",
@@ -1101,7 +1151,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the upper body garment with a printed black poplin top featuring a round neckline."
+   "prompt": "Substitute the upper body garment with a printed black poplin top featuring a round neckline.",
+   "ref": "/refs/sapphire/PRW26CTV108S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "PEW26CMV1010_999",
@@ -1148,7 +1200,10 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a dyed blue dobby strip straight shirt and flared pants."
+   "prompt": "Substitute the outfit with a dyed blue dobby strip straight shirt and flared pants.",
+   "ref": null,
+   "refHow": "none",
+   "refPin": "Text only. Wrong face on half-body input in 2 of 2 end-to-end runs (2026-10-08) even with the arms painted out. Run: node scripts/prepare-refs.mjs sapphire --only PEW26CMV1010_999 after a fix, and check it."
   },
   {
    "id": "PRW26CTV102S_999",
@@ -1196,7 +1251,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the outfit with a printed black cambric dress featuring a v-neckline."
+   "prompt": "Substitute the outfit with a printed black cambric dress featuring a v-neckline.",
+   "ref": "/refs/sapphire/PRW26CTV102S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "PRWCASTV106W_999",
@@ -1244,7 +1301,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the upper body garment with a printed black cambric jacket featuring a ban neckline with slit."
+   "prompt": "Substitute the upper body garment with a printed black cambric jacket featuring a ban neckline with slit.",
+   "ref": "/refs/sapphire/PRWCASTV106W_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "PEW26CMV1011_999",
@@ -1291,7 +1350,10 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a dyed green dobby strip straight shirt and wide culottes."
+   "prompt": "Substitute the outfit with a dyed green dobby strip straight shirt and wide culottes.",
+   "ref": null,
+   "refHow": "none",
+   "refPin": "Text only. Same model and set as PEW26CMV1010_999, which gave a wrong face; not tested itself."
   },
   {
    "id": "3PCCRCASV934_999",
@@ -1339,7 +1401,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the outfit with a printed black khaddar peshwas and churidar paired with a matching dupatta."
+   "prompt": "Substitute the outfit with a printed black khaddar peshwas and churidar paired with a matching dupatta.",
+   "ref": "/refs/sapphire/3PCCRCASV934_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCCRCASV935_999",
@@ -1386,7 +1450,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a printed off white khaddar straight shirt and farshi shalwar paired with a matching dupatta."
+   "prompt": "Substitute the outfit with a printed off white khaddar straight shirt and farshi shalwar paired with a matching dupatta.",
+   "ref": "/refs/sapphire/3PCCRCASV935_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "1PCCRCAS007S_999",
@@ -1432,7 +1498,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a dyed orange bedford straight shirt and matching balloon pants."
+   "prompt": "Substitute the outfit with a dyed orange bedford straight shirt and matching balloon pants.",
+   "ref": "/refs/sapphire/1PCCRCAS007S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCCRCSV921S_999",
@@ -1479,7 +1547,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a printed beige khaddar straight shirt featuring a round neckline with slit."
+   "prompt": "Substitute the upper body garment with a printed beige khaddar straight shirt featuring a round neckline with slit.",
+   "ref": "/refs/sapphire/3PCCRCSV921S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "3PCCRCASV96S_999",
@@ -1526,7 +1596,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a printed blue viscose marina straight shirt featuring a ban neckline with slit detail."
+   "prompt": "Substitute the upper body garment with a printed blue viscose marina straight shirt featuring a ban neckline with slit detail.",
+   "ref": "/refs/sapphire/3PCCRCASV96S_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "1PCFMGCASV92_999",
@@ -1572,7 +1644,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a printed blue cotton viscose dress featuring a square neckline."
+   "prompt": "Substitute the outfit with a printed blue cotton viscose dress featuring a square neckline.",
+   "ref": "/refs/sapphire/1PCFMGCASV92_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PEDY26V984",
@@ -1599,7 +1673,9 @@
    "fabric": "Premium Khaddar",
    "description": "three-piece embroidered green ensemble featuring a premium khaddar shirt paired with matching trousers and a shawl",
    "sizes": [],
-   "prompt": "Substitute the outfit with a three-piece embroidered green ensemble featuring a premium khaddar shirt paired with matching trousers and a shawl, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a three-piece embroidered green ensemble featuring a premium khaddar shirt paired with matching trousers and a shawl, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PEDY26V984.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PDYS26V936",
@@ -1626,7 +1702,9 @@
    "fabric": "Premium Khaddar",
    "description": "three-piece printed beige ensemble featuring a premium khaddar shirt paired with matching trousers and dupatta",
    "sizes": [],
-   "prompt": "Substitute the outfit with a three-piece printed beige ensemble featuring a premium khaddar shirt paired with matching trousers and dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a three-piece printed beige ensemble featuring a premium khaddar shirt paired with matching trousers and dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PDYS26V936.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PESG26V945",
@@ -1652,7 +1730,9 @@
    "fabric": "Light Khaddar",
    "description": "three-piece embroidered plum ensemble featuring a light khaddar shirt paired with matching trousers and a light khaddar dupatta",
    "sizes": [],
-   "prompt": "Substitute the outfit with a three-piece embroidered plum ensemble featuring a light khaddar shirt paired with matching trousers and a light khaddar dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a three-piece embroidered plum ensemble featuring a light khaddar shirt paired with matching trousers and a light khaddar dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PESG26V945.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PDYS26V937",
@@ -1678,7 +1758,9 @@
    "fabric": "Premium Khaddar",
    "description": "three-piece printed mustard ensemble featuring a premium khaddar shirt paired with matching trousers and dupatta",
    "sizes": [],
-   "prompt": "Substitute the outfit with a three-piece printed mustard ensemble featuring a premium khaddar shirt paired with matching trousers and dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a three-piece printed mustard ensemble featuring a premium khaddar shirt paired with matching trousers and dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PDYS26V937.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U3PEDY26V975",
@@ -1705,7 +1787,9 @@
    "fabric": "Light Khaddar",
    "description": "three-piece embroidered blue ensemble featuring a light khaddar shirt paired with matching trousers and a shawl",
    "sizes": [],
-   "prompt": "Substitute the outfit with a three-piece embroidered blue ensemble featuring a light khaddar shirt paired with matching trousers and a shawl, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a three-piece embroidered blue ensemble featuring a light khaddar shirt paired with matching trousers and a shawl, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U3PEDY26V975.jpg",
+   "refHow": "mask"
   },
   {
    "id": "U2DDS26V9250",
@@ -1732,7 +1816,9 @@
    "fabric": "Cotton",
    "description": "three-piece printed multicoloured ensemble featuring a cotton shirt paired with matching trousers and a voile dupatta",
    "sizes": [],
-   "prompt": "Substitute the outfit with a three-piece printed multicoloured ensemble featuring a cotton shirt paired with matching trousers and a voile dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder."
+   "prompt": "Substitute the outfit with a three-piece printed multicoloured ensemble featuring a cotton shirt paired with matching trousers and a voile dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/sapphire/U2DDS26V9250.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026007_999",
@@ -1778,7 +1864,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a blue knit dress."
+   "prompt": "Substitute the outfit with a blue knit dress.",
+   "ref": "/refs/sapphire/WTOPV1026007_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026006_999",
@@ -1824,7 +1912,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a taupe knit dress."
+   "prompt": "Substitute the outfit with a taupe knit dress.",
+   "ref": "/refs/sapphire/WTOPV1026006_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026008_999",
@@ -1871,7 +1961,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a green ribbed knit dress."
+   "prompt": "Substitute the outfit with a green ribbed knit dress.",
+   "ref": "/refs/sapphire/WTOPV1026008_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026045_999",
@@ -1918,7 +2010,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a black long knit dress."
+   "prompt": "Substitute the outfit with a black long knit dress.",
+   "ref": "/refs/sapphire/WTOPV1026045_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WOTWV1026020_999",
@@ -1964,7 +2058,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a mock Turtleneck Long Sweater In Clean Yarn."
+   "prompt": "Substitute the upper body garment with a mock Turtleneck Long Sweater In Clean Yarn.",
+   "ref": "/refs/sapphire/WOTWV1026020_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026017_999",
@@ -2012,7 +2108,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a brown two-tone ribbed knit dress."
+   "prompt": "Substitute the outfit with a brown two-tone ribbed knit dress.",
+   "ref": "/refs/sapphire/WTOPV1026017_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WOTWV1026023_999",
@@ -2058,7 +2156,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a taupe loose-fit knit sweater."
+   "prompt": "Substitute the upper body garment with a taupe loose-fit knit sweater.",
+   "ref": "/refs/sapphire/WOTWV1026023_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WOTWV1026011_999",
@@ -2104,7 +2204,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a merlot round-neck knit jumper."
+   "prompt": "Substitute the upper body garment with a merlot round-neck knit jumper.",
+   "ref": "/refs/sapphire/WOTWV1026011_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WOTWV1026013_999",
@@ -2150,7 +2252,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a black round-neck knit jumper."
+   "prompt": "Substitute the upper body garment with a black round-neck knit jumper.",
+   "ref": "/refs/sapphire/WOTWV1026013_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026034_999",
@@ -2197,7 +2301,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a black mock-neck knit jumper."
+   "prompt": "Substitute the upper body garment with a black mock-neck knit jumper.",
+   "ref": "/refs/sapphire/WTOPV1026034_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026033_999",
@@ -2244,7 +2350,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a green mock-neck knit jumper."
+   "prompt": "Substitute the upper body garment with a green mock-neck knit jumper.",
+   "ref": "/refs/sapphire/WTOPV1026033_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WOTWV1026021_999",
@@ -2289,7 +2397,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a navy blue loose-fit knit sweater."
+   "prompt": "Substitute the upper body garment with a navy blue loose-fit knit sweater.",
+   "ref": "/refs/sapphire/WOTWV1026021_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026042_999",
@@ -2336,7 +2446,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a black round-neck knit top."
+   "prompt": "Substitute the upper body garment with a black round-neck knit top.",
+   "ref": "/refs/sapphire/WTOPV1026042_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026031_999",
@@ -2382,7 +2494,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a white turtleneck knit top."
+   "prompt": "Substitute the upper body garment with a white turtleneck knit top.",
+   "ref": "/refs/sapphire/WTOPV1026031_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WBTMV1026008_999",
@@ -2428,7 +2542,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a pink button-through corduroy shirt."
+   "prompt": "Substitute the upper body garment with a pink button-through corduroy shirt.",
+   "ref": "/refs/sapphire/WBTMV1026008_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026009_999",
@@ -2475,7 +2591,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a teal button-through corduroy shirt."
+   "prompt": "Substitute the upper body garment with a teal button-through corduroy shirt.",
+   "ref": "/refs/sapphire/WTOPV1026009_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "WTOPV1026041_999",
@@ -2521,7 +2639,10 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a rust round-neck knit top."
+   "prompt": "Substitute the upper body garment with a rust round-neck knit top.",
+   "ref": "/refs/sapphire/WTOPV1026041_999.jpg",
+   "refHow": "mask",
+   "refSkin": "head"
   },
   {
    "id": "WTOPV1026039_999",
@@ -2567,7 +2688,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a cobalt blue turtleneck knit top."
+   "prompt": "Substitute the upper body garment with a cobalt blue turtleneck knit top.",
+   "ref": "/refs/sapphire/WTOPV1026039_999.jpg",
+   "refHow": "mask"
   },
   {
    "id": "MSTEKR26V610",
@@ -2610,7 +2733,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a grey embroidered cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length."
+   "prompt": "Substitute the upper body garment with a grey embroidered cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length.",
+   "ref": "/refs/sapphire/MSTEKR26V610.jpg",
+   "refHow": "mask"
   },
   {
    "id": "MSTEKR26V620",
@@ -2654,7 +2779,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a black embroidered cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length."
+   "prompt": "Substitute the upper body garment with a black embroidered cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length.",
+   "ref": "/refs/sapphire/MSTEKR26V620.jpg",
+   "refHow": "mask"
   },
   {
    "id": "MSTKR26V6300",
@@ -2697,7 +2824,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the upper body garment with a royal blue premium cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length."
+   "prompt": "Substitute the upper body garment with a royal blue premium cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length.",
+   "ref": "/refs/sapphire/MSTKR26V6300.jpg",
+   "refHow": "mask"
   },
   {
    "id": "MSTKR26V6600",
@@ -2739,7 +2868,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the upper body garment with a blue grey premium cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length."
+   "prompt": "Substitute the upper body garment with a blue grey premium cotton jacquard kurta, solid plain front, plain back panel, band neckline, open sleeves, standard length.",
+   "ref": "/refs/sapphire/MSTKR26V6600.jpg",
+   "refHow": "mask"
   },
   {
    "id": "MST2P26V6300",
@@ -2782,7 +2913,9 @@
      "inStock": true
     }
    ],
-   "prompt": "Substitute the outfit with a teal premium cotton dobby suit."
+   "prompt": "Substitute the outfit with a teal premium cotton dobby suit.",
+   "ref": "/refs/sapphire/MST2P26V6300.jpg",
+   "refHow": "mask"
   },
   {
    "id": "MST2P26V6400",
@@ -2825,7 +2958,9 @@
      "inStock": false
     }
    ],
-   "prompt": "Substitute the outfit with an off white premium cotton dobby kameez shalwar."
+   "prompt": "Substitute the outfit with an off white premium cotton dobby kameez shalwar.",
+   "ref": "/refs/sapphire/MST2P26V6400.jpg",
+   "refHow": "mask"
   }
  ],
  "addons": [

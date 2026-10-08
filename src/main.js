@@ -1,7 +1,7 @@
 // MIRVA front of house: the conversation on the tablet, the glass, and what the shopper keeps.
 import { Mirror } from "./mirror.js";
 import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns } from "./stylist.js";
-import { facelessReference } from "./vision.js";
+import { facelessReference, warmUp } from "./vision.js";
 import * as memory from "./memory.js";
 import * as link from "./link.js";
 
@@ -117,6 +117,8 @@ const RESTING = "Try-on is resting just now. Please try again in a little while.
 
 function friendly(e) {
   const m = String(e?.message || e || "");
+  if (e?.kind === "slow") return "The connection is slow. Check it, then tap a look to try again.";
+  if (e?.kind === "busy") return "The studio is busy just now. Please try again in a little while.";
   if (e?.name === "NotAllowedError") return "The camera is blocked. Allow it in the address bar, or use a photo.";
   if (e?.name === "NotFoundError" || e?.name === "OverconstrainedError") return "I can't find a camera. Use a photo instead.";
   if (e?.name === "NotReadableError") return "Another app is using the camera. Close it and try again.";
@@ -445,17 +447,39 @@ function syncGlass() {
 
 async function garment(p) {
   if (!S.garments.has(p.id)) {
-    const res = await fetch(pic(p.image, 768));
+    // The cloth on its own when the product has a clean reference; the catalogue photo, model and all, when not.
+    let res = p.ref ? await fetch(p.ref).catch(() => null) : null;
+    if (!res?.ok) res = await fetch(pic(p.image, 768));
     if (!res.ok) throw new Error("I couldn't load that garment's picture.");
     S.garments.set(p.id, await res.blob());
   }
   return S.garments.get(p.id);
 }
 
-// The garment picture with the catalogue model's face cropped away. The still engine copies
-// any face it sees in the reference, so this is what keeps the portrait the shopper's own.
+// The garment picture with nothing of the catalogue model left in it: no face, no hair, no neck. The still engine
+// copies whatever of her it can see, so this is what keeps the portrait the shopper's own (docs/portrait-experiments.md).
+//  - A product with `ref` was cleaned ahead of time (scripts/prepare-refs.mjs): fetch that.
+//  - `ref: null` means nothing clean could be made from its photo.
+//  - No `ref` at all (a store loaded just now, or a prepared file that would not load): clean the photo here, which
+//    brings in the 16 MB hair-and-skin model, once.
+// Resolves a Blob, or null: send no reference, and the portrait is told the garment in words alone.
 async function reference(p) {
-  if (!S.refs.has(p.id)) S.refs.set(p.id, await facelessReference(await garment(p)));
+  if (!S.refs.has(p.id)) {
+    let ref = null;
+    if (p.ref) {
+      const res = await fetch(p.ref).catch(() => null);
+      if (res?.ok) ref = await res.blob();
+    }
+    if (!ref && p.ref !== null) {
+      try {
+        const { cleanReference } = await import("./reference.js");
+        ref = (await cleanReference(await garment(p))).blob;
+      } catch (e) {
+        console.warn("Could not prepare the garment picture.", e);
+      }
+    }
+    S.refs.set(p.id, ref);
+  }
   return S.refs.get(p.id);
 }
 
@@ -546,6 +570,55 @@ function develop(p, kind) {
   return me;
 }
 
+// The wait in Studio: she keeps seeing herself, a little dimmed, with the step and the pose check's cue.
+function seeHerself() {
+  S.developing?.cancel();
+  const box = $("#seeing");
+  const step = (text) => replay($("#seeingStep"), text);
+  const steps = ["Opening the studio", "Fitting it to you"];
+  let n = 0;
+  const timer = setInterval(() => {
+    step(steps[++n]);
+    if (n >= steps.length - 1) clearInterval(timer);
+  }, 3400);
+  const slow = setTimeout(() => step("Taking a little longer than usual"), 10000);
+  step(steps[0]);
+  replay($("#seeingHint"), framingCue());
+  box.hidden = false;
+  requestAnimationFrame(() => box.classList.add("on"));
+  const me = {
+    hint: (text) => replay($("#seeingHint"), text || ""),
+    queue(place) {
+      clearInterval(timer);
+      clearTimeout(slow);
+      step(`The studio is busy. You are number ${place} in line.`);
+    },
+    cancel() {
+      if (S.developing !== me) return;
+      clearInterval(timer);
+      clearTimeout(slow);
+      S.developing = null;
+      box.classList.remove("on");
+      setTimeout(() => !S.developing && (box.hidden = true), 700);
+      syncGlass();
+    },
+  };
+  S.developing = me;
+  syncGlass();
+  return me;
+}
+
+// What the pose check would say to her right now, if anything.
+const framingCue = () => (mirror.presence.known && (!mirror.presence.present || mirror.presence.ok === false) ? mirror.presence.hint : "");
+
+// A garment swapped inside a live look: a light pass over the picture until the new one has settled.
+let sweepTimer;
+function sweep(on) {
+  clearTimeout(sweepTimer);
+  glass.classList.toggle("swapping", on);
+  if (on) sweepTimer = setTimeout(() => sweep(false), 5000);
+}
+
 async function countdown() {
   const box = $("#count");
   box.hidden = false;
@@ -602,7 +675,9 @@ async function thumbOf(blob, width = 300) {
   return c.toDataURL("image/jpeg", 0.8);
 }
 
-// Model: one portrait of the shopper in the piece, lit like a studio photograph.
+// Model: one portrait of the shopper in the piece, in her own pose, framing and light (the engine edits the clothes
+// and nothing else). If the wall behind her is not plain, a second, quiet pass puts the same portrait on a studio
+// backdrop, and the glass fades to it when it is ready. See src/portrait.js and docs/portrait-experiments.md.
 async function modelShot(p, { retake = false } = {}) {
   mirror.touch();
   if (mustJoin()) return askToJoin();
@@ -617,33 +692,75 @@ async function modelShot(p, { retake = false } = {}) {
   }
   if (mirror.presence.known && !mirror.presence.present) return caption("Step into the mirror so I can see you.");
   hidePortrait();
+  const pass = await import("./portrait.js");
   if (mirror.source.kind === "camera") {
     await countdown();
     if (ticket !== S.ticket) return;
   }
+  // A look at the frame before anything is spent: too dim and no later step can bring the colours back.
+  let person;
+  try {
+    person = await mirror.frameBlob(1024);
+  } catch (e) {
+    console.error(e);
+    return caption(friendly(e));
+  }
+  const look = await pass.lookAt(person);
+  if (ticket !== S.ticket) return;
+  if (look.dim) return caption(pass.DIM_LINE);
   const dev = develop(p, "model");
   caption(line("putting"));
   try {
-    const [person, ref] = await Promise.all([mirror.frameBlob(1024), reference(p)]);
+    const ref = await reference(p); // null: nothing clean could be made, so the garment is told in words alone
     const form = new FormData();
     form.append("person", person, "person.jpg");
-    form.append("reference", ref, "garment.jpg");
+    if (ref) form.append("reference", ref, "garment.jpg");
     form.append("brand", S.brand.id);
     form.append("product", p.id);
     form.append("mode", "portrait");
-    const res = await fetch("/api/model-shot", { method: "POST", body: form, headers: link.auth(), signal: link.timeout(75000) });
-    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || "The portrait didn't come out.");
-    const blob = await res.blob();
+    const { blob, saved } = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
-    const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved: res.headers.get("x-mirva-portrait") || null };
+    const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: null };
     link.track("portrait", { product: p.id });
     if (link.member) link.whoIsHere().then(showMember);
     S.portraits.set(p.id, entry);
     if (ticket !== S.ticket) return; // she moved on; it is kept for when she comes back
     dev.cancel();
     showPortrait(entry, p.id);
-    caption("This is you in it.");
+    caption(ref ? "This is you in it." : "This is you in it, drawn from the description.");
     setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
+
+    // The wall is not plain: make the same portrait again on a studio backdrop, without a spinner, one ask for each
+    // portrait however often she taps. If it fails the first picture stays, and she is never told.
+    if (look.busy && !entry.backdrop) {
+      entry.backdrop = "asking";
+      const again = new FormData();
+      again.append("person", blob, "portrait.png");
+      again.append("brand", S.brand.id);
+      again.append("product", p.id);
+      again.append("mode", "backdrop");
+      if (saved) again.append("replaces", saved);
+      pass
+        .requestShot(again, { headers: link.auth(), timeout: link.timeout })
+        .then(async (next) => {
+          if (S.portraits.get(p.id) !== entry) return; // her pictures were cleared meanwhile: nothing to put it in
+          const url = URL.createObjectURL(next.blob);
+          const old = entry.url;
+          const here = ticket === S.ticket && S.view === "portrait" && S.portrait?.pid === p.id;
+          if (here) await pass.crossfade($("#portrait"), url); // she has moved on otherwise: the picture is only kept
+          Object.assign(entry, { url, thumb: await thumbOf(next.blob), saved: next.saved || entry.saved, backdrop: "done" });
+          if (S.portrait?.pid === p.id) S.portrait = { pid: p.id, ...entry };
+          setTimeout(() => URL.revokeObjectURL(old), 2000);
+          if (here && ticket === S.ticket && S.view === "portrait") {
+            caption(pass.BACKDROP_LINE);
+            setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
+          }
+        })
+        .catch((e) => {
+          entry.backdrop = "failed";
+          console.warn("The studio backdrop did not come out; the first portrait stays.", e);
+        });
+    }
   } catch (e) {
     console.error(e);
     if (ticket !== S.ticket) return;
@@ -664,21 +781,32 @@ async function studio(p) {
   const ticket = ++S.ticket;
   hidePortrait();
   const swapping = mirror.state === "live" && hasPicture();
-  if (!swapping) develop(p, "studio");
+  if (swapping) sweep(true);
+  else seeHerself();
   caption(line("putting"));
   syncGlass();
+  // The garment starts coming the moment the tap lands, alongside the token and the connection.
+  const blob = garment(p);
+  blob.catch(() => {});
   try {
-    const blob = await garment(p);
-    if (ticket !== S.ticket) return; // a newer tap won
     await mirror.wear(p, blob);
+    if (swapping) setTimeout(() => ticket === S.ticket && sweep(false), 700);
   } catch (e) {
     if (ticket !== S.ticket) return;
     console.error(e);
+    sweep(false);
     S.developing?.cancel();
     caption(friendly(e));
     syncGlass();
   }
 }
+
+// Why a look ended, for the reasons the stylist has no line for.
+const ENDED = {
+  camera: "The camera stopped, so I ended the live look.",
+  hidden: "I ended the live look while this window was out of sight. Tap a look to carry on.",
+  nopicture: "That didn't come through. Tap the look to try again.",
+};
 
 function wireMirror() {
   mirror.addEventListener("awake", () => {
@@ -723,7 +851,27 @@ function wireMirror() {
     setTimeout(() => ticket === S.ticket && mirror.isLive && caption(line("wearing", product)), 1400);
   });
   mirror.addEventListener("queue", ({ detail }) => {
-    if (detail?.position > 0) caption(`The studio is busy. You are number ${detail.position} in line.`);
+    if (!(detail?.position > 0)) return;
+    // The engine reports a place and the size of the line, not a wait, so no wait is promised.
+    const of = detail.queueSize >= detail.position ? ` of ${detail.queueSize}` : "";
+    caption(`The studio is busy. You are number ${detail.position}${of} in line.`);
+    S.developing?.queue?.(`${detail.position}${of}`);
+  });
+  // A dropped line is redialled by the engine. Say so quietly, and take the note away when it is back or the look has ended.
+  mirror.addEventListener("link", ({ detail: { state } }) => {
+    const note = $("#lineNote");
+    note.textContent = state === "reconnecting" ? "The line is slow. Holding your look." : "";
+    note.hidden = !note.textContent;
+  });
+  mirror.addEventListener("abandoned", ({ detail: { grant } }) => link.track("live_end", { value: 0, grant, meta: "failed" }));
+  mirror.addEventListener("camera", ({ detail: { state, error } }) => {
+    const lost = state === "lost";
+    $("#camLost").hidden = !lost;
+    glass.classList.toggle("blind", lost);
+    if (lost) {
+      $("#camLostText").textContent = error ? friendly(error) : "The camera stopped. Another app may be using it.";
+      $("#camRetry").focus();
+    } else caption(state === "restarting" ? "The camera paused. Starting it again." : "There you are.");
   });
   mirror.addEventListener("tick", ({ detail: d }) => {
     $("#meterTime").textContent = clock(d.remaining);
@@ -741,6 +889,7 @@ function wireMirror() {
   });
   mirror.addEventListener("presence", ({ detail: f }) => {
     $("#hint").textContent = f.known && (!f.present || f.ok === false) ? f.hint : "";
+    S.developing?.hint?.($("#hint").textContent);
     syncGlass();
   });
   mirror.addEventListener("ended", ({ detail: { reason, elapsed, grant } }) => {
@@ -749,8 +898,10 @@ function wireMirror() {
     $("#toast").hidden = true;
     if (S.view !== "portrait") $("#wearing").hidden = true;
     $("#haloArc").style.strokeDashoffset = "0";
+    $("#lineNote").hidden = true;
     S.wearing = null;
     S.unveil = null;
+    sweep(false);
     if (reason !== "switch" && reason !== "reshape") {
       S.ticket++;
       S.developing?.cancel();
@@ -758,7 +909,7 @@ function wireMirror() {
     syncGlass();
     markCards();
     renderDetail();
-    if (reason !== "reshape" && reason !== "switch") caption(line(`ended.${reason}`) || line("ended.user"));
+    if (reason !== "reshape" && reason !== "switch") caption(ENDED[reason] || line(`ended.${reason}`) || line("ended.user"));
   });
   mirror.addEventListener("fault", ({ detail }) => caption(friendly(detail)));
   mirror.addEventListener("shape", ({ detail: { shape, wearing } }) => {
@@ -921,13 +1072,19 @@ async function openAdapt() {
 // ---------- wiring ----------
 function wireUI() {
   $("#wakeBtn").addEventListener("click", async () => {
+    const btn = $("#wakeBtn");
+    btn.disabled = true;
+    caption("Waking the mirror.");
     try {
       await mirror.startCamera();
     } catch (e) {
       console.error(e);
       caption(friendly(e));
+    } finally {
+      btn.disabled = false;
     }
   });
+  $("#camRetry").addEventListener("click", () => mirror.retryCamera());
   $("#photoBtn").addEventListener("click", () => $("#photoInput").click());
   $("#photoInput").addEventListener("change", async (e) => {
     const file = e.target.files?.[0];
@@ -1049,6 +1206,9 @@ async function boot() {
   mirror.auth = link.auth; // so a live session is billed to the right mirror or member
   wireMirror();
   wireUI();
+  // The pose model blocks the page for a few seconds the first time it runs. Spend them while the
+  // shopper is still reading the wake screen, so the camera never freezes under her afterwards.
+  if (!navigator.connection?.saveData) setTimeout(warmUp, 1500);
   const brands = await api("/api/brands");
   // A store's console can pair this screen (…/mirror?pair=CODE) and a link can name the store (…/mirror?brand=id).
   const query = new URLSearchParams(location.search);

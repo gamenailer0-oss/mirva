@@ -26,6 +26,7 @@ async function load() {
       } catch {
         detector = await make("CPU");
       }
+      prime(detector);
     } catch (e) {
       console.warn("Pose detection is unavailable; MIRVA carries on without it.", e);
       broken = true;
@@ -35,7 +36,21 @@ async function load() {
   return loading;
 }
 
+// The very first look compiles the model for the graphics chip, and the page cannot do anything
+// else while it does: measured at 4 to 7 seconds. Take that on a blank picture, once, up front,
+// so it never lands on a live camera.
+function prime(d) {
+  try {
+    const blank = document.createElement("canvas");
+    blank.width = blank.height = 256;
+    d.detect(blank);
+  } catch {}
+}
+
 export const warmUp = () => void load();
+
+/** Resolves when the detector has loaded and taken its first look, or has given up. Never rejects. */
+export const ready = () => load().then(() => undefined, () => undefined);
 
 // Landmark numbers from MediaPipe's pose model.
 const NOSE = 0, MOUTH_L = 9, MOUTH_R = 10, SHOULDER_L = 11, SHOULDER_R = 12, HIP_L = 23, HIP_R = 24;

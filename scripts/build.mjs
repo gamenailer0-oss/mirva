@@ -17,6 +17,8 @@ const options = {
     site: join(ROOT, "src", "web", "site.js"),
     retail: join(ROOT, "src", "web", "retail.js"),
     desk: join(ROOT, "src", "web", "desk.js"),
+    // Also an entry of its own, so scripts/prepare-refs.mjs can load it in a browser page.
+    reference: join(ROOT, "src", "reference.js"),
   },
   outdir: OUT,
   bundle: true,
@@ -47,18 +49,26 @@ await copyFile(worker, join(OUT, "chunks", "frame-metadata-worker.js")); // the 
 for (const f of ["vision_wasm_internal.js", "vision_wasm_internal.wasm", "vision_wasm_nosimd_internal.js", "vision_wasm_nosimd_internal.wasm"])
   await copyFile(join(MODULES, "@mediapipe", "tasks-vision", "wasm", f), join(OUT, "mp", f));
 
-// Its model file comes from Google's public MediaPipe bucket. Fetched once.
-const MODEL = join(ROOT, "public", "models", "pose_landmarker_lite.task");
-const MODEL_URL = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task";
-if (!existsSync(MODEL) || (await stat(MODEL)).size < 1e6) {
+// The model files come from Google's public MediaPipe bucket. Each is fetched once; if a download
+// fails the build still succeeds and the feature that needs it switches itself off.
+const BUCKET = "https://storage.googleapis.com/mediapipe-models";
+const MODELS = [
+  { file: "pose_landmarker_lite.task", url: `${BUCKET}/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task`, min: 1e6, what: "the pose model", off: "framing checks are off" },
+  // Hair and skin, so a garment photo can be shown without the catalogue model in it.
+  { file: "selfie_multiclass_256x256.tflite", url: `${BUCKET}/image_segmenter/selfie_multiclass_256x256/float32/latest/selfie_multiclass_256x256.tflite`, min: 1e6, what: "the hair-and-skin model", off: "garment pictures are prepared with a deeper crop instead" },
+  { file: "blaze_face_short_range.tflite", url: `${BUCKET}/face_detector/blaze_face_short_range/float16/latest/blaze_face_short_range.tflite`, min: 5e4, what: "the face detector", off: "garment pictures are not checked for a face" },
+];
+for (const m of MODELS) {
+  const target = join(ROOT, "public", "models", m.file);
+  if (existsSync(target) && (await stat(target)).size >= m.min) continue;
   try {
-    await mkdir(dirname(MODEL), { recursive: true });
-    const res = await fetch(MODEL_URL);
+    await mkdir(dirname(target), { recursive: true });
+    const res = await fetch(m.url);
     if (!res.ok) throw new Error(String(res.status));
-    await writeFile(MODEL, Buffer.from(await res.arrayBuffer()));
-    console.log("  fetched the pose model");
+    await writeFile(target, Buffer.from(await res.arrayBuffer()));
+    console.log(`  fetched ${m.what}`);
   } catch (e) {
-    console.warn(`  could not fetch the pose model (${e.message}). MIRVA still runs; framing checks are off.`);
+    console.warn(`  could not fetch ${m.what} (${e.message}). MIRVA still runs; ${m.off}.`);
   }
 }
 

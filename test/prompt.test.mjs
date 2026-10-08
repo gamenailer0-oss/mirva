@@ -54,13 +54,47 @@ test("prompts stay inside the engine's length limit", () => {
   assert.ok(p.length <= 500, `prompt is ${p.length} characters`);
 });
 
-test("the Model shot protects the shopper's own face and asks for studio light", () => {
-  const item = { ...base, name: "Printed Charmeuse Kaftan", colour: "White", description: "printed white charmeuse kaftan featuring a round neckline" };
-  const portrait = modelShotPrompt(item, "portrait");
+const kaftan = { ...base, name: "Printed Charmeuse Kaftan", colour: "White", description: "printed white charmeuse kaftan featuring a round neckline" };
+
+test("the Model shot edits only the clothes and keeps her face, pose, framing and background", () => {
+  const portrait = modelShotPrompt(kaftan, "portrait");
   assert.match(portrait, /^Substitute the outfit with a printed white charmeuse kaftan/);
-  assert.match(portrait, /person's own face/);
-  assert.match(portrait, /studio/);
-  const relight = modelShotPrompt(item, "relight");
-  assert.match(relight, /keep the entire outfit exactly the same/);
-  assert.doesNotMatch(relight, /Substitute/);
+  assert.match(portrait, /exactly as shown in the reference image/);
+  assert.match(portrait, /Edit only the clothes/);
+  // everything that is hers stays: named one by one, so nothing is left to be redrawn
+  for (const part of ["face", "hair", "skin tone", "expression", "pose", "camera framing", "background"]) assert.match(portrait, new RegExp(part), part);
+  assert.match(portrait, /Do not re-pose the person/);
+  assert.match(portrait, /do not change the background/);
+});
+
+test("the reference is described as the garment alone, and the person in it is to be ignored", () => {
+  const portrait = modelShotPrompt(kaftan, "portrait");
+  assert.match(portrait, /reference image shows only the garment/);
+  assert.match(portrait, /ignore any person, face, hair or skin/);
+});
+
+test("the Model shot no longer asks for a new pose or a fashion-photograph look", () => {
+  // Both invited the engine to redraw her (a new body, a glamorous face). See docs/portrait-experiments.md.
+  for (const mode of ["portrait", "backdrop"]) {
+    const text = modelShotPrompt(kaftan, mode);
+    assert.doesNotMatch(text, /full-length|relaxed, elegant pose|fashion studio|flattering|relight/i, mode);
+  }
+});
+
+test("with no reference the garment is told in words alone", () => {
+  const text = modelShotPrompt(kaftan, "portrait", { reference: false });
+  assert.match(text, /^Substitute the outfit with a printed white charmeuse kaftan[^.]*\. Edit only the clothes/);
+  assert.doesNotMatch(text, /reference/);
+  assert.match(text, /Do not re-pose the person/);
+});
+
+test("the backdrop pass changes only the background, from the portrait, with no garment text", () => {
+  const backdrop = modelShotPrompt(kaftan, "backdrop");
+  assert.match(backdrop, /^Change only the background/);
+  assert.match(backdrop, /light grey seamless studio backdrop/);
+  assert.match(backdrop, /Do not touch the person/);
+  assert.match(backdrop, /face, hair, skin tone, expression, pose and clothes stay exactly as they are/);
+  assert.doesNotMatch(backdrop, /Substitute|reference/);
+  assert.equal(modelShotPrompt(kaftan, "relight"), backdrop, "the old name still works");
+  assert.equal(modelShotPrompt(kaftan, "backdrop", { reference: false }), backdrop);
 });

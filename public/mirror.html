@@ -51,7 +51,17 @@
           <p id="reelLine" class="reel-line"></p>
         </div>
       </div>
+      <!-- While Studio connects: she keeps seeing herself, with the step and one cue -->
+      <div id="seeing" class="seeing" hidden aria-hidden="true">
+        <p id="seeingStep" class="reel-step"></p>
+        <p id="seeingHint" class="reel-line"></p>
+      </div>
+      <div class="sweep" aria-hidden="true"></div>
       <div id="count" class="count" hidden aria-hidden="true"></div>
+      <div id="camLost" class="cam-lost" role="alert" hidden>
+        <p id="camLostText"></p>
+        <button id="camRetry" class="primary small" type="button">Try the camera again</button>
+      </div>
 
       <svg class="halo" viewBox="0 0 200 44" aria-hidden="true">
         <defs>
@@ -76,6 +86,7 @@
         </div>
       </header>
       <p id="hint" class="hint" role="status" hidden></p>
+      <p id="lineNote" class="hint" role="status" hidden></p>
 
       <div id="wake" class="wake">
         <p class="kicker">MIRVA</p>

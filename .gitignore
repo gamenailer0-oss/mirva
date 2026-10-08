@@ -19,3 +19,6 @@ public/models/
 
 # The working handbook (sales tactics, cost margins, draft contracts) stays private
 docs/
+
+# Garment pictures prepared from a store's photos (scripts/prepare-refs.mjs): derived from their images, so not published here
+public/refs/

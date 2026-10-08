@@ -157,6 +157,33 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .reel-step { margin: 0; font-size: 10.5px; letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; opacity: .85; }
 .reel-line { margin: 0; font: italic 400 clamp(22px, 3vh + 4px, 32px)/1.15 var(--serif); text-wrap: balance; text-shadow: 0 2px 22px rgba(0,0,0,.6); }
 .reel-step.in, .reel-line.in { animation: rise .7s var(--ease); }
+/* the wait in Studio: her own picture stays, a little dimmed, with the step and one cue */
+.seeing {
+  position: absolute; inset: 0; z-index: 3; opacity: 0; transition: opacity .6s var(--ease); pointer-events: none;
+  background: linear-gradient(0deg, rgba(6,8,12,.7), rgba(6,8,12,.34) 45%, rgba(6,8,12,.5));
+}
+.seeing.on { opacity: 1; }
+.seeing .reel-step, .seeing .reel-line { position: absolute; left: 0; right: 0; padding: 0 12%; text-align: center; }
+.seeing .reel-step { bottom: 168px; }
+.seeing .reel-line { bottom: 112px; font-size: clamp(18px, 2.2vh + 3px, 26px); min-height: 1.2em; }
+/* a swap inside a live look: a light pass over the picture while the new garment takes */
+.sweep { position: absolute; inset: 0; z-index: 4; overflow: hidden; pointer-events: none; opacity: 0; transition: opacity .3s var(--ease); }
+.sweep::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.34), transparent); transform: skewX(-12deg);
+}
+.glass.swapping .sweep { opacity: 1; }
+.glass.swapping .sweep::before { animation: sweep 1.2s var(--ease) infinite; }
+@keyframes sweep { to { transform: translateX(400%) skewX(-12deg); } }
+@media (prefers-reduced-motion: reduce) { .glass.swapping .sweep::before { animation: none; } }
+/* the camera stopped feeding the mirror: never present a frozen picture as live */
+.glass.blind #cam { opacity: .28; }
+.cam-lost {
+  position: absolute; inset: 0; z-index: 7; padding: 0 14%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center;
+  background: rgba(6, 8, 12, .72);
+}
+.cam-lost p { margin: 0; font: italic 400 clamp(20px, 2.6vh + 4px, 28px)/1.2 var(--serif); text-wrap: balance; }
 .count {
   position: absolute; inset: 0; z-index: 7; display: grid; place-items: center; pointer-events: none;
   font: 400 clamp(96px, 20vh, 180px)/1 var(--serif); text-shadow: 0 6px 40px rgba(0,0,0,.5);
