@@ -1367,6 +1367,12 @@ async function boot() {
   if (!first.id) return noStore();
   await loadBrand(first.id);
   syncGlass();
+  // A paired mirror belongs to one store. Anywhere else, the other stores that are open are one tap away.
+  const others = link.pairedTo() ? [] : brands.filter((b) => b.id !== first.id);
+  if (others.length) {
+    $("#storeLine").replaceChildren("Also in this mirror: ", ...others.flatMap((b, i) => [i ? ", " : "", h("a", { href: `/mirror?brand=${b.id}`, text: b.name })]), ".");
+    $("#storeLine").hidden = false;
+  }
   if (paired) caption(paired.startsWith("!") ? paired.slice(1) : `This screen is now the mirror "${paired}".`);
   window.mirva = { S, mirror, visitLimits }; // a handle for the console while this is a prototype
   // On a phone the ask bar docks at the bottom of the screen once the glass has scrolled away (see styles.css).
