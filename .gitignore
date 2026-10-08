@@ -23,3 +23,6 @@ docs/
 
 # Garment pictures prepared from a store's photos (scripts/prepare-refs.mjs): derived from their images, so not published here
 public/refs/
+
+# Local test rigs (fake-camera rig, portrait experiments). Kept on this machine only.
+tools/
