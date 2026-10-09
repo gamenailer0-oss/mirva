@@ -64,6 +64,7 @@ live video, because nobody is paying for it there. Those allowances are in `lib/
 | The glass | Camera or photo in, portrait or live try-on on top | `src/mirror.js` |
 | Seeing | Framing, the walked-away pause, cropping the store model's face out of references | `src/vision.js` |
 | Her own head | The engine redraws the head with the clothes. Before any portrait is shown, the shopper's own head is laid back on it from the frame she sent. One path for every store. | `src/restore.js` |
+| The store's garment | The engine is given the store's photo at its largest, cut down to the garment, and an instruction that names the piece but no colour: the photo decides colour, print and embroidery. When a second pass changes the wall, the garment from the first picture is laid back. No portrait is drawn from a description alone. | `src/reference.js`, `lib/prompt.mjs`, `src/restore.js` |
 | The stylist | Occasion, mood and budget to three looks, and what goes with each. Rules, not a language model. | `src/stylist.js` |
 | The tablet | The conversation, look cards, sizes, add-ons, kept looks | `src/main.js`, `public/mirror.html` |
 | The line to the platform | Which mirror this is, what happened, the QR code to a phone | `src/link.js` |
@@ -149,7 +150,7 @@ the walked-away pause.
 
 - The stylist is rule-based. It knows price, size and stock from the catalogue and nothing about taste beyond its rules.
 - Sizes and stock are the store's online figures at snapshot time, not a branch's till. There is no link to a till.
-- A portrait is a likeness. Fine embroidery and prints come out close, not exact. The face and hair are the shopper's own pixels, put back after the engine has drawn the clothes; the neck and hands are the engine's, so their tone can differ a little from the face.
+- A portrait is a likeness. Colour, print and the placing of embroidery follow the store's photo; fine embroidery comes out close, not stitch for stitch. A piece with no usable photo of the garment has no portrait: the mirror shows the store's photo. The face and hair are the shopper's own pixels, put back after the engine has drawn the clothes; the neck and hands are the engine's, so their tone can differ a little from the face.
 - Putting the head back needs a 16 MB model in the shopper's browser (fetched once, kept a month). On a very slow line a portrait waits for it up to 45 seconds, then is shown as the engine drew it.
 - No email or WhatsApp is sent. Messages wait in the outbox.
 - A store with no agreement behind it is shown as a concept demo, with a notice, and can be taken off the public list from the founder's desk.

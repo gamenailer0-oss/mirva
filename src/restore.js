@@ -16,6 +16,11 @@
 //  4. If the engine moved the head (it re-posed her after all), or anything else is in doubt, leave the portrait alone.
 //
 // `tight` is for a picture whose wall has changed (the studio backdrop pass): only her hair and face go back.
+//
+// The same holds for the garment in that second pass. Asked to change nothing but the wall, the engine still draws
+// the whole picture again, and the clothes come back a little different: a bottle green suit came back emerald, and
+// a line of embroidery moved. The first picture is the one made from the store's photo, so its figure is laid back
+// over the second, a touch inside its own edge (restoreFigure). The new backdrop and the outline against it stay.
 import { head } from "./vision.js";
 import { load, labelsOf, grow, feather, canvasOf } from "./reference.js";
 
@@ -28,6 +33,11 @@ const DARKER = 0.72; // a leftover pixel this much darker than the drawn skin is
 const REACH = 0.14; // how far down (of the square) a leftover pixel of the drawn head may look for what lies beneath it
 const SOFT = 3; // pixels (at N) the edge fades over
 const MOVED = 0.34; // the drawn face may sit this far (of a head-width) from hers before it counts as moved
+const M = 512; // the whole picture is labelled at this size (its longer side) when the figure is laid back
+const INSIDE = 0.006; // the figure goes back this far (of the longer side) inside its own edge
+const TONE = 0.016; // the edge left as the second pass drew it takes the first picture's colour, averaged over this far
+const WALL_NEAR = 18, WALL_FAR = 54; // how unlike the new backdrop (summed over red, green and blue) a pixel must be to count as her: not at all, and fully
+const SAME = 0.8; // the two figures must share this much of their area, or the engine has moved her
 
 const centreOf = (labels, label) => {
   let sx = 0, sy = 0, n = 0;
@@ -41,12 +51,32 @@ const centreOf = (labels, label) => {
 };
 
 /** Shrink a 0/1 mask by r pixels: what is left after its edge is worn away. */
-function shrink(mask, r) {
+function shrink(mask, r, W = N, H = N) {
   const inverse = new Uint8Array(mask.length);
   for (let i = 0; i < mask.length; i++) inverse[i] = mask[i] ? 0 : 1;
-  const worn = grow(inverse, N, N, r);
+  const worn = grow(inverse, W, H, r);
   for (let i = 0; i < worn.length; i++) worn[i] = worn[i] ? 0 : 1;
   return worn;
+}
+
+/** Two box blurs of radius r over a field of numbers. */
+function blur(src, W, H, r) {
+  const pass = (from, len, lines, stride, step) => {
+    const to = new Float32Array(from.length);
+    const sums = new Float64Array(len + 1);
+    for (let l = 0; l < lines; l++) {
+      const base = l * stride;
+      for (let i = 0; i < len; i++) sums[i + 1] = sums[i] + from[base + i * step];
+      for (let i = 0; i < len; i++) {
+        const lo = Math.max(0, i - r), hi = Math.min(len, i + r + 1);
+        to[base + i * step] = (sums[hi] - sums[lo]) / (hi - lo);
+      }
+    }
+    return to;
+  };
+  let a = src;
+  for (let n = 0; n < 2; n++) a = pass(pass(a, W, H, W, 1), H, W, 1, W);
+  return a;
 }
 
 /** The face the detector is surest of, as { x, y, width } in the canvas's pixels, or null. */
@@ -231,6 +261,139 @@ export async function restoreHead(original, result, { tight = false, debug = fal
     return { blob, how: "restored", ...(debug ? { box: { x, y, side }, moved: f1 ? Math.hypot(f1.x - f0.x, f1.y - f0.y) / headPx : null } : {}) };
   } catch (e) {
     console.warn("The shopper's own head could not be put back; the portrait is shown as it came.", e);
+    return asItCame("failed");
+  } finally {
+    a?.close?.();
+    b?.close?.();
+  }
+}
+
+/**
+ * Lays the figure from `first` (the portrait as first made, from the store's photo) over `second` (the same portrait
+ * after the backdrop pass). Both are Blobs. Resolves { blob, how }: how is "restored", or why the second picture was
+ * left as it came ("shape", "notools", "moved", "failed"). Never throws.
+ */
+export async function restoreFigure(first, second, { debug = false } = {}) {
+  const asItCame = (how, extra) => ({ blob: second, how, ...extra });
+  let a, b;
+  try {
+    [a, b] = await Promise.all([createImageBitmap(first), createImageBitmap(second)]);
+    const W = b.width, H = b.height;
+    if (Math.abs(a.width / a.height - W / H) > 0.03) return asItCame("shape");
+    const { segmenter } = await load();
+    if (!segmenter) return asItCame("notools");
+
+    const scale = Math.min(1, M / Math.max(W, H));
+    const w = Math.round(W * scale), h = Math.round(H * scale);
+    const small = (bmp) => {
+      const c = canvasOf(w, h);
+      const ctx = c.getContext("2d", { willReadFrequently: true });
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(bmp, 0, 0, w, h);
+      return c;
+    };
+    const sa = small(a), sb = small(b);
+    const was = labelsOf(segmenter, sa, w, h), now = labelsOf(segmenter, sb, w, h);
+    if (!was || !now) return asItCame("failed");
+
+    // Is she where she was? What the two figures share, against what either covers.
+    const both = new Uint8Array(w * h);
+    let shared = 0, either = 0;
+    for (let i = 0; i < both.length; i++) {
+      const p = was.labels[i] !== BACKGROUND, q = now.labels[i] !== BACKGROUND;
+      if (p && q) (both[i] = 1), shared++;
+      if (p || q) either++;
+    }
+    if (!either || shared / either < SAME) return asItCame("moved", debug ? { same: either ? shared / either : 0 } : {});
+
+    const r = Math.max(2, Math.round(Math.max(w, h) * INSIDE));
+    const alpha = feather(shrink(both, r, w, h), w, h, Math.max(1, r >> 1));
+    const mask = canvasOf(w, h);
+    const mctx = mask.getContext("2d");
+    const md = mctx.createImageData(w, h);
+    for (let i = 0; i < alpha.length; i++) md.data[i * 4 + 3] = alpha[i];
+    mctx.putImageData(md, 0, 0);
+
+    // The first picture, cut to that shape, over the second.
+    const patch = canvasOf(W, H);
+    const pctx = patch.getContext("2d");
+    pctx.imageSmoothingQuality = "high";
+    pctx.drawImage(a, 0, 0, W, H);
+    pctx.globalCompositeOperation = "destination-in";
+    pctx.drawImage(mask, 0, 0, W, H);
+    const out = canvasOf(W, H);
+    const octx = out.getContext("2d", { willReadFrequently: true });
+    octx.drawImage(b, 0, 0);
+
+    // The edge of the figure stays as the second pass drew it, so its outline sits cleanly on the new backdrop. But
+    // that pass often lights her differently, and a rim of another shade would show round the garment. So the edge
+    // takes the first picture's colour too: the difference between the two, averaged over a patch, is added to it.
+    // The label map is coarse and runs a few pixels over the outline, so a pixel takes the correction only as far as
+    // it is unlike the backdrop beside it; otherwise the backdrop would be tinted in a line round her.
+    const pa = sa.getContext("2d").getImageData(0, 0, w, h).data, pb = sb.getContext("2d").getImageData(0, 0, w, h).data;
+    const reach = Math.max(2, Math.round(Math.max(w, h) * TONE));
+    const weight = new Float32Array(w * h);
+    for (let i = 0; i < weight.length; i++) weight[i] = both[i];
+    const share = blur(weight, w, h, reach);
+    const near = feather(both, w, h, r); // 0..255: how much of the correction a pixel takes
+    const tone = canvasOf(w, h);
+    const tctx = tone.getContext("2d");
+    const td = tctx.createImageData(w, h);
+    for (let c = 0; c < 3; c++) {
+      const diff = new Float32Array(w * h);
+      for (let i = 0; i < diff.length; i++) diff[i] = both[i] ? pa[i * 4 + c] - pb[i * 4 + c] : 0;
+      const soft = blur(diff, w, h, reach);
+      for (let i = 0; i < diff.length; i++) td.data[i * 4 + c] = 128 + ((share[i] > 0.02 ? soft[i] / share[i] : 0) * (near[i] / 255)) / 2;
+    }
+    for (let i = 0; i < w * h; i++) td.data[i * 4 + 3] = 255;
+    tctx.putImageData(td, 0, 0);
+    // the new backdrop's colour beside each pixel: the second picture, averaged over its backdrop alone
+    const open = new Float32Array(w * h);
+    let n = 0;
+    const mean = [0, 0, 0];
+    for (let i = 0; i < open.length; i++)
+      if (now.labels[i] === BACKGROUND) {
+        open[i] = 1;
+        n++;
+        for (let c = 0; c < 3; c++) mean[c] += pb[i * 4 + c];
+      }
+    const room = blur(open, w, h, reach * 2);
+    const wd = tctx.createImageData(w, h);
+    for (let c = 0; c < 3; c++) {
+      const seen = new Float32Array(w * h);
+      for (let i = 0; i < seen.length; i++) seen[i] = open[i] ? pb[i * 4 + c] : 0;
+      const soft = blur(seen, w, h, reach * 2);
+      for (let i = 0; i < seen.length; i++) wd.data[i * 4 + c] = room[i] > 0.02 ? soft[i] / room[i] : n ? mean[c] / n : 255;
+    }
+    for (let i = 0; i < w * h; i++) wd.data[i * 4 + 3] = 255;
+    const wallAt = canvasOf(w, h);
+    wallAt.getContext("2d").putImageData(wd, 0, 0);
+
+    const full = (canvas) => {
+      const c = canvasOf(W, H);
+      const ctx = c.getContext("2d", { willReadFrequently: true });
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(canvas, 0, 0, W, H);
+      return ctx.getImageData(0, 0, W, H).data;
+    };
+    const shift = full(tone), wall = full(wallAt);
+    const pic = octx.getImageData(0, 0, W, H);
+    const d = pic.data;
+    for (let i = 0; i < d.length; i += 4) {
+      if (shift[i] === 128 && shift[i + 1] === 128 && shift[i + 2] === 128) continue;
+      const unlike = Math.abs(d[i] - wall[i]) + Math.abs(d[i + 1] - wall[i + 1]) + Math.abs(d[i + 2] - wall[i + 2]);
+      const hers = Math.min(1, Math.max(0, (unlike - WALL_NEAR) / (WALL_FAR - WALL_NEAR)));
+      if (hers) for (let c = 0; c < 3; c++) d[i + c] += (shift[i + c] - 128) * 2 * hers; // clamped by the array
+    }
+    octx.putImageData(pic, 0, 0);
+
+    octx.drawImage(patch, 0, 0);
+
+    const blob = await new Promise((resolve) => out.toBlob(resolve, "image/jpeg", 0.95));
+    if (!blob) return asItCame("failed");
+    return { blob, how: "restored", ...(debug ? { same: shared / either } : {}) };
+  } catch (e) {
+    console.warn("The garment as first drawn could not be put back; the picture is shown as it came.", e);
     return asItCame("failed");
   } finally {
     a?.close?.();

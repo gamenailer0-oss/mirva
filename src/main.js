@@ -562,7 +562,7 @@ async function garment(p) {
 //  - `ref: null` means nothing clean could be made from its photo.
 //  - No `ref` at all (a store loaded just now, or a prepared file that would not load): clean the photo here, which
 //    brings in the 16 MB hair-and-skin model, once.
-// Resolves a Blob, or null: send no reference, and the portrait is told the garment in words alone.
+// Resolves a Blob, or null: there is then no portrait of this piece, and the store's own photo is shown instead.
 async function reference(p) {
   if (!S.refs.has(p.id)) {
     let ref = null;
@@ -573,7 +573,9 @@ async function reference(p) {
     if (!ref && p.ref !== null) {
       try {
         const { cleanReference } = await import("./reference.js");
-        ref = (await cleanReference(await garment(p))).blob;
+        // A larger photo than the look card shows, cut down to the figure: the engine reads the print and the embroidery from these pixels.
+        const large = await fetch(pic(p.image, 1200)).catch(() => null);
+        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200 })).blob;
       } catch (e) {
         console.warn("Could not prepare the garment picture.", e);
       }
@@ -803,7 +805,13 @@ async function ownHead(person, portrait, saved, options) {
   try {
     const mod = await restorer();
     if (!mod) return portrait;
-    const fixed = await Promise.race([mod.restoreHead(person, portrait, options), sleep(RESTORE_WAIT).then(() => null)]);
+    // After the backdrop pass (tight) the garment goes back first, as it was first drawn, and then her head over it.
+    const both = async () => {
+      const figure = options?.tight ? await mod.restoreFigure(person, portrait) : null;
+      const head = await mod.restoreHead(person, figure?.blob || portrait, options);
+      return head.how === "restored" || figure?.how !== "restored" ? head : figure;
+    };
+    const fixed = await Promise.race([both(), sleep(RESTORE_WAIT).then(() => null)]);
     if (fixed?.how !== "restored") return portrait;
     if (saved) fetch(`/api/portrait/${saved}`, { method: "POST", headers: { ...link.auth(), "content-type": fixed.blob.type }, body: fixed.blob }).catch(() => {});
     return fixed.blob;
@@ -875,10 +883,17 @@ async function modelShot(p, { retake = false } = {}) {
   S.shooting++;
   caption(line("putting"));
   try {
-    const ref = await reference(p); // null: nothing clean could be made, so the garment is told in words alone
+    const ref = await reference(p);
+    if (!ref) {
+      // No picture of the garment could be made ready. A portrait drawn from its description would not be the store's
+      // piece (the colours and embroidery would be invented), so none is made: she is shown the store's photo.
+      dev.cancel();
+      if (ticket === S.ticket) caption(PHOTO_ONLY_LINE), openPhoto(p);
+      return;
+    }
     const form = new FormData();
     form.append("person", person, "person.jpg");
-    if (ref) form.append("reference", ref, "garment.jpg");
+    form.append("reference", ref, "garment.jpg");
     form.append("brand", S.brand.id);
     form.append("product", p.id);
     form.append("mode", "portrait");
@@ -897,7 +912,7 @@ async function modelShot(p, { retake = false } = {}) {
     if (ticket !== S.ticket) return dev.cancel(); // she moved on; it is kept for when she comes back (and the wait over it is let go, unless it is someone else's by now)
     dev.cancel();
     showPortrait(entry, p.id);
-    caption(ref ? "This is you in it." : "This is you in it, drawn from the description.");
+    caption("This is you in it.");
     setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
 
     // The wall is not plain: make the same portrait again on a studio backdrop, without a spinner, one ask for each

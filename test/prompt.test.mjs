@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildPrompt, cleanDescription, modelShotPrompt, regionFor } from "../lib/prompt.mjs";
+import { buildPrompt, cleanDescription, modelShotPrompt, regionFor, withoutColours } from "../lib/prompt.mjs";
 
 const base = { name: "Printed Khaddar Shirt", cut: "", colour: "Beige", fabric: "Khaddar", description: "", unstitched: false };
 
@@ -58,8 +58,7 @@ const kaftan = { ...base, name: "Printed Charmeuse Kaftan", colour: "White", des
 
 test("the Model shot edits only the clothes and keeps her face, pose, framing and background", () => {
   const portrait = modelShotPrompt(kaftan, "portrait");
-  assert.match(portrait, /^Substitute the outfit with a printed white charmeuse kaftan/);
-  assert.match(portrait, /exactly as shown in the reference image/);
+  assert.match(portrait, /^Substitute the outfit with a printed charmeuse kaftan featuring a round neckline, exactly as shown in the reference image/);
   assert.match(portrait, /Edit only the clothes/);
   // everything that is hers stays: named one by one, so nothing is left to be redrawn
   for (const part of ["face", "hair", "skin tone", "expression", "pose", "camera framing", "background"]) assert.match(portrait, new RegExp(part), part);
@@ -81,11 +80,47 @@ test("the Model shot no longer asks for a new pose or a fashion-photograph look"
   }
 });
 
-test("with no reference the garment is told in words alone", () => {
-  const text = modelShotPrompt(kaftan, "portrait", { reference: false });
-  assert.match(text, /^Substitute the outfit with a printed white charmeuse kaftan[^.]*\. Edit only the clothes/);
-  assert.doesNotMatch(text, /reference/);
-  assert.match(text, /Do not re-pose the person/);
+// The store's photo is the only word on colour. A shade's name is often not what the photograph shows ("Espresso Brown"
+// on a grey suit), and with both in hand the engine splits the difference. See docs/tryon-research.md.
+test("a portrait's instruction names the piece and its cut, never its colour", () => {
+  const suit = { name: "Espresso Brown Plain Tropical Exclusive 2-Piece Suit", cut: "two-piece suit", colour: "Espresso Brown", description: "espresso brown two-piece suit with a jacket and matching trousers" };
+  const text = modelShotPrompt(suit, "portrait");
+  assert.match(text, /^Substitute the outfit with a two-piece suit with a jacket and matching trousers, exactly as shown in the reference image: the same colours, the same print or pattern, the same embroidery, in the same places\./);
+  assert.doesNotMatch(text.slice(0, text.indexOf("exactly as shown")), /brown|espresso/i);
+  // the live try-on's own instruction is untouched: it still names the colour
+  assert.match(buildPrompt(suit), /espresso brown two-piece suit/);
+  // a piece with no description is built from its name, and its colour goes the same way
+  const bare = modelShotPrompt({ name: "Khaddar Shirt", cut: "Straight", colour: "Tea Pink", description: "" }, "portrait");
+  assert.match(bare, /^Substitute the upper body garment with a khaddar shirt, straight, exactly as shown/);
+});
+
+test("colour words are taken out cleanly, and words that only sound like colours are left", () => {
+  assert.equal(withoutColours("orange & brown striped tweed ban-collar waistcoat with six buttons", "Orange & Brown"), "striped tweed ban-collar waistcoat with six buttons");
+  assert.equal(withoutColours("black and white checked shirt with navy trim"), "checked shirt with trim");
+  assert.equal(withoutColours("ivory kurta with gold-tone buttons and tea pink embroidery", "Ivory"), "kurta with buttons and embroidery");
+  assert.equal(withoutColours("printed multi charmeuse kaftan featuring a round neckline", "Multi"), "printed charmeuse kaftan featuring a round neckline");
+  assert.equal(withoutColours("dark royal blue kurta in navy with stone work and a rose print"), "kurta with stone work and a rose print");
+  assert.equal(withoutColours("embroidered green bright raw silk peshwas and flared pants", "Green"), "embroidered bright raw silk peshwas and flared pants", "bright is a cloth here, not a shade");
+  assert.equal(withoutColours("band collar shirt and trousers"), "band collar shirt and trousers");
+});
+
+test("every piece in every catalogue gets a clean, colourless instruction", async () => {
+  const { readdirSync, readFileSync, existsSync } = await import("node:fs");
+  const root = new URL("../brands/", import.meta.url);
+  const colour = /\b(black|white|ivory|cream|beige|brown|grey|gray|blue|navy|green|red|pink|maroon|gold|yellow|orange|purple|multi|olive|charcoal|teal|rust|mustard|peach|plum|lilac|mauve|silver|tan|taupe)\b/i;
+  let n = 0;
+  for (const brand of readdirSync(root)) {
+    const file = new URL(brand + "/catalogue.json", root);
+    if (!existsSync(file)) continue;
+    for (const p of JSON.parse(readFileSync(file, "utf8")).products) {
+      const text = modelShotPrompt(p, "portrait");
+      const head = text.slice(0, text.indexOf(", exactly as shown"));
+      assert.doesNotMatch(head, colour, brand + " " + p.id);
+      assert.doesNotMatch(head, /  | ,|with an? (,|with|and|featuring)\b|with an [^aeiou]|with a [aeiou]/i, brand + " " + p.id + ": " + head);
+      n++;
+    }
+  }
+  assert.ok(n > 100, "the catalogues were read");
 });
 
 test("the backdrop pass changes only the background, from the portrait, with no garment text", () => {
@@ -96,5 +131,4 @@ test("the backdrop pass changes only the background, from the portrait, with no 
   assert.match(backdrop, /face, hair, skin tone, expression, pose and clothes stay exactly as they are/);
   assert.doesNotMatch(backdrop, /Substitute|reference/);
   assert.equal(modelShotPrompt(kaftan, "relight"), backdrop, "the old name still works");
-  assert.equal(modelShotPrompt(kaftan, "backdrop", { reference: false }), backdrop);
 });

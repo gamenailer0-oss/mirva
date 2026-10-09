@@ -32,6 +32,7 @@ const brandId = args.find((a) => !a.startsWith("--"));
 const force = args.includes("--force");
 const only = args.includes("--only") ? new Set(String(args[args.indexOf("--only") + 1] || "").split(",").filter(Boolean)) : null;
 const skin = args.includes("--skin") ? args[args.indexOf("--skin") + 1] : "head";
+const SIDE = 1400; // pixels: the widest picture the image proxy serves
 
 if (!brandId) {
   console.error("Usage: node scripts/prepare-refs.mjs <brand> [--force] [--only id,id] [--skin head|all]");
@@ -112,11 +113,13 @@ try {
     let out;
     try {
       out = await page.evaluate(
-        async (url, skin) => {
+        async (url, skin, side) => {
           const { cleanReference } = await import("/dist/reference.js");
-          const res = await fetch(`/img?u=${encodeURIComponent(url)}&w=900`);
+          const res = await fetch(`/img?u=${encodeURIComponent(url)}&w=${side}`);
           if (!res.ok) return { error: `picture ${res.status}` };
-          const r = await cleanReference(await res.blob(), { delegates: ["CPU"], skin }); // CPU: same answer on every machine
+          // The largest photo the store's site will give, cut down to the figure: a print or a line of embroidery is
+          // then several times larger in what the engine is given. CPU: same answer on every machine.
+          const r = await cleanReference(await res.blob(), { delegates: ["CPU"], skin, tight: true, maxSide: side });
           let b64 = null;
           if (r.blob) {
             const bytes = new Uint8Array(await r.blob.arrayBuffer());
@@ -128,6 +131,7 @@ try {
         },
         p.image,
         p.refSkin === "head" || p.refSkin === "all" ? p.refSkin : skin,
+        SIDE,
       );
     } catch (e) {
       out = { error: String(e.message || e).split("\n")[0] };
@@ -151,7 +155,7 @@ try {
   writeFileSync(catalogueFile, JSON.stringify(cat, null, 1));
   console.log("\nDone.", Object.entries(counts).map(([k, v]) => `${v} ${k}`).join(", "));
   const none = cat.products.filter((p) => p.ref === null);
-  if (none.length) console.log(`These fall back to a portrait drawn from the description: ${none.map((p) => p.id).join(", ")}`);
+  if (none.length) console.log(`These have no garment picture, so the mirror shows the store's photo for them: ${none.map((p) => p.id).join(", ")}`);
 } catch (e) {
   console.error(e.message || e);
   process.exitCode = 1;

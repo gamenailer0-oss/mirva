@@ -182,19 +182,20 @@ test("a backdrop needs no garment picture, and the old name 'relight' means the 
 
 // --- the portrait, with and without a garment picture ------------------------------
 
-test("a portrait without a garment picture is drawn from the description alone", async () => {
+// Drawn from its description a piece would be a garment of that kind in colours and embroidery of the engine's own
+// choosing. A store cannot have that shown as its piece, so without the garment's picture nothing is asked or spent.
+test("a portrait is made from the garment's own picture or not at all", async () => {
   const { app } = await makeApp({ openMirror: true });
   outbound = [];
   const withIt = await shot(app, { fields: portraitFields() });
   const without = await shot(app, { fields: portraitFields({ reference: undefined }), ip: "10.2.0.3" });
   assert.equal(withIt.status, 200);
-  assert.equal(without.status, 200);
-  const [one, two] = outbound;
+  assert.deepEqual([without.status, without.body?.limit], [422, "photo-only"]);
+  assert.equal(outbound.length, 1, "the engine was asked once, for the portrait that had a picture");
+  const [one] = outbound;
   assert.ok(one.form.get("reference_image"));
-  assert.match(one.form.get("prompt"), /exactly as shown in the reference image/);
-  assert.equal(two.form.get("reference_image"), null);
-  assert.doesNotMatch(two.form.get("prompt"), /reference/);
-  for (const call of outbound) assert.match(call.form.get("prompt"), /Edit only the clothes[\s\S]*Do not re-pose the person/);
+  assert.match(one.form.get("prompt"), /exactly as shown in the reference image: the same colours, the same print or pattern, the same embroidery, in the same places/);
+  assert.match(one.form.get("prompt"), /Edit only the clothes[\s\S]*Do not re-pose the person/);
 });
 
 // --- what a member keeps ------------------------------------------------------------

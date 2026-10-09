@@ -23,6 +23,7 @@ const FACE_MODEL = "/models/blaze_face_short_range.tflite";
 // Categories of the multiclass selfie model.
 const BACKGROUND = 0, HAIR = 1, BODY_SKIN = 2, FACE_SKIN = 3, CLOTHES = 4, OTHERS = 5; // OTHERS: jewellery, glasses, bags
 
+const TUNED = 900; // the size of photo the pixel figures below were set on; a larger photo scales them up
 const GROW = 4; // pixels the paint reaches beyond the mask, into anything that is not cloth
 const FEATHER = 2; // pixels the paint fades over
 const BAND = 0.1; // the shoulder band, as a share of the photo's height
@@ -30,6 +31,9 @@ const SKIN_MATCH = 120; // how far (summed over red, green and blue) a pixel may
 const ARM_LENGTH = 0.12; // how long (of the photo's height) a region of skin must be to count as an arm
 const TORSO = 0.3; // how far below the shoulder line (of the photo's height) arms and hands are looked for
 const DEEP = 0.13; // without the segmenter: cut this far (of the photo's height) below the shoulder line
+const ROOM = 0.06; // a tight picture keeps this much around the figure (of the figure's longer side)
+const NARROWEST = 0.45; // and is never narrower than this share of its own height
+const ALREADY = 0.86; // a figure filling this much of the photo's width is tight enough as shot
 
 let tools = null; // { segmenter, faces }, each null when its model would not load
 let loading = null;
@@ -200,7 +204,7 @@ const toBlob = (canvas) =>
  * that are the colour of this model's hair, a few steps at a time. If the growth runs on (the cloth is hair
  * coloured, say a black kurta), keep only the first steps: a thin band beside the hair is all it may take.
  */
-function growHair(px, labels, base, W, H) {
+function growHair(px, labels, base, W, H, k = 1) {
   const hist = [new Uint32Array(256), new Uint32Array(256), new Uint32Array(256)];
   let area = 0;
   for (let i = 0; i < labels.length; i++)
@@ -208,7 +212,7 @@ function growHair(px, labels, base, W, H) {
       for (let c = 0; c < 3; c++) hist[c][px[i * 4 + c]]++;
       area++;
     }
-  if (area < 150) return 0;
+  if (area < 150 * k * k) return 0;
   const hair = hist.map((h) => {
     let seen = 0;
     for (let v = 0; v < 256; v++) if ((seen += h[v]) >= area / 2) return v;
@@ -225,7 +229,7 @@ function growHair(px, labels, base, W, H) {
   let early = null;
   let added = 0;
   for (let round = 0; round < 10; round++) {
-    const wide = grow(cur, W, H, 5);
+    const wide = grow(cur, W, H, Math.round(5 * k));
     const next = cur.slice();
     let n = 0;
     for (let i = 0; i < next.length; i++)
@@ -298,7 +302,7 @@ function medianColour(px, labels, label) {
 }
 
 /** Paints hair and skin out of `ctx` (the whole photo). Returns how much was painted, or null if there was nothing to paint. */
-function paintOut(ctx, { labels, soft }, W, H, { skin, shoulderY, softMin }) {
+function paintOut(ctx, { labels, soft }, W, H, { skin, shoulderY, softMin, k = 1 }) {
   const img = ctx.getImageData(0, 0, W, H);
   const px = img.data;
   const base = new Uint8Array(W * H);
@@ -330,7 +334,7 @@ function paintOut(ctx, { labels, soft }, W, H, { skin, shoulderY, softMin }) {
       }
     }
   if (count < 40) return null;
-  count += growHair(px, labels, base, W, H);
+  count += growHair(px, labels, base, W, H, k);
   for (let i = 0; i < base.length; i++)
     if (base[i]) {
       const y = Math.floor(i / W);
@@ -338,10 +342,10 @@ function paintOut(ctx, { labels, soft }, W, H, { skin, shoulderY, softMin }) {
       if (y > y1) y1 = y;
     }
   // Grow into the backdrop and anything unlabelled, never into cloth.
-  const wide = grow(base, W, H, GROW);
+  const wide = grow(base, W, H, Math.round(GROW * k));
   const paint = new Uint8Array(W * H);
   for (let i = 0; i < paint.length; i++) paint[i] = base[i] || (wide[i] && labels[i] !== CLOTHES) ? 1 : 0;
-  const alpha = feather(paint, W, H, FEATHER);
+  const alpha = feather(paint, W, H, Math.round(FEATHER * k));
   const backdrop = backdropRows(px, labels, W, H);
   for (let i = 0; i < alpha.length; i++) {
     if (labels[i] === CLOTHES && !base[i]) continue; // cloth is left exactly as shot
@@ -389,6 +393,46 @@ const detectFaces = (faces, canvas) => {
   }
 };
 
+/**
+ * The part of the photo the garment is in: the box round everything that is not backdrop, from row `top` down, with a
+ * little room. A store's photo is often a small figure in a large room, and the engine reads the garment from the
+ * pixels it is given: on a tight picture a print or a line of embroidery is several times larger. A column counts only
+ * when the figure runs some way down it, so a speck the model mistook for cloth does not widen the box.
+ * Null when the figure already fills the photo, or nothing was found.
+ */
+export function figureBox(labels, W, H, top = 0) {
+  const cols = new Uint32Array(W);
+  let bottom = -1;
+  for (let y = top; y < H; y++) {
+    let n = 0;
+    for (let x = 0; x < W; x++)
+      if (labels[y * W + x] !== BACKGROUND) {
+        cols[x]++;
+        n++;
+      }
+    if (n > W * 0.01) bottom = y;
+  }
+  const need = Math.max(2, Math.round((H - top) * 0.01));
+  let left = W, right = -1;
+  for (let x = 0; x < W; x++)
+    if (cols[x] >= need) {
+      if (x < left) left = x;
+      right = x;
+    }
+  if (right < 0 || bottom < 0) return null;
+  const pad = Math.round(Math.max(right - left, bottom - top) * ROOM);
+  let x0 = Math.max(0, left - pad), x1 = Math.min(W, right + 1 + pad);
+  const y1 = Math.min(H, bottom + 1 + pad);
+  const least = Math.min(W, Math.round((y1 - top) * NARROWEST));
+  if (x1 - x0 < least) {
+    const mid = (x0 + x1) / 2;
+    x0 = Math.max(0, Math.min(W - least, Math.round(mid - least / 2)));
+    x1 = x0 + least;
+  }
+  if (x1 - x0 >= W * ALREADY && y1 >= H - pad) return null;
+  return { x: x0, y: top, width: x1 - x0, height: y1 - top };
+}
+
 /** Crop `canvas` from row `top` down. */
 function cropTop(canvas, top) {
   const out = canvasOf(canvas.width, canvas.height - top);
@@ -399,7 +443,7 @@ function cropTop(canvas, top) {
 /**
  * Prepares a garment photo.
  *
- * Resolves { blob, how, cut, painted }:
+ * Resolves { blob, how, cut, painted, box }:
  *   how   "mask"        hair and skin painted out, cut below the chin, no face left
  *         "mask-deeper" the same, but a face was found and the cut went lower
  *         "deep-crop"   no segmenter: cut well below the hair, no face found
@@ -407,16 +451,18 @@ function cropTop(canvas, top) {
  *         "flat"        no person at all: a product shot, sent whole
  *         "none"        nothing clean could be made (blob is null): describe the garment in words instead
  *   cut   how far down the original the picture now starts (0 to 1)
+ *   box   with `tight`: the part of the original the picture is, as shares of its width and height (null: all of it)
  *
  * Options: maxSide (pixels), skin "auto" | "head" | "all" (whether hands and arms below the shoulders are painted out too;
- * auto does so only when a lot of bare skin would be left),
+ * auto does so only when a lot of bare skin would be left), tight (cut the picture down to the figure, see figureBox),
  * delegates (default GPU then CPU; only the first call's choice is used), debug (adds trace, full, views).
  */
-export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft = 0.4, delegates, debug = false } = {}) {
+export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft = 0.4, tight = false, delegates, debug = false } = {}) {
   const bmp = await createImageBitmap(blob);
   try {
     const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
     const W = Math.round(bmp.width * scale), H = Math.round(bmp.height * scale);
+    const k = Math.max(1, Math.max(W, H) / TUNED);
     const { segmenter, faces } = await load(delegates);
     const pose = await body(bmp); // undefined = cannot tell, null = looked and found nobody
 
@@ -428,7 +474,20 @@ export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft 
 
     const trace = [];
     let views = null;
-    const finish = async (canvas, how, cut, painted = null) => ({ blob: await toBlob(canvas), how, cut, painted, ...(debug ? { trace, full: await toBlob(work), views } : {}) });
+    let figure = null; // the label map, once the segmenter has looked
+    // The picture that goes out: from row `row` of the work canvas down and, when asked, only as wide as the figure.
+    // A product shot with nobody in it (no row given) goes whole: there the model's idea of cloth is not to be trusted.
+    const framed = (canvas, row) => {
+      const box = tight && figure && row != null ? figureBox(figure, W, H, row) : null;
+      if (!box) return { canvas, box: null };
+      const out = canvasOf(box.width, box.height);
+      out.getContext("2d").drawImage(work, box.x, box.y, box.width, box.height, 0, 0, box.width, box.height);
+      return { canvas: out, box };
+    };
+    const finish = async (canvas, how, cut, painted = null, row = null) => {
+      const f = framed(canvas, row);
+      return { blob: await toBlob(f.canvas), how, cut, painted, box: f.box && { x: f.box.x / W, y: f.box.y / H, width: f.box.width / W, height: f.box.height / H }, ...(debug ? { trace, full: await toBlob(work), views } : {}) };
+    };
     const giveUp = () => ({ blob: null, how: "none", cut: 1, painted: null, ...(debug ? { trace, views } : {}) });
 
     // Where the detector saw faces in the photo as the store shot it, before anything was painted.
@@ -469,8 +528,8 @@ export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft 
         const left = found && found.filter((f) => insideReal(f, row));
         if (debug) trace.push({ from: row, seen: found && found.map((f) => [Math.round(f.originX), Math.round(f.originY), Math.round(f.width), Math.round(f.height), +f.score.toFixed(2)]), left: left && left.length });
         const label = attempt && how === "mask" ? "mask-deeper" : how;
-        if (found === null) return await finish(out, `${label}-unchecked`, from / H, painted);
-        if (!left.length) return await finish(out, label, from / H, painted);
+        if (found === null) return await finish(out, `${label}-unchecked`, from / H, painted, row);
+        if (!left.length) return await finish(out, label, from / H, painted, row);
         const f = left.reduce((a, b) => (b.height > a.height ? b : a));
         from = from + f.originY + f.height * 1.5; // below the chin, with room to spare
         if (from >= H * 0.8) break;
@@ -498,7 +557,8 @@ export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft 
             }
       }
       if (debug) views = await viewsOf(seg, W, H);
-      const painted = paintOut(ctx, seg, W, H, { skin, shoulderY: shoulder, softMin: Math.round(soft * 255) });
+      figure = seg.labels;
+      const painted = paintOut(ctx, seg, W, H, { skin, shoulderY: shoulder, softMin: Math.round(soft * 255), k });
       if (!painted) {
         // Nothing to paint. Only a face detector can say there is nobody hiding in the picture.
         if (pose || biggest) return await checked(Math.round(H * (chin ?? 0)), "mask", null);
