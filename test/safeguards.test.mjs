@@ -332,6 +332,20 @@ test("an Assist store has no live Studio and is told where it is; its portraits 
   const route = await shot(app, { headers: dev.header });
   assert.deepEqual([route.status, route.body.limit], [429, "store-portraits"]);
 
+  // The founder can add portraits to a store's month at no charge, so a busy pilot does not stop at its allowance.
+  const boss = await signIn(app, db, "founder");
+  const more = (body, who = boss) => call(app, "POST", "/api/hq/retailers/pilot", { body: { brand: "sapphire", ...body }, headers: who.headers });
+  assert.equal((await more({ extraPortraits: 1.5 })).status, 400);
+  assert.equal((await more({ extraPortraits: 50000 })).status, 400);
+  assert.equal((await more({ extraPortraits: 400 }, await signIn(app, db, "retailer", "sapphire"))).status, 403, "only the founder");
+  const added = await more({ extraPortraits: 400 });
+  assert.deepEqual([added.status, added.body.extraPortraits, added.body.pilot], [200, 400, null], "portraits alone, no target");
+  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "600 used of 1,000");
+  await portraitsUsed(db, dev.id, 400);
+  assert.equal((await app.platform.grant(dev.who, "portrait")).limit, "store-portraits");
+  assert.equal((await more({ extraPortraits: 0 })).body.extraPortraits, 0);
+  assert.equal(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).extraPortraits, undefined);
+
   await plan(db, "sapphire", "assist", 2, "live");
   assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "two stores, twice the portraits");
   await plan(db, "sapphire", "boutique", 1, "live");

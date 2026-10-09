@@ -645,7 +645,7 @@ const VIEWS = {
         field("Target", el("input", { name: "target", type: "number", min: 1, step: "0.1", required: true })),
         field("Days", el("input", { name: "days", type: "number", min: 7, max: 180, value: 60 })),
       ),
-      el("p", { class: "fine", text: "The store sees the target and the running figure on its Overview. Sales are what its staff count with Sold on the mirror's tablet." }),
+      el("p", { class: "fine", text: "The store sees the target and the running figure on its Overview. Sales are what its staff count with Sold on the mirror's tablet. Setting a target again starts its count again." }),
       el("p", { class: "formnote", role: "alert" }),
       el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Start the pilot" }),
     );
@@ -653,6 +653,21 @@ const VIEWS = {
       await api("/api/hq/retailers/pilot", { brand: d.brand, metric: d.metric, target: Number(d.target), days: Number(d.days) });
       toast("The pilot is counting from today.");
       go("stores");
+    });
+    // A busy store can use an Assist month's portraits before the month is out. A pilot must not stop there.
+    const portraits = el("form", { class: "panel form" },
+      el("h2", { text: "Add portraits to a store's month" }),
+      el("div", { class: "form-2" },
+        field("Store", el("select", { name: "brand" }, brandOptions())),
+        field("Extra portraits a month, at no charge", el("input", { name: "extraPortraits", type: "number", min: 0, max: 20000, step: 100, value: 600, required: true })),
+      ),
+      el("p", { class: "fine", text: "Added to the plan's own, every month, until you set it back to 0. Each one used costs you about Rs.5.5. A pilot's count is not touched." }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
+    );
+    onSubmit(portraits, async (d) => {
+      const made = await api("/api/hq/retailers/pilot", { brand: d.brand, extraPortraits: Math.round(Number(d.extraPortraits) || 0) });
+      toast(made.extraPortraits ? `That store now has ${num(made.extraPortraits)} extra portraits a month.` : "That store is back to its plan's portraits.");
     });
     const user = el("form", { class: "panel form" },
       el("h2", { text: "Give someone at a store a console sign-in" }),
@@ -697,7 +712,7 @@ const VIEWS = {
         ),
       ),
       el("div", { class: "grid2" }, plan, user),
-      el("div", { class: "grid2" }, pilot),
+      el("div", { class: "grid2" }, pilot, portraits),
       o.system.stores &&
         panel("Who can open each store's mirror",
           el("p", { class: "muted small", style: "max-width:62ch", text: "Listed: anyone can find and open it. By link only: it opens for people who have its address, and is not offered to the public. A store that has not agreed to a demo belongs in the second group." }),
