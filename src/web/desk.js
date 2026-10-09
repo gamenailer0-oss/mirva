@@ -239,6 +239,15 @@ const VIEWS = {
               toast(e.message);
             }
           } });
+          const tryOn = el("button", { class: "switch", type: "button", role: "switch", "aria-checked": String(!p.photoOnly), "aria-label": `Let shoppers try ${p.name} on`, onclick: async () => {
+            try {
+              await api("/api/console/catalogue/try-on", { brand: S.brand, product: p.id, photoOnly: !p.photoOnly });
+              p.photoOnly = !p.photoOnly;
+              tryOn.setAttribute("aria-checked", String(!p.photoOnly));
+            } catch (e) {
+              toast(e.message);
+            }
+          } });
           const tr = el("tr", { class: p.hidden ? "off" : "" },
             el("td", {}, p.image && el("div", { style: "border-radius:5px" }, picture({ src: p.image, alt: "", loading: "lazy" }))),
             el("td", {}, p.name, p.unstitched && el("span", { class: "badge soft", style: "margin-left:8px", text: "Unstitched" })),
@@ -247,14 +256,15 @@ const VIEWS = {
             el("td", { class: "n", text: num(p.tries) }),
             el("td", { class: "n", text: num(p.keeps) }),
             el("td", {}, toggle),
+            el("td", {}, tryOn),
           );
           return tr;
         });
     const body = el("tbody", {}, rows(""));
     fill(work(), 
       head("Catalogue", el("input", { class: "input", style: "min-height:40px;width:240px", type: "search", placeholder: "Find a piece", "aria-label": "Find a piece", oninput: (e) => fill(body, ...rows(e.target.value.trim().toLowerCase())) })),
-      el("p", { class: "muted", style: "margin-bottom:20px", text: `${c.products.length} pieces, read from your public site on ${new Date(c.brand.takenAt).toLocaleDateString("en-GB", { day: "numeric", month: "long" })}. Switch a piece off and the mirror stops offering it.` }),
-      el("div", { class: "tbl-wrap" }, el("table", { class: "tbl" }, el("thead", {}, el("tr", {}, ["Picture", "Piece", "Price", "Sold out online", "Tries", "Kept", "In the mirror"].map((t, i) => el("th", { scope: "col", class: [2, 4, 5].includes(i) ? "n" : "" }, i ? t : el("span", { class: "sr", text: t }))))), body)),
+      el("p", { class: "muted", style: "margin-bottom:20px", text: `${c.products.length} pieces, read from your public site on ${new Date(c.brand.takenAt).toLocaleDateString("en-GB", { day: "numeric", month: "long" })}. Switch a piece off and the mirror stops offering it. Switch its try-on off and the mirror shows your own photographs of it and makes no look: for hand embroidery, or a designer who would rather not.` }),
+      el("div", { class: "tbl-wrap" }, el("table", { class: "tbl" }, el("thead", {}, el("tr", {}, ["Picture", "Piece", "Price", "Sold out online", "Tries", "Kept", "In the mirror", "Try-on"].map((t, i) => el("th", { scope: "col", class: [2, 4, 5].includes(i) ? "n" : "" }, i ? t : el("span", { class: "sr", text: t }))))), body)),
     );
   },
 

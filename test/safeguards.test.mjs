@@ -761,3 +761,42 @@ test("the month and the day are the ones the plans and Pakistan keep", () => {
   assert.equal(pktDayStart(Date.UTC(2026, 9, 8, 18, 59, 59)), Date.UTC(2026, 9, 7, 19, 0, 0));
   assert.equal(monthStart(noon), Date.UTC(2026, 9, 1));
 });
+
+// ===== 7. pieces shown in the store's own photographs only ====================================
+
+test("a store can keep a piece to its own photographs: the mirror is told, and no look is made of it", async () => {
+  const { app, db } = await makeApp({ openMirror: true });
+  const shop = await signIn(app, db, "retailer", "sapphire");
+  const set = (body, who = shop) => call(app, "POST", "/api/console/catalogue/try-on", { body, headers: who.headers });
+  const pieces = async () => (await call(app, "GET", "/api/brands/sapphire")).body.catalogue.products;
+  assert.equal((await pieces()).some((p) => p.photoOnly), false);
+
+  const on = await set({ brand: "sapphire", product: product.id, photoOnly: true });
+  assert.deepEqual([on.status, on.body.photoOnly], [200, [product.id]]);
+  const marked = (await pieces()).filter((p) => p.photoOnly).map((p) => p.id);
+  assert.deepEqual(marked, [product.id], "only that piece is marked, and it is still offered");
+  assert.equal((await call(app, "GET", "/api/console/catalogue?brand=sapphire", { headers: shop.headers })).body.products.find((p) => p.id === product.id).photoOnly, true);
+
+  const refused = await shot(app);
+  assert.deepEqual([refused.status, refused.body.limit, refused.body.error], [403, "photo-only", "This piece is shown in the store's own photographs."]);
+  assert.equal(outbound.length, 0, "nothing went to the engine");
+  assert.equal(await count(db, "usage"), 0);
+  assert.equal((await shot(app, { fields: { product: catalogue.products[1].id } })).status, 200, "other pieces are untouched");
+
+  const off = await set({ brand: "sapphire", product: product.id, photoOnly: false });
+  assert.deepEqual(off.body.photoOnly, []);
+  assert.equal((await shot(app)).status, 200);
+
+  assert.equal((await set({ brand: "sapphire", product: "no-such-piece", photoOnly: true })).status, 404);
+  assert.equal((await call(app, "POST", "/api/console/catalogue/try-on", { body: { brand: "sapphire", product: product.id, photoOnly: true } })).status, 401, "not for a passer-by");
+  const trail = await rows(db, "SELECT action, target FROM audit WHERE action LIKE 'piece-%' ORDER BY id");
+  assert.deepEqual(trail.map((r) => r.action), ["piece-photo-only", "piece-try-on"]);
+});
+
+test("a shopper's yes to sending a picture is recorded as an event, with nothing about her", async () => {
+  const { app, db } = await makeApp();
+  const dev = await pair(db);
+  const res = await call(app, "POST", "/api/events", { body: { brand: "sapphire", visit: "v1", events: [{ kind: "consent" }, { kind: "not-a-kind" }] }, headers: dev.header });
+  assert.equal(res.status, 200);
+  assert.deepEqual((await rows(db, "SELECT kind, user FROM events")).map((r) => [r.kind, r.user]), [["consent", null]]);
+});

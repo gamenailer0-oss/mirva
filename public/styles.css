@@ -231,7 +231,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 /* Once someone is in the glass, the crest steps into the corner: the halo over the store's name, as in MIRVA's own mark.
    Nothing is left across the top of the glass, where a face is. The name gives way to the tools on its right. */
 .glass:not([data-state="asleep"]) .glass-top { justify-content: flex-start; text-align: left; padding: 30px 18px 0; }
-.glass:not([data-state="asleep"]) .brandline { align-items: flex-start; gap: 3px; max-width: calc(100% - 132px); }
+.glass:not([data-state="asleep"]) .brandline { align-items: flex-start; gap: 3px; max-width: calc(100% - 196px); }
 .glass:not([data-state="asleep"]) .wordmark { font-size: 12px; letter-spacing: .24em; margin-right: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .glass:not([data-state="asleep"]) .byline { font-size: 8px; line-height: 1.4; letter-spacing: .22em; margin-right: 0; }
 .glass:not([data-state="asleep"]) .halo { left: 18px; top: 9px; width: 58px; transform: none; }
@@ -254,12 +254,18 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 }
 .tool:hover { background: rgba(255,255,255,.16); }
 .tool:active { transform: scale(.94); }
-[data-shape="landscape"] .tool svg { transform: rotate(90deg); }
+[data-shape="landscape"] #shapeBtn svg { transform: rotate(90deg); }
+.tool-row { display: flex; gap: 6px; }
+/* The camera's light: a small green lamp on its button for as long as the camera is on. A photo has no lamp. */
+.tool.cam { position: relative; }
+.tool.cam.lit::after { content: ""; position: absolute; top: 5px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: #6fe0a0; box-shadow: 0 0 0 2px rgba(8, 10, 15, .55); animation: breathe 2.4s ease-in-out infinite; }
 /* Short notes to the shopper (a cue from the pose check, a slow line, "still there?") share the column at the foot of
    the glass with MIRVA's line: two at once sit one above the other, and none lies across a face. */
 .notes { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 2px; }
 .notes:not(:has(> :not([hidden]))) { display: none; }
 .notes > * { pointer-events: auto; }
+/* One thing at a time: a question to the shopper ("still there?") stands alone, without the smaller notes above it. */
+.notes:has(#toast:not([hidden])) .hint { display: none; }
 .hint {
   margin: 0; max-width: 100%;
   padding: 7px 14px; border-radius: 16px; background: rgba(8, 10, 15, .72); font-size: 12.5px; line-height: 1.35;
@@ -322,6 +328,8 @@ a.chip { text-decoration: none; }
   text-wrap: balance; text-shadow: 0 2px 18px rgba(0,0,0,.55);
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
 }
+.likeness { margin: 0; font-size: 10.5px; line-height: 1.5; letter-spacing: .04em; opacity: .82; pointer-events: auto; }
+.likeness .tap { padding: 10px 4px; margin: -10px -4px; text-decoration: underline; text-underline-offset: 2px; color: inherit; font: inherit; }
 .caption.in, .say.in { animation: rise .45s var(--ease); }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 
@@ -378,11 +386,16 @@ a.chip { text-decoration: none; }
    the invitation drops its second sentence before anything can touch. */
 @container glass (max-width: 330px) {
   .glass-tools { flex-direction: column-reverse; align-items: flex-end; }
-  .glass:not([data-state="asleep"]) .brandline { max-width: calc(100% - 62px); }
+  .glass:not([data-state="asleep"]) .brandline { max-width: calc(100% - 124px); }
   .reel-step { letter-spacing: .22em; }
   .glass:not([data-state="asleep"]) .wordmark { font-size: 11px; letter-spacing: .16em; }
   .toast { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 12px 10px; }
   .wake .primary { padding: 12px 18px; font-size: 12px; letter-spacing: .1em; white-space: nowrap; }
+}
+/* The smallest glass: the two tools stand one over the other, and the store's name has the width. */
+@container glass (max-width: 260px) {
+  .tool-row { flex-direction: column; }
+  .glass:not([data-state="asleep"]) .brandline { max-width: calc(100% - 76px); }
 }
 @container glass (max-height: 440px) {
   .wake { padding-top: 92px; }
@@ -399,7 +412,8 @@ a.chip { text-decoration: none; }
   animation: rise .35s var(--ease);
 }
 .compare figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.compare img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 14px; }
+.compare img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; object-position: top; border-radius: 14px; background: #1b2030; }
+.compare.one { grid-template-columns: minmax(0, 72%); justify-content: center; }
 .compare figcaption { font-size: 11px; letter-spacing: .08em; }
 .compare figcaption b { display: block; font: 500 14px var(--serif); letter-spacing: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .compare .close { position: absolute; top: 20px; right: 18px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .85; padding: 6px; }
@@ -521,6 +535,9 @@ a.chip { text-decoration: none; }
 .sheet h3 { margin: 22px 0 10px; font-size: 10.5px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
 .sheet-copy { margin: 8px 0 0; color: var(--muted); font-size: 13.5px; }
 .sheet-note { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); min-height: 1em; }
+.sheet-note a { color: inherit; }
+.consent-row { justify-content: center; gap: 18px; margin: 20px 0 6px; }
+#consentCopy { font-size: 14.5px; line-height: 1.55; color: var(--ink); }
 .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .brand-pick { display: flex; align-items: center; gap: 9px; }
 .brand-pick i { width: 10px; height: 10px; border-radius: 50%; display: block; }

@@ -122,6 +122,54 @@ const CAMERA_DOWN_LINE = "The camera has stopped. Tap Try the camera again, then
 // A store on a plan without live Studio (Assist): the Studio button stays, says where live is, and gives a portrait.
 const NO_LIVE_LINE = "Live Studio comes with a MIRVA mirror. Here is a portrait instead.";
 const noLive = () => S.config?.studio === false;
+const NOT_SENT_LINE = "No picture was sent. Tap a look whenever you are ready.";
+// A piece the store shows in its own photographs only (hand embroidery, a designer's wish): no look is made of it.
+const PHOTO_ONLY_LINE = "This piece is shown in the store's own photographs.";
+
+// ---------- before the first look ----------
+// A look is made from a picture of the shopper, and the engine that makes it runs abroad. She is told so in plain
+// words before the first picture leaves: every shopper at a store mirror, and once on a person's own device.
+const CONSENT_KEY = "mirva:consent";
+const consentFor = () => link.member?.user.id || "this-device";
+function hasAgreed() {
+  if (S.agreed) return true;
+  if (link.pairedTo()) return false; // a store mirror belongs to nobody: each shopper is asked
+  try {
+    return localStorage.getItem(CONSENT_KEY) === consentFor();
+  } catch {
+    return false;
+  }
+}
+function agreed() {
+  if (hasAgreed()) return Promise.resolve(true);
+  const box = $("#consent");
+  const keeps = link.pairedTo() ? "This mirror keeps no pictures." : link.member ? "Your portraits stay in your wardrobe until you delete them." : "Nothing is kept.";
+  $("#consentCopy").textContent = `To show a piece on you, one picture from the mirror goes to our try-on engine, which runs abroad. It is used to make your look and for nothing else. ${keeps}`;
+  return new Promise((resolve) => {
+    const yes = $("#consentYes"), no = $("#consentNo");
+    const done = (ok) => {
+      yes.removeEventListener("click", onYes);
+      no.removeEventListener("click", onNo);
+      box.removeEventListener("cancel", onNo);
+      if (box.open) box.close();
+      if (ok) {
+        S.agreed = true;
+        if (!link.pairedTo())
+          try {
+            localStorage.setItem(CONSENT_KEY, consentFor());
+          } catch {}
+        link.track("consent");
+      }
+      resolve(ok);
+    };
+    const onYes = () => done(true);
+    const onNo = () => done(false);
+    yes.addEventListener("click", onYes);
+    no.addEventListener("click", onNo);
+    box.addEventListener("cancel", onNo);
+    box.showModal();
+  });
+}
 
 // What one shopper may use of a store mirror before the next one: the server says (`visit` in /api/config), and a paired
 // mirror whose server has not said uses these. Anyone else is not held to a visit. A number that is absent, null or not
@@ -474,12 +522,15 @@ function syncGlass() {
   // a switch between them with Keep and Take off. While something is being made it keeps the shape it had (it is out
   // of sight then), so nothing under the glass moves during the wait.
   const on = mirror.isLive || S.view === "portrait";
-  let dock = !awake ? "none" : on ? "result" : S.selected ? "choose" : "none";
+  let dock = !awake ? "none" : on ? "result" : S.selected && !S.selected.photoOnly ? "choose" : "none";
   if (st === "thinking" && awake) dock = frame.dataset.dock !== "none" ? frame.dataset.dock : S.selected ? "choose" : "none";
   frame.dataset.dock = dock;
   $("#dock").hidden = dock === "none";
   $("#glassActions").hidden = dock !== "result";
   $("#shapeBtn").hidden = !awake;
+  $("#camBtn").hidden = !awake;
+  $("#camBtn").classList.toggle("lit", mirror.source?.kind === "camera" && !mirror.cameraDown);
+  $("#likeness").hidden = !(st === "portrait" || st === "live");
   for (const b of $$("#modes button")) {
     const on = (b.dataset.mode === "model" && S.view === "portrait") || (b.dataset.mode === "studio" && mirror.isLive && S.view !== "portrait");
     b.setAttribute("aria-pressed", String(on));
@@ -554,6 +605,7 @@ function choose(p) {
   link.track("look_open", { product: p.id });
   if (S.step === "looks") renderDetail();
   markCards();
+  if (p.photoOnly) return syncGlass(), caption(PHOTO_ONLY_LINE), openPhoto(p);
   if (!mirror.awake) return needMirror(p);
   mirror.preload();
   if (S.mode !== "studio") fetchAhead();
@@ -565,7 +617,7 @@ function choose(p) {
 
 function setMode(mode) {
   const p = S.selected;
-  if (!p) return;
+  if (!p || p.photoOnly) return;
   S.mode = mode;
   if (mode === "model") modelShot(p);
   else studio(p);
@@ -772,6 +824,7 @@ function fetchAhead() {
 // backdrop, and the glass fades to it when it is ready. See src/portrait.js and docs/portrait-experiments.md.
 async function modelShot(p, { retake = false } = {}) {
   mirror.touch();
+  if (p.photoOnly) return caption(PHOTO_ONLY_LINE);
   if (mustJoin()) return askToJoin();
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Portraits are off. Add your Decart key to the .env file and restart.");
@@ -779,6 +832,7 @@ async function modelShot(p, { retake = false } = {}) {
   const fresh = retake || !S.portraits.has(p.id);
   if (fresh && mirror.cameraDown) return caption(CAMERA_DOWN_LINE);
   if (fresh && fullFitting("portrait")) return caption(FULL_LINE);
+  if (fresh && !(await agreed())) return caption(NOT_SENT_LINE);
   const ticket = ++S.ticket;
   if (mirror.isLive) {
     mirror.stop("switch");
@@ -888,6 +942,7 @@ async function modelShot(p, { retake = false } = {}) {
 // Studio: the piece on her, live, in the mirror.
 async function studio(p) {
   mirror.touch();
+  if (p.photoOnly) return caption(PHOTO_ONLY_LINE);
   if (mustJoin()) return askToJoin();
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Live try-on is off. Add your Decart key to the .env file and restart.");
@@ -897,6 +952,7 @@ async function studio(p) {
   if (mirror.cameraDown) return caption(CAMERA_DOWN_LINE);
   if (fullFitting("live")) return caption(FULL_LINE);
   if (mirror.presence.known && !mirror.presence.present) return caption("Step into the mirror so I can see you.");
+  if (!(await agreed())) return caption(NOT_SENT_LINE);
   const ticket = ++S.ticket;
   hidePortrait();
   const swapping = mirror.state === "live" && hasPicture();
@@ -951,6 +1007,18 @@ function wireMirror() {
     }
   });
   mirror.addEventListener("state", syncGlass);
+  mirror.addEventListener("asleep", () => {
+    S.ticket++;
+    S.developing?.cancel();
+    forgetPortraits();
+    S.pending = null;
+    $("#camLost").hidden = true;
+    glass.classList.remove("blind", "has-picture");
+    $("#compare").hidden = true;
+    $("#hint").textContent = "";
+    caption("");
+    syncGlass();
+  });
   mirror.addEventListener("picture", () => {
     if (!mirror.isLive) return;
     glass.classList.add("has-picture");
@@ -1142,6 +1210,23 @@ function openCompare() {
   close.focus();
 }
 
+// The store's own photograph of a piece: beside the look that is on the glass, or by itself for a piece that is
+// shown in photographs only. What she compares is the real thing against the likeness.
+function openPhoto(piece) {
+  const worn = S.view === "portrait" && S.portrait ? S.products.find((x) => x.id === S.portrait.pid) : S.wearing;
+  const p = piece || worn;
+  if (!p) return;
+  const box = $("#compare");
+  const fig = (src, title, sub) => h("figure", {}, h("img", { src, alt: title }), h("figcaption", {}, h("b", { text: title }), sub));
+  const close = h("button", { class: "close", type: "button", text: "Close", onclick: () => ((box.hidden = true), box.classList.remove("one")) });
+  const mine = !piece && (S.view === "portrait" ? S.portrait?.url : hasPicture() ? mirror.snapshot(600) : null);
+  box.classList.toggle("one", !mine);
+  box.replaceChildren(close, fig(pic(p.image, 420), "The store's photo", p.name), mine ? fig(mine, "On you", "A likeness, not a fitting") : null); // the size the look card has already loaded
+  box.hidden = false;
+  close.focus();
+  link.track("compare", { product: p.id });
+}
+
 async function openSend(items) {
   const list = items.filter((x, i, all) => all.findIndex((y) => (y.pid || y.id) === (x.pid || x.id)) === i).slice(0, 6);
   if (!list.length) return;
@@ -1197,6 +1282,7 @@ function startOver() {
     S.extras.clear();
     S.mode = null;
     S.pending = null;
+    S.agreed = false;
     S.lane = "all";
     renderSaved();
     renderCatalogue();
@@ -1347,6 +1433,8 @@ function wireUI() {
   });
   $("#shapeBtn").addEventListener("click", () => mirror.setShape(mirror.shape === "portrait" ? "landscape" : "portrait"));
   $("#restartBtn").addEventListener("click", startOver);
+  $("#photoPeek").addEventListener("click", () => openPhoto());
+  $("#camBtn").addEventListener("click", () => mirror.sleep());
   $("#compareBtn").addEventListener("click", openCompare);
   $("#sendAllBtn").addEventListener("click", () => openSend(S.mem.saved));
   $("#adaptBtn").addEventListener("click", openAdapt);

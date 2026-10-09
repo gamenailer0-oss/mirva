@@ -176,6 +176,21 @@ export class Mirror extends EventTarget {
     }
   }
 
+  /** Turn the mirror off. The camera is released (its light goes out) and the glass rests until it is turned on again. */
+  sleep() {
+    if (this.isLive) this.stop("user");
+    const old = this.source;
+    old?.stream?.getTracks().forEach((t) => t.stop());
+    old?.el?.remove?.();
+    old?.el?.close?.(); // a photo
+    this.source = null;
+    this.cameraDown = false;
+    this.presence = { known: false, present: true };
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.#set("asleep");
+    this.#emit("asleep");
+  }
+
   async usePhoto(blob) {
     const el = await createImageBitmap(blob);
     this.#useSource({ kind: "photo", el, flip: false });

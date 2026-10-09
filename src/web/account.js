@@ -28,7 +28,7 @@ async function door(mode) {
         field("Your name", { name: "name", autocomplete: "name", required: true, maxLength: 80 }),
         field("Email", { name: "email", type: "email", autocomplete: "email", required: true, inputMode: "email" }),
         field("Password", { name: "password", type: "password", autocomplete: "new-password", required: true, minLength: 10 }, "Ten characters or more. A sentence works well."),
-        el("label", { class: "check" }, el("input", { type: "checkbox", name: "agree" }), el("span", {}, "I agree to the ", el("a", { href: "/terms", target: "_blank", text: "terms" }), " and the ", el("a", { href: "/privacy", target: "_blank", text: "privacy notice" }), ".")),
+        el("label", { class: "check" }, el("input", { type: "checkbox", name: "agree" }), el("span", {}, "I am 18 or over, and I agree to the ", el("a", { href: "/terms", target: "_blank", text: "terms" }), " and the ", el("a", { href: "/privacy", target: "_blank", text: "privacy notice" }), ".")),
         el("label", { class: "check" }, el("input", { type: "checkbox", name: "updates" }), el("span", { text: "Tell me when a mirror opens near me." })),
         el("p", { class: "formnote", role: "alert" }),
         el("button", { class: "btn wide", type: "submit", text: waiting ? "Keep these looks" : "Open my wardrobe" }),
@@ -352,6 +352,17 @@ function you() {
     privateBlock(),
   );
 
+  // What she has removed, and when: her own record that it is gone.
+  const gone = el("div", { hidden: true });
+  api("/api/me/deleted")
+    .then(({ deleted }) => {
+      if (!deleted.length) return;
+      const when = (at) => new Date(at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+      fill(gone, el("p", { class: "kicker", style: "margin-top:8px", text: "Removed by you" }), el("ul", { class: "fine" }, deleted.slice(0, 12).map((d) => el("li", { text: `${d.portrait ? "A portrait and its look" : "A look"}: ${d.name}. Deleted ${when(d.at)}.` }))));
+      gone.hidden = false;
+    })
+    .catch(() => {});
+
   const data = el("div", { class: "card" },
     el("h2", { class: "subtitle", text: "Your data" }),
     el("p", { class: "muted", text: "Everything MIRVA holds about you is on this page. You can take a copy, or remove all of it." }),
@@ -360,6 +371,7 @@ function you() {
       el("button", { class: "btn ghost small", type: "button", text: "Sign out", onclick: () => signOut() }),
     ),
     el("button", { class: "link muted", type: "button", text: "Delete my account", onclick: confirmDelete }),
+    gone,
   );
 
   fill($("#view"), el("div", { class: "settings" }, profile, membership, data));

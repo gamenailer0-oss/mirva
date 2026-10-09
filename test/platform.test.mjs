@@ -1285,3 +1285,25 @@ test("neither server logged an error while all of this was going on", () => {
     assert.deepEqual(noise, [], `server on ${s.port} wrote to stderr`);
   }
 });
+
+// --- trust: what she removed stays on her own record; joining says 18 or over -------------------------
+
+test("a member can see what she removed and when, and nobody else's", async () => {
+  const m = await member("remover");
+  const other = await member("onlooker");
+  assert.deepEqual((await m.get("/api/me/deleted")).body.deleted, []);
+  const look = await addLook(m, A, "M");
+  const before = Date.now();
+  assert.equal((await m.post("/api/wardrobe/remove", { id: look.id })).status, 200);
+  const { deleted } = (await m.get("/api/me/deleted")).body;
+  assert.equal(deleted.length, 1);
+  assert.deepEqual([deleted[0].name, deleted[0].portrait], [A.name, false]);
+  assert.ok(deleted[0].at >= before - 5 && deleted[0].at <= Date.now() + 5);
+  assert.deepEqual((await other.get("/api/me/deleted")).body.deleted, [], "her record is hers alone");
+  err(await visitor().get("/api/me/deleted"), 401);
+});
+
+test("joining asks for 18 or over in the same breath as the terms", async () => {
+  const r = await visitor().post("/api/auth/join", { name: "No Tick", email: mailFor("notick"), password: PASSWORD });
+  err(r, 400, /18 or over.*terms.*privacy notice/);
+});
