@@ -35,7 +35,7 @@ let tools = null; // { segmenter, faces }, each null when its model would not lo
 let loading = null;
 
 /** Loads both models once, from /models. GPU first, then CPU, as vision.js does for the pose model. */
-function load(delegates = ["GPU", "CPU"]) {
+export function load(delegates = ["GPU", "CPU"]) {
   loading ??= (async () => {
     const found = { segmenter: null, faces: null };
     try {
@@ -66,7 +66,7 @@ function load(delegates = ["GPU", "CPU"]) {
 
 // ---- small image helpers ------------------------------------------------------------
 
-const canvasOf = (w, h) => {
+export const canvasOf = (w, h) => {
   const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
@@ -78,7 +78,7 @@ const canvasOf = (w, h) => {
  * (0 to 255, the model's own confidence, which catches a lock of hair lying on a sleeve that the
  * single best label calls cloth). Null if the segmenter fails.
  */
-function labelsOf(segmenter, source, W, H) {
+export function labelsOf(segmenter, source, W, H) {
   let result;
   try {
     result = segmenter.segment(source);
@@ -109,7 +109,7 @@ function labelsOf(segmenter, source, W, H) {
 }
 
 /** Grow a 0/1 mask by r pixels (a square window, done as two prefix-sum passes). */
-function grow(mask, W, H, r) {
+export function grow(mask, W, H, r) {
   const pass = (src, dst, len, lines, stride, step) => {
     const sums = new Int32Array(len + 1);
     for (let l = 0; l < lines; l++) {
@@ -126,7 +126,7 @@ function grow(mask, W, H, r) {
 }
 
 /** Soften a 0/1 mask into 0..255 alpha with two box blurs of radius r. */
-function feather(mask, W, H, r) {
+export function feather(mask, W, H, r) {
   let a = new Float32Array(W * H);
   for (let i = 0; i < a.length; i++) a[i] = mask[i] * 255;
   const blur = (src, len, lines, stride, step) => {

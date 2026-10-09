@@ -7,6 +7,9 @@
 /* ---------- hero ---------- */
 .hero { min-height: min(100svh, 980px); display: grid; align-items: center; padding: 120px 0 72px; overflow: hidden; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+/* The line breaks where the thought does: "The mirror that / styles you." */
+.hero .display { font-size: clamp(44px, 6.1vw, 92px); }
+.hero .display em { display: block; }
 .hero-copy .lede { color: #b4bccb; }
 .hero-copy .fine { color: #8c94a6; }
 .hero-stage { display: grid; justify-items: center; }
@@ -32,38 +35,44 @@
 .hero-cap .tag { font: 500 10px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #c8cedb; margin-bottom: 8px; }
 .hero-cap .line { font-size: clamp(20px, 2vw, 27px); line-height: 1.2; }
 
-/* ---------- how it goes ---------- */
-.head { max-width: 22em; margin-bottom: clamp(40px, 6vw, 80px); }
+/* ---------- try it here: the stylist, on a real store's rails ---------- */
+.head { max-width: 22em; margin-bottom: clamp(36px, 5vw, 64px); }
 .head .lede { margin-top: var(--s5); }
-.beats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); counter-reset: beat; }
-.beats li { display: grid; gap: var(--s3); align-content: start; }
-.beat-art { height: 230px; margin-bottom: var(--s4); border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); padding: var(--s5); display: grid; align-content: center; gap: var(--s4); }
-.beat-art.on-glass { background: radial-gradient(90% 70% at 50% 0%, var(--glass-lift), var(--glass) 75%); box-shadow: none; color: var(--pearl); }
+.try { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(28px, 4.5vw, 64px); align-items: start; }
+.try-ask { display: grid; gap: var(--s6); align-content: start; }
+.try-step { display: grid; gap: var(--s3); }
+.step { display: flex; align-items: center; gap: 10px; font: 500 11.5px/1.2 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.step b { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--panel); font: 500 11px/1 var(--sans); letter-spacing: 0; }
+.try-say { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; font-style: italic; min-height: 2.3em; text-wrap: balance; }
+.try-looks { display: grid; gap: var(--s4); min-width: 0; }
+.try-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); }
+.try-trio li { display: grid; gap: 4px; align-content: start; min-width: 0; animation: rise var(--calm) var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
+.try-trio .shot, .try-trio i { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: var(--r-md); overflow: hidden; background-color: var(--card); margin-bottom: 6px; }
+.try-trio img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.try-trio .badge { position: absolute; left: 8px; top: 8px; }
+.try-trio b { font-weight: 400; font-size: 14.5px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.try-trio li > span:last-child { font-size: 13px; line-height: 1.35; color: var(--muted); }
+.try-go { display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5); align-items: center; margin-top: var(--s3); }
+.try-go .fine { flex: 1 1 220px; max-width: 42ch; }
 .ask { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; }
-.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.trio > div { position: relative; }
-.trio i { display: block; aspect-ratio: 3 / 4; border-radius: var(--r-md); }
-.trio .badge { position: absolute; left: 7px; top: 7px; }
-.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.modes > div { display: grid; gap: 3px; padding: 12px 14px; border-radius: var(--r-md); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3); }
-.modes b { font: 500 18px/1.1 var(--serif); }
-.modes span { font-size: 12px; opacity: .82; }
-.modes .on { background: var(--pearl); color: var(--glass); box-shadow: none; }
 
-/* ---------- wardrobe on a phone ---------- */
-.phone { width: min(340px, 100%); justify-self: center; border-radius: 38px; background: var(--panel); box-shadow: 0 0 0 1px var(--line), 0 50px 100px -60px rgba(12, 16, 24, .55); padding: 26px 22px 22px; }
+/* ---------- after the mirror: the wardrobe, and the vote ---------- */
+.after { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3.4vw, 48px); margin-bottom: var(--s7); }
+.after-card { display: grid; gap: var(--s3); align-content: start; }
+.after-card .muted { max-width: 46ch; }
+.after-art { min-height: 330px; margin-bottom: var(--s4); border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); padding: clamp(20px, 2.8vw, 32px); display: grid; align-content: center; }
+.after-art .vote-pair { max-width: 320px; }
+.swatch.real { background-size: cover; background-position: top center; }
 .phone-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s4); }
 .kept li { display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
 .kept i { display: block; aspect-ratio: 3 / 4; border-radius: 10px; }
-.kept b { display: block; font-weight: 400; font-size: 15px; line-height: 1.25; }
+.kept b { display: block; font-weight: 400; font-size: 15px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 .kept span { font-size: 12.5px; color: var(--muted); }
-.phone-foot { padding-top: var(--s4); border-top: 1px solid var(--line); }
 .ticks { display: grid; gap: 12px; }
 .ticks li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: baseline; }
 .ticks li::before { content: ""; width: 14px; height: 8px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(-45deg); opacity: .7; }
 
 /* ---------- second opinions ---------- */
-.vote { max-width: 440px; justify-self: center; width: 100%; }
 .vote-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: var(--s4); }
 .vote-pair > div { display: grid; gap: 6px; }
 .vote-pair i { display: block; aspect-ratio: 3 / 4; border-radius: var(--r-md); }
@@ -160,8 +169,9 @@
   .hero { padding-top: 104px; }
   .hero-grid, .gate { grid-template-columns: 1fr; }
   .hero-glass { width: min(64vw, 300px); }
-  .beats, .tiers { grid-template-columns: 1fr; }
-  .beat-art { height: auto; min-height: 170px; }
+  .tiers, .try, .after { grid-template-columns: 1fr; }
+  .after-art { min-height: 0; }
+  .try-say { min-height: 0; }
   .promises { grid-template-columns: 1fr 1fr; }
   .closet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .askbar { border-radius: var(--r-lg); padding: 14px; }
@@ -202,3 +212,10 @@
 @media (max-width: 900px) {
   .nav-links .menu-only { display: block; width: 100%; min-height: 44px; padding: 14px 0; text-align: left; font-size: 18px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
 }
+
+/* A kicker sits a little clear of the heading under it, even in a close stack. */
+.stack.close > .kicker + .title, .stack.close > .kicker + .display { margin-top: var(--s4); }
+
+/* The home page's section titles break where the thought does, on two lines, not five. */
+[data-page="home"] .head { max-width: 46em; }
+[data-page="home"] .head .title em { display: block; }

@@ -77,6 +77,30 @@ export async function body(source) {
   }
 }
 
+const EAR_L = 7, EAR_R = 8;
+
+/**
+ * Where the head is in a picture: the nose, and about how wide the head is, in the picture's own pixels.
+ * Null when nobody is found; undefined when it cannot tell. Used to put the shopper's own head back on a portrait.
+ */
+export async function head(source) {
+  const d = await load();
+  if (!d) return undefined;
+  try {
+    const lm = d.detect(source).landmarks?.[0];
+    if (!lm) return null;
+    const W = source.width, H = source.height;
+    const at = (i) => ({ x: lm[i].x * W, y: lm[i].y * H });
+    const nose = at(NOSE), el = at(EAR_L), er = at(EAR_R), sl = at(SHOULDER_L), sr = at(SHOULDER_R);
+    // Ear to ear when the face is to the camera; the shoulders give the scale when the head is turned.
+    const width = Math.max(Math.hypot(el.x - er.x, el.y - er.y) * 1.25, Math.hypot(sl.x - sr.x, sl.y - sr.y) * 0.4);
+    if (!(width > 8)) return null;
+    return { x: nose.x, y: nose.y, width };
+  } catch {
+    return undefined;
+  }
+}
+
 /**
  * A garment reference with no face in it: the store's photo cropped just under the chin.
  * The still-image engine copies a face it can see in the reference, so the face must go.

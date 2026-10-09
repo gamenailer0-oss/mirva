@@ -9,7 +9,7 @@
     "start": "node scripts/build.mjs && node server.mjs",
     "dev": "node scripts/build.mjs --watch & node server.mjs",
     "snapshot": "node scripts/snapshot-sapphire.mjs",
-    "test": "node scripts/build.mjs && node --test",
+    "test": "node scripts/build.mjs && node --test test/*.test.mjs",
     "seed": "node scripts/seed.mjs",
     "cloud:schema": "node scripts/cloud-schema.mjs",
     "cloud:dev": "node scripts/build.mjs && node scripts/cloud-schema.mjs && wrangler d1 execute mirva --local --file worker/schema.sql && wrangler dev --port 8788",

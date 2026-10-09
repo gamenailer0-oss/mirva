@@ -1,13 +1,16 @@
 {
- "id": "sapphire",
- "name": "Sapphire",
- "wordmark": "SAPPHIRE",
- "byline": "styled by MIRVA",
- "mood": "porcelain",
- "accent": "#1E3FAE",
- "currency": "Rs.",
- "source": "https://pk.sapphireonline.pk",
- "imageHosts": ["pk.sapphireonline.pk"],
- "enhancePrompt": false,
- "notice": "Concept demo built on Sapphire's public catalogue. Not affiliated with or endorsed by Sapphire."
+  "id": "sapphire",
+  "name": "Sapphire",
+  "wordmark": "SAPPHIRE",
+  "byline": "styled by MIRVA",
+  "mood": "porcelain",
+  "accent": "#1E3FAE",
+  "currency": "Rs.",
+  "source": "https://pk.sapphireonline.pk",
+  "imageHosts": [
+    "pk.sapphireonline.pk"
+  ],
+  "enhancePrompt": false,
+  "notice": "Concept demo built on Sapphire's public catalogue. Not affiliated with or endorsed by Sapphire.",
+  "tagline": "Women's ready-to-wear and unstitched, with a men's rail"
 }

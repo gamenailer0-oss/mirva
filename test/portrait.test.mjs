@@ -299,3 +299,66 @@ test("a refused key is told plainly, an empty account is 'resting', and neither 
   assert.equal((await db.get("SELECT COUNT(*) AS n FROM usage")).n, 0);
   engine = () => new Response(PNG, { status: 200, headers: { "content-type": "image/png" } });
 });
+
+// --- the finished portrait: the shopper's own head, laid back by the mirror (src/restore.js) ---------------------------
+
+const JPEG = (() => {
+  const b = new Uint8Array(3000).fill(9);
+  b.set([0xff, 0xd8, 0xff, 0xe0]);
+  return b;
+})();
+async function finish(app, id, { cookie = "", bytes = JPEG, type = "image/jpeg", headers = {} } = {}) {
+  const res = await app.fetch(
+    new Request(`http://localhost:4999/api/portrait/${id}`, { method: "POST", body: bytes, headers: { "content-type": type, ...(cookie ? { cookie } : {}), ...headers } }),
+    { ip: "10.3.0.1" },
+  );
+  return { status: res.status, body: await res.json() };
+}
+
+test("a member's finished portrait takes the place of the one the engine drew, under the same id", async () => {
+  const { app, db } = await makeApp();
+  const { cookie } = await member(app, "finish");
+  const made = await shot(app, { cookie, fields: portraitFields() });
+  const id = made.headers.get("x-mirva-portrait");
+  assert.ok(id);
+  const done = await finish(app, id, { cookie });
+  assert.equal(done.status, 200);
+  assert.deepEqual([...kept.get(id).slice(0, 3)], [0xff, 0xd8, 0xff]);
+  assert.equal((await db.get("SELECT type FROM portraits WHERE id = ?", id)).type, "image/jpeg");
+  const back = await app.fetch(new Request(`http://localhost:4999/api/portrait/${id}`, { headers: { cookie } }));
+  assert.equal(back.status, 200);
+  assert.equal(back.headers.get("content-type"), "image/jpeg");
+});
+
+test("only the member whose portrait it is can finish it, only with a picture, and only while it is fresh", async () => {
+  const { app, db } = await makeApp();
+  const { cookie } = await member(app, "owner");
+  const other = await member(app, "other");
+  const made = await shot(app, { cookie, fields: portraitFields() });
+  const id = made.headers.get("x-mirva-portrait");
+  const before = kept.get(id);
+
+  assert.equal((await finish(app, id)).status, 401); // signed out
+  assert.equal((await finish(app, id, { cookie: other.cookie })).status, 404); // somebody else's
+  assert.equal((await finish(app, id, { cookie, type: "text/html" })).status, 415);
+  assert.equal((await finish(app, id, { cookie, bytes: new Uint8Array(3000).fill(60) })).status, 400); // says JPEG, is not one
+  assert.equal((await finish(app, id, { cookie, type: "image/png" })).status, 400); // says PNG, is a JPEG
+  assert.equal((await finish(app, id, { cookie, headers: { "content-length": String(4 * 1024 * 1024) } })).status, 413);
+  assert.equal(kept.get(id), before, "a refused picture changes nothing");
+
+  await db.run("UPDATE portraits SET created = created - ? WHERE id = ?", 16 * 60e3, id);
+  assert.equal((await finish(app, id, { cookie })).status, 404); // no longer fresh
+  assert.equal(kept.get(id), before);
+});
+
+test("the list of stores carries what the store picker shows: a line about each, and three pictures from its rails", async () => {
+  const { app } = await makeApp();
+  const res = await app.fetch(new Request("http://localhost:4999/api/brands"));
+  const [store] = await res.json();
+  assert.equal(store.id, "sapphire");
+  assert.equal(typeof store.tagline, "string");
+  assert.ok(store.tagline.length > 0, "Sapphire has a line of its own");
+  assert.equal(store.cover.length, 3);
+  for (const url of store.cover) assert.match(url, /^https:\/\//);
+  assert.equal(new Set(store.cover).size, 3);
+});

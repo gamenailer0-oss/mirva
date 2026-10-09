@@ -85,6 +85,7 @@ const S = {
 let mirror;
 
 const glass = $("#glass");
+const frame = $("#frame");
 const money = (n) => `${S.brand.currency}${Math.round(n).toLocaleString("en-PK")}`;
 const pic = (url, w) => `/img?u=${encodeURIComponent(url)}&w=${w}`;
 const spoken = (name) => name.replace(/^\d\s*-?\s*piece\s*-\s*/i, "").toLowerCase();
@@ -173,6 +174,7 @@ function applyBrand(brand) {
   $("#wordmark").textContent = brand.wordmark || brand.name;
   $("#byline").textContent = brand.notice ? "concept demo by MIRVA" : brand.byline || "styled by MIRVA";
   $("#wakeNotice").textContent = brand.notice || "";
+  $("#storeName").textContent = brand.name;
   document.title = `MIRVA for ${brand.name}`;
   $("#pageTitle").textContent = `MIRVA, the stylist for ${brand.name}`;
   const when = S.takenAt ? new Date(S.takenAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "";
@@ -449,8 +451,10 @@ function renderDetail() {
 
 // ---------- the glass ----------
 const hasPicture = () => glass.classList.contains("has-picture");
-const canKeepFor = (p) => (S.view === "portrait" && S.portrait?.pid === p.id) || (S.wearing?.id === p.id && hasPicture());
-const canKeep = () => (S.view === "portrait" && !!S.portrait) || (!!S.wearing && hasPicture());
+// A portrait is one picture: kept once, it is kept. (A live look can be kept again, turned another way.)
+const keptAlready = () => S.view === "portrait" && !!S.portrait && S.keptUrl === S.portrait.url;
+const canKeepFor = (p) => !keptAlready() && ((S.view === "portrait" && S.portrait?.pid === p.id) || (S.wearing?.id === p.id && hasPicture()));
+const canKeep = () => !keptAlready() && ((S.view === "portrait" && !!S.portrait) || (!!S.wearing && hasPicture()));
 
 function syncGlass() {
   let st = "awake";
@@ -460,16 +464,25 @@ function syncGlass() {
   else if (mirror.state === "connecting" || (mirror.state === "live" && !hasPicture())) st = "thinking";
   else if (mirror.state === "live") st = "live";
   glass.dataset.state = st;
+  frame.dataset.state = st;
 
   const awake = st !== "asleep";
-  $("#glassActions").hidden = !awake;
-  $("#modes").hidden = !(awake && S.selected);
+  // The dock. Nothing until a look is chosen; then the two ways to wear it, said in full; once a look is on the glass,
+  // a switch between them with Keep and Take off. While something is being made it keeps the shape it had (it is out
+  // of sight then), so nothing under the glass moves during the wait.
+  const on = mirror.isLive || S.view === "portrait";
+  let dock = !awake ? "none" : on ? "result" : S.selected ? "choose" : "none";
+  if (st === "thinking" && awake) dock = frame.dataset.dock !== "none" ? frame.dataset.dock : S.selected ? "choose" : "none";
+  frame.dataset.dock = dock;
+  $("#dock").hidden = dock === "none";
+  $("#glassActions").hidden = dock !== "result";
+  $("#shapeBtn").hidden = !awake;
   for (const b of $$("#modes button")) {
     const on = (b.dataset.mode === "model" && S.view === "portrait") || (b.dataset.mode === "studio" && mirror.isLive && S.view !== "portrait");
     b.setAttribute("aria-pressed", String(on));
   }
   $("#keepBtn").disabled = !canKeep();
-  $("#offBtn").hidden = !(mirror.isLive || S.view === "portrait");
+  $("#keepBtn").textContent = keptAlready() ? "Kept" : "Keep";
   $("#meter").hidden = !(mirror.state === "live" && S.view !== "portrait");
   $("#hint").hidden = !(st === "awake" && $("#hint").textContent);
 }
@@ -540,6 +553,7 @@ function choose(p) {
   markCards();
   if (!mirror.awake) return needMirror(p);
   mirror.preload();
+  if (S.mode !== "studio") fetchAhead();
   if (S.mode === "studio") return studio(p);
   if (S.mode === "model") return modelShot(p);
   syncGlass();
@@ -560,12 +574,13 @@ function setMode(mode) {
 function storyLines(p) {
   const out = [];
   if (p.fabric && !p.fabric.includes("%")) out.push(`${sentence(p.fabric.toLowerCase())}.`);
-  if (p.cut && p.cut.length < 64 && !/unstitched/i.test(p.cut)) out.push(`${p.cut}.`);
+  if (p.cut && p.cut.length < 64 && !/unstitched/i.test(p.cut)) out.push(`${sentence(p.cut)}.`);
   if (p.unstitched) out.push("Sold as fabric. Shown stitched, for you.");
   if (p.colour && !/multi/i.test(p.colour)) out.push(`In ${p.colour.toLowerCase()}.`);
   if (S.brief.budget && p.price <= S.brief.budget - 500) out.push(`${money(S.brief.budget - p.price)} under what you set.`);
   const left = p.sizes.filter((z) => z.inStock).map((z) => z.label);
-  if (left.length) out.push(`Made in ${left.join(", ")}.`);
+  if (left.length > 4) out.push(`In ${left.length} sizes, ${left[0]} to ${left[left.length - 1]}.`);
+  else if (left.length) out.push(`Made in ${left.join(", ")}.`);
   return out.length ? out : [`${p.name}.`];
 }
 
@@ -674,9 +689,9 @@ async function countdown() {
 
 function afterUnveil(p) {
   const left = p.sizes.filter((z) => z.inStock).map((z) => z.label);
-  if (S.brief.budget && p.price <= S.brief.budget - 500) return `${money(p.price)}. That is ${money(S.brief.budget - p.price)} under what you set.`;
-  if (p.sizes.length && left.length && left.length <= 2) return `${money(p.price)}. Only ${left.join(" and ")} left online.`;
-  return `${money(p.price)}. Keep it, or see it live.`;
+  if (S.brief.budget && p.price <= S.brief.budget - 500) return `That is ${money(S.brief.budget - p.price)} under what you set.`;
+  if (p.sizes.length && left.length && left.length <= 2) return `Only ${left.join(" and ")} left online.`;
+  return "Keep it, or see it live.";
 }
 
 function showPortrait(entry, pid) {
@@ -718,6 +733,35 @@ async function thumbOf(blob, width = 300) {
   c.height = Math.round((width * bmp.height) / bmp.width);
   c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
   return c.toDataURL("image/jpeg", 0.8);
+}
+
+// The engine redraws the head along with the clothes, whatever it is told and whichever store the piece is from. So
+// before any portrait is shown, the shopper's own head is laid back over it, from the frame she sent (src/restore.js).
+// A member's wardrobe gets the finished picture too. If it cannot be done, the portrait is shown as it came.
+let restoring = null;
+const restorer = () => (restoring ??= import("./restore.js").catch((e) => (console.warn(e), (restoring = null))));
+async function ownHead(person, portrait, saved, options) {
+  try {
+    const mod = await restorer();
+    if (!mod) return portrait;
+    const fixed = await Promise.race([mod.restoreHead(person, portrait, options), sleep(RESTORE_WAIT).then(() => null)]);
+    if (fixed?.how !== "restored") return portrait;
+    if (saved) fetch(`/api/portrait/${saved}`, { method: "POST", headers: { ...link.auth(), "content-type": fixed.blob.type }, body: fixed.blob }).catch(() => {});
+    return fixed.blob;
+  } catch (e) {
+    console.warn(e);
+    return portrait;
+  }
+}
+// A wrong face is worse than a longer wait, so the restore is given time: on a slow line its model is still arriving.
+const RESTORE_WAIT = 45000;
+// The model is 16 MB. It starts coming the first time a look is chosen (only fetched, into the browser's cache: nothing is
+// compiled yet, so the camera never stutters), unless the shopper has asked her browser to save data.
+let fetched = false;
+function fetchAhead() {
+  if (fetched || navigator.connection?.saveData) return;
+  fetched = true;
+  for (const f of ["selfie_multiclass_256x256.tflite", "blaze_face_short_range.tflite"]) fetch(`/models/${f}`, { priority: "low" }).catch(() => {});
 }
 
 // Model: one portrait of the shopper in the piece, in her own pose, framing and light (the engine edits the clothes
@@ -777,7 +821,12 @@ async function modelShot(p, { retake = false } = {}) {
     form.append("brand", S.brand.id);
     form.append("product", p.id);
     form.append("mode", "portrait");
-    const { blob, saved } = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
+    const asked = pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
+    restorer().then((m) => m?.warmRestore()); // its models load, and take their slow first look, behind the wait
+    const { blob: drawn, saved } = await asked;
+    const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // its model is still arriving
+    const blob = await ownHead(person, drawn, saved);
+    clearTimeout(slow);
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
     const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: null };
     link.track("portrait", { product: p.id });
@@ -804,6 +853,8 @@ async function modelShot(p, { retake = false } = {}) {
         .requestShot(again, { headers: link.auth(), timeout: link.timeout })
         .then(async (next) => {
           if (S.portraits.get(p.id) !== entry) return; // her pictures were cleared meanwhile: nothing to put it in
+          next.blob = await ownHead(blob, next.blob, next.saved, { tight: true }); // the wall is new; her face is not
+          if (S.portraits.get(p.id) !== entry) return;
           const url = URL.createObjectURL(next.blob);
           const old = entry.url;
           const here = ticket === S.ticket && S.view === "portrait" && S.portrait?.pid === p.id;
@@ -1002,6 +1053,7 @@ function wireMirror() {
   mirror.addEventListener("fault", ({ detail }) => caption(friendly(detail)));
   mirror.addEventListener("shape", ({ detail: { shape, wearing } }) => {
     glass.dataset.shape = shape;
+    frame.dataset.shape = shape;
     forgetPortraits();
     if (!wearing) S.developing?.cancel(); // it was still connecting: there is no look to bring back, so no wait to keep
     syncGlass();
@@ -1018,6 +1070,9 @@ function keep() {
   S.mem.saved.unshift({ id: Date.now(), pid: p.id, name: p.name, price: p.price, url: p.url, extras, thumb: fromPortrait ? S.portrait.thumb : mirror.snapshot(300) });
   memory.store(S.brand.id, S.mem);
   renderSaved();
+  if (fromPortrait) S.keptUrl = S.portrait.url;
+  syncGlass();
+  renderDetail();
   link.track("keep", { product: p.id });
   // On a member's own device the look goes straight to the wardrobe; in a store it waits for Send.
   if (link.member)
@@ -1159,6 +1214,51 @@ function resetByItself() {
   startOver();
 }
 
+// ---------- which store ----------
+// Anywhere but a store's own mirror, the shopper chooses whose rails she is looking at: asked once when the mirror
+// opens (unless a link named the store), and one tap away afterwards.
+const STORE_CHOSEN = "mirva:store-chosen";
+const WHO = { men: "Menswear", women: "Womenswear" };
+async function openStores() {
+  let brands;
+  try {
+    brands = await api("/api/brands");
+  } catch (e) {
+    return caption(friendly(e));
+  }
+  const last = memory.lastBrand.get();
+  // the store that is open first, then the one from last time, then the rest as the list has them
+  const rank = (b) => (b.id === S.brand?.id ? 0 : b.id === last ? 1 : 2);
+  brands = brands.map((b, i) => [b, i]).sort((x, y) => rank(x[0]) - rank(y[0]) || x[1] - y[1]).map(([b]) => b);
+  $("#storeList").replaceChildren(
+    ...brands.map((b) =>
+      h(
+        "button",
+        {
+          class: `store-card${b.id === S.brand?.id ? " on" : ""}`,
+          type: "button",
+          onclick: async () => {
+            try {
+              sessionStorage.setItem(STORE_CHOSEN, "1");
+            } catch {}
+            $("#stores").close();
+            if (b.id !== S.brand?.id) await loadBrand(b.id).catch((e) => caption(friendly(e)));
+          },
+        },
+        h("span", { class: "store-shots" }, (b.cover || []).slice(0, 3).map((u) => h("img", { src: pic(u, 240), alt: "", decoding: "async" }))),
+        h(
+          "span",
+          { class: "store-meta" },
+          b.id === S.brand?.id ? h("em", { text: "Open now" }) : b.id === last ? h("em", { text: "Last time" }) : null,
+          h("b", { text: b.name }),
+          h("span", { text: [b.tagline || WHO[b.audience] || "", `${b.count} pieces`].filter(Boolean).join(" · ") }),
+        ),
+      ),
+    ),
+  );
+  $("#stores").showModal();
+}
+
 // ---------- adapt sheet ----------
 async function openAdapt() {
   const brands = await api("/api/brands");
@@ -1239,6 +1339,7 @@ function wireUI() {
   $("#compareBtn").addEventListener("click", openCompare);
   $("#sendAllBtn").addEventListener("click", () => openSend(S.mem.saved));
   $("#adaptBtn").addEventListener("click", openAdapt);
+  $("#storeBtn").addEventListener("click", openStores);
   for (const b of $$(".tabs button")) b.addEventListener("click", () => showTab(b.dataset.tab));
   $(".tabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -1359,20 +1460,33 @@ async function boot() {
   // A store loaded from a link is not on the public list, so the link's own id is tried before any fallback.
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
   const first = { id: brands.find((b) => b.id === want)?.id || linked || brands.find((b) => b.id === "sapphire")?.id || brands[0]?.id };
-  if (query.has("pair") || query.has("brand")) history.replaceState(null, "", location.pathname);
+  const named = !!query.get("brand") && first.id === query.get("brand");
+  if (query.has("pair") || query.has("brand") || query.has("for")) history.replaceState(null, "", location.pathname);
   showMember(await link.whoIsHere());
   memory.setStoreMirror(!!link.pairedTo());
   memory.setOwner(link.member?.user.id);
   document.body.classList.toggle("shopper", forShopper()); // hides the cost meter and the Adapt sheet
   if (!first.id) return noStore();
   await loadBrand(first.id);
-  syncGlass();
-  // A paired mirror belongs to one store. Anywhere else, the other stores that are open are one tap away.
-  const others = link.pairedTo() ? [] : brands.filter((b) => b.id !== first.id);
-  if (others.length) {
-    $("#storeLine").replaceChildren("Also in this mirror: ", ...others.flatMap((b, i) => [i ? ", " : "", h("a", { href: `/mirror?brand=${b.id}`, text: b.name })]), ".");
-    $("#storeLine").hidden = false;
+  // "See them on you" on the home page names the occasion the reader chose there: the conversation carries on from it.
+  const occasion = OCCASIONS.find((o) => o.id === query.get("for"));
+  if (occasion) {
+    S.brief.occasion = occasion.id;
+    S.step = "mood";
+    say(line("mood"));
+    renderConversation();
   }
+  syncGlass();
+  // A paired mirror belongs to one store. Anywhere else the shopper chooses: the store's name heads the tablet with a
+  // way to change it, and the picker opens by itself the first time, unless a link has already named the store.
+  const choice = !link.pairedTo() && brands.length > 1;
+  $("#storeBar").hidden = !choice;
+  let chosen = named;
+  try {
+    chosen ||= !!sessionStorage.getItem(STORE_CHOSEN);
+    if (named) sessionStorage.setItem(STORE_CHOSEN, "1");
+  } catch {}
+  if (choice && !chosen) openStores();
   if (paired) caption(paired.startsWith("!") ? paired.slice(1) : `This screen is now the mirror "${paired}".`);
   window.mirva = { S, mirror, visitLimits }; // a handle for the console while this is a prototype
   // On a phone the ask bar docks at the bottom of the screen once the glass has scrolled away (see styles.css).

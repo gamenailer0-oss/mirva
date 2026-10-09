@@ -19,6 +19,8 @@ const options = {
     desk: join(ROOT, "src", "web", "desk.js"),
     // Also an entry of its own, so scripts/prepare-refs.mjs can load it in a browser page.
     reference: join(ROOT, "src", "reference.js"),
+    // The step that puts the shopper's own head back on a portrait: an entry too, so the test rigs can load it.
+    restore: join(ROOT, "src", "restore.js"),
   },
   outdir: OUT,
   bundle: true,

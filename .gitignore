@@ -26,3 +26,6 @@ public/refs/
 
 # Local test rigs (fake-camera rig, portrait experiments). Kept on this machine only.
 tools/
+
+# Test pictures for the head-restore rig are copied here for a run and taken away after. Never published.
+public/_lab/
