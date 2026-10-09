@@ -120,6 +120,39 @@ export function why(p, brief, stretch) {
   return bits.slice(0, 2).join(" · ");
 }
 
+// A store's size chart as it is typed in the console, one size to a line: "M, 38-40, 32-34" (label, chest, waist,
+// in inches; the waist may be left out). Lines that make no sense are dropped. Returns [{ label, chest:[lo,hi], waist }].
+export function parseSizeChart(text) {
+  const rows = [];
+  for (const raw of String(text || "").split(/\r?\n/).slice(0, 30)) {
+    const parts = raw.split(",").map((x) => x.trim());
+    const label = (parts[0] || "").slice(0, 12);
+    const range = (x) => {
+      const m = /^(\d{1,2}(?:\.\d)?)(?:\s*(?:-|to)\s*(\d{1,2}(?:\.\d)?))?$/i.exec(x || "");
+      if (!m) return null;
+      const lo = Number(m[1]), hi = Number(m[2] ?? m[1]);
+      return lo >= 15 && hi <= 80 && lo <= hi ? [lo, hi] : null;
+    };
+    const chest = range(parts[1]);
+    if (!label || !chest) continue;
+    rows.push({ label, chest, waist: range(parts[2]) });
+    if (rows.length === 20) break;
+  }
+  return rows.sort((a, b) => a.chest[0] - b.chest[0]);
+}
+
+// The size on a store's chart for a shopper's measurements: the smallest size whose chest takes hers, moved up if
+// her waist needs more. Null when she is outside the chart either way; MIRVA then says so instead of guessing.
+export function sizeFor(chart, { chest, waist } = {}) {
+  if (!Array.isArray(chart) || !chart.length || !(chest > 0)) return null;
+  if (chest < chart[0].chest[0] - 2) return null;
+  let i = chart.findIndex((r) => chest <= r.chest[1]);
+  if (i < 0) return null;
+  while (waist > 0 && chart[i].waist && waist > chart[i].waist[1] && i < chart.length - 1) i++;
+  if (waist > 0 && chart[i].waist && waist > chart[i].waist[1] + 1) return null;
+  return chart[i].label;
+}
+
 // Reads a typed request. Returns what it understood so MIRVA can say it back.
 export function parseAsk(text, products = []) {
   const t = ` ${text.toLowerCase().replace(/[^\p{L}\p{N}\s.,-]/gu, " ")} `;

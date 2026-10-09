@@ -219,6 +219,21 @@ const VIEWS = {
           ),
           o.plan && el("a", { class: "link muted small", href: "#limits", text: "Change the limits", onclick: (e) => (e.preventDefault(), go("limits")) }),
         ),
+        // What the store's own people counted with "Sold" on the mirror's tablet. Entered by hand: honest, and rough.
+        panel("Sales counted",
+          o.pilot && el("p", { class: o.pilot.met ? "lead" : "muted", text: `Pilot, day ${o.pilot.day} of ${o.pilot.days}: ${num(o.pilot.value)} against a target of ${num(o.pilot.target)} ${o.pilot.label}.${o.pilot.met ? " Target met." : o.pilot.ended ? " The pilot has ended." : ""}` }),
+          o.sales.count
+            ? [
+                el("dl", { class: "kv" },
+                  el("dt", { text: "Sales" }), el("dd", { class: "num", text: `${num(o.sales.count)} · ${money(o.sales.pkr)}` }),
+                  el("dt", { text: "Try-on visits that bought" }), el("dd", { class: "num", text: `${num(o.sales.visits)} of ${num(f.tried)}${f.tried ? ` (${Math.round(o.sales.share * 100)}%)` : ""}` }),
+                  o.plan?.share && [el("dt", { text: "Counted this month" }), el("dd", { class: "num", text: money(o.plan.share.counted) })],
+                  o.plan?.share && [el("dt", { text: "Fee this month" }), el("dd", { class: "num", text: `${money(o.plan.share.fee)} (${o.plan.share.rate * 100}% of counted sales, never more than ${money(o.plan.share.cap)})` })],
+                ),
+                hbars(o.sales.byStaff.map((s) => ({ label: s.name, value: s.pkr, note: `${num(s.n)} sale${s.n === 1 ? "" : "s"}` })), money),
+              ]
+            : el("p", { class: "muted", text: "Nothing counted yet. When a shopper buys what she tried, tap Sold beside the piece on the mirror's tablet. It is counted here, with the name of whoever helped." }),
+        ),
       ),
     );
   },
@@ -419,7 +434,20 @@ const VIEWS = {
       await api("/api/console/brand", { brand: S.brand, ...state });
       toast("Saved. Mirrors pick it up the next time they load.");
     });
-    fill(work(), head("Look and feel"), el("div", { class: "lookfeel" }, form, glass));
+    const chartText = (brand.sizeChart || []).map((r) => [r.label, r.chest.join("-"), r.waist ? r.waist.join("-") : ""].filter(Boolean).join(", ")).join("\n");
+    const chart = el("form", { class: "panel form" },
+      el("h2", { text: "Your size chart" }),
+      el("label", { class: "field" }, el("span", { text: "One size to a line: label, chest, waist, in inches" }), el("textarea", { name: "sizeChart", rows: 7, placeholder: "S, 34-36, 28-30\nM, 38-40, 32-34\nL, 42-44, 36-38", value: chartText })),
+      el("p", { class: "fine", text: "With a chart, the mirror offers \"Find my size\": the shopper gives two measurements and is shown her size on your chart, and told plainly when a piece is not made in it. Without one, she picks her usual size. Leave the box empty to take the chart away." }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save the chart" }),
+    );
+    onSubmit(chart, async (d) => {
+      await api("/api/console/brand", { brand: S.brand, sizeChart: d.sizeChart || "" });
+      toast("Saved. Mirrors pick it up the next time they load.");
+      go("look");
+    });
+    fill(work(), head("Look and feel"), el("div", { class: "lookfeel" }, form, glass), chart);
     paint();
   },
 
@@ -587,6 +615,24 @@ const VIEWS = {
       await api("/api/hq/retailers", d);
       go("stores");
     });
+    // A pilot is one target agreed in writing. It starts counting the day it is saved here.
+    const pilot = el("form", { class: "panel form" },
+      el("h2", { text: "Set a pilot's target" }),
+      el("div", { class: "form-2" },
+        field("Store", el("select", { name: "brand" }, brandOptions())),
+        field("Measured in", el("select", { name: "metric" }, [["buy-share", "Try-on visits that end in a sale, %"], ["sales", "Sales counted"], ["kept", "Looks kept"]].map(([v, t]) => el("option", { value: v, text: t })))),
+        field("Target", el("input", { name: "target", type: "number", min: 1, step: "0.1", required: true })),
+        field("Days", el("input", { name: "days", type: "number", min: 7, max: 180, value: 60 })),
+      ),
+      el("p", { class: "fine", text: "The store sees the target and the running figure on its Overview. Sales are what its staff count with Sold on the mirror's tablet." }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Start the pilot" }),
+    );
+    onSubmit(pilot, async (d) => {
+      await api("/api/hq/retailers/pilot", { brand: d.brand, metric: d.metric, target: Number(d.target), days: Number(d.days) });
+      toast("The pilot is counting from today.");
+      go("stores");
+    });
     const user = el("form", { class: "panel form" },
       el("h2", { text: "Give someone at a store a console sign-in" }),
       el("div", { class: "form-2" }, field("Store", el("select", { name: "brand" }, brandOptions())), field("Their name", el("input", { name: "name", required: true, maxLength: 80 })), field("Their email", el("input", { name: "email", type: "email", required: true }))),
@@ -630,6 +676,7 @@ const VIEWS = {
         ),
       ),
       el("div", { class: "grid2" }, plan, user),
+      el("div", { class: "grid2" }, pilot),
       o.system.stores &&
         panel("Who can open each store's mirror",
           el("p", { class: "muted small", style: "max-width:62ch", text: "Listed: anyone can find and open it. By link only: it opens for people who have its address, and is not offered to the public. A store that has not agreed to a demo belongs in the second group." }),

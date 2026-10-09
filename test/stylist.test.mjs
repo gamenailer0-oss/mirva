@@ -104,3 +104,31 @@ test("MIRVA has a line for every moment", () => {
   for (const key of ["hello", "mood", "budget", "picked", "pickedAsleep", "none", "putting", "wearing", "kept", "needMirror", "whichMode", "ended.cap", "ended.idle", "ended.lost", "ended.user", "ended.away", "unsure"])
     assert.ok(line(key, { name: "x", size: "M" }).length > 3, key);
 });
+
+// --- a size from the store's own chart ---------------------------------------------------------
+
+test("a store's size chart is read one size to a line, and lines that make no sense are dropped", async () => {
+  const { parseSizeChart } = await import("../src/stylist.js");
+  const chart = parseSizeChart("L, 42-44, 36-38\nS, 34-36, 28-30\n\nnot a size\nM, 38 to 40, 32-34\nXL, 46\nXXL, 300-400\n, 30-32");
+  assert.deepEqual(chart.map((r) => r.label), ["S", "M", "L", "XL"], "sorted by chest, nonsense left out");
+  assert.deepEqual(chart[1], { label: "M", chest: [38, 40], waist: [32, 34] });
+  assert.deepEqual(chart[3], { label: "XL", chest: [46, 46], waist: null }, "one number is a size of its own; the waist may be left out");
+  assert.deepEqual(parseSizeChart(""), []);
+  assert.deepEqual(parseSizeChart(null), []);
+  assert.equal(parseSizeChart(Array.from({ length: 40 }, (_, i) => `S${i}, ${30 + i}`).join("\n")).length, 20, "never more than twenty sizes");
+});
+
+test("her size is the smallest that takes her chest, moved up for her waist, and never a guess outside the chart", async () => {
+  const { parseSizeChart, sizeFor } = await import("../src/stylist.js");
+  const chart = parseSizeChart("S, 34-36, 28-30\nM, 38-40, 32-34\nL, 42-44, 36-38");
+  assert.equal(sizeFor(chart, { chest: 35 }), "S");
+  assert.equal(sizeFor(chart, { chest: 37 }), "M", "between two sizes she takes the larger");
+  assert.equal(sizeFor(chart, { chest: 39, waist: 33 }), "M");
+  assert.equal(sizeFor(chart, { chest: 39, waist: 36 }), "L", "a waist that needs more moves her up");
+  assert.equal(sizeFor(chart, { chest: 43, waist: 42 }), null, "past the largest waist: say so, do not guess");
+  assert.equal(sizeFor(chart, { chest: 48 }), null, "above the chart");
+  assert.equal(sizeFor(chart, { chest: 30 }), null, "below the chart");
+  assert.equal(sizeFor(chart, { chest: 33 }), "S", "a little under the smallest still wears it");
+  assert.equal(sizeFor([], { chest: 40 }), null);
+  assert.equal(sizeFor(chart, {}), null);
+});

@@ -1,6 +1,6 @@
 // MIRVA front of house: the conversation on the tablet, the glass, and what the shopper keeps.
 import { Mirror } from "./mirror.js";
-import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns } from "./stylist.js";
+import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns, sizeFor } from "./stylist.js";
 import { facelessReference, warmUp } from "./vision.js";
 import * as memory from "./memory.js";
 import * as link from "./link.js";
@@ -450,9 +450,10 @@ function renderDetail() {
     mine && p.sizes.length
       ? h("p", {
           class: "note",
-          text: p.sizes.find((z) => z.label === mine)?.inStock ? `Your size, ${mine}, is in stock.` : `Your size, ${mine}, is sold out online. Other sizes are available.`,
+          text: !p.sizes.some((z) => z.label === mine) ? `This piece is not made in ${mine}.` : p.sizes.find((z) => z.label === mine).inStock ? `Your size, ${mine}, is in stock.` : `Your size, ${mine}, is sold out online. Other sizes are available.`,
         })
       : null,
+    p.sizes.length && S.brand.sizeChart?.length ? h("button", { class: "textlink sizer-link", type: "button", text: S.mem.measure ? "Change my measurements" : "Not sure? Find my size", onclick: openSizer }) : null,
     picks.length
       ? h(
           "div",
@@ -493,6 +494,8 @@ function renderDetail() {
       { class: "detail-actions" },
       h("button", { class: "primary small", type: "button", text: "Keep this look", onclick: keep, disabled: !canKeepFor(p) }),
       h("button", { class: "chip", type: "button", text: "Send to phone", onclick: () => openSend([{ ...p, extras }]) }),
+      // The store's own people count a sale that came from this mirror: one tap, on the store's device only.
+      link.pairedTo() || link.staff ? h("button", { class: "chip", type: "button", text: "Sold", onclick: () => openSold(p, total) }) : null,
       h("a", { class: "textlink", href: p.url, target: "_blank", rel: "noopener", text: `View at ${S.brand.name}` }),
     ),
   ];
@@ -516,6 +519,7 @@ function syncGlass() {
   else if (mirror.state === "live") st = "live";
   glass.dataset.state = st;
   frame.dataset.state = st;
+  glass.classList.toggle("photo", mirror.source?.kind === "photo");
 
   const awake = st !== "asleep";
   // The dock. Nothing until a look is chosen; then the two ways to wear it, said in full; once a look is on the glass,
@@ -1247,6 +1251,53 @@ async function openSend(items) {
   $("#send").showModal();
 }
 
+// ---------- counted at the store: a sale, and a size ----------
+const SOLD_BY = "mirva:sold-by";
+function openSold(p, total) {
+  $("#soldCopy").textContent = p.name;
+  $("#soldAmount").value = String(Math.round(total));
+  try {
+    $("#soldBy").value = localStorage.getItem(SOLD_BY) || "";
+  } catch {}
+  $("#soldForm").onsubmit = (e) => {
+    e.preventDefault();
+    const amount = Math.round(Number(String($("#soldAmount").value).replace(/[^\d.]/g, "")));
+    if (!(amount > 0)) return $("#soldAmount").focus();
+    const by = $("#soldBy").value.trim().slice(0, 40);
+    try {
+      localStorage.setItem(SOLD_BY, by);
+    } catch {}
+    link.track("sale", { product: p.id, value: amount, meta: by || undefined });
+    link.flush?.();
+    $("#sold").close();
+    caption(`Counted: ${money(amount)}${by ? `, with ${by}` : ""}.`);
+  };
+  $("#sold").showModal();
+}
+
+// Her size on this store's own chart, from two measurements. Outside the chart, MIRVA says so and does not guess.
+function openSizer() {
+  const had = S.mem.measure || {};
+  $("#sizerChest").value = had.chest || "";
+  $("#sizerWaist").value = had.waist || "";
+  $("#sizerMsg").textContent = "";
+  $("#sizerForm").onsubmit = (e) => {
+    e.preventDefault();
+    const chest = Number($("#sizerChest").value), waist = Number($("#sizerWaist").value) || 0;
+    if (!(chest >= 20 && chest <= 70)) return ($("#sizerMsg").textContent = "Chest in inches, between 20 and 70.");
+    const label = sizeFor(S.brand.sizeChart, { chest, waist });
+    if (!label) return ($("#sizerMsg").textContent = "That is outside this store's chart. Ask the staff to measure you.");
+    S.mem.measure = { chest, waist: waist || undefined };
+    S.mem.size = label;
+    memory.store(S.brand.id, S.mem);
+    link.track("size_pick", { meta: label });
+    $("#sizer").close();
+    caption(`On ${S.brand.name}'s chart you are ${label}.`);
+    renderDetail();
+  };
+  $("#sizer").showModal();
+}
+
 // ---------- catalogue tab ----------
 function renderCatalogue() {
   const lanes = ["all", ...new Set(S.products.map((p) => p.lane))];
@@ -1537,6 +1588,11 @@ async function boot() {
   S.config = await api("/api/config");
   mirror = new Mirror({ cam: $("#cam"), live: $("#live"), config: S.config });
   mirror.auth = link.auth; // so a live session is billed to the right mirror or member
+  // An uploaded photo is shown from the mirror's own canvas, not through the video the camera uses: on some phones a
+  // video fed by a canvas shows nothing when the picture never changes, and the glass stayed empty under "There you are".
+  mirror.canvas.id = "still";
+  mirror.canvas.setAttribute("aria-label", "Your photo");
+  $("#cam").after(mirror.canvas);
   wireMirror();
   wireUI();
   // The pose model blocks the page for a few seconds the first time it runs. Spend them while the

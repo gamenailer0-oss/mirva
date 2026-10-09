@@ -800,3 +800,65 @@ test("a shopper's yes to sending a picture is recorded as an event, with nothing
   assert.equal(res.status, 200);
   assert.deepEqual((await rows(db, "SELECT kind, user FROM events")).map((r) => [r.kind, r.user]), [["consent", null]]);
 });
+
+// ===== 8. proof: sales counted at the store, a pilot's target, a fee on results, a size chart =====
+
+test("sales counted on the mirror's tablet reach the overview, a pilot's target and a Results fee", async () => {
+  const { app, db } = await makeApp();
+  const dev = await pair(db);
+  const boss = await signIn(app, db, "founder");
+  const shop = await signIn(app, db, "retailer", "sapphire");
+  const send = (visit, events) => call(app, "POST", "/api/events", { body: { brand: "sapphire", visit, events }, headers: dev.header });
+  const overview = async () => (await call(app, "GET", "/api/console/overview", { headers: shop.headers })).body;
+  assert.deepEqual((await overview()).sales, { count: 0, pkr: 0, visits: 0, share: 0, byStaff: [] });
+  assert.equal((await overview()).pilot, null);
+
+  await plan(db, "sapphire", "results", 1, "pilot");
+  await send("v1", [{ kind: "portrait" }, { kind: "sale", product: product.id, value: 30000, meta: "Bilal" }]);
+  await send("v2", [{ kind: "portrait" }]);
+  await send("v3", [{ kind: "live_start" }, { kind: "sale", value: 20000, meta: "Bilal" }, { kind: "sale", value: 10000 }]);
+  await send("v4", [{ kind: "sale", value: 5000, meta: "Sana" }]); // bought without trying anything on
+  let o = await overview();
+  assert.deepEqual([o.sales.count, o.sales.pkr, o.sales.visits, Math.round(o.sales.share * 100)], [4, 65000, 2, 67], "two of the three try-on visits bought");
+  assert.deepEqual(o.sales.byStaff, [{ name: "Bilal", n: 2, pkr: 50000 }, { name: "Not named", n: 1, pkr: 10000 }, { name: "Sana", n: 1, pkr: 5000 }]);
+  assert.deepEqual(o.plan.share, { rate: 0.03, cap: 250000, counted: 65000, fee: 26950 }, "the base and 3% of what was counted");
+
+  // A pilot counts from the moment it is set, against one target.
+  const setPilot = (body, who = boss) => call(app, "POST", "/api/hq/retailers/pilot", { body, headers: who.headers });
+  assert.equal((await setPilot({ brand: "sapphire", metric: "nonsense", target: 5 })).status, 400);
+  assert.equal((await setPilot({ brand: "sapphire", metric: "sales", target: 0 })).status, 400);
+  assert.equal((await setPilot({ brand: "atelier", metric: "sales", target: 5 })).status, 404, "a store with no plan has nothing to pilot");
+  assert.equal((await setPilot({ brand: "sapphire", metric: "sales", target: 5 }, shop)).status, 403, "only the founder sets the target");
+  await new Promise((r) => setTimeout(r, 5));
+  assert.equal((await setPilot({ brand: "sapphire", metric: "buy-share", target: 50, days: 60 })).status, 200);
+  o = await overview();
+  assert.deepEqual([o.pilot.metric, o.pilot.target, o.pilot.days, o.pilot.day, o.pilot.value, o.pilot.met, o.pilot.ended], ["buy-share", 50, 60, 1, 0, false, false], "what was counted before it began is not the pilot's");
+  await send("v5", [{ kind: "portrait" }, { kind: "sale", value: 12000, meta: "Sana" }]);
+  await send("v6", [{ kind: "portrait" }]);
+  o = await overview();
+  assert.deepEqual([o.pilot.value, o.pilot.met], [50, true]);
+  assert.match(o.pilot.label, /try-on visits end in a sale/);
+  assert.equal((await setPilot({ brand: "sapphire", clear: true })).body.pilot, null);
+  assert.equal((await overview()).pilot, null);
+
+  // The fee never passes the cap, however good the month.
+  await send("v7", [{ kind: "sale", value: 50000000 }]);
+  assert.equal((await overview()).plan.share.fee, 250000);
+});
+
+test("a store types its size chart and the mirror is given it; nonsense is refused and an empty box takes it away", async () => {
+  const { app, db } = await makeApp({ openMirror: true });
+  const shop = await signIn(app, db, "retailer", "sapphire");
+  const save = (sizeChart) => call(app, "POST", "/api/console/brand", { body: { brand: "sapphire", sizeChart }, headers: shop.headers });
+  const given = async () => (await call(app, "GET", "/api/brands/sapphire")).body.brand.sizeChart;
+  const saved = await save("M, 38-40, 32-34\nS, 34-36");
+  assert.equal(saved.status, 200, JSON.stringify(saved.body));
+  assert.deepEqual(await given(), [{ label: "S", chest: [34, 36], waist: null }, { label: "M", chest: [38, 40], waist: [32, 34] }]);
+  assert.deepEqual((await call(app, "GET", "/api/console/catalogue?brand=sapphire", { headers: shop.headers })).body.brand.sizeChart.length, 2);
+  const bad = await save("our sizes run large");
+  assert.equal(bad.status, 400);
+  assert.match(bad.body.error, /One size to a line/);
+  assert.equal((await given()).length, 2, "a refused chart changes nothing");
+  assert.equal((await save("")).status, 200);
+  assert.deepEqual(await given(), []);
+});

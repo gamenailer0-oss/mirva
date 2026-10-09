@@ -192,7 +192,12 @@ export class Mirror extends EventTarget {
   }
 
   async usePhoto(blob) {
-    const el = await createImageBitmap(blob);
+    let el;
+    try {
+      el = await createImageBitmap(blob, { imageOrientation: "from-image" });
+    } catch {
+      el = await createImageBitmap(blob);
+    }
     this.#useSource({ kind: "photo", el, flip: false });
   }
 
@@ -342,6 +347,10 @@ export class Mirror extends EventTarget {
     }
     this.ctx.drawImage(src.el, sx, Math.max(0, sy), cw, ch, 0, 0, W, H);
     this.ctx.restore();
+    if (src.kind === "photo") {
+      this.ctx.fillStyle = (this.flick = !this.flick) ? "#000" : "#010101";
+      this.ctx.fillRect(0, 0, 1, 1);
+    }
   };
 
   // Who is in the mirror. Costs nothing and runs on this device.

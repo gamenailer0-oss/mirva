@@ -221,6 +221,35 @@
   <p class="sheet-note"><a href="/privacy" target="_blank" rel="noopener">How your picture is handled</a></p>
 </dialog>
 
+<!-- Store staff: a sale that came from this mirror, counted with one tap. -->
+<dialog id="sold" class="sheet narrow" aria-labelledby="soldTitle">
+  <form method="dialog" class="sheet-head">
+    <h2 id="soldTitle">Sold</h2>
+    <button class="textlink" value="close">Close</button>
+  </form>
+  <p class="sheet-copy" id="soldCopy"></p>
+  <form id="soldForm" class="stackform">
+    <label class="fieldrow"><span>Amount</span><input id="soldAmount" class="select" inputmode="numeric" autocomplete="off" required></label>
+    <label class="fieldrow"><span>Sold by</span><input id="soldBy" class="select" maxlength="40" autocomplete="off" placeholder="Your name"></label>
+    <button class="primary small" type="submit">Count this sale</button>
+  </form>
+</dialog>
+
+<!-- A size from the store's own chart, from two measurements. -->
+<dialog id="sizer" class="sheet narrow" aria-labelledby="sizerTitle">
+  <form method="dialog" class="sheet-head">
+    <h2 id="sizerTitle">Find my size</h2>
+    <button class="textlink" value="close">Close</button>
+  </form>
+  <p class="sheet-copy">Two measurements, in inches, and I'll find your size on this store's own chart. They stay on this device.</p>
+  <form id="sizerForm" class="stackform">
+    <label class="fieldrow"><span>Chest</span><input id="sizerChest" class="select" inputmode="decimal" autocomplete="off" required></label>
+    <label class="fieldrow"><span>Waist, if you know it</span><input id="sizerWaist" class="select" inputmode="decimal" autocomplete="off"></label>
+    <button class="primary small" type="submit">Find my size</button>
+  </form>
+  <p id="sizerMsg" class="sheet-note" role="status"></p>
+</dialog>
+
 <dialog id="stores" class="sheet" aria-labelledby="storesTitle">
   <form method="dialog" class="sheet-head">
     <h2 id="storesTitle" tabindex="-1" autofocus>Choose a store</h2>

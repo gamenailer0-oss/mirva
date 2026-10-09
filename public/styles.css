@@ -138,6 +138,10 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 }
 .glass video, .portrait { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 #cam { opacity: 0; transition: opacity .7s var(--ease); }
+/* An uploaded photo: the mirror's own canvas is the picture, and the camera's video stands down. */
+#still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+.glass.photo:not([data-state="asleep"]) #still { display: block; animation: unveil .7s var(--ease); }
+.glass.photo #cam { visibility: hidden; }
 #live { opacity: 0; transition: opacity .6s var(--ease); }
 .glass:not([data-state="asleep"]) #cam { opacity: 1; }
 .glass.has-picture #live { opacity: 1; }
@@ -537,6 +541,10 @@ a.chip { text-decoration: none; }
 .sheet-note { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); min-height: 1em; }
 .sheet-note a { color: inherit; }
 .consent-row { justify-content: center; gap: 18px; margin: 20px 0 6px; }
+.stackform { display: grid; gap: 12px; margin-top: 16px; text-align: left; }
+.fieldrow { display: grid; gap: 6px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.fieldrow input { font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--ink); min-height: 44px; }
+.stackform .primary { justify-self: center; margin-top: 6px; }
 #consentCopy { font-size: 14.5px; line-height: 1.55; color: var(--ink); }
 .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .brand-pick { display: flex; align-items: center; gap: 9px; }
