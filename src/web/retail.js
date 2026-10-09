@@ -26,16 +26,16 @@ const SEGMENTS = {
     kicker: "Where the sale is lost",
     pain: "You have forty stores, and a real stylist in four of them.",
     answer: "Assist puts the same stylist on a staff tablet and on the shopper's own phone in every branch: the same three questions, your catalogue, your sizes.",
-    points: ["One standard of advice, whoever is on shift", "No new hardware: your own tablets", "The price falls from the tenth store"],
+    points: ["One standard of advice, whoever is on shift", "No new hardware: your own tablets", "The price falls from the tenth store, or pay on results instead"],
     plan: "assist",
     sum: { stores: 40, visitors: 300, share: 3, conversion: 22, ticket: 6500 },
   },
   boutique: {
     kicker: "Where the sale is lost",
     pain: "Your clients send a photograph to their family before they decide. Then they go home to wait for the answer.",
-    answer: "MIRVA makes that photograph for them: a studio portrait in your piece, and one link their family can answer from the sofa. Part of what you pay depends on sales it leads to.",
-    points: ["A portrait worth sending, made in fifteen seconds", "Family votes come back while she is still in the store", "A lower fee, plus 2% of matched sales"],
-    plan: "boutique",
+    answer: "MIRVA makes that photograph for them: a portrait in your piece, and one link their family can answer from the sofa. And in the mirror she sees the piece on herself, live, before anything is cut.",
+    points: ["A portrait worth sending, made in fifteen seconds", "Family votes come back while she is still in the store", "The mirror is ours to build and look after"],
+    plan: "studio",
     sum: { stores: 1, visitors: 25, share: 40, conversion: 20, ticket: 45000 },
   },
   unstitched: {
@@ -56,19 +56,24 @@ async function retail() {
   let touched = false;
 
   // ----- plans
+  const n = (x) => Number(x).toLocaleString("en-PK");
+  const toStart = (p, stores = 1) => (p.install || 0) * stores + p.advanceMonths * feeFor(p, stores);
   const card = (p) =>
-    el("article", { class: "plan", "data-plan": p.id, "data-reveal": true },
+    el("article", { class: `plan${p.mirrors ? " dark hero" : ""}`, "data-plan": p.id, "data-reveal": true },
       el("div", { class: "row", style: "justify-content:space-between" }, el("h3", { text: p.name }), el("span", { class: "badge", hidden: true, text: "Start here" })),
-      el("p", { class: "fee num" }, money(p.monthly), el("small", { text: "a store, a month" + (p.monthlyFromTenth ? `. ${money(p.monthlyFromTenth)} from the tenth store.` : p.share ? `, plus ${p.share * 100}% of matched sales. Capped at ${money(p.cap)} in all.` : ".") })),
+      el("p", { class: "fee num" }, money(p.monthly), el("small", { text: "a store, a month" + (p.monthlyFromTenth ? `. ${money(p.monthlyFromTenth)} from the tenth store.` : p.share ? `, plus ${p.share * 100}% of sales counted through MIRVA. Never more than ${money(p.cap)} in all.` : ".") })),
       el("p", { class: "muted small", text: p.fit }),
+      el("ul", { class: "ticks small" }, p.perks.map((t) => el("li", { text: t }))),
       el("dl", {},
-        el("div", {}, el("dt", { text: "Sessions a month" }), el("dd", { class: "num", text: p.sessions.toLocaleString("en-PK") })),
-        el("div", {}, el("dt", { text: "Setup, once" }), el("dd", { class: "num", text: p.setup ? money(p.setup) : "None" })),
-        el("div", {}, el("dt", { text: "Hardware" }), el("dd", { text: p.hardware })),
+        el("div", {}, el("dt", { text: "Live minutes a month" }), el("dd", { class: "num", text: p.liveMinutes ? n(p.liveMinutes) : "With a mirror" })),
+        el("div", {}, el("dt", { text: "Portraits a month" }), el("dd", { class: "num", text: n(p.portraits) })),
+        el("div", {}, el("dt", { text: "Mirror" }), el("dd", { text: p.hardware })),
+        el("div", {}, el("dt", { text: "To start" }), el("dd", { text: p.install ? `${money(p.install)} installation and ${p.advanceMonths} months in advance` : "The first month. Nothing to install." })),
+        el("div", {}, el("dt", { text: "Agreement" }), el("dd", { text: p.termMonths > 1 ? `${p.termMonths} months` : "Month to month" })),
       ),
     );
   fill($("#plans"), ...Object.values(plans).map(card));
-  $("#extraLine").textContent = `${money(extras.sessionOverage)} a session, up to a monthly cap that you set. Catalogue imaging, if you want it: ${money(extras.imagingPerProduct)} a product a season.`;
+  $("#extraLine").textContent = `${money(extras.liveMinutePkr)} a live minute, in blocks of ${extras.liveBlockMinutes}, and only the blocks you agree to. Without them live Studio rests until the 1st and portraits carry on. Catalogue imaging, if you want it: ${money(extras.imagingPerProduct)} a product a season.`;
   reveal($("#plans"));
 
   // ----- the sum
@@ -78,25 +83,28 @@ async function retail() {
     const v = Object.fromEntries(["stores", "visitors", "share", "conversion", "ticket", "margin"].map((k) => [k, Math.max(0, Number(calc.elements[k].value) || 0)]));
     const plan = plans[calc.elements.plan.value];
     const stores = Math.max(1, Math.round(v.stores));
-    const sessions = Math.round(v.visitors * 30 * (v.share / 100)); // a store, a month
-    const over = Math.max(0, sessions - plan.sessions);
-    const fee = feeFor(plan, stores) + over * extras.sessionOverage * stores;
-    const buyers = sessions * stores * (v.conversion / 100);
+    const users = Math.round(v.visitors * 30 * (v.share / 100)); // shoppers who use MIRVA, a store, a month
+    const fee = feeFor(plan, stores);
+    const buyers = users * stores * (v.conversion / 100);
     const perSale = v.ticket * (v.margin / 100);
     const needed = perSale > 0 ? fee / perSale : 0;
     const uplift = buyers > 0 ? (needed / buyers) * 100 : 0;
     const usable = perSale > 0 && buyers > 0;
     $("#rBreak").textContent = usable ? `+${uplift < 10 ? uplift.toFixed(1) : Math.round(uplift)}%` : "—";
     $("#rBreakLine").textContent = usable
-      ? `more sales among the shoppers who use MIRVA. That is ${Math.ceil(needed).toLocaleString("en-PK")} extra sales a month across ${stores === 1 ? "the store" : `${stores} stores`}, beside the ${Math.round(buyers).toLocaleString("en-PK")} those shoppers already make.`
+      ? `more sales among the shoppers who use MIRVA. That is ${n(Math.ceil(needed))} extra sales a month across ${stores === 1 ? "the store" : `${stores} stores`}, beside the ${n(Math.round(buyers))} those shoppers already make.`
       : "Fill in the numbers to see it.";
     $("#rFee").textContent = money(fee);
-    $("#rSessions").textContent = `${sessions.toLocaleString("en-PK")} of ${plan.sessions.toLocaleString("en-PK")}`;
-    $("#rOneIn").textContent = usable ? `${Math.max(1, Math.round((sessions * stores) / needed)).toLocaleString("en-PK")} sessions` : "—";
-    $("#rSetup").textContent = plan.setup ? money(plan.setup * stores) : "None";
+    $("#rSessions").textContent = n(users);
+    $("#rOneIn").textContent = usable ? `${n(Math.max(1, Math.round((users * stores) / needed)))} shoppers` : "—";
+    $("#rSetup").textContent = money(toStart(plan, stores));
     $("#rNote").textContent =
-      (over ? `You would pass the allowance by ${over.toLocaleString("en-PK")} sessions a store, so the fee above includes ${money(over * extras.sessionOverage * stores)} for them. A larger plan may suit you better. ` : "") +
-      (plan.share ? `Boutique also takes ${plan.share * 100}% of sales matched to MIRVA, which this sum leaves out because it is only paid when those sales happen. ` : "") +
+      (plan.liveMinutes
+        ? `${plan.name} includes ${n(plan.liveMinutes)} live minutes a store a month, which is about that many live looks; portraits (${n(plan.portraits)}) cover everyone else. `
+        : `${plan.name} makes portraits (${n(plan.portraits)} a store a month); live Studio comes with a mirror. `) +
+      (users > plan.portraits ? `At these numbers more shoppers would use it than the plan has portraits for, so a larger plan would suit you better. ` : "") +
+      (plan.share ? `Results also takes ${plan.share * 100}% of sales counted through MIRVA, which this sum leaves out because it is only paid when those sales happen. ` : "") +
+      (plan.install ? `"To start" is the installation and the first ${plan.advanceMonths} months, which are part of the fee above, not on top of it. ` : "") +
       "If nothing changed at all, the cost to you is the monthly fee.";
   };
   calc.addEventListener("input", (e) => {
@@ -211,7 +219,7 @@ async function pitch() {
     noticed.push([`${facts.withGap}`, `pieces had at least one size sold out online, ${facts.sizesOut} sizes in all.`, "The mirror tells you which of those sizes shoppers asked for, so you know what a gap really cost."]);
   if (facts.formal)
     noticed.push([`${facts.formal}`, "formal and festive pieces.", "These are bought for an occasion and sent to family first. A studio portrait and a voting link do that inside the store."]);
-  noticed.push([rupees(facts.priceMedian), "is your middle price.", facts.priceMedian >= 20000 ? "At this ticket a few extra sales a week cover a mirror. Studio fits, or Boutique if you run one or two stores." : facts.priceMedian < 8000 ? "At this ticket volume matters more than a mirror. Assist, on tablets you already own, reaches every branch." : "A mirror in your flagships and Assist everywhere else is where stores at this price usually start."]);
+  noticed.push([rupees(facts.priceMedian), "is your middle price.", facts.priceMedian >= 20000 ? "At this ticket a few extra sales a week cover a mirror. Start on Assist, and move to the mirror when you have seen it work." : facts.priceMedian < 8000 ? "At this ticket volume matters more than a mirror. Assist, on tablets you already own, reaches every branch." : "A mirror in your flagships and Assist everywhere else is where stores at this price usually start."]);
   if (facts.addons) noticed.push([`${facts.addons}`, "accessories, shoes and wraps.", "MIRVA suggests up to three with every look, each with a reason, and adds them to what she takes home."]);
 
   fill(main, 

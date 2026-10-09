@@ -110,6 +110,11 @@ const spend = (db, deviceId, usd, { ago = 0, sample = 0, kind = "portrait", bran
 // Visits that reached a try-on (or another kind of event), as a paired mirror would have reported them.
 const visits = (db, deviceId, count, { brandId = "sapphire", kind = "portrait", sample = 0, ago = 0, prefix = "v" } = {}) =>
   db.batch(Array.from({ length: count }, (_, i) => ["INSERT INTO events (at, brand, device, visit, user, kind, product, value, meta, sample) VALUES (?,?,?,?,?,?,?,?,?,?)", Date.now() - ago, brandId, deviceId, `${prefix}${i}`, null, kind, null, null, null, sample]));
+// Live seconds and portraits on the meter, as a paired mirror's try-ons leave them. No dollars, so the day's budget is not in the way.
+const liveUsed = (db, deviceId, seconds, { ago = 0, sample = 0, brandId = "sapphire" } = {}) =>
+  db.run("INSERT INTO usage (at, kind, brand, device, user, seconds, usd, sample) VALUES (?,?,?,?,?,?,?,?)", Date.now() - ago, "live", brandId, deviceId, null, seconds, 0, sample);
+const portraitsUsed = (db, deviceId, count, { ago = 0, sample = 0, brandId = "sapphire", kind = "portrait" } = {}) =>
+  db.batch(Array.from({ length: count }, () => ["INSERT INTO usage (at, kind, brand, device, user, seconds, usd, sample) VALUES (?,?,?,?,?,?,?,?)", Date.now() - ago, kind, brandId, deviceId, null, 0, 0, sample]));
 const rows = (db, sql, ...p) => db.all(sql, ...p);
 const count = async (db, table) => Number((await db.get(`SELECT COUNT(*) AS n FROM ${table}`)).n);
 
@@ -261,62 +266,84 @@ test("a live look is shortened to what the day has left, and refused if that is 
   assert.equal(portrait.status, 200, "a portrait still fits in what is left");
 });
 
-test("a store that has used its month is refused, with room for the overage it has agreed to", async () => {
+test("a store that has used its live minutes is refused live, with room for the minutes it has agreed to; portraits carry on", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);
-  const allowance = RETAIL_PLANS.assist.sessions;
-  await plan(db, "sapphire", "assist", 1, "pilot");
+  const included = RETAIL_PLANS.studio.liveMinutes * 60; // 70 minutes
+  await plan(db, "sapphire", "studio", 1, "pilot");
   const rm = await pair(db, "atelier"); // a mirror of a store with no plan on record
 
-  // 299 real sessions among a lot of things that are not.
-  await visits(db, dev.id, allowance - 1);
-  await visits(db, dev.id, 40, { kind: "visit", prefix: "nothing" }); // stepped up, tried nothing
-  await visits(db, dev.id, 40, { sample: 1, prefix: "sample" }); // seeded sample
-  await visits(db, dev.id, 40, { sample: 2, prefix: "home" }); // members at home
-  await visits(db, null, 40, { prefix: "desk" }); // a signed-in desk, no mirror
-  await visits(db, dev.id, 40, { ago: 40 * DAY, prefix: "old" }); // an earlier month
-  await visits(db, rm.id, 40, { brandId: "atelier", prefix: "else" }); // another store's mirror
-  await db.batch([["INSERT INTO events (at, brand, device, visit, user, kind, product, value, meta, sample) VALUES (?,?,?,?,?,?,?,?,?,?)", Date.now(), "sapphire", dev.id, "v0", null, "live_start", null, null, null, 0]]); // a second try-on in a visit already counted
-  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "299 of 300");
+  // Sixteen seconds short of the plan, among a lot of things that are not this store's month.
+  await liveUsed(db, dev.id, included - 16);
+  await liveUsed(db, dev.id, 5000, { sample: 1 }); // seeded sample
+  await liveUsed(db, null, 5000); // members at home: no mirror
+  await liveUsed(db, dev.id, 5000, { ago: 40 * DAY }); // an earlier month
+  await liveUsed(db, rm.id, 5000, { brandId: "atelier" }); // another store's mirror
+  await portraitsUsed(db, dev.id, 50); // portraits are not live minutes
+  const last = await app.platform.grant(dev.who, "live");
+  assert.deepEqual([last.ok, last.seconds], [true, 16], "the look may run only as long as the month has left");
 
-  await visits(db, dev.id, 1, { prefix: "last" });
-  const refused = await app.platform.grant(dev.who, "portrait");
+  await liveUsed(db, dev.id, 2);
+  const refused = await app.platform.grant(dev.who, "live");
   assert.equal(refused.ok, false);
   assert.equal(refused.status, 429);
-  assert.deepEqual({ error: refused.error, limit: refused.limit }, { error: "This store has used its try-ons for the month. The stylist still works.", limit: "store-month" });
+  assert.deepEqual({ error: refused.error, limit: refused.limit }, { error: "This store has used its live minutes for the month. Here is a portrait instead.", limit: "store-live" });
   const usage = await count(db, "usage");
-  const route = await shot(app, { headers: dev.header });
-  assert.deepEqual([route.status, route.body.limit], [429, "store-month"]);
-  assert.equal((await call(app, "POST", "/api/token", { body: { brand: "sapphire" }, headers: dev.header })).body.limit, "store-month");
+  const route = await call(app, "POST", "/api/token", { body: { brand: "sapphire" }, headers: dev.header });
+  assert.deepEqual([route.status, route.body.limit], [429, "store-live"]);
   assert.equal(await count(db, "usage"), usage, "nothing metered");
   assert.equal(outbound.length, 0, "nothing sent to the engine");
+  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "portraits carry on");
 
-  // The store agrees to five more.
-  await setSettings(db, "sapphire", { overageSessions: 5 });
-  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true);
-  await visits(db, dev.id, 4, { prefix: "extra" });
-  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "304 of 305");
-  await visits(db, dev.id, 1, { prefix: "extra-last" });
-  assert.equal((await app.platform.grant(dev.who, "portrait")).limit, "store-month", "305 of 305");
+  // The store agrees to twenty more minutes.
+  await setSettings(db, "sapphire", { extraLiveMinutes: 20 });
+  assert.deepEqual([(await app.platform.grant(dev.who, "live")).ok, (await app.platform.grant(dev.who, "live")).seconds], [true, 180]);
+  await liveUsed(db, dev.id, 20 * 60);
+  assert.equal((await app.platform.grant(dev.who, "live")).limit, "store-live", "and those run out too");
 
-  // A store with no plan on record is not held to an allowance; the other store's busy month is not its.
-  await visits(db, rm.id, allowance + 50, { brandId: "atelier", prefix: "many" });
-  assert.equal((await app.platform.grant(rm.who, "portrait")).ok, true);
+  // A store with no plan on record is not held to a month; the other store's busy month is not its.
+  await liveUsed(db, rm.id, 99999, { brandId: "atelier" });
+  assert.equal((await app.platform.grant(rm.who, "live")).ok, true);
   // And staff and an open mirror are never held to it.
-  assert.equal((await app.platform.grant({ kind: "staff", user: { id: "s1" } }, "portrait")).ok, true);
-  assert.equal((await app.platform.grant({ kind: "open" }, "portrait")).ok, true);
+  assert.equal((await app.platform.grant({ kind: "staff", user: { id: "s1" } }, "live")).ok, true);
+  assert.equal((await app.platform.grant({ kind: "open" }, "live")).ok, true);
 });
 
-test("a store's allowance is its plan's sessions for every store it has", async () => {
+test("an Assist store has no live Studio and is told where it is; its portraits are counted for every store it has", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);
+  const config = async () => (await call(app, "GET", "/api/config", { headers: dev.header })).body;
+  assert.equal((await config()).studio, true, "no plan on record: nothing is held back");
+
+  await plan(db, "sapphire", "assist", 1, "live");
+  const live = await app.platform.grant(dev.who, "live");
+  assert.deepEqual([live.ok, live.status, live.limit, live.error], [false, 402, "no-live", "Live Studio comes with a MIRVA mirror. Here is a portrait instead."]);
+  assert.equal((await call(app, "POST", "/api/token", { body: { brand: "sapphire" }, headers: dev.header })).body.limit, "no-live");
+  assert.equal((await config()).studio, false, "the mirror page is told, so it never has to ask");
+
+  await portraitsUsed(db, dev.id, RETAIL_PLANS.assist.portraits - 1);
+  await portraitsUsed(db, dev.id, 80, { kind: "backdrop" }); // a studio backdrop comes with its portrait
+  await portraitsUsed(db, dev.id, 80, { sample: 1 });
+  await portraitsUsed(db, dev.id, 80, { ago: 40 * DAY });
+  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "599 of 600");
+  await portraitsUsed(db, dev.id, 1);
+  const full = await app.platform.grant(dev.who, "portrait");
+  assert.deepEqual([full.status, full.limit, full.error], [429, "store-portraits", "This store has used its portraits for the month. The stylist still works."]);
+  const route = await shot(app, { headers: dev.header });
+  assert.deepEqual([route.status, route.body.limit], [429, "store-portraits"]);
+
+  await plan(db, "sapphire", "assist", 2, "live");
+  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "two stores, twice the portraits");
+  await plan(db, "sapphire", "boutique", 1, "live");
+  assert.equal((await app.platform.grant(dev.who, "live")).limit, "no-live", "a store signed as Boutique is on Results, which has no mirror");
+
+  // A mirror plan has live Studio, and two stores have twice the minutes.
   await plan(db, "sapphire", "flagship", 1, "live");
-  await visits(db, dev.id, RETAIL_PLANS.flagship.sessions - 1);
-  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true);
-  await visits(db, dev.id, 1, { prefix: "last" });
-  assert.equal((await app.platform.grant(dev.who, "portrait")).limit, "store-month");
+  assert.equal((await config()).studio, true);
+  await liveUsed(db, dev.id, RETAIL_PLANS.flagship.liveMinutes * 60);
+  assert.equal((await app.platform.grant(dev.who, "live")).limit, "store-live");
   await plan(db, "sapphire", "flagship", 2, "live");
-  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "two stores, twice the sessions");
+  assert.equal((await app.platform.grant(dev.who, "live")).ok, true);
 });
 
 test("one mirror may start forty try-ons in an hour, and a refusal for any other reason does not use one up", async () => {
@@ -405,30 +432,31 @@ test("a store reads and sets its limits; a retailer is held to its own store and
   const first = (await limits(shop)).body;
   assert.equal(first.mirrorDailyUsd, 8);
   assert.equal(first.mirrorDailyPkr, 2216);
-  assert.equal(first.overageSessions, 0);
-  assert.equal(first.overagePkr, 90);
-  assert.equal(first.sessions, null, "no plan on record, no allowance to count");
+  assert.equal(first.extraLiveMinutes, 0);
+  assert.deepEqual([first.liveMinutePkr, first.liveBlockMinutes, first.extraLiveMax], [600, 20, 600]);
+  assert.equal(first.month, null, "no plan on record, no month to count against");
   assert.deepEqual([first.minDailyUsd, first.maxDailyUsd], [1, 20]);
   assert.deepEqual(first.mirrors.map((m) => [m.name, m.spentUsd, m.hit]), [["Front mirror", 0, false]]);
   assert.equal((await limits(boss)).body.maxDailyUsd, 200);
 
   await spend(db, dev.id, 3.5);
-  const saved = await save(shop, { brand: "sapphire", mirrorDailyUsd: "12.5", overageSessions: 40 });
+  const saved = await save(shop, { brand: "sapphire", mirrorDailyUsd: "12.5", extraLiveMinutes: 40 });
   assert.equal(saved.status, 200, JSON.stringify(saved.body));
-  assert.deepEqual([saved.body.mirrorDailyUsd, saved.body.mirrorDailyPkr, saved.body.overageSessions], [12.5, 3463, 40]);
+  assert.deepEqual([saved.body.mirrorDailyUsd, saved.body.mirrorDailyPkr, saved.body.extraLiveMinutes], [12.5, 3463, 40]);
   assert.deepEqual(saved.body.mirrors.map((m) => m.spentUsd), [3.5]);
   assert.equal(saved.body.plan.status, "demo", "a store with no plan gets the placeholder a hidden piece makes");
   assert.equal((await limits(boss)).body.mirrorDailyUsd, 12.5, "the founder sees the same");
-  assert.equal(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).overageSessions, 40);
+  assert.equal(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).extraLiveMinutes, 40);
 
   // One setting at a time leaves the other alone.
-  assert.equal((await save(shop, { brand: "sapphire", mirrorDailyUsd: 9 })).body.overageSessions, 40);
-  assert.equal((await save(shop, { brand: "sapphire", overageSessions: 0 })).body.mirrorDailyUsd, 9);
+  assert.equal((await save(shop, { brand: "sapphire", mirrorDailyUsd: 9 })).body.extraLiveMinutes, 40);
+  assert.equal((await save(shop, { brand: "sapphire", extraLiveMinutes: 0 })).body.mirrorDailyUsd, 9);
 
   // Bounds: a store may not give itself a bigger day than $20, the founder may.
   for (const bad of [0.99, 20.01, 1000, "abc", "", true, null, [8], { n: 8 }, -3])
     assert.equal((await save(shop, { brand: "sapphire", mirrorDailyUsd: bad })).status, 400, `daily ${JSON.stringify(bad)}`);
-  for (const bad of [-1, 1.5, 10001, "x", "", true, null, [1]]) assert.equal((await save(shop, { brand: "sapphire", overageSessions: bad })).status, 400, `overage ${JSON.stringify(bad)}`);
+  for (const bad of [-20, 10, 30, 620, 1.5, "x", "", true, null, [20]]) assert.equal((await save(shop, { brand: "sapphire", extraLiveMinutes: bad })).status, 400, `extra live ${JSON.stringify(bad)}`);
+  assert.match((await save(shop, { brand: "sapphire", extraLiveMinutes: 30 })).body.error, /blocks of 20, from 0 to 600/);
   assert.match((await save(shop, { brand: "sapphire", mirrorDailyUsd: 50 })).body.error, /between \$1 and \$20/);
   assert.equal((await save(shop, { brand: "sapphire" })).status, 400);
   assert.equal((await limits(shop)).body.mirrorDailyUsd, 9, "refusals changed nothing for the store");
@@ -445,7 +473,7 @@ test("a store reads and sets its limits; a retailer is held to its own store and
   // It is audited, with who and what.
   const trail = await rows(db, "SELECT actor, action, target FROM audit WHERE action = 'limits-changed' ORDER BY id");
   assert.ok(trail.length >= 4);
-  assert.deepEqual({ ...trail[0] }, { actor: shop.id, action: "limits-changed", target: "sapphire daily=12.5 overage=40" });
+  assert.deepEqual({ ...trail[0] }, { actor: shop.id, action: "limits-changed", target: "sapphire daily=12.5 extra-live=40" });
 
   // The new budget is the one a mirror is held to.
   await save(boss, { brand: "sapphire", mirrorDailyUsd: 3.5 });
@@ -460,72 +488,83 @@ test("a store reads and sets its limits; a retailer is held to its own store and
   assert.equal((await call(app, "POST", "/api/console/limits", { body: { mirrorDailyUsd: 5 }, headers: { cookie } })).status, 403);
 });
 
-test("the overview shows sessions used, the allowance, how far over, and what that bills", async () => {
+test("the overview shows the month: live minutes and portraits used, what the plan includes, how far past it, and what that bills", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);
   const shop = await signIn(app, db, "retailer", "sapphire");
   const overview = async () => (await call(app, "GET", "/api/console/overview", { headers: shop.headers })).body.plan;
-  assert.equal(await overview(), null, "no plan, no allowance");
+  assert.equal(await overview(), null, "no plan, nothing to count against");
 
-  await plan(db, "sapphire", "assist", 2, "live"); // 600 sessions
-  await visits(db, dev.id, 10);
-  await visits(db, dev.id, 30, { sample: 1, prefix: "sample" });
+  await plan(db, "sapphire", "assist", 2, "live");
+  await portraitsUsed(db, dev.id, 10);
+  await portraitsUsed(db, dev.id, 30, { sample: 1 });
   let p = await overview();
-  assert.deepEqual([p.sessions, p.used, p.over, p.overagePkr, p.overageCap, p.overage], [600, 10, 0, 0, 0, 90]);
+  assert.deepEqual([p.id, p.name, p.monthly, p.mirrors], ["assist", "Assist", 50000, 0]);
+  assert.deepEqual(p.portraits, { used: 10, included: 1200, stopped: false });
+  assert.deepEqual([p.live.included, p.live.usedMinutes, p.live.stopped], [0, 0, true], "Assist has no live Studio to use");
 
-  await visits(db, dev.id, 615);
+  await plan(db, "sapphire", "studio", 1, "live");
+  await liveUsed(db, dev.id, 75 * 60);
   p = await overview();
-  assert.deepEqual([p.used, p.over, p.overagePkr, p.stopped], [615, 15, 1350, true]);
-  await setSettings(db, "sapphire", { overageSessions: 100 });
+  assert.deepEqual(p.live, { usedMinutes: 75, included: 70, extra: 0, limit: 70, over: 5, overPkr: 3000, stopped: true });
+  assert.equal(p.minutePkr, 600);
+  await setSettings(db, "sapphire", { extraLiveMinutes: 20 });
   p = await overview();
-  assert.deepEqual([p.overageCap, p.stopped, p.monthly, p.id], [100, false, 70000, "assist"]);
+  assert.deepEqual([p.live.extra, p.live.limit, p.live.stopped, p.monthly, p.id], [20, 90, false, 95000, "studio"]);
+  await liveUsed(db, dev.id, 7); // a part of a minute is a tenth more on the gauge and a whole minute on the bill
+  assert.deepEqual([(await overview()).live.usedMinutes, (await overview()).live.over], [75.2, 6]);
 
   const stats = await call(app, "GET", "/api/console/limits", { headers: shop.headers });
-  assert.deepEqual(stats.body.sessions, { used: 615, allowance: 600, overage: 100, limit: 700, over: 15, overPkr: 1350, stopped: false });
+  assert.deepEqual(stats.body.month.live, { usedMinutes: 75.2, included: 70, extra: 20, limit: 90, over: 6, overPkr: 3600, stopped: false });
+  assert.deepEqual(stats.body.month.portraits, { used: 10, included: 2500, stopped: false });
 });
 
 // ===== 5. what the founder is told ============================================================
 
-test("the founder is told about stores near or over their allowance, with what to bill", async () => {
+test("the founder is told about stores near or past their live minutes, with what to bill", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);
   const boss = await signIn(app, db, "founder");
   const needs = async () => (await call(app, "GET", "/api/hq/overview", { headers: boss.headers })).body;
   assert.deepEqual((await needs()).needs, [], "a quiet system has nothing for the founder");
 
-  await plan(db, "sapphire", "assist", 1, "pilot"); // 300 sessions
-  await visits(db, dev.id, 239);
-  assert.deepEqual((await needs()).needs, [], "79.7% is not yet");
+  await plan(db, "sapphire", "studio", 1, "pilot"); // 70 live minutes
+  await liveUsed(db, dev.id, 55 * 60 + 54);
+  assert.deepEqual((await needs()).needs, [], "55.9 of 70 is not yet");
 
-  await visits(db, dev.id, 1, { prefix: "eighty" });
+  await liveUsed(db, dev.id, 6);
   let o = await needs();
   assert.deepEqual(o.needs.map((n) => n.kind), ["store-near"]);
-  assert.match(o.needs[0].text, /Sapphire has used 240 of its 300 sessions this month \(80%\)\./);
-  assert.deepEqual(o.retailers[0].sessions, { used: 240, allowance: 300, overage: 0, limit: 300, over: 0, overPkr: 0, stopped: false });
+  assert.match(o.needs[0].text, /Sapphire has used 56 of its 70 live minutes this month \(80%\)\./);
+  assert.deepEqual(o.retailers[0].month.live, { usedMinutes: 56, included: 70, extra: 0, limit: 70, over: 0, overPkr: 0, stopped: false });
+  assert.deepEqual([o.retailers[0].plan, o.retailers[0].planName], ["studio", "Mirror"]);
 
-  await visits(db, dev.id, 60, { prefix: "full" });
+  await liveUsed(db, dev.id, 14 * 60);
   o = await needs();
   assert.deepEqual(o.needs.map((n) => n.kind), ["store-near"]);
-  assert.match(o.needs[0].text, /300 of its 300.*stopped until the 1st/, "at the allowance with no overage the mirrors have stopped");
+  assert.match(o.needs[0].text, /70 of its 70.*Live Studio has stopped there until the 1st/, "at the plan's minutes with none agreed, live has stopped");
 
-  await setSettings(db, "sapphire", { overageSessions: 50 });
-  await visits(db, dev.id, 20, { prefix: "past" });
+  await setSettings(db, "sapphire", { extraLiveMinutes: 40 });
+  await liveUsed(db, dev.id, 10 * 60);
   o = await needs();
   assert.deepEqual(o.needs.map((n) => n.kind), ["store-over"]);
-  assert.equal(o.needs[0].over, 20);
-  assert.equal(o.needs[0].pkr, 1800);
-  assert.match(o.needs[0].text, /Sapphire is over its allowance: 320 sessions this month against 300 included\. That is 20 to bill, Rs\.1,800 at Rs\.90 each\. Its overage cap is 50, so 30 more can run\./);
+  assert.equal(o.needs[0].over, 10);
+  assert.equal(o.needs[0].pkr, 6000);
+  assert.match(o.needs[0].text, /Sapphire is past its plan: 80 live minutes this month against 70 included\. That is 10 live minutes to bill, Rs\.6,000 at Rs\.600 each\. It has agreed to 40 extra, so about 30 more can run\./);
 
-  await setSettings(db, "sapphire", { overageSessions: 20 });
-  assert.match((await needs()).needs[0].text, /Its mirrors have stopped until the 1st\./);
+  await setSettings(db, "sapphire", { extraLiveMinutes: 0 });
+  assert.match((await needs()).needs[0].text, /Live Studio has stopped there until the 1st; portraits carry on\./);
 
-  // Only paired mirrors count: the seeded sample and members at home do not push a store over.
+  // Only paired mirrors count: the seeded sample and members at home do not push a store over. A plan with no live has nothing to be near.
   const quiet = await makeApp();
   const qd = await pair(quiet.db);
   const qboss = await signIn(quiet.app, quiet.db, "founder");
+  await plan(quiet.db, "sapphire", "studio", 1, "pilot");
+  await liveUsed(quiet.db, qd.id, 99999, { sample: 1 });
+  await liveUsed(quiet.db, null, 99999);
+  assert.deepEqual((await call(quiet.app, "GET", "/api/hq/overview", { headers: qboss.headers })).body.needs, []);
   await plan(quiet.db, "sapphire", "assist", 1, "pilot");
-  await visits(quiet.db, qd.id, 500, { sample: 1 });
-  await visits(quiet.db, qd.id, 500, { sample: 2, prefix: "home" });
+  await portraitsUsed(quiet.db, qd.id, 590);
   assert.deepEqual((await call(quiet.app, "GET", "/api/hq/overview", { headers: qboss.headers })).body.needs, []);
 });
 
@@ -624,8 +663,8 @@ test("an account out of credit is rested, recorded, told to the founder once a d
   assert.equal((await db.get("SELECT at FROM flags WHERE key = 'tryon-credit'")).at, flag.at, "it remembers when it first noticed");
 
   // On the founder's desk, first.
-  await plan(db, "sapphire", "assist", 1, "pilot");
-  await visits(db, dev.id, 250); // and a store near its allowance
+  await plan(db, "sapphire", "studio", 1, "pilot");
+  await liveUsed(db, dev.id, 60 * 60); // and a store near its live minutes
   const needs = (await hq()).needs;
   assert.equal(needs[0].kind, "credit");
   assert.match(needs[0].text, /^The try-on account is out of credit\./);
@@ -641,7 +680,7 @@ test("an account out of credit is rested, recorded, told to the founder once a d
   assert.equal((await shot(app, { headers: dev.header })).status, 200);
   assert.equal(await db.get("SELECT 1 AS n FROM flags WHERE key = 'tryon-credit'"), undefined);
   assert.deepEqual((await hq()).needs.map((n) => n.kind), ["store-near"]);
-  assert.equal(await count(db, "usage"), 1, "and that one was metered");
+  assert.equal(await count(db, "usage"), 2, "and that one was metered, beside the hour of live put there above");
 });
 
 test("an out-of-credit token is rested too, and a working token clears the flag", async () => {

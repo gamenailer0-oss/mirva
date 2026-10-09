@@ -65,6 +65,11 @@
 .plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); margin-bottom: var(--s7); }
 .plan { display: grid; gap: var(--s4); align-content: start; padding: clamp(20px, 2.2vw, 28px); border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); transition: transform var(--calm) var(--ease), box-shadow var(--calm); }
 .plan.suggested { box-shadow: 0 0 0 1.5px var(--ink); }
+/* The mirror plans are the product, so they are the glass: dark, where Assist and Results are paper. */
+.plan.hero { background: radial-gradient(90% 70% at 50% 0%, var(--glass-lift), var(--glass) 75%); color: var(--ink); box-shadow: none; }
+.plan.hero.suggested { box-shadow: 0 0 0 1.5px var(--pearl); }
+.plan .ticks.small { gap: 8px; font-size: 14px; line-height: 1.4; }
+.plan dd { text-align: right; max-width: 62%; }
 .plan h3 { font: 400 28px/1 var(--serif); }
 .plan .fee { font: 400 clamp(26px, 2.6vw, 34px)/1 var(--serif); }
 .plan .fee small { display: block; margin-top: 6px; font: 400 13px/1.3 var(--sans); color: var(--muted); }
@@ -124,3 +129,6 @@
   .figures { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) { .brandmark .for { display: none; } }
+
+/* Two rows of terms under the plans sit apart from each other. */
+.terms + .terms { margin-top: var(--s6); }

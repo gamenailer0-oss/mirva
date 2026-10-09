@@ -178,13 +178,15 @@ test("password rules ask for length, not symbols", () => {
 });
 
 test("a retailer's monthly fee follows the plan, with a lower rate from the tenth Assist store", () => {
-  assert.equal(monthlyFee("assist", 12), 9 * 35000 + 3 * 25000);
-  assert.equal(monthlyFee("assist", 1), 35000);
-  assert.equal(monthlyFee("assist", 9), 9 * 35000);
-  assert.equal(monthlyFee("assist", 10), 9 * 35000 + 25000);
+  assert.equal(monthlyFee("assist", 12), 9 * 25000 + 3 * 20000);
+  assert.equal(monthlyFee("assist", 1), 25000);
+  assert.equal(monthlyFee("assist", 9), 9 * 25000);
+  assert.equal(monthlyFee("assist", 10), 9 * 25000 + 20000);
   assert.equal(monthlyFee("studio", 2), 190000);
   assert.equal(monthlyFee("studio", 12), 12 * 95000, "only Assist has a volume rate");
-  assert.equal(monthlyFee("flagship", 2), 320000);
+  assert.equal(monthlyFee("flagship", 2), 390000);
+  assert.equal(monthlyFee("results", 3), 75000, "the base; the share is billed from counted sales");
+  assert.equal(monthlyFee("boutique", 1), 25000, "a store signed as Boutique is read as Results");
   assert.equal(monthlyFee("studio"), 95000, "one store unless told otherwise");
   assert.equal(monthlyFee("studio", 0), 95000, "never fewer than one store");
   assert.equal(monthlyFee("nope", 3), 0);
@@ -986,16 +988,19 @@ test("a retailer's plan sets the monthly fee the console shows", async () => {
   assert.equal((await desk.post("/api/hq/retailers", { brand: "sapphire", plan: "studio", stores: 2, status: "pilot" })).status, 200);
   const o = await overview();
   assert.equal(o.plan.monthly, 190000);
-  assert.deepEqual([o.plan.id, o.plan.stores, o.plan.status, o.plan.sessions], ["studio", 2, "pilot", 1200]);
+  assert.deepEqual([o.plan.id, o.plan.name, o.plan.stores, o.plan.status, o.plan.mirrors, o.plan.live.included, o.plan.portraits.included], ["studio", "Mirror", 2, "pilot", 2, 140, 5000]);
 
   assert.equal((await desk.post("/api/hq/retailers", { brand: "sapphire", plan: "assist", stores: 12, status: "live" })).status, 200);
-  assert.equal((await overview()).plan.monthly, 9 * 35000 + 3 * 25000, "the Assist volume rate reaches the console");
+  assert.equal((await overview()).plan.monthly, 9 * 25000 + 3 * 20000, "the Assist volume rate reaches the console");
   const hq = (await desk.get("/api/hq/overview")).body;
   const row = hq.retailers.find((r) => r.brand === "sapphire");
-  assert.equal(row.monthly, 390000);
+  assert.equal(row.monthly, 285000);
+  assert.deepEqual([row.plan, row.planName], ["assist", "Assist"]);
   assert.equal(row.name, "Sapphire");
   assert.equal(hq.mrr, hq.retailers.filter((r) => r.status === "live").reduce((sum, r) => sum + r.monthly, 0));
-  assert.ok(hq.mrr >= 390000);
+  assert.ok(hq.mrr >= 285000);
+  assert.equal((await desk.post("/api/hq/retailers", { brand: "sapphire", plan: "boutique", stores: 1, status: "live" })).status, 200);
+  assert.deepEqual([(await overview()).plan.id, (await overview()).plan.name], ["results", "Results"], "the old name is stored as the plan that took its place");
 
   assert.equal((await desk.post("/api/hq/retailers", { brand: "sapphire", plan: "studio", stores: 0, status: "whatever" })).status, 200);
   const odd = (await overview()).plan;

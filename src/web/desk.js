@@ -211,10 +211,10 @@ const VIEWS = {
             el("dt", { text: "Live looks" }), el("dd", { class: "num", text: `${num((spend.live?.seconds || 0) / 60)} min · ${money((spend.live?.usd || 0) * 277)}` }),
             el("dt", { text: "Together" }), el("dd", { class: "num", text: money(o.spend.pkr) }),
             o.plan && [el("dt", { text: "Plan" }), el("dd", { text: `${o.plan.name}, ${plural(o.plan.stores, "store")} (${o.plan.status})` })],
-            // Sessions are this calendar month at the store's paired mirrors, the way the allowance is counted.
-            o.plan && [el("dt", { text: "Sessions this month" }), el("dd", { class: "num", text: `${num(o.plan.used)} of ${num(o.plan.sessions)} in the allowance` })],
-            o.plan && [el("dt", { text: "Over the allowance" }), el("dd", { class: "num", text: o.plan.over ? `${num(o.plan.over)} · ${money(o.plan.overagePkr)} at ${money(o.plan.overage)} each` : `None. Each extra session is ${money(o.plan.overage)}` })],
-            o.plan && [el("dt", { text: "Overage cap" }), el("dd", { text: o.plan.overageCap ? `Up to ${num(o.plan.overageCap)} extra, ${money(o.plan.overageCap * o.plan.overage)} at most` : "None: mirrors stop at the allowance" })],
+            // This calendar month at the store's paired mirrors, the way the plan is counted.
+            o.plan && [el("dt", { text: "Live minutes this month" }), el("dd", { class: "num", text: o.plan.live.included ? `${num(o.plan.live.usedMinutes)} of ${num(o.plan.live.included)}${o.plan.live.extra ? `, plus ${num(o.plan.live.extra)} agreed` : ""}` : "None in this plan. Live Studio comes with a mirror." })],
+            o.plan && o.plan.live.over > 0 && [el("dt", { text: "Past the plan" }), el("dd", { class: "num", text: `${num(o.plan.live.over)} min · ${money(o.plan.live.overPkr)} at ${money(o.plan.minutePkr)} each` })],
+            o.plan && [el("dt", { text: "Portraits this month" }), el("dd", { class: "num", text: `${num(o.plan.portraits.used)} of ${num(o.plan.portraits.included)}` })],
             o.plan && [el("dt", { text: "Fee" }), el("dd", { class: "num", text: `${money(o.plan.monthly)} a month` })],
           ),
           o.plan && el("a", { class: "link muted small", href: "#limits", text: "Change the limits", onclick: (e) => (e.preventDefault(), go("limits")) }),
@@ -299,10 +299,10 @@ const VIEWS = {
   },
 
   // What try-ons may cost at the store's mirrors, in the store's own hands: a budget for each mirror a day,
-  // and how far past the monthly allowance of sessions the store is willing to go.
+  // and how many live minutes past its plan's own the store is willing to pay for in a month.
   async limits() {
     const L = await api(`/api/console/limits?brand=${S.brand}`);
-    const s = L.sessions;
+    const m = L.month;
     const usd = (n) => "$" + (Number.isInteger(Number(n)) ? String(Number(n)) : Number(n).toFixed(2));
     const pkr = (n) => money(Math.round(Number(n) * 277));
 
@@ -324,37 +324,44 @@ const VIEWS = {
       go("limits");
     });
 
-    const extra = el("input", { name: "overageSessions", type: "number", inputMode: "numeric", min: 0, max: L.overageMax, step: "1", value: String(L.overageSessions), required: true });
-    const extraHint = el("span", { class: "hint" });
-    const showExtra = () => {
-      const n = Math.max(0, Math.round(Number(extra.value) || 0));
-      extraHint.textContent = n ? `Up to ${num(n)} extra sessions, ${money(n * L.overagePkr)} at most, billed after the month ends.` : "Mirrors stop when the allowance is used, and start again on the 1st.";
-    };
-    extra.addEventListener("input", showExtra);
-    showExtra();
+    // Extra live minutes come in blocks. With none, live Studio stops at the plan's own minutes and portraits carry on.
+    const blocks = Array.from({ length: Math.floor(L.extraLiveMax / L.liveBlockMinutes) + 1 }, (_, i) => i * L.liveBlockMinutes);
+    const extra = el("select", { name: "extraLiveMinutes" }, blocks.map((n) => el("option", { value: String(n), selected: n === L.extraLiveMinutes, text: n ? `${num(n)} minutes, up to ${money(n * L.liveMinutePkr)}` : "None" })));
+    const hasLive = !!(m && m.live.included);
     const extraForm = el("form", { class: "panel form" },
-      el("h2", { text: "If the month's sessions run out" }),
-      el("label", { class: "field" }, el("span", { text: "Extra sessions you will pay for" }), extra, extraHint),
-      el("p", { class: "fine", text: `${L.plan ? `Your ${L.plan.name} plan includes ${num(s.allowance)} sessions a month for ${plural(L.plan.stores, "store")}. ` : ""}A session is one shopper who reaches at least one look, with up to four personal renders. Each session past the allowance is ${money(L.overagePkr)}. Zero stops the mirrors when the allowance is used; the stylist keeps working.` }),
-      el("p", { class: "formnote", role: "alert" }),
-      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save the cap" }),
-    );
-    onSubmit(extraForm, async (d) => {
-      await api("/api/console/limits", { brand: S.brand, overageSessions: d.overageSessions });
-      toast("Saved.");
-      go("limits");
-    });
-
-    const month = el("section", { class: "panel" },
-      el("h2", { text: "Sessions this month" }),
-      s
+      el("h2", { text: "If the month's live minutes run out" }),
+      hasLive
         ? [
-            el("p", { class: "lead", text: `${num(s.used)} of ${num(s.allowance)}` }),
-            el("div", { class: "gauge", role: "img", "aria-label": `${num(s.used)} of ${num(s.allowance)} sessions used`, style: `--v:${Math.min(1, s.used / Math.max(1, s.allowance))}` }, el("i")),
-            el("p", { class: "muted small", text: s.over ? `${num(s.over)} over the allowance: ${money(s.overPkr)} at ${money(L.overagePkr)} each.` : `${num(Math.max(0, s.allowance - s.used))} left in the allowance.` }),
-            s.stopped && el("p", { class: "formnote", text: "The mirrors have stopped making try-ons for the month. The stylist still works." }),
+            el("label", { class: "field" }, el("span", { text: "Extra live minutes you will pay for" }), extra),
+            el("p", { class: "fine", text: `Your ${L.plan.name} plan includes ${num(m.live.included)} live minutes a month for ${plural(L.plan.stores, "store")}. A live minute past them is ${money(L.liveMinutePkr)}, and you are billed only for the minutes used. With none agreed, live Studio rests when the plan's minutes are used and comes back on the 1st; portraits and the stylist carry on.` }),
+            el("p", { class: "formnote", role: "alert" }),
+            el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
           ]
-        : el("p", { class: "muted", text: "No plan is on record for this store yet, so there is no monthly allowance to count against. The daily budget below still applies." }),
+        : el("p", { class: "muted", text: L.plan ? `Live Studio is not part of ${L.plan.name}. It comes with a MIRVA mirror: the piece on the shopper, live, as she turns. Ask us about adding one.` : "No plan is on record for this store yet." }),
+    );
+    if (hasLive)
+      onSubmit(extraForm, async (d) => {
+        await api("/api/console/limits", { brand: S.brand, extraLiveMinutes: Number(d.extraLiveMinutes) });
+        toast("Saved.");
+        go("limits");
+      });
+
+    const gauge = (used, of, label) => el("div", { class: "gauge", role: "img", "aria-label": `${num(used)} of ${num(of)} ${label} used`, style: `--v:${Math.min(1, used / Math.max(1, of))}` }, el("i"));
+    const month = el("section", { class: "panel" },
+      el("h2", { text: "This month" }),
+      m
+        ? [
+            hasLive && [
+              el("p", { class: "lead", text: `${num(m.live.usedMinutes)} of ${num(m.live.included)} live minutes` }),
+              gauge(m.live.usedMinutes, m.live.limit, "live minutes"),
+              el("p", { class: "muted small", text: m.live.over ? `${num(m.live.over)} past the plan: ${money(m.live.overPkr)} at ${money(L.liveMinutePkr)} each.` : `${num(Math.max(0, Math.round((m.live.included - m.live.usedMinutes) * 10) / 10))} left in the plan${m.live.extra ? `, and ${num(m.live.extra)} more agreed` : ""}.` }),
+              m.live.stopped && el("p", { class: "formnote", text: "Live Studio is resting for the month. Portraits and the stylist carry on." }),
+            ],
+            el("p", { class: "lead", style: hasLive ? "margin-top:18px" : "", text: `${num(m.portraits.used)} of ${num(m.portraits.included)} portraits` }),
+            gauge(m.portraits.used, m.portraits.included, "portraits"),
+            m.portraits.stopped && el("p", { class: "formnote", text: "The month's portraits are used. The stylist still works." }),
+          ]
+        : el("p", { class: "muted", text: "No plan is on record for this store yet, so there is nothing to count the month against. The daily budget below still applies." }),
     );
     const today = el("section", { class: "panel" },
       el("h2", { text: "Today at each mirror" }),
@@ -367,7 +374,7 @@ const VIEWS = {
     );
     fill(work(),
       head("Limits"),
-      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "What try-ons are allowed to cost at your mirrors. The daily budget is a ceiling on each mirror, so a busy day or a stuck screen cannot run up a bill. The cap on extra sessions decides whether a busy month can go past your plan, and what that would cost you." }),
+      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "What try-ons are allowed to cost at your mirrors. The daily budget is a ceiling on each mirror, so a busy day or a stuck screen cannot run up a bill. The extra live minutes you agree to decide whether a busy month can go past your plan, and what that would cost you." }),
       el("div", { class: "grid2" }, month, today),
       el("div", { class: "grid2" }, dailyForm, extraForm),
     );
@@ -445,7 +452,7 @@ const VIEWS = {
         panel("Real try-on spend, day by day", chart(days, "pkr"), el("p", { class: "fine", text: "In rupees, at Decart's list price. Sample activity is left out." })),
       ),
       el("div", { class: "grid2" },
-        panel("Stores", o.retailers.length ? el("div", { class: "rows" }, o.retailers.map((r) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: r.name }), el("div", { class: "sub", text: `${cap(r.plan)} · ${plural(r.stores, "store")} · ${r.status}${r.sessions ? ` · ${num(r.sessions.used)} of ${num(r.sessions.allowance)} sessions` : ""}` })), el("b", { class: "num", text: money(r.monthly) })))) : empty("No stores yet.")),
+        panel("Stores", o.retailers.length ? el("div", { class: "rows" }, o.retailers.map((r) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: r.name }), el("div", { class: "sub", text: `${r.planName || cap(r.plan)} · ${plural(r.stores, "store")} · ${r.status}${r.month ? (r.month.live.included ? ` · ${num(r.month.live.usedMinutes)} of ${num(r.month.live.included)} live min` : "") + ` · ${num(r.month.portraits.used)} of ${num(r.month.portraits.included)} portraits` : ""}` })), el("b", { class: "num", text: money(r.monthly) })))) : empty("No stores yet.")),
         panel("The system",
           el("dl", { class: "kv" },
             el("dt", { text: "Try-on" }), el("dd", { text: o.system.live ? `On · ${o.system.model}` : "Off" }),

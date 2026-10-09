@@ -119,6 +119,9 @@ function askToJoin() {
 const RESTING = "Try-on is resting just now. Please try again in a little while.";
 const FULL_LINE = "That's a full fitting. Tap Start over for the next one, or ask the staff.";
 const CAMERA_DOWN_LINE = "The camera has stopped. Tap Try the camera again, then pick a look.";
+// A store on a plan without live Studio (Assist): the Studio button stays, says where live is, and gives a portrait.
+const NO_LIVE_LINE = "Live Studio comes with a MIRVA mirror. Here is a portrait instead.";
+const noLive = () => S.config?.studio === false;
 
 // What one shopper may use of a store mirror before the next one: the server says (`visit` in /api/config), and a paired
 // mirror whose server has not said uses these. Anyone else is not held to a visit. A number that is absent, null or not
@@ -890,6 +893,7 @@ async function studio(p) {
   if (!S.config.live) return caption(forShopper() ? RESTING : "Live try-on is off. Add your Decart key to the .env file and restart.");
   // At home, live video is a Private perk: it costs by the second and no store is paying for it.
   if (link.member && !link.member.tier.liveSecondsPerMonth) return (S.mode = "model"), caption("Live Studio is in MIRVA stores. At home, I'll make you a portrait."), modelShot(p);
+  if (noLive()) return (S.mode = "model"), caption(NO_LIVE_LINE), modelShot(p);
   if (mirror.cameraDown) return caption(CAMERA_DOWN_LINE);
   if (fullFitting("live")) return caption(FULL_LINE);
   if (mirror.presence.known && !mirror.presence.present) return caption("Step into the mirror so I can see you.");
@@ -914,6 +918,13 @@ async function studio(p) {
     console.error(e);
     sweep(false);
     S.developing?.cancel();
+    // The store's live minutes for the month are used, or its plan has none: the server says so, and a portrait is made.
+    if (e?.limit === "store-live" || e?.limit === "no-live") {
+      if (e.limit === "no-live") S.config.studio = false;
+      S.mode = "model";
+      syncGlass();
+      return modelShot(p);
+    }
     caption(friendly(e));
     syncGlass();
   }
@@ -1466,6 +1477,7 @@ async function boot() {
   memory.setStoreMirror(!!link.pairedTo());
   memory.setOwner(link.member?.user.id);
   document.body.classList.toggle("shopper", forShopper()); // hides the cost meter and the Adapt sheet
+  if (noLive()) $('#modes [data-mode="studio"] span').textContent = "With a MIRVA mirror";
   if (!first.id) return noStore();
   await loadBrand(first.id);
   // "See them on you" on the home page names the occasion the reader chose there: the conversation carries on from it.
