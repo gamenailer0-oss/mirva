@@ -65,6 +65,8 @@ live video, because nobody is paying for it there. Those allowances are in `lib/
 | Seeing | Framing, the walked-away pause, cropping the store model's face out of references | `src/vision.js` |
 | Her own head | The engine redraws the head with the clothes. Before any portrait is shown, the shopper's own head is laid back on it from the frame she sent. One path for every store. | `src/restore.js` |
 | The store's garment | The engine is given the store's photo at its largest, cut down to the garment, and an instruction that names the piece but no colour: the photo decides colour, print and embroidery. When a second pass changes the wall, the garment from the first picture is laid back. No portrait is drawn from a description alone. | `src/reference.js`, `lib/prompt.mjs`, `src/restore.js` |
+| The oval | MIRVA's own mirror is an oval. A store sets a paired mirror's glass to oval in its console; the page then keeps everything inside that outline, with the dock under it. `?glass=oval` shows it on any screen. | `public/styles.css`, `lib/platform.mjs` |
+| A weak line | When live video will not connect or drops, the glass offers a portrait in one tap. | `src/main.js` |
 | The stylist | Occasion, mood and budget to three looks, and what goes with each. Rules, not a language model. | `src/stylist.js` |
 | The tablet | The conversation, look cards, sizes, add-ons, kept looks | `src/main.js`, `public/mirror.html` |
 | The line to the platform | Which mirror this is, what happened, the QR code to a phone | `src/link.js` |

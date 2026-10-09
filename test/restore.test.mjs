@@ -60,6 +60,27 @@ test("a garment picture is cut down to the figure, and a speck does not widen it
   assert.equal(figureBox(new Uint8Array(W * H), W, H, 0), null, "and so is a photo with no figure found");
 });
 
+// A line that will not carry live video still carries a portrait. It is offered in one tap, and only when Studio has
+// failed: a Studio that works is never interrupted with it.
+test("a portrait is offered when live video will not connect or drops, and nowhere else", () => {
+  const offers = [...main.matchAll(/offerPortrait\(/g)].length;
+  assert.equal(offers, 3, "the function, and its two calls");
+  assert.match(main, /caption\(friendly\(e\)\);\s*syncGlass\(\);\s*if \(weakLine\(e\)\) offerPortrait\(p\);/, "after a Studio that would not start");
+  assert.match(main, /if \(reason === "lost" \|\| reason === "nopicture"\) offerPortrait\(was \|\| S\.selected\);/, "and after one that dropped");
+  const weak = main.slice(main.indexOf("const weakLine"), main.indexOf("function offerPortrait"));
+  assert.match(weak, /!e\?\.limit/, "a refusal by the server (a ceiling, a plan) is not a weak line");
+  const offer = main.slice(main.indexOf("function offerPortrait"), main.indexOf("// Why a look ended"));
+  assert.match(offer, /p\.photoOnly \|\| !S\.config\.live \|\| mirror\.cameraDown \|\| fullFitting\("portrait"\)/, "never for a piece or a visit that cannot have a portrait");
+});
+
+test("the oval mirror keeps the dock off the glass and the tall-or-wide switch away", () => {
+  const css = read("public/styles.css");
+  assert.match(main, /S\.config\.glass === "oval" \|\| new URLSearchParams\(location\.search\)\.get\("glass"\) === "oval"/);
+  assert.match(css, /\[data-glass="oval"\] \.glass \{ border-radius: 50%; \}/);
+  assert.match(css, /\[data-glass="oval"\] #shapeBtn \{ display: none; \}/);
+  assert.match(css, /\[data-glass="oval"\] \.dock \{\s*position: static;/, "on a wide screen too the dock sits under the oval");
+});
+
 test("the restore does not depend on the store: one path for every brand, present and future", () => {
   assert.doesNotMatch(helper, /brand|sapphire|lawrencepur/i);
   const restore = read("src/restore.js");

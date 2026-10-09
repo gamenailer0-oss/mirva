@@ -707,3 +707,65 @@ a.chip { text-decoration: none; }
   /* the glass never leaves the screen on its side, so the bar is always docked */
   .ask { position: sticky; bottom: calc(6px + env(safe-area-inset-bottom)); z-index: 6; }
 }
+
+/* ---------- the oval mirror ---------- */
+/* MIRVA's own mirror is an oval glass (set for a paired mirror in the store's console; "?glass=oval" on any screen).
+   Everything written on it keeps inside that outline: the crest at its head, MIRVA's line at its foot, both centred
+   and narrow where the oval is narrow, and the tools at its widest point, out by the edge. Lengths are taken from the
+   glass itself (cqw and cqh: hundredths of its width and height), since a corner of the box is no longer glass.
+   The dock never lies on the picture: it sits under the oval on its own slab, at every width. */
+[data-glass="oval"] .glass { border-radius: 50%; }
+[data-glass="oval"] #shapeBtn { display: none; }
+[data-glass="oval"] .halo { top: 5.5cqh; width: min(34cqw, 170px); }
+[data-glass="oval"] .glass-top,
+[data-glass="oval"] .glass:not([data-state="asleep"]) .glass-top { justify-content: center; text-align: center; padding: calc(5.5cqh + 34px) 0 0; }
+[data-glass="oval"] .brandline,
+[data-glass="oval"] .glass:not([data-state="asleep"]) .brandline { align-items: center; max-width: 46cqw; }
+[data-glass="oval"] .glass:not([data-state="asleep"]) .glass-top { padding-top: calc(4.5cqh + 22px); }
+[data-glass="oval"] .glass:not([data-state="asleep"]) .halo { left: 50%; top: 4.5cqh; width: 54px; transform: translateX(-50%); }
+[data-glass="oval"] .glass:not([data-state="asleep"]) .wordmark { margin-right: -.24em; }
+[data-glass="oval"] .glass-tools { top: 38cqh; right: 6cqw; transform: translateY(-50%); flex-direction: column-reverse; align-items: flex-end; gap: 8px; }
+[data-glass="oval"] .tool-row { flex-direction: column; }
+[data-glass="oval"] .glass-bottom,
+[data-glass="oval"] .frame[data-dock] .glass-bottom { padding: 0 19cqw 10.5cqh; align-items: center; text-align: center; }
+[data-glass="oval"] .notes { align-items: center; }
+[data-glass="oval"] .wearing { justify-content: center; max-width: 100%; }
+[data-glass="oval"] .caption { font-size: clamp(15px, 5.4cqmin, 24px); }
+[data-glass="oval"] .toast { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 12px 10px; text-align: center; }
+[data-glass="oval"] .reel-words { inset: 24cqh 15cqw 30cqh; }
+[data-glass="oval"] .seeing-words { left: 15cqw; right: 15cqw; bottom: 32cqh; }
+[data-glass="oval"] .wake { padding: 22cqh 15cqw 11cqh; }
+[data-glass="oval"] .wake-copy { max-width: 26ch; }
+[data-glass="oval"] .wake-notice { max-width: 22ch; }
+[data-glass="oval"] .glass[data-state="asleep"] .brandline { max-width: 60cqw; }
+[data-glass="oval"] .cam-lost { padding: 0 17cqw; }
+[data-glass="oval"] .compare { padding: 17cqh 13cqw 15cqh; align-items: start; background: rgb(8, 10, 15); }
+[data-glass="oval"] .compare .close { top: auto; right: auto; bottom: 6cqh; left: 50%; transform: translateX(-50%); }
+[data-glass="oval"] .glass[data-state="portrait"] .veil, [data-glass="oval"] .glass[data-state="live"] .veil {
+  background: linear-gradient(180deg, rgba(6,8,12,.5), transparent 17%), linear-gradient(0deg, rgba(6,8,12,.8), transparent 34%);
+}
+@container glass (max-height: 440px) {
+  [data-glass="oval"] .wake { padding-top: 24cqh; }
+}
+/* On one tall screen (the mirror itself, or a phone) the oval is the first thing on it and never moves: the looks she
+   has kept sit under the dock, not above the glass, so the bar that holds them can grow without pushing the oval down.
+   A mirror's front can then be cut to the oval, since the oval is always in the same place behind it. */
+@media (max-width: 980px) and (orientation: portrait) {
+  [data-glass="oval"] .stage { order: 1; padding-top: calc(14px + env(safe-area-inset-top)); }
+  [data-glass="oval"] .wardrobe { order: 2; border-bottom: 0; border-top: 1px solid var(--line); padding-top: 10px; }
+  [data-glass="oval"] .tablet { order: 3; }
+}
+/* Beside the stylist on a wide screen: the oval as tall as the window allows, the dock under it. */
+@media (min-width: 981px) {
+  [data-glass="oval"] .frame, [data-glass="oval"] .frame[data-shape="landscape"] {
+    width: 100%; height: auto; aspect-ratio: auto; display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  [data-glass="oval"] .glass {
+    position: relative; inset: auto; flex: none; aspect-ratio: 9 / 16;
+    height: min(calc(100dvh - 44px - 90px), calc((100vw - 92px - clamp(380px, 33vw, 480px) - 44px) * 16 / 9));
+  }
+  [data-glass="oval"] .dock {
+    position: static; width: 100%; max-width: 440px; padding: 8px; border-radius: 24px; background: var(--glass);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(6, 9, 16, .8);
+  }
+}

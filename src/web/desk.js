@@ -306,6 +306,27 @@ const VIEWS = {
           el("p", { class: "mono", text: d.pairUrl }),
           el("button", { class: "btn ghost small", type: "button", style: "justify-self:start", text: "Copy the address", onclick: () => copy(d.pairUrl) }),
         ),
+        // MIRVA's own mirror is an oval: its page keeps every word and button inside that outline. Any other screen is plain.
+        el("label", { class: "row small", style: "gap:10px" },
+          el("span", { class: "muted", text: "Glass" }),
+          (() => {
+            const pick = el("select", { class: "input", style: "min-height:36px;width:auto", "aria-label": `Glass of ${d.name}` },
+              el("option", { value: "plain", text: "A plain screen" }),
+              el("option", { value: "oval", text: "The oval mirror" }),
+            );
+            pick.value = d.glass === "oval" ? "oval" : "plain";
+            pick.onchange = async () => {
+              try {
+                await api("/api/console/devices/glass", { id: d.id, glass: pick.value });
+                toast(pick.value === "oval" ? "This mirror now shows the oval. It changes the next time the mirror's page opens." : "This mirror now shows a plain glass.");
+              } catch (e) {
+                toast(e.message);
+                pick.value = d.glass === "oval" ? "oval" : "plain";
+              }
+            };
+            return pick;
+          })(),
+        ),
         el("div", { class: "row" },
           el("button", { class: "link", type: "button", text: d.paired ? "Unpair and make a new code" : "New code", onclick: async () => (await api("/api/console/devices/code", { id: d.id }).catch((e) => toast(e.message)), go("mirrors")) }),
           el("button", { class: "link muted", type: "button", text: "Remove", onclick: async (e) => {
@@ -317,7 +338,7 @@ const VIEWS = {
       );
     fill(work(), 
       head("Mirrors"),
-      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "A mirror is any screen with a camera and a browser. Pairing ties it to your store, so its try-ons are counted here and nobody else's screen can spend on your account." }),
+      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "A mirror is any screen with a camera and a browser. Pairing ties it to your store, so its try-ons are counted here and nobody else's screen can spend on your account. Set a MIRVA mirror's glass to oval and its page keeps everything inside that outline." }),
       add,
       devices.length ? el("div", { class: "grid2" }, devices.map(card)) : empty("No mirrors yet. Add one above."),
     );

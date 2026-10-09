@@ -389,6 +389,7 @@ test("a paired mirror is told how a visit is shaped; everyone else gets the conf
   assert.equal(plain.body.visit, null);
   assert.equal(plain.body.idleSeconds, 75);
   assert.deepEqual(Object.keys(plain.body).sort(), ["idleSeconds", "live", "model", "open", "ratePerSecond", "sessionSeconds", "shotPrice", "usdToPkr", "visit"]);
+  assert.equal(plain.body.glass, undefined, "a browser that is no store's mirror is told nothing about its glass");
 
   const mine = await call(app, "GET", "/api/config", { headers: dev.header });
   assert.deepEqual(mine.body.visit, { liveLooks: 4, liveSeconds: 240, portraits: 8, resetSeconds: 60 });
@@ -411,6 +412,38 @@ test("a paired mirror is told how a visit is shaped; everyone else gets the conf
   const joined = await call(app, "POST", "/api/auth/join", { body: { name: "A Shopper", email: "shopper@example.com", password: "a long enough phrase", agree: true } });
   const cookie = joined.headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
   assert.equal((await call(app, "GET", "/api/config", { headers: { cookie, ...dev.header } })).body.visit, null);
+});
+
+// MIRVA's own mirror is an oval. A store says which of its mirrors is one, and only that mirror's page is told, so
+// the page can keep every word and button inside the outline.
+test("a store sets a mirror's glass to oval, and that mirror alone is told", async () => {
+  const { app, db } = await makeApp();
+  const dev = await pair(db);
+  const second = await pair(db, "sapphire", "Back mirror");
+  const staff = await signIn(app, db, "retailer", "sapphire");
+  const glass = async (d = dev) => (await call(app, "GET", "/api/config", { headers: d.header })).body.glass;
+  const set = (value, id = dev.id, headers = staff.headers) => call(app, "POST", "/api/console/devices/glass", { headers, body: { id, glass: value } });
+  const listed = async () => (await call(app, "GET", "/api/console/devices?brand=sapphire", { headers: staff.headers })).body.devices;
+  assert.equal(await glass(), "plain");
+
+  await plan(db, "sapphire", "studio", 1, "pilot", { photoOnly: ["A"], visit: { liveLooks: 2 } });
+  assert.deepEqual([(await set("oval")).status, await glass(), await glass(second)], [200, "oval", "plain"]);
+  assert.deepEqual((await listed()).map((d) => d.glass), ["oval", "plain"]);
+  const kept = JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings);
+  assert.deepEqual([kept.photoOnly, kept.visit], [["A"], { liveLooks: 2 }], "the store's other settings are left as they were");
+
+  // only plain or oval, only by the store's own people, and never without signing in
+  assert.equal((await set("round")).status, 400);
+  const other = await signIn(app, db, "retailer", "atelier");
+  assert.equal((await set("plain", dev.id, other.headers)).status, 404);
+  assert.ok([401, 403].includes((await set("plain", dev.id, {})).status));
+  assert.equal(await glass(), "oval");
+
+  assert.deepEqual([(await set("plain")).status, await glass()], [200, "plain"]);
+  // a mirror that is removed takes its setting with it
+  await set("oval", second.id);
+  assert.equal((await call(app, "POST", "/api/console/devices/remove", { headers: staff.headers, body: { id: second.id } })).status, 200);
+  assert.deepEqual(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).glass, {});
 });
 
 test("a shorter idle wait never lengthens a short one", async () => {

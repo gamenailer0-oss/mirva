@@ -1002,7 +1002,27 @@ async function studio(p) {
     }
     caption(friendly(e));
     syncGlass();
+    if (weakLine(e)) offerPortrait(p);
   }
+}
+
+// The line here would not carry live video: it never connected, or it dropped. A portrait needs one picture up and one
+// down, so it is offered in a single tap. Only on that path: a Studio that works is never interrupted with it.
+const weakLine = (e) =>
+  !e?.limit && (e?.kind === "slow" || e?.name === "TimeoutError" || e?.name === "AbortError" || /network|failed to fetch|websocket|ice|timeout|connect/i.test(String(e?.message || "")));
+function offerPortrait(p) {
+  if (!p || p.photoOnly || !S.config.live || mirror.cameraDown || fullFitting("portrait")) return;
+  const t = $("#toast");
+  const go = h("button", { type: "button", text: "Portrait instead" });
+  go.addEventListener("click", () => {
+    t.hidden = true;
+    S.mode = "model";
+    syncGlass();
+    modelShot(p);
+  });
+  t.replaceChildren(h("span", { text: "The connection here is not carrying live video." }), go);
+  t.hidden = false;
+  syncGlass();
 }
 
 // Why a look ended, for the reasons the stylist has no line for.
@@ -1130,6 +1150,7 @@ function wireMirror() {
     syncGlass();
   });
   mirror.addEventListener("ended", ({ detail: { reason, elapsed, grant } }) => {
+    const was = S.wearing;
     link.track("live_end", { value: Math.round(elapsed), grant, meta: reason });
     glass.classList.remove("has-picture");
     $("#toast").hidden = true;
@@ -1147,6 +1168,7 @@ function wireMirror() {
     markCards();
     renderDetail();
     if (reason !== "reshape" && reason !== "switch") caption(ENDED[reason] || line(`ended.${reason}`) || line("ended.user"));
+    if (reason === "lost" || reason === "nopicture") offerPortrait(was || S.selected);
   });
   mirror.addEventListener("fault", ({ detail }) => caption(friendly(detail)));
   mirror.addEventListener("shape", ({ detail: { shape, wearing } }) => {
@@ -1601,6 +1623,8 @@ function noStore() {
 
 async function boot() {
   S.config = await api("/api/config");
+  // MIRVA's own mirror is an oval. A store's paired mirror is told so by its console; "?glass=oval" shows it on any screen.
+  if (S.config.glass === "oval" || new URLSearchParams(location.search).get("glass") === "oval") document.documentElement.dataset.glass = "oval";
   mirror = new Mirror({ cam: $("#cam"), live: $("#live"), config: S.config });
   mirror.auth = link.auth; // so a live session is billed to the right mirror or member
   // An uploaded photo is shown from the mirror's own canvas, not through the video the camera uses: on some phones a
