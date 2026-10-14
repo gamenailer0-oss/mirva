@@ -484,11 +484,21 @@ const VIEWS = {
       el("div", { class: "crest" }, el("span", { class: "wm", text: brand.name.toUpperCase() }), el("span", { class: "by", id: "lfBy", text: state.byline })),
       el("span", { class: "pill", id: "lfPill", text: "On you" }),
     );
+    // The mood is the stylist's panel under the glass (the glass itself is always dark), so the preview shows that panel.
+    const tablet = el("div", { class: "lf-tablet", "aria-hidden": "true" },
+      el("p", { class: "lf-say", text: "What are we shopping for?" }),
+      el("div", { class: "lf-chips" }, el("span", { class: "lf-chip on", text: "A wedding" }), el("span", { class: "lf-chip", text: "Eid" }), el("span", { class: "lf-chip", text: "Work" })),
+      el("span", { class: "lf-go", id: "lfGo", text: "Keep" }),
+    );
+    const preview = el("div", { class: "lf-preview" }, glass, tablet, el("p", { class: "fine", style: "text-align:center", text: "How your mirror looks" }));
     const paint = () => {
+      tablet.dataset.tone = state.mood;
+      const go = $("#lfGo", tablet);
+      go.style.background = state.accent;
       const pill = $("#lfPill", glass);
       pill.style.background = state.accent;
       const [r, g, b] = [1, 3, 5].map((i) => parseInt(state.accent.slice(i, i + 2), 16));
-      pill.style.color = r * 0.299 + g * 0.587 + b * 0.114 > 150 ? "#0a0c11" : "#fff";
+      pill.style.color = go.style.color = r * 0.299 + g * 0.587 + b * 0.114 > 150 ? "#0a0c11" : "#fff";
       $("#lfBy", glass).textContent = state.byline;
       for (const b of $$("[data-mood-set]", form)) b.classList.toggle("on", b.dataset.moodSet === state.mood);
     };
@@ -497,7 +507,7 @@ const VIEWS = {
       el("div", { class: "field" }, el("span", { text: "Mood of the tablet" }), el("div", { class: "row" }, ["porcelain", "noir"].map((m) => el("button", { class: "chip", type: "button", "data-mood-set": m, text: cap(m), onclick: () => ((state.mood = m), paint()) })))),
       field("Your colour", el("input", { type: "color", name: "accent", value: state.accent, style: "padding:4px;height:50px", oninput: (e) => ((state.accent = e.target.value), paint()) })),
       field("The line under your name", el("input", { name: "byline", value: state.byline, maxLength: 40, oninput: (e) => ((state.byline = e.target.value), paint()) })),
-      el("p", { class: "fine", text: "The glass itself is always dark. Your colour marks what the shopper is wearing and the one button that matters." }),
+      el("p", { class: "fine", text: "The mood is the stylist's panel under the glass: light (Porcelain) or dark (Noir). The glass itself is always dark. Your colour marks what the shopper is wearing and the one button that matters." }),
       el("p", { class: "formnote", role: "alert" }),
       el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
     );
@@ -518,7 +528,7 @@ const VIEWS = {
       toast("Saved. Mirrors pick it up the next time they load.");
       go("look");
     });
-    fill(work(), head("Look and feel"), el("div", { class: "lookfeel" }, form, glass), chart);
+    fill(work(), head("Look and feel"), el("div", { class: "lookfeel" }, form, preview), chart);
     paint();
   },
 
