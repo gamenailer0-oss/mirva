@@ -60,6 +60,24 @@ test("a garment picture is cut down to the figure, and a speck does not widen it
   assert.equal(figureBox(new Uint8Array(W * H), W, H, 0), null, "and so is a photo with no figure found");
 });
 
+// Shown the model's shorts under a shirt, the engine put shorts on the shopper; shown the model's top above a pair of
+// jeans, it changed her top. So a western top's picture ends just below the hips and a lower piece's starts just above.
+test("a western top's picture ends just below the hips, and jeans start just above them", async () => {
+  const { hemBox, waistRow } = await import("../src/reference.js");
+  const H = 1000, pose = { hips: true, shoulderY: 0.2, hipY: 0.6 };
+  const box = { x: 100, y: 150, width: 600, height: 850 };
+  const top = hemBox(pose, box, H);
+  assert.equal(top.y, 150, "the top of the picture stays");
+  assert.equal(top.y + top.height, 628, "and it ends 0.07 of the torso below the hips");
+  assert.deepEqual(hemBox({ ...pose, hips: false }, box, H), box, "with no hips found it is left whole");
+  assert.deepEqual(hemBox(pose, { ...box, height: 400 }, H), { ...box, height: 400 }, "and a picture that already ends higher is not stretched");
+  assert.equal(hemBox(pose, null, H), null);
+  assert.equal(waistRow(pose, 150, H), 560, "a lower piece starts 0.1 of the torso above the hips");
+  assert.equal(waistRow(pose, 700, H), 700, "never above where it would start anyway");
+  assert.equal(waistRow(null, 100, H), 460, "and with no pose, 40% of the way down");
+  assert.equal(waistRow(pose, null, H), null, "a product shot goes whole");
+});
+
 // A line that will not carry live video still carries a portrait. It is offered in one tap, and only when Studio has
 // failed: a Studio that works is never interrupted with it.
 test("a portrait is offered when live video will not connect or drops, and nowhere else", () => {

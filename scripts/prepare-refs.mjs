@@ -114,13 +114,13 @@ try {
     let out;
     try {
       out = await page.evaluate(
-        async (url, skin, side, lower) => {
+        async (url, skin, side, lower, upper) => {
           const { cleanReference } = await import("/dist/reference.js");
           const res = await fetch(`/img?u=${encodeURIComponent(url)}&w=${side}`);
           if (!res.ok) return { error: `picture ${res.status}` };
           // The largest photo the store's site will give, cut down to the figure: a print or a line of embroidery is
           // then several times larger in what the engine is given. CPU: same answer on every machine.
-          const r = await cleanReference(await res.blob(), { delegates: ["CPU"], skin, tight: true, maxSide: side, lower });
+          const r = await cleanReference(await res.blob(), { delegates: ["CPU"], skin, tight: true, maxSide: side, lower, upper });
           let b64 = null;
           if (r.blob) {
             const bytes = new Uint8Array(await r.blob.arrayBuffer());
@@ -134,6 +134,7 @@ try {
         p.refSkin === "head" || p.refSkin === "all" ? p.refSkin : skin,
         SIDE,
         regionFor(p) === "lower body garment",
+        p.tradition === "west" && regionFor(p) === "upper body garment",
       );
     } catch (e) {
       out = { error: String(e.message || e).split("\n")[0] };

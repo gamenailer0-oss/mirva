@@ -781,7 +781,7 @@ a.chip { text-decoration: none; }
   --sheet: clamp(292px, 42svh, 400px);
   position: fixed; inset: 0; display: block; height: auto; min-height: 0; padding: 0;
 }
-:root.phone-app .app[data-sheet="mini"] { --sheet: calc(132px + env(safe-area-inset-bottom)); }
+:root.phone-app .app[data-sheet="mini"] { --sheet: calc(142px + env(safe-area-inset-bottom)); }
 :root.phone-app .wardrobe {
   position: absolute; z-index: 6; inset: 0 0 auto 0; height: var(--top); flex-direction: row; align-items: center; gap: 10px;
   padding: env(safe-area-inset-top) 12px 0 12px; border: 0; background: var(--bg);
@@ -828,11 +828,22 @@ a.chip { text-decoration: none; }
 :root.phone-app .store-bar { padding-top: 2px; }
 /* folded: just the three looks in a row, to switch between them; everything else is one swipe up */
 :root.phone-app .app[data-sheet="mini"] .tablet { overflow: hidden; }
-:root.phone-app .app[data-sheet="mini"] :is(.store-bar, .tablet-head, #say, #chips, #refine, #detail, #catalogue, .ask, .notice) { display: none !important; }
-:root.phone-app .app[data-sheet="mini"] #foryou { display: block !important; }
-:root.phone-app .app[data-sheet="mini"] .looks { display: flex; gap: 10px; overflow-x: auto; padding: 0 0 4px; scrollbar-width: none; }
+:root.phone-app .app[data-sheet="mini"] :is(.store-bar, .tablet-head, #say, #chips, #refine, #detail, #lanes, .ask, .notice) { display: none !important; }
+:root.phone-app .app[data-sheet="mini"] :is(.looks, .grid) { display: flex; gap: 10px; overflow-x: auto; padding: 0 0 4px; scrollbar-width: none; }
+/* chosen from the catalogue: folded, the catalogue is the row */
+:root.phone-app .app[data-sheet="mini"] .grid { margin: 0 -5px; padding: 5px 5px 8px; }
+:root.phone-app .app[data-sheet="mini"] .grid .look { content-visibility: visible; contain-intrinsic-block-size: none; animation: none; }
+/* chosen some other way (a kept look, a store's own website): folded, that piece and the way back to the stylist */
+.solo { display: none; }
+:root.phone-app .app[data-sheet="mini"] .looks:empty { display: none; }
+:root.phone-app .app[data-sheet="mini"] .solo:not([hidden]) { display: flex; align-items: center; gap: 14px; padding: 5px 0 6px; }
+.solo .shot { flex: none; width: 70px; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--ink); }
+.solo .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.solo-words { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.solo .name { font-size: 13.5px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.solo .price { font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
 :root.phone-app .app[data-sheet="mini"] .look { flex: 0 0 auto; width: 70px; display: block; }
-:root.phone-app .app[data-sheet="mini"] .look .shot { width: 70px; aspect-ratio: 3 / 4; }
+:root.phone-app .app[data-sheet="mini"] .look .shot { display: block; width: 70px; aspect-ratio: 3 / 4; border-radius: 12px; }
 :root.phone-app .app[data-sheet="mini"] .look :is(.name, .price, .why, .badge) { display: none; }
 :root.phone-app .app[data-sheet="mini"] .look[aria-current="true"] .shot,
 :root.phone-app .app[data-sheet="mini"] .look.on .shot { box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--ink); }

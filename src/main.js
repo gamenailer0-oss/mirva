@@ -401,13 +401,37 @@ function renderLooks() {
   box.replaceChildren(...(S.step === "looks" ? S.looks.map((k, i) => lookCard(k.product, { ...k, first: i === 0 && !k.stretch })) : []));
   if (S.step === "looks") box.append(h("button", { class: "mini-more", type: "button", text: "More", "aria-label": "Show the stylist", onclick: () => setSheet("peek") }));
   markCards();
-  // On a phone the three looks arrive inside the panel: it brings them fully into view.
+  renderSolo();
+  // On a phone the three looks arrive inside the panel: it brings them fully into view. Her line is then either whole
+  // or scrolled out of sight (it is one swipe back), never cut through the middle of a word.
   if (phoneApp() && S.step === "looks" && $("#app").dataset.sheet === "peek")
     requestAnimationFrame(() => {
       const panel = $(".tablet");
-      panel.scrollTo({ top: Math.max(0, box.offsetTop + box.offsetHeight - panel.clientHeight + 14), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      const said = $("#say");
+      const lid = $("#sheetHandle").offsetHeight + 4; // the handle stays at the top, over what scrolls under it
+      const end = said.offsetTop + said.offsetHeight;
+      let top = Math.max(0, box.offsetTop + box.offsetHeight - panel.clientHeight + 14);
+      if (top + lid > said.offsetTop && top + lid < end) top = Math.min(end + 2 - lid, box.offsetTop - lid);
+      panel.scrollTo({ top, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     });
   renderDetail();
+}
+
+// Folded on a phone, the panel shows the three looks. A piece that came another way (a kept look, a link from a store's
+// own website) has no three looks around it, so the folded panel shows that piece and the way back to the stylist.
+// (From the catalogue, the folded panel is the catalogue itself, as a row.)
+function renderSolo() {
+  const box = $("#solo");
+  const p = S.step !== "looks" ? S.selected : null;
+  box.hidden = !p;
+  if (!p) return void (box.replaceChildren(), delete box.dataset.pid);
+  if (box.dataset.pid === p.id) return;
+  box.dataset.pid = p.id;
+  box.replaceChildren(
+    h("span", { class: "shot" }, h("img", { decoding: "async", src: pic(p.image, 160), alt: "" })),
+    h("span", { class: "solo-words" }, h("span", { class: "name", text: p.name }), h("span", { class: "price", text: money(p.price) })),
+    h("button", { class: "mini-more", type: "button", text: "More", "aria-label": "Show the stylist", onclick: () => setSheet("peek") }),
+  );
 }
 
 function markCards() {
@@ -580,6 +604,19 @@ function syncSheet() {
   if (app.dataset.sheet !== next) {
     app.dataset.sheet = next;
     if (next !== "full") $(".tablet").scrollTop = 0;
+    // Folded, the row shows the piece she is wearing, wherever it sits in the catalogue. A catalogue card that was off
+    // screen (content-visibility) is only laid out in the row a frame or two later, so it is waited for.
+    if (next === "mini") {
+      let frames = 0;
+      const centre = () => {
+        const on = $(".pane:not([hidden]) .look.on");
+        if (!on) return;
+        if (!on.offsetWidth) return void (++frames < 12 && requestAnimationFrame(centre));
+        const row = on.parentElement;
+        row.scrollLeft += on.getBoundingClientRect().left - row.getBoundingClientRect().left - (row.clientWidth - on.offsetWidth) / 2;
+      };
+      requestAnimationFrame(centre);
+    }
   }
   $("#sheetHandle").setAttribute("aria-expanded", String(next === "full"));
   $("#sheetHandle").setAttribute("aria-label", next === "full" ? "Show the mirror again" : "Show more of the stylist");
@@ -637,7 +674,7 @@ async function reference(p) {
         const { cleanReference } = await import("./reference.js");
         // A larger photo than the look card shows, cut down to the figure: the engine reads the print and the embroidery from these pixels.
         const large = await fetch(pic(p.image, 1200)).catch(() => null);
-        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200, lower: regionFor(p) === "lower body garment" })).blob;
+        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200, lower: regionFor(p) === "lower body garment", upper: p.tradition === "west" && regionFor(p) === "upper body garment" })).blob;
       } catch (e) {
         console.warn("Could not prepare the garment picture.", e);
       }
@@ -675,6 +712,7 @@ function choose(p) {
   link.track("look_open", { product: p.id });
   if (S.step === "looks") renderDetail();
   markCards();
+  renderSolo();
   if (p.photoOnly) return syncGlass(), caption(PHOTO_ONLY_LINE), openPhoto(p);
   if (!mirror.awake) return needMirror(p);
   mirror.preload();
@@ -1444,6 +1482,7 @@ function showTab(name) {
   }
   $("#foryou").hidden = name !== "foryou";
   $("#catalogue").hidden = name !== "catalogue";
+  $("#app").dataset.pane = name;
   if (phoneApp() && name === "catalogue") setSheet("full");
 }
 

@@ -440,6 +440,24 @@ function cropTop(canvas, top) {
   return out;
 }
 
+// A piece worn below the waist (jeans, trousers, a skirt) is cut from just above the hips: shown the model's top and
+// shoes as well, the engine restyles the shopper's own top and shoes to match. `row` is where the picture would start,
+// `pose` what body() found (shares of the height), H the canvas height. Without hips, the cut is 40% of the way down.
+export function waistRow(pose, row, H) {
+  if (row == null) return row;
+  const at = pose?.hips && pose.hipY > pose.shoulderY ? pose.hipY - (pose.hipY - pose.shoulderY) * 0.1 : null;
+  return Math.max(row, Math.round((at ?? (row / H + (1 - row / H) * 0.4)) * H));
+}
+
+// A western top (a shirt, a jacket, a sweatshirt) stops a little below the hips for the same reason: shown the model's
+// shorts or jeans, the engine puts them on the shopper too (0.07 of the torso below the hips kept her own jeans exact on
+// a real portrait; 0.14 and more let the model's jeans through). An eastern kameez is long and is never cut.
+export function hemBox(pose, box, H) {
+  if (!box || !pose?.hips || !(pose.hipY > pose.shoulderY)) return box;
+  const end = Math.round((pose.hipY + (pose.hipY - pose.shoulderY) * 0.07) * H);
+  return end > box.y + 40 && end < box.y + box.height ? { ...box, height: end - box.y } : box;
+}
+
 /**
  * Prepares a garment photo.
  *
@@ -456,9 +474,10 @@ function cropTop(canvas, top) {
  * Options: maxSide (pixels), skin "auto" | "head" | "all" (whether hands and arms below the shoulders are painted out too;
  * auto does so only when a lot of bare skin would be left), tight (cut the picture down to the figure, see figureBox),
  * lower (the piece is worn below the waist: with tight, the picture starts just above the hips),
+ * upper (a western top: with tight, the picture ends a little below the hips),
  * delegates (default GPU then CPU; only the first call's choice is used), debug (adds trace, full, views).
  */
-export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft = 0.4, tight = false, lower = false, delegates, debug = false } = {}) {
+export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft = 0.4, tight = false, lower = false, upper = false, delegates, debug = false } = {}) {
   const bmp = await createImageBitmap(blob);
   try {
     const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
@@ -478,16 +497,11 @@ export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft 
     let figure = null; // the label map, once the segmenter has looked
     // The picture that goes out: from row `row` of the work canvas down and, when asked, only as wide as the figure.
     // A product shot with nobody in it (no row given) goes whole: there the model's idea of cloth is not to be trusted.
-    // A piece worn below the waist (jeans, trousers, a skirt) is cut from just above the hips: shown the model's top and
-    // shoes as well, the engine restyles the shopper's own top and shoes to match.
-    const waist = (row) => {
-      if (!lower || row == null) return row;
-      const at = pose?.hips && pose.hipY > pose.shoulderY ? pose.hipY - (pose.hipY - pose.shoulderY) * 0.1 : null;
-      return Math.max(row, Math.round((at ?? (row / H + (1 - row / H) * 0.4)) * H));
-    };
+    const waist = (row) => (lower ? waistRow(pose, row, H) : row);
+    const hem = (box) => (upper ? hemBox(pose, box, H) : box);
     const framed = (canvas, row) => {
       row = waist(row);
-      const box = tight && figure && row != null ? figureBox(figure, W, H, row) : null;
+      const box = hem(tight && figure && row != null ? figureBox(figure, W, H, row) : null);
       if (!box) return { canvas, box: null };
       const out = canvasOf(box.width, box.height);
       out.getContext("2d").drawImage(work, box.x, box.y, box.width, box.height, 0, 0, box.width, box.height);
