@@ -1411,3 +1411,52 @@ test("joining asks for 18 or over in the same breath as the terms", async () => 
   const r = await visitor().post("/api/auth/join", { name: "No Tick", email: mailFor("notick"), password: PASSWORD });
   err(r, 400, /18 or over.*terms.*privacy notice/);
 });
+
+// --- a store's own website (public/embed.js) ------------------------------------------
+test("a store's website gets a pass only when the store named it and has signed, and only it may hold the mirror", async () => {
+  const desk = await founder();
+  const site = "https://shop.example.com";
+  const ask = (origin, store = "lawrencepur") =>
+    raw("/api/embed/session", { method: "POST", headers: { origin, "content-type": "text/plain" }, body: JSON.stringify({ store }) });
+  let r = await ask(site);
+  assert.equal(r.status, 403, "a website the store has not named gets nothing");
+  assert.equal(r.headers["access-control-allow-origin"], site, "and is told so in a way its page can read");
+  assert.equal((await desk.post("/api/console/website", { brand: "lawrencepur", sites: "shop.example.com" })).status, 200);
+  assert.deepEqual((await desk.get("/api/console/website?brand=lawrencepur")).body.sites, [site]);
+  assert.equal((await ask(site)).status, 403, "named, but a store that has not signed has no pass to give");
+  assert.equal((await desk.post("/api/hq/retailers", { brand: "lawrencepur", plan: "assist", stores: 1, status: "pilot" })).status, 200);
+  r = await ask(site);
+  assert.equal(r.status, 200, r.body);
+  const { pass, mirror } = JSON.parse(r.body);
+  assert.match(mirror, /\/mirror\?brand=lawrencepur&embed=[A-Za-z0-9_-]{16,}$/);
+  assert.equal((await ask("https://elsewhere.example.com")).status, 403, "another website gets nothing");
+  const pre = await raw("/api/embed/session", { method: "OPTIONS", headers: { origin: site } });
+  assert.equal(pre.status, 204);
+  // With the pass the website is one of the store's mirrors: portraits from its plan, no live Studio.
+  const shopper = visitor();
+  assert.equal((await shopper.get("/api/config", { "x-mirva-embed": pass })).body.studio, false);
+  assert.equal((await shopper.get("/api/config", { "x-mirva-embed": "not-a-real-pass-at-all" })).body.studio, undefined);
+  // The mirror opened with the pass may sit in that website's sheet; without one it can never be framed.
+  const held = await raw(`/mirror?brand=lawrencepur&embed=${pass}`);
+  assert.match(held.headers["content-security-policy"], /frame-ancestors https:\/\/shop\.example\.com;/);
+  assert.equal(held.headers["x-frame-options"], undefined);
+  const plain = await raw("/mirror");
+  assert.match(plain.headers["content-security-policy"], /frame-ancestors 'none'/);
+  assert.equal(plain.headers["x-frame-options"], "DENY");
+  assert.equal((await raw("/embed.js")).headers["cross-origin-resource-policy"], "cross-origin", "other sites may load the one script");
+  // A bad address is refused, and a store user cannot name websites for another store.
+  err(await desk.post("/api/console/website", { brand: "lawrencepur", sites: "not a website" }), 400, /address like/);
+  assert.equal((await desk.post("/api/hq/retailers", { brand: "lawrencepur", plan: "assist", stores: 1, status: "demo" })).status, 200);
+  assert.equal((await ask(site)).status, 403, "and when the store is no longer signed, its website gets no new pass");
+});
+
+test("the founder's WhatsApp stays off the store site until the founder switches it on", async () => {
+  const desk = await founder();
+  assert.equal((await visitor().get("/api/contact")).body.whatsapp, null);
+  err(await desk.post("/api/hq/contact", { whatsapp: "12", show: true }), 400, /country code/);
+  assert.equal((await desk.post("/api/hq/contact", { whatsapp: "0300 1234567", show: false })).status, 200);
+  assert.equal((await visitor().get("/api/contact")).body.whatsapp, null, "a number saved but not shown stays private");
+  assert.equal((await desk.post("/api/hq/contact", { whatsapp: "0300 1234567", show: true })).status, 200);
+  assert.equal((await visitor().get("/api/contact")).body.whatsapp, "923001234567");
+  assert.equal((await desk.post("/api/hq/contact", { whatsapp: "0300 1234567", show: false })).status, 200);
+});

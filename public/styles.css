@@ -926,3 +926,7 @@ a.chip { text-decoration: none; }
   .glass { view-transition-name: mirva-glass; }
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
 }
+
+/* Inside a store's own website (public/embed.js): the mirror and the store's pieces, nothing that needs a MIRVA account. */
+:root[data-embed] :is(.wardrobe, #keepBtn, #askBtn, #storeBar, #restartBtn) { display: none !important; }
+:root[data-embed].phone-app .stage { top: env(safe-area-inset-top); }

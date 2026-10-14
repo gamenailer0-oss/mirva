@@ -7,8 +7,18 @@ try {
   device = JSON.parse(localStorage.getItem(DEVICE_KEY) || "null");
 } catch {}
 
-/** Headers that tell the server which paired store mirror this is. */
-export const auth = () => (device ? { "x-mirva-device": `${device.id}.${device.token}` } : {});
+// Opened inside a store's own website (public/embed.js) with a pass it was given: the try-ons are that store's. The pass
+// is kept for this tab, so a reload inside the sheet still has it.
+let pass = null;
+try {
+  const asked = new URLSearchParams(location.search).get("embed");
+  pass = asked && /^[A-Za-z0-9_-]{16,64}$/.test(asked) ? asked : sessionStorage.getItem("mirva:embed");
+  if (pass) sessionStorage.setItem("mirva:embed", pass);
+} catch {}
+export const embedded = () => !!pass;
+
+/** Headers that tell the server which paired store mirror this is (or which store's website it is in). */
+export const auth = () => (pass ? { "x-mirva-embed": pass } : device ? { "x-mirva-device": `${device.id}.${device.token}` } : {});
 export const pairedTo = () => device;
 
 /** A signal that fires after `ms`. Browsers without AbortSignal.timeout get a timer instead. */
@@ -51,6 +61,7 @@ export let member = null;
 export let staff = false;
 export async function whoIsHere() {
   try {
+    if (pass) return (member = null); // inside a store's website nobody is signed in to MIRVA
     const me = await (await fetch("/api/me", { headers: auth(), signal: timeout(15000) })).json();
     member = me.user?.role === "member" ? me : null;
     staff = me.user?.role === "founder" || me.user?.role === "retailer";

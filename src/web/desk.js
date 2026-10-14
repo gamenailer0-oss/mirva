@@ -8,7 +8,7 @@ const root = $("#desk");
 const S = { me: null, tab: "", brand: "", brands: [], days: 30, filter: "all" };
 const TABS = desk === "hq"
   ? [["today", "Today"], ["tryons", "Try-ons"], ["enquiries", "Enquiries"], ["stores", "Stores"], ["members", "Members"], ["outbox", "Outbox"], ["log", "Log"]]
-  : [["overview", "Overview"], ["catalogue", "Catalogue"], ["mirrors", "Mirrors"], ["limits", "Limits"], ["look", "Look and feel"]];
+  : [["overview", "Overview"], ["catalogue", "Catalogue"], ["mirrors", "Mirrors"], ["website", "Website"], ["limits", "Limits"], ["look", "Look and feel"]];
 
 const num = (n) => Math.round(Number(n) || 0).toLocaleString("en-PK");
 const pct = (a, b) => (b ? Math.round((a / b) * 100) + "%" : "—");
@@ -424,6 +424,53 @@ const VIEWS = {
       el("div", { class: "grid2" }, month, today),
       el("div", { class: "grid2" }, dailyForm, extraForm),
     );
+  },
+
+  // "Try it on" on the store's own website (public/embed.js), the WhatsApp number shoppers are sent to, and the shoppers
+  // who asked MIRVA for a mirror in this store.
+  async website() {
+    const w = await api(`/api/console/website?brand=${S.brand}`);
+    const form = el("form", { class: "panel form" },
+      el("h2", { text: "Try it on, on your own website" }),
+      el("p", { class: "muted small", text: "A button beside the add-to-cart on your product pages. The shopper sees herself in that piece without leaving your site. Portraits come from your plan, counted as one more mirror called Your website; live Studio stays in the mirror." }),
+      field("Your websites, one to a line", el("textarea", { name: "sites", rows: 3, placeholder: "https://yourstore.com", value: w.sites.join("\n") })),
+      el("p", { class: "fine", text: "Only these addresses can open MIRVA with your store's portraits. Up to five." }),
+      field("WhatsApp for shoppers", el("input", { name: "whatsapp", type: "tel", inputMode: "tel", placeholder: "+92 3xx xxxxxxx", value: w.whatsapp ? "+" + w.whatsapp : "" })),
+      el("p", { class: "fine", text: "When a shopper has chosen with her family, MIRVA offers her a message to this number about the piece she chose." }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
+    );
+    onSubmit(form, async (d) => {
+      await api("/api/console/website", { brand: S.brand, sites: d.sites, whatsapp: d.whatsapp });
+      toast("Saved.");
+      go("website");
+    });
+    const mark = '<rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>';
+    const code = el("section", { class: "panel" },
+      el("h2", { text: "The one line for your theme" }),
+      el("p", { class: "muted small", text: "On Shopify: Online Store, Themes, Edit code, theme.liquid, just before </body>. On WordPress or any other site: in the footer of every page. It finds the piece on each product page by itself." }),
+      el("pre", { class: "mono", style: "white-space:pre-wrap;padding:14px;border-radius:10px;background:var(--card);margin:12px 0", text: w.snippet }),
+      el("div", { class: "row" },
+        el("button", { class: "btn ghost small", type: "button", text: "Copy the line", onclick: () => copy(w.snippet) }),
+        el("a", { class: "link", href: `/mirror?brand=${encodeURIComponent(S.brand)}`, target: "_blank", rel: "noopener", text: "Open what shoppers will see" }),
+      ),
+      el("p", { class: "muted small", style: "margin-top:16px", text: "How the button looks on your page:" }),
+      el("div", { style: "max-width:320px;margin-top:8px" },
+        el("span", { style: "display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;border-radius:999px;background:#0a0c11;color:#f3f5f9;font:500 13px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase" }, svg(mark, "0 0 32 40"), el("span", { text: "Try it on" })),
+        el("small", { class: "muted", style: "display:block;text-align:center;margin-top:6px;font-size:11px", text: "See yourself in it, with MIRVA" }),
+      ),
+      !w.signed && el("p", { class: "formnote", style: "margin-top:12px", text: "Your website can use it once your pilot or plan has started." }),
+    );
+    const month = panel("This month on your website",
+      el("p", { class: "lead", text: plural(w.portraitsThisMonth, "portrait") }),
+      el("p", { class: "muted small", text: "Counted with your mirrors' portraits against your plan." }),
+    );
+    const want = panel("Shoppers asking for a MIRVA mirror at your store",
+      w.waitlist.count
+        ? [el("p", { class: "lead", text: plural(w.waitlist.count, "shopper") }), hbars(w.waitlist.areas.map(([label, value]) => ({ label: label || "Not said", value })))]
+        : empty("Nobody has asked yet. Shoppers can ask on MIRVA's site for a mirror in the store they shop at, and you will see them here."),
+    );
+    fill(work(), head("Website"), el("div", { class: "grid2" }, form, code), el("div", { class: "grid2" }, month, want));
   },
 
   async look() {

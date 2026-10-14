@@ -110,11 +110,11 @@ const caption = (text) => replay($("#caption"), text);
 // True when a shopper is at the screen: a paired store mirror, or a member's own device.
 // Then nothing about keys, dollars or settings belongs on the glass.
 // On a public address that is everyone except the founder and a store's own staff.
-const forShopper = () => !!(link.pairedTo() || link.member || (S.config?.open === false && !link.staff));
+const forShopper = () => !!(link.pairedTo() || link.embedded() || link.member || (S.config?.open === false && !link.staff));
 // On a public address a look is made only for a member, a paired store mirror, or staff, with one exception: someone
 // who has not joined may see one portrait of herself first (the server holds it for her if she then joins).
 const guestMay = () => S.config?.guest && !S.guestUsed;
-const mustJoin = (kind = "live") => S.config?.open === false && !link.member && !link.pairedTo() && !link.staff && !(kind === "portrait" && guestMay());
+const mustJoin = (kind = "live") => S.config?.open === false && !link.member && !link.pairedTo() && !link.embedded() && !link.staff && !(kind === "portrait" && guestMay());
 function askToJoin(words = "Join free to see this on you. It takes a minute.") {
   caption(words);
   const t = $("#toast");
@@ -1790,7 +1790,8 @@ async function boot() {
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
   const first = { id: brands.find((b) => b.id === want)?.id || linked || brands.find((b) => b.id === "sapphire")?.id || brands[0]?.id };
   const named = !!query.get("brand") && first.id === query.get("brand");
-  if (query.has("pair") || query.has("brand") || query.has("for")) history.replaceState(null, "", location.pathname);
+  if (link.embedded()) document.documentElement.dataset.embed = "1";
+  else if (query.has("pair") || query.has("brand") || query.has("for") || query.has("p")) history.replaceState(null, "", location.pathname);
   showMember(await link.whoIsHere());
   memory.setStoreMirror(!!link.pairedTo());
   memory.setOwner(link.member?.user.id);
@@ -1798,6 +1799,9 @@ async function boot() {
   if (noLive()) $('#modes [data-mode="studio"] span').textContent = "With a MIRVA mirror";
   if (!first.id) return noStore();
   await loadBrand(first.id);
+  // A link to one piece (a store's website, a shared look): the mirror opens on it.
+  const piece = query.get("p") && S.products.find((x) => String(x.id) === query.get("p"));
+  if (piece) requestAnimationFrame(() => choose(piece));
   // "See them on you" on the home page names the occasion the reader chose there: the conversation carries on from it.
   const occasion = OCCASIONS.find((o) => o.id === query.get("for"));
   if (occasion) {
