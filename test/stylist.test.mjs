@@ -132,3 +132,66 @@ test("her size is the smallest that takes her chest, moved up for her waist, and
   assert.equal(sizeFor([], { chest: 40 }), null);
   assert.equal(sizeFor(chart, {}), null);
 });
+
+// --- casual wear: Outfitters, and the casual occasions every store now has ---------------------------------------------
+import { garmentOf, occasionsFor, moodMatters } from "../src/stylist.js";
+const casual = JSON.parse(readFileSync(new URL("../brands/outfitters/catalogue.json", import.meta.url), "utf8"));
+const tailor = JSON.parse(readFileSync(new URL("../brands/lawrencepur/catalogue.json", import.meta.url), "utf8"));
+
+test("the Outfitters snapshot is a usable casual store for men and women", () => {
+  assert.ok(casual.products.length >= 40, "enough pieces");
+  for (const p of casual.products) {
+    assert.ok(p.id && p.name && p.price > 0 && p.image.startsWith("https://") && p.prompt.startsWith("Substitute"), `piece ${p.id} is complete`);
+    assert.equal(p.tradition, "west");
+    assert.ok(p.formality >= 1 && p.formality <= 3, `${p.name} is casual`);
+    assert.ok(p.sizes.length, `${p.name} has sizes`);
+  }
+  for (const who of ["women", "men"]) assert.ok(casual.products.filter((p) => p.gender === who).length >= 15, who);
+});
+
+test("every occasion a store can dress returns three different real pieces, in all three stores", () => {
+  for (const [name, c] of [["sapphire", cat], ["lawrencepur", tailor], ["outfitters", casual]])
+    for (const who of ["women", "men"]) {
+      const mine = c.products.filter((p) => p.gender === who);
+      if (!mine.length) continue;
+      for (const o of occasionsFor(mine))
+        for (const m of MOODS) {
+          const picks = pickLooks(c.products, { who, occasion: o.id, mood: m.id });
+          assert.equal(picks.length, 3, `${name}/${who}/${o.id}/${m.id}`);
+          assert.equal(new Set(picks.map((k) => k.product.id)).size, 3, `${name}/${o.id}: no repeats`);
+        }
+    }
+});
+
+test("a casual store offers no wedding, and a formal one still has its weddings", () => {
+  const ids = (c) => occasionsFor(c.products).map((o) => o.id);
+  assert.ok(!ids(casual).includes("wedding"), "nothing at Outfitters is for a wedding");
+  assert.ok(ids(casual).includes("university") && ids(casual).includes("weekend"));
+  assert.ok(ids(cat).includes("wedding") && ids(cat).includes("eid"));
+  assert.equal(moodMatters(casual.products), false, "one tradition throughout: no mood question");
+  assert.equal(moodMatters(cat.products), true);
+});
+
+test("casual occasions pick different garments, not three of one kind", () => {
+  for (const occasion of ["university", "weekend", "travel", "friends"])
+    for (const who of ["women", "men"]) {
+      const kinds = pickLooks(casual.products, { who, occasion, mood: "contemporary" }).map((k) => garmentOf(k.product));
+      assert.ok(new Set(kinds).size >= 2, `${who} ${occasion}: ${kinds.join(", ")}`);
+    }
+});
+
+test("a tee is offered something below it, shoes and a cap, and never a dupatta or a shawl", () => {
+  const tee = casual.products.find((p) => garmentOf(p) === "tee");
+  const kinds = addOns(tee, casual.addons, 6).map((a) => a.kind);
+  assert.ok(kinds.includes("bottoms"), kinds.join(", "));
+  assert.ok(kinds.includes("shoes"));
+  assert.ok(!kinds.includes("dupatta") && !kinds.includes("shawl"));
+  const jeans = casual.products.find((p) => garmentOf(p) === "jeans");
+  const withJeans = addOns(jeans, casual.addons, 6).map((a) => a.kind);
+  assert.ok(withJeans.includes("tops") && !withJeans.includes("bottoms"), withJeans.join(", "));
+});
+
+test("garments are read from their names", () => {
+  for (const [name, kind] of [["Black Basic Mock Neck T-Shirt", "tee"], ["Relaxed Fit Jeans", "jeans"], ["Oversized Hoodie", "hoodie"], ["Cotton Overshirt", "overshirt"], ["Knitted Co-Ord Set", "coord"], ["3 Piece - Embroidered Raw Silk Suit", "suit"], ["Linen Shirt", "shirt"]])
+    assert.equal(garmentOf({ name }), kind, name);
+});

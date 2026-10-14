@@ -1,0 +1,17 @@
+{
+ "id": "outfitters",
+ "name": "Outfitters",
+ "wordmark": "OUTFITTERS",
+ "byline": "styled by MIRVA",
+ "mood": "porcelain",
+ "accent": "#222222",
+ "currency": "Rs.",
+ "source": "https://outfitters.com.pk",
+ "imageHosts": [
+  "cdn.shopify.com"
+ ],
+ "enhancePrompt": false,
+ "visibility": "public",
+ "notice": "Concept demo built on Outfitters' public catalogue. Not affiliated with or endorsed by Outfitters.",
+ "tagline": "Everyday casual wear for men and women"
+}

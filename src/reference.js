@@ -455,9 +455,10 @@ function cropTop(canvas, top) {
  *
  * Options: maxSide (pixels), skin "auto" | "head" | "all" (whether hands and arms below the shoulders are painted out too;
  * auto does so only when a lot of bare skin would be left), tight (cut the picture down to the figure, see figureBox),
+ * lower (the piece is worn below the waist: with tight, the picture starts just above the hips),
  * delegates (default GPU then CPU; only the first call's choice is used), debug (adds trace, full, views).
  */
-export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft = 0.4, tight = false, delegates, debug = false } = {}) {
+export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft = 0.4, tight = false, lower = false, delegates, debug = false } = {}) {
   const bmp = await createImageBitmap(blob);
   try {
     const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
@@ -477,7 +478,15 @@ export async function cleanReference(blob, { maxSide = 900, skin = "auto", soft 
     let figure = null; // the label map, once the segmenter has looked
     // The picture that goes out: from row `row` of the work canvas down and, when asked, only as wide as the figure.
     // A product shot with nobody in it (no row given) goes whole: there the model's idea of cloth is not to be trusted.
+    // A piece worn below the waist (jeans, trousers, a skirt) is cut from just above the hips: shown the model's top and
+    // shoes as well, the engine restyles the shopper's own top and shoes to match.
+    const waist = (row) => {
+      if (!lower || row == null) return row;
+      const at = pose?.hips && pose.hipY > pose.shoulderY ? pose.hipY - (pose.hipY - pose.shoulderY) * 0.1 : null;
+      return Math.max(row, Math.round((at ?? (row / H + (1 - row / H) * 0.4)) * H));
+    };
     const framed = (canvas, row) => {
+      row = waist(row);
       const box = tight && figure && row != null ? figureBox(figure, W, H, row) : null;
       if (!box) return { canvas, box: null };
       const out = canvasOf(box.width, box.height);

@@ -71,6 +71,7 @@ export async function body(source) {
       shoulderWidth: Math.abs(lm[SHOULDER_L].x - lm[SHOULDER_R].x),
       shoulders: seen(SHOULDER_L) && seen(SHOULDER_R),
       hips: seen(HIP_L) && seen(HIP_R),
+      hipY: (lm[HIP_L].y + lm[HIP_R].y) / 2,
     };
   } catch {
     return undefined;

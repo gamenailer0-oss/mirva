@@ -132,3 +132,24 @@ test("the backdrop pass changes only the background, from the portrait, with no 
   assert.doesNotMatch(backdrop, /Substitute|reference/);
   assert.equal(modelShotPrompt(kaftan, "relight"), backdrop, "the old name still works");
 });
+
+test("casual pieces are asked for on the right part of the body, and jeans come as a pair", async () => {
+  const { buildPrompt, regionFor } = await import("../lib/prompt.mjs");
+  assert.equal(regionFor({ name: "Black Slim Fit Jeans", cut: "" }), "lower body garment");
+  assert.equal(regionFor({ name: "Grey Joggers", cut: "" }), "lower body garment");
+  assert.equal(regionFor({ name: "Oversized Hoodie", cut: "" }), "upper body garment");
+  assert.equal(regionFor({ name: "Piqué Polo", cut: "" }), "upper body garment");
+  assert.equal(regionFor({ name: "Knitted Co-Ord Set", cut: "" }), "outfit");
+  assert.equal(regionFor({ name: "2 Piece - Printed Khaddar Suit", cut: "" }), "outfit", "eastern suits are still whole outfits");
+  assert.match(buildPrompt({ name: "Black Slim Fit Jeans", cut: "", colour: "Black", description: "" }, { colour: false }), /^Substitute the lower body garment with a pair of /);
+});
+
+test("a western piece is tried on over her own other half; an eastern look is still a whole outfit", async () => {
+  const { modelShotPrompt } = await import("../lib/prompt.mjs");
+  const jacket = modelShotPrompt({ name: "Indigo Blue Zipper Denim Jacket", cut: "", colour: "Indigo", description: "", tradition: "west" });
+  assert.match(jacket, /Keep what the person wears below the waist exactly as it is/);
+  const jeans = modelShotPrompt({ name: "Black Relaxed Fit Jeans", cut: "", colour: "Black", description: "", tradition: "west" });
+  assert.match(jeans, /Keep what the person wears above the waist exactly as it is/);
+  const kameez = modelShotPrompt({ name: "Embroidered Khaddar Shirt", cut: "", colour: "Maroon", description: "", tradition: "east" });
+  assert.doesNotMatch(kameez, /Keep what the person wears/, "an eastern shirt is left as it was");
+});

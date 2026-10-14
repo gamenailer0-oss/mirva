@@ -19,6 +19,7 @@
 // machine. Set CHROME_PATH if Chrome is somewhere unusual, and MIRVA_PUPPETEER to a folder whose node_modules
 // holds puppeteer-core (npm install puppeteer-core in any empty folder will do).
 import { spawn } from "node:child_process";
+import { regionFor } from "../lib/prompt.mjs";
 import { createRequire } from "node:module";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import net from "node:net";
@@ -113,13 +114,13 @@ try {
     let out;
     try {
       out = await page.evaluate(
-        async (url, skin, side) => {
+        async (url, skin, side, lower) => {
           const { cleanReference } = await import("/dist/reference.js");
           const res = await fetch(`/img?u=${encodeURIComponent(url)}&w=${side}`);
           if (!res.ok) return { error: `picture ${res.status}` };
           // The largest photo the store's site will give, cut down to the figure: a print or a line of embroidery is
           // then several times larger in what the engine is given. CPU: same answer on every machine.
-          const r = await cleanReference(await res.blob(), { delegates: ["CPU"], skin, tight: true, maxSide: side });
+          const r = await cleanReference(await res.blob(), { delegates: ["CPU"], skin, tight: true, maxSide: side, lower });
           let b64 = null;
           if (r.blob) {
             const bytes = new Uint8Array(await r.blob.arrayBuffer());
@@ -132,6 +133,7 @@ try {
         p.image,
         p.refSkin === "head" || p.refSkin === "all" ? p.refSkin : skin,
         SIDE,
+        regionFor(p) === "lower body garment",
       );
     } catch (e) {
       out = { error: String(e.message || e).split("\n")[0] };

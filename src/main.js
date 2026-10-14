@@ -1,8 +1,9 @@
 // MIRVA front of house: the conversation on the tablet, the glass, and what the shopper keeps.
 import { Mirror } from "./mirror.js";
+import { regionFor } from "../lib/prompt.mjs";
 import { offerInstall } from "./web/install.js";
 import { registerWorker } from "./web/notify.js";
-import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns, sizeFor } from "./stylist.js";
+import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns, sizeFor, occasionsFor, moodMatters } from "./stylist.js";
 import { facelessReference, warmUp } from "./vision.js";
 import * as memory from "./memory.js";
 import * as link from "./link.js";
@@ -54,7 +55,7 @@ const api = async (path, options) => {
   }
 };
 
-const LANES = { formal: "Formal", festive: "Festive", outfits: "Outfits", smart: "Smart casual", fusion: "Fusion", casual: "Casual", unstitched: "Unstitched", west: "Western", men: "Men", suits: "Suits", blazers: "Blazers", waistcoats: "Waistcoats", eastern: "Eastern" };
+const LANES = { formal: "Formal", festive: "Festive", outfits: "Outfits", smart: "Smart casual", fusion: "Fusion", casual: "Casual", unstitched: "Unstitched", west: "Western", men: "Men", suits: "Suits", blazers: "Blazers", waistcoats: "Waistcoats", eastern: "Eastern", tees: "Tees", polos: "Polos", shirts: "Shirts", knitwear: "Knitwear", outerwear: "Jackets", denim: "Denim", trousers: "Trousers", dresses: "Dresses" };
 
 const S = {
   config: null,
@@ -337,8 +338,12 @@ function renderConversation() {
     renderLooks();
   };
 
+  // The occasions this store can dress (a casual store has no wedding), and the mood question only where there is a choice.
+  const mine = S.products.filter((p) => p.gender === S.brief.who);
+  const moods = moodMatters(S.products);
+  if (S.step === "mood" && !moods) ((S.brief.mood = "contemporary"), (S.step = "budget"), say(line("budget")));
   if (S.step === "occasion") {
-    for (const o of OCCASIONS)
+    for (const o of occasionsFor(mine.length ? mine : S.products))
       chips.append(
         chip(o.label, () => {
           S.brief.occasion = o.id;
@@ -364,11 +369,13 @@ function renderConversation() {
     const o = OCCASIONS.find((x) => x.id === S.brief.occasion);
     const m = MOODS.find((x) => x.id === S.brief.mood);
     if (o) chips.append(chip(o.label, () => go("occasion", line("hello")), "on"));
-    if (m) chips.append(chip(m.label, () => go("mood", line("mood")), "on"));
+    if (m && moods) chips.append(chip(m.label, () => go("mood", line("mood")), "on"));
     if (S.brief.budget) chips.append(chip(`Under ${money(S.brief.budget)}`, () => go("budget", line("budget")), "on"));
     if (S.brief.colour) chips.append(chip(sentence(S.brief.colour), () => ((S.brief.colour = null), suggest()), "on"));
     if (S.brief.who === "men" && hasWomen) chips.append(chip("For him", () => ((S.brief.who = "women"), S.shown.clear(), suggest()), "on"));
-    for (const [kind, label] of [["less", "Less formal"], ["more", "More formal"], ["cheaper", "Lower price"], ["colour", "Another colour"], ["three", "Three more"]])
+    // In an everyday store "formal" is the wrong word: there the same two steps are more relaxed and smarter.
+    const everyday = !moods && S.products.every((p) => p.formality <= 3);
+    for (const [kind, label] of [["less", everyday ? "More relaxed" : "Less formal"], ["more", everyday ? "Smarter" : "More formal"], ["cheaper", "Lower price"], ["colour", "Another colour"], ["three", "Three more"]])
       refineBox.append(chip(label, () => refine(kind)));
   }
 }
@@ -628,7 +635,7 @@ async function reference(p) {
         const { cleanReference } = await import("./reference.js");
         // A larger photo than the look card shows, cut down to the figure: the engine reads the print and the embroidery from these pixels.
         const large = await fetch(pic(p.image, 1200)).catch(() => null);
-        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200 })).blob;
+        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200, lower: regionFor(p) === "lower body garment" })).blob;
       } catch (e) {
         console.warn("Could not prepare the garment picture.", e);
       }

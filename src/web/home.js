@@ -2,10 +2,10 @@
 // rails as the reader taps an occasion. Nothing is made up for the page: the same rules, the same catalogue, the same
 // reasons. Without a script, or without the catalogue, the page keeps the three painted cards it was sent with.
 import { $, $$, el, fill } from "./ui.js";
-import { OCCASIONS, pickLooks } from "../stylist.js";
+import { OCCASIONS, pickLooks, occasionsFor } from "../stylist.js";
 
 const pic = (url, w) => `/img?u=${encodeURIComponent(url)}&w=${w}`;
-const FOR = { wedding: "a wedding", eid: "Eid", dinner: "a dinner", work: "work", everyday: "every day" };
+const FOR = { wedding: "a wedding", eid: "Eid", dinner: "a dinner", work: "work", everyday: "every day", university: "university", weekend: "the weekend", travel: "travel", friends: "a day out" };
 
 export async function start() {
   const box = $("#try");
@@ -52,6 +52,7 @@ export async function start() {
   pills($("#tryOccasions"), OCCASIONS.map((o) => ({ id: o.id, label: o.label })), "occasion");
 
   let turn = 0;
+  let shownFor = "";
   async function show() {
     const mine = ++turn;
     const store = stores.find((s) => s.id === state.store);
@@ -65,6 +66,11 @@ export async function start() {
     }
     if (mine !== turn) return; // a later tap has asked for something else
     const { brand, catalogue } = data;
+    // Only the occasions this store can dress: a casual store has no wedding to offer.
+    const fits = occasionsFor(catalogue.products);
+    if (!fits.some((o) => o.id === state.occasion)) state.occasion = fits[0].id;
+    if (shownFor !== state.store) ((shownFor = state.store), pills($("#tryOccasions"), fits.map((o) => ({ id: o.id, label: o.label })), "occasion"));
+    $("#tryGo").href = `/mirror?brand=${encodeURIComponent(state.store)}&for=${encodeURIComponent(state.occasion)}`;
     const money = (n) => `${brand.currency || "Rs."}${Math.round(n).toLocaleString("en-PK")}`;
     const picks = pickLooks(catalogue.products, { occasion: state.occasion, who: brand.audience === "men" ? "men" : "women", formalityShift: 0 });
     if (!picks.length) return;

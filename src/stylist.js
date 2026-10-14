@@ -7,7 +7,13 @@ export const OCCASIONS = [
   { id: "eid", label: "Eid", formality: 4.2, words: ["eid", "festive", "festival", "chand raat", "chaand raat"] },
   { id: "dinner", label: "A dinner", formality: 3.6, words: ["dinner", "party", "date", "dawat", "daawat", "birthday", "evening", "night out"] },
   { id: "work", label: "Work", formality: 3, words: ["work", "office", "meeting", "interview"] },
-  { id: "everyday", label: "Everyday", formality: 2, words: ["everyday", "every day", "casual", "daily", "home", "university", "uni", "college", "brunch", "lunch"] },
+  { id: "everyday", label: "Everyday", formality: 2, words: ["everyday", "every day", "casual", "daily", "home", "brunch", "lunch"] },
+  // Casual days. Their pieces cluster near the same formality, so each also says which garments suit it (`likes`, a bonus
+  // or a cost per kind of garment, see garmentOf) and the trio is spread over different garments.
+  { id: "university", label: "University", formality: 1.8, words: ["university", "uni", "college", "campus", "class", "classes", "lecture"], likes: { jeans: 1.4, overshirt: 1.2, hoodie: 1, shirt: 0.8, coord: 0.6, tee: 0.5, polo: 0.4, knit: 0.3, jogger: -0.2, shorts: -0.8, dress: -0.5 } },
+  { id: "weekend", label: "A weekend", formality: 1.5, words: ["weekend", "saturday", "sunday", "errands", "chill", "lazy"], likes: { tee: 1.2, shorts: 1.1, jogger: 0.9, jeans: 0.5, polo: 0.4, overshirt: 0.4, knit: 0.3, hoodie: 0.2 } },
+  { id: "travel", label: "Travel", formality: 1.6, words: ["travel", "travelling", "traveling", "trip", "flight", "airport", "journey", "holiday", "vacation"], likes: { jogger: 1.6, coord: 1.4, hoodie: 1.3, jacket: 1.2, knit: 1.2, tee: 0.3, dress: 0.2, shirt: -0.2, jeans: -0.3, shorts: -0.2 } },
+  { id: "friends", label: "Out with friends", formality: 2.2, words: ["friends", "hangout", "hang out", "outing", "mall", "movie", "movies"], likes: { shirt: 1.2, jacket: 1.2, jeans: 1, overshirt: 1, dress: 0.8, polo: 0.8, knit: 0.6, trousers: 0.6, tee: 0.2, hoodie: -0.3, shorts: -0.4, jogger: -0.8 } },
 ];
 
 export const MOODS = [
@@ -24,12 +30,54 @@ const TRADITION_FIT = {
 const MODERN_CUT = /\b(kaftan|dress|jacket|co-?ord|jumper|top|sweater|peshwas)\b/i;
 const CLASSIC_CUT = /\b(3 piece|2 piece|dupatta|shalwar|suit|kurta)\b/i;
 
+// What kind of garment a piece is, read from its name and cut. Only the casual occasions look at it.
+// The first kind that matches wins, so a jacket with a hood is a jacket and a cargo jean is a jean.
+const GARMENTS = [
+  ["coord", /\b(co-?ords?|set|tracksuit)\b/i],
+  ["dress", /\b(dress|jumpsuit|kaftan|gown|maxi)\b/i],
+  ["suit", /\b(suit|\d\s*-?\s*piece)\b/i],
+  ["jeans", /\b(jeans?|jorts)\b/i],
+  ["shorts", /\b(shorts|bermudas?)\b/i],
+  ["jogger", /\b(joggers?|sweatpants|track\s?pants)\b/i],
+  ["trousers", /\b(trousers?|pants|chinos?|cargos?|skirt|culottes|palazzo|leggings|tights)\b/i],
+  ["waistcoat", /\b(waist\s?coats?)\b/i],
+  ["blazer", /\bblazer\b/i],
+  ["jacket", /\b(jacket|puffer|bomber|coat|parka|windbreaker|gilet|vest)\b/i],
+  ["overshirt", /\b(over\s?shirt|shacket)\b/i],
+  ["polo", /\bpolo/i],
+  ["hoodie", /\b(hoodies?|sweatshirts?|pull-?over|quarter\s?zip)/i],
+  ["knit", /\b(sweaters?|cardigan|jumper|knit)\b/i],
+  ["kameez", /\b(kameez|kurta|kurti|shalwar|peshwas)\b/i],
+  ["tee", /\b(t-?shirts?|tees?|henley|tank|camisole)\b/i],
+  ["shirt", /\b(shirts?|blouse|top)\b/i],
+];
+export const garmentOf = (p) => {
+  const hay = `${p.name || ""} ${p.cut || ""}`;
+  return GARMENTS.find(([, re]) => re.test(hay))?.[0] || "other";
+};
+
+// The mood question (traditional, between, contemporary) only means something where a store sells more than one
+// tradition. A store that is western throughout has nothing to choose between, so every mood reads as contemporary
+// there and the question can be skipped.
+export const moodMatters = (products) => new Set(products.map((p) => p.tradition)).size > 1;
+
+// The occasions a store can speak to: one whose most fitting piece is within reach of the occasion's formality.
+// A casual store has no wedding to offer; a tailor has no university.
+export function occasionsFor(products, reach = 1.2) {
+  if (!products.length) return OCCASIONS;
+  const have = products.map((p) => p.formality);
+  const fits = OCCASIONS.filter((o) => Math.min(...have.map((f) => Math.abs(f - o.formality))) <= reach);
+  return fits.length ? fits : OCCASIONS;
+}
+
 const COLOUR_WORDS = ["black", "white", "ivory", "beige", "brown", "taupe", "grey", "blue", "navy", "teal", "green", "olive", "yellow", "mustard", "orange", "rust", "red", "maroon", "merlot", "pink", "peach", "purple", "plum"];
 const COLOUR_KIN = { navy: "blue", cobalt: "blue", royal: "blue", olive: "green", sage: "green", merlot: "maroon", burgundy: "maroon", plum: "purple", ivory: "white", "off white": "white", tea: "pink", rust: "orange", taupe: "brown" };
+// Shades the casual stores give their own names to. Only read when no plain colour word is in the name.
+const COLOUR_NAMES = { skyway: "blue", twilight: "blue", indigo: "blue", "coconut milk": "white", vanilla: "white", flamingo: "pink", magenta: "pink", coral: "pink", grape: "purple", anthracite: "grey", metal: "grey", mink: "brown", caramel: "brown", coffee: "brown", mushroom: "brown", peanut: "beige", sand: "beige" };
 export const colourFamily = (c = "") => {
   const s = c.toLowerCase();
   for (const [k, v] of Object.entries(COLOUR_KIN)) if (s.includes(k)) return v;
-  return COLOUR_WORDS.find((w) => s.includes(w)) || s;
+  return COLOUR_WORDS.find((w) => s.includes(w)) || Object.entries(COLOUR_NAMES).find(([k]) => new RegExp(`\\b${k}\\b`).test(s))?.[1] || s;
 };
 
 // Budget steps come from the store's own prices, so they make sense for any brand.
@@ -58,7 +106,10 @@ const hash = (s) => {
 export function pickLooks(products, brief, ctx = {}) {
   const occasion = OCCASIONS.find((o) => o.id === brief.occasion);
   const target = Math.min(5, Math.max(1, (occasion?.formality ?? 3) + (brief.formalityShift || 0)));
-  const fit = TRADITION_FIT[brief.mood] || TRADITION_FIT.between;
+  // In a store that is one tradition throughout, the mood has nothing to rank: it counts as contemporary and moves nothing.
+  const moody = moodMatters(products);
+  const fit = moody ? TRADITION_FIT[brief.mood] || TRADITION_FIT.between : {};
+  const likes = occasion?.likes;
   // A store that dresses one gender only (a men's tailor) is asked for that gender, whatever the brief began with.
   const asked = brief.who || "women";
   const who = products.some((p) => p.gender === asked) ? asked : products[0]?.gender || asked;
@@ -69,8 +120,9 @@ export function pickLooks(products, brief, ctx = {}) {
   const score = (p) => {
     let s = -Math.abs(p.formality - target) * 2.5 + (fit[p.tradition] ?? 0);
     if (target >= 4.5 && p.formality <= 3) s -= 2; // underdressed for a wedding
-    if (brief.mood === "contemporary" && MODERN_CUT.test(p.name)) s += 1;
-    if (brief.mood === "traditional" && CLASSIC_CUT.test(p.name)) s += 1;
+    if (moody && brief.mood === "contemporary" && MODERN_CUT.test(p.name)) s += 1;
+    if (moody && brief.mood === "traditional" && CLASSIC_CUT.test(p.name)) s += 1;
+    if (likes) s += likes[garmentOf(p)] ?? 0;
     if (brief.colour && colourFamily(p.colour) === brief.colour) s += 4;
     if (avoid.has(colourFamily(p.colour))) s -= 3;
     if (shown.has(p.id)) s -= 6;
@@ -87,6 +139,8 @@ export function pickLooks(products, brief, ctx = {}) {
     picks.reduce((n, k) => {
       if (k.product.name === p.name) n += 2.5;
       if (colourFamily(k.product.colour) === colourFamily(p.colour)) n += k.product.lane === p.lane ? 1.6 : 0.6;
+      // A casual trio is three different garments (a tee, a jean, a layer), not three tees.
+      if (likes && garmentOf(p) !== "other" && garmentOf(k.product) === garmentOf(p)) n += 1.2;
       return n;
     }, 0);
   while (picks.length < 3) {
@@ -260,11 +314,17 @@ export function line(key, x = {}) {
 
 // ---------- add-ons: the small things that finish a look ----------
 const NEUTRALS = new Set(["black", "white", "beige", "brown", "grey", "gold", "silver"]);
-const SHOE = /(sandal|heel|flat|pump|slide|khussa|shoe|mule|loafer|sneaker)/i;
+const SHOE = /(sandal|heel|flat|pump|slide|khussa|shoe|mule|loafer|sneaker|trainer|boot|clog|flip.?flop)/i;
 const BAG = /(bag|tote|clutch|wallet|pouch)/i;
 const WRAP = /(dupatta|shawl|stole|scarf|cape)/i;
 // What finishes a suit in a tailor's store. Their shelf name is trusted: a wallet is a wallet, not a bag.
 const TAILORING = new Set(["tie", "pocketsquare", "cufflinks", "belt", "wallet", "socks"]);
+// A tailor is a store with ties or pocket squares on its shelves. A belt or a wallet alone (a casual store has them
+// too) does not make one.
+const TAILOR_SHELF = new Set(["tie", "pocketsquare", "cufflinks"]);
+// What a casual western piece is worn with, and finished by, once the garment itself is covered.
+const BOTTOM_KINDS = new Set(["jeans", "shorts", "jogger", "trousers"]);
+const BOTTOM_WORD = /\b(jeans?|trousers?|pants|chinos?|joggers?|shorts|jorts|cargos?|skirt|culottes|palazzo|leggings|tights)\b/i;
 
 /** What an add-on is, whatever shelf the store filed it on. */
 export function kindOf(a) {
@@ -277,7 +337,7 @@ export function kindOf(a) {
 }
 
 const KIND_LABEL = {
-  dupatta: "Dupatta", shawl: "Shawl", bottoms: "Trousers", shoes: "Shoes", bag: "Bag", fragrance: "Fragrance", accessory: "Accessory",
+  dupatta: "Dupatta", shawl: "Shawl", bottoms: "Trousers", tops: "Top", shoes: "Shoes", bag: "Bag", cap: "Cap", sunglasses: "Sunglasses", fragrance: "Fragrance", accessory: "Accessory",
   tie: "Tie", pocketsquare: "Pocket square", cufflinks: "Cufflinks", belt: "Belt", wallet: "Wallet", socks: "Socks",
 };
 
@@ -291,18 +351,29 @@ export function addOns(product, addons = [], max = 3) {
   const fam = colourFamily(product.colour);
   const name = `${product.name} ${product.cut || ""}`;
   const hasDupatta = /3\s*-?\s*piece|dupatta|shawl/i.test(name);
-  const hasBottom = /\d\s*-?\s*piece|suit|dress|kaftan|trouser|pants|shalwar|culottes/i.test(name);
+  // A piece that is its own bottom, or comes with one (a co-ord set, a jumpsuit), needs none.
+  const bottomOnly = BOTTOM_KINDS.has(garmentOf(product));
+  const hasBottom = /\d\s*-?\s*piece|suit|dress|kaftan|shalwar|co-?ord|jumpsuit|tracksuit|\bset\b/i.test(name) || BOTTOM_WORD.test(name);
   const eastern = product.tradition !== "west";
+  const tailor = pool.some((a) => TAILOR_SHELF.has(a.kind));
+  // A casual western piece (a tee, a hoodie, a pair of jeans) is finished by the other half of the outfit, shoes and a
+  // cap. It is never offered a dupatta or a shawl.
+  const casual = !eastern && product.formality <= 2.5 && !tailor;
 
   // What this piece needs most, in order.
   const wants = [];
   if (!hasBottom) wants.push("bottoms");
-  if (eastern && !hasDupatta) wants.push("dupatta");
-  if (!eastern || product.formality <= 3) wants.push("shawl");
-  wants.push("shoes", "bag", "fragrance");
+  if (casual) {
+    if (bottomOnly) wants.push("tops"); // jeans need something above them
+    wants.push("shoes", "bag", "cap", "sunglasses", "belt", "fragrance");
+  } else {
+    if (eastern && !hasDupatta) wants.push("dupatta");
+    if (!eastern || product.formality <= 3) wants.push("shawl");
+    wants.push("shoes", "bag", "fragrance");
+  }
   // A tailor's store (ties, pocket squares, belts on its shelves) finishes a suit with those. A store without them,
   // Sapphire among them, never takes this branch, so what it is offered does not move.
-  if (pool.some((a) => TAILORING.has(a.kind))) {
+  if (tailor) {
     wants.length = 0;
     if (!hasBottom) wants.push("bottoms");
     if (/suit|blazer|jacket|waist\s?coat/i.test(name)) wants.push("tie", "pocketsquare", "belt");
@@ -311,7 +382,8 @@ export function addOns(product, addons = [], max = 3) {
 
   const score = (a) => {
     const c = colourFamily(a.colour || "");
-    let s = hash(a.id) * 0.4;
+    // A casual store has few of each add-on, so the pick also moves with the piece: not the same jeans under every tee.
+    let s = casual ? hash(a.id + product.id) * 0.9 : hash(a.id) * 0.4;
     if (c && c === fam) s += 2;
     else if (NEUTRALS.has(c)) s += 1.4;
     else if (!c) s += 0.8; // a fragrance has no colour to clash
@@ -326,13 +398,15 @@ export function addOns(product, addons = [], max = 3) {
     if (!best) continue;
     const c = colourFamily(best.colour || "");
     const why =
-      kind === "bottoms" ? "It needs a trouser"
+      kind === "bottoms" ? (casual ? "Worn with it" : "It needs a trouser")
+      : kind === "tops" ? "Worn with it"
       : kind === "dupatta" ? "Finishes a two-piece"
       : c && c === fam ? `Picks up the ${fam}`
       : NEUTRALS.has(c) ? "A neutral that works"
       : kind === "fragrance" ? "The last touch"
       : "Goes with it";
-    picks.push({ addon: best, kind, label: KIND_LABEL[kind] || "Add-on", why });
+    const label = kind === "bottoms" && /\bjeans\b/i.test(best.name) ? "Jeans" : KIND_LABEL[kind] || "Add-on";
+    picks.push({ addon: best, kind, label, why });
   }
   return picks;
 }

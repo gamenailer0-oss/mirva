@@ -1,0 +1,3049 @@
+{
+ "takenAt": "2026-10-14T13:52:08.607Z",
+ "source": "https://outfitters.com.pk",
+ "products": [
+  {
+   "id": "8181117780159",
+   "name": "Black Basic Mock Neck T-Shirt",
+   "price": 1790,
+   "url": "https://outfitters.com.pk/products/f1514-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901_03fe03ec-9cad-41cf-b023-ea1f9663eec7.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901._32f6de81-b444-4896-bb86-0873ab2df061.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901_3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1514106901_4.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "tees",
+   "formality": 1.6,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Black",
+   "fabric": "Cotton",
+   "description": "black basic mock neck t-shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black basic mock neck t-shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8181117780159.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8206028406975",
+   "name": "Coconut Milk Basic Textured T-Shirt",
+   "price": 1190,
+   "url": "https://outfitters.com.pk/products/f1547-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003_234d1f6b-8692-4fce-92f2-4157b2195dd3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003_234d1f6b-8692-4fce-92f2-4157b2195dd3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003._1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003_3_a86337b6-fe24-45f3-a1ff-67c38add9723.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1547106003_5.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "tees",
+   "formality": 1.6,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Cream",
+   "fabric": "Cotton",
+   "description": "cream basic textured t-shirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a cream basic textured t-shirt in a regular fit.",
+   "ref": "/refs/outfitters/8206028406975.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8270575501503",
+   "name": "Light Grey Graphic T-Shirt",
+   "price": 1390,
+   "url": "https://outfitters.com.pk/products/f1627-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914._f90ae86d-8840-4592-9ac2-255ca153f9dc.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914_59350aa7-9e51-43de-8435-4f7b6d79352a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914._e7d5f44d-1afb-4089-af74-4db83f78ff27.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1627106914_1.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "tees",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Light Grey",
+   "fabric": "Cotton",
+   "description": "light grey graphic t-shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a light grey graphic t-shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8270575501503.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8270575698111",
+   "name": "White Slogan Print T-Shirt",
+   "price": 1390,
+   "url": "https://outfitters.com.pk/products/f1635-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001_c4fb4487-37cf-4150-ba6c-559c9afba90c.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001._15a9811f-64dc-41db-8b1e-f48da499d014.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001_1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1635106001_2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "tees",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "White",
+   "fabric": "Cotton",
+   "description": "white slogan print t-shirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a white slogan print t-shirt in a regular fit.",
+   "ref": "/refs/outfitters/8270575698111.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8289751171263",
+   "name": "Multi Color Striped Slogan Print T-Shirt",
+   "price": 1590,
+   "url": "https://outfitters.com.pk/products/f1691-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_3_fa0a2f89-4e05-4b9f-a516-62d26cf57102.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_3_fa0a2f89-4e05-4b9f-a516-62d26cf57102.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_3_..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_3_._2ef1da71-903b-4356-a4f1-1414ec0ddfab.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_3_5f9af700-4ec1-47ac-99b7-07acdf541f79.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1691106999_4.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "tees",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Multi Color",
+   "fabric": "Cotton",
+   "description": "multi color striped slogan print t-shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a multi color striped slogan print t-shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8289751171263.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8280316543167",
+   "name": "Blue Ice Knit Polo Shirt",
+   "price": 2690,
+   "url": "https://outfitters.com.pk/products/f1512-106-a",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_11.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_11.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_40.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_37.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_25.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1512106628_5.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "polos",
+   "formality": 2.4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Blue Ice",
+   "fabric": "Cotton",
+   "description": "blue ice knit polo shirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a blue ice knit polo shirt in a regular fit.",
+   "ref": "/refs/outfitters/8280316543167.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8283647606975",
+   "name": "Off White Embroidered Slogan Print Polo Shirt",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f1727-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_38.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_38.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_36.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_56_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_48_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1727106002_5.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "polos",
+   "formality": 2.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Off White",
+   "fabric": "Cotton",
+   "description": "off white embroidered slogan print polo shirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an off white embroidered slogan print polo shirt in a regular fit.",
+   "ref": "/refs/outfitters/8283647606975.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8340879245503",
+   "name": "Multi Color Striped Polo Shirt",
+   "price": 2490,
+   "url": "https://outfitters.com.pk/products/f1768-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999._49c783bd-b833-46f8-b306-72114b65708c.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999_3d7edb43-90bb-46d7-b2a1-014cc7bf9e49.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999_3_d4bf6cda-b4b7-47c9-b109-a9f89046198d.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1768106999_4_c9c8d8a8-d20e-4308-a10f-6bd3898b2cad.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "polos",
+   "formality": 2.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Multi Color",
+   "fabric": "Cotton",
+   "description": "multi color striped polo shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a multi color striped polo shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8340879245503.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8247268638911",
+   "name": "Jet Black Basic Shirt",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f1003-103",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902._f06533ab-d4c3-4b67-aef9-b6603b24fbd6.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902_24fa2a18-4b44-4f5d-962b-3364afb0da61.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902_3_copy_e45678fc-d12d-4517-afcb-9e2b9a303fa6.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1003103902_6_copy2.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "shirts",
+   "formality": 2.3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Jet Black",
+   "fabric": "Cotton",
+   "description": "jet black basic shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a jet black basic shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8247268638911.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8270573863103",
+   "name": "Sand Button Up Shirt",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f1004-103",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007_f85a9807-d6ad-499d-a263-5c5f399634ec.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007._f6bffeb2-b108-4456-a27e-614b9a277a50.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007_3_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1004103007_8_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2.7,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Sand",
+   "fabric": "",
+   "description": "sand button up shirt",
+   "sizes": [
+    {
+     "label": "S-M",
+     "inStock": true
+    },
+    {
+     "label": "L-XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a sand button up shirt.",
+   "ref": "/refs/outfitters/8270573863103.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8283635056831",
+   "name": "Off White Embroidered Resort Collar Shirt",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f0900-103",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_3_38246ff5-fac6-470a-a5be-f1f50cfe34c2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_3_38246ff5-fac6-470a-a5be-f1f50cfe34c2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_3_..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_3_39a49238-2ca8-44d3-8d40-69e6f4c318e2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_3_._746fe45e-69fc-46d5-a79d-8adf4b68e0c4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0900103002_5.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Off White",
+   "fabric": "Cotton",
+   "description": "off white embroidered resort collar shirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an off white embroidered resort collar shirt in a regular fit.",
+   "ref": "/refs/outfitters/8283635056831.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8283636072639",
+   "name": "Brown Resort Collar Striped Shirt",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f1043-103",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801_0f3fd6c0-c3e5-4071-babd-f80916ba7f28.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801_0f3fd6c0-c3e5-4071-babd-f80916ba7f28.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801._c21d6675-e3d3-4139-919d-840246d3b743.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801_4_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1043103801_9_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Brown",
+   "fabric": "Cotton",
+   "description": "brown resort collar striped shirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a brown resort collar striped shirt in a regular fit.",
+   "ref": "/refs/outfitters/8283636072639.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8218048299199",
+   "name": "Black Slogan Print Sweatshirt",
+   "price": 2690,
+   "url": "https://outfitters.com.pk/products/slogan-print-sweatshirt-1",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901_234cb35b-e192-49c0-a4c6-47afbb41b99b.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901_7_copy2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0533107901_3_copy.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "knitwear",
+   "formality": 1.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "oversized fit",
+   "colour": "Black",
+   "fabric": "Cotton blend",
+   "description": "black slogan print sweatshirt in an oversized fit",
+   "sizes": [
+    {
+     "label": "S-M",
+     "inStock": true
+    },
+    {
+     "label": "L-XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black slogan print sweatshirt in an oversized fit.",
+   "ref": "/refs/outfitters/8218048299199.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8539462107327",
+   "name": "Coconut Milk Regular Fit Hoodie",
+   "price": 5990,
+   "url": "https://outfitters.com.pk/products/f0631-107",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003-1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003-1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003-4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003-5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003-3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003-2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0631107003_2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 1.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Cream",
+   "fabric": "Cotton blend",
+   "description": "cream regular fit hoodie",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a cream coconut milk regular fit hoodie.",
+   "ref": "/refs/outfitters/8539462107327.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8213269708991",
+   "name": "Mid Grey Washed-Out Sweater",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/washed-out-sweater",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905_f3c02690-396c-4b32-8ebc-310606b93868.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905_f3c02690-396c-4b32-8ebc-310606b93868.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905._4ca5240b-937d-4c09-9397-cbe181b0df76.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0172102905_4.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "knitwear",
+   "formality": 1.9,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Mid Grey",
+   "fabric": "Cotton",
+   "description": "mid grey washed-out sweater in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a mid grey washed-out sweater in a relaxed fit.",
+   "ref": "/refs/outfitters/8213269708991.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526757232831",
+   "name": "Navy Blue Ribbed Sweatshirt",
+   "price": 5490,
+   "url": "https://outfitters.com.pk/products/f0642-107",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619._e791f83b-9779-47e7-ac4b-9bbba202819e.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619_39b316c5-5787-41f6-926d-fac6bc6d5480.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0642107619_2_copy2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 1.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Navy Blue",
+   "fabric": "Cotton blend",
+   "description": "navy blue ribbed sweatshirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a navy blue ribbed sweatshirt in a regular fit.",
+   "ref": "/refs/outfitters/8526757232831.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8539461943487",
+   "name": "Off White Crew Neck Sweatshirt",
+   "price": 4490,
+   "url": "https://outfitters.com.pk/products/f0627-107",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002-1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002-1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002-4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002-5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002-3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002-2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0627107002_2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 1.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Off White",
+   "fabric": "Cotton blend",
+   "description": "off white crew neck sweatshirt in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an off white crew neck sweatshirt in a regular fit.",
+   "ref": "/refs/outfitters/8539461943487.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15382912467135",
+   "name": "Black Faux Leather Jacket",
+   "price": 14990,
+   "url": "https://outfitters.com.pk/products/f0396-101",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901._6a063dbd-c942-48ad-b338-3e84b93e4779.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901._f4dac5b4-ad7b-468e-bcba-82087998c105.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901_02.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0396101901_04_copy.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "outerwear",
+   "formality": 2.3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Black",
+   "fabric": "",
+   "description": "black faux leather jacket in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black faux leather jacket in a relaxed fit.",
+   "ref": "/refs/outfitters/15382912467135.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8181108179135",
+   "name": "Indigo Blue Zipper Denim Jacket",
+   "price": 6190,
+   "url": "https://outfitters.com.pk/products/zipper-denim-jacket-1",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F02941016222_0dd10cbf-00d9-45d4-a0e7-e66e61e19b38.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F02941016222_0dd10cbf-00d9-45d4-a0e7-e66e61e19b38.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294101622._9dc1fe6a-72c9-4524-a8cd-f3fe814f1f03.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294101622..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F02941016222.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294101622.2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294101622_3_copy.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "outerwear",
+   "formality": 1.8,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Indigo Blue",
+   "fabric": "Cotton denim",
+   "description": "indigo blue zipper denim jacket in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an indigo blue zipper denim jacket in a relaxed fit.",
+   "ref": "/refs/outfitters/8181108179135.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8268499157183",
+   "name": "Black Notched Collar Blazer",
+   "price": 6990,
+   "url": "https://outfitters.com.pk/products/notched-collar-blazer-zzz",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901_0fd39712-a486-4ef9-a45b-39ffab053186.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901_0fd39712-a486-4ef9-a45b-39ffab053186.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901._743a169f-6ee9-4255-a4f4-d5a6b18d7d33.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901._0057e9ee-3d78-4277-86f6-4bac81a4ddc1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901_a62d78ba-0fb6-48a5-849e-c2752c15fe8f.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901_3_copy_1_809fd8a6-cdd8-48c0-835d-127f5a80c3db.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0319101901_9_copy2_1_815c90c6-39d4-45fb-81d2-533c16d19a52.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "outerwear",
+   "formality": 3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Black",
+   "fabric": "",
+   "description": "black notched collar blazer",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": false
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black notched collar blazer.",
+   "ref": "/refs/outfitters/8268499157183.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8514389835967",
+   "name": "Skyway Baggy Fit Jeans",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/f0875-109",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630LOWER._9f6ad075-0f98-480b-9dbe-8599b444e9f3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630LOWER._9f6ad075-0f98-480b-9dbe-8599b444e9f3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630LOWER._2cf2b5f7-d66b-4591-9992-4b447dd6f3bf.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0875109630_3.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "denim",
+   "formality": 1.7,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Light Blue",
+   "fabric": "Cotton blend",
+   "description": "light blue baggy fit jeans",
+   "sizes": [
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    },
+    {
+     "label": "36",
+     "inStock": true
+    },
+    {
+     "label": "38",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of light blue skyway baggy fit jeans.",
+   "ref": "/refs/outfitters/8514389835967.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526761853119",
+   "name": "Black Relaxed Fit Jeans",
+   "price": 5490,
+   "url": "https://outfitters.com.pk/products/f0867-109",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901LOWER3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901LOWER3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901LOWER5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901LOWER4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901LOWER2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901LOWER1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0867109901_2_copy.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "denim",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Black",
+   "fabric": "Denim",
+   "description": "black relaxed fit jeans",
+   "sizes": [
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    },
+    {
+     "label": "36",
+     "inStock": true
+    },
+    {
+     "label": "38",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of black relaxed fit jeans.",
+   "ref": "/refs/outfitters/8526761853119.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8314853228735",
+   "name": "Grey Straight Fit Jeans",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0647-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909_4e31b262-05ea-4a00-9e87-2e7633158bde.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909_4e31b262-05ea-4a00-9e87-2e7633158bde.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909._a173683e-d5e4-4687-b805-f6681454c51e.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647209909_4_copy.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "denim",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Grey",
+   "fabric": "Cotton denim",
+   "description": "grey straight fit jeans",
+   "sizes": [
+    {
+     "label": "24",
+     "inStock": false
+    },
+    {
+     "label": "26",
+     "inStock": true
+    },
+    {
+     "label": "28",
+     "inStock": true
+    },
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of grey straight fit jeans.",
+   "ref": "/refs/outfitters/8314853228735.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8283629519039",
+   "name": "Multi Color Skater Fit Jeans With Laser Print",
+   "price": 3690,
+   "url": "https://outfitters.com.pk/products/f0740-109",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999LOWER._822fb404-6a83-4876-b2c8-92cbb3c945b5.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999LOWER._822fb404-6a83-4876-b2c8-92cbb3c945b5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999LOWER._93421740-f29e-4cdc-acd1-6598a95cb943.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0740109999_8_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "denim",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Multi Color",
+   "fabric": "Cotton denim",
+   "description": "multi color skater fit jeans with laser print",
+   "sizes": [
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    },
+    {
+     "label": "36",
+     "inStock": true
+    },
+    {
+     "label": "38",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of multi color skater fit jeans with laser print.",
+   "ref": "/refs/outfitters/8283629519039.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8069648482495",
+   "name": "Black Basic Slim Chino Pants",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0537-108",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901LOWER_e29c63ea-10b7-4872-8cb4-8a33669af35d.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901LOWER_e29c63ea-10b7-4872-8cb4-8a33669af35d.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901_6.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901_4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0537108901_1.jpg"
+   ],
+   "season": "SS-25",
+   "lane": "trousers",
+   "formality": 2.4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Black",
+   "fabric": "Cotton",
+   "description": "black basic slim chino pants",
+   "sizes": [
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    },
+    {
+     "label": "36",
+     "inStock": true
+    },
+    {
+     "label": "38",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of black basic slim chino pants.",
+   "ref": "/refs/outfitters/8069648482495.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8314850148543",
+   "name": "Smoky Grape Textured Bermuda Shorts",
+   "price": 2490,
+   "url": "https://outfitters.com.pk/products/f0154-110",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512LOWER..jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512LOWER._a81be979-ffa3-4f19-ad03-0549c6240101.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512LOWER_c018c941-9243-4b23-b67f-041bd5638c5f.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0154110512_4.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "trousers",
+   "formality": 1.2,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Lilac",
+   "fabric": "Cotton",
+   "description": "lilac textured bermuda shorts in a regular fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of lilac textured bermuda shorts in a regular fit.",
+   "ref": "/refs/outfitters/8314850148543.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526759461055",
+   "name": "Sand Loose Relaxed Jogger Trousers",
+   "price": 5490,
+   "url": "https://outfitters.com.pk/products/f0781-108",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007LOWER._338f23bb-5a51-414d-813b-fa1d079929ea.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007LOWER._338f23bb-5a51-414d-813b-fa1d079929ea.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007LOWER._435182fa-1817-4e0c-92b6-5d23032a152a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0781108007_9_copy2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "trousers",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Sand",
+   "fabric": "Cotton blend",
+   "description": "sand loose relaxed jogger trousers",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of sand loose relaxed jogger trousers.",
+   "ref": "/refs/outfitters/8526759461055.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8314855096511",
+   "name": "Peanut Regular Fit Trousers",
+   "price": 5990,
+   "url": "https://outfitters.com.pk/products/f0766-108",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808LOWER.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808LOWER_252c843e-919d-448a-8d5c-4c388565fb49.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808LOWER._2ef4b348-8706-4cc3-85c4-d0fe4dbcd4ed.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808_3_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0766108808_9_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "trousers",
+   "formality": 2.4,
+   "tradition": "west",
+   "gender": "men",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Tan",
+   "fabric": "Cotton",
+   "description": "tan regular fit trousers",
+   "sizes": [
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    },
+    {
+     "label": "36",
+     "inStock": true
+    },
+    {
+     "label": "38",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of tan peanut regular fit trousers.",
+   "ref": "/refs/outfitters/8314855096511.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8327994704063",
+   "name": "White T-Shirt With Button Tab Detail",
+   "price": 1590,
+   "url": "https://outfitters.com.pk/products/f1324-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001._32e5252b-8638-44c7-aed9-b5332f157920.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001._3b859504-2a62-44c7-8b36-f7b58a9cf40e.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001_4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1324206001_3.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "tees",
+   "formality": 1.6,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "White",
+   "fabric": "Cotton",
+   "description": "white t-shirt with button tab detail in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a white t-shirt with button tab detail in a relaxed fit.",
+   "ref": "/refs/outfitters/8327994704063.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8387437232319",
+   "name": "Powder Coral Crew Neck T-Shirt With Side Slit",
+   "price": 1990,
+   "url": "https://outfitters.com.pk/products/f1340-206-a",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327._1b813dbe-6f21-4d9b-a545-c607cd0515a5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327._5f0e4886-a4b2-4717-b91d-2aa4dc150746.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1340206327_4.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "tees",
+   "formality": 1.6,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "oversized fit",
+   "colour": "Light Pink",
+   "fabric": "Cotton",
+   "description": "light pink crew neck t-shirt with side slit in an oversized fit",
+   "sizes": [
+    {
+     "label": "XS-S",
+     "inStock": true
+    },
+    {
+     "label": "M-L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a light pink crew neck t-shirt with side slit in an oversized fit.",
+   "ref": "/refs/outfitters/8387437232319.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8411027505343",
+   "name": "Taupe Oversized T-Shirt",
+   "price": 2490,
+   "url": "https://outfitters.com.pk/products/f1460-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805._e71ce0e8-749e-4c6a-8319-f54e53069c3a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805._434bca1d-cd22-45ed-a4d8-b3461f13f13a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805_2_d6407153-e608-48ce-8c8c-1e78f67da4c4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1460206805_3_da37b98a-540a-4ed2-8baa-9bbd6c79ba0f.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "tees",
+   "formality": 1.6,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Taupe",
+   "fabric": "Cotton",
+   "description": "taupe oversized t-shirt",
+   "sizes": [
+    {
+     "label": "XS-S",
+     "inStock": true
+    },
+    {
+     "label": "M-L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a taupe oversized t-shirt.",
+   "ref": "/refs/outfitters/8411027505343.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8411028357311",
+   "name": "Light Khaaki Graphic T-Shirt",
+   "price": 2490,
+   "url": "https://outfitters.com.pk/products/f1485-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128._38de955d-a8a1-405e-89a6-81addd7d5098.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128._271947be-bcee-4e00-8850-39bfa5f3a9ad.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128_2_dad35249-8dfb-4f93-b9d1-d19d1aa5b042.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1485206128_1_a406df14-50cb-4873-bbd8-ce2bf62145b4.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "tees",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Light Khaaki",
+   "fabric": "",
+   "description": "light khaaki graphic t-shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a light khaaki graphic t-shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8411028357311.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8411028521151",
+   "name": "Light Grey Marl Raglan T-Shirt",
+   "price": 1190,
+   "url": "https://outfitters.com.pk/products/f1489-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915._a4503213-4f09-420e-bf95-0c65c738e3ef.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915._735de5f6-d1cb-4b28-b7e2-2db710f952e1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915_5_924e9240-d603-4b5c-920b-782bf9832d99.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F1489206915_3_4d6a08c5-7088-4656-8527-bf5e7e9e4bc6.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "tees",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Light Grey Marl",
+   "fabric": "Cotton",
+   "description": "light grey marl raglan t-shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a light grey marl raglan t-shirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8411028521151.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8270572781759",
+   "name": "White Shirt With Lace Detail",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f0541-203",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001._d1c03fa6-0a78-4b87-b20a-a6d5a0e9a54d.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001_9dc81c91-811e-440f-845f-9a212d1fe27a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001_3_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0541203001_9_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2.3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "oversized fit",
+   "colour": "White",
+   "fabric": "Cotton",
+   "description": "white shirt with lace detail in an oversized fit",
+   "sizes": [
+    {
+     "label": "XS-S",
+     "inStock": true
+    },
+    {
+     "label": "M-L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a white shirt with lace detail in an oversized fit.",
+   "ref": "/refs/outfitters/8270572781759.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8308663713983",
+   "name": "Pale Yellow Resort Collar Shirt",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f0506-203",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114._b53c13d2-4fb0-4b45-8e75-4d0dce992e9b.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114_c6cee749-7133-4479-be0a-e9869c532c8a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114_3_82c948e1-1340-4da6-8d36-9e199c852fa6.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0506203114_5.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "oversized fit",
+   "colour": "Pale Yellow",
+   "fabric": "Cotton",
+   "description": "pale yellow resort collar shirt in an oversized fit",
+   "sizes": [
+    {
+     "label": "XS-S",
+     "inStock": true
+    },
+    {
+     "label": "M-L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a pale yellow resort collar shirt in an oversized fit.",
+   "ref": "/refs/outfitters/8308663713983.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8327993131199",
+   "name": "Vanilla Ice Linen Blend Shirt",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/f0782-203",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005._665683a9-2607-45d9-8d5c-e60b2d0bfb22.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005._28829e90-c9ed-4333-aef1-9993dfb3ca5b.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005_3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0782203005_2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2.7,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "boxy fit",
+   "colour": "Cream",
+   "fabric": "Cotton blend",
+   "description": "cream linen blend shirt in a boxy fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a cream linen blend shirt in a boxy fit.",
+   "ref": "/refs/outfitters/8327993131199.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8405228028095",
+   "name": "Caramel Muslin Shirt",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f0794-203",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806._5749d048-f9d4-45a7-bf92-70788d4a3f40.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806._366590f9-8abd-4c61-bc7b-b66fca61308b.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0794203806_9_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "shirts",
+   "formality": 2.3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Tan",
+   "fabric": "Cotton",
+   "description": "tan muslin shirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a tan muslin shirt in a relaxed fit.",
+   "ref": null,
+   "refHow": "mask-deeper",
+   "refPin": "the mask took the whole top with it; the portrait would be drawn from the picture alone, so no reference is kept"
+  },
+  {
+   "id": "8213270757567",
+   "name": "Twilight Embroidered Quarter Zip-Up Sweatshirt",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/embroidered-quarter-zip-up-sweatshirt-2",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621_f689d2fa-19cb-4932-bfe6-83fb5104717c.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621._7eef5dea-6bed-4998-9a59-2961ca794104.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0256207621_9_copy2.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "knitwear",
+   "formality": 1.5,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Navy",
+   "fabric": "Cotton",
+   "description": "navy embroidered quarter zip-up sweatshirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a navy embroidered quarter zip-up sweatshirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8213270757567.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526748287167",
+   "name": "Antique White Cropped Button Up Cardigan",
+   "price": 6490,
+   "url": "https://outfitters.com.pk/products/f0285-202",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006._4af7792b-bb99-441f-b69f-7eb1b9641325.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006._4af7792b-bb99-441f-b69f-7eb1b9641325.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006_3_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006_9_copy2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006_4_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006._c682d435-bf74-4c41-9b86-304bbb137e5a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0285202006..jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 2,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "regular fit",
+   "colour": "Antique White",
+   "fabric": "Acrylic",
+   "description": "antique white cropped button up cardigan in a regular fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an antique white cropped button up cardigan in a regular fit.",
+   "ref": "/refs/outfitters/8526748287167.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526748582079",
+   "name": "Coconut Milk Knitted Sweater",
+   "price": 6490,
+   "url": "https://outfitters.com.pk/products/f0292-202",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003._7d5d3d92-2a77-4c12-82eb-2feedf7b3532.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003._697f7296-d3c7-4a61-9b47-77f9fd84f1ca.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292202003_9_copy2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 1.9,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Cream",
+   "fabric": "Acrylic",
+   "description": "cream knitted sweater in a relaxed fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a cream knitted sweater in a relaxed fit.",
+   "ref": "/refs/outfitters/8526748582079.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8308664762559",
+   "name": "Black Graphic Sweatshirt",
+   "price": 3790,
+   "url": "https://outfitters.com.pk/products/f0340-207",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901._a38f28d4-0f82-4c6f-8033-29d011f559be.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901._714119d0-08bc-4be2-8f7b-8f0031a77620.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0340207901_4.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "knitwear",
+   "formality": 1.2,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Black",
+   "fabric": "Cotton",
+   "description": "black graphic sweatshirt in a relaxed fit",
+   "sizes": [
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a black graphic sweatshirt in a relaxed fit.",
+   "ref": "/refs/outfitters/8308664762559.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526748745919",
+   "name": "Multi Colour Striped Sweater",
+   "price": 6490,
+   "url": "https://outfitters.com.pk/products/f0293-202",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998._41be2134-bac0-4139-a20e-ce52c011fda5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998._a3a11d76-4d2f-421a-b1e1-b3ee57d4fecc.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998_3_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0293202998_9_copy2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 1.9,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Multi Colour",
+   "fabric": "",
+   "description": "multi colour striped sweater in a relaxed fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a multi colour striped sweater in a relaxed fit.",
+   "ref": "/refs/outfitters/8526748745919.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8539459780799",
+   "name": "Taupe Mock Neck Sweater",
+   "price": 7490,
+   "url": "https://outfitters.com.pk/products/f0294-202",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805-2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805-2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805-5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805-4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805-3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805_10_copy2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0294202805_9_copy2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "knitwear",
+   "formality": 2.1,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Taupe",
+   "fabric": "Acrylic",
+   "description": "taupe mock neck sweater in a relaxed fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a taupe mock neck sweater in a relaxed fit.",
+   "ref": "/refs/outfitters/8539459780799.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8181108015295",
+   "name": "Dark Olive Cropped Quilted Puffer Jacket",
+   "price": 5490,
+   "url": "https://outfitters.com.pk/products/cropped-quilted-puffer-jacket-1",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117.2_bcf14ff6-4e79-4ebe-9155-94d808cb0a78.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117.2_bcf14ff6-4e79-4ebe-9155-94d808cb0a78.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117_5f1d842d-972f-4ed1-a2e4-688c3451a9d0.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117.2_729553fe-8a37-4b4a-a207-d5632dd580a6.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117.2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0266201117_1.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "outerwear",
+   "formality": 1.8,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Dark Olive",
+   "fabric": "",
+   "description": "dark olive cropped quilted puffer jacket in a relaxed fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a dark olive cropped quilted puffer jacket in a relaxed fit.",
+   "ref": "/refs/outfitters/8181108015295.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8201826173119",
+   "name": "Indigo Blue Notch Collar Blazer",
+   "price": 7490,
+   "url": "https://outfitters.com.pk/products/notch-collar-blazer",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622_2cdbca49-1ad9-46b7-b229-257bc2158ba4.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622_2cdbca49-1ad9-46b7-b229-257bc2158ba4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622._343564c0-c162-4186-8b46-40e051119d58.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0344201622_7_copy2.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "outerwear",
+   "formality": 3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "relaxed fit",
+   "colour": "Indigo Blue",
+   "fabric": "",
+   "description": "indigo blue notch collar blazer in a relaxed fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an indigo blue notch collar blazer in a relaxed fit.",
+   "ref": "/refs/outfitters/8201826173119.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8201826795711",
+   "name": "Off White Notched Collar Blazer",
+   "price": 7490,
+   "url": "https://outfitters.com.pk/products/notched-collar-blazer-2",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002._386a4db5-7392-48dc-829f-c6555ed4589e.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002._5b7ddc47-27c5-4c75-803b-3f65e16e3a86.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002_3_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0432201002_5_copy.jpg"
+   ],
+   "season": "WS-25",
+   "lane": "outerwear",
+   "formality": 3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "oversized fit",
+   "colour": "Off White",
+   "fabric": "",
+   "description": "off white notched collar blazer in an oversized fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an off white notched collar blazer in an oversized fit.",
+   "ref": "/refs/outfitters/8201826795711.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8431515926719",
+   "name": "Skyway Mid Rise Ankle Balloon Jeans",
+   "price": 3190,
+   "url": "https://outfitters.com.pk/products/f0731-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630LOWER4.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630LOWER4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630LOWER.1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630LOWER.2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630LOWER.3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630_3_d35d51d8-60b2-4e7a-8256-b8641871318f.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0731209630_5.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "denim",
+   "formality": 1.7,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Light Blue",
+   "fabric": "Cotton denim",
+   "description": "light blue mid rise ankle balloon jeans",
+   "sizes": [
+    {
+     "label": "24",
+     "inStock": true
+    },
+    {
+     "label": "26",
+     "inStock": true
+    },
+    {
+     "label": "28",
+     "inStock": true
+    },
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of light blue mid rise ankle balloon jeans.",
+   "ref": "/refs/outfitters/8431515926719.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526761066687",
+   "name": "Black Baggy Fit Jeans",
+   "price": 6990,
+   "url": "https://outfitters.com.pk/products/f0822-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER7.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER7.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER4.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0822209901LOWER2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "denim",
+   "formality": 1.7,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Black",
+   "fabric": "Cotton denim",
+   "description": "black baggy fit jeans",
+   "sizes": [
+    {
+     "label": "24",
+     "inStock": true
+    },
+    {
+     "label": "26",
+     "inStock": true
+    },
+    {
+     "label": "28",
+     "inStock": true
+    },
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of black baggy fit jeans.",
+   "ref": "/refs/outfitters/8526761066687.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526761132223",
+   "name": "Anthracite Grey Wide Leg Jeans",
+   "price": 5990,
+   "url": "https://outfitters.com.pk/products/f0823-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903LOWER..jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903LOWER._f89fe40f-42d4-41e6-8e0e-a329c0b0bc58.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903_1_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903_4_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0823209903_9_copy2.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "denim",
+   "formality": 1.7,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Dark Grey",
+   "fabric": "Cotton denim",
+   "description": "dark grey wide leg jeans",
+   "sizes": [
+    {
+     "label": "24",
+     "inStock": true
+    },
+    {
+     "label": "26",
+     "inStock": true
+    },
+    {
+     "label": "28",
+     "inStock": true
+    },
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of dark grey anthracite grey wide leg jeans.",
+   "ref": "/refs/outfitters/8526761132223.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8526760476863",
+   "name": "Ocean Blue High Waist Barrel Jeans",
+   "price": 6490,
+   "url": "https://outfitters.com.pk/products/f0815-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604LOWER..jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604LOWER._5b6351a7-e709-413c-bd02-9efe7841e8d6.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604LOWER._d89e06da-b0e5-4393-b458-918950f4d0fd.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604LOWER._8ffff91e-0f77-4554-a22a-faae133f75f3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0815209604_2_copy.jpg"
+   ],
+   "season": "WS-26",
+   "lane": "denim",
+   "formality": 1.7,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Ocean Blue",
+   "fabric": "Cotton denim",
+   "description": "ocean blue high waist barrel jeans",
+   "sizes": [
+    {
+     "label": "24",
+     "inStock": true
+    },
+    {
+     "label": "26",
+     "inStock": true
+    },
+    {
+     "label": "28",
+     "inStock": true
+    },
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of ocean blue high waist barrel jeans.",
+   "ref": "/refs/outfitters/8526760476863.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8283627716799",
+   "name": "Flamingo Creased-Effect Wide Leg Trousers",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0617-208",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311LOWER..jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311LOWER._3740ce5e-090c-43b3-9117-4d67b7cbec5a.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311LOWER._e937bece-244a-4346-bcb9-a2cb55dbf29b.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311_4_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0617208311_9_copy2.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "trousers",
+   "formality": 2.4,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Pink",
+   "fabric": "Cotton",
+   "description": "pink creased-effect wide leg trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of pink flamingo creased-effect wide leg trousers.",
+   "ref": "/refs/outfitters/8283627716799.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8314853458111",
+   "name": "Black Balloon Fit Pants",
+   "price": 3190,
+   "url": "https://outfitters.com.pk/products/f0657-208",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901LOWER._d8078984-bcd0-488d-a425-b82d7495b55c.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901LOWER._d8078984-bcd0-488d-a425-b82d7495b55c.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901LOWER._c08a9ef2-641c-4ba5-8afa-b551e0b8891e.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901_2_copy.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0657208901_3_copy.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "trousers",
+   "formality": 2.4,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Black",
+   "fabric": "Cotton",
+   "description": "black balloon fit pants",
+   "sizes": [
+    {
+     "label": "24",
+     "inStock": true
+    },
+    {
+     "label": "26",
+     "inStock": true
+    },
+    {
+     "label": "28",
+     "inStock": true
+    },
+    {
+     "label": "30",
+     "inStock": true
+    },
+    {
+     "label": "32",
+     "inStock": true
+    },
+    {
+     "label": "34",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of black balloon fit pants.",
+   "ref": "/refs/outfitters/8314853458111.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8265701621951",
+   "name": "Grey Loose Fit Jogger Trousers",
+   "price": 2690,
+   "url": "https://outfitters.com.pk/products/f0613-208",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909LOWER_bb7c161f-468e-4142-8cbf-dd6cdfadeb6c.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909LOWER_bb7c161f-468e-4142-8cbf-dd6cdfadeb6c.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909LOWER..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909LOWER._118d5f7e-6ab1-4fd0-894a-e683fe57f4a5.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909LOWER.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0613208909_1.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "trousers",
+   "formality": 1.3,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Grey",
+   "fabric": "Cotton blend",
+   "description": "grey loose fit jogger trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": false
+    },
+    {
+     "label": "L",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of grey loose fit jogger trousers.",
+   "ref": "/refs/outfitters/8265701621951.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8327992344767",
+   "name": "Vanilla Ice Striped Straight Fit Pants",
+   "price": 3190,
+   "url": "https://outfitters.com.pk/products/f0623-208",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005_5b9f697b-c0c0-4baf-9e16-284aed386804.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005._366d3bbf-0cf7-415c-9340-83de14a4ea4d.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005_2.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0623208005_3.jpg"
+   ],
+   "season": "SS-26",
+   "lane": "trousers",
+   "formality": 2.4,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "",
+   "colour": "Cream",
+   "fabric": "Polyester blend",
+   "description": "cream striped straight fit pants",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the lower body garment with a pair of cream vanilla ice striped straight fit pants.",
+   "ref": "/refs/outfitters/8327992344767.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8431513436351",
+   "name": "Jet Black T-Shirt Dress",
+   "price": 3990,
+   "url": "https://outfitters.com.pk/products/f0309-204",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902._dc8a94ad-33b5-417d-bb7c-36313efcac79.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902._61ac21b9-2a02-4f3a-9818-287f7e29711c.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902_1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309204902_9_copy.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "dresses",
+   "formality": 1.8,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "slim fit",
+   "colour": "Jet Black",
+   "fabric": "Cotton",
+   "description": "jet black t-shirt dress in a slim fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a jet black t-shirt dress in a slim fit.",
+   "ref": "/refs/outfitters/8431513436351.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8437500215487",
+   "name": "Brown Grey Tiered T-Shirt Dress",
+   "price": 6990,
+   "url": "https://outfitters.com.pk/products/f0310-204",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816._4f98e2a9-01b3-4fa5-8572-60ddb26f75f8.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816._f4f7240e-fd8e-41e1-b510-56a2013509e1.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816._e313a59f-c27f-4f34-b8b8-99a95de557e3.jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816..jpg",
+    "https://cdn.shopify.com/s/files/1/2290/7887/files/F0310204816_2_copy.jpg"
+   ],
+   "season": "HS-26",
+   "lane": "dresses",
+   "formality": 1.8,
+   "tradition": "west",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "slim fit",
+   "colour": "Brown Grey",
+   "fabric": "Cotton",
+   "description": "brown grey tiered t-shirt dress in a slim fit",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a brown grey tiered t-shirt dress in a slim fit.",
+   "ref": "/refs/outfitters/8437500215487.jpg",
+   "refHow": "mask"
+  }
+ ],
+ "addons": [
+  {
+   "id": "8310605971647",
+   "name": "Multi-Piece Sneakers",
+   "price": 9990,
+   "url": "https://outfitters.com.pk/products/f0398-112",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0398112901_5.jpg",
+   "kind": "shoes",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8526751858879",
+   "name": "Suede Moc-Toe Shoes",
+   "price": 10990,
+   "url": "https://outfitters.com.pk/products/f0424-112",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0424112805_4.jpg",
+   "kind": "shoes",
+   "gender": "men",
+   "colour": "taupe"
+  },
+  {
+   "id": "8310605873343",
+   "name": "Multi-Piece Contrast Sneakers",
+   "price": 4990,
+   "url": "https://outfitters.com.pk/products/f0394-112",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0394112113_4.jpg",
+   "kind": "shoes",
+   "gender": "men",
+   "colour": "beige"
+  },
+  {
+   "id": "8378178502847",
+   "name": "Multi-Piece Chunky Sneakers",
+   "price": 6490,
+   "url": "https://outfitters.com.pk/products/f0372-112",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0372112120_5.jpg",
+   "kind": "shoes",
+   "gender": "men",
+   "colour": "mid olive"
+  },
+  {
+   "id": "8536106041535",
+   "name": "Faux Leather Chelsea Boots",
+   "price": 10990,
+   "url": "https://outfitters.com.pk/products/f0423-112-a",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0423112901_5.jpg",
+   "kind": "shoes",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8526752055487",
+   "name": "Suede Leather Boots",
+   "price": 12490,
+   "url": "https://outfitters.com.pk/products/f0425-112",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0425112801_4.jpg",
+   "kind": "shoes",
+   "gender": "men",
+   "colour": "brown"
+  },
+  {
+   "id": "8327983235263",
+   "name": "Faux Leather Belt",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0292-114",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0292114901_4.jpg",
+   "kind": "belt",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8327984382143",
+   "name": "Faux Leather Grommet Belt",
+   "price": 1690,
+   "url": "https://outfitters.com.pk/products/f0300-114",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0300114802_3.jpg",
+   "kind": "belt",
+   "gender": "men",
+   "colour": "coffee"
+  },
+  {
+   "id": "8327982186687",
+   "name": "Multi-Functional Backpack",
+   "price": 4990,
+   "url": "https://outfitters.com.pk/products/f0254-113",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0254113901_1.jpg",
+   "kind": "bag",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8327974486207",
+   "name": "Square Sunglasses",
+   "price": 1790,
+   "url": "https://outfitters.com.pk/products/f0102-120",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0102120802_1_copy.jpg",
+   "kind": "sunglasses",
+   "gender": "men",
+   "colour": "coffee"
+  },
+  {
+   "id": "8327975239871",
+   "name": "Aviator Sunglasses",
+   "price": 2790,
+   "url": "https://outfitters.com.pk/products/f0108-120",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0108120901_2.jpg",
+   "kind": "sunglasses",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8327975403711",
+   "name": "Rectangle Tinted Sunglasses",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/f0109-120",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0109120629_1_copy.jpg",
+   "kind": "sunglasses",
+   "gender": "men",
+   "colour": "blue ice"
+  },
+  {
+   "id": "8283648393407",
+   "name": "Metal Crew Neck T-Shirt",
+   "price": 1190,
+   "url": "https://outfitters.com.pk/products/f1831-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1831106907_1.jpg",
+   "kind": "tops",
+   "gender": "men",
+   "colour": "grey"
+  },
+  {
+   "id": "8411043332287",
+   "name": "White Crew Neck T-Shirt",
+   "price": 1390,
+   "url": "https://outfitters.com.pk/products/f2097-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F2097106001_5.jpg",
+   "kind": "tops",
+   "gender": "men",
+   "colour": "white"
+  },
+  {
+   "id": "8411042906303",
+   "name": "Deep Blue Crew Neck T-Shirt",
+   "price": 1190,
+   "url": "https://outfitters.com.pk/products/f2094-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F2094106620_4.jpg",
+   "kind": "tops",
+   "gender": "men",
+   "colour": "deep blue"
+  },
+  {
+   "id": "8526777123007",
+   "name": "Black Button Up Shirt",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/f1106-103",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1106103901_3.jpg",
+   "kind": "tops",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8487907000511",
+   "name": "Stone Crew Neck T-Shirt",
+   "price": 1590,
+   "url": "https://outfitters.com.pk/products/f2371-106",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F2371106817_2.jpg",
+   "kind": "tops",
+   "gender": "men",
+   "colour": "beige"
+  },
+  {
+   "id": "8308664008895",
+   "name": "Indigo Blue Straight Fit Jeans",
+   "price": 3190,
+   "url": "https://outfitters.com.pk/products/f0647-109",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0647109622_2.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "indigo blue"
+  },
+  {
+   "id": "8278682992831",
+   "name": "Dark Olive Relaxed Fit Jeans",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0734-109",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0734109117_3.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "dark olive"
+  },
+  {
+   "id": "8431516254399",
+   "name": "Sand Straight Fit Jeans",
+   "price": 3490,
+   "url": "https://outfitters.com.pk/products/f0854-109",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0854109007_2.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "sand"
+  },
+  {
+   "id": "8411015315647",
+   "name": "Anthracite Grey Straight Fit Trousers",
+   "price": 6990,
+   "url": "https://outfitters.com.pk/products/f0737-108",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0737108903_2_copy.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "dark grey"
+  },
+  {
+   "id": "8306754486463",
+   "name": "Black Relaxed Fit Trousers",
+   "price": 3190,
+   "url": "https://outfitters.com.pk/products/f0694-108",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0694108901_2_copy_acafebf3-2e82-4c03-a1fa-e16106491433.jpg",
+   "kind": "bottoms",
+   "gender": "men",
+   "colour": "black"
+  },
+  {
+   "id": "8512351142079",
+   "name": "Low-Top Mesh Sneakers",
+   "price": 9990,
+   "url": "https://outfitters.com.pk/products/f0311-212-a",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0311212805_4.jpg",
+   "kind": "shoes",
+   "gender": "women",
+   "colour": "taupe"
+  },
+  {
+   "id": "8526751203519",
+   "name": "Suede Loafers",
+   "price": 6990,
+   "url": "https://outfitters.com.pk/products/f0395-212",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0395212806_7.jpg",
+   "kind": "shoes",
+   "gender": "women",
+   "colour": "tan"
+  },
+  {
+   "id": "8310605709503",
+   "name": "Multi-Piece Suede Trainers",
+   "price": 4490,
+   "url": "https://outfitters.com.pk/products/f0352-212",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0352212701_5_2.jpg",
+   "kind": "shoes",
+   "gender": "women",
+   "colour": "green"
+  },
+  {
+   "id": "8321254719679",
+   "name": "Multi-Piece Sneakers",
+   "price": 5490,
+   "url": "https://outfitters.com.pk/products/f0309-212",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0309212509_5.jpg",
+   "kind": "shoes",
+   "gender": "women",
+   "colour": "light purple"
+  },
+  {
+   "id": "8350292377791",
+   "name": "Mesh Ballet Flats",
+   "price": 3990,
+   "url": "https://outfitters.com.pk/products/f0342-212",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0342212901_5.jpg",
+   "kind": "shoes",
+   "gender": "women",
+   "colour": "black"
+  },
+  {
+   "id": "8340877279423",
+   "name": "Multi-Piece Ballet Sneakers",
+   "price": 4690,
+   "url": "https://outfitters.com.pk/products/f0351-212",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0351212002_3.jpg",
+   "kind": "shoes",
+   "gender": "women",
+   "colour": "off white"
+  },
+  {
+   "id": "8327980777663",
+   "name": "Faux Leather Belt With Heart Detail",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0187-214",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0187214901_4.jpg",
+   "kind": "belt",
+   "gender": "women",
+   "colour": "black"
+  },
+  {
+   "id": "8327981039807",
+   "name": "Animal Print Belt",
+   "price": 1490,
+   "url": "https://outfitters.com.pk/products/f0189-214",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0189214998_3.jpg",
+   "kind": "belt",
+   "gender": "women",
+   "colour": "multi colour"
+  },
+  {
+   "id": "8411013021887",
+   "name": "Bowling Bag",
+   "price": 7490,
+   "url": "https://outfitters.com.pk/products/f0249-213",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0249213802_3.jpg",
+   "kind": "bag",
+   "gender": "women",
+   "colour": "coffee"
+  },
+  {
+   "id": "8327981891775",
+   "name": "Animal Print Shoulder Bag",
+   "price": 4190,
+   "url": "https://outfitters.com.pk/products/f0245-213",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0245213998_5.jpg",
+   "kind": "bag",
+   "gender": "women",
+   "colour": "multi colour"
+  },
+  {
+   "id": "8327974387903",
+   "name": "Rectangle Tinted Sunglasses",
+   "price": 3990,
+   "url": "https://outfitters.com.pk/products/f0101-220",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0101220901_1_copy.jpg",
+   "kind": "sunglasses",
+   "gender": "women",
+   "colour": "black"
+  },
+  {
+   "id": "8327975010495",
+   "name": "Oval Tinted Sunglasses",
+   "price": 4490,
+   "url": "https://outfitters.com.pk/products/f0106-220",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0106220919_12.jpg",
+   "kind": "sunglasses",
+   "gender": "women",
+   "colour": "silver"
+  },
+  {
+   "id": "8327974650047",
+   "name": "Rimless Tinted Sunglasses",
+   "price": 1990,
+   "url": "https://outfitters.com.pk/products/f0103-220",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0103220617_1_copy.jpg",
+   "kind": "sunglasses",
+   "gender": "women",
+   "colour": "light aqua"
+  },
+  {
+   "id": "8239008121023",
+   "name": "Ribbed Beanie With Label Patch",
+   "price": 790,
+   "url": "https://outfitters.com.pk/products/f0116-215",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0116215725_4.jpg",
+   "kind": "cap",
+   "gender": "women",
+   "colour": "parrot green fluorescent"
+  },
+  {
+   "id": "8411027669183",
+   "name": "Peanut Ringer T-Shirt",
+   "price": 1090,
+   "url": "https://outfitters.com.pk/products/f1466-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1466206808_2.jpg",
+   "kind": "tops",
+   "gender": "women",
+   "colour": "tan"
+  },
+  {
+   "id": "8411026391231",
+   "name": "Vanilla Ice Crew Neck T-Shirt",
+   "price": 890,
+   "url": "https://outfitters.com.pk/products/f1449-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1449206005_3.jpg",
+   "kind": "tops",
+   "gender": "women",
+   "colour": "cream"
+  },
+  {
+   "id": "8477216014527",
+   "name": "White Crew Neck T-Shirt",
+   "price": 1190,
+   "url": "https://outfitters.com.pk/products/f1779-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1779206001_6.jpg",
+   "kind": "tops",
+   "gender": "women",
+   "colour": "white"
+  },
+  {
+   "id": "8526770634943",
+   "name": "Black Crew Neck T-Shirt",
+   "price": 2090,
+   "url": "https://outfitters.com.pk/products/f1670-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1670206901_2.jpg",
+   "kind": "tops",
+   "gender": "women",
+   "colour": "black"
+  },
+  {
+   "id": "8477216112831",
+   "name": "Mink Crew Neck T-Shirt",
+   "price": 2090,
+   "url": "https://outfitters.com.pk/products/f1781-206",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F1781206807_2.jpg",
+   "kind": "tops",
+   "gender": "women",
+   "colour": "brown"
+  },
+  {
+   "id": "8283627651263",
+   "name": "Grey Relaxed Fit Jeans",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0616-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0616209909_2.jpg",
+   "kind": "bottoms",
+   "gender": "women",
+   "colour": "grey"
+  },
+  {
+   "id": "8283629224127",
+   "name": "Dusty Blue Relaxed Fit Jeans",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0676-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0676209635_2_copy.jpg",
+   "kind": "bottoms",
+   "gender": "women",
+   "colour": "dusty blue"
+  },
+  {
+   "id": "8258872082623",
+   "name": "Black Straight Fit Jeans",
+   "price": 2990,
+   "url": "https://outfitters.com.pk/products/f0723-209",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0723209901_2_copy.jpg",
+   "kind": "bottoms",
+   "gender": "women",
+   "colour": "black"
+  },
+  {
+   "id": "8426155573439",
+   "name": "Mid Olive Wide Leg Trousers",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f0578-208",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0578208120_1_copy.jpg",
+   "kind": "bottoms",
+   "gender": "women",
+   "colour": "mid olive"
+  },
+  {
+   "id": "8283623620799",
+   "name": "Pale Yellow Straight Fit Trousers",
+   "price": 2190,
+   "url": "https://outfitters.com.pk/products/f0343-208",
+   "image": "https://cdn.shopify.com/s/files/1/2290/7887/files/F0343208114_2.jpg",
+   "kind": "bottoms",
+   "gender": "women",
+   "colour": "pale yellow"
+  }
+ ]
+}

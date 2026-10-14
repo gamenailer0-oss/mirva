@@ -7,13 +7,16 @@ import sapphireBrand from "../brands/sapphire/brand.json";
 import sapphireCatalogue from "../brands/sapphire/catalogue.json";
 import lawrencepurBrand from "../brands/lawrencepur/brand.json";
 import lawrencepurCatalogue from "../brands/lawrencepur/catalogue.json";
+import outfittersBrand from "../brands/outfitters/brand.json";
+import outfittersCatalogue from "../brands/outfitters/catalogue.json";
 
-// Catalogues that ship with the code. Sapphire's and Lawrencepur's are concept demos built from their public
+// Catalogues that ship with the code. Sapphire's, Lawrencepur's and Outfitters' are concept demos built from their public
 // sites, with no agreement behind them. The founder chose to show them publicly; the mirror labels each a concept
 // demo, and the founder's desk can take either off the public list at any time.
 const BUILT_IN = {
   sapphire: { brand: sapphireBrand, catalogue: sapphireCatalogue },
   lawrencepur: { brand: lawrencepurBrand, catalogue: lawrencepurCatalogue },
+  outfitters: { brand: outfittersBrand, catalogue: outfittersCatalogue },
 };
 
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
