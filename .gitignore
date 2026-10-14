@@ -30,3 +30,6 @@ tools/
 
 # Test pictures for the head-restore rig are copied here for a run and taken away after. Never published.
 public/_lab/
+
+# copies of the live database (personal data): this laptop only
+backups/

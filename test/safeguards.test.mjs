@@ -909,3 +909,16 @@ test("a store types its size chart and the mirror is given it; nonsense is refus
   assert.equal((await save("")).status, 200);
   assert.deepEqual(await given(), []);
 });
+
+test("a paused store makes no try-ons at its mirrors or on its website, and the stylist still works", async () => {
+  const { app, db } = await makeApp();
+  const dev = await pair(db);
+  await plan(db, "sapphire", "studio", 1, "paused");
+  const refused = await app.platform.grant(dev.who, "portrait");
+  assert.equal(refused.ok, false);
+  assert.equal(refused.limit, "paused");
+  assert.match(refused.error, /stylist still works/);
+  assert.equal((await app.platform.grant(dev.who, "live")).limit, "paused");
+  await plan(db, "sapphire", "studio", 1, "live");
+  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "and starts again when the store is back");
+});

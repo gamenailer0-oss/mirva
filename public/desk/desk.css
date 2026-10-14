@@ -128,3 +128,12 @@ body.desk { background: var(--bg); font-size: 15.5px; }
   .side .who b { display: none; }
   .side .who .link { padding: 6px 0; font-size: 14px; }
 }
+
+/* "Print the week": the console's overview on paper, without the desk around it */
+@media print {
+  .side, .work-head .row, .sample, .toast { display: none !important; }
+  .shell { display: block !important; }
+  .work { padding: 0 !important; overflow: visible !important; height: auto !important; }
+  .panel, .tile { break-inside: avoid; box-shadow: 0 0 0 1px #ccc !important; }
+  body, .work { background: #fff !important; color: #000 !important; }
+}

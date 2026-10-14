@@ -1,6 +1,7 @@
 // The two desks. A store's console: what happened at its mirrors, its catalogue, its mirrors, its look.
 // The founder's desk: enquiries, stores, members, the messages waiting to be sent, and what it all costs.
 import { $, $$, el, api, money, plural, when, toast, busy, onSubmit, copy, local, fill, connection, picture } from "./ui.js";
+import { pushState, turnOnPush, registerWorker } from "./notify.js";
 
 connection();
 const desk = document.body.dataset.desk; // "console" | "hq"
@@ -174,6 +175,8 @@ const VIEWS = {
       head(name,
         S.brands.length > 1 && el("select", { class: "input", style: "min-height:34px;padding:4px 12px;width:auto", "aria-label": "Store", onchange: (e) => ((S.brand = e.target.value), go("overview")) }, S.brands.map((b) => el("option", { value: b.id, text: b.name, selected: b.id === S.brand }))),
         [7, 30, 90].map((d) => el("button", { class: "chip" + (S.days === d ? " on" : ""), type: "button", text: `${d} days`, onclick: () => ((S.days = d), go("overview")) })),
+        // The week on paper, for the owner's Monday meeting: the same page, printed without the desk around it.
+        el("button", { class: "chip", type: "button", text: "Print the week", onclick: () => (S.days === 7 ? print() : ((S.days = 7), go("overview"), setTimeout(print, 1200))) }),
       ),
       o.sample && el("p", { class: "sample", text: "Sample numbers. The seed script added a month of made-up visits so you can see the console at work. Real visits are counted beside them." }),
       el("div", { class: "tiles" },
@@ -522,6 +525,15 @@ const VIEWS = {
   // =================================================================== the founder's desk
   async today() {
     const [o, week] = await Promise.all([api("/api/hq/overview"), api("/api/hq/tryons?days=7").catch(() => null)]);
+    // The founder's phone is told when a store writes in, and once a day about anything below that needs them.
+    registerWorker();
+    const alerts = el("div", { class: "row", style: "margin:-6px 0 18px" });
+    pushState().then((state) => {
+      if (state === "unsupported") return;
+      fill(alerts, state === "on"
+        ? el("span", { class: "badge good", text: "This phone is told about enquiries" })
+        : el("button", { class: "btn ghost small", type: "button", text: "Tell me on this phone", onclick: async () => (await turnOnPush()) && (toast("This phone will be told when a store writes in."), go("today")) }));
+    });
     const ways = week && [week.modes.model, week.modes.studio];
     const tried = ways ? week.modes.model.count + week.modes.studio.count : 0;
     const prefer = !tried ? "—" : ways[0].count === ways[1].count ? "Even" : ways[0].count > ways[1].count ? "Model" : "Studio";
@@ -543,6 +555,7 @@ const VIEWS = {
     ];
     fill(work(), 
       head("Today"),
+      alerts,
       el("div", { class: "tiles" },
         tile("New enquiries", num(o.leads.new), `${num(o.leads.contacted + o.leads.demo)} in conversation`, 0),
         tile("Stores in pilot", num(o.pilots), `${num(o.leads.won)} won, ${num(o.leads.lost)} lost`, 1),
