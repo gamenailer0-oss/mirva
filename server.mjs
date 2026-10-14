@@ -314,6 +314,7 @@ server.requestTimeout = 120e3;
 server.headersTimeout = 20e3;
 
 // Housekeeping every six hours: portraits nobody kept, expired sessions, closed boards.
+setTimeout(() => app.sweep().catch(() => {}), 5000).unref(); // once, soon after starting, then every six hours
 setInterval(() => app.sweep().catch(() => {}), 6 * 3600e3).unref();
 
 // Localhost only by default: this process can mint tokens that spend money.
