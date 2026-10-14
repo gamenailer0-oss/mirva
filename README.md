@@ -80,10 +80,28 @@ live video, because nobody is paying for it there. Those allowances are in `lib/
 
 ## Bringing in another store
 
-- **Any Shopify store:** type its address on `/retail` under "Your catalogue", or in `/hq` under Stores.
-  MIRVA reads `/products.json`, re-skins the mirror, and writes that store's page at `/for/<store>`.
+- **Any Shopify or WooCommerce store:** type its address on `/retail` under "See it dressed as your store", or in
+  `/hq` under Stores. MIRVA reads `/products.json` (Shopify) or `/wp-json/wc/store/v1/products` (WooCommerce),
+  re-skins the mirror, and writes that store's page at `/for/<store>`.
 - **Sapphire again:** `npm run snapshot` re-reads its collections.
 - **Anything else:** add `brands/<name>/brand.json` and `catalogue.json` in the same shape.
+
+## On a store's own website
+
+A store in a pilot or on a plan can put "Try it on" beside the add-to-cart of its own product pages:
+
+```html
+<script src="https://<mirva address>/embed.js" data-store="<store id>" async></script>
+```
+
+It names its websites in the console (Website), where the line is ready to copy. The button opens the mirror for
+that piece in a sheet; the portraits come out of the store's plan as one more mirror ("web-<store>"), and only the
+websites it named get a pass (`POST /api/embed/session`). The mirror may be framed only by that website.
+
+## Backups
+
+`npm run backup` copies the live database to `backups/` on this machine (git-ignored: it holds personal data).
+Portraits live in the FILES store and are not in it.
 
 ## Keeping the bill in hand
 
