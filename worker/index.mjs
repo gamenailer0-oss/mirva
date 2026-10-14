@@ -2,6 +2,7 @@
 // D1 for the store, KV for portraits and loaded catalogues, the edge cache for product pictures.
 import { createApp } from "../lib/app.mjs";
 import { databaseLimiter } from "../lib/auth.mjs";
+import { createPush } from "../lib/push.mjs";
 import sapphireBrand from "../brands/sapphire/brand.json";
 import sapphireCatalogue from "../brands/sapphire/catalogue.json";
 import lawrencepurBrand from "../brands/lawrencepur/brand.json";
@@ -66,6 +67,8 @@ async function start(env, origin) {
   const limiter = databaseLimiter(db);
   await refreshBrands(env, db);
   const app = await createApp({
+    // Phone notifications: the signing key is two secrets (VAPID_PUBLIC_KEY, VAPID_PRIVATE_JWK). Without them, none are sent.
+    push: createPush({ publicKey: env.VAPID_PUBLIC_KEY, privateJwk: env.VAPID_PRIVATE_JWK, subject: env.MIRVA_PUSH_SUBJECT || "mailto:founder@mirva.local" }),
     env: {
       key,
       hasKey,
@@ -126,7 +129,7 @@ export default {
       const { app, db } = await ready;
       // Catalogues can change in another isolate; the list is one cheap query away.
       if (url.pathname.startsWith("/api/") || url.pathname === "/mirror") await refreshBrands(env, db).catch(() => {});
-      return await app.fetch(request, { ip: request.headers.get("cf-connecting-ip") || "edge", host: undefined });
+      return await app.fetch(request, { ip: request.headers.get("cf-connecting-ip") || "edge", host: undefined, later: (p) => ctx.waitUntil(p.catch(() => {})) });
     } catch (e) {
       console.error(e);
       return new Response(JSON.stringify({ error: "Something went wrong on the server." }), { status: 500, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });

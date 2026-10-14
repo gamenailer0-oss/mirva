@@ -164,6 +164,75 @@
 .choice .bar { height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
 .choice .bar i { display: block; height: 100%; background: var(--ink); transform-origin: left; transform: scaleX(var(--v, 0)); transition: transform var(--slow) var(--ease); }
 .center { text-align: center; justify-items: center; margin-inline: auto; }
+.board-head { max-width: 640px; }
+.board-head .title { font-size: clamp(34px, 7vw, 56px); }
+.board-name { width: min(420px, 100%); margin-inline: auto; }
+.choices.n2 { grid-template-columns: repeat(2, minmax(0, 300px)); }
+.choices.n3, .choices.n4 { grid-template-columns: repeat(auto-fit, minmax(150px, 260px)); }
+.choice .shot .badge { position: absolute; left: 8px; top: 8px; }
+.choice.won .shot { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--good); }
+.choice[disabled] { cursor: default; }
+.choice .bar.lead i, .q-looks .bar.lead i { background: var(--good); }
+.after-vote { width: min(520px, 100%); margin-inline: auto; display: grid; gap: var(--s4); animation: rise var(--calm) var(--ease) both; }
+.after-vote textarea { min-height: 76px; resize: none; line-height: 1.45; }
+.after-vote .btn { justify-self: start; }
+.board-foot { margin-top: var(--s6); padding-top: var(--s7); border-top: 1px solid var(--line); max-width: 560px; }
+.boardpage > *, .boardbody > * { min-width: 0; }
+.boardbody { display: grid; gap: var(--s6); }
+/* On a phone the looks sit side by side, so they can be compared without scrolling back. */
+@media (max-width: 560px) {
+  .choices.n2, .choices.n3, .choices.n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .choices.n3 > :last-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 6px); }
+  .choice b { font-size: 14px; }
+  .choice .meta { font-size: 12.5px; }
+  .board-head .title { font-size: clamp(30px, 9vw, 40px); }
+}
+
+/* ---------- asking: the sheet that makes a question, and the owner's results ---------- */
+.ask-body { display: grid; gap: var(--s5); }
+.ask-strip { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--s1)); padding: 0 var(--s1); }
+.ask-strip li { flex: 0 0 92px; display: grid; gap: 6px; font-size: 12px; line-height: 1.25; color: var(--muted); }
+.ask-strip img { width: 92px; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 12px; background: var(--card); }
+.ask-quick { gap: 8px; margin-top: calc(-1 * var(--s3)); }
+.ask-quick .chip { min-height: 36px; padding: 0 14px; font-size: 13.5px; }
+.ask-set { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.ask-set legend { margin-bottom: 8px; }
+.ask-days { grid-template-columns: repeat(3, 1fr); }
+.ask-choice { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: var(--r-md); background: var(--card); cursor: pointer; transition: box-shadow var(--quick); }
+.ask-choice:has(input:checked) { box-shadow: inset 0 0 0 1.5px var(--ink); background: var(--panel); }
+.ask-choice input { margin: 3px 0 0; accent-color: var(--ink); width: 18px; height: 18px; flex: none; }
+.ask-choice span { display: grid; gap: 2px; }
+.ask-choice b { font-weight: 500; font-size: 15px; }
+.ask-choice small { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.ask-days .ask-choice { padding: 12px; align-items: center; }
+.ask-link { flex-wrap: nowrap; }
+.ask-link .input { min-width: 0; flex: 1; }
+.ask-tell:not([hidden]) { padding-top: var(--s3); border-top: 1px solid var(--line); }
+.btn.wa { background: #1f6b4a; color: #fff; }
+.tell-line { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; justify-content: space-between; padding: 14px 18px; margin-bottom: var(--s5); border-radius: var(--r-md); background: var(--card); }
+.tell-line[hidden] { display: none; }
+.questions { display: grid; gap: var(--s6); }
+.question { display: grid; gap: var(--s4); padding-bottom: var(--s6); border-bottom: 1px solid var(--line); }
+.q-looks { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(132px, 180px); gap: 14px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.q-looks li { display: grid; gap: 7px; align-content: start; }
+.q-looks .shot { position: relative; aspect-ratio: 3 / 4; border-radius: var(--r-md); overflow: hidden; background: var(--card); }
+.q-looks .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.q-looks .shot .badge { position: absolute; left: 8px; top: 8px; }
+.q-looks li.won .shot { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--good); }
+.q-looks b { font-weight: 400; font-size: 14px; line-height: 1.3; }
+.q-looks .meta { font-size: 12.5px; color: var(--muted); }
+.q-looks .bar { height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.q-looks .bar i { display: block; height: 100%; background: var(--ink); transform-origin: left; transform: scaleX(var(--v, 0)); transition: transform var(--slow) var(--ease); }
+.q-notes { display: grid; gap: 8px; padding: 14px 18px; border-radius: var(--r-md); background: var(--card); font-size: 14.5px; }
+.q-notes b { font-weight: 500; }
+.q-acts { gap: 10px 18px; }
+.decide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-top: var(--s4); }
+.decide-grid .shot { aspect-ratio: 3 / 4; border-radius: var(--r-md); overflow: hidden; background: var(--card); }
+.decide-grid img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5); }
+.winner-shot { flex: none; height: min(46svh, 460px); border-radius: var(--r-md); overflow: hidden; background: var(--card); }
+.winner-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.winner .title { font-size: clamp(28px, 6vw, 40px); }
 
 @media (max-width: 900px) {
   .hero { padding-top: 104px; }
@@ -219,3 +288,5 @@
 /* The home page's section titles break where the thought does, on two lines, not five. */
 [data-page="home"] .head { max-width: 46em; }
 [data-page="home"] .head .title em { display: block; }
+.ask-go { position: sticky; bottom: calc(-1 * clamp(22px, 4vw, 36px)); margin-bottom: calc(-1 * clamp(22px, 4vw, 36px)); padding: 12px 0 clamp(22px, 4vw, 36px); background: linear-gradient(to top, var(--panel) 72%, transparent); }
+@media (max-width: 700px) { .ask-go { bottom: calc(-24px - env(safe-area-inset-bottom)); margin-bottom: calc(-24px - env(safe-area-inset-bottom)); padding-bottom: calc(24px + env(safe-area-inset-bottom)); } }

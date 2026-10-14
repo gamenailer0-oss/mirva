@@ -12,6 +12,7 @@ import { json } from "./lib/http.mjs";
 import { openDb } from "./lib/db.mjs";
 import { memoryLimiter } from "./lib/auth.mjs";
 import { createApp } from "./lib/app.mjs";
+import { createPush, newPushKeys } from "./lib/push.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(ROOT, "public");
@@ -164,7 +165,19 @@ async function firstRunWrite(text) {
 }
 
 await loadBrands();
+
+// The key MIRVA signs phone notifications with. Made once on this machine and kept beside the database.
+async function pushKeys() {
+  const file = join(DATA, "push-keys.json");
+  if (existsSync(file)) return JSON.parse(await readFile(file, "utf8"));
+  mkdirSync(DATA, { recursive: true });
+  const keys = await newPushKeys();
+  await writeFile(file, JSON.stringify(keys));
+  return keys;
+}
+
 const app = await createApp({
+  push: createPush({ ...(await pushKeys()), subject: "mailto:founder@mirva.local" }),
   env: {
     key: KEY,
     hasKey: HAS_KEY,
@@ -289,7 +302,7 @@ const server = http.createServer(async (req, res) => {
   }
   res.on("close", discard);
   try {
-    await send(req, res, await app.fetch(request, { ip: clientIp(req), host: req.headers.host }));
+    await send(req, res, await app.fetch(request, { ip: clientIp(req), host: req.headers.host, later: (p) => void p.catch(() => {}) }));
   } catch (e) {
     console.error(e);
     if (!res.headersSent) await send(req, res, json(500, { error: "Something went wrong on the server." }));

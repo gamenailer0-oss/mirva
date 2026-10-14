@@ -202,6 +202,13 @@ dialog.sheet::backdrop { background: rgba(6, 8, 14, .55); }
 dialog.sheet[open] { animation: rise var(--calm) var(--ease); }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
 .sheet-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); margin-bottom: var(--s4); }
+/* On a phone a sheet rises from the bottom edge, where the thumb already is. */
+@media (max-width: 700px) {
+  dialog.sheet { margin: auto 0 0; width: 100%; max-width: 100%; max-height: 92svh; overflow-y: auto; overscroll-behavior: contain; border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 22px 20px calc(24px + env(safe-area-inset-bottom)); }
+  dialog.sheet[open] { animation: sheet-up var(--calm) var(--ease); }
+  dialog.sheet::before { content: ""; display: block; width: 38px; height: 4px; margin: -8px auto 14px; border-radius: 4px; background: var(--line); }
+}
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } }
 details.faq { border-top: 1px solid var(--line); }
 details.faq:last-of-type { border-bottom: 1px solid var(--line); }
 details.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: var(--s5); padding: 22px 0; font: 400 clamp(19px, 2vw, 23px)/1.25 var(--serif); }

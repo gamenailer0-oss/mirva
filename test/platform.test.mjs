@@ -529,7 +529,7 @@ test("a board needs two of your own looks, and a free member keeps three open", 
   assert.equal(listed.length, 1);
   assert.equal(listed[0].code, made.body.code);
   assert.equal(listed[0].title, "Which one?", "a default title");
-  assert.deepEqual(listed[0].looks, [mine[0], mine[1]]);
+  assert.deepEqual(listed[0].looks.map((l) => l.id), [mine[0], mine[1]]);
   assert.equal(listed[0].closed, false);
   assert.deepEqual(listed[0].votes, []);
 
@@ -628,6 +628,110 @@ test("once the owner closes a board, voting is over but the owner still sees eve
   assert.equal(ownerView.owner, true);
   assert.equal(ownerView.looks.length, 2);
   assert.equal((await owner.get("/api/boards")).body.boards[0].closed, true);
+});
+
+test("a question carries her words, how long it stays open, and whose pictures go out", async () => {
+  const owner = await member("eman");
+  const looks = [(await addLook(owner, A)).id, (await addLook(owner, B)).id];
+  const made = await owner.post("/api/boards", { title: "Which one for the walima?", looks, days: 7, pictures: "store" });
+  assert.equal(made.status, 200, JSON.stringify(made.body));
+  const listed = (await owner.get("/api/boards")).body.boards[0];
+  assert.equal(listed.title, "Which one for the walima?");
+  assert.equal(listed.pictures, "store");
+  assert.ok(listed.closes - listed.created > 6.9 * 86400e3 && listed.closes - listed.created < 7.1 * 86400e3, "open for a week");
+  const odd = await owner.post("/api/boards", { looks, days: 40, pictures: "everyone" });
+  const odder = (await owner.get("/api/boards")).body.boards.find((b) => b.code === odd.body.code);
+  assert.equal(odder.pictures, "mine", "anything else is her own pictures");
+  assert.ok(odder.closes - odder.created < 3.1 * 86400e3, "and the usual three days");
+  const guest = (await visitor().get(`/api/board/${made.body.code}`)).body;
+  assert.equal(guest.pictures, "store");
+  assert.ok(guest.looks.every((l) => l.portrait === null), "no portrait reaches a guest when she sent the store's photos");
+});
+
+test("a guest can answer first and add a name and a word after; only she sees the words", async () => {
+  const { owner, looks, code } = await boardOf("farah");
+  const guest = visitor();
+  const first = await guest.post(`/api/board/${code}/vote`, { look: looks[0] });
+  assert.equal(first.status, 200, JSON.stringify(first.body));
+  assert.deepEqual(first.body.tally[looks[0]], { votes: 1, names: [] }, "a tap with no name still counts");
+  const named = await guest.post(`/api/board/${code}/vote`, { look: looks[0], name: "Khala" });
+  assert.deepEqual(named.body.tally[looks[0]], { votes: 1, names: ["Khala"] }, "the name joins the same answer");
+  const worded = await guest.post(`/api/board/${code}/vote`, { look: looks[0], name: "Khala", note: "The first one. It suits you." });
+  assert.equal(worded.body.myNote, "The first one. It suits you.");
+  assert.equal((await guest.post(`/api/board/${code}/vote`, { look: looks[0], name: "Khala" })).body.myNote, "The first one. It suits you.", "a vote without a note keeps the word");
+
+  const seen = (await visitor().get(`/api/board/${code}`)).body;
+  assert.equal(seen.votes, undefined, "another guest sees no one's words");
+  assert.ok(!JSON.stringify(seen).includes("suits you"));
+  const mine = (await owner.get("/api/boards")).body.boards[0];
+  assert.deepEqual(mine.votes.map((v) => [v.name, v.note]), [["Khala", "The first one. It suits you."]]);
+
+  const told = (await owner.get("/api/notes")).body;
+  assert.deepEqual(told.notes.map((n) => n.kind), ["vote", "vote"], "a new answer and a word, not the name");
+  assert.match(told.notes[1].title, /Someone chose/);
+  assert.match(told.notes[0].title, /Khala: “The first one\. It suits you\.”/);
+  assert.equal(told.unseen, 2);
+  const fresh = (await owner.get("/api/notes?fresh=1")).body.notes;
+  assert.equal(fresh.length, 2, "a woken phone gets what is new");
+  assert.equal((await owner.get("/api/notes?fresh=1")).body.notes.length, 0, "and only once");
+  assert.equal((await visitor().get("/api/notes")).status, 401);
+});
+
+test("more time, then her decision: voting stops and the link shows what she chose", async () => {
+  const { owner, looks, code } = await boardOf("gul");
+  const before = (await owner.get("/api/boards")).body.boards[0].closes;
+  const longer = await owner.post("/api/boards/extend", { code, days: 1 });
+  assert.equal(longer.status, 200, JSON.stringify(longer.body));
+  assert.ok(longer.body.board.closes - before > 0.9 * 86400e3, "a day more");
+  err(await (await member("intruder")).post("/api/boards/decide", { code, look: looks[0] }), 404, /can't find/);
+  err(await owner.post("/api/boards/decide", { code, look: looks[2] }), 400, /Choose one/);
+  const decided = await owner.post("/api/boards/decide", { code, look: looks[1] });
+  assert.equal(decided.body.board.decided, looks[1]);
+  assert.equal(decided.body.board.closed, true);
+  err(await visitor().post(`/api/board/${code}/vote`, { look: looks[0] }), 410, /decided/);
+  const guest = (await visitor().get(`/api/board/${code}`)).body;
+  assert.equal(guest.decided, looks[1]);
+  assert.equal(guest.looks.length, 2, "once she has decided, the link shows the looks and her choice");
+  assert.ok(guest.looks.every((l) => l.portrait === null), "but no portrait once voting is over");
+  const again = await owner.post("/api/boards/extend", { code, days: 1 });
+  assert.equal(again.body.board.decided, null, "opening it again clears the decision");
+  assert.equal(again.body.board.closed, false);
+});
+
+test("a question's link carries the question and a picture for WhatsApp, written safely", async () => {
+  const owner = await member("hania");
+  const looks = [(await addLook(owner, A)).id, (await addLook(owner, B)).id];
+  const made = await owner.post("/api/boards", { title: `Which one? <script>alert(1)</script> "quoted"`, looks });
+  const page = await visitor().get(`/b/${made.body.code}`);
+  assert.equal(page.status, 200);
+  assert.match(page.body, /<meta property="og:title" content="Hania asks: Which one\? &lt;script&gt;alert\(1\)&lt;\/script&gt; &quot;quoted&quot;">/);
+  assert.ok(!page.body.includes("<script>alert"), "nothing she typed becomes markup");
+  assert.match(page.body, new RegExp(`og:image" content="${main.base}/share/mirva\\.jpg"`), "MIRVA's own picture until hers is made");
+
+  const jpeg = new Uint8Array(5000);
+  jpeg.set([0xff, 0xd8, 0xff, 0xe0]);
+  const put = (c, bytes, type = "image/jpeg") =>
+    fetch(`${main.base}/api/board/${made.body.code}/cover`, { method: "POST", headers: { "content-type": type, "x-forwarded-for": c.ip, cookie: [...c.jar].map(([k, v]) => `${k}=${v}`).join("; ") }, body: bytes });
+  assert.equal((await put(await member("snoop"), jpeg)).status, 404, "only she can set it");
+  assert.equal((await put(owner, new Uint8Array(5000))).status, 400, "it must be a picture");
+  assert.equal((await put(owner, jpeg, "image/png")).status, 415);
+  assert.equal((await put(owner, jpeg)).status, 200);
+  const after = await visitor().get(`/b/${made.body.code}`);
+  assert.match(after.body, new RegExp(`og:image" content="${main.base}/api/board/${made.body.code}/cover"`));
+  const cover = await fetch(`${main.base}/api/board/${made.body.code}/cover`);
+  assert.equal(cover.status, 200);
+  assert.equal(cover.headers.get("content-type"), "image/jpeg");
+  assert.equal((await visitor().get("/b/ZZZZZZZZZZ")).body.includes("og:title"), false, "a code that is not a question gets the plain page");
+});
+
+test("a phone is only ever told through a real push service", async () => {
+  const c = await member("ifra");
+  assert.ok((await c.get("/api/push/key")).body.key, "this server has a signing key");
+  err(await visitor().post("/api/push/subscribe", { endpoint: "https://fcm.googleapis.com/fcm/send/abc" }), 401);
+  for (const endpoint of ["http://fcm.googleapis.com/fcm/send/abc", "https://evil.example/push", "https://fcm.googleapis.com.evil.example/x", "", undefined])
+    err(await c.post("/api/push/subscribe", { endpoint }), 400, /notification address/);
+  assert.equal((await c.post("/api/push/subscribe", { endpoint: "https://fcm.googleapis.com/fcm/send/abc" })).status, 200);
+  assert.equal((await c.post("/api/push/unsubscribe", { endpoint: "https://fcm.googleapis.com/fcm/send/abc" })).status, 200);
 });
 
 // --- hand-off from a mirror to a phone ------------------------------------------

@@ -1,10 +1,13 @@
 // A member's account: the door (join, sign in, reset), then the wardrobe, the opinions asked for, and the settings.
 import { $, $$, el, api, money, plural, when, until, toast, whoAmI, busy, onSubmit, local, copy, fill, picture, signOut } from "./ui.js";
+import { askSheet, shareSheet } from "./ask.js";
+import { pushState, turnOnPush } from "./notify.js";
 
 const root = () => $("#account");
 const params = new URLSearchParams(location.search);
 const claimCode = (location.pathname.match(/^\/claim\/([A-Za-z0-9]{8})$/) || [])[1] || "";
-const S = { me: null, tab: "wardrobe", looks: [], boards: [], picking: false, picked: new Set() };
+const TABS = ["wardrobe", "opinions", "you"];
+const S = { me: null, tab: TABS.includes(params.get("tab")) ? params.get("tab") : "wardrobe", looks: [], boards: [], picking: false, picked: new Set() };
 
 export async function start() {
   S.me = await whoAmI(true);
@@ -187,7 +190,7 @@ function wardrobe() {
         el("span", { id: "pickCount", text: pickLine() }),
         el("div", { class: "row" },
           el("button", { class: "link", type: "button", text: "Cancel", onclick: () => ((S.picking = false), S.picked.clear(), wardrobe()) }),
-          el("button", { class: "btn small", type: "button", text: "Make the link", onclick: (e) => busy(e.currentTarget, makeBoard) }),
+          el("button", { class: "btn small", type: "button", text: "Next", onclick: makeBoard }),
         ),
       )
     : null;
@@ -239,30 +242,111 @@ function piece(look) {
   return card;
 }
 
-async function makeBoard() {
+function makeBoard() {
   if (S.picked.size < 2) return toast("Choose at least two looks.");
-  try {
-    const board = await api("/api/boards", { title: "Which one?", looks: [...S.picked] });
-    S.picking = false;
-    S.picked.clear();
-    S.tab = "opinions";
-    await home();
-    share(board.url);
-  } catch (e) {
-    toast(e.message);
-  }
+  const looks = S.looks.filter((l) => S.picked.has(l.id));
+  askSheet({
+    looks,
+    by: S.me.user.name.split(" ")[0],
+    onMade: async () => {
+      S.picking = false;
+      S.picked.clear();
+      S.tab = "opinions";
+      await home();
+    },
+  });
 }
 
-function share(url) {
-  const message = `Help me choose. Tap the one you like: ${url}`;
+// ---------------------------------------------------------------- opinions
+let refresher = null;
+function opinions() {
+  const view = $("#view");
+  clearInterval(refresher);
+  if (!S.boards.length)
+    return fill(view,
+      el("div", { class: "empty" },
+        el("p", { class: "subtitle voice", text: "No questions asked yet." }),
+        el("p", { class: "muted", text: "Pick two or more looks from your wardrobe and send one link to the people whose opinion you trust. They answer with one tap, no app." }),
+        S.looks.length > 1
+          ? el("button", { class: "btn", type: "button", text: "Choose the looks", onclick: () => ((S.tab = "wardrobe"), (S.picking = true), home()) })
+          : el("a", { class: "btn", href: "/mirror", text: "Open the mirror" }),
+      ),
+    );
+  const tell = el("div", { class: "tell-line", hidden: true });
+  pushState().then((state) => {
+    if (state !== "off") return;
+    fill(tell, el("p", { class: "muted", text: "Be told on this phone when someone answers." }), el("button", { class: "btn ghost small", type: "button", text: "Turn on", onclick: async () => (await turnOnPush()) && (tell.hidden = true) }));
+    tell.hidden = false;
+  });
+  fill(view, tell, el("div", { class: "questions" }, S.boards.map(question)));
+  // Answers arrive while she watches.
+  if (S.boards.some((b) => !b.closed))
+    refresher = setInterval(async () => {
+      if (S.tab !== "opinions" || document.visibilityState !== "visible") return;
+      try {
+        const { boards } = await api("/api/boards");
+        if (JSON.stringify(boards.map((b) => [b.code, b.total, b.closed, b.decided])) !== JSON.stringify(S.boards.map((b) => [b.code, b.total, b.closed, b.decided]))) {
+          S.boards = boards;
+          opinions();
+        }
+      } catch {}
+    }, 10000);
+}
+
+function question(b) {
+  const total = b.total;
+  const lead = Math.max(0, ...Object.values(b.tally).map((t) => t.votes));
+  const notes = b.votes.filter((v) => v.note);
+  const status = b.decided ? el("span", { class: "badge good", text: "Decided" }) : b.closed ? el("span", { class: "badge soft", text: "Closed" }) : el("span", { class: "badge good", text: until(b.closes) });
+  const act = async (path, body, done) => {
+    try {
+      await api(path, { code: b.code, ...body });
+      ({ boards: S.boards } = await api("/api/boards"));
+      opinions();
+      done?.();
+    } catch (e) {
+      toast(e.message);
+    }
+  };
+  return el("article", { class: "question" },
+    el("div", { class: "q-head" },
+      el("div", { class: "stack close" }, el("h3", { class: "subtitle", text: b.title }), el("div", { class: "row" }, status, el("span", { class: "fine", text: total ? plural(total, "answer") : `No answers yet · asked ${when(b.created)}` }), b.pictures === "store" && el("span", { class: "fine", text: "· store photos sent" }))),
+    ),
+    el("ul", { class: "q-looks" },
+      b.looks.map((l) => {
+        const t = b.tally[l.id] || { votes: 0, names: [] };
+        const leading = total && t.votes === lead && t.votes > 0;
+        return el("li", { class: (leading ? "lead" : "") + (b.decided === l.id ? " won" : "") },
+          el("div", { class: "shot" }, picture({ src: l.portrait || l.image, alt: l.name, loading: "lazy" }), b.decided === l.id ? el("span", { class: "badge good", text: "Your choice" }) : leading && el("span", { class: "badge", text: "Leading" })),
+          el("b", { text: l.name }),
+          el("div", { class: "bar" + (leading ? " lead" : "") }, el("i", { style: `--v:${total ? t.votes / total : 0}` })),
+          el("span", { class: "meta", text: plural(t.votes, "vote") + (t.names.length ? " · " + t.names.join(", ") : "") }),
+        );
+      }),
+    ),
+    notes.length > 0 && el("ul", { class: "q-notes" }, notes.map((v) => el("li", {}, el("b", { text: (v.name || "Someone") + ": " }), "“" + v.note + "”"))),
+    el("div", { class: "row q-acts" },
+      !b.closed && el("button", { class: "btn small", type: "button", text: "Send the link", onclick: () => shareSheet(b) }),
+      !b.decided && b.looks.some((l) => !l.gone) && el("button", { class: "btn ghost small", type: "button", text: "Decide", onclick: () => decide(b, act) }),
+      !b.decided && el("button", { class: "link", type: "button", text: b.closed ? "Open it again for a day" : "A day more", onclick: () => act("/api/boards/extend", { days: 1 }) }),
+      !b.closed && el("button", { class: "link muted", type: "button", text: "Close it", onclick: () => act("/api/boards/close", {}) }),
+      b.decided && el("button", { class: "link", type: "button", text: "See your choice", onclick: () => winner(b, b.looks.find((l) => l.id === b.decided)) }),
+    ),
+  );
+}
+
+// She chooses; voting stops, and everyone who opens the link sees her choice.
+function decide(b, act) {
   const sheet = el("dialog", { class: "sheet" },
-    el("div", { class: "sheet-head" }, el("h2", { class: "subtitle", text: "Your link is ready." }), el("button", { class: "link muted", type: "button", text: "Close", onclick: () => sheet.close() })),
-    el("div", { class: "stack close" },
-      el("p", { class: "muted", text: "Anyone with this link can see these looks and vote, for three days. Send it only to people you'd show the photos to." }),
-      el("input", { class: "input", readOnly: true, value: url, "aria-label": "Link", onfocus: (e) => e.target.select() }),
-      el("div", { class: "row" },
-        el("a", { class: "btn", href: "https://wa.me/?text=" + encodeURIComponent(message), target: "_blank", rel: "noopener", text: "Send on WhatsApp" }),
-        el("button", { class: "btn ghost", type: "button", text: "Copy the link", onclick: () => copy(url) }),
+    el("div", { class: "sheet-head" }, el("h2", { class: "subtitle", text: "Which one is it?" }), el("button", { class: "link muted", type: "button", text: "Not yet", onclick: () => sheet.close() })),
+    el("p", { class: "muted", text: "Voting stops, and the link shows what you chose." }),
+    el("div", { class: "decide-grid" },
+      b.looks.filter((l) => !l.gone).map((l) =>
+        el("button", { class: "choice", type: "button", onclick: () => act("/api/boards/decide", { look: l.id }, () => (sheet.close(), winner(b, l))) },
+          el("div", { class: "shot" }, picture({ src: l.portrait || l.image, alt: l.name })),
+          el("b", { text: l.name }),
+          el("span", { class: "meta", text: plural(b.tally[l.id]?.votes || 0, "vote") }),
+        ),
       ),
     ),
   );
@@ -271,37 +355,26 @@ function share(url) {
   sheet.showModal();
 }
 
-// ---------------------------------------------------------------- opinions
-function opinions() {
-  const view = $("#view");
-  if (!S.boards.length)
-    return fill(view, 
-      el("div", { class: "empty" },
-        el("p", { class: "subtitle voice", text: "No questions asked yet." }),
-        el("p", { class: "muted", text: "Pick two or more looks from your wardrobe and send one link to the people whose opinion you trust." }),
-        el("button", { class: "btn", type: "button", text: "Go to the wardrobe", onclick: () => ((S.tab = "wardrobe"), (S.picking = S.looks.length > 1), home()) }),
-      ),
-    );
-  const names = new Map(S.looks.map((l) => [l.id, l.name]));
-  fill(view, 
-    ...S.boards.map((b) => {
-      const counts = b.looks.map((id) => ({ id, name: names.get(id) || "A look you let go", voters: b.votes.filter((v) => v.look === id) })).sort((a, z) => z.voters.length - a.voters.length);
-      return el("div", { class: "boardrow" },
-        el("div", {},
-          el("div", { class: "row" }, el("b", { class: "subtitle", text: b.title }), el("span", { class: "badge " + (b.closed ? "soft" : "good"), text: b.closed ? "Closed" : until(b.closes) })),
-          el("div", { class: "tally" },
-            b.votes.length
-              ? counts.map((c) => el("span", {}, el("b", { text: `${c.name}: ${c.voters.length}` }), c.voters.some((v) => v.name) ? " · " + c.voters.map((v) => v.name).filter(Boolean).join(", ") : ""))
-              : el("span", { text: `No votes yet. Asked ${when(b.created)}.` }),
-          ),
-        ),
-        !b.closed && el("div", { class: "row" },
-          el("button", { class: "btn ghost small", type: "button", text: "Share", onclick: () => share(b.url) }),
-          el("button", { class: "link muted", type: "button", text: "Close it", onclick: async () => (await api("/api/boards/close", { code: b.code }).catch((e) => toast(e.message)), home()) }),
-        ),
-      );
-    }),
+// The chosen look, and the way to the store.
+function winner(b, l) {
+  if (!l) return;
+  const sheet = el("dialog", { class: "sheet winner" },
+    el("div", { class: "winner-shot" }, picture({ src: l.portrait || l.image, alt: l.name })),
+    el("div", { class: "stack close" },
+      el("p", { class: "kicker", text: "Your choice" }),
+      el("h2", { class: "title", text: l.name }),
+      el("p", { class: "muted num", text: [l.brandName, l.size && "Size " + l.size, money(l.price, l.currency)].filter(Boolean).join(" · ") }),
+    ),
+    el("div", { class: "stack close" },
+      l.whatsapp && el("a", { class: "btn wide wa", href: `https://wa.me/${l.whatsapp}?text=${encodeURIComponent(`Salaam. I'd like ${l.name}${l.size ? ", size " + l.size : ""}. Is it in stock? (from MIRVA)`)}`, target: "_blank", rel: "noopener", text: `Message ${l.brandName} on WhatsApp` }),
+      l.url && el("a", { class: l.whatsapp ? "btn ghost wide" : "btn wide", href: l.url, target: "_blank", rel: "noopener", text: `See it at ${l.brandName}` }),
+      el("a", { class: "btn ghost wide", href: "/mirrors", text: "Find a MIRVA mirror" }),
+      el("button", { class: "link muted", type: "button", text: "Close", onclick: () => sheet.close() }),
+    ),
   );
+  sheet.addEventListener("close", () => sheet.remove());
+  document.body.append(sheet);
+  sheet.showModal();
 }
 
 // ---------------------------------------------------------------- you

@@ -1,10 +1,12 @@
 // The shopper's site: quiet pages, with the account and the voting board loaded only where they are used.
 import { $, $$, el, api, nav, reveal, whoAmI, toast, busy, connection, signOut } from "./ui.js";
+import { registerWorker } from "./notify.js";
 
 document.documentElement.classList.add("js");
 nav();
 reveal();
 connection();
+registerWorker();
 
 const page = document.body.dataset.page;
 
