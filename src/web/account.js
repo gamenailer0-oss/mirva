@@ -158,8 +158,44 @@ async function home() {
       ),
       el("div", { id: "view" }),
     ),
+    appbar(),
   );
   ({ wardrobe, opinions, you })[S.tab]();
+  if (S.tab === "opinions") api("/api/notes/seen", {}).catch(() => {});
+}
+
+// On a phone the account is an app: four places along the bottom, where the thumb is.
+const ICONS = {
+  mirror: '<rect x="8" y="5.5" width="8" height="14" rx="4"/><path d="M5 6.5Q12 0.5 19 6.5"/>',
+  wardrobe: '<path d="M12 5.5a2 2 0 1 1 2 2c-.9 0-2 .7-2 1.6v.4"/><path d="M12 9.5 3.5 15.8c-.8.6-.4 1.7.6 1.7h15.8c1 0 1.4-1.1.6-1.7L12 9.5Z"/>',
+  opinions: '<path d="M5 6.5h14a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5h-7l-4 3v-3H5A1.5 1.5 0 0 1 3.5 15V8A1.5 1.5 0 0 1 5 6.5Z"/>',
+  you: '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c1.2-3.3 3.9-5 7-5s5.8 1.7 7 5"/>',
+};
+function appbar() {
+  const icon = (name) => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.innerHTML = ICONS[name];
+    return svg;
+  };
+  const tab = (id, label) =>
+    el("button", { type: "button", class: "appbar-item", "aria-current": S.tab === id ? "page" : false, onclick: () => ((S.tab = id), (S.picking = false), S.picked.clear(), home(), scrollTo({ top: 0 })) }, icon(id), el("span", { text: label }), id === "opinions" && el("i", { class: "dot", id: "unseen", hidden: true }));
+  const bar = el("nav", { class: "appbar", "aria-label": "Your MIRVA" },
+    el("a", { class: "appbar-item", href: "/mirror" }, icon("mirror"), el("span", { text: "Mirror" })),
+    tab("wardrobe", "Wardrobe"),
+    tab("opinions", "Questions"),
+    tab("you", "You"),
+  );
+  // New answers she has not seen yet
+  if (S.tab !== "opinions")
+    api("/api/notes")
+      .then(({ unseen }) => {
+        const dot = $("#unseen");
+        if (dot && unseen) ((dot.hidden = false), (dot.textContent = unseen > 9 ? "9+" : String(unseen)));
+      })
+      .catch(() => {});
+  return bar;
 }
 
 function ring(part, C) {

@@ -1,0 +1,23 @@
+{
+  "id": "/mirror",
+  "name": "MIRVA, the mirror that styles you",
+  "short_name": "MIRVA",
+  "description": "Say the occasion, see three looks from a store's own rails, and see yourself in each one. Ask your family with one link.",
+  "start_url": "/mirror?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0c11",
+  "theme_color": "#0a0c11",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Open the mirror", "url": "/mirror?source=app", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "My wardrobe", "url": "/account", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "My questions", "url": "/account?tab=opinions", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

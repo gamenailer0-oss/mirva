@@ -769,3 +769,149 @@ a.chip { text-decoration: none; }
     box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(6, 9, 16, .8);
   }
 }
+
+/* ---------- the mirror as a phone app ----------
+   On a phone held upright (src/main.js adds .phone-app) MIRVA is one screen, like an app: the kept looks along the top,
+   the glass, the dock under it (never across the picture), and the stylist in a panel along the bottom that the thumb
+   already reaches. The panel is tall while she is choosing, folds to a strip of the three looks while one is on, so the
+   glass grows, and opens to the whole screen for details or the catalogue. Nothing here changes what any button does. */
+:root.phone-app, :root.phone-app body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+:root.phone-app .app {
+  --top: calc(56px + env(safe-area-inset-top));
+  --sheet: clamp(292px, 42svh, 400px);
+  position: fixed; inset: 0; display: block; height: auto; min-height: 0; padding: 0;
+}
+:root.phone-app .app[data-sheet="mini"] { --sheet: calc(132px + env(safe-area-inset-bottom)); }
+:root.phone-app .wardrobe {
+  position: absolute; z-index: 6; inset: 0 0 auto 0; height: var(--top); flex-direction: row; align-items: center; gap: 10px;
+  padding: env(safe-area-inset-top) 12px 0 12px; border: 0; background: var(--bg);
+}
+:root.phone-app .wardrobe-title { display: none; }
+:root.phone-app .saved { flex: 1; flex-direction: row; gap: 8px; overflow-x: auto; overflow-y: hidden; padding: 8px 4px 8px 2px; align-items: center; }
+:root.phone-app .saved:empty::before { content: "Looks you keep sit here"; width: auto; margin: 0; text-align: left; white-space: nowrap; }
+:root.phone-app .kept { width: 26px; }
+:root.phone-app .kept .drop { display: none; }
+:root.phone-app .wardrobe-foot { flex-direction: row; gap: 2px; margin-left: 0; }
+:root.phone-app .rail-btn { min-height: 44px; padding: 0 8px; font-size: 10.5px; letter-spacing: .16em; }
+:root.phone-app .rail-btn.strong { color: var(--ink); }
+:root.phone-app .stage {
+  position: absolute; z-index: 1; left: 0; right: 0; top: var(--top); bottom: var(--sheet); padding: 4px 14px 12px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: bottom var(--calm) var(--ease);
+}
+:root.phone-app .frame, :root.phone-app .frame[data-shape="landscape"] {
+  flex: 1; min-height: 0; width: 100%; height: auto; aspect-ratio: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+}
+:root.phone-app .glass { position: relative; inset: auto; flex: 1 1 auto; min-height: 0; height: auto; max-height: calc((100vw - 28px) * 16 / 9); width: auto; aspect-ratio: 9 / 16; border-radius: 26px; }
+:root.phone-app .frame[data-shape="landscape"] .glass { width: 100%; height: auto; flex: none; aspect-ratio: 16 / 9; }
+:root.phone-app .dock {
+  position: static; flex: none; width: 100%; max-width: 420px; padding: 8px; border-radius: 22px; background: var(--glass);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(6, 9, 16, .8);
+}
+:root.phone-app .frame[data-dock] .glass-bottom { padding: 0 14px 14px; }
+:root.phone-app .tablet {
+  position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; height: var(--sheet);
+  border: 0; border-radius: 22px 22px 0 0; padding: 0 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--panel); box-shadow: 0 -1px 0 var(--line), 0 -24px 48px -30px rgba(6, 9, 16, .5);
+  overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; contain: none;
+  transition: height var(--calm) var(--ease);
+}
+:root.phone-app .app[data-sheet="full"] .tablet { height: calc(100svh - 64px - env(safe-area-inset-top)); box-shadow: 0 -1px 0 var(--line), 0 -40px 80px -20px rgba(6, 9, 16, .55); }
+:root.phone-app .app[data-sheet="full"] .stage { bottom: clamp(292px, 42svh, 400px); }
+:root.phone-app .pane { overflow: visible; }
+.sheet-handle { display: none; }
+:root.phone-app .sheet-handle {
+  display: grid; place-items: center; position: sticky; top: 0; z-index: 3; width: calc(100% + 32px); height: 26px; margin: 0 -16px 2px;
+  background: linear-gradient(var(--panel) 70%, transparent); cursor: grab; touch-action: none;
+}
+:root.phone-app .sheet-handle::before { content: ""; width: 40px; height: 4px; border-radius: 4px; background: var(--line); box-shadow: 0 0 0 .5px var(--line); }
+:root.phone-app .store-bar { padding-top: 2px; }
+/* folded: just the three looks in a row, to switch between them; everything else is one swipe up */
+:root.phone-app .app[data-sheet="mini"] .tablet { overflow: hidden; }
+:root.phone-app .app[data-sheet="mini"] :is(.store-bar, .tablet-head, #say, #chips, #refine, #detail, #catalogue, .ask, .notice) { display: none !important; }
+:root.phone-app .app[data-sheet="mini"] #foryou { display: block !important; }
+:root.phone-app .app[data-sheet="mini"] .looks { display: flex; gap: 10px; overflow-x: auto; padding: 0 0 4px; scrollbar-width: none; }
+:root.phone-app .app[data-sheet="mini"] .look { flex: 0 0 auto; width: 70px; display: block; }
+:root.phone-app .app[data-sheet="mini"] .look .shot { width: 70px; aspect-ratio: 3 / 4; }
+:root.phone-app .app[data-sheet="mini"] .look :is(.name, .price, .why, .badge) { display: none; }
+:root.phone-app .app[data-sheet="mini"] .look[aria-current="true"] .shot,
+:root.phone-app .app[data-sheet="mini"] .look.on .shot { box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--ink); }
+:root.phone-app .app[data-sheet="mini"] .mini-more { display: inline-flex; }
+.mini-more { display: none; }
+:root.phone-app .mini-more { align-items: center; justify-content: center; flex: 0 0 auto; width: 70px; aspect-ratio: 3 / 4; border-radius: 12px; background: var(--card); color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; text-align: center; line-height: 1.4; }
+/* the ask bar never floats over the panel; it stays at the panel's foot */
+:root.phone-app .glass-away .ask, :root.phone-app .ask { position: static; }
+/* dialogs rise from the bottom edge */
+:root.phone-app .sheet {
+  margin: auto 0 0; width: 100%; max-width: 100%; max-height: 92svh; overflow-y: auto; overscroll-behavior: contain;
+  border-radius: 22px 22px 0 0; padding: 22px 20px calc(22px + env(safe-area-inset-bottom));
+}
+:root.phone-app .sheet[open] { animation: sheet-up var(--calm) var(--ease); }
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } }
+:root.phone-app .sheet.narrow { text-align: left; }
+
+/* ---------- asking the family from the mirror: the same sheet as the account page (src/web/ask.js) ---------- */
+.ask-sheet .subtitle { margin: 0; font: 400 26px/1.15 var(--serif); }
+.ask-sheet .link { background: none; border: 0; padding: 10px 0; color: var(--ink); font-size: 15px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.ask-sheet .link.muted { color: var(--muted); }
+.ask-sheet .fine { margin: 0; font-size: 13px; line-height: 1.45; color: var(--muted); }
+.ask-sheet .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ask-sheet .field { display: grid; gap: 7px; }
+.ask-sheet .field > span, .ask-sheet .label { font: 500 11.5px/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.ask-sheet .input { width: 100%; min-height: 50px; padding: 12px 16px; border-radius: 14px; border: 0; background: #fff; box-shadow: inset 0 0 0 1px var(--line); font: 16px var(--sans); color: var(--ink); }
+.ask-sheet .input:focus { outline: 0; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.ask-sheet .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 0; background: var(--ink); color: var(--panel); font: 500 12.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+.ask-sheet .btn.wide { width: 100%; }
+.ask-sheet .btn.small { min-height: 44px; padding: 0 18px; font-size: 11.5px; }
+.ask-sheet .btn.ghost { background: none; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.ask-sheet .btn.wa { background: #1f6b4a; color: #fff; }
+.ask-sheet .btn[aria-busy="true"] { opacity: .55; pointer-events: none; }
+.ask-sheet .chip { min-height: 36px; padding: 0 14px; font-size: 13.5px; }
+.ask-body { display: grid; gap: 22px; margin-top: 16px; }
+.ask-strip { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; list-style: none; margin: 0; padding: 0; }
+.ask-strip li { flex: 0 0 92px; display: grid; gap: 6px; font-size: 12px; line-height: 1.25; color: var(--muted); }
+.ask-strip img { width: 92px; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 12px; background: var(--card); }
+.ask-quick { margin-top: -10px; }
+.ask-set { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.ask-set legend { margin-bottom: 8px; }
+.ask-days { grid-template-columns: repeat(3, 1fr); }
+.ask-choice { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 14px; background: var(--card); cursor: pointer; }
+.ask-choice:has(input:checked) { box-shadow: inset 0 0 0 1.5px var(--ink); background: var(--panel); }
+.ask-choice input { margin: 3px 0 0; accent-color: var(--ink); width: 18px; height: 18px; flex: none; }
+.ask-choice span { display: grid; gap: 2px; }
+.ask-choice b { font-weight: 500; font-size: 15px; }
+.ask-choice small { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.ask-days .ask-choice { padding: 12px; align-items: center; }
+.ask-link { flex-wrap: nowrap; }
+.ask-link .input { min-width: 0; flex: 1; }
+.ask-tell:not([hidden]) { padding-top: 12px; border-top: 1px solid var(--line); }
+.ask-go { position: sticky; bottom: -24px; margin-bottom: -24px; padding: 12px 0 24px; background: linear-gradient(to top, var(--panel) 72%, transparent); }
+/* the panel is one scrolling column on a phone: nothing in it is squeezed to fit its height */
+:root.phone-app .tablet { display: block; }
+:root.phone-app .pane { padding: 14px 2px 12px; }
+:root.phone-app .say { font-size: clamp(22px, 6.2vw, 27px); margin-bottom: 14px; }
+:root.phone-app .app[data-sheet="mini"] .pane { padding: 6px 0 0; }
+:root.phone-app .app[data-sheet="mini"] .looks { margin: 0; }
+:root.phone-app .app[data-sheet="mini"] .looks { padding: 5px 5px 8px; margin: 0 -5px; }
+
+/* "Add MIRVA to your home screen" (src/web/install.js): a card that rises once, after the first kept look. */
+.install-card {
+  position: fixed; z-index: 80; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 460px; margin: 0 auto;
+  display: grid; gap: 12px; padding: 16px 16px 14px 18px; border-radius: 20px; background: #0a0c11; color: #f3f5f9;
+  box-shadow: 0 30px 70px -30px rgba(4, 7, 14, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
+}
+.install-card.in { transform: none; opacity: 1; }
+.install-card b { display: block; font: 400 19px/1.2 "Bodoni Moda", Georgia, serif; }
+.install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #c8cedb; }
+.install-acts { display: flex; justify-content: flex-end; gap: 8px; }
+.install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 "Jost", sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.install-later { background: none; color: #c8cedb; }
+.install-add { background: #f3f5f9; color: #0a0c11; }
+
+/* Arriving from the home page, the glass there becomes the mirror's own glass. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .mark-link { view-transition-name: mirva-mark; }
+  .glass { view-transition-name: mirva-glass; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
+}

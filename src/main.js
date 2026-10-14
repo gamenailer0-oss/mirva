@@ -1,5 +1,7 @@
 // MIRVA front of house: the conversation on the tablet, the glass, and what the shopper keeps.
 import { Mirror } from "./mirror.js";
+import { offerInstall } from "./web/install.js";
+import { registerWorker } from "./web/notify.js";
 import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns, sizeFor } from "./stylist.js";
 import { facelessReference, warmUp } from "./vision.js";
 import * as memory from "./memory.js";
@@ -378,7 +380,7 @@ function lookCard(p, extra = {}) {
   return h(
     "button",
     { class: "look", type: "button", "data-pid": p.id, "data-badge": base, onclick: () => choose(p) },
-    h("span", { class: "shot" }, h("img", { src: pic(p.image, 420), alt: p.name, loading: "lazy", decoding: "async" }), h("span", { class: "badge", text: base, hidden: !base })),
+    h("span", { class: "shot" }, h("img", { loading: "lazy", decoding: "async", src: pic(p.image, 420), alt: p.name }), h("span", { class: "badge", text: base, hidden: !base })),
     h("span", { class: "name", text: p.name }),
     h("span", { class: "price", text: money(p.price) }),
     extra.why && h("span", { class: "why", text: extra.why }),
@@ -388,7 +390,14 @@ function lookCard(p, extra = {}) {
 function renderLooks() {
   const box = $("#looks");
   box.replaceChildren(...(S.step === "looks" ? S.looks.map((k, i) => lookCard(k.product, { ...k, first: i === 0 && !k.stretch })) : []));
+  if (S.step === "looks") box.append(h("button", { class: "mini-more", type: "button", text: "More", "aria-label": "Show the stylist", onclick: () => setSheet("peek") }));
   markCards();
+  // On a phone the three looks arrive inside the panel: it brings them fully into view.
+  if (phoneApp() && S.step === "looks" && $("#app").dataset.sheet === "peek")
+    requestAnimationFrame(() => {
+      const panel = $(".tablet");
+      panel.scrollTo({ top: Math.max(0, box.offsetTop + box.offsetHeight - panel.clientHeight + 14), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
   renderDetail();
 }
 
@@ -543,6 +552,50 @@ function syncGlass() {
   $("#keepBtn").textContent = keptAlready() ? "Kept" : "Keep";
   $("#meter").hidden = !(mirror.state === "live" && S.view !== "portrait");
   $("#hint").hidden = !(st === "awake" && $("#hint").textContent);
+  syncSheet();
+}
+
+// ---------- a phone held upright: the mirror as one screen (public/styles.css, "the mirror as a phone app") ----------
+// The stylist's panel is tall while she chooses, folds to the three looks while one is on (so the glass grows), and
+// opens to the whole screen when she asks for it. Only the layout changes; every button does what it always did.
+const upright = matchMedia("(max-width: 700px) and (orientation: portrait)");
+const phoneApp = () => upright.matches && document.documentElement.dataset.glass !== "oval";
+const SHEETS = ["mini", "peek", "full"];
+let sheetWish = null; // the size she chose herself, until she picks a look
+function syncSheet() {
+  const app = $("#app");
+  document.documentElement.classList.toggle("phone-app", phoneApp());
+  if (!phoneApp()) return void delete app.dataset.sheet;
+  const wearing = ["thinking", "portrait", "live"].includes(frame.dataset.state) || frame.dataset.dock !== "none";
+  const next = sheetWish || (wearing ? "mini" : "peek");
+  if (app.dataset.sheet !== next) {
+    app.dataset.sheet = next;
+    if (next !== "full") $(".tablet").scrollTop = 0;
+  }
+  $("#sheetHandle").setAttribute("aria-expanded", String(next === "full"));
+  $("#sheetHandle").setAttribute("aria-label", next === "full" ? "Show the mirror again" : "Show more of the stylist");
+}
+function setSheet(size) {
+  sheetWish = size;
+  syncSheet();
+}
+function wireSheet() {
+  const handle = $("#sheetHandle");
+  let from = null;
+  handle.addEventListener("pointerdown", (e) => ((from = e.clientY), handle.setPointerCapture?.(e.pointerId)));
+  handle.addEventListener("pointerup", (e) => {
+    if (from === null) return;
+    const dy = e.clientY - from;
+    from = null;
+    const now = SHEETS.indexOf($("#app").dataset.sheet);
+    if (Math.abs(dy) < 12) return setSheet(now === 2 ? null : "full"); // a tap opens it, or puts it back
+    setSheet(SHEETS[Math.max(0, Math.min(2, now + (dy < 0 ? 1 : -1)))]);
+  });
+  handle.addEventListener("pointercancel", () => (from = null));
+  handle.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setSheet($("#app").dataset.sheet === "full" ? null : "full")));
+  // A tap on the mirror while the panel covers it puts the panel back.
+  $(".stage").addEventListener("click", () => $("#app").dataset.sheet === "full" && setSheet(null));
+  upright.addEventListener?.("change", syncSheet);
 }
 
 async function garment(p) {
@@ -597,7 +650,7 @@ function needMirror(p) {
 // On a phone the glass is above the looks. A look tapped from far down the page (the Catalogue is a long way) would
 // answer somewhere out of sight, so the page eases back up to the glass.
 function showGlass() {
-  if (!matchMedia("(max-width: 980px)").matches) return;
+  if (!matchMedia("(max-width: 980px)").matches || phoneApp()) return;
   const r = glass.getBoundingClientRect();
   const seen = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
   if (seen >= r.height * 0.6) return;
@@ -606,6 +659,8 @@ function showGlass() {
 
 function choose(p) {
   mirror.touch();
+  sheetWish = null;
+  navigator.vibrate?.(8);
   showGlass();
   S.selected = p;
   link.track("look_open", { product: p.id });
@@ -1201,6 +1256,8 @@ function keep() {
       .then(() => caption("Kept, and in your wardrobe."))
       .catch((e) => caption(e.message));
   caption(line("kept"));
+  // Not on a store's mirror, which is nobody's phone.
+  if (!link.pairedTo()) setTimeout(offerInstall, 2400);
 }
 
 function renderSaved() {
@@ -1238,6 +1295,24 @@ function renderSaved() {
   );
   $("#compareBtn").hidden = saved.length < 2;
   $("#sendAllBtn").hidden = saved.length < 1;
+  // At home the family is asked from here; a store mirror sends the looks to her phone, and she asks from there.
+  $("#askBtn").hidden = saved.length < 2 || !!link.pairedTo();
+}
+
+// Ask the people she trusts about the looks she kept here. They are in her wardrobe already (keep() saved them).
+async function askFamily() {
+  if (!link.member) return caption("Join free to ask your family. Your kept looks come with you."), setTimeout(() => (location.href = "/account?join=1"), 1600);
+  try {
+    const res = await fetch("/api/wardrobe", { headers: { accept: "application/json" } });
+    const { looks = [] } = res.ok ? await res.json() : {};
+    const kept = new Set(S.mem.saved.map((k) => k.pid));
+    const chosen = looks.filter((l) => l.brand === S.brand.id && kept.has(l.product)).slice(0, 6);
+    if (chosen.length < 2) return caption("Keep two looks, and you can ask about them.");
+    const { askSheet } = await import("./web/ask.js");
+    askSheet({ looks: chosen, by: link.member.user.name.split(" ")[0] });
+  } catch {
+    caption("That didn't go through. Try again in a moment.");
+  }
 }
 
 function openCompare() {
@@ -1355,6 +1430,7 @@ function showTab(name) {
   }
   $("#foryou").hidden = name !== "foryou";
   $("#catalogue").hidden = name !== "catalogue";
+  if (phoneApp() && name === "catalogue") setSheet("full");
 }
 
 // ---------- the next shopper ----------
@@ -1430,7 +1506,7 @@ async function openStores() {
             if (b.id !== S.brand?.id) await loadBrand(b.id).catch((e) => caption(friendly(e)));
           },
         },
-        h("span", { class: "store-shots" }, (b.cover || []).slice(0, 3).map((u) => h("img", { src: pic(u, 240), alt: "", decoding: "async" }))),
+        h("span", { class: "store-shots" }, (b.cover || []).slice(0, 3).map((u) => h("img", { loading: "lazy", decoding: "async", src: pic(u, 240), alt: "" }))),
         h(
           "span",
           { class: "store-meta" },
@@ -1525,6 +1601,8 @@ function wireUI() {
   $("#camBtn").addEventListener("click", () => mirror.sleep());
   $("#compareBtn").addEventListener("click", openCompare);
   $("#sendAllBtn").addEventListener("click", () => openSend(S.mem.saved));
+  $("#askBtn").addEventListener("click", askFamily);
+  wireSheet();
   $("#adaptBtn").addEventListener("click", openAdapt);
   $("#storeBtn").addEventListener("click", openStores);
   for (const b of $$(".tabs button")) b.addEventListener("click", () => showTab(b.dataset.tab));
@@ -1622,6 +1700,7 @@ function noStore() {
 }
 
 async function boot() {
+  registerWorker(); // notifications, and MIRVA as an app on the home screen
   S.config = await api("/api/config");
   // MIRVA's own mirror is an oval. A store's paired mirror is told so by its console; "?glass=oval" shows it on any screen.
   if (S.config.glass === "oval" || new URLSearchParams(location.search).get("glass") === "oval") document.documentElement.dataset.glass = "oval";

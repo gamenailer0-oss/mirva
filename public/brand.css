@@ -262,3 +262,11 @@ details.faq > div { padding: 0 0 24px; max-width: var(--measure); color: var(--m
   :root .askbar { bottom: calc(16px + env(safe-area-inset-bottom)); }
   .offline { padding-top: calc(10px + env(safe-area-inset-top)); }
 }
+
+/* Moving between MIRVA's pages: the pages cross-fade and the mark stays put (browsers that can; others just change page). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .nav .brandmark { view-transition-name: mirva-mark; }
+  .hero-glass { view-transition-name: mirva-glass; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
+}

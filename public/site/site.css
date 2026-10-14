@@ -290,3 +290,42 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 [data-page="home"] .head .title em { display: block; }
 .ask-go { position: sticky; bottom: calc(-1 * clamp(22px, 4vw, 36px)); margin-bottom: calc(-1 * clamp(22px, 4vw, 36px)); padding: 12px 0 clamp(22px, 4vw, 36px); background: linear-gradient(to top, var(--panel) 72%, transparent); }
 @media (max-width: 700px) { .ask-go { bottom: calc(-24px - env(safe-area-inset-bottom)); margin-bottom: calc(-24px - env(safe-area-inset-bottom)); padding-bottom: calc(24px + env(safe-area-inset-bottom)); } }
+
+/* "Add MIRVA to your home screen" (src/web/install.js): a card that rises once, after the first kept look. */
+.install-card {
+  position: fixed; z-index: 80; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 460px; margin: 0 auto;
+  display: grid; gap: 12px; padding: 16px 16px 14px 18px; border-radius: 20px; background: #0a0c11; color: #f3f5f9;
+  box-shadow: 0 30px 70px -30px rgba(4, 7, 14, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
+}
+.install-card.in { transform: none; opacity: 1; }
+.install-card b { display: block; font: 400 19px/1.2 "Bodoni Moda", Georgia, serif; }
+.install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #c8cedb; }
+.install-acts { display: flex; justify-content: flex-end; gap: 8px; }
+.install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 "Jost", sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.install-later { background: none; color: #c8cedb; }
+.install-add { background: #f3f5f9; color: #0a0c11; }
+
+/* ---------- the account as an app, on a phone: four places along the bottom ---------- */
+.appbar { display: none; }
+@media (max-width: 700px) {
+  .account { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+  .me-tabs { display: none; }
+  .appbar {
+    display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; z-index: 40; left: 0; right: 0; bottom: 0;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); background: color-mix(in oklab, var(--panel) 90%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); box-shadow: 0 -1px 0 var(--line);
+  }
+  .appbar-item { position: relative; display: grid; justify-items: center; gap: 3px; min-height: 52px; padding: 6px 0 4px; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+  .appbar-item svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .appbar-item[aria-current="page"] { color: var(--ink); }
+  .appbar-item[aria-current="page"] svg { stroke-width: 1.9; }
+  .appbar-item .dot { position: absolute; top: 2px; left: calc(50% + 6px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--good); color: #fff; font: 600 10.5px/18px var(--sans); font-style: normal; text-align: center; }
+  .appbar-item .dot[hidden] { display: none; }
+  :root .askbar { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .install-card { bottom: calc(84px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 700px) {
+  .account { padding-top: 92px; }
+  .me-head { margin-bottom: var(--s5); }
+  .allow .btn { display: none; } /* the Mirror is in the bar along the bottom */
+}

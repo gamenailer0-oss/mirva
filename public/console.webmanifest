@@ -1,0 +1,17 @@
+{
+  "id": "/console",
+  "name": "MIRVA for stores",
+  "short_name": "MIRVA Store",
+  "description": "Your store's MIRVA: what shoppers tried, kept and bought, your catalogue, your mirrors and your limits.",
+  "start_url": "/console?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#e7eaf0",
+  "theme_color": "#0a0c11",
+  "categories": ["business", "shopping"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

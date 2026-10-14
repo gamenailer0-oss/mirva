@@ -7,9 +7,11 @@
 <meta name="theme-color" content="#0a0c11">
 <title>MIRVA</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0d12'/%3E%3Crect x='10.5' y='9' width='11' height='17' rx='5.5' fill='none' stroke='%23e8ecf3' stroke-width='1.6'/%3E%3Cpath d='M8 9.5Q16 2 24 9.5' fill='none' stroke='%23e8ecf3' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/jost-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bodoni-moda-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <link rel="stylesheet" href="/styles.css">
 <link rel="modulepreload" href="/dist/app.js">
 </head>
@@ -28,6 +30,7 @@
     <div class="wardrobe-foot">
       <button id="compareBtn" class="rail-btn" type="button" hidden>Compare</button>
       <button id="sendAllBtn" class="rail-btn" type="button" hidden>Send</button>
+      <button id="askBtn" class="rail-btn strong" type="button" hidden>Ask family</button>
       <button id="adaptBtn" class="rail-btn" type="button">Adapt</button>
     </div>
   </aside>
@@ -145,6 +148,7 @@
 
   <!-- Right: the side tablet -->
   <section class="tablet" aria-label="MIRVA stylist">
+    <button id="sheetHandle" class="sheet-handle" type="button" aria-label="Show more of the stylist" aria-expanded="false"></button>
     <div id="storeBar" class="store-bar" hidden>
       <span class="store-now"><i id="storeDot" aria-hidden="true"></i><span id="storeName"></span></span>
       <button id="storeBtn" class="textlink" type="button">Change store</button>

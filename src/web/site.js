@@ -1,6 +1,7 @@
 // The shopper's site: quiet pages, with the account and the voting board loaded only where they are used.
 import { $, $$, el, api, nav, reveal, whoAmI, toast, busy, connection, signOut } from "./ui.js";
 import { registerWorker } from "./notify.js";
+import { offerInstall } from "./install.js";
 
 document.documentElement.classList.add("js");
 nav();
@@ -13,6 +14,8 @@ const page = document.body.dataset.page;
 // Signed in: the account link says where it goes, a quiet "Sign out" sits beside it, and the phone menu gets both.
 whoAmI().then(({ user }) => {
   if (!user) return;
+  // A member with something in her wardrobe is offered MIRVA on her home screen, once.
+  if (user.role === "member" && page === "account") setTimeout(offerInstall, 4000);
   const label = user.role === "member" ? "Your wardrobe" : "Your desk";
   const href = user.role === "member" ? "/account" : user.role === "founder" ? "/hq" : "/console";
   $("#nav")?.classList.add("signed");
