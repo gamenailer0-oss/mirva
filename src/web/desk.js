@@ -490,7 +490,7 @@ const VIEWS = {
       const [r, g, b] = [1, 3, 5].map((i) => parseInt(state.accent.slice(i, i + 2), 16));
       pill.style.color = r * 0.299 + g * 0.587 + b * 0.114 > 150 ? "#0a0c11" : "#fff";
       $("#lfBy", glass).textContent = state.byline;
-      for (const b of $("[data-mood-set]", form)) b.classList.toggle("on", b.dataset.moodSet === state.mood);
+      for (const b of $$("[data-mood-set]", form)) b.classList.toggle("on", b.dataset.moodSet === state.mood);
     };
     const form = el("form", { class: "panel form" },
       el("h2", { text: "How MIRVA dresses for you" }),
@@ -506,7 +506,7 @@ const VIEWS = {
       toast("Saved. Mirrors pick it up the next time they load.");
     });
     const chartText = (brand.sizeChart || []).map((r) => [r.label, r.chest.join("-"), r.waist ? r.waist.join("-") : ""].filter(Boolean).join(", ")).join("\n");
-    const chart = el("form", { class: "panel form" },
+    const chart = el("form", { class: "panel form", style: "margin-top:20px" },
       el("h2", { text: "Your size chart" }),
       el("label", { class: "field" }, el("span", { text: "One size to a line: label, chest, waist, in inches" }), el("textarea", { name: "sizeChart", rows: 7, placeholder: "S, 34-36, 28-30\nM, 38-40, 32-34\nL, 42-44, 36-38", value: chartText })),
       el("p", { class: "fine", text: "With a chart, the mirror offers \"Find my size\": the shopper gives two measurements and is shown her size on your chart, and told plainly when a piece is not made in it. Without one, she picks her usual size. Leave the box empty to take the chart away." }),

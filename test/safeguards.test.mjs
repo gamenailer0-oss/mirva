@@ -922,3 +922,8 @@ test("a paused store makes no try-ons at its mirrors or on its website, and the 
   await plan(db, "sapphire", "studio", 1, "live");
   assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "and starts again when the store is back");
 });
+
+test("the desks never loop over a single element (Look and feel once crashed on it)", () => {
+  const desk = readFileSync(new URL("../src/web/desk.js", import.meta.url), "utf8");
+  assert.doesNotMatch(desk, /for \(const \w+ of \$\(/, "use $$ to loop over elements");
+});
