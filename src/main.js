@@ -732,55 +732,57 @@ function setMode(mode) {
 }
 
 // ---- the wait, made into part of the experience ----
-// While a look is being made, the glass shows the piece itself: its close-ups, its cloth,
-// and a tailor's steps. The wait builds wanting instead of testing patience.
-function storyLines(p) {
-  const out = [];
-  if (p.fabric && !p.fabric.includes("%")) out.push(`${sentence(p.fabric.toLowerCase())}.`);
-  if (p.cut && p.cut.length < 64 && !/unstitched/i.test(p.cut)) out.push(`${sentence(p.cut)}.`);
-  if (p.unstitched) out.push("Sold as fabric. Shown stitched, for you.");
-  if (p.colour && !/multi/i.test(p.colour)) out.push(`In ${p.colour.toLowerCase()}.`);
-  if (S.brief.budget && p.price <= S.brief.budget - 500) out.push(`${money(S.brief.budget - p.price)} under what you set.`);
-  const left = p.sizes.filter((z) => z.inStock).map((z) => z.label);
-  if (left.length > 4) out.push(`In ${left.length} sizes, ${left[0]} to ${left[left.length - 1]}.`);
-  else if (left.length) out.push(`Made in ${left.join(", ")}.`);
-  return out.length ? out : [`${p.name}.`];
+// While a portrait is made: her own picture stays on the glass, a little dimmed. The halo fills as MIRVA's clock, timed
+// from how long portraits have really taken on this device, and one small line says how many seconds are left. It
+// reaches nearly full at the usual time and then only creeps, so it never says it is done before it is.
+const WAITS = "mirva.waits";
+function expectedWait() {
+  try {
+    const w = JSON.parse(localStorage.getItem(WAITS) || "[]").filter((n) => n > 2 && n < 90).sort((a, b) => a - b);
+    if (w.length) return Math.min(40, Math.max(6, w[Math.floor(w.length / 2)]));
+  } catch {}
+  return 14;
+}
+function rememberWait(seconds) {
+  try {
+    const w = JSON.parse(localStorage.getItem(WAITS) || "[]");
+    localStorage.setItem(WAITS, JSON.stringify([...(Array.isArray(w) ? w : []), Math.round(seconds * 10) / 10].slice(-7)));
+  } catch {}
 }
 
-function develop(p, kind) {
+function develop() {
   S.developing?.cancel();
   const reel = $("#reel");
-  const imgs = [$("#reelA"), $("#reelB")];
-  const shots = (p.images?.length > 1 ? p.images.slice(1, 6) : [p.image]).map((u) => pic(u, 720));
-  const steps = kind === "model" ? ["Taking your measure", "Cutting the cloth", "Stitching it for you", "Pressing the last seam"] : ["Opening the studio", "Fitting it to you"];
-  const lines = storyLines(p);
-  let n = 0;
-  let front = 0;
-  const frame = () => {
-    const img = imgs[front ^ 1];
-    img.onload = () => {
-      img.classList.add("on");
-      imgs[front].classList.remove("on");
-      front ^= 1;
-    };
-    img.src = shots[n % shots.length];
-    replay($("#reelStep"), steps[Math.min(n, steps.length - 1)]);
-    replay($("#reelLine"), lines[n % lines.length]);
-    n++;
+  const arc = $("#haloArc");
+  const left = $("#reelLine");
+  const usual = expectedWait();
+  const t0 = performance.now();
+  const tick = () => {
+    const t = (performance.now() - t0) / 1000;
+    const done = t < usual ? 0.95 * (t / usual) : 0.95 + 0.045 * (1 - Math.exp(-(t - usual) / 8));
+    arc.style.strokeDashoffset = String(100 - done * 100);
+    const s = Math.ceil(usual - t);
+    left.textContent = s > 0 ? `${s} s` : "Almost there";
   };
-  imgs.forEach((i) => i.classList.remove("on"));
-  frame();
-  const timer = setInterval(frame, 3400);
+  glass.classList.add("timed");
+  tick();
+  const timer = setInterval(tick, 250);
   reel.hidden = false;
   requestAnimationFrame(() => reel.classList.add("on"));
   const me = {
     kind: "model",
+    // the portrait came: how long it really took is what the next wait is timed by
+    done() {
+      if (S.developing === me) rememberWait((performance.now() - t0) / 1000);
+    },
     cancel() {
       if (S.developing !== me) return;
       clearInterval(timer);
+      glass.classList.remove("timed");
+      arc.style.strokeDashoffset = "";
       S.developing = null;
       reel.classList.remove("on");
-      setTimeout(() => !S.developing && (reel.hidden = true), 700);
+      setTimeout(() => !S.developing && (reel.hidden = true), 400);
       syncGlass();
     },
   };
@@ -981,7 +983,7 @@ async function modelShot(p, { retake = false } = {}) {
   const look = await pass.lookAt(person);
   if (ticket !== S.ticket) return;
   if (look.dim) return caption(pass.DIM_LINE);
-  const dev = develop(p, "model");
+  const dev = develop();
   S.shooting++;
   caption(line("putting"));
   try {
@@ -1012,6 +1014,7 @@ async function modelShot(p, { retake = false } = {}) {
     S.visit.portraits++;
     if (link.member) link.whoIsHere().then(showMember);
     S.portraits.set(p.id, entry);
+    dev.done();
     if (ticket !== S.ticket) return dev.cancel(); // she moved on; it is kept for when she comes back (and the wait over it is let go, unless it is someone else's by now)
     dev.cancel();
     showPortrait(entry, p.id);

@@ -577,7 +577,21 @@ const VIEWS = {
   },
 
   async enquiries() {
-    const { leads, statuses } = await api("/api/hq/leads");
+    const [{ leads, statuses }, contact] = await Promise.all([api("/api/hq/leads"), api("/api/hq/contact").catch(() => ({ whatsapp: "", show: false }))]);
+    // The founder's own number is never on the public site unless the founder puts it there, here.
+    const reach = el("form", { class: "panel form", style: "margin-bottom:20px;max-width:640px" },
+      el("h2", { text: "Your WhatsApp on the store site" }),
+      el("p", { class: "muted small", text: "Off until you switch it on. When it is on, the store site shows a “WhatsApp the founder” button beside the pilot and the enquiry form, opening a chat with this number." }),
+      field("WhatsApp number", el("input", { name: "whatsapp", type: "tel", inputMode: "tel", placeholder: "+92 3xx xxxxxxx", value: contact.whatsapp ? "+" + contact.whatsapp : "" })),
+      el("label", { class: "check" }, el("input", { type: "checkbox", name: "show", checked: contact.show }), el("span", { text: "Show it on the store site" })),
+      el("p", { class: "formnote", role: "alert" }),
+      el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
+    );
+    onSubmit(reach, async (d) => {
+      const saved = await api("/api/hq/contact", { whatsapp: d.whatsapp, show: d.show });
+      toast(saved.show ? "Saved. The store site shows your WhatsApp now." : "Saved. Your number stays off the site.");
+      go("enquiries");
+    });
     count("enquiries", leads.filter((l) => l.status === "new").length);
     const shown = leads.filter((l) => S.filter === "all" || l.status === S.filter);
     const card = (l) => {
@@ -595,7 +609,7 @@ const VIEWS = {
         el("div", { class: "stack close" },
           el("div", { class: "row" }, el("h2", { text: l.company }), l.source === "sample" && el("span", { class: "badge soft", text: "Sample" })),
           el("p", { class: "muted small", text: [l.name, l.role, l.city, l.stores && plural(l.stores, "store"), l.plan && cap(l.plan), when(l.at)].filter(Boolean).join(" · ") }),
-          el("p", { class: "small" }, el("a", { href: `mailto:${l.email}`, text: l.email }), l.phone && "  ·  ", l.phone && el("a", { href: `https://wa.me/${l.phone.replace(/[^0-9]/g, "")}`, target: "_blank", rel: "noopener", text: l.phone })),
+          el("p", { class: "small" }, el("a", { href: `mailto:${l.email}`, text: l.email }), l.phone && "  ·  ", l.phone && el("a", { href: `https://wa.me/${l.phone.replace(/[^0-9]/g, "").replace(/^0(?=3)/, "92")}`, target: "_blank", rel: "noopener", text: l.phone })),
           l.message && el("p", { class: "msg", text: l.message }),
         ),
         el("div", { class: "stack close" },
@@ -607,6 +621,7 @@ const VIEWS = {
     };
     fill(work(), 
       head("Enquiries", ["all", ...statuses].map((s) => el("button", { class: "chip" + (S.filter === s ? " on" : ""), type: "button", style: "text-transform:capitalize", text: s === "all" ? `All (${leads.length})` : `${s} (${leads.filter((l) => l.status === s).length})`, onclick: () => ((S.filter = s), go("enquiries")) }))),
+      reach,
       shown.length ? el("div", { class: "leads" }, shown.map(card)) : empty("Nothing at this stage."),
     );
   },

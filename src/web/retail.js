@@ -1,5 +1,5 @@
-// The store's site: four ways in, a live preview on the visitor's own catalogue, plans, an honest sum,
-// and the page MIRVA prepares for one store from that store's public catalogue.
+// The store's site: proof first, their own catalogue in a minute, the pilot as the way in, the plans with their detail
+// one tap away, an honest sum, and the page MIRVA prepares for one store from that store's public catalogue.
 import { $, $$, el, api, money, nav, reveal, busy, onSubmit, fill, connection, picture } from "./ui.js";
 
 document.documentElement.classList.add("js");
@@ -11,74 +11,91 @@ const page = document.body.dataset.page;
 if (page === "retail") retail();
 if (page === "pitch") pitch();
 
-// The same product, told the way each kind of store would recognise. The figures are starting
-// points for the calculator, not claims about anyone's business.
+// The founder's WhatsApp, only when the founder has switched it on at /hq. Until then the buttons stay hidden.
+async function whatsapp(text) {
+  const { whatsapp: number } = await api("/api/contact").catch(() => ({}));
+  if (!number) return;
+  for (const a of $$("[data-whatsapp]")) {
+    a.href = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.hidden = false;
+  }
+}
+
+// The same product, told the way each kind of store would recognise. The figures are starting points for the sum,
+// not claims about anyone's business.
 const SEGMENTS = {
   formal: {
-    kicker: "Where the sale is lost",
-    pain: "The sale happens at the fitting room, and on a Saturday there is a queue for it.",
-    answer: "The mirror gives every shopper a first fitting without a room: three formal looks on her in about a minute, so the fitting room is kept for the one she means to buy.",
-    points: ["Portraits in your formal pieces, lit to sell them", "Fewer fittings that end in nothing", "A record of what was tried and left behind"],
+    say: "The sale happens at the fitting room, and on a Saturday there is a queue for it. The mirror gives every shopper a first fitting without a room.",
     plan: "studio",
-    sum: { stores: 2, visitors: 120, share: 15, conversion: 18, ticket: 22000 },
+    sum: { stores: 1, visitors: 120, share: 15, conversion: 18, ticket: 22000 },
+  },
+  casual: {
+    say: "Tees, jeans and jackets sell on volume, in the store and online. Assist on your own tablets, and a Try it on button on your website, reach every shopper.",
+    plan: "assist",
+    sum: { stores: 1, visitors: 300, share: 8, conversion: 25, ticket: 4500 },
   },
   chain: {
-    kicker: "Where the sale is lost",
-    pain: "You have forty stores, and a real stylist in four of them.",
-    answer: "Assist puts the same stylist on a staff tablet and on the shopper's own phone in every branch: the same three questions, your catalogue, your sizes.",
-    points: ["One standard of advice, whoever is on shift", "No new hardware: your own tablets", "The price falls from the tenth store, or pay on results instead"],
+    say: "Forty stores, and a real stylist in four of them. Assist puts the same stylist on a tablet in every branch, on tablets you already own.",
     plan: "assist",
     sum: { stores: 40, visitors: 300, share: 3, conversion: 22, ticket: 6500 },
   },
   boutique: {
-    kicker: "Where the sale is lost",
-    pain: "Your clients send a photograph to their family before they decide. Then they go home to wait for the answer.",
-    answer: "MIRVA makes that photograph for them: a portrait in your piece, and one link their family can answer from the sofa. And in the mirror she sees the piece on herself, live, before anything is cut.",
-    points: ["A portrait worth sending, made in fifteen seconds", "Family votes come back while she is still in the store", "The mirror is ours to build and look after"],
+    say: "Your clients send a photo to their family before they decide, then go home to wait. MIRVA makes that photo, and the family answers while she is still with you.",
     plan: "studio",
     sum: { stores: 1, visitors: 25, share: 40, conversion: 20, ticket: 45000 },
   },
   unstitched: {
-    kicker: "Where the sale is lost",
-    pain: "Nobody can try on a length of fabric.",
-    answer: "MIRVA shows an unstitched three-piece as a finished suit, on the shopper, with the dupatta draped. She sees the garment before the tailor has seen the cloth.",
-    points: ["Every unstitched piece shown stitched and worn", "The trouser and dupatta suggested with it", "Which prints are tried most, by occasion"],
-    plan: "studio",
+    say: "Nobody can try on a length of fabric. MIRVA shows each unstitched piece as a finished suit, on her, with the dupatta draped.",
+    plan: "assist",
     sum: { stores: 6, visitors: 150, share: 12, conversion: 20, ticket: 9500 },
   },
 };
+const SHOWN = ["assist", "studio", "flagship"]; // Results is told in a line under them
 
 const feeFor = (plan, stores) => (plan.monthlyFromTenth && stores >= 10 ? 9 * plan.monthly + (stores - 9) * plan.monthlyFromTenth : stores * plan.monthly);
+const n = (x) => Number(x).toLocaleString("en-PK");
 
 async function retail() {
-  const { retail: plans, extras } = await api("/api/plans");
-  let segment = "formal";
+  whatsapp("Hello, I run a store and I would like to see MIRVA on our catalogue.");
+  const { retail: plans, extras, pilot } = await api("/api/plans");
   let touched = false;
 
-  // ----- plans
-  const n = (x) => Number(x).toLocaleString("en-PK");
-  const toStart = (p, stores = 1) => (p.install || 0) * stores + p.advanceMonths * feeFor(p, stores);
-  const card = (p) =>
-    el("article", { class: `plan${p.mirrors ? " dark hero" : ""}`, "data-plan": p.id, "data-reveal": true },
-      el("div", { class: "row", style: "justify-content:space-between" }, el("h3", { text: p.name }), el("span", { class: "badge", hidden: true, text: "Start here" })),
-      el("p", { class: "fee num" }, money(p.monthly), el("small", { text: "a store, a month" + (p.monthlyFromTenth ? `. ${money(p.monthlyFromTenth)} from the tenth store.` : p.share ? `, plus ${p.share * 100}% of sales counted through MIRVA. Never more than ${money(p.cap)} in all.` : ".") })),
-      el("p", { class: "muted small", text: p.fit }),
-      el("ul", { class: "ticks small" }, p.perks.map((t) => el("li", { text: t }))),
-      el("dl", {},
-        el("div", {}, el("dt", { text: "Live minutes a month" }), el("dd", { class: "num", text: p.liveMinutes ? n(p.liveMinutes) : "With a mirror" })),
-        el("div", {}, el("dt", { text: "Portraits a month" }), el("dd", { class: "num", text: n(p.portraits) })),
-        el("div", {}, el("dt", { text: "Mirror" }), el("dd", { text: p.hardware })),
-        el("div", {}, el("dt", { text: "To start" }), el("dd", { text: p.install ? `${money(p.install)} installation and ${p.advanceMonths} months in advance` : "The first month. Nothing to install." })),
-        el("div", {}, el("dt", { text: "Agreement" }), el("dd", { text: p.termMonths > 1 ? `${p.termMonths} months` : "Month to month" })),
-      ),
-    );
-  fill($("#plans"), ...Object.values(plans).map(card));
-  $("#extraLine").textContent = `${money(extras.liveMinutePkr)} a live minute, in blocks of ${extras.liveBlockMinutes}, and only the blocks you agree to. Without them live Studio rests until the 1st and portraits carry on. Catalogue imaging, if you want it: ${money(extras.imagingPerProduct)} a product a season.`;
-  reveal($("#plans"));
+  // ----- the pilot, from the one place its terms are kept
+  if (pilot) $("#pilotFee").textContent = money(pilot.feePkr);
 
-  // ----- the sum
+  // ----- plans: the decision on three cards, everything else behind "Every detail"
+  const card = (p) =>
+    el("article", { class: `plan${p.mirrors ? " glassy" : ""}`, "data-plan": p.id },
+      el("span", { class: "badge", hidden: true, text: "Where you'd start" }),
+      el("h3", { text: p.name }),
+      el("p", { class: "fee num" }, money(p.monthly), el("small", { text: "a store, a month" + (p.monthlyFromTenth ? ` · ${money(p.monthlyFromTenth)} from the tenth store` : "") })),
+      el("p", { class: "fit", text: p.fit }),
+      el("ul", { class: "ticks" }, p.perks.slice(0, 3).map((t) => el("li", { text: t }))),
+    );
+  fill($("#plans-list"), ...SHOWN.map((id) => card(plans[id])));
+  const r = plans.results;
+  if (r) fill($("#resultsLine"), "Rather pay on results? ", el("b", { text: r.name }), `: ${money(r.monthly)} a store a month plus ${r.share * 100}% of the sales counted through MIRVA, never more than ${money(r.cap)} in all.`);
+  const order = [...SHOWN, "results"].map((id) => plans[id]).filter(Boolean);
+  const toStart = (p) => (p.install ? `${money(p.install)} installation and ${p.advanceMonths} months in advance` : "The first month. Nothing to install.");
+  const rows = [
+    ["A store, a month", (p) => money(p.monthly) + (p.share ? ` + ${p.share * 100}% of counted sales` : "")],
+    ["Live minutes a month", (p) => (p.liveMinutes ? n(p.liveMinutes) : "With a mirror")],
+    ["Portraits a month", (p) => n(p.portraits)],
+    ["The mirror", (p) => p.hardware],
+    ["To start", toStart],
+    ["Agreement", (p) => (p.termMonths > 1 ? `${p.termMonths} months` : "Month to month")],
+  ];
+  fill($("#compareTable"),
+    el("thead", {}, el("tr", {}, el("td"), order.map((p) => el("th", { scope: "col", text: p.name })))),
+    el("tbody", {}, rows.map(([label, f]) => el("tr", {}, el("th", { scope: "row", text: label }), order.map((p) => el("td", { text: f(p) }))))),
+  );
+  $("#extraLine").textContent = `${money(extras.liveMinutePkr)} a live minute, in blocks of ${extras.liveBlockMinutes}, and only the blocks you agree to. Without them live Studio rests until the 1st and portraits carry on.`;
+
+  // ----- the sum: three numbers in front, the assumptions one tap away
   const calc = $("#calc");
-  fill(calc.elements.plan, ...Object.values(plans).map((p) => el("option", { value: p.id, text: p.name })));
+  fill(calc.elements.plan, ...order.map((p) => el("option", { value: p.id, text: p.name })));
   const sum = () => {
     const v = Object.fromEntries(["stores", "visitors", "share", "conversion", "ticket", "margin"].map((k) => [k, Math.max(0, Number(calc.elements[k].value) || 0)]));
     const plan = plans[calc.elements.plan.value];
@@ -92,65 +109,63 @@ async function retail() {
     const usable = perSale > 0 && buyers > 0;
     $("#rBreak").textContent = usable ? `+${uplift < 10 ? uplift.toFixed(1) : Math.round(uplift)}%` : "—";
     $("#rBreakLine").textContent = usable
-      ? `more sales among the shoppers who use MIRVA. That is ${n(Math.ceil(needed))} extra sales a month across ${stores === 1 ? "the store" : `${stores} stores`}, beside the ${n(Math.round(buyers))} those shoppers already make.`
+      ? `more sales among the shoppers who use MIRVA pays for ${plan.name}: ${n(Math.ceil(needed))} extra sales a month across ${stores === 1 ? "the store" : `${stores} stores`}, beside the ${n(Math.round(buyers))} those shoppers make already.`
       : "Fill in the numbers to see it.";
-    $("#rFee").textContent = money(fee);
-    $("#rSessions").textContent = n(users);
-    $("#rOneIn").textContent = usable ? `${n(Math.max(1, Math.round((users * stores) / needed)))} shoppers` : "—";
-    $("#rSetup").textContent = money(toStart(plan, stores));
     $("#rNote").textContent =
-      (plan.liveMinutes
-        ? `${plan.name} includes ${n(plan.liveMinutes)} live minutes a store a month, which is about that many live looks; portraits (${n(plan.portraits)}) cover everyone else. `
-        : `${plan.name} makes portraits (${n(plan.portraits)} a store a month); live Studio comes with a mirror. `) +
-      (users > plan.portraits ? `At these numbers more shoppers would use it than the plan has portraits for, so a larger plan would suit you better. ` : "") +
-      (plan.share ? `Results also takes ${plan.share * 100}% of sales counted through MIRVA, which this sum leaves out because it is only paid when those sales happen. ` : "") +
-      (plan.install ? `"To start" is the installation and the first ${plan.advanceMonths} months, which are part of the fee above, not on top of it. ` : "") +
-      "If nothing changed at all, the cost to you is the monthly fee.";
+      `${plan.name} is ${money(fee)} a month here. ` +
+      (users > plan.portraits ? `At these numbers more shoppers would use it than the plan has portraits for (${n(plan.portraits)}), so a larger plan would suit you better. ` : "") +
+      (plan.share ? `Results also takes ${plan.share * 100}% of sales counted through MIRVA, left out here because it is only paid when those sales happen. ` : "") +
+      "If nothing changed at all, the cost to you is the monthly fee. We won't promise you an uplift; this shows how small it would have to be.";
   };
   calc.addEventListener("input", (e) => {
     if (e.target.name !== "plan") touched = true;
     sum();
   });
 
-  // ----- four kinds of store
+  // ----- which kind of store
   const choose = (id, animate = true) => {
-    segment = id;
     const s = SEGMENTS[id];
-    for (const b of $$("[data-seg]")) b.setAttribute("aria-selected", String(b.dataset.seg === id));
-    $("#segKicker").textContent = s.kicker;
-    $("#segPain").textContent = s.pain;
-    $("#segAnswer").textContent = s.answer;
-    fill($("#segPoints"), ...s.points.map((t) => el("li", { text: t })));
-    $("#segPlan").textContent = plans[s.plan].name;
+    for (const b of $$("[data-seg]")) b.setAttribute("aria-checked", String(b.dataset.seg === id));
+    const say = $("#segSay");
+    say.textContent = s.say;
+    if (animate) (say.classList.remove("swap"), void say.offsetWidth, say.classList.add("swap"));
     for (const c of $$(".plan")) (c.classList.toggle("suggested", c.dataset.plan === s.plan), ($(".badge", c).hidden = c.dataset.plan !== s.plan));
-    $("#leadForm").elements.segment.value = id;
+    // On a phone the plans slide sideways: the one she'd start on is brought into view (the page itself never moves).
+    const row = $("#plans-list");
+    const pick = $(`.plan[data-plan="${s.plan}"]`, row);
+    if (pick && row.scrollWidth > row.clientWidth)
+      row.scrollTo({ left: row.scrollLeft + pick.getBoundingClientRect().left - row.getBoundingClientRect().left - parseFloat(getComputedStyle(row).paddingLeft), behavior: animate ? "smooth" : "auto" });
+    const lead = $("#leadForm").elements;
+    lead.segment.value = id;
+    lead.plan.value = s.plan;
     if (!touched) {
       calc.elements.plan.value = s.plan;
       for (const [k, val] of Object.entries(s.sum)) calc.elements[k].value = val;
     }
     sum();
-    if (animate) {
-      const panel = $("#segPanel");
-      panel.classList.remove("swap");
-      void panel.offsetWidth;
-      panel.classList.add("swap");
-    }
   };
   for (const b of $$("[data-seg]")) b.addEventListener("click", () => choose(b.dataset.seg));
-  choose(segment, false);
+  // Arrow keys move along the choices, as in any group of radio buttons.
+  $(".seg-chips").addEventListener("keydown", (e) => {
+    const all = $$("[data-seg]");
+    const at = all.indexOf(document.activeElement);
+    if (at < 0 || !["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
+    e.preventDefault();
+    const next = all[(at + (e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : all.length - 1)) % all.length];
+    next.focus();
+    choose(next.dataset.seg);
+  });
+  choose("formal", false);
 
   // ----- your catalogue
   const form = $("#tryForm");
   const note = $("#tryNote");
-  const word = $("#tryWord");
   const clean = (v) => v.trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/.*$/, "");
-  $("#tryInput").addEventListener("input", (e) => (word.textContent = (clean(e.target.value).split(".")[0] || "YOUR STORE").toUpperCase().slice(0, 18)));
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const domain = clean($("#tryInput").value);
     if (!domain) return (note.textContent = "Type your store's web address first.");
     note.textContent = "";
-    $("#tryHalo").setAttribute("class", "halo think");
     busy($("button", form), async () => {
       try {
         const store = await api("/api/preview", { domain }, 40000);
@@ -159,13 +174,10 @@ async function retail() {
         $("#tryFacts").textContent = `${facts.products} pieces read from your public catalogue just now, from ${money(facts.priceMin, currency)} to ${money(facts.priceMax, currency)}.`;
         $("#tryMirror").href = `/mirror?brand=${store.id}`;
         $("#tryPitch").href = `/for/${store.id}`;
-        $("#tryWait").hidden = true;
         $("#tryReady").hidden = false;
         $("#tryMirror").focus({ preventScroll: true });
       } catch (err) {
-        note.textContent = err.message + " If your store is not on Shopify, write to us below and we will load it for you.";
-      } finally {
-        $("#tryHalo").setAttribute("class", "halo breathe");
+        note.textContent = err.message + " If your store is on another platform, write to us below and we will load it for you.";
       }
     });
   });
@@ -174,7 +186,7 @@ async function retail() {
   const lead = $("#leadForm");
   onSubmit(lead, async (data) => {
     await api("/api/leads", data);
-    fill(lead, 
+    fill(lead,
       el("div", { class: "sent" },
         el("p", { class: "kicker", text: "Sent" }),
         el("p", { class: "title voice", text: "Thank you." }),
@@ -193,7 +205,7 @@ async function pitch() {
   try {
     data = await api("/api/pitch/" + id);
   } catch {
-    return fill(main, 
+    return fill(main,
       el("section", { class: "p-hero band" },
         el("div", { class: "wrap stack" },
           el("h1", { class: "title", text: "We haven't read this store's catalogue yet." }),
@@ -203,9 +215,14 @@ async function pitch() {
       ),
     );
   }
+  const [{ pilot }, book] = await Promise.all([
+    api("/api/plans").catch(() => ({})),
+    fetch(`/showcase/lookbook/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  ]);
+  const days = pilot?.days || 60;
   const { brand, facts, pictures, currency, takenAt } = data;
   const read = new Date(takenAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-  const rupees = (n) => money(n, currency);
+  const rupees = (v) => money(v, currency);
   document.title = `Prepared for ${brand.name} — MIRVA`;
   document.documentElement.style.setProperty("--store", brand.accent || "#8d95a6");
   $("#navMirror").href = `/mirror?brand=${brand.id}`;
@@ -218,11 +235,13 @@ async function pitch() {
   if (facts.sizesOut)
     noticed.push([`${facts.withGap}`, `pieces had at least one size sold out online, ${facts.sizesOut} sizes in all.`, "The mirror tells you which of those sizes shoppers asked for, so you know what a gap really cost."]);
   if (facts.formal)
-    noticed.push([`${facts.formal}`, "formal and festive pieces.", "These are bought for an occasion and sent to family first. A studio portrait and a voting link do that inside the store."]);
-  noticed.push([rupees(facts.priceMedian), "is your middle price.", facts.priceMedian >= 20000 ? "At this ticket a few extra sales a week cover a mirror. Start on Assist, and move to the mirror when you have seen it work." : facts.priceMedian < 8000 ? "At this ticket volume matters more than a mirror. Assist, on tablets you already own, reaches every branch." : "A mirror in your flagships and Assist everywhere else is where stores at this price usually start."]);
+    noticed.push([`${facts.formal}`, "formal and festive pieces.", "These are bought for an occasion and sent to family first. A portrait and a voting link do that inside the store."]);
+  noticed.push([rupees(facts.priceMedian), "is your middle price.", facts.priceMedian >= 20000 ? "At this ticket a few extra sales a week cover a mirror. Start on Assist, and move to the mirror when you have seen it work." : facts.priceMedian < 8000 ? "At this ticket volume matters more than a mirror. Assist on tablets you already own, and a Try it on button on your website, reach every shopper." : "A mirror in your flagships and Assist everywhere else is where stores at this price usually start."]);
   if (facts.addons) noticed.push([`${facts.addons}`, "accessories, shoes and wraps.", "MIRVA suggests up to three with every look, each with a reason, and adds them to what she takes home."]);
 
-  fill(main, 
+  // Real portraits of the store's own pieces, made once for this page by MIRVA's engine on a made-up shopper.
+  const looks = Array.isArray(book?.items) ? book.items.slice(0, 6) : [];
+  fill(main,
     el("section", { class: "p-hero band" },
       el("div", { class: "wrap p-hero-grid" },
         el("div", { class: "stack" },
@@ -241,32 +260,53 @@ async function pitch() {
         ),
       ),
     ),
-    pictures.length > 2 &&
+    looks.length >= 2 &&
       el("section", { class: "section tight" },
+        el("div", { class: "wrap" },
+          el("div", { class: "head stack close" },
+            el("p", { class: "kicker", "data-reveal": true, text: "Your pieces, on a shopper" }),
+            el("h2", { class: "title", "data-reveal": true, style: "--i:1" }, "Made by MIRVA ", el("em", { text: "from your own photos." })),
+          ),
+          el("div", { class: "lookbook", "data-reveal": true },
+            looks.map((l) =>
+              el("figure", {},
+                el("div", { class: "pair" },
+                  el("img", { src: l.portrait, alt: `MIRVA portrait in ${brand.name}'s ${l.name}`, loading: "lazy", width: 360, height: 640 }),
+                  l.image && el("img", { class: "store", src: l.image, alt: "Your photo of the same piece", loading: "lazy" }),
+                ),
+                el("figcaption", {}, el("b", { text: l.name }), el("span", { text: l.price ? rupees(l.price) : "" })),
+              ),
+            ),
+          ),
+          el("p", { class: "fine", style: "margin-top:16px", text: "Real results from MIRVA's try-on, untouched; your photo of each piece sits in its corner. The shopper was made for this page by the same engine, so no real person is shown. A likeness, not a fitting." }),
+        ),
+      ),
+    pictures.length > 2 &&
+      el("section", { class: looks.length >= 2 ? "section tight band" : "section tight" },
         el("div", { class: "wrap stack" },
           el("p", { class: "kicker", "data-reveal": true, text: "From your own rails" }),
           el("div", { class: "rail", "data-reveal": true }, pictures.map((p) => el("figure", {}, el("div", { style: "border-radius:var(--r-md)" }, picture({ src: p.image, alt: p.name, loading: "lazy" })), el("figcaption", { text: `${p.name} · ${rupees(p.price)}` })))),
           el("p", { class: "fine", text: "Every one of these can be worn in the mirror today. Tap “Open the mirror” above." }),
         ),
       ),
-    el("section", { class: "section tight band" },
+    el("section", { class: "section tight" + (looks.length >= 2 ? "" : " band") },
       el("div", { class: "wrap" },
         el("div", { class: "head stack close" }, el("p", { class: "kicker", "data-reveal": true, text: "What we noticed" }), el("h2", { class: "title", "data-reveal": true, style: "--i:1" }, "Your catalogue, ", el("em", { text: "read as a stylist would." }))),
         el("div", { class: "noticed" }, noticed.map(([fig, what, so], i) => el("article", { class: "card", "data-reveal": true, style: `--i:${i}` }, el("p", { class: "fig num", text: fig }), el("p", { text: what }), el("p", { class: "muted", text: so })))),
       ),
     ),
-    el("section", { class: "section tight" },
+    el("section", { class: "section tight dark" },
       el("div", { class: "wrap split" },
         el("div", { class: "stack" },
-          el("p", { class: "kicker", "data-reveal": true, text: "A first month together" }),
-          el("h2", { class: "title", "data-reveal": true, style: "--i:1" }, "Thirty days. One store. ", el("em", { text: "A written result." })),
-          el("p", { class: "lede", "data-reveal": true, style: "--i:2", text: "We agree what success means, in numbers, before the mirror goes in. On day thirty you have a short report and a decision to make." }),
-          el("div", { class: "row", "data-reveal": true, style: "--i:3" }, el("a", { class: "btn", href: "/retail#talk", text: "Ask about a pilot" }), el("a", { class: "link arrow", href: "/retail#pricing", text: "See the plans " })),
+          el("p", { class: "kicker", "data-reveal": true, text: "The pilot" }),
+          el("h2", { class: "title", "data-reveal": true, style: "--i:1" }, `${days === 60 ? "Sixty" : days} days. One store. `, el("em", { text: "Your money back if it misses." })),
+          el("p", { class: "lede", "data-reveal": true, style: "--i:2", text: `We agree one target in writing before day one, and run MIRVA in one of your stores on your own tablets.${pilot ? ` ${money(pilot.feePkr)} in advance, returned in full if the target is missed.` : ""}` }),
+          el("div", { class: "row", "data-reveal": true, style: "--i:3" }, el("a", { class: "btn", href: "/retail#talk", text: "Ask about a pilot" }), el("a", { class: "link arrow", href: "/retail#plans", text: "See the plans " })),
         ),
         el("ol", { class: "steps", "data-reveal": true, style: "--i:1" },
-          el("li", {}, el("div", {}, el("b", { text: "Before day one." }), el("p", { class: "muted", text: "Your catalogue is already loaded. We agree the measures and install the mirror." }))),
-          el("li", {}, el("div", {}, el("b", { text: "Days 1 to 30." }), el("p", { class: "muted", text: "You see the numbers every day in your console. We go through them with you every week." }))),
-          el("li", {}, el("div", {}, el("b", { text: "Day 30." }), el("p", { class: "muted", text: "A written result against what we agreed. Keep it, or we take the mirror away." }))),
+          el("li", {}, el("div", {}, el("b", { text: "Before day one." }), el("p", { class: "muted", text: "Your catalogue is already loaded. We agree the one target and set MIRVA up on your tablets." }))),
+          el("li", {}, el("div", {}, el("b", { text: `Days 1 to ${days}.` }), el("p", { class: "muted", text: "You see the numbers every day in your console. We go through them with you every week." }))),
+          el("li", {}, el("div", {}, el("b", { text: `Day ${days}.` }), el("p", { class: "muted", text: "A written result against the target. Hit, and you choose a plan. Missed, and the fee comes back." }))),
         ),
       ),
     ),
