@@ -52,3 +52,42 @@ test("plural product types are read as casual western wear, and sizes come from 
     assert.ok(p.formality <= 2.5, `${p.name} is casual (${p.formality})`);
   }
 });
+
+test("a WooCommerce store is read through its Store API: prices in minor units, sizes from the size attribute", async () => {
+  const real = globalThis.fetch;
+  const woo = [
+    {
+      id: 501, name: "Embroidered Lawn Kurta &#8211; Green", permalink: "https://www.lawnhouse.pk/product/kurta-green/",
+      prices: { price: "459000", currency_minor_unit: 2, currency_code: "PKR" },
+      images: [{ src: "https://www.lawnhouse.pk/wp-content/uploads/kurta.jpg" }],
+      categories: [{ name: "Pret" }], tags: [], short_description: "<p>Lawn, embroidered.</p>", is_in_stock: true,
+      attributes: [{ name: "Size", terms: [{ name: "S" }, { name: "M" }, { name: "L" }] }],
+    },
+    {
+      id: 502, name: "Picture From Elsewhere", permalink: "https://www.lawnhouse.pk/product/x/",
+      prices: { price: "100000", currency_minor_unit: 2 }, images: [{ src: "https://evil.example.com/x.jpg" }], categories: [], attributes: [],
+    },
+  ];
+  globalThis.fetch = async (url) => {
+    const u = String(url);
+    if (u.includes("/products.json")) return new Response("<html>not shopify</html>", { status: 404 });
+    if (u.includes("/wp-json/wc/store/v1/products")) return new Response(JSON.stringify(woo), { status: 200, headers: { "content-type": "application/json" } });
+    if (u.endsWith("/wp-json")) return new Response(JSON.stringify({ name: "Lawn House" }), { status: 200, headers: { "content-type": "application/json" } });
+    return new Response("not found", { status: 404 });
+  };
+  try {
+    const { brand, catalogue } = await readShopify("lawnhouse.pk");
+    assert.equal(brand.name, "Lawn House");
+    assert.equal(brand.currency, "Rs.");
+    assert.equal(catalogue.products.length, 1, "a picture from another server is never taken");
+    const [p] = catalogue.products;
+    assert.equal(p.id, "501");
+    assert.equal(p.name, "Embroidered Lawn Kurta – Green");
+    assert.equal(p.price, 4590);
+    assert.equal(p.url, "https://www.lawnhouse.pk/product/kurta-green/");
+    assert.deepEqual(p.sizes.map((z) => z.label), ["S", "M", "L"]);
+    assert.equal(p.tradition, "east");
+  } finally {
+    globalThis.fetch = real;
+  }
+});
