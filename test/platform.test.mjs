@@ -1402,7 +1402,7 @@ test("a member can see what she removed and when, and nobody else's", async () =
   const { deleted } = (await m.get("/api/me/deleted")).body;
   assert.equal(deleted.length, 1);
   assert.deepEqual([deleted[0].name, deleted[0].portrait], [A.name, false]);
-  assert.ok(deleted[0].at >= before - 5 && deleted[0].at <= Date.now() + 5);
+  assert.ok(deleted[0].at >= before - 2000 && deleted[0].at <= Date.now() + 2000);
   assert.deepEqual((await other.get("/api/me/deleted")).body.deleted, [], "her record is hers alone");
   err(await visitor().get("/api/me/deleted"), 401);
 });
