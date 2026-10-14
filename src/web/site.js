@@ -1,5 +1,5 @@
 // The shopper's site: quiet pages, with the account and the voting board loaded only where they are used.
-import { $, $$, el, api, nav, reveal, whoAmI, toast, busy, connection, signOut } from "./ui.js";
+import { $, $$, el, api, nav, reveal, whoAmI, toast, busy, connection, signOut, onSubmit } from "./ui.js";
 import { registerWorker } from "./notify.js";
 import { offerInstall } from "./install.js";
 
@@ -58,3 +58,14 @@ if (ask) {
     );
   });
 }
+
+// "Tell me when it opens": the home page and the mirrors page.
+const wait = $("#waitForm");
+if (wait)
+  onSubmit(wait, async (d) => {
+    const out = await api("/api/waitlist", d);
+    const note = $(".formnote", wait);
+    note.classList.add("ok");
+    note.textContent = out.count > 1 ? `Done. You and ${out.count - 1} more in ${out.city} are waiting for one. We'll tell you the day it opens.` : `Done. We'll tell you the day one opens in ${out.city}.`;
+    $("[type=submit]", wait).disabled = true;
+  });

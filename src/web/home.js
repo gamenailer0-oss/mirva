@@ -19,7 +19,7 @@ export async function start() {
   if (!Array.isArray(stores) || !stores.length) return;
   stores = stores.slice(0, 4);
 
-  const state = { store: stores[0].id, occasion: "wedding" };
+  const state = { store: (stores.find((s) => s.id === "sapphire") || stores[0]).id, occasion: "wedding" };
   const rails = new Map(); // store id -> its catalogue, asked for once
   const railsOf = (id) => {
     if (!rails.has(id))

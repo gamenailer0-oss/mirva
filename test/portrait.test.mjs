@@ -363,3 +363,54 @@ test("the list of stores carries what the store picker shows: a line about each,
   for (const url of store.cover) assert.match(url, /^https:\/\//);
   assert.equal(new Set(store.cover).size, 3);
 });
+
+// --- a first portrait before joining ---------------------------------------------------
+test("someone who has not joined gets one portrait, held for her, and it moves into her wardrobe when she joins", async () => {
+  const { app, db } = await makeApp({ guestShots: 5 });
+  const ip = "10.9.0.1";
+  const first = await shot(app, { ip, fields: portraitFields() });
+  assert.equal(first.status, 200, JSON.stringify(first.body));
+  assert.equal(first.headers.get("x-mirva-guest"), "1");
+  const id = first.headers.get("x-mirva-portrait");
+  assert.ok(id, "it is held under an id");
+  const cookie = first.headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
+  assert.match(cookie, /^mirva_g=/);
+
+  const again = await shot(app, { cookie, ip, fields: portraitFields() });
+  assert.equal(again.status, 403);
+  assert.equal(again.body.limit, "guest-used", "one a day on one browser");
+
+  const backdrop = await shot(app, { cookie, ip, fields: backdropFields({ replaces: id }) });
+  assert.equal(backdrop.status, 200, "the quiet second pass belongs to her own portrait");
+  assert.equal(backdrop.headers.get("x-mirva-portrait"), id, "and replaces it");
+  assert.equal((await shot(app, { cookie, ip, fields: backdropFields({ replaces: id }) })).status, 401, "once");
+  assert.equal((await shot(app, { ip: "10.9.0.2", fields: backdropFields({ replaces: id }) })).status, 401, "never from someone else's browser");
+
+  const png = new Uint8Array(3000);
+  png.set([0x89, 0x50, 0x4e, 0x47]);
+  const finish = (c) => app.fetch(new Request(`http://localhost:4999/api/portrait/${id}`, { method: "POST", headers: { ...(c ? { cookie: c } : {}), "content-type": "image/png" }, body: png }), { ip });
+  assert.equal((await finish(cookie)).status, 200, "her own head is laid back on her own portrait");
+  assert.equal((await finish("")).status, 401);
+
+  const joined = await app.fetch(
+    new Request("http://localhost:4999/api/auth/join", { method: "POST", headers: { "content-type": "application/json", cookie }, body: JSON.stringify({ name: "Guest Joins", email: `guest-${++counter}@example.com`, password: "a long enough phrase", agree: true }) }),
+    { ip },
+  );
+  assert.equal(joined.status, 200);
+  assert.equal((await joined.json()).kept, 1, "joining keeps it");
+  const member = joined.headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
+  const wardrobe = await (await app.fetch(new Request("http://localhost:4999/api/wardrobe", { headers: { cookie: member } }))).json();
+  assert.equal(wardrobe.looks.length, 1);
+  assert.match(wardrobe.looks[0].portrait, new RegExp(id));
+  assert.equal(Number((await db.get("SELECT COUNT(*) n FROM guest_shots WHERE claimed IS NOT NULL")).n), 1);
+});
+
+test("free first portraits are off unless asked for, and the day has a cap", async () => {
+  const { app } = await makeApp();
+  assert.equal((await shot(app, { fields: portraitFields() })).status, 401, "off: join first");
+  const { app: capped } = await makeApp({ guestShots: 1 });
+  assert.equal((await shot(capped, { ip: "10.9.1.1", fields: portraitFields() })).status, 200);
+  const late = await shot(capped, { ip: "10.9.1.2", fields: portraitFields() });
+  assert.equal(late.status, 403);
+  assert.equal(late.body.limit, "guest-used", "the day's free portraits are all made");
+});

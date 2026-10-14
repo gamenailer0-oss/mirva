@@ -3,8 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="MIRVA is the mirror that styles you. Say the occasion, see three looks from the store's own rails, and wear each one on yourself before you ask for a size.">
+<meta name="description" content="MIRVA is the mirror that styles you. Say the occasion, see three looks from a store's own rails, and see yourself in each one. Then ask your family with one link.">
 <meta name="theme-color" content="#06070a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRVA">
+<meta property="og:title" content="MIRVA, the mirror that styles you">
+<meta property="og:description" content="Say the occasion. See three looks from a store's own rails, on you. Free for shoppers.">
+<meta property="og:image" content="/share/home.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <title>MIRVA — the mirror that styles you</title>
 <link rel="icon" href="/favicon.svg">
 <link rel="preload" href="/fonts/jost-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -12,9 +20,11 @@
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="preload" href="/showcase/woman-khaddar.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="/brand.css">
 <link rel="stylesheet" href="/site/site.css">
 <link rel="modulepreload" href="/dist/site.js">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MIRVA","applicationCategory":"LifestyleApplication","description":"The mirror that styles you: three looks from a store's own rails, shown on you, and a link to ask your family.","offers":{"@type":"Offer","price":"0","priceCurrency":"PKR"},"operatingSystem":"Any"}</script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">Skip to the page</a>
@@ -28,10 +38,10 @@
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
   </button>
   <nav class="nav-links" id="navLinks" aria-label="Main">
-    <a href="/#how">Try it</a>
+    <a href="/#proof">What it makes</a>
+    <a href="/#how">How it works</a>
+    <a href="/#family">Ask the family</a>
     <a href="/membership">Membership</a>
-    <a href="/#privacy">Your pictures</a>
-    <a href="/retail">For stores</a>
   </nav>
   <div class="nav-cta">
     <a class="btn ghost small hide-s" href="/account" data-account>Sign in</a>
@@ -40,93 +50,130 @@
 </header>
 
 <main id="main">
-  <!-- 1. A mirror in a dark room -->
+  <!-- 1. The mirror draws itself, then shows what it really makes -->
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div class="hero-copy stack">
         <p class="kicker" data-reveal>A new kind of fitting room</p>
         <h1 class="display" data-reveal style="--i:1">The mirror that <em>styles you.</em></h1>
-        <p class="lede" data-reveal style="--i:2">Tell it the occasion. It finds three looks on the store's own rails and shows you each one on yourself, before you ask anyone for a size.</p>
+        <p class="lede" data-reveal style="--i:2">Say what it's for. MIRVA picks three looks from a store's own rails and shows you in each one, in about fifteen seconds.</p>
         <div class="row" data-reveal style="--i:3">
-          <a class="btn" href="/mirror">Open the mirror</a>
-          <a class="btn ghost" href="/account?join=1">Join free</a>
+          <a class="btn" href="/mirror">Try it on yourself</a>
+          <a class="btn ghost" href="#proof">See what it makes</a>
         </div>
-        <p class="fine" data-reveal style="--i:4">Free for shoppers, for good. Your pictures stay yours.</p>
+        <p class="fine" data-reveal style="--i:4" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
       </div>
 
-      <div class="hero-stage" data-reveal style="--i:2" aria-hidden="true">
-        <div class="glass hero-glass">
-          <svg class="halo" viewBox="0 0 200 44">
-            <path class="track" d="M14 38Q100 -8 186 38" pathLength="100"/>
-            <path class="arc" d="M14 38Q100 -8 186 38" pathLength="100"/>
-            <path class="arc spark" d="M14 38Q100 -8 186 38" pathLength="100"/>
-          </svg>
-          <svg class="figure" viewBox="0 0 240 427" preserveAspectRatio="xMidYMax meet">
-            <defs>
-              <linearGradient id="silk" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#3aa58c"/><stop offset=".55" stop-color="#17614f"/><stop offset="1" stop-color="#0b3029"/></linearGradient>
-              <linearGradient id="ivory" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#f6efdf"/><stop offset=".6" stop-color="#dccdaa"/><stop offset="1" stop-color="#a98c56"/></linearGradient>
-              <linearGradient id="velvet" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#5a356f"/><stop offset=".55" stop-color="#2c1b3f"/><stop offset="1" stop-color="#120d1f"/></linearGradient>
-              <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4154"/><stop offset="1" stop-color="#232838"/></linearGradient>
-            </defs>
-            <!-- the shopper, as the mirror sees her before a look is on -->
-            <ellipse cx="120" cy="414" rx="62" ry="5" fill="#000" opacity=".35"/>
-            <g class="body" fill="url(#skin)">
-              <ellipse cx="120" cy="58" rx="15" ry="19"/>
-              <path d="M114 74h12v26h-12z"/>
-              <path d="M102 98Q120 106 138 98L156 106Q163 112 165 126L172 246 163 248 153 150 152 300 88 300 87 150 77 248 68 246 75 126Q77 112 84 106Z"/>
-              <path d="M92 300 90 412h14l12-112ZM124 300l12 112h14l-2-112Z"/>
-            </g>
-            <!-- look one: a straight kameez in raw silk, trousers, a dupatta over one shoulder -->
-            <g class="look l1">
-              <path d="M90 314 88 412h18l10-98ZM124 314l10 98h18l-2-98Z" fill="#0f4238"/>
-              <path d="M100 98Q120 108 140 98L158 106Q166 112 168 126L176 246 164 248 154 150 156 318 84 318 86 150 76 248 64 246 72 126Q74 112 82 106Z" fill="url(#silk)"/>
-              <path d="M108 101Q120 126 132 101M120 114v44" fill="none" stroke="#e7d39a" stroke-width="1.3"/>
-              <path d="M84 308h72M64.600 238l11.800 2M163.600 240l11.800-2" stroke="#e7d39a" stroke-width="1.1" opacity=".85"/>
-              <path d="M84 104Q70 204 88 334l13-2Q84 204 97 100Z" fill="#9fe0cd" opacity=".4"/>
-            </g>
-            <!-- look two: a kaftan in ivory charmeuse -->
-            <g class="look l2">
-              <path d="M102 98Q120 106 138 98L190 196 178 262 166 244 170 406 70 406 74 244 62 262 50 196Z" fill="url(#ivory)"/>
-              <path d="M110 100 120 138 130 100" fill="none" stroke="#8c6f37" stroke-width="1.3"/>
-              <path d="M120 138v268" stroke="#8c6f37" stroke-width=".7" opacity=".45"/>
-              <path d="M70 394h100M54 200l10 54M186 200l-10 54" fill="none" stroke="#8c6f37" stroke-width="1.3" opacity=".65"/>
-            </g>
-            <!-- look three: a floor-length velvet with a flared skirt -->
-            <g class="look l3">
-              <path d="M100 98Q120 108 140 98L158 106Q166 112 168 126L176 246 164 248 154 150 150 192Q190 300 196 408L44 408Q50 300 90 192L86 150 76 248 64 246 72 126Q74 112 82 106Z" fill="url(#velvet)"/>
-              <path d="M108 101Q120 124 132 101" fill="none" stroke="#d9b56a" stroke-width="1.4"/>
-              <path d="M90 192h60" stroke="#d9b56a" stroke-width="1.3"/>
-              <path d="M46 398h148" stroke="#d9b56a" stroke-width="2" opacity=".8"/>
-              <path d="M120 192v214M104 192Q84 300 78 406M136 192q20 108 26 214" fill="none" stroke="#0c0916" stroke-width=".8" opacity=".5"/>
-            </g>
-          </svg>
-          <div class="hero-cap">
-            <p class="tag"><span class="c c1">Embroidered raw silk</span><span class="c c2">Printed charmeuse kaftan</span><span class="c c3">Velvet, floor length</span></p>
-            <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">Softer. For a dinner.</span><span class="c c3">And one for the walima.</span></p>
+      <figure class="oval-hero" data-reveal style="--i:2">
+        <div class="oval" aria-label="Three real MIRVA portraits of one shopper: an embroidered khaddar suit, a navy suit, a denim jacket.">
+          <img class="o1" src="/showcase/woman-khaddar.webp" alt="MIRVA portrait: a shopper in Sapphire's embroidered khaddar suit" width="720" height="1280" fetchpriority="high">
+          <img class="o2" src="/showcase/man-suit.webp" alt="MIRVA portrait: a shopper in Lawrencepur's navy suit" width="720" height="1280" loading="lazy">
+          <img class="o3" src="/showcase/man-jacket.webp" alt="MIRVA portrait: a shopper in Outfitters' denim jacket" width="720" height="1280" loading="lazy">
+          <div class="oval-cap" aria-hidden="true">
+            <p class="tag"><span class="c c1">Sapphire · Khaddar suit</span><span class="c c2">Lawrencepur · Navy suit</span><span class="c c3">Outfitters · Denim jacket</span></p>
+            <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">For the office.</span><span class="c c3">And for the weekend.</span></p>
           </div>
         </div>
-      </div>
+        <svg class="oval-line" viewBox="0 0 360 640" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="mercury" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8d95a6"/><stop offset=".32" stop-color="#f6f8fb"/><stop offset=".55" stop-color="#c3c9d6"/><stop offset=".72" stop-color="#f1f3f7"/><stop offset="1" stop-color="#7e8698"/></linearGradient></defs>
+          <ellipse cx="180" cy="320" rx="318" ry="178" pathLength="100"/>
+        </svg>
+        <svg class="oval-halo" viewBox="0 0 200 44" aria-hidden="true"><path d="M14 38Q100 -8 186 38" pathLength="100"/></svg>
+        <figcaption class="fine">Real MIRVA portraits from one photo. The shopper is made for this page; the clothes are real.</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- 2. Try it: the stylist itself, on a real store's rails -->
-  <section class="section band" id="how">
+  <!-- 2. Proof: one photo in, the store's own pieces out -->
+  <section class="section band" id="proof">
     <div class="wrap">
       <div class="head stack close">
-        <p class="kicker" data-reveal>Try it here</p>
-        <h2 class="title" data-reveal style="--i:1">Say what it's for. <em>See what it picks.</em></h2>
-        <p class="lede" data-reveal style="--i:2">This is the stylist from the mirror, choosing from a real store's rails. No camera needed yet.</p>
+        <p class="kicker" data-reveal>What it makes</p>
+        <h2 class="title" data-reveal style="--i:1">One photo of you. <em>The store's own pieces, on you.</em></h2>
+        <p class="lede" data-reveal style="--i:2">The colours, the print and the embroidery come from the store's own photo. Your face stays your own.</p>
       </div>
+
+      <div class="proof" data-reveal>
+        <div class="proof-pick" role="group" aria-label="Show">
+          <input type="radio" name="who" id="forHer" checked><label for="forHer">Her</label>
+          <input type="radio" name="who" id="forHim"><label for="forHim">Him</label>
+        </div>
+        <div class="proof-row her">
+          <figure class="before">
+            <img src="/showcase/before-woman-s.webp" alt="The photo she starts with: a plain white kurta" width="360" height="640" loading="lazy">
+            <figcaption><b>Her photo</b><span>One picture, from her phone</span></figcaption>
+          </figure>
+          <span class="proof-arrow" aria-hidden="true"></span>
+          <ul class="results">
+            <li>
+              <img src="/showcase/woman-khaddar-s.webp" srcset="/showcase/woman-khaddar-s.webp 360w, /showcase/woman-khaddar.webp 720w" sizes="(max-width: 700px) 62vw, 220px" alt="MIRVA portrait in Sapphire's 3 piece embroidered premium khaddar suit" width="360" height="640" loading="lazy">
+              <img class="store" src="/img?u=https%3A%2F%2Fpk.sapphireonline.pk%2Fdw%2Fimage%2Fv2%2FBKSB_PRD%2Fon%2Fdemandware.static%2F-%2FSites-sapphire-master-catalog%2Fdefault%2Fdw7f67d9a8%2Fimages%2Foct26%2Fcampaignoct%2FU3PEDY26V984_1.jpg&w=240" alt="The store's photo of the same suit" loading="lazy">
+              <p><span class="kicker">For Eid</span><b>Embroidered khaddar suit</b><span>Sapphire · Rs.5,590</span></p>
+            </li>
+            <li>
+              <img src="/showcase/woman-rawsilk-s.webp" srcset="/showcase/woman-rawsilk-s.webp 360w, /showcase/woman-rawsilk.webp 720w" sizes="(max-width: 700px) 62vw, 220px" alt="MIRVA portrait in Sapphire's 3 piece embroidered raw silk suit" width="360" height="640" loading="lazy">
+              <img class="store" src="/img?u=https%3A%2F%2Fpk.sapphireonline.pk%2Fdw%2Fimage%2Fv2%2FBKSB_PRD%2Fon%2Fdemandware.static%2F-%2FSites-sapphire-master-catalog%2Fdefault%2Fdwe1dcc6e0%2Fimages%2Fsep26%2F16sepRTW%2F3SFW26STV101_999_2.JPG&w=240" alt="The store's photo of the same suit" loading="lazy">
+              <p><span class="kicker">For a wedding</span><b>Embroidered raw silk suit</b><span>Sapphire · Rs.25,990</span></p>
+            </li>
+            <li>
+              <img src="/showcase/woman-sweatshirt-s.webp" srcset="/showcase/woman-sweatshirt-s.webp 360w, /showcase/woman-sweatshirt.webp 720w" sizes="(max-width: 700px) 62vw, 220px" alt="MIRVA portrait in Outfitters' embroidered quarter-zip sweatshirt" width="360" height="640" loading="lazy">
+              <img class="store" src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F2290%2F7887%2Ffiles%2FF0256207621.jpg&w=240" alt="The store's photo of the same sweatshirt" loading="lazy">
+              <p><span class="kicker">For university</span><b>Quarter-zip sweatshirt</b><span>Outfitters · Rs.3,490</span></p>
+            </li>
+          </ul>
+        </div>
+        <div class="proof-row him">
+          <figure class="before">
+            <img src="/showcase/before-man-s.webp" alt="The photo he starts with: a grey t-shirt and jeans" width="360" height="640" loading="lazy">
+            <figcaption><b>His photo</b><span>One picture, from his phone</span></figcaption>
+          </figure>
+          <span class="proof-arrow" aria-hidden="true"></span>
+          <ul class="results">
+            <li>
+              <img src="/showcase/man-suit-s.webp" srcset="/showcase/man-suit-s.webp 360w, /showcase/man-suit.webp 720w" sizes="(max-width: 700px) 62vw, 220px" alt="MIRVA portrait in Lawrencepur's navy two piece suit" width="360" height="640" loading="lazy">
+              <img class="store" src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0647%2F7093%2F2993%2Ffiles%2F11_9c71e589-866c-4df5-abcc-affac46fa4ad.jpg&w=240" alt="The store's photo of the same suit" loading="lazy">
+              <p><span class="kicker">For work</span><b>Navy two-piece suit</b><span>Lawrencepur · Rs.55,000</span></p>
+            </li>
+            <li>
+              <img src="/showcase/man-jacket-s.webp" srcset="/showcase/man-jacket-s.webp 360w, /showcase/man-jacket.webp 720w" sizes="(max-width: 700px) 62vw, 220px" alt="MIRVA portrait in Outfitters' zipper denim jacket, over his own t-shirt and jeans" width="360" height="640" loading="lazy">
+              <img class="store" src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F2290%2F7887%2Ffiles%2FF02941016222_0dd10cbf-00d9-45d4-a0e7-e66e61e19b38.jpg&w=240" alt="The store's photo of the same jacket" loading="lazy">
+              <p><span class="kicker">For the weekend</span><b>Zipper denim jacket</b><span>Outfitters · Rs.6,190</span></p>
+            </li>
+            <li>
+              <img src="/showcase/man-chinos-s.webp" srcset="/showcase/man-chinos-s.webp 360w, /showcase/man-chinos.webp 720w" sizes="(max-width: 700px) 62vw, 220px" alt="MIRVA portrait in Outfitters' black slim chinos, with his own t-shirt and shoes" width="360" height="640" loading="lazy">
+              <img class="store" src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F2290%2F7887%2Ffiles%2FF0537108901LOWER_e29c63ea-10b7-4872-8cb4-8a33669af35d.jpg&w=240" alt="The store's photo of the same trousers" loading="lazy">
+              <p><span class="kicker">For university</span><b>Slim chinos</b><span>Outfitters · Rs.2,990</span></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="fine proof-note" data-reveal>Real results from MIRVA's try-on, untouched. The shoppers were made for this page by the same engine, so no real person is shown. The pieces are real, from the public catalogues of Sapphire, Lawrencepur and Outfitters, shown as concept demos. A likeness, not a fitting: the store's photo is always one tap away.</p>
+    </div>
+  </section>
+
+  <!-- 3. How it works, and then the stylist itself -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="head stack close">
+        <p class="kicker" data-reveal>How it works</p>
+        <h2 class="title" data-reveal style="--i:1">Say what it's for. <em>See what it picks.</em></h2>
+      </div>
+      <ol class="how" data-reveal>
+        <li><b>Say the occasion.</b><span>A wedding, Eid, work, university, the weekend. Three taps, or one sentence.</span></li>
+        <li><b>See three looks.</b><span>From what that store really has, in your size, with one honest reason for each.</span></li>
+        <li><b>Wear them.</b><span>As a portrait in about fifteen seconds, or live in a MIRVA mirror as you turn.</span></li>
+        <li><b>Ask, then buy.</b><span>Keep the ones you like, send one link to the family, and take the winner to the store.</span></li>
+      </ol>
 
       <div class="try card" id="try" data-reveal>
         <div class="try-ask">
           <div class="try-step">
             <p class="step"><b>1</b>Choose a store</p>
-            <div class="row" id="tryStores"><span class="chip on">Sapphire</span><span class="chip">Lawrencepur</span></div>
+            <div class="row" id="tryStores"><span class="chip on">Sapphire</span><span class="chip">Lawrencepur</span><span class="chip">Outfitters</span></div>
           </div>
           <div class="try-step">
             <p class="step"><b>2</b>What is it for?</p>
-            <div class="row" id="tryOccasions"><span class="chip on">A wedding</span><span class="chip">Eid</span><span class="chip">A dinner</span><span class="chip">Work</span><span class="chip">Everyday</span></div>
+            <div class="row" id="tryOccasions"><span class="chip on">A wedding</span><span class="chip">Eid</span><span class="chip">A dinner</span><span class="chip">Work</span><span class="chip">University</span></div>
           </div>
           <p class="voice try-say" id="trySay" aria-live="polite">Three looks, not three hundred.</p>
         </div>
@@ -139,51 +186,45 @@
           </ol>
           <div class="try-go">
             <a class="btn" id="tryGo" href="/mirror">See them on you</a>
-            <p class="fine">Opens the mirror. You get a portrait of you in the piece, or the piece on you live.</p>
+            <p class="fine">Opens the mirror with these three. A portrait of you in each, from one photo.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. After the mirror: keep it, ask the family -->
-  <section class="section" id="remembers">
-    <div class="wrap">
-      <div class="head stack close">
-        <p class="kicker" data-reveal>After the mirror</p>
-        <h2 class="title" data-reveal style="--i:1">Keep the ones you like. <em>Ask who you'd ask anyway.</em></h2>
+  <!-- 4. The family decides together: one link in WhatsApp -->
+  <section class="section dark" id="family">
+    <div class="wrap split wide-left family">
+      <div class="stack">
+        <p class="kicker" data-reveal>Ask the family</p>
+        <h2 class="title" data-reveal style="--i:1">One link in the group. <em>Everyone taps the one they'd choose.</em></h2>
+        <ul class="family-points" data-reveal style="--i:2">
+          <li><b>No app, no sign-in.</b> They open the link in WhatsApp and tap.</li>
+          <li><b>Your portraits, or the store's photos.</b> You choose what they see.</li>
+          <li><b>Their names and a word for you.</b> "The green one, definitely."</li>
+          <li><b>Told on your phone</b> when someone answers. Decide, and take the winner to the store.</li>
+        </ul>
+        <div class="row" data-reveal style="--i:3"><a class="btn" href="/account?join=1">Join free</a><a class="link arrow" href="/membership">What membership gives you </a></div>
       </div>
-      <div class="after">
-        <article class="after-card" data-reveal>
-          <div class="after-art" aria-hidden="true">
-            <div class="phone-top"><span class="kicker">Your wardrobe</span><span class="fine">3 kept</span></div>
-            <ul class="kept">
-              <li><i class="swatch" data-pick="0" style="--a:#3aa58c;--b:#0b3029"></i><div><b data-pick-name="0">Embroidered raw silk suit</b><span>Size M · kept at the mirror</span></div></li>
-              <li><i class="swatch" data-pick="1" style="--a:#f6efdf;--b:#a98c56"></i><div><b data-pick-name="1">Printed charmeuse kaftan</b><span>Size L · portrait saved</span></div></li>
-              <li><i class="swatch" data-pick="2" style="--a:#5a356f;--b:#120d1f"></i><div><b data-pick-name="2">Velvet, floor length</b><span>Size M · two votes so far</span></div></li>
-            </ul>
+      <div class="family-demo" data-reveal style="--i:2" aria-hidden="true">
+        <div class="chat">
+          <p class="chat-top"><span class="chat-dot"></span>Family</p>
+          <div class="bubble">
+            <img src="/share/family-preview.jpg" alt="" width="1200" height="630" loading="lazy">
+            <p class="bubble-site">mirva</p>
+            <p class="bubble-title">Ayesha asks: Which one for the mehndi?</p>
+            <p class="bubble-text">Which one for the mehndi? Tap the one you'd choose.</p>
           </div>
-          <h3 class="subtitle">It remembers, so you don't have to.</h3>
-          <p class="muted">Keep a look in the mirror and it is in your wardrobe, with your size. Free members also get six portraits a month at home.</p>
-        </article>
-        <article class="after-card" data-reveal style="--i:1">
-          <div class="after-art" aria-hidden="true">
-            <p class="voice ask">Which one for Saturday?</p>
-            <div class="vote-pair">
-              <div class="chosen"><i class="swatch" data-pick="0" style="--a:#3aa58c;--b:#0b3029"></i><b>3 votes</b><span>Ami, Hira, Zoya</span></div>
-              <div><i class="swatch" data-pick="2" style="--a:#5a356f;--b:#120d1f"></i><b>1 vote</b><span>Mahnoor</span></div>
-            </div>
-          </div>
-          <h3 class="subtitle">One link, and the family votes.</h3>
-          <p class="muted">Send a link instead of a photo to the group. They tap the look they like, with no app to install. It closes by itself after three days.</p>
-        </article>
+          <div class="bubble mine">Green one 💚 the embroidery!</div>
+          <div class="bubble">Second one for the mehndi. First for Eid 😄</div>
+        </div>
       </div>
-      <div class="row center-row" data-reveal><a class="btn" href="/account?join=1">Join free</a><a class="link arrow" href="/membership">What membership gives you </a></div>
     </div>
   </section>
 
-  <!-- 4. Your pictures -->
-  <section class="section dark" id="privacy">
+  <!-- 5. Your pictures -->
+  <section class="section" id="privacy">
     <div class="wrap">
       <div class="head stack close">
         <p class="kicker" data-reveal>Your pictures</p>
@@ -192,42 +233,44 @@
       <ul class="promises">
         <li data-reveal><h3 class="subtitle">Nothing is recorded.</h3><p class="muted">The camera shows you to yourself. One frame leaves the mirror only when you ask for a look, and the mirror asks you first.</p></li>
         <li data-reveal style="--i:1"><h3 class="subtitle">Store mirrors keep nothing.</h3><p class="muted">A portrait made in a store is shown, then gone, unless you send it to your own phone.</p></li>
-        <li data-reveal style="--i:2"><h3 class="subtitle">You can delete everything.</h3><p class="muted">Your wardrobe, your portraits, your account. From your phone, in one step, without asking anyone.</p></li>
-        <li data-reveal style="--i:3"><h3 class="subtitle">Stores don't share you.</h3><p class="muted">What you tried in one store is never used to sell to you in another.</p></li>
+        <li data-reveal style="--i:2"><h3 class="subtitle">You choose who sees.</h3><p class="muted">Ask the family with your portraits or with the store's photos. Links close by themselves.</p></li>
+        <li data-reveal style="--i:3"><h3 class="subtitle">You can delete everything.</h3><p class="muted">Your wardrobe, your portraits, your account. From your phone, in one step, without asking anyone.</p></li>
       </ul>
       <p class="fine" data-reveal><a href="/privacy">Read the privacy notice</a></p>
     </div>
   </section>
 
-  <!-- 5. Three short answers -->
+  <!-- 6. Where to find one, and what people ask -->
+  <section class="section tight band" id="near">
+    <div class="wrap split">
+      <div class="stack" data-reveal>
+        <p class="kicker">Near you</p>
+        <h2 class="title">The first MIRVA mirrors <em>are coming to Lahore.</em></h2>
+        <p class="lede">Until one is in a store near you, MIRVA works at home with the camera on your phone. Tell us where you'd use one, and we'll tell you the day it opens.</p>
+      </div>
+      <form class="card wait" id="waitForm" data-reveal style="--i:1" novalidate>
+        <label class="field"><span>City</span><input name="city" value="Lahore" autocomplete="address-level2" maxlength="40" required></label>
+        <label class="field"><span>Area</span><input name="area" placeholder="DHA, Gulberg, Johar Town…" autocomplete="address-level3" maxlength="60"></label>
+        <label class="field"><span>The store you'd want it in</span><input name="store" placeholder="Any store you shop at" maxlength="60" list="waitStores"></label>
+        <datalist id="waitStores"><option value="Sapphire"><option value="Lawrencepur"><option value="Outfitters"></datalist>
+        <label class="field"><span>Your WhatsApp or email</span><input name="contact" placeholder="Only to tell you it's open" autocomplete="email" maxlength="80"></label>
+        <p class="formnote" role="status"></p>
+        <button class="btn wide" type="submit">Tell me when it opens</button>
+      </form>
+    </div>
+  </section>
+
   <section class="section tight" id="answers">
     <div class="wrap split">
       <div class="stack">
         <p class="kicker" data-reveal>Short answers</p>
-        <h2 class="title" data-reveal style="--i:1">Three things <em>people ask.</em></h2>
+        <h2 class="title" data-reveal style="--i:1">What people <em>ask first.</em></h2>
       </div>
       <div data-reveal style="--i:1">
-        <details class="faq"><summary>Is it really free?</summary><div>Yes. In a store you need no account at all. Joining is free and stays free: your kept looks on your phone, your sizes remembered, the family vote, and six portraits a month at home.</div></details>
+        <details class="faq"><summary>Is it really free?</summary><div>Yes. In a store you need no account at all. Joining is free and stays free: your kept looks on your phone, your sizes remembered, asking the family, and six portraits a month at home.</div></details>
+        <details class="faq"><summary>How close is the picture to the real thing?</summary><div>Close, and honest about it. The colours, print and embroidery are taken from the store's own photo, and your face is your own. It is a likeness, not a fitting: the store's photo is always one tap away, and the size comes from the store's own chart.</div></details>
         <details class="faq"><summary>If the store pays for MIRVA, do I pay more for the clothes?</summary><div>No. A piece costs what it costs in that store, with the mirror or without it. The store pays MIRVA a monthly fee, the way it pays for its lights and its tills. MIRVA takes nothing from you and sets no prices.</div></details>
         <details class="faq"><summary>Where does my picture go?</summary><div>When you ask for a look, one picture is sent to the try-on engine's servers abroad, which make the look and send it back. The mirror asks before the first one, and a light on the glass shows when the camera is on. A store mirror keeps nothing. At home, a portrait you keep is saved to your own wardrobe, and you can delete it, or everything, in one step. The <a href="/privacy">privacy notice</a> has the detail.</div></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Free, and where to find one -->
-  <section class="section tight band" id="join">
-    <div class="wrap split">
-      <div class="stack" data-reveal>
-        <p class="kicker">For shoppers</p>
-        <h2 class="subtitle">Free, and it stays free. Stores pay for MIRVA; shoppers don't.</h2>
-        <p class="muted">MIRVA is new. The first store mirrors are planned for Lahore. Until one is near you, it works at home with the camera on your phone or laptop.</p>
-        <div class="row"><a class="btn" href="/mirror">Open the mirror</a><a class="btn ghost" href="/account?join=1">Join free</a></div>
-      </div>
-      <div class="stack" data-reveal style="--i:1">
-        <p class="kicker">Run a store?</p>
-        <h2 class="subtitle">See MIRVA dressed in your own catalogue, in about a minute.</h2>
-        <p class="muted">Your products, your name, your colours. No meeting needed to look.</p>
-        <a class="btn ghost" href="/retail">MIRVA for stores</a>
       </div>
     </div>
   </section>
@@ -238,13 +281,13 @@
     <div class="foot-grid">
       <div class="stack close">
         <a class="brandmark" href="/"><svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>MIRVA</span></a>
-        <p class="fine">The mirror that styles you.<br>Made in Lahore.</p>
+        <p class="fine">The mirror that styles you.<br>Made in Lahore. A project by MVP family.</p>
       </div>
-      <div><h3>Shoppers</h3><ul><li><a href="/mirror">Open the mirror</a></li><li><a href="/membership">Membership</a></li><li><a href="/account">Your wardrobe</a></li></ul></div>
-      <div><h3>Stores</h3><ul><li><a href="/retail">MIRVA for stores</a></li><li><a href="/retail#pricing">Pricing</a></li><li><a href="/console">Store console</a></li></ul></div>
+      <div><h3>Shoppers</h3><ul><li><a href="/mirror">Open the mirror</a></li><li><a href="/membership">Membership</a></li><li><a href="/account">Your wardrobe</a></li><li><a href="/mirrors">Find a mirror</a></li></ul></div>
+      <div><h3>Stores</h3><ul><li><a href="/retail">MIRVA for stores</a></li><li><a href="/console">Store console</a></li></ul></div>
       <div><h3>The small print</h3><ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></div>
     </div>
-    <div class="foot-note fine"><span>© 2026 MIRVA</span><span>Demo looks come from stores' public catalogues and are shown as a concept. MIRVA is not affiliated with those stores.</span></div>
+    <div class="foot-note fine"><span>© 2026 MIRVA</span><span>Store looks come from stores' public catalogues and are shown as concept demos. MIRVA is not affiliated with those stores.</span></div>
   </div>
 </footer>
 <script type="module" src="/dist/site.js"></script>

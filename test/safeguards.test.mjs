@@ -402,7 +402,7 @@ test("a paired mirror is told how a visit is shaped; everyone else gets the conf
   assert.equal(plain.status, 200);
   assert.equal(plain.body.visit, null);
   assert.equal(plain.body.idleSeconds, 75);
-  assert.deepEqual(Object.keys(plain.body).sort(), ["idleSeconds", "live", "model", "open", "ratePerSecond", "sessionSeconds", "shotPrice", "usdToPkr", "visit"]);
+  assert.deepEqual(Object.keys(plain.body).sort(), ["guest", "idleSeconds", "live", "model", "open", "ratePerSecond", "sessionSeconds", "shotPrice", "usdToPkr", "visit"]);
   assert.equal(plain.body.glass, undefined, "a browser that is no store's mirror is told nothing about its glass");
 
   const mine = await call(app, "GET", "/api/config", { headers: dev.header });

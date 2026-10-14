@@ -79,7 +79,7 @@ export async function lookAt(blob) {
 export async function requestShot(form, { headers = {}, timeout, onBusy, wait = 2000, fetcher = fetch } = {}) {
   const once = async () => {
     const res = await fetcher("/api/model-shot", { method: "POST", body: form, headers, signal: timeout ? timeout(75000) : undefined });
-    if (res.ok) return { blob: await res.blob(), saved: res.headers.get("x-mirva-portrait") || null };
+    if (res.ok) return { blob: await res.blob(), saved: res.headers.get("x-mirva-portrait") || null, guest: res.headers.get("x-mirva-guest") === "1" };
     let body = null;
     try {
       body = await res.json();

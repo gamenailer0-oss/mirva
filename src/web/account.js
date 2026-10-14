@@ -114,6 +114,7 @@ async function enter(result) {
   if (location.pathname !== "/account" || location.search) history.replaceState(null, "", "/account");
   await home();
   if (result?.claimed?.added) toast(`${plural(result.claimed.added, "look")} from the mirror ${result.claimed.added === 1 ? "is" : "are"} in your wardrobe.`);
+  else if (result?.kept) toast(result.kept === 1 ? "The portrait you made is in your wardrobe." : `The ${result.kept} portraits you made are in your wardrobe.`);
 }
 
 async function claim(code) {

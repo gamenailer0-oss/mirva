@@ -111,10 +111,12 @@ const caption = (text) => replay($("#caption"), text);
 // Then nothing about keys, dollars or settings belongs on the glass.
 // On a public address that is everyone except the founder and a store's own staff.
 const forShopper = () => !!(link.pairedTo() || link.member || (S.config?.open === false && !link.staff));
-// On a public address a look is made only for a member, a paired store mirror, or staff.
-const mustJoin = () => S.config?.open === false && !link.member && !link.pairedTo() && !link.staff;
-function askToJoin() {
-  caption("Join free to see this on you. It takes a minute.");
+// On a public address a look is made only for a member, a paired store mirror, or staff, with one exception: someone
+// who has not joined may see one portrait of herself first (the server holds it for her if she then joins).
+const guestMay = () => S.config?.guest && !S.guestUsed;
+const mustJoin = (kind = "live") => S.config?.open === false && !link.member && !link.pairedTo() && !link.staff && !(kind === "portrait" && guestMay());
+function askToJoin(words = "Join free to see this on you. It takes a minute.") {
+  caption(words);
   const t = $("#toast");
   t.replaceChildren(h("span", { text: "Membership is free, and your pictures stay yours." }), h("a", { href: "/account?join=1", text: "Join free" }));
   t.hidden = false;
@@ -899,7 +901,7 @@ function fetchAhead() {
 async function modelShot(p, { retake = false } = {}) {
   mirror.touch();
   if (p.photoOnly) return caption(PHOTO_ONLY_LINE);
-  if (mustJoin()) return askToJoin();
+  if (mustJoin("portrait")) return askToJoin("Join free to see more looks on you. Your first portrait is kept for you.");
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Portraits are off. Add your Decart key to the .env file and restart.");
   // A portrait already made is shown again for free; a new one is a try-on, and a visit has only so many.
@@ -961,7 +963,8 @@ async function modelShot(p, { retake = false } = {}) {
     form.append("mode", "portrait");
     const asked = pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
     restorer().then((m) => m?.warmRestore()); // its models load, and take their slow first look, behind the wait
-    const { blob: drawn, saved } = await asked;
+    const { blob: drawn, saved, guest } = await asked;
+    if (guest) S.guestUsed = true; // her one portrait before joining
     const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // its model is still arriving
     const blob = await ownHead(person, drawn, saved);
     clearTimeout(slow);
@@ -976,6 +979,8 @@ async function modelShot(p, { retake = false } = {}) {
     showPortrait(entry, p.id);
     caption("This is you in it.");
     setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
+    // Her free portrait: the next step is to keep it, and that is joining.
+    if (guest) setTimeout(() => ticket === S.ticket && S.view === "portrait" && askToJoin("Join free to keep this one and see the other two on you."), 6000);
 
     // The wall is not plain: make the same portrait again on a studio backdrop, without a spinner, one ask for each
     // portrait however often she taps. If it fails the first picture stays, and she is never told.
@@ -1014,6 +1019,7 @@ async function modelShot(p, { retake = false } = {}) {
     console.error(e);
     dev.cancel(); // does nothing if another look has taken the glass since
     if (ticket !== S.ticket) return;
+    if (e.limit === "guest-used" || e.limit === "join") return (S.guestUsed = true), askToJoin(e.message);
     caption(friendly(e));
   } finally {
     S.shooting--;
@@ -1263,6 +1269,7 @@ function keep() {
       .then(() => caption("Kept, and in your wardrobe."))
       .catch((e) => caption(e.message));
   caption(line("kept"));
+  if (!link.member && !link.pairedTo() && S.config?.open === false) setTimeout(() => askToJoin("Kept here. Join free and it goes into your wardrobe, with your size."), 1800);
   // Not on a store's mirror, which is nobody's phone.
   if (!link.pairedTo()) setTimeout(offerInstall, 2400);
 }

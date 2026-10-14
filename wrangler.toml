@@ -36,4 +36,6 @@ MIRVA_SHOTS_PER_HOUR = "30"
 MIRVA_SESSIONS_PER_HOUR = "20"
 # The most the try-on engine may cost in one day, in US dollars, before MIRVA says it is resting.
 MIRVA_DAILY_USD = "5"
+# Free first portraits a day, for people who have not joined yet (one each, on their own browser). 0 turns it off.
+MIRVA_GUEST_SHOTS = "60"
 MIRVA_PAYMENTS = "off"
