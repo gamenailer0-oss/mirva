@@ -750,7 +750,7 @@ const VIEWS = {
       el("h2", { text: "Add portraits to a store's month" }),
       el("div", { class: "form-2" },
         field("Store", el("select", { name: "brand" }, brandOptions())),
-        field("Extra portraits a month, at no charge", el("input", { name: "extraPortraits", type: "number", min: 0, max: 20000, step: 100, value: 600, required: true })),
+        field("Extra portraits a month (sold at Rs.3,000 for 100, or given)", el("input", { name: "extraPortraits", type: "number", min: 0, max: 20000, step: 100, value: 600, required: true })),
       ),
       el("p", { class: "fine", text: "Added to the plan's own, every month, until you set it back to 0. Each one used costs you about Rs.5.5. A pilot's count is not touched." }),
       el("p", { class: "formnote", role: "alert" }),

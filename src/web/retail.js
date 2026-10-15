@@ -91,7 +91,9 @@ async function retail() {
     el("thead", {}, el("tr", {}, el("td"), order.map((p) => el("th", { scope: "col", text: p.name })))),
     el("tbody", {}, rows.map(([label, f]) => el("tr", {}, el("th", { scope: "row", text: label }), order.map((p) => el("td", { text: f(p) }))))),
   );
-  $("#extraLine").textContent = `${money(extras.liveMinutePkr)} a live minute, in blocks of ${extras.liveBlockMinutes}, and only the blocks you agree to. Without them live Studio rests until the 1st and portraits carry on.`;
+  $("#extraLine").textContent =
+    `${money(extras.liveMinutePkr)} a live minute, in blocks of ${extras.liveBlockMinutes}, and only the blocks you agree to. Without them live Studio rests until the 1st and portraits carry on.` +
+    (extras.portraitBlockPkr ? ` More portraits: ${money(extras.portraitBlockPkr)} for ${n(extras.portraitBlock)}.` : "");
 
   // ----- the sum: three numbers in front, the assumptions one tap away
   const calc = $("#calc");

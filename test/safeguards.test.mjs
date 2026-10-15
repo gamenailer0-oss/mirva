@@ -546,7 +546,7 @@ test("the overview shows the month: live minutes and portraits used, what the pl
   await portraitsUsed(db, dev.id, 10);
   await portraitsUsed(db, dev.id, 30, { sample: 1 });
   let p = await overview();
-  assert.deepEqual([p.id, p.name, p.monthly, p.mirrors], ["assist", "Assist", 50000, 0]);
+  assert.deepEqual([p.id, p.name, p.monthly, p.mirrors], ["assist", "Assist", 60000, 0]);
   assert.deepEqual(p.portraits, { used: 10, included: 1200, stopped: false });
   assert.deepEqual([p.live.included, p.live.usedMinutes, p.live.stopped], [0, 0, true], "Assist has no live Studio to use");
 
@@ -557,13 +557,13 @@ test("the overview shows the month: live minutes and portraits used, what the pl
   assert.equal(p.minutePkr, 600);
   await setSettings(db, "sapphire", { extraLiveMinutes: 20 });
   p = await overview();
-  assert.deepEqual([p.live.extra, p.live.limit, p.live.stopped, p.monthly, p.id], [20, 90, false, 95000, "studio"]);
+  assert.deepEqual([p.live.extra, p.live.limit, p.live.stopped, p.monthly, p.id], [20, 90, false, 110000, "studio"]);
   await liveUsed(db, dev.id, 7); // a part of a minute is a tenth more on the gauge and a whole minute on the bill
   assert.deepEqual([(await overview()).live.usedMinutes, (await overview()).live.over], [75.2, 6]);
 
   const stats = await call(app, "GET", "/api/console/limits", { headers: shop.headers });
   assert.deepEqual(stats.body.month.live, { usedMinutes: 75.2, included: 70, extra: 20, limit: 90, over: 6, overPkr: 3600, stopped: false });
-  assert.deepEqual(stats.body.month.portraits, { used: 10, included: 2500, stopped: false });
+  assert.deepEqual(stats.body.month.portraits, { used: 10, included: 1500, stopped: false });
 });
 
 // ===== 5. what the founder is told ============================================================
