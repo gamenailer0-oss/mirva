@@ -4,8 +4,9 @@
    Motion: only opacity and transform animate. One slow moment per page; everything else is quick. */
 
 :root {
-  --serif: "Bodoni Moda", "Didot", "Bodoni MT", "Playfair Display", Georgia, serif;
-  --sans: "Jost", "Futura", "Century Gothic", "Avenir Next", system-ui, sans-serif;
+  --serif: "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
+  --sans: "Albert Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mark: "MIRVA Mark", "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif; /* the wordmark only */
   --glass: #0a0c11;
   --glass-lift: #1b2030;
   --pearl: #f3f5f9;
@@ -116,7 +117,7 @@ td.n, th.n { overflow-wrap: normal; }
 /* ---------- navigation ---------- */
 .nav { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: var(--s5); padding: 14px clamp(20px, 5vw, 56px); background: color-mix(in oklab, var(--bg) 88%, transparent); border-bottom: 1px solid transparent; transition: border-color var(--calm), background-color var(--calm); }
 .nav.scrolled { border-bottom-color: var(--line); background: var(--bg); }
-.brandmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 500 15px/1 var(--serif); letter-spacing: .34em; }
+.brandmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 500 15px/1 var(--mark); letter-spacing: .34em; }
 .brandmark svg { width: 20px; height: 25px; }
 .nav-links { display: flex; gap: var(--s5); margin-left: auto; }
 .nav-links a { text-decoration: none; font-size: 14.5px; padding: 10px 2px; color: var(--muted); transition: color var(--quick); }

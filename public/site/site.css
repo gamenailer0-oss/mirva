@@ -298,10 +298,10 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
   box-shadow: 0 30px 70px -30px rgba(4, 7, 14, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
 }
 .install-card.in { transform: none; opacity: 1; }
-.install-card b { display: block; font: 400 19px/1.2 "Bodoni Moda", Georgia, serif; }
+.install-card b { display: block; font: 400 19px/1.2 var(--serif); }
 .install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #c8cedb; }
 .install-acts { display: flex; justify-content: flex-end; gap: 8px; }
-.install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 "Jost", sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
 .install-later { background: none; color: #c8cedb; }
 .install-add { background: #f3f5f9; color: #0a0c11; }
 

@@ -2,8 +2,9 @@
 // 1. When a push wakes it, ask MIRVA what is new and show it (pushes carry nothing themselves; see lib/push.mjs).
 // 2. Keep the fonts and the brand marks for offline starts. Pages, scripts and anything from /api always come from
 //    the network, so a new version of MIRVA is never hidden behind an old copy, and nothing private is stored.
-const SHELL = "mirva-shell-v1";
-const KEEP = [/^\/fonts\//, /^\/brand\//, /^\/favicon\.svg$/, /^\/icons\//];
+const SHELL = "mirva-shell-v2"; // v2: new typefaces (2026-10-15); the old store is cleared on activate
+// Only the font files, whose names change when the letters do; fonts.css always comes fresh, so it can point at them.
+const KEEP = [/^\/fonts\/.+\.woff2$/,/^\/brand\//, /^\/favicon\.svg$/, /^\/icons\//];
 
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (event) => {

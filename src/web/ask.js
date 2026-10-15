@@ -161,7 +161,7 @@ export async function drawCover({ title, by, looks, pictures }) {
   g.fillStyle = sky;
   g.fillRect(0, 0, W, H);
   try {
-    await Promise.all([document.fonts.load('400 56px "Bodoni Moda"'), document.fonts.load('500 20px "Jost"'), document.fonts.load('400 24px "Jost"')]);
+    await Promise.all([document.fonts.load('400 56px "Newsreader"'), document.fonts.load('500 20px "Albert Sans"'), document.fonts.load('400 24px "Albert Sans"')]);
   } catch {}
   const pics = await Promise.all(looks.slice(0, 4).map((l) => load(shotOf(l, pictures))));
 
@@ -203,16 +203,16 @@ export async function drawCover({ title, by, looks, pictures }) {
 
   // The question.
   g.fillStyle = "#9aa2b3";
-  g.font = '500 19px "Jost", "Futura", sans-serif';
+  g.font = '500 19px "Albert Sans", "Avenir Next", sans-serif';
   if ("letterSpacing" in g) g.letterSpacing = "4px";
   g.fillText(`${(by || "Someone").toUpperCase()} ASKS`, 64, 150);
   if ("letterSpacing" in g) g.letterSpacing = "0px";
   g.fillStyle = "#f3f5f9";
-  g.font = '400 54px "Bodoni Moda", "Didot", Georgia, serif';
+  g.font = '400 54px "Newsreader", Georgia, serif';
   const lines = wrap(g, title, 370).slice(0, 4);
   lines.forEach((line, i) => g.fillText(line, 64, 222 + i * 62));
   g.fillStyle = "#c8cedb";
-  g.font = '400 23px "Jost", "Futura", sans-serif';
+  g.font = '400 23px "Albert Sans", "Avenir Next", sans-serif';
   g.fillText("Tap the one you'd choose.", 64, 222 + lines.length * 62 + 26);
 
   // The mark: the oval mirror and its name.
@@ -225,7 +225,7 @@ export async function drawCover({ title, by, looks, pictures }) {
   g.quadraticCurveTo(81, 532, 99, 551);
   g.stroke();
   g.fillStyle = "#f3f5f9";
-  g.font = '500 20px "Jost", "Futura", sans-serif';
+  g.font = '500 20px "Albert Sans", "Avenir Next", sans-serif';
   if ("letterSpacing" in g) g.letterSpacing = "7px";
   g.fillText("MIRVA", 116, 573);
   return new Promise((done) => c.toBlob(done, "image/jpeg", 0.86));

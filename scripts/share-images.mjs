@@ -34,7 +34,7 @@ for (const job of jobs) {
     sky.addColorStop(1, "#06070a");
     g.fillStyle = sky;
     g.fillRect(0, 0, W, H);
-    await Promise.all([document.fonts.load('400 56px "Bodoni Moda"'), document.fonts.load('500 20px "Jost"'), document.fonts.load('400 24px "Jost"')]);
+    await Promise.all([document.fonts.load('400 56px "Newsreader"'), document.fonts.load('500 20px "Albert Sans"'), document.fonts.load('400 24px "Albert Sans"')]);
     const load = (src) => new Promise((done) => { const i = new Image(); i.onload = () => done(i); i.onerror = () => done(null); i.src = src; });
     const pics = await Promise.all(job.pics.map(load));
     const rounded = (x, y, w, h, r) => { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); };
@@ -67,16 +67,16 @@ for (const job of jobs) {
     g.stroke();
     const wrap = (words, width) => { const out = []; let line = ""; for (const w of words.split(/\s+/)) { const next = line ? line + " " + w : w; if (g.measureText(next).width > width && line) (out.push(line), (line = w)); else line = next; } if (line) out.push(line); return out; };
     g.fillStyle = "#9aa2b3";
-    g.font = '500 19px "Jost", sans-serif';
+    g.font = '500 19px "Albert Sans", sans-serif';
     g.letterSpacing = "4px";
     g.fillText(job.kicker, 64, 150);
     g.letterSpacing = "0px";
     g.fillStyle = "#f3f5f9";
-    g.font = '400 54px "Bodoni Moda", Georgia, serif';
+    g.font = '400 54px "Newsreader", Georgia, serif';
     const lines = wrap(job.title, 370).slice(0, 4);
     lines.forEach((l, i) => g.fillText(l, 64, 222 + i * 62));
     g.fillStyle = "#c8cedb";
-    g.font = '400 23px "Jost", sans-serif';
+    g.font = '400 23px "Albert Sans", sans-serif';
     wrap(job.line, 360).forEach((l, i) => g.fillText(l, 64, 222 + lines.length * 62 + 26 + i * 32));
     g.strokeStyle = "#f3f5f9";
     g.lineWidth = 2;
@@ -87,7 +87,7 @@ for (const job of jobs) {
     g.quadraticCurveTo(81, 532, 99, 551);
     g.stroke();
     g.fillStyle = "#f3f5f9";
-    g.font = '500 20px "Jost", sans-serif';
+    g.font = '500 20px "Albert Sans", sans-serif';
     g.letterSpacing = "7px";
     g.fillText("MIRVA", 116, 573);
     return c.toDataURL("image/jpeg", 0.86).split(",")[1];

@@ -8,8 +8,9 @@
    100 ms. Nothing blurs live video. The one slow moment is the unveil of a look. */
 
 :root {
-  --serif: "Bodoni Moda", "Didot", "Bodoni MT", "Playfair Display", Georgia, serif;
-  --sans: "Jost", "Futura", "Century Gothic", "Avenir Next", system-ui, sans-serif;
+  --serif: "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
+  --sans: "Albert Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mark: "MIRVA Mark", "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif; /* the wordmark only */
   --accent: #1e3fae;
   --on-accent: #fff;
   --mercury: linear-gradient(120deg, #8d95a6, #f6f8fb 32%, #c3c9d6 55%, #f1f3f7 72%, #7e8698);
@@ -230,7 +231,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
   display: flex; justify-content: center; text-align: center;
 }
 .brandline { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; max-width: 100%; }
-.wordmark { font: 500 15px/1 var(--serif); letter-spacing: .34em; margin-right: -.34em; }
+.wordmark { font: 500 15px/1 var(--mark); letter-spacing: .34em; margin-right: -.34em; }
 .byline { font-size: 9.5px; letter-spacing: .3em; margin-right: -.3em; text-transform: uppercase; opacity: .72; }
 /* Once someone is in the glass, the crest steps into the corner: the halo over the store's name, as in MIRVA's own mark.
    Nothing is left across the top of the glass, where a face is. The name gives way to the tools on its right. */
@@ -912,10 +913,10 @@ a.chip { text-decoration: none; }
   box-shadow: 0 30px 70px -30px rgba(4, 7, 14, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
 }
 .install-card.in { transform: none; opacity: 1; }
-.install-card b { display: block; font: 400 19px/1.2 "Bodoni Moda", Georgia, serif; }
+.install-card b { display: block; font: 400 19px/1.2 var(--serif); }
 .install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #c8cedb; }
 .install-acts { display: flex; justify-content: flex-end; gap: 8px; }
-.install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 "Jost", sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
 .install-later { background: none; color: #c8cedb; }
 .install-add { background: #f3f5f9; color: #0a0c11; }
 

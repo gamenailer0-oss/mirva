@@ -24,6 +24,8 @@ function cover(ctx, img, x, y, w, h, top = 0.12) {
 /** Resolves a JPEG File: { portrait, store } are same-site picture addresses (a blob: URL, /api/portrait/…, /img?…). */
 export async function lookPicture({ portrait, store, name, brand, price }) {
   const [a, b] = await Promise.all([load(portrait), store ? load(store).catch(() => null) : null]);
+  // A canvas draws with whatever letters are already loaded: fetch MIRVA's first, or the band falls back to Georgia.
+  await Promise.all(["italic 400 46px Newsreader", '400 28px "Albert Sans"', '500 22px "Albert Sans"', '500 24px "MIRVA Mark"'].map((f) => document.fonts.load(f, "MIRVA").catch(() => null)));
   const c = document.createElement("canvas");
   c.width = W;
   c.height = H;
@@ -34,7 +36,7 @@ export async function lookPicture({ portrait, store, name, brand, price }) {
   cover(ctx, a, 0, 0, half, H - BAND);
   if (b) cover(ctx, b, W / 2 + 3, 0, half, H - BAND, 0);
   // the two labels, small, at the foot of each picture
-  ctx.font = "500 22px Jost, system-ui, sans-serif";
+  ctx.font = "500 22px 'Albert Sans', system-ui, sans-serif";
   ctx.textBaseline = "middle";
   const tag = (text, x) => {
     const w = ctx.measureText(text).width + 36;
@@ -49,13 +51,13 @@ export async function lookPicture({ portrait, store, name, brand, price }) {
   if (b) tag("THE STORE'S PHOTO", W / 2 + 27);
   // the band: the piece, then the store and price, then MIRVA's mark
   ctx.fillStyle = "#f3f5f9";
-  ctx.font = "italic 400 46px 'Bodoni Moda', Georgia, serif";
+  ctx.font = "italic 400 46px Newsreader, Georgia, serif";
   ctx.fillText(fit(ctx, name, W - 96), 48, H - BAND + 62);
   ctx.fillStyle = "#a9b0c0";
-  ctx.font = "400 28px Jost, system-ui, sans-serif";
+  ctx.font = "400 28px 'Albert Sans', system-ui, sans-serif";
   ctx.fillText([brand, price].filter(Boolean).join("  ·  "), 48, H - BAND + 122);
   ctx.textAlign = "right";
-  ctx.font = "500 24px 'Bodoni Moda', Georgia, serif";
+  ctx.font = "500 24px 'MIRVA Mark', 'Bodoni Moda', Georgia, serif";
   ctx.fillText("M I R V A", W - 48, H - BAND + 122);
   const blob = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.9));
   return new File([blob], "mirva-look.jpg", { type: "image/jpeg" });
