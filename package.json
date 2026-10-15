@@ -15,7 +15,9 @@
     "cloud:dev": "node scripts/build.mjs && node scripts/cloud-schema.mjs && wrangler d1 execute mirva --local --file worker/schema.sql && wrangler dev --port 8788",
     "cloud:deploy": "node scripts/build.mjs && wrangler deploy",
     "smoke": "node scripts/smoke.mjs",
-    "backup": "node scripts/backup.mjs"
+    "backup": "node scripts/backup.mjs",
+    "ship": "node scripts/ship.mjs",
+    "look": "node scripts/look.mjs"
   },
   "dependencies": {
     "@decartai/sdk": "latest",
