@@ -27,7 +27,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - `docs/` (handbook, checklists) is git-ignored and private. Never put it in the repo.
 
 ## Secrets: never in chat, never in the repo
-- Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only.
+- Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only. `.env` also holds
+  `FAL_KEY` (fal.ai: FASHN, Kling, SAM 3, FLUX; topped up 2026-10-15; the key cannot read its balance, and a call
+  dearer than what is left answers "User is locked. Reason: TOP_UP"), `GEMINI_API_KEY` and `OPENAI_API_KEY` (no
+  billing on either yet). All three were pasted in chat by the founder: remind them to replace them.
 - Sign-ins live in files only: `.data/first-run.txt` (local founder), `.data/demo-sign-ins.txt` (demo accounts),
   `.data/live-founder.txt` (live founder, reset 2026-10-15). Point the founder to the file; never print a password.
 - When grepping files that hold passwords, hide values (a grep that prints a whole line will print the password).
@@ -39,7 +42,18 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Commit first; end commit messages with the Co-Authored-By line.
 - **Look before calling a screen done**: start the dev server (preview `mirva`, port 4310), then
   `npm run look -- /retail /mirror` (add `--live` for the live site). Read the screenshots in `tools/shots/`.
-- **Tests**: `npm test` (197 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (201 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
+- **Engine test** (portrait engines side by side; about $0.17 a case on fal + $0.02 Decart), in `tools/portrait-lab/engines/`:
+  `node bakeoff.mjs <round> [cases] [decart,fashn,kling]` (cases in `cases.mjs`; made-up shoppers in `synth/`, three
+  hard ones `hard-*.png` from `shoppers.mjs`), `node keep.mjs <round>` (Decart + her own head and wall back, SAM 3
+  masks), `node score.mjs <round>` (face kept), `node contact.mjs <round>` (a sheet to read), write
+  `out/<round>/verdicts.json`, `node sheet.mjs <round>` and publish `out/<round>/sheet/index.html` with its `img/`.
+  Round r1 is https://claude.ai/artifact/AL1fa9LpWBfZ5V5M7riPtp. Run one case first, then the rest.
+- **Is it still her face?** `node tools/eval/kept-cli.mjs <her photo> <portrait…>` (lined-up faces compared pixel by
+  pixel: the same photo 100%, her face kept or laid back 80 to 97%, another woman 34 to 55%).
+- **Why a phone showed the wrong face**: every portrait event now carries `meta` = `face=<restored|moved|nohead|
+  notools|shape|wait|failed|error> shot=<s> fix=<s>` and `value` = seconds; the studio-wall pass is a `backdrop` event.
+  `SELECT datetime(at/1000,'unixepoch','+5 hours'), user, product, value, meta FROM events WHERE kind IN ('portrait','backdrop') ORDER BY at DESC LIMIT 30`.
 - **Garment pictures for a store**: `MIRVA_PUPPETEER=D:/Mirva/tools/camera-lab node scripts/prepare-refs.mjs <store>`
   (`--only id,id` names products; a pinned product, `refPin`, is redone only when named: never pass pinned ids in bulk).
 - **A real portrait test** (costs ~$0.02): `node tools/portrait-lab/restore/real2.mjs <store> <photo> <label> <product id>`
@@ -82,6 +96,19 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Printed demo passwords in tool output once**: never `cat` or wide-grep `.data/*.txt`.
 - **Ran ahead on a long turn and the founder hit the usage limit**: ship in small committed steps so nothing is lost.
 - This machine reports "reduce motion": a reduced-motion rule hid the hero portrait. Test with motion on and off.
+- **A script that spends money must never be imported**: `sheet.mjs` imported the case list from `bakeoff.mjs`, whose
+  top level runs paid engine calls. Shared data lives in its own module (`cases.mjs`).
+- **The real2 rig saves the engine's own picture as an empty file** (`*-engine1.png`, 0 bytes): for the raw engine
+  output call the engine directly (`bakeoff.mjs` or `models/direct.mjs`).
+- **Made-up (AI) faces flatter every engine**: Decart kept them at 74 to 91%, while real faces came back as strangers
+  on a friend's phone. Clothes, fit, speed and price can be judged on made-up shoppers; a face verdict needs a real face.
+- **face-api's recognition score cannot tell our made-up South Asian women apart** (different women 0.38 to 0.55,
+  "same"): use the lined-up face comparison (`tools/eval/identity.mjs` `faceKept`).
+- **A local page screenshot without the viewport meta lays out at 980 px** and hides phone overflow: wrap it in the
+  artifact skeleton's `<meta name=viewport …>` first. And grid children need `min-width: 0`, or a swiping row of
+  pictures widens the whole page.
+- **SAM 3 "clothing" masks miss parts of a garment** (a suit came back with bare arms and the old jeans): cut by
+  "person" and "head" instead.
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
@@ -100,6 +127,19 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (src/worn.js) stopped a shirt turning his dark navy trousers into light blue jeans; "keep the person's own shoes"
   held for women's suits and kaftans; body shape and looseness held for every build. Still open: a men's kurta
   sometimes swaps his shoes for the store model's.
+- **Where a portrait is made today**: the picture in the cloud (Decart); her head is laid back **on her phone**
+  (src/restore.js: a 16 MB model, waited for up to 45 s, silently skipped when anything fails). On 2026-10-15 a friend's
+  Android showed the engine's face on all five tries, and two of the founder's three tries on a slow line never reached
+  the screen (one took over a minute). The plan agreed with the founder: move every step that shapes the picture to the
+  cloud; the phone only takes the photo and shows the portrait.
+- **Engine test r1, 2026-10-15** (8 made-up shoppers, real Sapphire/Lawrencepur/Outfitters pieces, times from Lahore):
+  Decart 14.5 s avg (max 18), face kept 85% avg; FASHN v1.6 balanced 12.3 s (max 13.7), 91%; Kling 11.9 s (max 13.4),
+  91%; Decart + keep her (cloud, SAM 3 person/head masks, about +3 s) 91%. Clothes: Decart best on dupatta drape, kurta
+  colour and stripes; FASHN and Kling best on prints and colours and keep her own shoes, but flatten a dupatta into a
+  front panel and leave her old top showing in a lower neckline (3 of 8); Decart turned a dark teal shirt light blue and
+  swapped a man's sneakers. FASHN quality mode took 24 s for no visible gain: use balanced. FASHN and Kling outputs are
+  nearly identical. Best together: FASHN for single pieces and western wear, Decart + keep her for 3-piece suits with a
+  dupatta (5 right, 3 close, 0 wrong of 8). Prices: Decart $0.02, + keep $0.035, Kling $0.07, FASHN $0.075 (fal).
 
 ## Presentation models (from 2026-10-15)
 - Three AI-made models, the founder's choice, used wherever MIRVA shows results (home, store page, share cards,
