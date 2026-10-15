@@ -104,3 +104,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   happened (`events.sample`: 0 store mirror or staff, 1 seeded sample, 2 member on the MIRVA app, 3 visitor on the
   MIRVA app, 4 the store's website) and the console filters by place; sales, a pilot's target and the cost per try-on
   stay in-store (`store_events`). Lesson: when a number is zero, check what is filtered out before what is missing.
+- **"Try-on is resting for today" for everyone but the founder (2026-10-15):** one $5 daily ceiling covered live video
+  and portraits together; six live Studio sessions ($4.40, the founder's own tests count) used it up and portraits
+  stopped for every shopper. Now two ceilings: `MIRVA_DAILY_USD` live ($5) and `MIRVA_DAILY_PORTRAIT_USD` portraits
+  ($3). The founder and store users are never held, so they do not see the limit: test as a shopper too.

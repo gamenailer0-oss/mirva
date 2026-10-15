@@ -927,3 +927,19 @@ test("the desks never loop over a single element (Look and feel once crashed on 
   const desk = readFileSync(new URL("../src/web/desk.js", import.meta.url), "utf8");
   assert.doesNotMatch(desk, /for \(const \w+ of \$\(/, "use $$ to loop over elements");
 });
+
+test("live Studio and portraits have separate days: live video used up never stops portraits for anyone", async () => {
+  const { app, db } = await makeApp({ dailyUsd: 5, dailyPortraitUsd: 3 });
+  const shopper = { kind: "open" };
+  await spend(db, null, 5.2, { kind: "live" }); // a few minutes of live video, as on 15 October 2026
+  const live = await app.platform.grant(shopper, "live");
+  assert.equal(live.ok, false);
+  assert.equal(live.limit, "day-live");
+  assert.match(live.error, /portrait/);
+  assert.equal((await app.platform.grant(shopper, "portrait")).ok, true, "portraits carry on");
+  await spend(db, null, 3, { kind: "portrait" });
+  const portrait = await app.platform.grant(shopper, "portrait");
+  assert.equal(portrait.ok, false, "and they have a day of their own");
+  assert.match(portrait.error, /resting for today/);
+  assert.equal((await app.platform.grant({ kind: "staff", user: { id: "s1" } }, "portrait")).ok, true, "a founder's demo never stops");
+});

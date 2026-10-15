@@ -84,7 +84,8 @@ async function start(env, origin) {
       config,
       shotsPerHour: clamp(num(env.MIRVA_SHOTS_PER_HOUR, 30), 1, 1000),
       tokensPerHour: clamp(num(env.MIRVA_SESSIONS_PER_HOUR, 20), 1, 1000),
-      dailyUsd: clamp(num(env.MIRVA_DAILY_USD, 5), 0, 1000),
+      dailyUsd: clamp(num(env.MIRVA_DAILY_USD, 5), 0, 1000), // live Studio, a day
+      dailyPortraitUsd: clamp(num(env.MIRVA_DAILY_PORTRAIT_USD, 3), 0, 1000), // portraits and backdrops, a day
       guestShots: clamp(num(env.MIRVA_GUEST_SHOTS, 0), 0, 1000), // free first portraits a day, before joining
       setupKey: String(env.SETUP_KEY || ""),
       debugShots: false,
