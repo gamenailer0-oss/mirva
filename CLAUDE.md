@@ -26,6 +26,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Sapphire, Lawrencepur and Outfitters are shown only as "concept demo by MIRVA"; no partnership is claimed.
 - `docs/` (handbook, checklists) is git-ignored and private. Never put it in the repo.
 
+- **Ponytail** (skill, installed 2026-10-15 in `~/.claude/skills/ponytail*`, the original from DietrichGebert/ponytail):
+  the smallest complete change, existing code and the platform first. It never outranks the rules above: the
+  founder's asks for polish, motion and design are asked-for features, not extras to skip; tests and safeguards stay.
+
 ## Secrets: never in chat, never in the repo
 - Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only. `.env` also holds
   `FAL_KEY` (fal.ai: SAM 3 outlines and FASHN, now part of every portrait; also a Worker secret, set with
