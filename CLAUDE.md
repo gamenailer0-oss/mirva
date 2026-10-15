@@ -76,3 +76,8 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
 - System map: https://claude.ai/artifact/8iXrBqwLk8MrMbUV3AH7Lt
 - Motion experiments (local only, not to be pushed): `motion/`.
+
+## Facts measured (so they are not re-measured)
+- Portrait time is the engine's: on 2026-10-15 a portrait took 16.8 s on the glass, 16.2 s of it inside Decart.
+  Everything on our side adds under a second. 480p instead of 720p saved only ~2.5 s and lost detail: kept 720p.
+- Studio pre-connecting was not built: Decart's live billing per connected second is unconfirmed.

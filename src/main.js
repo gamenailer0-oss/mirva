@@ -422,6 +422,7 @@ function renderLooks() {
   if (S.step === "looks") box.append(h("button", { class: "mini-more", type: "button", text: "More", "aria-label": "Show the stylist", onclick: () => setSheet("peek") }));
   markCards();
   renderSolo();
+  if (S.step === "looks") for (const k of S.looks) if (k.product.ref) reference(k.product);
   // On a phone the three looks arrive inside the panel: it brings them fully into view. Her line is then either whole
   // or scrolled out of sight (it is one swipe back), never cut through the middle of a word.
   if (phoneApp() && S.step === "looks" && $("#app").dataset.sheet === "peek")
@@ -770,11 +771,42 @@ function rememberWait(seconds) {
   } catch {}
 }
 
-function develop() {
+// One true line at a time about the piece, while it is made: its cloth, cut, colour, sizes, and her budget.
+function storyLines(p) {
+  const out = [];
+  if (p.fabric && !p.fabric.includes("%")) out.push(`${sentence(p.fabric.toLowerCase())}.`);
+  if (p.cut && p.cut.length < 64 && !/unstitched/i.test(p.cut)) out.push(`${sentence(p.cut)}.`);
+  if (p.unstitched) out.push("Sold as fabric. Shown stitched, for you.");
+  if (p.colour && !/multi/i.test(p.colour)) out.push(`In ${p.colour.toLowerCase()}.`);
+  if (S.brief.budget && p.price <= S.brief.budget - 500) out.push(`${money(S.brief.budget - p.price)} under what you set.`);
+  const left = p.sizes.filter((z) => z.inStock).map((z) => z.label);
+  if (left.length > 4) out.push(`In ${left.length} sizes, ${left[0]} to ${left[left.length - 1]}.`);
+  else if (left.length) out.push(`Made in ${left.join(", ")}.`);
+  return out.length ? out : [`${p.name}.`];
+}
+
+function develop(p) {
   S.developing?.cancel();
   const reel = $("#reel");
   const arc = $("#haloArc");
   const left = $("#reelLine");
+  // the piece's own photographs cross-fade slowly behind the clock, with one true line about it under the seconds
+  const imgs = [$("#reelA"), $("#reelB")];
+  const shots = p ? (p.images?.length > 1 ? p.images.slice(1, 6) : [p.image]).filter(Boolean).map((u) => pic(u, 720)) : [];
+  const lines = p ? storyLines(p) : [];
+  let n = 0, front = 0;
+  const slide = () => {
+    if (shots.length) {
+      const img = imgs[front ^ 1];
+      img.onload = () => (img.classList.add("on"), imgs[front].classList.remove("on"), (front ^= 1));
+      img.src = shots[n % shots.length];
+    }
+    if (lines.length) replay($("#reelFact"), lines[n % lines.length]);
+    n++;
+  };
+  imgs.forEach((i) => i.classList.remove("on"));
+  slide();
+  const slides = setInterval(slide, 3400);
   const usual = expectedWait();
   const t0 = performance.now();
   const tick = () => {
@@ -798,6 +830,7 @@ function develop() {
     cancel() {
       if (S.developing !== me) return;
       clearInterval(timer);
+      clearInterval(slides);
       glass.classList.remove("timed");
       arc.style.strokeDashoffset = "";
       S.developing = null;
@@ -867,7 +900,7 @@ async function countdown() {
   caption("Stand tall and look here.");
   for (const n of ["3", "2", "1"]) {
     replay(box, n);
-    await sleep(820);
+    await sleep(650);
   }
   box.hidden = true;
 }
@@ -1022,7 +1055,7 @@ async function modelShot(p, { retake = false } = {}) {
   const look = await pass.lookAt(person);
   if (ticket !== S.ticket) return;
   if (look.dim) return caption(pass.DIM_LINE);
-  const dev = develop();
+  const dev = develop(p);
   S.shooting++;
   caption(line("putting"));
   try {
