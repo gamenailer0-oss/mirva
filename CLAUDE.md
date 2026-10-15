@@ -97,8 +97,9 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   a pocket and legs lightly crossed). Make a new piece on them with `node tools/portrait-lab/models/direct.mjs
   <store> <product id> <base> <out> [below=<colour>]`, then `scripts/showcase.mjs`. Ignore any "MENVA"/"AR menu" text
   on the sheets (a mistake on them).
-- The head restore draws a visible box when hair is long (it pastes a square around the head that cuts across hair and
-  neckline). Showcase pictures are made without it (`direct.mjs`); the restore itself needs fixing for real shoppers.
+- The head restore used to draw a box when hair was long (its square cut across the hair and neckline). Fixed
+  2026-10-15 (src/restore.js: the square grows downward when hair reaches its foot, the paste fades over the last rows,
+  her old wall is never laid lower than just below her chin); measured on real portraits, long hair now flows on.
 - **The console showed zeros for weeks** because it counted only paired store mirrors: members' tries were saved as
   "at home" and hidden, and visitors who had not signed in were refused outright. Now every try is counted with where it
   happened (`events.sample`: 0 store mirror or staff, 1 seeded sample, 2 member on the MIRVA app, 3 visitor on the

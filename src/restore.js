@@ -38,6 +38,10 @@ const INSIDE = 0.006; // the figure goes back this far (of the longer side) insi
 const TONE = 0.016; // the edge left as the second pass drew it takes the first picture's colour, averaged over this far
 const WALL_NEAR = 18, WALL_FAR = 54; // how unlike the new backdrop (summed over red, green and blue) a pixel must be to count as her: not at all, and fully
 const SAME = 0.8; // the two figures must share this much of their area, or the engine has moved her
+const LONG = 0.06; // hair across this share of the square's last rows means it runs on below the square
+const TALLER = 1.8; // and the square is made this much larger, downward, to take all of it
+const FOOT = 0.12; // what is laid back fades out over the square's last rows, so no edge of it can show as a line
+const WALL_BELOW = 0.35; // her old wall is laid back no lower than this far (of a head-width) below her chin
 
 const centreOf = (labels, label) => {
   let sx = 0, sy = 0, n = 0;
@@ -118,8 +122,8 @@ export async function restoreHead(original, result, { tight = false, debug = fal
 
     const at = (await head(mine)) || (faces && faceIn(faces, mine));
     if (!at) return asItCame("nohead");
-    const side = Math.max(96, at.width * WIDE);
-    const x = at.x - side / 2, y = at.y - at.width * 0.2 - side / 2;
+    let side = Math.max(96, at.width * WIDE);
+    let x = at.x - side / 2, y = at.y - at.width * 0.2 - side / 2;
 
     const square = (canvas) => {
       const c = canvasOf(N, N);
@@ -130,9 +134,24 @@ export async function restoreHead(original, result, { tight = false, debug = fal
       ctx.drawImage(canvas, x, y, side, side, 0, 0, N, N);
       return c;
     };
-    const hers = labelsOf(segmenter, square(mine), N, N);
-    const drawn = labelsOf(segmenter, square(out), N, N);
+    let hers = labelsOf(segmenter, square(mine), N, N);
     if (!hers) return asItCame("failed");
+    // Long hair runs on past the bottom of the square: what was laid back ended in a straight cut across her hair and
+    // the new neckline. The square is then made larger, downward, so all of her hair is inside it.
+    const hairAtFoot = (labels) => {
+      let n = 0;
+      for (let i = N * (N - Math.round(N * 0.04)); i < N * N; i++) if (labels[i] === HAIR) n++;
+      return n / (N * Math.round(N * 0.04));
+    };
+    if (hairAtFoot(hers.labels) > LONG) {
+      const top = y;
+      side *= TALLER;
+      x = at.x - side / 2;
+      y = top;
+      hers = labelsOf(segmenter, square(mine), N, N);
+      if (!hers) return asItCame("failed");
+    }
+    const drawn = labelsOf(segmenter, square(out), N, N);
 
     // Has the engine kept the head where it was? The middle of the face, hers against the drawn one.
     const f0 = centreOf(hers.labels, FACE_SKIN), f1 = drawn && centreOf(drawn.labels, FACE_SKIN);
@@ -168,7 +187,10 @@ export async function restoreHead(original, result, { tight = false, debug = fal
       // mostly; the label map is coarse, so the spill is taken a little wide). Never over the new garment.
       const ring = grow(own, N, N, Math.round(N * RING));
       const spill = grow(over, N, N, Math.round(N * SPILL));
-      for (let i = 0; i < lay.length; i++) lay[i] = own[i] || ((ring[i] || spill[i]) && wall[i] && drawn?.labels[i] !== CLOTHES) ? 1 : 0;
+      // Her old wall stays up by her head: lower down, beside long hair, it would lay a patch of her old clothes' surround
+      // over the new neckline.
+      const wallFloor = chin + headPx * WALL_BELOW;
+      for (let i = 0; i < lay.length; i++) lay[i] = own[i] || ((ring[i] || spill[i]) && wall[i] && drawn?.labels[i] !== CLOTHES && Math.floor(i / N) <= wallFloor) ? 1 : 0;
 
       // What is left of the drawn head lies over her neck or her collar (a longer chin, a fuller beard). Skin left
       // there reads as her neck and stays. Hair left there (the drawn beard) does not: each such pixel takes what the
@@ -240,6 +262,13 @@ export async function restoreHead(original, result, { tight = false, debug = fal
       }
     }
     const alpha = feather(lay, N, N, SOFT);
+    // Over the square's last rows what is laid back fades away, so where her own hair ends and the drawn picture
+    // carries on, there is no straight edge to see.
+    const foot = Math.round(N * FOOT);
+    for (let r = N - foot; r < N; r++) {
+      const keep = (N - 1 - r) / foot;
+      for (let c = 0; c < N; c++) alpha[r * N + c] = Math.round(alpha[r * N + c] * keep);
+    }
 
     // Her pixels, cut to that shape, laid over the portrait.
     const mask = canvasOf(N, N);
