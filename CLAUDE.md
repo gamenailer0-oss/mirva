@@ -31,7 +31,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   founder's asks for polish, motion and design are asked-for features, not extras to skip; tests and safeguards stay.
 
 ## Secrets: never in chat, never in the repo
-- Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only. `.env` also holds
+- Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only. The Decart key was replaced
+  on 2026-10-16 by a new account's key (the founder pasted it in chat): set in `.env` with a script that prints nothing,
+  then `node -e "<print it from .env>" | npx wrangler secret put DECART_API_KEY`, checked with one live portrait
+  (`eng=decart`, 16 s) and the `tryon-credit` flag cleared itself. `.env` also holds
   `FAL_KEY` (fal.ai: SAM 3 outlines and FASHN, now part of every portrait; also a Worker secret, set with
   `node -e "<print the key from .env>" | npx wrangler secret put FAL_KEY`; topped up 2026-10-15; the key cannot read
   its balance, and a call dearer than what is left answers 403 "User is locked. Reason: TOP_UP"), `GEMINI_API_KEY` and
@@ -161,8 +164,8 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Motion experiments (local only, not to be pushed): `motion/`.
 
 ## Open (suggested 2026-10-16, not built; the founder chooses)
-- Founder: close and reopen the mirror after each ship; top up Decart (out since 2026-10-15 23:31); replace the pasted
-  keys; share the team page from its Share menu before sending it.
+- Founder: close and reopen the mirror after each ship; replace the pasted keys; share the team page from its Share menu
+  before sending it. (Decart: a new account's key went live 2026-10-16 00:22 PKT; Decart makes portraits again.)
 - Warm the cloud cut for the three looks while she reads them (src/main.js `S.step === "looks"` warms only pieces with a
   prepared `ref`): 2 to 4 s off a boutique piece's first tap, US$0.025 a piece once.
 - Pre-cut each boutique's likely pieces before a store visit (~US$0.30 a store).
