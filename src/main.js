@@ -247,7 +247,10 @@ function applyBrand(brand) {
   document.documentElement.dataset.mood = brand.mood || "porcelain";
   setAccent(brand.accent || "#1e3fae");
   $("#wordmark").textContent = brand.wordmark || brand.name;
-  $("#byline").textContent = brand.notice ? "concept demo by MIRVA" : brand.byline || "styled by MIRVA";
+  // "by MIRVA" is kept whole, so on a phone's narrow glass the line breaks as "concept demo / by MIRVA", never mid-phrase.
+  const byline = $("#byline");
+  if (brand.byline && !brand.notice) byline.textContent = brand.byline;
+  else byline.replaceChildren(brand.notice ? "concept demo " : "styled ", Object.assign(document.createElement("span"), { className: "by-who", textContent: "by MIRVA" }));
   $("#wakeNotice").textContent = brand.notice || "";
   $("#storeName").textContent = brand.name;
   document.title = `MIRVA for ${brand.name}`;
@@ -978,10 +981,14 @@ async function thumbOf(blob, width = 300) {
 // A member's wardrobe gets the finished picture too. If it cannot be done, the portrait is shown as it came.
 let restoring = null;
 const restorer = () => (restoring ??= import("./restore.js").catch((e) => (console.warn(e), (restoring = null))));
-async function ownHead(person, portrait, saved, options) {
+// `report`, if given, learns what happened (how: "restored", or why not: "shape", "notools", "nohead", "moved",
+// "failed", "wait", "nomodule", "error") and how long it took, so a phone that shows the engine's face is on the record.
+async function ownHead(person, portrait, saved, options, report = {}) {
+  const t0 = performance.now();
+  const done = (how, blob) => ((report.how = how), (report.ms = Math.round(performance.now() - t0)), blob);
   try {
     const mod = await restorer();
-    if (!mod) return portrait;
+    if (!mod) return done("nomodule", portrait);
     // After the backdrop pass (tight) the garment goes back first, as it was first drawn, and then her head over it.
     const both = async () => {
       const figure = options?.tight ? await mod.restoreFigure(person, portrait) : null;
@@ -989,14 +996,16 @@ async function ownHead(person, portrait, saved, options) {
       return head.how === "restored" || figure?.how !== "restored" ? head : figure;
     };
     const fixed = await Promise.race([both(), sleep(RESTORE_WAIT).then(() => null)]);
-    if (fixed?.how !== "restored") return portrait;
+    if (fixed?.how !== "restored") return done(fixed?.how || "wait", portrait);
     if (saved) fetch(`/api/portrait/${saved}`, { method: "POST", headers: { ...link.auth(), "content-type": fixed.blob.type }, body: fixed.blob }).catch(() => {});
-    return fixed.blob;
+    return done("restored", fixed.blob);
   } catch (e) {
     console.warn(e);
-    return portrait;
+    return done("error", portrait);
   }
 }
+// What one portrait went through, in the record's short note: "face=moved shot=17.2 fix=9.8" (seconds).
+const shotNote = (face, shotMs) => `face=${face.how || "?"} shot=${(shotMs / 1000).toFixed(1)} fix=${((face.ms || 0) / 1000).toFixed(1)}`;
 // A wrong face is worse than a longer wait, so the restore is given time: on a slow line its model is still arriving.
 const RESTORE_WAIT = 45000;
 // The model is 16 MB. It starts coming the first time a look is chosen (only fetched, into the browser's cache: nothing is
@@ -1077,6 +1086,7 @@ async function modelShot(p, { retake = false } = {}) {
     form.append("product", p.id);
     form.append("mode", "portrait");
     if (worn) form.append(worn.half === "below" ? "wornBelow" : "wornAbove", worn.name);
+    const shotFrom = performance.now();
     const asked = pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
     restorer().then((m) => m?.warmRestore()); // its models load, and take their slow first look, behind the wait
     let { blob: drawn, saved, guest } = await asked;
@@ -1089,12 +1099,15 @@ async function modelShot(p, { retake = false } = {}) {
       } catch {}
     }
     if (guest) S.guestUsed = true; // her one portrait before joining
+    const shotMs = performance.now() - shotFrom;
     const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // its model is still arriving
-    const blob = await ownHead(person, drawn, saved);
+    const face = {};
+    const blob = await ownHead(person, drawn, saved, undefined, face);
     clearTimeout(slow);
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
     const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: null };
-    link.track("portrait", { product: p.id });
+    // value: seconds from asking to the finished picture; meta: whether her own face went back, and the time of each part
+    link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) });
     S.visit.portraits++;
     if (link.member) link.whoIsHere().then(showMember);
     S.portraits.set(p.id, entry);
@@ -1117,11 +1130,14 @@ async function modelShot(p, { retake = false } = {}) {
       again.append("product", p.id);
       again.append("mode", "backdrop");
       if (saved) again.append("replaces", saved);
+      const wallFrom = performance.now();
       pass
         .requestShot(again, { headers: link.auth(), timeout: link.timeout })
         .then(async (next) => {
           if (S.portraits.get(p.id) !== entry) return; // her pictures were cleared meanwhile: nothing to put it in
-          next.blob = await ownHead(blob, next.blob, next.saved, { tight: true }); // the wall is new; her face is not
+          const wallMs = performance.now() - wallFrom, face2 = {};
+          next.blob = await ownHead(blob, next.blob, next.saved, { tight: true }, face2); // the wall is new; her face is not
+          link.track("backdrop", { product: p.id, value: Math.round((wallMs + (face2.ms || 0)) / 100) / 10, meta: shotNote(face2, wallMs) });
           if (S.portraits.get(p.id) !== entry) return;
           const url = URL.createObjectURL(next.blob);
           const old = entry.url;

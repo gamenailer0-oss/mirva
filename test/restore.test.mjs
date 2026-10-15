@@ -13,7 +13,7 @@ const helper = main.slice(main.indexOf("async function ownHead"), main.indexOf("
 
 test("a portrait is shown only after the shopper's own head has been laid back on it", () => {
   assert.ok(modelShot.length > 500 && helper.length > 200, "the portrait flow is where this test expects it");
-  const restored = modelShot.indexOf("const blob = await ownHead(person, drawn, saved);");
+  const restored = modelShot.indexOf("const blob = await ownHead(person, drawn, saved, undefined, face);");
   assert.match(main, /const RESTORE_WAIT = (\d+);/);
   assert.ok(Number(main.match(/const RESTORE_WAIT = (\d+);/)[1]) >= 30000, "the restore is given time on a slow line: a wrong face is worse than a wait");
   assert.ok(restored > 0, "the engine's picture goes through ownHead");
@@ -24,7 +24,7 @@ test("a portrait is shown only after the shopper's own head has been laid back o
 
 test("the studio backdrop pass is restored too, from the finished first portrait", () => {
   assert.match(modelShot, /again\.append\("person", blob, "portrait\.png"\)/, "the backdrop is made from the finished portrait");
-  assert.match(modelShot, /next\.blob = await ownHead\(blob, next\.blob, next\.saved, \{ tight: true \}\)/);
+  assert.match(modelShot, /next\.blob = await ownHead\(blob, next\.blob, next\.saved, \{ tight: true \}, face2\)/);
 });
 
 // Asked to change only the wall, the engine still redraws the garment (a bottle green suit came back emerald). The
@@ -107,6 +107,15 @@ test("the restore does not depend on the store: one path for every brand, presen
 });
 
 test("a portrait that cannot be finished is shown as it came, never withheld", () => {
-  assert.match(helper, /if \(fixed\?\.how !== "restored"\) return portrait;/);
-  assert.match(helper, /catch \(e\) \{\s*console\.warn\(e\);\s*return portrait;/);
+  assert.match(helper, /if \(fixed\?\.how !== "restored"\) return done\(fixed\?\.how \|\| "wait", portrait\);/);
+  assert.match(helper, /catch \(e\) \{\s*console\.warn\(e\);\s*return done\("error", portrait\);/);
+});
+
+// Since 15 October 2026 every portrait says on the record whether her own face went back, and if not why, with the time
+// each part took: a friend's Android showed the engine's faces for a whole afternoon and nothing said why.
+test("each portrait records whether her own face went back, and how long each part took", () => {
+  assert.match(modelShot, /link\.track\("portrait", \{ product: p\.id, value: [^}]*meta: shotNote\(face, shotMs\) \}\)/);
+  assert.match(modelShot, /link\.track\("backdrop", \{ product: p\.id, [^}]*meta: shotNote\(face2, wallMs\) \}\)/);
+  assert.match(main, /const shotNote = \(face, shotMs\) =>/);
+  assert.match(read("lib/platform.mjs"), /"backdrop", \/\/ the second, studio-wall pass/);
 });

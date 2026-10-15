@@ -233,6 +233,9 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .brandline { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; max-width: 100%; }
 .wordmark { font: 500 15px/1 var(--serif); /* the store's own name: Newsreader (MIRVA Mark holds only M I R V A) */ letter-spacing: .34em; margin-right: -.34em; }
 .byline { font-size: 9.5px; letter-spacing: .3em; margin-right: -.3em; text-transform: uppercase; opacity: .72; }
+.byline .by-who { white-space: nowrap; }
+/* The crest sits over her own photo, often a busy street: a soft shadow keeps the store's name readable on any wall. */
+.glass-top { text-shadow: 0 1px 10px rgba(6, 7, 10, .55), 0 0 2px rgba(6, 7, 10, .35); }
 /* Once someone is in the glass, the crest steps into the corner: the halo over the store's name, as in MIRVA's own mark.
    Nothing is left across the top of the glass, where a face is. The name gives way to the tools on its right. */
 .glass:not([data-state="asleep"]) .glass-top { justify-content: flex-start; text-align: left; padding: 30px 18px 0; }
@@ -394,6 +397,9 @@ a.chip { text-decoration: none; }
   .glass:not([data-state="asleep"]) .brandline { max-width: calc(100% - 124px); }
   .reel-step { letter-spacing: .22em; }
   .glass:not([data-state="asleep"]) .wordmark { font-size: 11px; letter-spacing: .16em; }
+  /* "concept demo" over "by MIRVA": two clean lines instead of a ragged pile over her photo (seen on a 360px Android) */
+  .glass:not([data-state="asleep"]) .byline { letter-spacing: .16em; }
+  .glass:not([data-state="asleep"]) .byline .by-who { display: block; }
   .toast { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 12px 10px; }
   .wake .primary { padding: 12px 18px; font-size: 12px; letter-spacing: .1em; white-space: nowrap; }
 }
