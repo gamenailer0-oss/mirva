@@ -20,7 +20,8 @@ test("a portrait is shown only after the shopper's own head has been kept", () =
   assert.ok(finished > 0, "the engine's picture goes through finishPortrait");
   assert.ok(finished < modelShot.indexOf("showPortrait(entry, p.id)"), "and only then is it shown");
   assert.match(finisher, /if \(meta\?\.face === "engine"\) return done\("engine", shot\.blob\);/, "the second engine's picture kept her face itself");
-  assert.match(finisher, /await keepHer\(person, shot\.blob, \{ her, drawn: meta\.drawn \}\)/, "Decart's picture gets her own face, hair and shoes back");
+  assert.match(finisher, /await keepHer\(person, shot\.blob, \{ her, drawn, drawnSize \}\)/, "Decart's picture gets her own face, hair and shoes back");
+  assert.match(finisher, /fetch\("\/api\/outline", \{ method: "POST"[^}]*"x-mirva-pass": meta\.pass \}, body: small\.blob/, "the portrait's own outlines come from a small copy");
   assert.match(finisher, /mode", "retake"/, "a head the engine moved is made again by the second engine");
   assert.match(finisher, /await ownHead\(person, shot\.blob, saved, undefined, sub\)/, "and without outlines, the old restore on the phone");
   assert.ok(Number(main.match(/const RESTORE_WAIT = (\d+);/)[1]) >= 30000, "the old restore is given time on a slow line: a wrong face is worse than a wait");
@@ -31,7 +32,7 @@ test("a portrait is shown only after the shopper's own head has been kept", () =
 test("a busy wall becomes a studio wall by cutting her out, never by drawing her again", () => {
   assert.doesNotMatch(modelShot, /append\("mode", "backdrop"\)/, "no second drawing of the portrait");
   assert.match(modelShot, /form\.append\("studio", "1"\)/, "the figure's outline is asked for with the portrait");
-  assert.match(finisher, /onStudio\(kept\.blob, kept\.m, kept\.grid, kept\.filled\)/);
+  assert.match(finisher, /busy && drawn\.person \? await onStudio\(kept\.blob, kept\.m, kept\.grid, kept\.filled\)/);
   assert.match(modelShot, /pass\.crossfade\(\$\("#portrait"\), url, 1100\)/, "she is shown in her own place first, then the room eases away");
 });
 

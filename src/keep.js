@@ -158,8 +158,9 @@ const toBlob = (c, q = 0.93) => new Promise((resolve, reject) => c.toBlob((b) =>
 
 /**
  * Lays her own face, hair and shoes from `herBlob` (the photo she sent) over `drawnBlob` (the engine's portrait),
- * using `masks` ({ her: {face, hair, person, feet}, drawn: {face, hair, feet, person?} }, outlines as RLE at each
- * picture's own size). Resolves { blob, how, alpha?, grid? }: blob is the portrait as it came unless how is "kept".
+ * using `masks` ({ her: {face, hair, person, feet}, drawn: {face, hair, feet, person?}, drawnSize? }: outlines as RLE;
+ * the portrait's at `drawnSize` (the small copy they were found on) or the portrait's own size, hers at her photo's
+ * size). Resolves { blob, how, m?, grid?, filled? }: blob is the portrait as it came unless how is "kept".
  */
 export async function keepHer(herBlob, drawnBlob, masks) {
   const [her, drawn] = await Promise.all([createImageBitmap(herBlob), createImageBitmap(drawnBlob)]);
@@ -168,15 +169,17 @@ export async function keepHer(herBlob, drawnBlob, masks) {
     if (Math.abs(her.width / her.height - W / H) > 0.03) return { blob: drawnBlob, how: "shape" };
     const gw = Math.round(W / 2), gh = Math.round(H / 2); // the grid: half size is plenty for an outline with a soft edge
     const at = (rle, w, h) => (rle ? resample(decodeRLE(rle, w, h), w, h, gw, gh) : null);
+    // the portrait's outlines were found on a small copy of it (masks.drawnSize), or on the portrait itself
+    const [dw, dh] = masks.drawnSize || [W, H];
     const m = {
       herFace: at(masks.her.face, her.width, her.height),
       herHair: at(masks.her.hair, her.width, her.height),
       herPerson: at(masks.her.person, her.width, her.height),
       herFeet: at(masks.her.feet, her.width, her.height),
-      drawnFace: at(masks.drawn.face, W, H),
-      drawnHair: at(masks.drawn.hair, W, H),
-      drawnFeet: at(masks.drawn.feet, W, H),
-      drawnPerson: at(masks.drawn.person, W, H),
+      drawnFace: at(masks.drawn.face, dw, dh),
+      drawnHair: at(masks.drawn.hair, dw, dh),
+      drawnFeet: at(masks.drawn.feet, dw, dh),
+      drawnPerson: at(masks.drawn.person, dw, dh),
     };
     if (!m.herFace || !m.herPerson || !m.drawnFace) return { blob: drawnBlob, how: "nomask" };
     const { alpha, how, filled } = herAlpha(m, gw, gh);

@@ -1043,9 +1043,18 @@ async function finishPortrait(person, shot, { form, studio: busy, ticket }, repo
   if (meta?.face === "cloud") {
     try {
       const her = meta.her || S.herOutlines?.her;
-      const kept = her ? await keepHer(person, shot.blob, { her, drawn: meta.drawn }) : { how: "nomask" };
+      // The portrait's own outlines: from a 360-pixel copy sent with the pass that came with it (about 2 s), or, from a
+      // server that sent them already, as they came.
+      let drawn = meta.drawn || null, drawnSize = null;
+      if (!drawn && meta.pass && her) {
+        const small = await smallCopy(shot.blob, 360);
+        const res = await fetch("/api/outline", { method: "POST", headers: { ...link.auth(), "content-type": "image/jpeg", "x-mirva-pass": meta.pass }, body: small.blob, signal: link.timeout(20000) });
+        if (res.ok) ({ drawn } = await res.json()), (drawnSize = [small.w, small.h]);
+        report.outline = Math.round(performance.now() - t0);
+      }
+      const kept = her && drawn ? await keepHer(person, shot.blob, { her, drawn, drawnSize }) : { how: "nomask" };
       if (kept.how === "kept") {
-        const onWall = busy && meta.drawn.person ? await onStudio(kept.blob, kept.m, kept.grid, kept.filled).catch(() => null) : null;
+        const onWall = busy && drawn.person ? await onStudio(kept.blob, kept.m, kept.grid, kept.filled).catch(() => null) : null;
         postFinished(saved, onWall || kept.blob);
         return done(onWall ? "kept+studio" : "kept", kept.blob, { studio: onWall });
       }
@@ -1071,6 +1080,24 @@ async function finishPortrait(person, shot, { form, studio: busy, ticket }, repo
   const sub = {};
   const blob = await ownHead(person, shot.blob, saved, undefined, sub);
   return done(`device-${sub.how || "?"}`, blob);
+}
+
+/** A small JPEG copy of a picture, `width` pixels wide: { blob, w, h }. */
+async function smallCopy(blob, width) {
+  const bmp = await createImageBitmap(blob);
+  try {
+    const w = Math.min(width, bmp.width), h = Math.round((bmp.height * w) / bmp.width);
+    const c = document.createElement("canvas");
+    c.width = w;
+    c.height = h;
+    const ctx = c.getContext("2d");
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(bmp, 0, 0, w, h);
+    const small = await new Promise((resolve, reject) => c.toBlob((b) => (b ? resolve(b) : reject(new Error("no copy"))), "image/jpeg", 0.88));
+    return { blob: small, w, h };
+  } finally {
+    bmp.close?.();
+  }
 }
 
 /** Puts a finished version in place of the one kept for a look, without showing it (she has moved on). */

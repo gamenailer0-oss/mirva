@@ -10,7 +10,7 @@ import { createApp } from "../lib/app.mjs";
 import { openDb } from "../lib/db.mjs";
 import { memoryLimiter } from "../lib/auth.mjs";
 import { SHOT_TYPE, unpackShot, packShot } from "../lib/shot.mjs";
-import { fashnCategory } from "../lib/finish.mjs";
+import { fashnCategory, outlinePass, checkPass } from "../lib/finish.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const brand = JSON.parse(readFileSync(join(ROOT, "brands/sapphire/brand.json"), "utf8"));
@@ -84,7 +84,13 @@ test("the answer's two parts, what happened and the picture, come apart as they 
   assert.deepEqual([...picture], [...PNG]);
 });
 
-test("a new mirror's portrait comes with her outlines and the portrait's, found while the engine works, and costs what was spent", async () => {
+// The portrait's own outlines are asked by the phone with a small copy and the pass that came with the portrait.
+async function outline(app, pass, { bytes = JPEG, type = "image/jpeg" } = {}) {
+  const res = await app.fetch(new Request("http://localhost:4999/api/outline", { method: "POST", body: bytes, headers: { "content-type": type, "x-mirva-pass": pass } }), { ip: `10.7.1.${++ip}` });
+  return { status: res.status, json: await res.json() };
+}
+
+test("a new mirror's portrait comes with her outlines, found while the engine works, and a pass for the portrait's own", async () => {
   const { app, db } = await makeApp();
   calls = [];
   const r = await shot(app);
@@ -92,24 +98,43 @@ test("a new mirror's portrait comes with her outlines and the portrait's, found 
   assert.ok(r.type.startsWith(SHOT_TYPE));
   assert.deepEqual([r.meta.face, r.meta.engine, r.meta.type], ["cloud", "decart", "image/png"]);
   assert.deepEqual(Object.keys(r.meta.her).sort(), ["face", "feet", "hair", "person"]);
-  assert.deepEqual(Object.keys(r.meta.drawn).sort(), ["face", "feet", "hair"]);
   assert.equal(r.meta.her.face, "4 3", "the outline as fal sent it");
+  assert.equal(r.meta.drawn, undefined, "the portrait's own come from the phone's small copy");
+  assert.ok(await checkPass("fal_test_key", r.meta.pass));
   assert.deepEqual([...r.picture], [...PNG], "the picture is the engine's own bytes");
-  assert.equal(calls.filter((c) => c.startsWith("sam:")).length, 7);
+  assert.equal(calls.filter((c) => c.startsWith("sam:")).length, 4);
   assert.ok(calls.includes("sam:footwear*"), "two shoes are two things: every match is asked for");
-  assert.deepEqual(await spent(db), [["portrait", 0.055]], "Decart 0.02 and seven outlines at 0.005");
+  calls = [];
+  const o = await outline(app, r.meta.pass);
+  assert.equal(o.status, 200);
+  assert.deepEqual(Object.keys(o.json.drawn).sort(), ["face", "feet", "hair"]);
+  assert.equal(calls.length, 3);
+  assert.deepEqual(await spent(db), [["portrait", 0.055]], "Decart 0.02 and seven outlines at 0.005, all paid with the portrait");
 });
 
-test("a second portrait from the same photo asks only for the portrait's outlines; a busy wall adds the figure's", async () => {
+test("a second portrait from the same photo asks no outlines of her; a busy wall's pass brings the figure's outline", async () => {
   const { app, db } = await makeApp();
   calls = [];
   const again = await shot(app, { her: "known" });
   assert.equal(again.meta.face, "cloud");
   assert.equal(again.meta.her, undefined);
-  assert.equal(calls.filter((c) => c.startsWith("sam:")).length, 3);
+  assert.equal(calls.filter((c) => c.startsWith("sam:")).length, 0);
   const busy = await shot(app, { her: "known", studio: "1" });
-  assert.deepEqual(Object.keys(busy.meta.drawn).sort(), ["face", "feet", "hair", "person"]);
+  const o = await outline(app, busy.meta.pass);
+  assert.deepEqual(Object.keys(o.json.drawn).sort(), ["face", "feet", "hair", "person"]);
   assert.deepEqual(await spent(db), [["portrait", 0.035], ["portrait", 0.04]]);
+});
+
+test("the outline route answers only a good pass, once, for a picture of a sensible size", async () => {
+  const { app } = await makeApp();
+  const r = await shot(app);
+  assert.equal((await outline(app, "made.up.pass.here")).status, 401);
+  assert.equal((await outline(app, await outlinePass("another_key"))).status, 401, "signed with another key");
+  assert.equal((await outline(app, await outlinePass("fal_test_key", { now: Date.now() - 6 * 60e3 }))).status, 401, "five minutes old");
+  assert.equal((await outline(app, r.meta.pass, { type: "text/html" })).status, 415);
+  assert.equal((await outline(app, r.meta.pass, { bytes: new Uint8Array(500 * 1024) })).status, 413);
+  assert.equal((await outline(app, r.meta.pass)).status, 200);
+  assert.equal((await outline(app, r.meta.pass)).status, 409, "one use");
 });
 
 test("with fal out of credit the portrait still comes, the phone keeps her face the old way, and the founder is told once", async () => {
@@ -119,7 +144,7 @@ test("with fal out of credit the portrait still comes, the phone keeps her face 
   const b = await shot(app);
   sam = (prompt) => Response.json({ rle: `${prompt.length} 3` });
   assert.deepEqual([a.status, a.meta.face, a.meta.engine], [200, "device", "decart"]);
-  assert.equal(a.meta.drawn, undefined);
+  assert.equal(a.meta.pass, undefined, "no outlines of her, so nothing to lay: the phone keeps her face the old way");
   assert.equal(b.meta.face, "device");
   assert.deepEqual(await spent(db), [["portrait", 0.02], ["portrait", 0.02]], "only Decart was spent");
   await new Promise((r) => setTimeout(r, 50));
