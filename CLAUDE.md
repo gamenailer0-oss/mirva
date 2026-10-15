@@ -13,8 +13,15 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   only for a measured improvement, and say what was measured. The founder called the home page "perfect".
 - Ask once, then act: the founder wants finished work, fast, in small shipped steps, without long waits. Plain words,
   no jargon. Before a big change, say in a few lines what you understood, then do it.
-- Design is MIRVA's own: dark glass, the halo (one arc of mercury light), Bodoni Moda + Jost, porcelain/noir. No
+- Design is MIRVA's own: dark glass, the halo (one arc of mercury light), Newsreader + Albert Sans, porcelain/noir. No
   gimmick graphics, no stock motion, only real MIRVA results as proof.
+- **Type (founder's choice, 2026-10-15):** Newsreader is the voice (`--serif`: headlines, look names, the stylist's
+  lines), Albert Sans everything read and tapped (`--sans`), and the wordmark alone keeps Bodoni Moda (`--mark`, a
+  1.4 KB file of the letters M I R V A). Bodoni and Jost were dropped for readability on phones: Bodoni's hairlines broke
+  up at small sizes on dark glass, Jost's round "a" and short lowercase tired the eye. Fonts come from
+  `node scripts/fonts.mjs` (one file per Newsreader weight, since a file of every weight is 270 KB). The comparison
+  page: https://claude.ai/artifact/EAJTFBFD88LAB37gwRDt4S. Canvas pictures (share card, family card) must
+  `document.fonts.load` before drawing.
 - The founder's phone number is never published on the site (the /hq WhatsApp switch is theirs to turn on).
 - Sapphire, Lawrencepur and Outfitters are shown only as "concept demo by MIRVA"; no partnership is claimed.
 - `docs/` (handbook, checklists) is git-ignored and private. Never put it in the repo.
@@ -52,7 +59,12 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 
 ## Mistakes made, so they are not made again
 - **Shell heredocs strip backslashes** (`\d`, `\.`, `\/` came out as `d`, `.`, `/`) even with `<<'EOF'`. Write code
-  that has backslashes with the Write/Edit tools, then check the regex after patching.
+  that has backslashes with the Write/Edit tools, then check the regex after patching. Made again on 2026-10-15
+  (`node -e` and `node - <<EOF` patches with `\n` and `\/`): any patch containing a backslash goes in a file written by Write.
+- **A replacement put double quotes inside a double-quoted JS string** (`"500 22px "Albert Sans", …"`) and the build
+  broke. When swapping a font name into code, check which quote the string uses.
+- **The service worker kept everything under `/fonts/` cache-first**, so an installed phone would have kept the old
+  fonts.css forever. It now keeps only `.woff2` files (new names when the letters change); bump `SHELL` when needed.
 - **`String.replace` with a string turns `$$` into `$`**: an import `{ $, $$ }` became `{ $, $ }`. Use a function
   replacer `(…) => text`.
 - **Git Bash rewrites `/path` arguments** (e.g. `/retail` became `C:/Program Files/Git/retail`): set `MSYS_NO_PATHCONV=1`.
