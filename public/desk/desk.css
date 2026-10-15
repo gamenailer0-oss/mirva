@@ -166,3 +166,6 @@ body.desk { background: var(--bg); font-size: 15.5px; }
 .skel-desk { display: grid; grid-template-columns: 236px 1fr; min-height: 100vh; }
 .skel-side { display: grid; align-content: start; gap: 18px; padding: 40px 24px; border-right: 1px solid var(--line); }
 @media (max-width: 900px) { .skel-desk { grid-template-columns: 1fr; } .skel-side { display: none; } }
+
+/* where the visits happened: one choice, and the count from each place */
+.places { display: grid; gap: 8px; margin: -4px 0 18px; }

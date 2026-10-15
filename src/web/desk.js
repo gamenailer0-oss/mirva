@@ -6,7 +6,9 @@ import { pushState, turnOnPush, registerWorker } from "./notify.js";
 connection();
 const desk = document.body.dataset.desk; // "console" | "hq"
 const root = $("#desk");
-const S = { me: null, tab: "", brand: "", brands: [], days: 30, filter: "all" };
+const S = { me: null, tab: "", brand: "", brands: [], days: 30, filter: "all", place: "all" };
+// Where a visit happened: the store's own mirrors and tablets, its website (the Try it on button), or MIRVA's own app.
+const PLACES = [["all", "Everywhere"], ["store", "In the store"], ["web", "Your website"], ["app", "MIRVA app"]];
 const TABS = desk === "hq"
   ? [["today", "Today"], ["tryons", "Try-ons"], ["enquiries", "Enquiries"], ["stores", "Stores"], ["members", "Members"], ["outbox", "Outbox"], ["log", "Log"]]
   : [["overview", "Overview"], ["catalogue", "Catalogue"], ["mirrors", "Mirrors"], ["website", "Website"], ["limits", "Limits"], ["look", "Look and feel"]];
@@ -165,7 +167,7 @@ function door(message) {
 const VIEWS = {
   // =================================================================== a store's console
   async overview() {
-    const o = await api(`/api/console/overview?brand=${S.brand}&days=${S.days}`);
+    const o = await api(`/api/console/overview?brand=${S.brand}&days=${S.days}&place=${S.place}`);
     const f = o.funnel;
     const name = S.brands.find((b) => b.id === S.brand)?.name || S.brand;
     const spend = Object.fromEntries(o.spend.byKind.map((k) => [k.kind, k]));
@@ -179,6 +181,10 @@ const VIEWS = {
         el("button", { class: "chip", type: "button", text: "Print the week", onclick: () => (S.days === 7 ? print() : ((S.days = 7), go("overview"), setTimeout(print, 1200))) }),
       ),
       o.sample && el("p", { class: "sample", text: "Sample numbers. The seed script added a month of made-up visits so you can see the console at work. Real visits are counted beside them." }),
+      el("div", { class: "places" },
+        el("div", { class: "row", role: "group", "aria-label": "Where the visits happened" }, PLACES.map(([id, label]) => el("button", { class: "chip" + (S.place === id ? " on" : ""), type: "button", "aria-pressed": String(S.place === id), text: label, onclick: () => ((S.place = id), go("overview")) }))),
+        el("p", { class: "muted small", text: `Visits: ${num(o.places.store)} in the store · ${num(o.places.web)} on your website · ${num(o.places.app)} on the MIRVA app. Sales and a pilot's target count the store only.` }),
+      ),
       el("div", { class: "tiles" },
         tile("Stepped up", num(f.visits), "shoppers who began", 0),
         tile("Saw three looks", num(f.briefed), pct(f.briefed, f.visits) + " of those", 1),
@@ -229,7 +235,7 @@ const VIEWS = {
             ? [
                 el("dl", { class: "kv" },
                   el("dt", { text: "Sales" }), el("dd", { class: "num", text: `${num(o.sales.count)} · ${money(o.sales.pkr)}` }),
-                  el("dt", { text: "Try-on visits that bought" }), el("dd", { class: "num", text: `${num(o.sales.visits)} of ${num(f.tried)}${f.tried ? ` (${Math.round(o.sales.share * 100)}%)` : ""}` }),
+                  el("dt", { text: "Try-on visits that bought" }), el("dd", { class: "num", text: `${num(o.sales.visits)} of ${num(o.sales.tried)} in the store${o.sales.tried ? ` (${Math.round(o.sales.share * 100)}%)` : ""}` }),
                   o.plan?.share && [el("dt", { text: "Counted this month" }), el("dd", { class: "num", text: money(o.plan.share.counted) })],
                   o.plan?.share && [el("dt", { text: "Fee this month" }), el("dd", { class: "num", text: `${money(o.plan.share.fee)} (${o.plan.share.rate * 100}% of counted sales, never more than ${money(o.plan.share.cap)})` })],
                 ),

@@ -1255,11 +1255,11 @@ test("member-only routes refuse staff logins", async () => {
 });
 
 // --- the mirror when mirrors must be paired -----------------------------------------
-test("with closed mirrors, only a paired mirror or a signed-in member can send events and hand-offs", async () => {
+test("with closed mirrors, only a paired mirror or a signed-in member can hand off; anyone's visit is counted, by where it happened", async () => {
   const body = { brand: "sapphire", visit: "closed-1", events: [{ kind: "visit" }] };
   const basket = { brand: "sapphire", looks: [{ product: A.id }] };
   const anon = visitor(undefined, closed);
-  err(await anon.post("/api/events", body), 401, /not paired/);
+  assert.equal((await anon.post("/api/events", { ...body, visit: "closed-anon" })).body.stored, 1, "a visitor on MIRVA's site who has not signed in is counted");
   err(await anon.post("/api/handoff", basket), 401, /Pair this mirror/);
 
   const desk = await signInFounder(closed);
@@ -1459,4 +1459,31 @@ test("the founder's WhatsApp stays off the store site until the founder switches
   assert.equal((await desk.post("/api/hq/contact", { whatsapp: "0300 1234567", show: true })).status, 200);
   assert.equal((await visitor().get("/api/contact")).body.whatsapp, "923001234567");
   assert.equal((await desk.post("/api/hq/contact", { whatsapp: "0300 1234567", show: false })).status, 200);
+});
+
+test("a store's console counts tries from its mirror, its website and the MIRVA app, and can show each place alone", async () => {
+  const desk = await founder();
+  const made = (await desk.post("/api/console/devices", { brand: "lawrencepur", name: "Places mirror" })).body;
+  const paired = (await visitor().post("/api/pair", { code: made.code })).body;
+  const mirrorHeader = { "x-mirva-device": `${paired.device}.${paired.token}` };
+  const P = (await import("node:fs")).readFileSync(new URL("../brands/lawrencepur/catalogue.json", import.meta.url), "utf8");
+  const pid = JSON.parse(P).products[0].id;
+  const tryOn = (c, visit, headers) => c.post("/api/events", { brand: "lawrencepur", visit, events: [{ kind: "visit" }, { kind: "portrait", product: pid }, { kind: "keep", product: pid }] }, headers);
+  const before = (await desk.get("/api/console/overview?brand=lawrencepur&days=7")).body;
+  await tryOn(visitor(), "places-store", mirrorHeader);
+  const shopper = visitor();
+  assert.equal((await shopper.post("/api/auth/join", { name: "Places Member", email: mailFor("places"), password: PASSWORD, agree: true })).status, 200);
+  await tryOn(shopper, "places-member");
+  await tryOn(visitor(), "places-guest");
+  const all = (await desk.get("/api/console/overview?brand=lawrencepur&days=7")).body;
+  assert.equal(all.funnel.tried - before.funnel.tried, 3, "every try is on the dashboard " + JSON.stringify({ b: before.places, a: all.places }));
+  assert.equal(all.funnel.kept - before.funnel.kept, 3);
+  assert.equal(all.places.app - before.places.app, 2, "a member and a visitor on the MIRVA app");
+  assert.equal(all.places.store - before.places.store, 1, "and one at the store's own mirror");
+  const store = (await desk.get("/api/console/overview?brand=lawrencepur&days=7&place=store")).body;
+  assert.equal(store.place, "store");
+  assert.equal(store.funnel.tried - before.places.store, store.funnel.tried - before.places.store, "the store view reads the store only");
+  const app = (await desk.get("/api/console/overview?brand=lawrencepur&days=7&place=app")).body;
+  assert.ok(app.funnel.tried >= 2 && app.top.some((t) => t.product === pid), "the app view shows the pieces tried there");
+  assert.equal(all.sales.tried, store.sales.tried, "sales are measured against the store's own tries, whatever the view");
 });

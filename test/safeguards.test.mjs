@@ -857,7 +857,7 @@ test("sales counted on the mirror's tablet reach the overview, a pilot's target 
   const shop = await signIn(app, db, "retailer", "sapphire");
   const send = (visit, events) => call(app, "POST", "/api/events", { body: { brand: "sapphire", visit, events }, headers: dev.header });
   const overview = async () => (await call(app, "GET", "/api/console/overview", { headers: shop.headers })).body;
-  assert.deepEqual((await overview()).sales, { count: 0, pkr: 0, visits: 0, share: 0, byStaff: [] });
+  assert.deepEqual((await overview()).sales, { count: 0, pkr: 0, visits: 0, tried: 0, share: 0, byStaff: [] });
   assert.equal((await overview()).pilot, null);
 
   await plan(db, "sapphire", "results", 1, "pilot");

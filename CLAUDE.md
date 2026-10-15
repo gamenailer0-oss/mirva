@@ -99,3 +99,8 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   on the sheets (a mistake on them).
 - The head restore draws a visible box when hair is long (it pastes a square around the head that cuts across hair and
   neckline). Showcase pictures are made without it (`direct.mjs`); the restore itself needs fixing for real shoppers.
+- **The console showed zeros for weeks** because it counted only paired store mirrors: members' tries were saved as
+  "at home" and hidden, and visitors who had not signed in were refused outright. Now every try is counted with where it
+  happened (`events.sample`: 0 store mirror or staff, 1 seeded sample, 2 member on the MIRVA app, 3 visitor on the
+  MIRVA app, 4 the store's website) and the console filters by place; sales, a pilot's target and the cost per try-on
+  stay in-store (`store_events`). Lesson: when a number is zero, check what is filtered out before what is missing.
