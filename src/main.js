@@ -5,7 +5,7 @@ import { offerInstall } from "./web/install.js";
 import { registerWorker } from "./web/notify.js";
 import { lookPicture, lookWords, shareLook } from "./web/sharelook.js";
 import { readWorn, wornChanged } from "./worn.js";
-import { keepHer, onStudio } from "./keep.js";
+import { keepHer } from "./keep.js";
 import { wireTouch, flyTo } from "./web/touch.js";
 
 wireTouch();
@@ -695,12 +695,26 @@ async function reference(p) {
       const res = await fetch(p.ref).catch(() => null);
       if (res?.ok) ref = await res.blob();
     }
+    const lower = regionFor(p) === "lower body garment", upper = p.tradition === "west" && regionFor(p) === "upper body garment";
+    // A whole piece: the cloud's outlines of the store's photo (found once a piece, kept for every phone), the cloth laid
+    // on white here in a fraction of a second, scenery and all left out (src/cloth.js). Separates are cut at the waist
+    // or hips, which needs the body's pose: those, and anything the cloud cannot do, take the old way below.
+    if (!ref && p.ref !== null && !lower && !upper) {
+      try {
+        const res = await fetch(`/api/cloth/${S.brand.id}/${encodeURIComponent(p.id)}`, { signal: link.timeout(25000) });
+        const { size, masks } = res.ok ? await res.json() : {};
+        const photo = masks?.person ? await fetch(pic(p.image, size)) : null;
+        if (photo?.ok) ref = await (await import("./cloth.js")).clothOnly(await photo.blob(), masks);
+      } catch (e) {
+        console.warn("The cloud could not cut the garment picture; the phone will.", e);
+      }
+    }
     if (!ref && p.ref !== null) {
       try {
         const { cleanReference } = await import("./reference.js");
         // A larger photo than the look card shows, cut down to the figure: the engine reads the print and the embroidery from these pixels.
         const large = await fetch(pic(p.image, 1200)).catch(() => null);
-        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200, lower: regionFor(p) === "lower body garment", upper: p.tradition === "west" && regionFor(p) === "upper body garment" })).blob;
+        ref = (await cleanReference(large?.ok ? await large.blob() : await garment(p), { tight: true, maxSide: 1200, lower, upper })).blob;
       } catch (e) {
         console.warn("Could not prepare the garment picture.", e);
       }
@@ -1026,17 +1040,17 @@ const postFinished = (saved, blob) => saved && fetch(`/api/portrait/${saved}`, {
 /**
  * Turns what the server sent into the portrait she sees, her own face kept, whatever the phone:
  *  - from the second engine (FASHN): as it came, the engine kept her face itself;
- *  - from Decart with the cloud's outlines: her face, hair and shoes laid back (src/keep.js), and for a busy wall a
- *    studio version beside it; if Decart moved her head, the second engine makes the same look again (a "retake");
+ *  - from Decart with the cloud's outlines: her face, hair and shoes laid back (src/keep.js); if Decart moved her
+ *    head, the second engine makes the same look again (a "retake");
  *  - without outlines (fal out of credit or down): the old restore on this phone (src/restore.js).
- * The finished picture goes back to the server for a member's wardrobe. Resolves { blob, saved, studio }.
+ * The finished picture goes back to the server for a member's wardrobe. Resolves { blob, saved }.
  */
-async function finishPortrait(person, shot, { form, studio: busy, ticket }, report) {
+async function finishPortrait(person, shot, { form, ticket }, report) {
   const t0 = performance.now();
   let saved = shot.saved;
   const done = (how, blob, extra = {}) => {
     Object.assign(report, { how, ms: Math.round(performance.now() - t0), engine: extra.engine || shot.meta?.engine || "decart", cloud: shot.meta?.ms || null });
-    return { blob, saved, studio: extra.studio || null };
+    return { blob, saved };
   };
   const meta = shot.meta;
   if (meta?.face === "engine") return done("engine", shot.blob);
@@ -1054,9 +1068,8 @@ async function finishPortrait(person, shot, { form, studio: busy, ticket }, repo
       }
       const kept = her && drawn ? await keepHer(person, shot.blob, { her, drawn, drawnSize }) : { how: "nomask" };
       if (kept.how === "kept") {
-        const onWall = busy && drawn.person ? await onStudio(kept.blob, kept.m, kept.grid, kept.filled).catch(() => null) : null;
-        postFinished(saved, onWall || kept.blob);
-        return done(onWall ? "kept+studio" : "kept", kept.blob, { studio: onWall });
+        postFinished(saved, kept.blob);
+        return done("kept", kept.blob);
       }
       if (kept.how === "moved" && ticket === S.ticket) {
         // Decart moved her head, so hers cannot be laid back: the same look from the second engine, which keeps faces itself.
@@ -1102,16 +1115,8 @@ async function smallCopy(blob, width) {
   }
 }
 
-/** Puts a finished version in place of the one kept for a look, without showing it (she has moved on). */
-async function swapIn(entry, blob) {
-  const old = entry.url;
-  Object.assign(entry, { url: URL.createObjectURL(blob), thumb: await thumbOf(blob) });
-  setTimeout(() => URL.revokeObjectURL(old), 2000);
-}
-
-// Model: one portrait of the shopper in the piece, in her own pose, framing and light (the engine edits the clothes
-// and nothing else). If the wall behind her is not plain, a second, quiet pass puts the same portrait on a studio
-// backdrop, and the glass fades to it when it is ready. See src/portrait.js and docs/portrait-experiments.md.
+// Model: one portrait of the shopper in the piece, in her own pose, framing, light and room (the engine edits the
+// clothes and nothing else). See src/portrait.js and docs/portrait-experiments.md.
 async function modelShot(p, { retake = false } = {}) {
   mirror.touch();
   if (p.photoOnly) return caption(PHOTO_ONLY_LINE);
@@ -1180,9 +1185,9 @@ async function modelShot(p, { retake = false } = {}) {
     if (worn) form.append(worn.half === "below" ? "wornBelow" : "wornAbove", worn.name);
     // The cloud's finish (lib/finish.mjs): the outlines of her face, hair and shoes come with the portrait, and are
     // laid back here in a tenth of a second (src/keep.js). The same photo as her last portrait needs no new outlines
-    // of her; a busy wall behind her gets its figure outline too, for the studio wall.
+    // of her. Her own room stays behind her, busy or not: the founder's call on 15 October 2026, after the studio wall
+    // made a shopper look pasted on ("it gives off the feel of natural, which helps").
     form.append("finish", "cloud");
-    if (look.busy) form.append("studio", "1");
     const herKey = await fingerprint(person);
     if (herKey && S.herOutlines?.key === herKey) form.append("her", "known");
     const shotFrom = performance.now();
@@ -1201,10 +1206,10 @@ async function modelShot(p, { retake = false } = {}) {
     const shotMs = performance.now() - shotFrom;
     const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // only the old way on the phone takes this long
     const face = {};
-    const { blob, saved, studio } = await finishPortrait(person, shot, { p, form, studio: look.busy, ticket }, face);
+    const { blob, saved } = await finishPortrait(person, shot, { p, form, ticket }, face);
     clearTimeout(slow);
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
-    const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: studio ? "done" : null };
+    const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved };
     // value: seconds from asking to the finished picture; meta: whether her own face went back (and how), which engine, and the time of each part
     link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) });
     S.visit.portraits++;
@@ -1218,26 +1223,6 @@ async function modelShot(p, { retake = false } = {}) {
     setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
     // Her free portrait: the next step is to keep it, and that is joining.
     if (guest) setTimeout(() => ticket === S.ticket && S.view === "portrait" && askToJoin("Join free to keep this one and see the other two on you."), 6000);
-
-    // A busy wall behind her: she is first shown as she stood, in her own place; a moment later the room eases away
-    // onto a quiet studio wall. Nothing is drawn again (the figure is cut out along the cloud's outline), so her face
-    // cannot change, and it costs no wait: the studio version was made with the first.
-    if (studio) {
-      setTimeout(async () => {
-        if (S.portraits.get(p.id) !== entry || ticket !== S.ticket || S.view !== "portrait" || S.portrait?.pid !== p.id) {
-          if (S.portraits.get(p.id) === entry) swapIn(entry, studio); // she moved on: the studio version is simply what is kept
-          return;
-        }
-        const url = URL.createObjectURL(studio);
-        if (await pass.crossfade($("#portrait"), url, 1100)) {
-          const old = entry.url;
-          Object.assign(entry, { url, thumb: await thumbOf(studio) });
-          if (S.portrait?.pid === p.id) S.portrait = { pid: p.id, ...entry };
-          setTimeout(() => URL.revokeObjectURL(old), 2000);
-          if (ticket === S.ticket && S.view === "portrait") caption(pass.BACKDROP_LINE);
-        }
-      }, 1600);
-    }
   } catch (e) {
     console.error(e);
     dev.cancel(); // does nothing if another look has taken the glass since

@@ -29,11 +29,21 @@ test("a portrait is shown only after the shopper's own head has been kept", () =
   assert.doesNotMatch(modelShot, /createObjectURL\((drawn|shot\.blob)\)/);
 });
 
-test("a busy wall becomes a studio wall by cutting her out, never by drawing her again", () => {
+// The founder's call, 15 October 2026: her own room stays behind her, busy or not ("it gives off the feel of natural").
+// The studio wall cut her out and made her look pasted on.
+test("her own room stays behind her: no studio wall, and no second drawing of the portrait", () => {
   assert.doesNotMatch(modelShot, /append\("mode", "backdrop"\)/, "no second drawing of the portrait");
-  assert.match(modelShot, /form\.append\("studio", "1"\)/, "the figure's outline is asked for with the portrait");
-  assert.match(finisher, /busy && drawn\.person \? await onStudio\(kept\.blob, kept\.m, kept\.grid, kept\.filled\)/);
-  assert.match(modelShot, /pass\.crossfade\(\$\("#portrait"\), url, 1100\)/, "she is shown in her own place first, then the room eases away");
+  assert.doesNotMatch(modelShot, /append\("studio"/, "the figure is never asked for to cut her out");
+  assert.doesNotMatch(main, /onStudio\(/);
+});
+
+// A store loaded from its website: the cloud finds the cloth in the store's own photo (no 16 MB model on the phone, and
+// no scenery left: Rang Rasiya's red curtain came back as a red yoke on a navy suit).
+test("a store's photo with no garment picture made ahead is cut by the cloud's outlines first", () => {
+  const ref = main.slice(main.indexOf("async function reference(p)"), main.indexOf("function needMirror"));
+  assert.match(ref, /fetch\(`\/api\/cloth\/\$\{S\.brand\.id\}\/\$\{encodeURIComponent\(p\.id\)\}`/);
+  assert.match(ref, /clothOnly\(await photo\.blob\(\), masks\)/);
+  assert.ok(ref.indexOf("/api/cloth/") < ref.indexOf("cleanReference"), "the phone's own cut only when the cloud cannot");
 });
 
 test("the fat 16 MB restore model is fetched only when the old restore is needed", () => {

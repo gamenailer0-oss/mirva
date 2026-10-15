@@ -47,7 +47,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Commit first; end commit messages with the Co-Authored-By line.
 - **Look before calling a screen done**: start the dev server (preview `mirva`, port 4310), then
   `npm run look -- /retail /mirror` (add `--live` for the live site). Read the screenshots in `tools/shots/`.
-- **Tests**: `npm test` (224 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (230 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
   site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
@@ -154,8 +154,15 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **How a portrait is made (from 2026-10-15)**: the mirror sends `finish=cloud`. lib/app.mjs asks Decart for the portrait
   while fal's SAM 3 outlines her face, hair, figure and footwear (lib/finish.mjs `HER`); the answer (lib/shot.mjs: 4-byte
   length + JSON + picture) carries her outlines and a signed one-use pass; the phone sends a 360-px copy to `/api/outline`
-  for the portrait's own (face, hair, footwear, + figure for a busy wall), lays her face, hair and shoes back
-  (src/keep.js, ~0.1 s), and for a busy wall cuts her onto a studio wall 1.6 s after the unveil (no second drawing).
+  for the portrait's own (face, hair, footwear), lays her face, hair and shoes back (src/keep.js, ~0.1 s). **Her own
+  room always stays** (founder's rule, 15 Oct: the studio wall made a shopper look pasted on; "natural helps"): the
+  mirror never sends `studio`, and the server's studio path is only for old mirrors.
+- **A store loaded from its website** has no garment pictures made ahead. The phone asks `/api/cloth/<store>/<piece>`:
+  SAM 3 outlines the store's photo at 1000 px (person, face, hair, neck, skin; US$0.025, once a piece, kept in the
+  `cloth` table), and src/cloth.js lays the cloth on white in its own box (0.77 s on a processor slowed 4x; the whole
+  photo took 2.8 s). Before: the phone fetched the 16 MB model and painted out only hair and skin, so a boutique's
+  scenery stayed (Rang Rasiya's red curtain came back as a red yoke on a navy suit). Western separates (cut at the
+  waist by pose) still take the phone's old cut.
   Decart moved her head: a `retake` from FASHN. Decart out of credit or down: FASHN makes it. fal down or out of credit:
   the old restore on the phone (src/restore.js, its 16 MB model fetched only then). The server stores only the entry;
   the phone's finished picture is the file. Old mirrors get exactly the old answer. Before: a friend's Android showed the

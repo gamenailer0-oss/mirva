@@ -246,3 +246,44 @@ test("a portrait the phone finishes is stored as finished: the engine's raw pict
   const old = await shot(app, { finish: undefined }, cookie);
   assert.ok(kept.has(old.headers.get("x-mirva-portrait")), "an old mirror's portrait is stored at once, as before");
 });
+
+// A store loaded from its website has no garment pictures made ahead: the cloud finds the cloth in its own photo once
+// a piece (src/cloth.js lays it on white), and every phone after that gets the same outlines without a new call.
+test("a piece's cloth is outlined once, from the store's own picture at the agreed size, and then kept", async () => {
+  const { app, db } = await makeApp();
+  const get = (path, n = ++ip) => app.fetch(new Request("http://localhost:4999" + path), { ip: `10.7.2.${n}` });
+  const asked = [];
+  const before = sam;
+  sam = (prompt) => (asked.push(prompt), Response.json({ rle: prompt === "person" ? "10 5" : "" }));
+  try {
+    calls = [];
+    const first = await get(`/api/cloth/sapphire/${product.id}`);
+    assert.equal(first.status, 200);
+    const body = await first.json();
+    assert.equal(body.size, 1000);
+    assert.deepEqual(Object.keys(body.masks).sort(), ["face", "hair", "neck", "person", "skin"]);
+    assert.equal(body.masks.person, "10 5");
+    assert.deepEqual(calls.sort(), ["sam:face*", "sam:hair*", "sam:neck*", "sam:person", "sam:skin*"]);
+    const row = await db.get("SELECT image FROM cloth WHERE brand = 'sapphire' AND product = ?", product.id);
+    assert.equal(row.image, new URL(product.image).origin + new URL(product.image).pathname + "?sw=1000", "the very picture the phone fetches through /img at that width");
+
+    calls = [];
+    const again = await get(`/api/cloth/sapphire/${product.id}`);
+    assert.equal(again.status, 200);
+    assert.equal((await again.json()).masks.person, "10 5");
+    assert.deepEqual(calls, [], "the second phone costs nothing");
+
+    assert.equal((await get("/api/cloth/sapphire/NOPE")).status, 404);
+    assert.equal((await get(`/api/cloth/elsewhere/${product.id}`)).status, 404);
+  } finally {
+    sam = before;
+  }
+});
+
+test("new cloth outlines are held to a ceiling an hour from one address", async () => {
+  const { app } = await makeApp();
+  const many = catalogue.products.slice(0, 31);
+  let last;
+  for (const p of many) last = await app.fetch(new Request(`http://localhost:4999/api/cloth/sapphire/${encodeURIComponent(p.id)}`), { ip: "10.7.3.1" });
+  assert.equal(last.status, 429);
+});
