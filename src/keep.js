@@ -218,12 +218,16 @@ export async function onStudio(blob, m, [gw, gh], filled = null) {
     wall.addColorStop(1, "#cfcfcb");
     ctx.fillStyle = wall;
     ctx.fillRect(0, 0, W, H);
-    // a soft shadow where she stands
-    const floor = ctx.createRadialGradient(W * 0.5, H * 0.95, 4, W * 0.5, H * 0.95, W * 0.42);
-    floor.addColorStop(0, "rgba(40,40,44,.20)");
+    // a soft shadow where she stands: an ellipse that fades to nothing, so no edge of it can show as a line
+    ctx.save();
+    ctx.translate(W * 0.5, H * 0.955);
+    ctx.scale(1, 0.16);
+    const floor = ctx.createRadialGradient(0, 0, 2, 0, 0, W * 0.46);
+    floor.addColorStop(0, "rgba(40,40,44,.22)");
     floor.addColorStop(1, "rgba(40,40,44,0)");
     ctx.fillStyle = floor;
-    ctx.fillRect(0, H * 0.82, W, H * 0.18);
+    ctx.fillRect(-W, -H * 4, W * 2, H * 8);
+    ctx.restore();
     const layer = canvasOf(W, H);
     const lctx = layer.getContext("2d");
     lctx.drawImage(bmp, 0, 0);
