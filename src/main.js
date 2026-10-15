@@ -5,6 +5,7 @@ import { offerInstall } from "./web/install.js";
 import { registerWorker } from "./web/notify.js";
 import { lookPicture, lookWords, shareLook } from "./web/sharelook.js";
 import { readWorn, wornChanged } from "./worn.js";
+import { keepHer, onStudio } from "./keep.js";
 import { wireTouch, flyTo } from "./web/touch.js";
 
 wireTouch();
@@ -741,7 +742,6 @@ function choose(p) {
   if (p.photoOnly) return syncGlass(), caption(PHOTO_ONLY_LINE), openPhoto(p);
   if (!mirror.awake) return needMirror(p);
   mirror.preload();
-  if (S.mode !== "studio") fetchAhead();
   if (S.mode === "studio") return studio(p);
   if (S.mode === "model") return modelShot(p);
   syncGlass();
@@ -1004,17 +1004,79 @@ async function ownHead(person, portrait, saved, options, report = {}) {
     return done("error", portrait);
   }
 }
-// What one portrait went through, in the record's short note: "face=moved shot=17.2 fix=9.8" (seconds).
-const shotNote = (face, shotMs) => `face=${face.how || "?"} shot=${(shotMs / 1000).toFixed(1)} fix=${((face.ms || 0) / 1000).toFixed(1)}`;
-// A wrong face is worse than a longer wait, so the restore is given time: on a slow line its model is still arriving.
+// What one portrait went through, in the record's short note: "face=kept eng=decart shot=17.2 fix=0.2" (seconds).
+const shotNote = (face, shotMs) => `face=${face.how || "?"} eng=${face.engine || "decart"} shot=${(shotMs / 1000).toFixed(1)} fix=${((face.ms || 0) / 1000).toFixed(1)}`;
+// A wrong face is worse than a longer wait, so the old restore is given time: on a slow line its model is still arriving.
+// It runs only when the cloud could not outline (fal out of credit or down): its 16 MB model is never fetched otherwise.
 const RESTORE_WAIT = 45000;
-// The model is 16 MB. It starts coming the first time a look is chosen (only fetched, into the browser's cache: nothing is
-// compiled yet, so the camera never stutters), unless the shopper has asked her browser to save data.
-let fetched = false;
-function fetchAhead() {
-  if (fetched || navigator.connection?.saveData) return;
-  fetched = true;
-  for (const f of ["selfie_multiclass_256x256.tflite", "blaze_face_short_range.tflite"]) fetch(`/models/${f}`, { priority: "low" }).catch(() => {});
+
+/** A short fingerprint of her photo, so a second portrait from the same photo reuses its outlines. "" if it cannot be had. */
+async function fingerprint(blob) {
+  try {
+    const d = new Uint8Array(await crypto.subtle.digest("SHA-1", await blob.arrayBuffer()));
+    return [...d.slice(0, 10)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  } catch {
+    return "";
+  }
+}
+
+const postFinished = (saved, blob) => saved && fetch(`/api/portrait/${saved}`, { method: "POST", headers: { ...link.auth(), "content-type": blob.type }, body: blob }).catch(() => {});
+
+/**
+ * Turns what the server sent into the portrait she sees, her own face kept, whatever the phone:
+ *  - from the second engine (FASHN): as it came, the engine kept her face itself;
+ *  - from Decart with the cloud's outlines: her face, hair and shoes laid back (src/keep.js), and for a busy wall a
+ *    studio version beside it; if Decart moved her head, the second engine makes the same look again (a "retake");
+ *  - without outlines (fal out of credit or down): the old restore on this phone (src/restore.js).
+ * The finished picture goes back to the server for a member's wardrobe. Resolves { blob, saved, studio }.
+ */
+async function finishPortrait(person, shot, { form, studio: busy, ticket }, report) {
+  const t0 = performance.now();
+  let saved = shot.saved;
+  const done = (how, blob, extra = {}) => {
+    Object.assign(report, { how, ms: Math.round(performance.now() - t0), engine: extra.engine || shot.meta?.engine || "decart" });
+    return { blob, saved, studio: extra.studio || null };
+  };
+  const meta = shot.meta;
+  if (meta?.face === "engine") return done("engine", shot.blob);
+  if (meta?.face === "cloud") {
+    try {
+      const her = meta.her || S.herOutlines?.her;
+      const kept = her ? await keepHer(person, shot.blob, { her, drawn: meta.drawn }) : { how: "nomask" };
+      if (kept.how === "kept") {
+        const onWall = busy && meta.drawn.person ? await onStudio(kept.blob, kept.m, kept.grid, kept.filled).catch(() => null) : null;
+        postFinished(saved, onWall || kept.blob);
+        return done(onWall ? "kept+studio" : "kept", kept.blob, { studio: onWall });
+      }
+      if (kept.how === "moved" && ticket === S.ticket) {
+        // Decart moved her head, so hers cannot be laid back: the same look from the second engine, which keeps faces itself.
+        const again = new FormData();
+        for (const k of ["person", "reference", "brand", "product"]) again.append(k, form.get(k));
+        again.append("mode", "retake");
+        again.append("finish", "cloud");
+        if (saved) again.append("replaces", saved);
+        try {
+          const r = await pass.requestShot(again, { headers: link.auth(), timeout: link.timeout });
+          saved = r.saved || saved;
+          return done("retake", r.blob, { engine: "fashn" });
+        } catch (e) {
+          console.warn("The second studio could not retake it; her head is laid back the old way.", e);
+        }
+      }
+    } catch (e) {
+      console.warn("The outlines could not be laid; her head is laid back the old way.", e);
+    }
+  }
+  const sub = {};
+  const blob = await ownHead(person, shot.blob, saved, undefined, sub);
+  return done(`device-${sub.how || "?"}`, blob);
+}
+
+/** Puts a finished version in place of the one kept for a look, without showing it (she has moved on). */
+async function swapIn(entry, blob) {
+  const old = entry.url;
+  Object.assign(entry, { url: URL.createObjectURL(blob), thumb: await thumbOf(blob) });
+  setTimeout(() => URL.revokeObjectURL(old), 2000);
 }
 
 // Model: one portrait of the shopper in the piece, in her own pose, framing and light (the engine edits the clothes
@@ -1086,27 +1148,34 @@ async function modelShot(p, { retake = false } = {}) {
     form.append("product", p.id);
     form.append("mode", "portrait");
     if (worn) form.append(worn.half === "below" ? "wornBelow" : "wornAbove", worn.name);
+    // The cloud's finish (lib/finish.mjs): the outlines of her face, hair and shoes come with the portrait, and are
+    // laid back here in a tenth of a second (src/keep.js). The same photo as her last portrait needs no new outlines
+    // of her; a busy wall behind her gets its figure outline too, for the studio wall.
+    form.append("finish", "cloud");
+    if (look.busy) form.append("studio", "1");
+    const herKey = await fingerprint(person);
+    if (herKey && S.herOutlines?.key === herKey) form.append("her", "known");
     const shotFrom = performance.now();
-    const asked = pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
-    restorer().then((m) => m?.warmRestore()); // its models load, and take their slow first look, behind the wait
-    let { blob: drawn, saved, guest } = await asked;
+    let shot = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
     // Her own half came back a different colour (a shirt that brought the model's jeans with it): once more, quietly,
     // inside the same wait. The better of the two is kept. A first portrait before joining is not made twice.
-    if (worn && !guest && ticket === S.ticket && (await wornChanged(worn, drawn))) {
+    if (worn && !shot.guest && ticket === S.ticket && (await wornChanged(worn, shot.blob))) {
       try {
         const again = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout });
-        if (!(await wornChanged(worn, again.blob))) ({ blob: drawn, saved } = again);
+        if (!(await wornChanged(worn, again.blob))) shot = again;
       } catch {}
     }
+    const { guest } = shot;
     if (guest) S.guestUsed = true; // her one portrait before joining
+    if (shot.meta?.her && herKey) S.herOutlines = { key: herKey, her: shot.meta.her };
     const shotMs = performance.now() - shotFrom;
-    const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // its model is still arriving
+    const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // only the old way on the phone takes this long
     const face = {};
-    const blob = await ownHead(person, drawn, saved, undefined, face);
+    const { blob, saved, studio } = await finishPortrait(person, shot, { p, form, studio: look.busy, ticket }, face);
     clearTimeout(slow);
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
-    const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: null };
-    // value: seconds from asking to the finished picture; meta: whether her own face went back, and the time of each part
+    const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved, backdrop: studio ? "done" : null };
+    // value: seconds from asking to the finished picture; meta: whether her own face went back (and how), which engine, and the time of each part
     link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) });
     S.visit.portraits++;
     if (link.member) link.whoIsHere().then(showMember);
@@ -1120,41 +1189,24 @@ async function modelShot(p, { retake = false } = {}) {
     // Her free portrait: the next step is to keep it, and that is joining.
     if (guest) setTimeout(() => ticket === S.ticket && S.view === "portrait" && askToJoin("Join free to keep this one and see the other two on you."), 6000);
 
-    // The wall is not plain: make the same portrait again on a studio backdrop, without a spinner, one ask for each
-    // portrait however often she taps. If it fails the first picture stays, and she is never told.
-    if (look.busy && !entry.backdrop) {
-      entry.backdrop = "asking";
-      const again = new FormData();
-      again.append("person", blob, "portrait.png");
-      again.append("brand", S.brand.id);
-      again.append("product", p.id);
-      again.append("mode", "backdrop");
-      if (saved) again.append("replaces", saved);
-      const wallFrom = performance.now();
-      pass
-        .requestShot(again, { headers: link.auth(), timeout: link.timeout })
-        .then(async (next) => {
-          if (S.portraits.get(p.id) !== entry) return; // her pictures were cleared meanwhile: nothing to put it in
-          const wallMs = performance.now() - wallFrom, face2 = {};
-          next.blob = await ownHead(blob, next.blob, next.saved, { tight: true }, face2); // the wall is new; her face is not
-          link.track("backdrop", { product: p.id, value: Math.round((wallMs + (face2.ms || 0)) / 100) / 10, meta: shotNote(face2, wallMs) });
-          if (S.portraits.get(p.id) !== entry) return;
-          const url = URL.createObjectURL(next.blob);
+    // A busy wall behind her: she is first shown as she stood, in her own place; a moment later the room eases away
+    // onto a quiet studio wall. Nothing is drawn again (the figure is cut out along the cloud's outline), so her face
+    // cannot change, and it costs no wait: the studio version was made with the first.
+    if (studio) {
+      setTimeout(async () => {
+        if (S.portraits.get(p.id) !== entry || ticket !== S.ticket || S.view !== "portrait" || S.portrait?.pid !== p.id) {
+          if (S.portraits.get(p.id) === entry) swapIn(entry, studio); // she moved on: the studio version is simply what is kept
+          return;
+        }
+        const url = URL.createObjectURL(studio);
+        if (await pass.crossfade($("#portrait"), url, 1100)) {
           const old = entry.url;
-          const here = ticket === S.ticket && S.view === "portrait" && S.portrait?.pid === p.id;
-          if (here) await pass.crossfade($("#portrait"), url); // she has moved on otherwise: the picture is only kept
-          Object.assign(entry, { url, thumb: await thumbOf(next.blob), saved: next.saved || entry.saved, backdrop: "done" });
+          Object.assign(entry, { url, thumb: await thumbOf(studio) });
           if (S.portrait?.pid === p.id) S.portrait = { pid: p.id, ...entry };
           setTimeout(() => URL.revokeObjectURL(old), 2000);
-          if (here && ticket === S.ticket && S.view === "portrait") {
-            caption(pass.BACKDROP_LINE);
-            setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
-          }
-        })
-        .catch((e) => {
-          entry.backdrop = "failed";
-          console.warn("The studio backdrop did not come out; the first portrait stays.", e);
-        });
+          if (ticket === S.ticket && S.view === "portrait") caption(pass.BACKDROP_LINE);
+        }
+      }, 1600);
     }
   } catch (e) {
     console.error(e);

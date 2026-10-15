@@ -2,6 +2,8 @@
 // the call to the server (with one polite retry when the studio is busy), and the cross-fade to the version on a
 // studio backdrop. src/main.js decides what to do with each; none of it needs the camera or the pose model.
 
+import { SHOT_TYPE, unpackShot } from "../lib/shot.mjs";
+
 export const DIM_LINE = "It's dim where you are. Face a window or a lamp, then try again.";
 export const BUSY_LINE = "The studio is busy. One more try.";
 export const BACKDROP_LINE = "Now on a studio backdrop.";
@@ -79,7 +81,15 @@ export async function lookAt(blob) {
 export async function requestShot(form, { headers = {}, timeout, onBusy, wait = 2000, fetcher = fetch } = {}) {
   const once = async () => {
     const res = await fetcher("/api/model-shot", { method: "POST", body: form, headers, signal: timeout ? timeout(75000) : undefined });
-    if (res.ok) return { blob: await res.blob(), saved: res.headers.get("x-mirva-portrait") || null, guest: res.headers.get("x-mirva-guest") === "1" };
+    if (res.ok) {
+      const saved = res.headers.get("x-mirva-portrait") || null, guest = res.headers.get("x-mirva-guest") === "1";
+      // A new mirror's answer carries what happened and the outlines with the picture (lib/shot.mjs).
+      if ((res.headers.get("content-type") || "").startsWith(SHOT_TYPE)) {
+        const { meta, picture } = unpackShot(await res.arrayBuffer());
+        return { blob: new Blob([picture], { type: meta.type || "image/png" }), saved, guest, meta };
+      }
+      return { blob: await res.blob(), saved, guest, meta: null };
+    }
     let body = null;
     try {
       body = await res.json();

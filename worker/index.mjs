@@ -75,6 +75,7 @@ async function start(env, origin) {
     env: {
       key,
       hasKey,
+      falKey: String(env.FAL_KEY || "").trim(), // a Worker secret: the outlines that keep her own face, and the second engine
       origin: publicOrigin,
       origins: new Set([publicOrigin, origin]),
       hosts: null, // Cloudflare only delivers requests for this app's own hostnames

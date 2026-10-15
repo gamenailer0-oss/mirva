@@ -11,20 +11,32 @@ const main = read("src/main.js");
 const modelShot = main.slice(main.indexOf("async function modelShot"), main.indexOf("// Studio: the piece on her"));
 const helper = main.slice(main.indexOf("async function ownHead"), main.indexOf("const RESTORE_WAIT"));
 
-test("a portrait is shown only after the shopper's own head has been laid back on it", () => {
-  assert.ok(modelShot.length > 500 && helper.length > 200, "the portrait flow is where this test expects it");
-  const restored = modelShot.indexOf("const blob = await ownHead(person, drawn, saved, undefined, face);");
-  assert.match(main, /const RESTORE_WAIT = (\d+);/);
-  assert.ok(Number(main.match(/const RESTORE_WAIT = (\d+);/)[1]) >= 30000, "the restore is given time on a slow line: a wrong face is worse than a wait");
-  assert.ok(restored > 0, "the engine's picture goes through ownHead");
-  assert.ok(restored < modelShot.indexOf("showPortrait(entry, p.id)"), "and only then is it shown");
+// Since 15 October 2026 her face is kept by the cloud's outlines (src/keep.js), the second engine, or, when neither is
+// to be had, the old restore on the phone. Whichever: nothing reaches the glass before it has been through finishPortrait.
+const finisher = main.slice(main.indexOf("async function finishPortrait"), main.indexOf("/** Puts a finished version in place"));
+test("a portrait is shown only after the shopper's own head has been kept", () => {
+  assert.ok(modelShot.length > 500 && helper.length > 200 && finisher.length > 500, "the portrait flow is where this test expects it");
+  const finished = modelShot.indexOf("await finishPortrait(person, shot,");
+  assert.ok(finished > 0, "the engine's picture goes through finishPortrait");
+  assert.ok(finished < modelShot.indexOf("showPortrait(entry, p.id)"), "and only then is it shown");
+  assert.match(finisher, /if \(meta\?\.face === "engine"\) return done\("engine", shot\.blob\);/, "the second engine's picture kept her face itself");
+  assert.match(finisher, /await keepHer\(person, shot\.blob, \{ her, drawn: meta\.drawn \}\)/, "Decart's picture gets her own face, hair and shoes back");
+  assert.match(finisher, /mode", "retake"/, "a head the engine moved is made again by the second engine");
+  assert.match(finisher, /await ownHead\(person, shot\.blob, saved, undefined, sub\)/, "and without outlines, the old restore on the phone");
+  assert.ok(Number(main.match(/const RESTORE_WAIT = (\d+);/)[1]) >= 30000, "the old restore is given time on a slow line: a wrong face is worse than a wait");
   // the picture the engine drew is never the one that is kept or shown
-  assert.doesNotMatch(modelShot, /createObjectURL\(drawn\)/);
+  assert.doesNotMatch(modelShot, /createObjectURL\((drawn|shot\.blob)\)/);
 });
 
-test("the studio backdrop pass is restored too, from the finished first portrait", () => {
-  assert.match(modelShot, /again\.append\("person", blob, "portrait\.png"\)/, "the backdrop is made from the finished portrait");
-  assert.match(modelShot, /next\.blob = await ownHead\(blob, next\.blob, next\.saved, \{ tight: true \}, face2\)/);
+test("a busy wall becomes a studio wall by cutting her out, never by drawing her again", () => {
+  assert.doesNotMatch(modelShot, /append\("mode", "backdrop"\)/, "no second drawing of the portrait");
+  assert.match(modelShot, /form\.append\("studio", "1"\)/, "the figure's outline is asked for with the portrait");
+  assert.match(finisher, /onStudio\(kept\.blob, kept\.m, kept\.grid, kept\.filled\)/);
+  assert.match(modelShot, /pass\.crossfade\(\$\("#portrait"\), url, 1100\)/, "she is shown in her own place first, then the room eases away");
+});
+
+test("the fat 16 MB restore model is fetched only when the old restore is needed", () => {
+  assert.doesNotMatch(main, /fetchAhead|warmRestore/);
 });
 
 // Asked to change only the wall, the engine still redraws the garment (a bottle green suit came back emerald). The
@@ -42,7 +54,8 @@ test("no portrait is drawn from words alone: without the garment's picture she i
   assert.ok(at > 0);
   const after = modelShot.slice(at, at + 900);
   assert.match(after, /if \(!ref\) \{[\s\S]*?caption\(PHOTO_ONLY_LINE\), openPhoto\(p\);[\s\S]*?return;/);
-  assert.ok(after.indexOf("return;") < after.indexOf("pass.requestShot"), "and nothing is asked of the engine");
+  const ask = modelShot.indexOf("pass.requestShot", at);
+  assert.ok(ask > 0 && at + after.indexOf("return;") < ask, "and nothing is asked of the engine");
   assert.doesNotMatch(main, /drawn from the description/);
 });
 
@@ -115,7 +128,6 @@ test("a portrait that cannot be finished is shown as it came, never withheld", (
 // each part took: a friend's Android showed the engine's faces for a whole afternoon and nothing said why.
 test("each portrait records whether her own face went back, and how long each part took", () => {
   assert.match(modelShot, /link\.track\("portrait", \{ product: p\.id, value: [^}]*meta: shotNote\(face, shotMs\) \}\)/);
-  assert.match(modelShot, /link\.track\("backdrop", \{ product: p\.id, [^}]*meta: shotNote\(face2, wallMs\) \}\)/);
-  assert.match(main, /const shotNote = \(face, shotMs\) =>/);
+  assert.match(main, /const shotNote = \(face, shotMs\) => .face=\$\{face\.how \|\| "\?"\} eng=\$\{face\.engine \|\| "decart"\}/, "which engine made it is on the record too");
   assert.match(read("lib/platform.mjs"), /"backdrop", \/\/ the second, studio-wall pass/);
 });

@@ -181,6 +181,7 @@ const app = await createApp({
   env: {
     key: KEY,
     hasKey: HAS_KEY,
+    falKey: (process.env.FAL_KEY || "").trim(), // fal.ai: the outlines that keep her own face, and the second engine (lib/finish.mjs)
     origin: ORIGIN,
     origins: ORIGINS,
     hosts: HOSTS,
