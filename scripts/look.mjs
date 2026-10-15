@@ -21,6 +21,8 @@ for (const [name, w, h, mobile] of [["phone", 390, 844, true], ["laptop", 1366, 
   page.on("pageerror", (e) => console.log(`  ${name} page error:`, String(e).slice(0, 200)));
   for (const p of pages) {
     await page.goto(base + p, { waitUntil: "networkidle2" });
+    // A store's own page writes itself from the API: wait for its heading, or it is shot blank.
+    await page.waitForSelector("h1", { timeout: 8000 }).catch(() => {});
     const total = await page.evaluate(() => document.documentElement.scrollHeight);
     for (let y = 0; y < total; y += h * 0.7) await page.evaluate((y) => scrollTo(0, y), y), await new Promise((r) => setTimeout(r, 150));
     await page.evaluate(() => scrollTo(0, 0));
