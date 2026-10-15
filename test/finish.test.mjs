@@ -228,3 +228,21 @@ test("FASHN is told what kind of piece it is: a western top keeps her own trouse
   assert.equal(fashnCategory({ tradition: "west", name: "Linen Co-ord Set" }), "auto");
   assert.equal(fashnCategory({ tradition: "east", name: "3 Piece - Printed Khaddar Suit" }), "auto");
 });
+
+test("a portrait the phone finishes is stored as finished: the engine's raw picture is never kept for it", async () => {
+  const { app } = await makeApp({ openMirror: false });
+  const join = await app.fetch(
+    new Request("http://localhost:4999/api/auth/join", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: "Store Tester", email: `store-${Date.now()}@example.com`, password: "a long enough phrase", agree: true }) }),
+    { ip: "10.7.9.2" },
+  );
+  const cookie = join.headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
+  const cloud = await shot(app, {}, cookie);
+  const id = cloud.headers.get("x-mirva-portrait");
+  assert.ok(id, "the entry is made, so Keep can hold it");
+  assert.equal(kept.has(id), false, "no picture yet: the finished one is on its way from the phone");
+  const done = await app.fetch(new Request(`http://localhost:4999/api/portrait/${id}`, { method: "POST", headers: { cookie, "content-type": "image/jpeg" }, body: JPEG }), { ip: "10.7.9.2" });
+  assert.equal(done.status, 200);
+  assert.deepEqual([...kept.get(id).slice(0, 3)], [0xff, 0xd8, 0xff], "the finished picture is the one kept");
+  const old = await shot(app, { finish: undefined }, cookie);
+  assert.ok(kept.has(old.headers.get("x-mirva-portrait")), "an old mirror's portrait is stored at once, as before");
+});

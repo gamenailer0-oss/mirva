@@ -1079,6 +1079,8 @@ async function finishPortrait(person, shot, { form, studio: busy, ticket }, repo
   }
   const sub = {};
   const blob = await ownHead(person, shot.blob, saved, undefined, sub);
+  // A cloud portrait is stored only when the phone sends it (lib/app.mjs): whatever was laid or not, one is sent.
+  if (meta?.face === "cloud" && sub.how !== "restored") postFinished(saved, blob);
   return done(`device-${sub.how || "?"}`, blob);
 }
 
