@@ -698,6 +698,27 @@ test("more time, then her decision: voting stops and the link shows what she cho
   assert.equal(again.body.board.closed, false);
 });
 
+test("search engines get a sitemap of the public pages, a canonical address on each, and nothing personal", async () => {
+  const v = visitor();
+  const map = await v.get("/sitemap.xml");
+  assert.equal(map.status, 200);
+  assert.match(map.headers.get("content-type"), /xml/);
+  for (const p of ["/", "/retail", "/membership", "/mirrors", "/privacy", "/terms"]) assert.ok(map.body.includes(`<loc>${main.base}${p}</loc>`), p);
+  assert.ok(!/\/(account|console|hq|mirror|b\/|for\/)/.test(map.body.replace(/<loc>[^<]*\/mirrors<\/loc>/, "")), "no private page is listed");
+  const robots = await v.get("/robots.txt");
+  assert.match(robots.body, /Disallow: \/account/);
+  assert.ok(robots.body.trimEnd().endsWith(`Sitemap: ${main.base}/sitemap.xml`));
+  const home = await v.get("/");
+  assert.ok(home.body.includes(`<link rel="canonical" href="${main.base}/">`));
+  assert.ok(!home.body.includes("{{origin}}"), "the structured data carries the site's own address");
+  assert.match(home.body, new RegExp(`"logo":"${main.base}/icons/icon-512\\.png"`));
+  assert.ok((await v.get("/retail")).body.includes(`<link rel="canonical" href="${main.base}/retail">`));
+  assert.ok(!(await v.get("/account")).body.includes('rel="canonical"'), "a private page gets no canonical address");
+  const llms = await v.get("/llms.txt");
+  assert.equal(llms.status, 200);
+  assert.match(llms.body, /^# MIRVA/);
+});
+
 test("a question's link carries the question and a picture for WhatsApp, written safely", async () => {
   const owner = await member("hania");
   const looks = [(await addLook(owner, A)).id, (await addLook(owner, B)).id];

@@ -34,9 +34,11 @@ MIRVA_SESSION_SECONDS = "120"
 MIRVA_IDLE_SECONDS = "60"
 MIRVA_SHOTS_PER_HOUR = "30"
 MIRVA_SESSIONS_PER_HOUR = "20"
-# The most the try-on engine may cost in one day, in US dollars, before MIRVA says it is resting.
-MIRVA_DAILY_USD = "5"
-MIRVA_DAILY_PORTRAIT_USD = "6"
+# The most the try-on engine may cost in one day, in US dollars, before MIRVA says it is resting (live video, then
+# portraits). Kept low while there is no money to spend (15 Oct 2026): $2 is about 36 portraits. The founder and store
+# users are never held.
+MIRVA_DAILY_USD = "1"
+MIRVA_DAILY_PORTRAIT_USD = "2"
 # Free first portraits a day, for people who have not joined yet (one each, on their own browser). 0 turns it off.
-MIRVA_GUEST_SHOTS = "60"
+MIRVA_GUEST_SHOTS = "15"
 MIRVA_PAYMENTS = "off"

@@ -1,0 +1,22 @@
+# MIRVA
+
+> MIRVA is an AI fitting mirror for clothing stores in Pakistan, starting in Lahore. A shopper says the occasion, a stylist picks three looks from the store's own catalogue, and she sees herself in each one: a portrait in about 20 seconds, or live video at a store mirror. She keeps the looks she likes and sends one link to her family on WhatsApp, and they vote.
+
+MIRVA is free for shoppers. Stores pay a monthly plan; a 60-day pilot is the way to start. The portraits are a likeness, not a fitting: they show how a piece looks on the shopper, not how it fits.
+
+## For shoppers
+
+- [Home](/): what MIRVA does, with real results
+- [Membership](/membership): a free wardrobe of kept looks, sizes remembered, portraits at home
+- [Find a mirror](/mirrors): where the store mirrors are, and how to be told when one opens near you
+- [Privacy](/privacy): what MIRVA takes in, what it keeps, and what it never does
+- [Terms](/terms): the plain rules for using MIRVA
+
+## For stores
+
+- [MIRVA for stores](/retail): the pilot, the plans, what changes on the shop floor, and the one line that puts a "Try it on" button on a store's own website
+
+## Notes
+
+- Shoppers' photos and portraits are private. A family vote shows only the pictures the shopper chooses to send, and the link expires.
+- Store names shown on MIRVA's own pages are concept demos made by MIRVA; no partnership is claimed unless a store says so itself.

@@ -131,6 +131,12 @@ export default {
   async fetch(request, env, ctx) {
     try {
       const url = new URL(request.url);
+      // Plain http takes one permanent step to https, before anything else: the site's own address is read from the
+      // first request an instance sees, and it must never be an http one. Local wrangler dev stays on http.
+      if (url.protocol === "http:" && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(url.hostname)) {
+        url.protocol = "https:";
+        return Response.redirect(url.toString(), 301);
+      }
       ready ||= start(env, url.origin).catch((e) => ((ready = null), Promise.reject(e)));
       const { app, db } = await ready;
       // Catalogues can change in another isolate; the list is one cheap query away.

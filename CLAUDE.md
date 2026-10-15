@@ -47,7 +47,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Commit first; end commit messages with the Co-Authored-By line.
 - **Look before calling a screen done**: start the dev server (preview `mirva`, port 4310), then
   `npm run look -- /retail /mirror` (add `--live` for the live site). Read the screenshots in `tools/shots/`.
-- **Tests**: `npm test` (222 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (223 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
   site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
@@ -77,6 +77,9 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Front end: `src/main.js` (mirror), `src/web/*.js` (site, account, board, desk, retail, touch, sharelook), built by
   `scripts/build.mjs` into `public/dist/`. Styles: `public/brand.css` (all site pages), `public/styles.css` (mirror),
   `public/site/site.css`, `public/retail/retail.css`, `public/desk/desk.css`.
+- Search: `INDEXED` in lib/http.mjs lists the public pages (served `/sitemap.xml`, a canonical link and og:url on each;
+  robots.txt gets its Sitemap line); `{{origin}}` in a page becomes the site's own address; `public/llms.txt`. The
+  Worker sends plain http to https first (301), since the site's address is read from an instance's first request.
 - Prices and allowances: `lib/plans.mjs` only (pilot: `PILOT`). Schema: `lib/schema.mjs` (`LATER` + `COLUMNS`; the
   version is a hash of them, so a new table always migrates).
 
@@ -166,7 +169,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   laid back 86 to 98%; FASHN 88 to 96% but broke on the founder's seated pose (his own black kurta left showing, his
   trousers not changed). So Decart + keep her is the main way and FASHN the second.
 - **Cost of a portrait**: Decart US$0.02 + 7 outlines at US$0.005 = US$0.055 (a second from the same photo 0.035, a busy
-  wall +0.005, FASHN 0.075). The daily portrait ceiling is US$6. Prices (lib/plans.mjs, 15 October): Assist Rs.30,000
+  wall +0.005, FASHN 0.075). The daily ceilings (wrangler.toml, lowered 15 Oct while there is no money): portraits US$2 (~36), live US$1, 15 free first portraits. Prices (lib/plans.mjs, 15 October): Assist Rs.30,000
   (Rs.25,000 from the 10th store, 600 portraits), Mirror Rs.110,000 (70 live min, 1,500 portraits), Flagship Rs.225,000
   (150 min, 3,500), Results Rs.25,000 + 3%, extra portraits Rs.3,000 per 100, pilot Rs.50,000; test/economics.test.mjs
   keeps every plan above 50% after try-on costs.
@@ -197,5 +200,5 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   stay in-store (`store_events`). Lesson: when a number is zero, check what is filtered out before what is missing.
 - **"Try-on is resting for today" for everyone but the founder (2026-10-15):** one $5 daily ceiling covered live video
   and portraits together; six live Studio sessions ($4.40, the founder's own tests count) used it up and portraits
-  stopped for every shopper. Now two ceilings: `MIRVA_DAILY_USD` live ($5) and `MIRVA_DAILY_PORTRAIT_USD` portraits
-  ($3). The founder and store users are never held, so they do not see the limit: test as a shopper too.
+  stopped for every shopper. Now two ceilings: `MIRVA_DAILY_USD` live and `MIRVA_DAILY_PORTRAIT_USD` portraits
+  (now $1 and $2). The founder and store users are never held, so they do not see the limit: test as a shopper too.
