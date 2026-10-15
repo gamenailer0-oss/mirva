@@ -81,3 +81,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Portrait time is the engine's: on 2026-10-15 a portrait took 16.8 s on the glass, 16.2 s of it inside Decart.
   Everything on our side adds under a second. 480p instead of 720p saved only ~2.5 s and lost detail: kept 720p.
 - Studio pre-connecting was not built: Decart's live billing per connected second is unconfirmed.
+- The engine reads at most 963 characters of instruction (`PROMPT_MAX` in lib/prompt.mjs, held by a test for every
+  product); a longer one is refused and no portrait is made. Mushq's long descriptions had been over it.
+- 2026-10-15 batch of 8 across four body types (slim and plus-size women, slim and shorter heavier men;
+  `tools/portrait-lab/restore/batch.mjs`, `sheet.mjs`): naming the colour of what the shopper already wears
+  (src/worn.js) stopped a shirt turning his dark navy trousers into light blue jeans; "keep the person's own shoes"
+  held for women's suits and kaftans; body shape and looseness held for every build. Still open: a men's kurta
+  sometimes swaps his shoes for the store model's.

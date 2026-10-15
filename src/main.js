@@ -4,6 +4,7 @@ import { regionFor } from "../lib/prompt.mjs";
 import { offerInstall } from "./web/install.js";
 import { registerWorker } from "./web/notify.js";
 import { lookPicture, lookWords, shareLook } from "./web/sharelook.js";
+import { readWorn, wornChanged } from "./worn.js";
 import { wireTouch, flyTo } from "./web/touch.js";
 
 wireTouch();
@@ -1059,7 +1060,9 @@ async function modelShot(p, { retake = false } = {}) {
   S.shooting++;
   caption(line("putting"));
   try {
-    const ref = await reference(p);
+    // A western top is tried over her own trousers, trousers under her own top: the half she keeps is read from her photo.
+    const half = p.tradition === "west" ? ({ "upper body garment": "below", "lower body garment": "above" })[regionFor(p)] : null;
+    const [ref, worn] = await Promise.all([reference(p), half ? readWorn(person, half) : null]);
     if (!ref) {
       // No picture of the garment could be made ready. A portrait drawn from its description would not be the store's
       // piece (the colours and embroidery would be invented), so none is made: she is shown the store's photo.
@@ -1073,9 +1076,18 @@ async function modelShot(p, { retake = false } = {}) {
     form.append("brand", S.brand.id);
     form.append("product", p.id);
     form.append("mode", "portrait");
+    if (worn) form.append(worn.half === "below" ? "wornBelow" : "wornAbove", worn.name);
     const asked = pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
     restorer().then((m) => m?.warmRestore()); // its models load, and take their slow first look, behind the wait
-    const { blob: drawn, saved, guest } = await asked;
+    let { blob: drawn, saved, guest } = await asked;
+    // Her own half came back a different colour (a shirt that brought the model's jeans with it): once more, quietly,
+    // inside the same wait. The better of the two is kept. A first portrait before joining is not made twice.
+    if (worn && !guest && ticket === S.ticket && (await wornChanged(worn, drawn))) {
+      try {
+        const again = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout });
+        if (!(await wornChanged(worn, again.blob))) ({ blob: drawn, saved } = again);
+      } catch {}
+    }
     if (guest) S.guestUsed = true; // her one portrait before joining
     const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // its model is still arriving
     const blob = await ownHead(person, drawn, saved);

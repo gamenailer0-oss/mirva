@@ -72,6 +72,10 @@ export async function body(source) {
       shoulders: seen(SHOULDER_L) && seen(SHOULDER_R),
       hips: seen(HIP_L) && seen(HIP_R),
       hipY: (lm[HIP_L].y + lm[HIP_R].y) / 2,
+      // across the picture: each hip, and the middle of the shoulders (where she is, for sampling what she wears)
+      hipLX: lm[HIP_L].x,
+      hipRX: lm[HIP_R].x,
+      shoulderX: (lm[SHOULDER_L].x + lm[SHOULDER_R].x) / 2,
     };
   } catch {
     return undefined;
