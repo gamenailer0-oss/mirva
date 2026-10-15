@@ -1005,7 +1005,8 @@ async function ownHead(person, portrait, saved, options, report = {}) {
   }
 }
 // What one portrait went through, in the record's short note: "face=kept eng=decart shot=17.2 fix=0.2" (seconds).
-const shotNote = (face, shotMs) => `face=${face.how || "?"} eng=${face.engine || "decart"} shot=${(shotMs / 1000).toFixed(1)} fix=${((face.ms || 0) / 1000).toFixed(1)}`;
+const shotNote = (face, shotMs) =>
+  `face=${face.how || "?"} eng=${face.engine || "decart"} shot=${(shotMs / 1000).toFixed(1)}${face.cloud ? ` e=${(face.cloud.engine / 1000).toFixed(1)} o=${(face.cloud.outlines / 1000).toFixed(1)}` : ""} fix=${((face.ms || 0) / 1000).toFixed(1)}`;
 // A wrong face is worse than a longer wait, so the old restore is given time: on a slow line its model is still arriving.
 // It runs only when the cloud could not outline (fal out of credit or down): its 16 MB model is never fetched otherwise.
 const RESTORE_WAIT = 45000;
@@ -1034,7 +1035,7 @@ async function finishPortrait(person, shot, { form, studio: busy, ticket }, repo
   const t0 = performance.now();
   let saved = shot.saved;
   const done = (how, blob, extra = {}) => {
-    Object.assign(report, { how, ms: Math.round(performance.now() - t0), engine: extra.engine || shot.meta?.engine || "decart" });
+    Object.assign(report, { how, ms: Math.round(performance.now() - t0), engine: extra.engine || shot.meta?.engine || "decart", cloud: shot.meta?.ms || null });
     return { blob, saved, studio: extra.studio || null };
   };
   const meta = shot.meta;

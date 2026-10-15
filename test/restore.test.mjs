@@ -128,6 +128,7 @@ test("a portrait that cannot be finished is shown as it came, never withheld", (
 // each part took: a friend's Android showed the engine's faces for a whole afternoon and nothing said why.
 test("each portrait records whether her own face went back, and how long each part took", () => {
   assert.match(modelShot, /link\.track\("portrait", \{ product: p\.id, value: [^}]*meta: shotNote\(face, shotMs\) \}\)/);
-  assert.match(main, /const shotNote = \(face, shotMs\) => .face=\$\{face\.how \|\| "\?"\} eng=\$\{face\.engine \|\| "decart"\}/, "which engine made it is on the record too");
+  assert.match(main, /const shotNote = \(face, shotMs\) =>\s*.face=\$\{face\.how \|\| "\?"\} eng=\$\{face\.engine \|\| "decart"\}/, "which engine made it is on the record too");
+  assert.match(main, /e=\$\{\(face\.cloud\.engine \/ 1000\)\.toFixed\(1\)\} o=\$\{\(face\.cloud\.outlines \/ 1000\)/, "and how long the engine and the outlines took in the cloud");
   assert.match(read("lib/platform.mjs"), /"backdrop", \/\/ the second, studio-wall pass/);
 });
