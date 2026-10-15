@@ -133,12 +133,40 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   KV on the free plan takes 1,000 writes a day: each member's or visitor's portrait is one write now.
 - **The smoke test pinned the Mirror price** and blocked a ship after the prices changed; it reads lib/plans.mjs now. Five
   enquiries an hour from one address: several ships in an hour meet that limit (the test accepts it).
+- **"Still slow" after a fix, but the fix never ran** (2026-10-15): the founder's phone kept the mirror page it had open
+  before the deploy, so the cloud cut was never asked (the `cloth` table held only Claude's own test row). Before judging
+  a fix from a phone test, check the new code ran (here: rows in `cloth`, `hits` keys `cloth:%`), and tell the founder
+  to close and reopen the page or app after every ship.
+- **A portrait event's `value` leaves out the phone's preparation** (the garment picture, the old 16 MB cut): the
+  shopper's real wait can be longer than the record says.
+- **An engine out of credit looks like "slow" to the founder**: Decart ran out at 23:31 PKT on 2026-10-15 and FASHN made
+  every portrait after (`eng=fashn` in `meta`; flag `tryon-credit` = `out`). First check on any "slow" or "wrong" report:
+  `SELECT * FROM flags` and the last portraits' `meta`.
+- **Store loads are limited to 6 an hour from one address** (`/api/preview`): reloading stores in bulk needs a wait.
+  The importer asks a shop for prices in its own money (`?currency=`; a shop that sells abroad answered in dollars) and
+  splits a name written as one word ("HussainRehar").
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
 - System map: https://claude.ai/artifact/8iXrBqwLk8MrMbUV3AH7Lt
+- Engine test (real-face results): https://claude.ai/artifact/AL1fa9LpWBfZ5V5M7riPtp
+- **Founding team page** (intro film, eight seats, seat finder, 7-day missions, scorecard, first 30 days):
+  https://claude.ai/artifact/3T6t6G6bLBuMA8z6YR6auk; its film as an MP4 for WhatsApp: `motion/team-intro/mirva-team-intro.mp4`
+  (recorded frame by frame with `window.filmSeek(t)`; ffmpeg is installed). No shared answers: a page with a store
+  is organisation-only, and the team is not in the founder's claude.ai organisation.
+- **Five boutique pages** (unlisted, "not affiliated" footer), for walk-in visits: `/for/zarashahjahan-com`,
+  `/for/hussainrehar-com`, `/for/sairashakira-com`, `/for/rangrasiya-com-pk`, `/for/sadaffawadkhan-com`; spares that load:
+  Maryum N Maria, Ammara Khan, Republic Womenswear.
 - Motion experiments (local only, not to be pushed): `motion/`.
+
+## Open (suggested 2026-10-16, not built; the founder chooses)
+- Founder: close and reopen the mirror after each ship; top up Decart (out since 2026-10-15 23:31); replace the pasted
+  keys; share the team page from its Share menu before sending it.
+- Warm the cloud cut for the three looks while she reads them (src/main.js `S.step === "looks"` warms only pieces with a
+  prepared `ref`): 2 to 4 s off a boutique piece's first tap, US$0.025 a piece once.
+- Pre-cut each boutique's likely pieces before a store visit (~US$0.30 a store).
+- Measure the upload sizes (her photo, the garment picture): on the Rang Rasiya tries 6 to 13 s went beyond the engine.
 
 ## Facts measured (so they are not re-measured)
 - Portrait time is the engine's: on 2026-10-15 a portrait took 16.8 s on the glass, 16.2 s of it inside Decart.
