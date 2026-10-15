@@ -28,9 +28,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 
 ## Secrets: never in chat, never in the repo
 - Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only. `.env` also holds
-  `FAL_KEY` (fal.ai: FASHN, Kling, SAM 3, FLUX; topped up 2026-10-15; the key cannot read its balance, and a call
-  dearer than what is left answers "User is locked. Reason: TOP_UP"), `GEMINI_API_KEY` and `OPENAI_API_KEY` (no
-  billing on either yet). All three were pasted in chat by the founder: remind them to replace them.
+  `FAL_KEY` (fal.ai: SAM 3 outlines and FASHN, now part of every portrait; also a Worker secret, set with
+  `node -e "<print the key from .env>" | npx wrangler secret put FAL_KEY`; topped up 2026-10-15; the key cannot read
+  its balance, and a call dearer than what is left answers 403 "User is locked. Reason: TOP_UP"), `GEMINI_API_KEY` and
+  `OPENAI_API_KEY` (no billing on either yet). All three were pasted in chat by the founder; they chose to replace them later.
 - Sign-ins live in files only: `.data/first-run.txt` (local founder), `.data/demo-sign-ins.txt` (demo accounts),
   `.data/live-founder.txt` (live founder, reset 2026-10-15). Point the founder to the file; never print a password.
 - When grepping files that hold passwords, hide values (a grep that prints a whole line will print the password).
@@ -42,7 +43,11 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Commit first; end commit messages with the Co-Authored-By line.
 - **Look before calling a screen done**: start the dev server (preview `mirva`, port 4310), then
   `npm run look -- /retail /mirror` (add `--live` for the live site). Read the screenshots in `tools/shots/`.
-- **Tests**: `npm test` (201 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (222 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
+- **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
+  prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
+  site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
+  `node tools/eval/local-shots.mjs 3`.
 - **Engine test** (portrait engines side by side; about $0.17 a case on fal + $0.02 Decart), in `tools/portrait-lab/engines/`:
   `node bakeoff.mjs <round> [cases] [decart,fashn,kling]` (cases in `cases.mjs`; made-up shoppers in `synth/`, three
   hard ones `hard-*.png` from `shoppers.mjs`), `node keep.mjs <round>` (Decart + her own head and wall back, SAM 3
@@ -51,9 +56,9 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Round r1 is https://claude.ai/artifact/AL1fa9LpWBfZ5V5M7riPtp. Run one case first, then the rest.
 - **Is it still her face?** `node tools/eval/kept-cli.mjs <her photo> <portrait…>` (lined-up faces compared pixel by
   pixel: the same photo 100%, her face kept or laid back 80 to 97%, another woman 34 to 55%).
-- **Why a phone showed the wrong face**: every portrait event now carries `meta` = `face=<restored|moved|nohead|
-  notools|shape|wait|failed|error> shot=<s> fix=<s>` and `value` = seconds; the studio-wall pass is a `backdrop` event.
-  `SELECT datetime(at/1000,'unixepoch','+5 hours'), user, product, value, meta FROM events WHERE kind IN ('portrait','backdrop') ORDER BY at DESC LIMIT 30`.
+- **How each portrait went**: the portrait event carries `meta` = `face=<kept|kept+studio|engine|retake|device-…>
+  eng=<decart|fashn> shot=<s> e=<engine s> o=<her outlines s> fix=<phone's finish s>` and `value` = seconds.
+  `SELECT datetime(at/1000,'unixepoch','+5 hours'), user, product, value, meta FROM events WHERE kind = 'portrait' ORDER BY at DESC LIMIT 30`.
 - **Garment pictures for a store**: `MIRVA_PUPPETEER=D:/Mirva/tools/camera-lab node scripts/prepare-refs.mjs <store>`
   (`--only id,id` names products; a pinned product, `refPin`, is redone only when named: never pass pinned ids in bulk).
 - **A real portrait test** (costs ~$0.02): `node tools/portrait-lab/restore/real2.mjs <store> <photo> <label> <product id>`
@@ -108,7 +113,19 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   artifact skeleton's `<meta name=viewport …>` first. And grid children need `min-width: 0`, or a swiping row of
   pictures widens the whole page.
 - **SAM 3 "clothing" masks miss parts of a garment** (a suit came back with bare arms and the old jeans): cut by
-  "person" and "head" instead.
+  "person" and face/hair instead. "head" swept in a friend's dupatta: use "face" and "hair" separately.
+- **SAM 3 returns only its best match unless asked**: one of two slides came back. Footwear asks `return_multiple_masks`.
+  "shoes" found nothing (422 "No masks generated") where "footwear" worked; a 422 means none, not a failure.
+- **The backslash pitfall struck three more times** (a `\n` in a replacement became a real line break inside a quoted
+  string; a backtick inside a template ended it; `\u0000` was mangled): patches with backslashes or backticks go in a
+  file written by the Write tool, or straight through the Edit tool.
+- **sharp's raw output of a one-channel picture came back as three channels** and a mask laid in stripes: use
+  `.extractChannel(0)` and check `info.channels`.
+- **The edge's free plan has about 10 ms of processing a request** (see `kdf: "pbkdf2"` in worker/index.mjs): no picture
+  decoding or encoding there. The phone does the laying; the edge only passes pictures on (Buffer's base64 is native).
+  KV on the free plan takes 1,000 writes a day: each member's or visitor's portrait is one write now.
+- **The smoke test pinned the Mirror price** and blocked a ship after the prices changed; it reads lib/plans.mjs now. Five
+  enquiries an hour from one address: several ships in an hour meet that limit (the test accepts it).
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
@@ -127,11 +144,28 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (src/worn.js) stopped a shirt turning his dark navy trousers into light blue jeans; "keep the person's own shoes"
   held for women's suits and kaftans; body shape and looseness held for every build. Still open: a men's kurta
   sometimes swaps his shoes for the store model's.
-- **Where a portrait is made today**: the picture in the cloud (Decart); her head is laid back **on her phone**
-  (src/restore.js: a 16 MB model, waited for up to 45 s, silently skipped when anything fails). On 2026-10-15 a friend's
-  Android showed the engine's face on all five tries, and two of the founder's three tries on a slow line never reached
-  the screen (one took over a minute). The plan agreed with the founder: move every step that shapes the picture to the
-  cloud; the phone only takes the photo and shows the portrait.
+- **How a portrait is made (from 2026-10-15)**: the mirror sends `finish=cloud`. lib/app.mjs asks Decart for the portrait
+  while fal's SAM 3 outlines her face, hair, figure and footwear (lib/finish.mjs `HER`); the answer (lib/shot.mjs: 4-byte
+  length + JSON + picture) carries her outlines and a signed one-use pass; the phone sends a 360-px copy to `/api/outline`
+  for the portrait's own (face, hair, footwear, + figure for a busy wall), lays her face, hair and shoes back
+  (src/keep.js, ~0.1 s), and for a busy wall cuts her onto a studio wall 1.6 s after the unveil (no second drawing).
+  Decart moved her head: a `retake` from FASHN. Decart out of credit or down: FASHN makes it. fal down or out of credit:
+  the old restore on the phone (src/restore.js, its 16 MB model fetched only then). The server stores only the entry;
+  the phone's finished picture is the file. Old mirrors get exactly the old answer. Before: a friend's Android showed the
+  engine's face on all five tries, and the founder's slow line never finished two of three.
+- **Live timings, 2026-10-15**: server 15.9 s (Decart 15.6, saving 0.3), the portrait's outlines 1.5 s from a 23 to 53 KB
+  copy, about 21 s tap to finished portrait; Decart alone is the wait. Steps that were cut: Decart's 1.1 MB PNG sent four
+  times to SAM (6.9 s; Decart ignores `output_format`), storing that PNG before answering (2.8 s). Never send her
+  pictures through fal's storage upload: its links are public.
+- **Real faces, 2026-10-15** (the founder's own test photo and a friend's street photo, with leave; kept only in
+  `tools/portrait-lab/_lab` and `engines/out/real1`): Decart alone kept 39 to 54% of the face (strangers); with her own
+  laid back 86 to 98%; FASHN 88 to 96% but broke on the founder's seated pose (his own black kurta left showing, his
+  trousers not changed). So Decart + keep her is the main way and FASHN the second.
+- **Cost of a portrait**: Decart US$0.02 + 7 outlines at US$0.005 = US$0.055 (a second from the same photo 0.035, a busy
+  wall +0.005, FASHN 0.075). The daily portrait ceiling is US$6. Prices (lib/plans.mjs, 15 October): Assist Rs.30,000
+  (Rs.25,000 from the 10th store, 600 portraits), Mirror Rs.110,000 (70 live min, 1,500 portraits), Flagship Rs.225,000
+  (150 min, 3,500), Results Rs.25,000 + 3%, extra portraits Rs.3,000 per 100, pilot Rs.50,000; test/economics.test.mjs
+  keeps every plan above 50% after try-on costs.
 - **Engine test r1, 2026-10-15** (8 made-up shoppers, real Sapphire/Lawrencepur/Outfitters pieces, times from Lahore):
   Decart 14.5 s avg (max 18), face kept 85% avg; FASHN v1.6 balanced 12.3 s (max 13.7), 91%; Kling 11.9 s (max 13.4),
   91%; Decart + keep her (cloud, SAM 3 person/head masks, about +3 s) 91%. Clothes: Decart best on dupatta drape, kurta
