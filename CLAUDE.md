@@ -88,3 +88,14 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (src/worn.js) stopped a shirt turning his dark navy trousers into light blue jeans; "keep the person's own shoes"
   held for women's suits and kaftans; body shape and looseness held for every build. Still open: a men's kurta
   sometimes swaps his shoes for the store model's.
+
+## Presentation models (from 2026-10-15)
+- Three AI-made models, the founder's choice, used wherever MIRVA shows results (home, store page, share cards,
+  decks, brand book; never in the real mirror): a formal woman (Sapphire), a man (Lawrencepur and men's casual), a
+  casual woman (Outfitters). Character sheets and clean starting photos: `tools/portrait-lab/models/`
+  (`formal-base.png`, `man-base.png`, `casual-a.png`; poses: hands softly clasped, hand at the button with the other in
+  a pocket and legs lightly crossed). Make a new piece on them with `node tools/portrait-lab/models/direct.mjs
+  <store> <product id> <base> <out> [below=<colour>]`, then `scripts/showcase.mjs`. Ignore any "MENVA"/"AR menu" text
+  on the sheets (a mistake on them).
+- The head restore draws a visible box when hair is long (it pastes a square around the head that cuts across hair and
+  neckline). Showcase pictures are made without it (`direct.mjs`); the restore itself needs fixing for real shoppers.
