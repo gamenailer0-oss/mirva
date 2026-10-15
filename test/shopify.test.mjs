@@ -53,6 +53,29 @@ test("plural product types are read as casual western wear, and sizes come from 
   }
 });
 
+test("a store that sells abroad is asked for its prices in its own money, not the visitor's", async () => {
+  const real = globalThis.fetch;
+  const asked = [];
+  globalThis.fetch = async (url) => {
+    const u = String(url);
+    asked.push(u);
+    // Like Saira Shakira's shop, read from outside Pakistan: dollars unless rupees are asked for.
+    const price = u.includes("currency=PKR") ? "150000.00" : "542.00";
+    if (u.includes("/products.json")) return new Response(JSON.stringify({ products: [product(9, "Zelina", "Pret", [{ option1: "M", title: "M", available: true, price }], [{ name: "Size" }])] }), { status: 200 });
+    if (u.includes("/meta.json")) return new Response(JSON.stringify({ name: "AbroadCo", currency: "PKR" }), { status: 200 });
+    return new Response("not found", { status: 404 });
+  };
+  try {
+    const out = await readShopify("abroad.example.pk");
+    assert.equal(out.catalogue.products[0].price, 150000);
+    assert.equal(out.brand.currency, "Rs.");
+    assert.equal(out.brand.name, "Abroad Co", "a name written as one word is read as its sign reads");
+    assert.ok(asked.some((u) => u.includes("/products.json?limit=80&currency=PKR")));
+  } finally {
+    globalThis.fetch = real;
+  }
+});
+
 test("a WooCommerce store is read through its Store API: prices in minor units, sizes from the size attribute", async () => {
   const real = globalThis.fetch;
   const woo = [
