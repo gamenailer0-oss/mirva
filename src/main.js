@@ -3,6 +3,24 @@ import { Mirror } from "./mirror.js";
 import { regionFor } from "../lib/prompt.mjs";
 import { offerInstall } from "./web/install.js";
 import { registerWorker } from "./web/notify.js";
+import { lookPicture, lookWords, shareLook } from "./web/sharelook.js";
+import { wireTouch, flyTo } from "./web/touch.js";
+
+wireTouch();
+// The halo draws itself when the mirror wakes (and only then).
+{
+  const g = document.getElementById("glass");
+  let was = g?.dataset.state;
+  if (g)
+    new MutationObserver(() => {
+      const now = g.dataset.state;
+      if (was === "asleep" && now !== "asleep") {
+        g.classList.add("woke");
+        setTimeout(() => g.classList.remove("woke"), 1000);
+      }
+      was = now;
+    }).observe(g, { attributes: true, attributeFilter: ["data-state"] });
+}
 import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily, addOns, sizeFor, occasionsFor, moodMatters } from "./stylist.js";
 import { facelessReference, warmUp } from "./vision.js";
 import * as memory from "./memory.js";
@@ -382,6 +400,8 @@ function renderConversation() {
   }
 }
 
+const arrived = (e) => e.target.parentElement?.classList.remove("loading");
+
 // Cards are built once per set of looks and then only re-marked, so a tap never
 // rebuilds the grid or reloads a picture.
 function lookCard(p, extra = {}) {
@@ -389,7 +409,7 @@ function lookCard(p, extra = {}) {
   return h(
     "button",
     { class: "look", type: "button", "data-pid": p.id, "data-badge": base, onclick: () => choose(p) },
-    h("span", { class: "shot" }, h("img", { loading: "lazy", decoding: "async", src: pic(p.image, 420), alt: p.name }), h("span", { class: "badge", text: base, hidden: !base })),
+    h("span", { class: "shot loading" }, h("img", { loading: "lazy", decoding: "async", src: pic(p.image, 420), alt: p.name, onload: arrived, onerror: arrived }), h("span", { class: "badge", text: base, hidden: !base })),
     h("span", { class: "name", text: p.name }),
     h("span", { class: "price", text: money(p.price) }),
     extra.why && h("span", { class: "why", text: extra.why }),
@@ -428,7 +448,7 @@ function renderSolo() {
   if (box.dataset.pid === p.id) return;
   box.dataset.pid = p.id;
   box.replaceChildren(
-    h("span", { class: "shot" }, h("img", { decoding: "async", src: pic(p.image, 160), alt: "" })),
+    h("span", { class: "shot loading" }, h("img", { decoding: "async", src: pic(p.image, 160), alt: "", onload: arrived, onerror: arrived })),
     h("span", { class: "solo-words" }, h("span", { class: "name", text: p.name }), h("span", { class: "price", text: money(p.price) })),
     h("button", { class: "mini-more", type: "button", text: "More", "aria-label": "Show the stylist", onclick: () => setSheet("peek") }),
   );
@@ -864,6 +884,12 @@ function showPortrait(entry, pid) {
   // by a portrait that was already there used to stay, and keep the controls under it out of reach).
   S.developing?.cancel();
   const img = $("#portrait");
+  if (S.view === "portrait" && S.portrait?.url !== entry.url) {
+    glass.classList.remove("pass");
+    void glass.offsetWidth;
+    glass.classList.add("pass");
+    setTimeout(() => glass.classList.remove("pass"), 1000);
+  }
   img.src = entry.url;
   img.hidden = false;
   img.classList.remove("unveil");
@@ -878,6 +904,19 @@ function showPortrait(entry, pid) {
   syncGlass();
   markCards();
   renderDetail();
+  prepareShare(entry, p);
+}
+
+// On her own phone, Keep also sends the look to the family: her portrait beside the store's photo, in one picture. It is
+// made while she looks at the portrait, so the share sheet can open inside the tap on Keep (browsers insist on that).
+const atHome = () => !!link.member && !link.pairedTo() && !link.embedded();
+function prepareShare(entry, p) {
+  if (!atHome() || S.share?.url === entry.url) return;
+  const share = { url: entry.url, pid: p.id, file: null };
+  S.share = share;
+  lookPicture({ portrait: entry.url, store: p.image ? pic(p.image, 720) : "", name: p.name, brand: S.brand.name, price: money(p.price) })
+    .then((file) => (share.file = file))
+    .catch(() => {});
 }
 
 function hidePortrait() {
@@ -1310,6 +1349,11 @@ function keep() {
       .then(() => caption("Kept, and in your wardrobe."))
       .catch((e) => caption(e.message));
   caption(line("kept"));
+  flyTo($("#portrait:not([hidden])") || $("#glass"), $("#saved .kept"));
+  if (atHome() && fromPortrait) {
+    const words = lookWords({ name: p.name, brand: S.brand.name, price: money(p.price), url: p.url });
+    shareLook(S.share?.pid === p.id ? S.share.file : null, words);
+  }
   if (!link.member && !link.pairedTo() && S.config?.open === false) setTimeout(() => askToJoin("Kept here. Join free and it goes into your wardrobe, with your size."), 1800);
   // Not on a store's mirror, which is nobody's phone.
   if (!link.pairedTo()) setTimeout(offerInstall, 2400);

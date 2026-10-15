@@ -437,3 +437,6 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 }
 /* the results show the person, not the empty studio above her */
 .proof .before img, .results li > img:first-child { aspect-ratio: 5 / 8; object-position: 50% 38%; }
+
+/* answers arrive: a bar grows from nothing when a vote comes in */
+@starting-style { .choice .bar i, .q-looks .bar i { transform: scaleX(0); } }

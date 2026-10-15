@@ -1,5 +1,6 @@
 // A member's account: the door (join, sign in, reset), then the wardrobe, the opinions asked for, and the settings.
 import { $, $$, el, api, money, plural, when, until, toast, whoAmI, busy, onSubmit, local, copy, fill, picture, signOut } from "./ui.js";
+import { lookPicture, lookWords, shareLook } from "./sharelook.js";
 import { askSheet, shareSheet } from "./ask.js";
 import { pushState, turnOnPush } from "./notify.js";
 
@@ -243,6 +244,17 @@ function wardrobe() {
 
 const pickLine = () => (S.picked.size < 2 ? "Choose at least two" : `${S.picked.size} chosen`);
 
+// Sends one kept look to the family: her portrait beside the store's photo, in one picture. The picture is started on
+// the first touch, so it is usually ready by the time the tap ends and the share sheet can open.
+function send(look) {
+  let made = null;
+  const make = () => (made ||= lookPicture({ portrait: look.portrait, store: look.image, name: look.name, brand: look.brandName, price: money(look.price, look.currency) }).catch(() => null));
+  return el("button", { class: "link", type: "button", text: "Send to family", onpointerdown: make, onclick: async (e) => {
+    e.stopPropagation();
+    shareLook(await make(), lookWords({ name: look.name, brand: look.brandName, price: money(look.price, look.currency), url: look.url }));
+  } });
+}
+
 function piece(look) {
   let showing = look.portrait ? "portrait" : "piece";
   const img = picture({ src: look.portrait || look.image, alt: look.portrait ? `Your portrait in ${look.name}` : look.name, loading: "lazy" });
@@ -263,7 +275,7 @@ function piece(look) {
     el("div", { class: "shot" }, img, look.portrait && el("span", { class: "badge", text: "On you" }), !S.picking && flip, S.picking && el("span", { class: "tick", "aria-hidden": "true", text: S.picked.has(look.id) ? "✓" : "" })),
     el("b", { text: look.name }),
     el("span", { class: "meta num", text: [look.brandName, money(look.price, look.currency), look.size && "Size " + look.size].filter(Boolean).join(" · ") }),
-    !S.picking && el("div", { class: "acts" }, look.url && el("a", { class: "link", href: look.url, target: "_blank", rel: "noopener", text: "At the store" }), drop),
+    !S.picking && el("div", { class: "acts" }, look.portrait && send(look), look.url && el("a", { class: "link", href: look.url, target: "_blank", rel: "noopener", text: "At the store" }), drop),
   );
   if (S.picking) {
     card.tabIndex = 0;

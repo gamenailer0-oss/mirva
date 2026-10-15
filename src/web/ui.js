@@ -1,5 +1,9 @@
 // Small helpers every MIRVA web surface shares. No framework: the pages are documents first.
 
+import { wireTouch } from "./touch.js";
+
+wireTouch();
+
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 

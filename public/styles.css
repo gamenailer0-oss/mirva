@@ -930,3 +930,47 @@ a.chip { text-decoration: none; }
 /* Inside a store's own website (public/embed.js): the mirror and the store's pieces, nothing that needs a MIRVA account. */
 :root[data-embed] :is(.wardrobe, #keepBtn, #askBtn, #storeBar, #restartBtn) { display: none !important; }
 :root[data-embed].phone-app .stage { top: env(safe-area-inset-top); }
+
+/* ---------- touch in the mirror: every press answers at once and springs back; panels and sheets glide ---------- */
+:root { --spring: cubic-bezier(.32, .72, 0, 1); }
+.chip, .look, .primary, .tool, .rail-btn, .mini-more, .tabs button, .dock button, .store-card, .solo .mini-more { -webkit-tap-highlight-color: transparent; }
+.chip { transition: transform .34s var(--spring), background-color .26s var(--spring), color .26s, box-shadow .26s; }
+.chip:active, .mini-more:active, .rail-btn:active, .dock button:active, .store-card:active { transform: scale(.95); transition-duration: 70ms; }
+.primary, .tool { transition: transform .34s var(--spring), background-color .2s, opacity .2s; }
+.primary:active, .tool:active { transform: scale(.95); transition-duration: 70ms; }
+.look .shot { transition: transform .34s var(--spring), box-shadow .2s; }
+.look:active .shot { transform: scale(.965); transition-duration: 70ms; }
+:root.phone-app .tablet { transition: height .5s var(--spring); }
+:root.phone-app .stage { transition: bottom .5s var(--spring); }
+.pane:not([hidden]) { animation: pane-in .3s var(--spring); }
+@keyframes pane-in { from { opacity: 0; transform: translateY(6px); } }
+
+/* sheets slide in and out (browsers without this keep the rise above) */
+@supports (transition-behavior: allow-discrete) {
+  .sheet, .sheet[open], :root.phone-app .sheet[open] { animation: none; }
+  .sheet { transition: opacity .28s var(--spring), transform .46s var(--spring), overlay .46s allow-discrete, display .46s allow-discrete; }
+  .sheet:not([open]) { opacity: 0; transform: translateY(14px) scale(.985); }
+  @starting-style { .sheet[open] { opacity: 0; transform: translateY(14px) scale(.985); } }
+  .sheet::backdrop { transition: opacity .28s, overlay .46s allow-discrete, display .46s allow-discrete; }
+  @starting-style { .sheet[open]::backdrop { opacity: 0; } }
+  :root.phone-app .sheet:not([open]) { opacity: 1; transform: translateY(100%); }
+  @starting-style { :root.phone-app .sheet[open] { opacity: 1; transform: translateY(100%); } }
+}
+
+/* the halo draws itself when the mirror wakes; a pass of light crosses the glass when one portrait gives way to another */
+.glass.woke .halo-arc { stroke-dasharray: 100; animation: halo-draw .9s var(--spring) both; }
+@keyframes halo-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+.glass.pass .sweep { opacity: 1; }
+.glass.pass .sweep::before { animation: sweep .95s var(--ease) 1; }
+
+/* a picture still on its way: a soft shape with a slow light across it, then the picture fades in */
+.look .shot::after, .solo .shot::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); transform: translateX(-100%); }
+.look .shot.loading::after, .solo .shot.loading::after { opacity: 1; animation: skel 1.4s var(--ease) infinite; }
+@keyframes skel { to { transform: translateX(100%); } }
+.look .shot img, .solo .shot img { transition: opacity .35s var(--ease); }
+.look .shot.loading img, .solo .shot.loading img { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glass.woke .halo-arc, .glass.pass .sweep::before, .pane:not([hidden]), .look .shot.loading::after { animation: none; }
+  .chip:active, .primary:active, .tool:active, .look:active .shot { transform: none; }
+}

@@ -270,3 +270,48 @@ details.faq > div { padding: 0 0 24px; max-width: var(--measure); color: var(--m
   .hero-glass { view-transition-name: mirva-glass; }
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
 }
+
+/* ---------- touch: every press answers at once and springs back (only transform and opacity move) ---------- */
+:root { --spring: cubic-bezier(.32, .72, 0, 1); }
+.btn { transition: transform .34s var(--spring), opacity var(--quick), background-color var(--calm), box-shadow var(--calm); }
+.btn:active { transform: scale(.965); transition-duration: 70ms; }
+.chip { transition: transform .34s var(--spring), background-color var(--calm) var(--spring), color var(--calm), box-shadow var(--calm); }
+.chip:active { transform: scale(.94); transition-duration: 70ms; }
+.nav-toggle, .link { transition: opacity var(--quick); }
+.nav-toggle:active, .link:active { opacity: .55; }
+summary { -webkit-tap-highlight-color: transparent; }
+
+/* sheets slide in and out, and the dim behind them fades (browsers without this keep the rise above) */
+@supports (transition-behavior: allow-discrete) {
+  dialog.sheet, dialog.sheet[open] { animation: none; }
+  dialog.sheet { transition: opacity .28s var(--spring), transform .46s var(--spring), overlay .46s allow-discrete, display .46s allow-discrete; }
+  dialog.sheet:not([open]) { opacity: 0; transform: translateY(14px) scale(.985); }
+  @starting-style { dialog.sheet[open] { opacity: 0; transform: translateY(14px) scale(.985); } }
+  dialog.sheet::backdrop { transition: opacity .28s, overlay .46s allow-discrete, display .46s allow-discrete; }
+  @starting-style { dialog.sheet[open]::backdrop { opacity: 0; } }
+  @media (max-width: 700px) {
+    dialog.sheet:not([open]) { opacity: 1; transform: translateY(100%); }
+    @starting-style { dialog.sheet[open] { opacity: 1; transform: translateY(100%); } }
+  }
+}
+
+/* an answer opens and closes smoothly, at its own height */
+@supports (interpolate-size: allow-keywords) {
+  details { interpolate-size: allow-keywords; }
+  details::details-content { block-size: 0; overflow: clip; transition: block-size .42s var(--spring), content-visibility .42s allow-discrete; }
+  details[open]::details-content { block-size: auto; }
+}
+
+/* waiting for words and pictures: soft shapes in the page's own colours, a slow light across them */
+.skel { position: relative; overflow: hidden; background: var(--card); border-radius: var(--r-md); }
+.skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--panel) 70%, transparent), transparent); animation: skel 1.4s var(--ease) infinite; }
+@keyframes skel { to { transform: translateX(100%); } }
+.skel-line { height: 14px; border-radius: 7px; }
+.skel-wrap { display: grid; gap: 14px; align-content: start; }
+.skel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.skel-card { aspect-ratio: 3 / 4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active, .chip:active { transform: none; }
+  .skel::after { animation: none; }
+}

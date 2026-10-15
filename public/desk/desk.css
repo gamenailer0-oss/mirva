@@ -149,3 +149,20 @@ body.desk { background: var(--bg); font-size: 15.5px; }
 .lf-chip.on { background: #0c1018; color: #fcfdfe; box-shadow: none; }
 .lf-tablet[data-tone="noir"] .lf-chip.on { background: #f1f3f8; color: #0f1117; }
 .lf-go { justify-self: start; padding: 8px 16px; border-radius: 99px; font: 500 9.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+
+/* a switch glides, and its knob stretches a little under the finger, as on a phone */
+.switch { transition: background-color .3s var(--spring, ease); -webkit-tap-highlight-color: transparent; }
+.switch::after { transition: transform .38s var(--spring, ease), width .22s var(--spring, ease); }
+.switch:active::after { width: 25px; }
+.switch[aria-checked="true"]:active::after { transform: translateX(13px); }
+.side nav button { transition: background-color .25s var(--spring, ease), transform .3s var(--spring, ease); }
+.side nav button:active { transform: scale(.97); transition-duration: 70ms; }
+.tile, .panel { transition: box-shadow .3s; }
+.work > * { animation: desk-in .32s var(--spring, ease) both; }
+@keyframes desk-in { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { .work > * { animation: none; } }
+
+/* the desk's shape while it opens */
+.skel-desk { display: grid; grid-template-columns: 236px 1fr; min-height: 100vh; }
+.skel-side { display: grid; align-content: start; gap: 18px; padding: 40px 24px; border-right: 1px solid var(--line); }
+@media (max-width: 900px) { .skel-desk { grid-template-columns: 1fr; } .skel-side { display: none; } }
