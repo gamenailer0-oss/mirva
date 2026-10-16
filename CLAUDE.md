@@ -30,6 +30,13 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   the smallest complete change, existing code and the platform first. It never outranks the rules above: the
   founder's asks for polish, motion and design are asked-for features, not extras to skip; tests and safeguards stay.
 
+- **Taste skills** (installed 2026-10-17 from github.com/Leonxlnx/taste-skill, MIT, commit f624f37, read before
+  installing): `design-taste-frontend` (`~/.claude/skills/taste-skill`: deals a researched direction, lints and
+  screenshots a page with its own scripts; `assets.mjs` fetches public-domain pictures from museum archives),
+  `redesign-existing-projects` and `high-end-visual-design`. Use them to judge and polish pages, never to replace
+  MIRVA's identity: its own fonts, palette, halo and the frozen home page win over anything a taste skill deals.
+- Plugins on the account (17 Oct): Sales, Social Media Skills, marketing, founder toolkit, PFD, Remotion.
+
 ## Secrets: never in chat, never in the repo
 - Decart key, push keys: `.env`, `.data/push-keys*.json`, and Cloudflare Worker secrets only. The Decart key was replaced
   on 2026-10-16 by a new account's key (the founder pasted it in chat): set in `.env` with a script that prints nothing,
