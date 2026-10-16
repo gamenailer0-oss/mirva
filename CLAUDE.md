@@ -163,6 +163,9 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Five boutique pages** (unlisted, "not affiliated" footer), for walk-in visits: `/for/zarashahjahan-com`,
   `/for/hussainrehar-com`, `/for/sairashakira-com`, `/for/rangrasiya-com-pk`, `/for/sadaffawadkhan-com`; spares that load:
   Maryum N Maria, Ammara Khan, Republic Womenswear.
+- **Lahore Route** (team sales playbook, 17 Oct 2026: staircase of five retailer steps by season, funnel, top 10 Lahore
+  prospects with catalogue prices, channels, objections, three team pairs, Mon–Sat rhythm, gaps):
+  https://claude.ai/artifact/5BiqCiGqdWpVpJaheyAXEa (source in the session scratchpad `route/`; private until shared).
 - Motion experiments (local only, not to be pushed): `motion/`.
 
 ## Open (suggested 2026-10-16, not built; the founder chooses)
