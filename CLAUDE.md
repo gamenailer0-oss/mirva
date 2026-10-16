@@ -70,6 +70,8 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (`--only id,id` names products; a pinned product, `refPin`, is redone only when named: never pass pinned ids in bulk).
 - **A real portrait test** (costs ~$0.02): `node tools/portrait-lab/restore/real2.mjs <store> <photo> <label> <product id>`
   with the synthetic shoppers in `tools/portrait-lab/synth/`.
+- **Morning check**: `npm run health` (live site, portraits by engine, spend, enquiries; counts only, read-only). A
+  scheduled task "MIRVA morning check" runs it daily at 09:00 PKT. The founder's one page is `docs/START-HERE.md`.
 - **Database copy**: `npm run backup` (into git-ignored `backups/`).
 - **Live database question**: `npx wrangler d1 execute mirva --remote --json --command "SELECT …"` (read-only unless asked).
 - After each finished piece: update memory notes and the founder's checklist `docs/update-checklist.md`.

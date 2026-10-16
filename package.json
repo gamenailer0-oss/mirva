@@ -17,7 +17,8 @@
     "smoke": "node scripts/smoke.mjs",
     "backup": "node scripts/backup.mjs",
     "ship": "node scripts/ship.mjs",
-    "look": "node scripts/look.mjs"
+    "look": "node scripts/look.mjs",
+    "health": "node scripts/health.mjs"
   },
   "dependencies": {
     "@decartai/sdk": "latest",
