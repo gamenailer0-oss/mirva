@@ -184,6 +184,16 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Pre-cut each boutique's likely pieces before a store visit (~US$0.30 a store).
 - Measure the upload sizes (her photo, the garment picture): on the Rang Rasiya tries 6 to 13 s went beyond the engine.
 
+- **Asked 2026-10-17, waiting on the founder (nothing that costs money without a yes):** (1) a new name (ideas: Aarsi,
+  Aina, Zeba, Mira; renaming is about half a day of code and text plus a new domain, best before the domain is bought and
+  the first store signs); (2) "Complete the look": one or two small square tiles beside a single piece (top, trouser) from
+  the same store, then one portrait of the whole outfit (two garments in one picture, or two passes); later "Make your
+  own outfit"; for brands: add-on sales, merchandisers' own pairings, slow stock as the second piece, bundle offers,
+  add-on rate in the console; (3) the 20-second wait in a busy store: snap and stroll (portraits go to her phone while she
+  browses), all three looks made at once (3x the cost), hide her picture while it is made, live Studio as the in-store
+  default; (4) faster live: pre-connect while she answers the stylist (needs Decart to confirm billing per connected
+  second first), FASHN performance mode (untested, US$0.075).
+
 ## Facts measured (so they are not re-measured)
 - Portrait time is the engine's: on 2026-10-15 a portrait took 16.8 s on the glass, 16.2 s of it inside Decart.
   Everything on our side adds under a second. 480p instead of 720p saved only ~2.5 s and lost detail: kept 720p.
