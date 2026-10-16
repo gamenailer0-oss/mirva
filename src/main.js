@@ -651,19 +651,74 @@ function setSheet(size) {
   sheetWish = size;
   syncSheet();
 }
+// The panel on a phone moves like the phone's own sheets: it follows the finger from anywhere on it, and when let go it
+// settles at the nearest of its three sizes, carried on by how fast it was moving. A sideways swipe still scrolls the
+// looks; once the panel is full its content scrolls, and pulling down from the top of the content folds it again.
+// The decision is made on the first move, while the browser still lets the page take the gesture.
+function followFinger() {
+  const app = $("#app"), tablet = $(".tablet");
+  const probe = document.body.appendChild(h("div", { "aria-hidden": "true", style: "position:fixed;visibility:hidden;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)" }));
+  const sizes = () => {
+    const cs = getComputedStyle(probe), top = parseFloat(cs.paddingTop) || 0, bottom = parseFloat(cs.paddingBottom) || 0, v = innerHeight;
+    return { mini: 142 + bottom, peek: Math.min(400, Math.max(292, v * 0.42)), full: v - 64 - top };
+  };
+  let g = null;
+  tablet.addEventListener("touchstart", (e) => {
+    if (!phoneApp() || e.touches.length !== 1) return void (g = null);
+    const t = e.touches[0];
+    g = { x: t.clientX, y: t.clientY, start: tablet.getBoundingClientRect().height, decided: false, taking: false, trail: [[t.clientY, e.timeStamp]] };
+  }, { passive: true });
+  tablet.addEventListener("touchmove", (e) => {
+    if (!g) return;
+    const t = e.touches[0], dx = t.clientX - g.x, dy = t.clientY - g.y;
+    if (!g.decided) {
+      if (!dx && !dy) return;
+      g.decided = true;
+      if (Math.abs(dx) > Math.abs(dy)) return void (g = null); // sideways: the looks scroll
+      const full = app.dataset.sheet === "full";
+      g.taking = dy > 0 ? tablet.scrollTop <= 0 : !full; // down from the top folds it; up grows it until it is full
+      if (!g.taking) return void (g = null);
+      app.classList.add("dragging");
+    }
+    if (e.cancelable) e.preventDefault();
+    const { mini, full } = sizes();
+    let height = g.start - dy;
+    if (height > full) height = full + (height - full) * 0.25; // past the ends it gives a little, then holds
+    if (height < mini) height = mini - (mini - height) * 0.25;
+    app.style.setProperty("--drag", `${Math.round(height)}px`);
+    g.now = height;
+    g.trail.push([t.clientY, e.timeStamp]);
+    if (g.trail.length > 6) g.trail.shift();
+  }, { passive: false });
+  const settle = () => {
+    if (!g?.taking) return void (g = null);
+    const [[y0, t0], [y1, t1]] = [g.trail[0], g.trail[g.trail.length - 1]];
+    const speed = t1 > t0 ? (y1 - y0) / (t1 - t0) : 0; // px a millisecond, downward
+    const aim = (g.now ?? g.start) - speed * 220;
+    const s = sizes();
+    const pick = Object.entries(s).sort((a, b) => Math.abs(a[1] - aim) - Math.abs(b[1] - aim))[0][0];
+    g = null;
+    app.classList.remove("dragging");
+    app.style.removeProperty("--drag");
+    setSheet(pick);
+  };
+  tablet.addEventListener("touchend", settle);
+  tablet.addEventListener("touchcancel", settle);
+}
 function wireSheet() {
   const handle = $("#sheetHandle");
   let from = null;
-  handle.addEventListener("pointerdown", (e) => ((from = e.clientY), handle.setPointerCapture?.(e.pointerId)));
+  handle.addEventListener("pointerdown", (e) => (from = e.clientY));
   handle.addEventListener("pointerup", (e) => {
     if (from === null) return;
     const dy = e.clientY - from;
     from = null;
-    const now = SHEETS.indexOf($("#app").dataset.sheet);
-    if (Math.abs(dy) < 12) return setSheet(now === 2 ? null : "full"); // a tap opens it, or puts it back
-    setSheet(SHEETS[Math.max(0, Math.min(2, now + (dy < 0 ? 1 : -1)))]);
+    // A tap opens it, or puts it back. A drag belongs to the finger-following code below (and, with a mouse, steps).
+    if (Math.abs(dy) < 12) return setSheet($("#app").dataset.sheet === "full" ? null : "full");
+    if (e.pointerType === "mouse") setSheet(SHEETS[Math.max(0, Math.min(2, SHEETS.indexOf($("#app").dataset.sheet) + (dy < 0 ? 1 : -1)))]);
   });
   handle.addEventListener("pointercancel", () => (from = null));
+  followFinger();
   handle.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setSheet($("#app").dataset.sheet === "full" ? null : "full")));
   // A tap on the mirror while the panel covers it puts the panel back.
   $(".stage").addEventListener("click", () => $("#app").dataset.sheet === "full" && setSheet(null));

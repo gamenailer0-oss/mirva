@@ -243,7 +243,11 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (`/brand/marble-light.webp`), smoky marble and lamplight at night (`.dark`), drawn by `node scripts/marble.mjs`;
   where a light room meets a dark one the later rises in an arch with a line of light (brand.css "the room"; sections
   clip sideways, since a rule on body is passed to the whole screen on phones). Neutrals are warm now (ink #14131a,
-  marble #ebe8e4, night #0b0a0d); mercury stays silver; the lamp (#e2c995) is light, never a fill.
+  marble #e9e5df, ivory panels #f9f6f1 (the founder found pure white harsh), night #0b0a0d); mercury stays silver; the lamp
+  (#e2c995) is light, never a fill. Buttons, chips and the glass controls have depth (a top highlight, a room-tinted
+  shadow, sink when pressed; brand.css and styles.css "depth"); Studio carries a small live light. On a phone the
+  mirror's panel follows the finger from anywhere on it and settles at mini / peek / full by speed (src/main.js
+  `followFinger`: decided on the first touchmove, while the browser still lets the page take it; tested with CDP touches).
 - Three AI-made models, the founder's choice, used wherever MIRVA shows results (home, store page, share cards,
   decks, brand book; never in the real mirror): a formal woman (Sapphire), a man (Lawrencepur and men's casual), a
   casual woman (Outfitters). Character sheets and clean starting photos: `tools/portrait-lab/models/`
