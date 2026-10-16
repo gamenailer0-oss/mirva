@@ -57,6 +57,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Commit first; end commit messages with the Co-Authored-By line.
 - **Look before calling a screen done**: start the dev server (preview `mirva`, port 4310), then
   `npm run look -- /retail /mirror` (add `--live` for the live site). Read the screenshots in `tools/shots/`.
+  The mirror's own screens on a phone (fake camera, no portrait, free): `node scripts/walk.mjs [--size phone|tablet|mirror] [--live]`.
 - **Tests**: `npm test` (230 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
@@ -233,6 +234,16 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   dupatta (5 right, 3 close, 0 wrong of 8). Prices: Decart $0.02, + keep $0.035, Kling $0.07, FASHN $0.075 (fal).
 
 ## Presentation models (from 2026-10-15)
+- **The fitting room (2026-10-17, the founder: "not so depressing", "marble", "a fashion stylist's room")**: the models'
+  starting photos were moved from the grey studio into one evening fitting room (smoky marble, brass rail of emerald,
+  sapphire and crimson clothes, two wall lamps) with `tools/portrait-lab/models/room.mjs` (fal nano-banana edit, US$0.04;
+  faces kept 82 to 93%; a ceiling camera it drew was painted out), then MIRVA's own engine was run again on them
+  (`direct.mjs`, faces 87 to 96%), so the showcase stays real results. Sources in `tools/portrait-lab/models/room/`
+  (`formal-room.png`, `man-room.png`, `casual-room.png`). The site is the same room: honed marble by day
+  (`/brand/marble-light.webp`), smoky marble and lamplight at night (`.dark`), drawn by `node scripts/marble.mjs`;
+  where a light room meets a dark one the later rises in an arch with a line of light (brand.css "the room"; sections
+  clip sideways, since a rule on body is passed to the whole screen on phones). Neutrals are warm now (ink #14131a,
+  marble #ebe8e4, night #0b0a0d); mercury stays silver; the lamp (#e2c995) is light, never a fill.
 - Three AI-made models, the founder's choice, used wherever MIRVA shows results (home, store page, share cards,
   decks, brand book; never in the real mirror): a formal woman (Sapphire), a man (Lawrencepur and men's casual), a
   casual woman (Outfitters). Character sheets and clean starting photos: `tools/portrait-lab/models/`

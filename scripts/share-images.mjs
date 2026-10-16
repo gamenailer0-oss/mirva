@@ -30,8 +30,8 @@ for (const job of jobs) {
     c.height = H;
     const g = c.getContext("2d");
     const sky = g.createRadialGradient(W * 0.68, -80, 40, W * 0.68, 120, 900);
-    sky.addColorStop(0, "#1d2232");
-    sky.addColorStop(1, "#06070a");
+    sky.addColorStop(0, "#1f1c22");
+    sky.addColorStop(1, "#0b0a0d");
     g.fillStyle = sky;
     g.fillRect(0, 0, W, H);
     await Promise.all([document.fonts.load('400 56px "Newsreader"'), document.fonts.load('500 20px "Albert Sans"'), document.fonts.load('400 24px "Albert Sans"')]);
@@ -45,7 +45,7 @@ for (const job of jobs) {
       const x = x0 + i * (cw + gap);
       g.save();
       rounded(x, y0, cw, ch, 18);
-      g.fillStyle = "#1b2030";
+      g.fillStyle = "#1e1d24";
       g.fill();
       g.clip();
       if (img) {
@@ -66,7 +66,7 @@ for (const job of jobs) {
     g.quadraticCurveTo(area.x + area.w / 2, 4, area.x + area.w - 120, 46);
     g.stroke();
     const wrap = (words, width) => { const out = []; let line = ""; for (const w of words.split(/\s+/)) { const next = line ? line + " " + w : w; if (g.measureText(next).width > width && line) (out.push(line), (line = w)); else line = next; } if (line) out.push(line); return out; };
-    g.fillStyle = "#9aa2b3";
+    g.fillStyle = "#a8a29c";
     g.font = '500 19px "Albert Sans", sans-serif';
     g.letterSpacing = "4px";
     g.fillText(job.kicker, 64, 150);
@@ -75,7 +75,7 @@ for (const job of jobs) {
     g.font = '400 54px "Newsreader", Georgia, serif';
     const lines = wrap(job.title, 370).slice(0, 4);
     lines.forEach((l, i) => g.fillText(l, 64, 222 + i * 62));
-    g.fillStyle = "#c8cedb";
+    g.fillStyle = "#d2cbc3";
     g.font = '400 23px "Albert Sans", sans-serif';
     wrap(job.line, 360).forEach((l, i) => g.fillText(l, 64, 222 + lines.length * 62 + 26 + i * 32));
     g.strokeStyle = "#f3f5f9";

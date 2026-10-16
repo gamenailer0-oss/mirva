@@ -14,8 +14,8 @@
   --accent: #1e3fae;
   --on-accent: #fff;
   --mercury: linear-gradient(120deg, #8d95a6, #f6f8fb 32%, #c3c9d6 55%, #f1f3f7 72%, #7e8698);
-  --glass: #0a0c11;
-  --pearl: #f3f5f9;
+  --glass: #0b0b0e;
+  --pearl: #f4f2ef;
   --ease: cubic-bezier(.2, .7, .2, 1);
   --quick: 140ms;
   --calm: 260ms;
@@ -23,32 +23,33 @@
 }
 
 [data-mood="porcelain"] {
-  --bg: #e7eaf0;
-  --bg-glow: #f7f8fb;
-  --panel: #fcfdfe;
-  --ink: #0c1018;
-  --muted: #586172;
-  --line: rgba(12, 16, 24, .12);
+  --marble: url(/brand/marble-light.webp) 50% 0 / 1500px auto;
+  --bg: #ebe8e4;
+  --bg-glow: #f8f6f3;
+  --panel: #fdfcfa;
+  --ink: #14131a;
+  --muted: #5e5a62;
+  --line: rgba(20, 19, 26, .12);
   --chip: #fff;
   --accent-text: var(--accent);
-  --card: #eef1f5;
+  --card: #f2efeb;
 }
 [data-mood="noir"] {
-  --bg: #06070a;
-  --bg-glow: #12151d;
-  --panel: #0f1117;
-  --ink: #f1f3f8;
-  --muted: #9aa2b3;
+  --bg: #0b0a0d;
+  --bg-glow: #19171d;
+  --panel: #121116;
+  --ink: #f3f1ee;
+  --muted: #a8a29c;
   --line: rgba(255, 255, 255, .13);
-  --chip: #171a23;
+  --chip: #1a191f;
   --accent-text: color-mix(in oklab, var(--accent) 45%, white);
-  --card: #171a23;
+  --card: #1a191f;
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 body {
-  background: radial-gradient(120% 90% at 38% 0%, var(--bg-glow), var(--bg) 62%);
+  background: radial-gradient(120% 90% at 38% 0%, var(--bg-glow), transparent 62%), var(--marble, none), var(--bg);
   color: var(--ink);
   font: 400 15px/1.45 var(--sans);
   letter-spacing: .01em;
@@ -96,7 +97,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .kept:hover { transform: translateY(-2px); }
 .kept .drop {
   position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%;
-  background: rgba(8, 10, 14, .78); color: #fff; font-size: 12px; line-height: 18px; text-align: center;
+  background: rgba(11, 10, 13, .78); color: #fff; font-size: 12px; line-height: 18px; text-align: center;
   opacity: 0; transition: opacity var(--quick);
 }
 .kept:hover .drop, .kept .drop:focus-visible { opacity: 1; }
@@ -125,8 +126,8 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
   position: absolute; inset: 0; overflow: hidden; isolation: isolate; contain: layout paint;
   container: glass / size;
   border-radius: 30px;
-  background: radial-gradient(90% 60% at 50% 18%, #1b2030, var(--glass) 70%);
-  box-shadow: 0 40px 90px -45px rgba(6, 9, 16, .75), 0 2px 0 rgba(255,255,255,.06) inset;
+  background: radial-gradient(90% 60% at 50% 18%, #1e1d24, var(--glass) 70%);
+  box-shadow: 0 40px 90px -45px rgba(12, 10, 8, .75), 0 2px 0 rgba(255,255,255,.06) inset;
   color: var(--pearl);
 }
 /* the bevel: a hair of mercury around the glass */
@@ -153,21 +154,21 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .veil {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(6,8,12,.55), transparent 18%),
-    linear-gradient(0deg, rgba(6,8,12,.84), transparent 38%);
+    linear-gradient(180deg, rgba(10,9,12,.55), transparent 18%),
+    linear-gradient(0deg, rgba(10,9,12,.84), transparent 38%);
 }
 /* With a look on the glass the picture is the point: the shade keeps to the name in the corner and the line of words. */
 .glass[data-state="portrait"] .veil, .glass[data-state="live"] .veil {
   background:
-    linear-gradient(180deg, rgba(6,8,12,.4), transparent 13%),
-    linear-gradient(0deg, rgba(6,8,12,.74), transparent 30%);
+    linear-gradient(180deg, rgba(10,9,12,.4), transparent 13%),
+    linear-gradient(0deg, rgba(10,9,12,.74), transparent 30%);
 }
 
 /* the wait for a portrait, kept small: her own picture stays, a little dimmed; the halo moves to the middle and fills
    as the clock (src/main.js develop, timed from real portraits on this device); the seconds left sit under it */
-.reel { position: absolute; inset: 0; z-index: 3; opacity: 0; transition: opacity .4s var(--ease); pointer-events: none; background: radial-gradient(120% 80% at 50% 44%, rgba(6,8,12,.38), rgba(6,8,12,.7)); }
+.reel { position: absolute; inset: 0; z-index: 3; opacity: 0; transition: opacity .4s var(--ease); pointer-events: none; background: radial-gradient(120% 80% at 50% 44%, rgba(10,9,12,.38), rgba(10,9,12,.7)); }
 .reel.on { opacity: 1; }
-.wait-left { position: absolute; left: 0; right: 0; top: calc(44% + 4px); margin: 0; text-align: center; font: italic 400 clamp(17px, 5cqmin, 22px)/1 var(--serif); color: #f3f5f9; font-variant-numeric: tabular-nums; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+.wait-left { position: absolute; left: 0; right: 0; top: calc(44% + 4px); margin: 0; text-align: center; font: italic 400 clamp(17px, 5cqmin, 22px)/1 var(--serif); color: #f4f2ef; font-variant-numeric: tabular-nums; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
 .glass.timed:not([data-state="asleep"]) .halo, [data-glass="oval"] .glass.timed:not([data-state="asleep"]) .halo { left: 50%; top: 44%; width: min(34%, 150px); transform: translate(-50%, -100%); }
 .glass.timed .halo-track { stroke-width: 1.4; stroke: rgba(255,255,255,.22); }
 .glass.timed .halo-arc { stroke-dasharray: 100; animation: none; stroke-width: 2.6; transition: stroke-dashoffset .25s linear; }
@@ -182,7 +183,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 /* the wait in Studio: her own picture stays, a little dimmed, with the step and one cue above the line of words */
 .seeing {
   position: absolute; inset: 0; z-index: 3; opacity: 0; transition: opacity .6s var(--ease); pointer-events: none;
-  background: linear-gradient(0deg, rgba(6,8,12,.72), rgba(6,8,12,.34) 45%, rgba(6,8,12,.5));
+  background: linear-gradient(0deg, rgba(10,9,12,.72), rgba(10,9,12,.34) 45%, rgba(10,9,12,.5));
 }
 .seeing.on { opacity: 1; }
 .seeing-words { position: absolute; left: 10%; right: 10%; bottom: 31%; display: flex; flex-direction: column; gap: 10px; text-align: center; }
@@ -202,7 +203,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .cam-lost {
   position: absolute; inset: 0; z-index: 11; padding: 0 12%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center;
-  background: rgba(6, 8, 12, .72);
+  background: rgba(10, 9, 12, .72);
 }
 .cam-lost p { margin: 0; font: italic 400 clamp(19px, 2.6vh + 4px, 28px)/1.2 var(--serif); font-size: clamp(18px, 6.4cqmin, 28px); text-wrap: balance; }
 .count {
@@ -235,7 +236,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .byline { font-size: 9.5px; letter-spacing: .3em; margin-right: -.3em; text-transform: uppercase; opacity: .72; }
 .byline .by-who { white-space: nowrap; }
 /* The crest sits over her own photo, often a busy street: a soft shadow keeps the store's name readable on any wall. */
-.glass-top { text-shadow: 0 1px 10px rgba(6, 7, 10, .55), 0 0 2px rgba(6, 7, 10, .35); }
+.glass-top { text-shadow: 0 1px 10px rgba(11, 10, 13, .55), 0 0 2px rgba(11, 10, 13, .35); }
 /* Once someone is in the glass, the crest steps into the corner: the halo over the store's name, as in MIRVA's own mark.
    Nothing is left across the top of the glass, where a face is. The name gives way to the tools on its right. */
 .glass:not([data-state="asleep"]) .glass-top { justify-content: flex-start; text-align: left; padding: 30px 18px 0; }
@@ -249,7 +250,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .glass-tools { position: absolute; top: 14px; right: 14px; display: flex; align-items: center; gap: 6px; }
 .meter {
   display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px; border-radius: 999px;
-  background: rgba(8, 10, 15, .66);
+  background: rgba(11, 10, 13, .66);
   font-size: 12px; font-variant-numeric: tabular-nums; letter-spacing: .06em;
   box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset;
 }
@@ -257,7 +258,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .meter-cost { opacity: .7; }
 .tool {
   width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: inherit;
-  background: rgba(8, 10, 15, .5); box-shadow: 0 0 0 1px rgba(255,255,255,.16) inset;
+  background: rgba(11, 10, 13, .5); box-shadow: 0 0 0 1px rgba(255,255,255,.16) inset;
   transition: transform var(--quick) var(--ease), background var(--quick);
 }
 .tool:hover { background: rgba(255,255,255,.16); }
@@ -266,7 +267,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .tool-row { display: flex; gap: 6px; }
 /* The camera's light: a small green lamp on its button for as long as the camera is on. A photo has no lamp. */
 .tool.cam { position: relative; }
-.tool.cam.lit::after { content: ""; position: absolute; top: 5px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: #6fe0a0; box-shadow: 0 0 0 2px rgba(8, 10, 15, .55); animation: breathe 2.4s ease-in-out infinite; }
+.tool.cam.lit::after { content: ""; position: absolute; top: 5px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: #6fe0a0; box-shadow: 0 0 0 2px rgba(11, 10, 13, .55); animation: breathe 2.4s ease-in-out infinite; }
 /* Short notes to the shopper (a cue from the pose check, a slow line, "still there?") share the column at the foot of
    the glass with MIRVA's line: two at once sit one above the other, and none lies across a face. */
 .notes { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 2px; }
@@ -276,15 +277,15 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .notes:has(#toast:not([hidden])) .hint { display: none; }
 .hint {
   margin: 0; max-width: 100%;
-  padding: 7px 14px; border-radius: 16px; background: rgba(8, 10, 15, .72); font-size: 12.5px; line-height: 1.35;
+  padding: 7px 14px; border-radius: 16px; background: rgba(11, 10, 13, .72); font-size: 12.5px; line-height: 1.35;
   box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset;
 }
 .toast {
   display: flex; gap: 12px; align-items: center; max-width: 100%;
   padding: 10px 12px 10px 16px; border-radius: 22px; font-size: 12.5px; line-height: 1.35;
-  background: rgba(8, 10, 15, .86); box-shadow: 0 0 0 1px rgba(255,255,255,.16) inset;
+  background: rgba(11, 10, 13, .86); box-shadow: 0 0 0 1px rgba(255,255,255,.16) inset;
 }
-.toast button { flex: none; padding: 6px 12px; border-radius: 999px; background: var(--pearl); color: #0b0d12; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.toast button { flex: none; padding: 6px 12px; border-radius: 999px; background: var(--pearl); color: #0d0c10; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
 .toast a { color: inherit; font-weight: 500; white-space: nowrap; padding: 8px 4px; }
 
 /* asleep: the invitation. The crest has the top of the glass; the invitation is centred in what is left, and the
@@ -314,7 +315,7 @@ a.chip { text-decoration: none; }
 .primary:active { transform: scale(.97); }
 .primary.small { padding: 10px 18px; font-size: 11.5px; }
 .primary:disabled { opacity: .38; cursor: default; transform: none; }
-.glass .primary { background: var(--pearl); color: #0b0d12; }
+.glass .primary { background: var(--pearl); color: #0d0c10; }
 .primary.nudge { animation: nudge 1.1s var(--ease) 3; }
 @keyframes nudge { 50% { transform: scale(1.06); } }
 .textlink { font-size: 12.5px; color: inherit; opacity: .74; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: .5px; }
@@ -352,7 +353,7 @@ a.chip { text-decoration: none; }
 .modes { flex: 1; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .modes button {
   display: flex; flex-direction: column; justify-content: center; gap: 3px; align-items: flex-start; text-align: left;
-  height: 60px; padding: 0 14px; border-radius: 14px; background: rgba(10, 12, 18, .62);
+  height: 60px; padding: 0 14px; border-radius: 14px; background: rgba(13, 12, 15, .62);
   box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset;
   transition: transform var(--quick) var(--ease), background var(--quick), color var(--quick);
 }
@@ -360,27 +361,27 @@ a.chip { text-decoration: none; }
 .modes button:active { transform: scale(.97); }
 .modes b { font: 500 17px/1.1 var(--serif); }
 .modes span { font-size: 11px; line-height: 1.2; letter-spacing: .04em; opacity: .8; }
-.modes button[aria-pressed="true"] { background: var(--pearl); color: #0b0d12; box-shadow: none; }
+.modes button[aria-pressed="true"] { background: var(--pearl); color: #0d0c10; box-shadow: none; }
 /* Once a look is on, the choice folds into a switch and makes room for Keep and Take off: one row, 40px high. */
 .frame[data-dock="result"] .modes {
-  flex: none; gap: 0; padding: 3px; border-radius: 999px; background: rgba(10, 12, 18, .62);
+  flex: none; gap: 0; padding: 3px; border-radius: 999px; background: rgba(13, 12, 15, .62);
   box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset;
 }
 .frame[data-dock="result"] .modes button { height: 34px; padding: 0 12px; border-radius: 999px; align-items: center; background: none; box-shadow: none; }
 .frame[data-dock="result"] .modes button:hover { background: rgba(255,255,255,.14); }
-.frame[data-dock="result"] .modes button[aria-pressed="true"] { background: var(--pearl); color: #0b0d12; }
+.frame[data-dock="result"] .modes button[aria-pressed="true"] { background: var(--pearl); color: #0d0c10; }
 .frame[data-dock="result"] .modes b { font: 500 11.5px/1 var(--sans); letter-spacing: .13em; text-transform: uppercase; }
 .frame[data-dock="result"] .modes span { display: none; }
 .glass-actions { flex: 1; min-width: 0; display: flex; gap: 8px; }
 .glass-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   height: 40px; padding: 0 14px; border-radius: 999px; font-size: 11.5px; letter-spacing: .13em; text-transform: uppercase; white-space: nowrap;
-  background: rgba(10, 12, 18, .62); box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset;
+  background: rgba(13, 12, 15, .62); box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset;
   transition: transform var(--quick) var(--ease), background var(--quick), opacity var(--quick);
 }
 .glass-btn:hover { background: rgba(255,255,255,.16); }
 .glass-btn:active { transform: scale(.96); }
-.glass-btn.solid { flex: 1; min-width: 0; background: var(--pearl); color: #0b0d12; box-shadow: none; }
+.glass-btn.solid { flex: 1; min-width: 0; background: var(--pearl); color: #0d0c10; box-shadow: none; }
 .glass-btn.solid:hover { background: #fff; }
 .glass-btn:disabled { opacity: .5; cursor: default; transform: none; }
 .glass-btn svg { display: none; }
@@ -418,12 +419,12 @@ a.chip { text-decoration: none; }
 }
 
 .compare {
-  position: absolute; inset: 0; z-index: 14; background: rgba(6, 8, 12, .95);
+  position: absolute; inset: 0; z-index: 14; background: rgba(10, 9, 12, .95);
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 64px 14px 20px; align-items: center;
   animation: rise .35s var(--ease);
 }
 .compare figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.compare img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; object-position: top; border-radius: 14px; background: #1b2030; }
+.compare img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; object-position: top; border-radius: 14px; background: #1e1d24; }
 .compare.one { grid-template-columns: minmax(0, 72%); justify-content: center; }
 .compare figcaption { font-size: 11px; letter-spacing: .08em; }
 .compare figcaption b { display: block; font: 500 14px var(--serif); letter-spacing: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -476,7 +477,7 @@ a.chip { text-decoration: none; }
 .look.on .shot { box-shadow: 0 0 0 2px var(--accent-text); }
 .badge {
   position: absolute; left: 7px; top: 7px; padding: 3px 8px; border-radius: 999px;
-  background: rgba(8, 10, 15, .78); color: #fff; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+  background: rgba(11, 10, 13, .78); color: #fff; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
 }
 .badge.onyou { background: var(--accent); color: var(--on-accent); }
 .look .name { font-size: 12.5px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -540,7 +541,7 @@ a.chip { text-decoration: none; }
 }
 .sheet[open] { animation: rise .3s var(--ease); }
 .sheet.narrow { width: min(380px, calc(100vw - 32px)); text-align: center; }
-.sheet::backdrop { background: rgba(6, 8, 12, .62); }
+.sheet::backdrop { background: rgba(10, 9, 12, .62); }
 .sheet-head { display: flex; justify-content: space-between; align-items: baseline; }
 .sheet h2 { margin: 0; font: 500 26px/1.1 var(--serif); outline: none; }
 .sheet h3 { margin: 22px 0 10px; font-size: 10.5px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
@@ -610,11 +611,11 @@ a.chip { text-decoration: none; }
   .frame[data-shape="landscape"] .glass { width: 100%; height: auto; aspect-ratio: 16 / 9; }
   .dock {
     position: static; width: 100%; max-width: 440px; padding: 8px; border-radius: 24px; background: var(--glass);
-    box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(6, 9, 16, .8);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(12, 10, 8, .8);
   }
   .frame[data-dock] .glass-bottom { padding: 0 16px 16px; }
   .glass[data-state="portrait"] .veil, .glass[data-state="live"] .veil {
-    background: linear-gradient(180deg, rgba(6,8,12,.4), transparent 13%), linear-gradient(0deg, rgba(6,8,12,.72), transparent 24%);
+    background: linear-gradient(180deg, rgba(10,9,12,.4), transparent 13%), linear-gradient(0deg, rgba(10,9,12,.72), transparent 24%);
   }
   .tablet { border-left: 0; border-top: 1px solid var(--line); padding: 16px 16px calc(14px + env(safe-area-inset-bottom)); contain: none; }
   .pane { overflow: visible; }
@@ -692,7 +693,7 @@ a.chip { text-decoration: none; }
   .kept { overflow: visible; }
   .kept > button:first-child { border-radius: 10px; overflow: hidden; }
   .kept .drop { width: 44px; height: 44px; top: -15px; right: -15px; background: none; opacity: 1; display: grid; place-items: center; line-height: 1; font-size: 0; }
-  .kept .drop::before { content: "\00d7"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(8, 10, 14, .82); color: #fff; font-size: 14px; }
+  .kept .drop::before { content: "\00d7"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(11, 10, 13, .82); color: #fff; font-size: 14px; }
   .saved { padding: 15px 15px 2px 2px; }
   /* 16px in a field: iOS does not zoom the page in when it is tapped, and so never leaves it zoomed */
   .ask input, .import input, .select { font-size: 16px; min-height: 44px; }
@@ -701,7 +702,7 @@ a.chip { text-decoration: none; }
   /* Once the glass has scrolled out of sight the ask bar docks at the bottom of the screen (src/main.js marks the page
      "glass-away"), so the stylist is never a long way off, however far down the Catalogue is. While the glass is in view
      it stays where it is, and never lies across the tabs. */
-  .ask { margin-top: 12px; box-shadow: 0 0 0 1px var(--line) inset, 0 12px 28px -14px rgba(8, 10, 16, .4); }
+  .ask { margin-top: 12px; box-shadow: 0 0 0 1px var(--line) inset, 0 12px 28px -14px rgba(12, 11, 14, .4); }
   .glass-away .ask { position: sticky; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 6; }
   /* When the camera has stopped, "Try the camera again" is the one thing to tap. It sits above the line of words, clear of it. */
   .cam-lost { padding-bottom: 12%; }
@@ -749,7 +750,7 @@ a.chip { text-decoration: none; }
 [data-glass="oval"] .compare { padding: 17cqh 13cqw 15cqh; align-items: start; background: rgb(8, 10, 15); }
 [data-glass="oval"] .compare .close { top: auto; right: auto; bottom: 6cqh; left: 50%; transform: translateX(-50%); }
 [data-glass="oval"] .glass[data-state="portrait"] .veil, [data-glass="oval"] .glass[data-state="live"] .veil {
-  background: linear-gradient(180deg, rgba(6,8,12,.5), transparent 17%), linear-gradient(0deg, rgba(6,8,12,.8), transparent 34%);
+  background: linear-gradient(180deg, rgba(10,9,12,.5), transparent 17%), linear-gradient(0deg, rgba(10,9,12,.8), transparent 34%);
 }
 @container glass (max-height: 440px) {
   [data-glass="oval"] .wake { padding-top: 24cqh; }
@@ -773,7 +774,7 @@ a.chip { text-decoration: none; }
   }
   [data-glass="oval"] .dock {
     position: static; width: 100%; max-width: 440px; padding: 8px; border-radius: 24px; background: var(--glass);
-    box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(6, 9, 16, .8);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(12, 10, 8, .8);
   }
 }
 
@@ -813,17 +814,17 @@ a.chip { text-decoration: none; }
 :root.phone-app .frame[data-shape="landscape"] .glass { width: 100%; height: auto; flex: none; aspect-ratio: 16 / 9; }
 :root.phone-app .dock {
   position: static; flex: none; width: 100%; max-width: 420px; padding: 8px; border-radius: 22px; background: var(--glass);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(6, 9, 16, .8);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(12, 10, 8, .8);
 }
 :root.phone-app .frame[data-dock] .glass-bottom { padding: 0 14px 14px; }
 :root.phone-app .tablet {
   position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; height: var(--sheet);
   border: 0; border-radius: 22px 22px 0 0; padding: 0 16px calc(10px + env(safe-area-inset-bottom));
-  background: var(--panel); box-shadow: 0 -1px 0 var(--line), 0 -24px 48px -30px rgba(6, 9, 16, .5);
+  background: var(--panel); box-shadow: 0 -1px 0 var(--line), 0 -24px 48px -30px rgba(12, 10, 8, .5);
   overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; contain: none;
   transition: height var(--calm) var(--ease);
 }
-:root.phone-app .app[data-sheet="full"] .tablet { height: calc(100svh - 64px - env(safe-area-inset-top)); box-shadow: 0 -1px 0 var(--line), 0 -40px 80px -20px rgba(6, 9, 16, .55); }
+:root.phone-app .app[data-sheet="full"] .tablet { height: calc(100svh - 64px - env(safe-area-inset-top)); box-shadow: 0 -1px 0 var(--line), 0 -40px 80px -20px rgba(12, 10, 8, .55); }
 :root.phone-app .app[data-sheet="full"] .stage { bottom: clamp(292px, 42svh, 400px); }
 :root.phone-app .pane { overflow: visible; }
 .sheet-handle { display: none; }
@@ -915,16 +916,16 @@ a.chip { text-decoration: none; }
 /* "Add MIRVA to your home screen" (src/web/install.js): a card that rises once, after the first kept look. */
 .install-card {
   position: fixed; z-index: 80; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 460px; margin: 0 auto;
-  display: grid; gap: 12px; padding: 16px 16px 14px 18px; border-radius: 20px; background: #0a0c11; color: #f3f5f9;
-  box-shadow: 0 30px 70px -30px rgba(4, 7, 14, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
+  display: grid; gap: 12px; padding: 16px 16px 14px 18px; border-radius: 20px; background: #0b0b0e; color: #f4f2ef;
+  box-shadow: 0 30px 70px -30px rgba(10, 8, 6, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
 }
 .install-card.in { transform: none; opacity: 1; }
 .install-card b { display: block; font: 400 19px/1.2 var(--serif); }
-.install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #c8cedb; }
+.install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #d2cbc3; }
 .install-acts { display: flex; justify-content: flex-end; gap: 8px; }
 .install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
-.install-later { background: none; color: #c8cedb; }
-.install-add { background: #f3f5f9; color: #0a0c11; }
+.install-later { background: none; color: #d2cbc3; }
+.install-add { background: #f4f2ef; color: #0b0b0e; }
 
 /* Arriving from the home page, the glass there becomes the mirror's own glass. */
 @media (prefers-reduced-motion: no-preference) {
@@ -988,7 +989,7 @@ a.chip { text-decoration: none; }
 .reel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.1s var(--ease); }
 .reel img.on { opacity: .85; animation: drift 7s linear forwards; }
 @keyframes drift { from { transform: scale(1.04); } to { transform: scale(1.14) translateY(-1.5%); } }
-.reel-shade { position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 44%, rgba(6,8,12,.42), rgba(6,8,12,.8)); }
+.reel-shade { position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 44%, rgba(10,9,12,.42), rgba(10,9,12,.8)); }
 .wait-left { z-index: 2; }
 .wait-fact { position: absolute; z-index: 2; left: 12%; right: 12%; top: calc(44% + 42px); margin: 0; text-align: center; font-size: 12px; line-height: 1.5; letter-spacing: .04em; color: rgba(243,245,249,.82); text-wrap: balance; text-shadow: 0 2px 14px rgba(0,0,0,.6); }
 .wait-fact.in { animation: rise .7s var(--ease); }

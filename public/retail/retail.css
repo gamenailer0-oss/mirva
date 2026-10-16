@@ -12,7 +12,7 @@
 .form-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4); }
 
 /* The page opens in the dark room of the glass, so the bar above it is dark until the reader scrolls into daylight. */
-.nav.on-dark:not(.scrolled) { --ink: #f1f3f8; --muted: #a9b0c0; --line: rgba(255, 255, 255, .16); --accent: #f3f5f9; --on-accent: #0a0c11; --bg: #06070a; background: transparent; color: var(--ink); }
+.nav.on-dark:not(.scrolled) { --ink: #f3f1ee; --muted: #b2aba4; --line: rgba(255, 255, 255, .16); --accent: #f4f2ef; --on-accent: #0b0b0e; --bg: #0b0a0d; background: transparent; color: var(--ink); }
 .nav.on-dark { position: fixed; left: 0; right: 0; }
 
 /* ---------- 1. hero: from the rail, onto her ---------- */
@@ -25,10 +25,10 @@
 /* The store's own photos hang on a line of mercury. One lifts, a thread of light runs down, and the oval shows her in it.
    Three turns of five seconds; for anyone who asks for less motion, the first turn holds still. */
 .from-rail { position: relative; justify-self: center; width: clamp(250px, 27vw, 360px); margin: 0; display: grid; gap: 0; --cycle: 15s; }
-.rail-bar { height: 1.5px; margin: 0 4%; border-radius: 2px; background: linear-gradient(90deg, transparent, #c3c9d6 14%, #f6f8fb 50%, #c3c9d6 86%, transparent); opacity: .85; }
+.rail-bar { height: 1.5px; margin: 0 4%; border-radius: 2px; background: linear-gradient(90deg, transparent, #cdc6be 14%, #f6f8fb 50%, #cdc6be 86%, transparent); opacity: .85; }
 .hangers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12%; padding: 0 8%; }
 .hangers li { position: relative; padding-top: 12px; opacity: .42; transform-origin: 50% 0; animation: hang-pick var(--cycle) var(--ease) infinite; }
-.hangers li::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 12px; background: #c3c9d6; opacity: .8; }
+.hangers li::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 12px; background: #cdc6be; opacity: .8; }
 .hangers img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; background: #171a23; }
 .hangers .h2 { animation-delay: 5s; } .hangers .h3 { animation-delay: 10s; }
 @keyframes hang-pick { 0% { opacity: .42; transform: none; } 4%, 30% { opacity: 1; transform: translateY(-4px) scale(1.06); } 36%, 100% { opacity: .42; transform: none; } }
@@ -36,18 +36,18 @@
 .threads path { fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 40 100; stroke-dashoffset: 40; opacity: 0; filter: drop-shadow(0 0 3px rgba(255, 255, 255, .7)); animation: thread var(--cycle) linear infinite; }
 .threads .t2 { animation-delay: 5s; } .threads .t3 { animation-delay: 10s; }
 @keyframes thread { 0%, 3% { opacity: 0; stroke-dashoffset: 40; } 4% { opacity: 1; stroke-dashoffset: 40; } 11% { opacity: 1; stroke-dashoffset: -100; } 12%, 100% { opacity: 0; stroke-dashoffset: -100; } }
-.from-rail .oval { position: relative; width: 84%; justify-self: center; aspect-ratio: 9 / 16; border-radius: 50%; overflow: hidden; isolation: isolate; background: radial-gradient(90% 60% at 50% 18%, #1b2030, #0a0c11 70%); box-shadow: 0 50px 110px -50px rgba(4, 7, 14, .9), 0 0 0 1.5px rgba(214, 220, 232, .55); }
+.from-rail .oval { position: relative; width: 84%; justify-self: center; aspect-ratio: 9 / 16; border-radius: 50%; overflow: hidden; isolation: isolate; background: radial-gradient(90% 60% at 50% 18%, #1e1d24, #0b0b0e 70%); box-shadow: 0 50px 110px -50px rgba(10, 8, 6, .9), 0 0 0 1.5px rgba(214, 220, 232, .55); }
 .from-rail .oval img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; opacity: 0; animation: wear var(--cycle) var(--ease) infinite; }
 .from-rail .o2 { animation-delay: 5s; } .from-rail .o3 { animation-delay: 10s; }
 @keyframes wear { 0%, 7% { opacity: 0; transform: scale(1.025); } 12%, 32% { opacity: 1; transform: none; } 37%, 100% { opacity: 0; } }
-.from-rail .oval::after { content: ""; position: absolute; inset: auto 0 0; height: 40%; z-index: 1; background: linear-gradient(transparent, rgba(6, 8, 13, .86)); }
-.oval-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 0 14% 13%; text-align: center; color: #f3f5f9; }
+.from-rail .oval::after { content: ""; position: absolute; inset: auto 0 0; height: 40%; z-index: 1; background: linear-gradient(transparent, rgba(11, 10, 13, .86)); }
+.oval-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 0 14% 13%; text-align: center; color: #f4f2ef; }
 .oval-cap p { position: relative; height: 1.35em; }
 .oval-cap .c { position: absolute; left: 0; right: 0; bottom: 0; white-space: nowrap; opacity: 0; animation: wear var(--cycle) var(--ease) infinite; }
 .oval-cap .c2 { animation-delay: 5s; } .oval-cap .c3 { animation-delay: 10s; }
-.oval-cap .tag { font: 500 9.5px/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #c8cedb; margin-bottom: 6px; }
+.oval-cap .tag { font: 500 9.5px/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #d2cbc3; margin-bottom: 6px; }
 .oval-cap .line { font-size: clamp(18px, 1.8vw, 23px); }
-.from-rail figcaption { margin-top: 16px; color: #8c94a6; text-align: center; max-width: 32ch; justify-self: center; }
+.from-rail figcaption { margin-top: 16px; color: #968f88; text-align: center; max-width: 32ch; justify-self: center; }
 @media (prefers-reduced-motion: reduce) {
   .hangers li, .threads path, .from-rail .oval img, .oval-cap .c { animation: none; }
   .hangers .h1, .from-rail .oval .o1, .oval-cap .c1 { opacity: 1; }
@@ -67,9 +67,9 @@
 .changes .link { display: inline-block; padding: 6px 0 0; font-size: 14.5px; }
 .web { margin-top: clamp(32px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
 .web .subtitle em { font-style: italic; }
-.snippet { display: grid; gap: 16px; justify-items: start; padding: 22px; border-radius: var(--r-md); background: #0a0c11; color: #dfe4ee; }
+.snippet { display: grid; gap: 16px; justify-items: start; padding: 22px; border-radius: var(--r-md); background: #0b0b0e; color: #dfe4ee; }
 .snippet code { font: 400 13px/1.6 ui-monospace, "Cascadia Mono", Consolas, monospace; overflow-wrap: anywhere; color: #b9c2d3; }
-.snippet-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 20px 0 16px; border-radius: 999px; background: #f3f5f9; color: #0a0c11; font: 500 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.snippet-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 20px 0 16px; border-radius: 999px; background: #f4f2ef; color: #0b0b0e; font: 500 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
 .snippet-btn svg { width: 14px; height: 18px; }
 
 /* ---------- 4. pilot ---------- */
@@ -92,8 +92,8 @@
 .plan { position: relative; display: grid; gap: var(--s3); align-content: start; padding: clamp(20px, 2.2vw, 28px); border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); transition: box-shadow var(--calm); }
 .plan.suggested { box-shadow: 0 0 0 1.5px var(--ink); }
 /* The mirror plans are the product, so they are the glass: dark, where Assist is paper. */
-.plan.glassy { background: radial-gradient(90% 70% at 50% 0%, var(--glass-lift), var(--glass) 75%); --ink: #f1f3f8; --muted: #a9b0c0; --line: rgba(255, 255, 255, .14); color: var(--ink); box-shadow: none; }
-.plan.glassy.suggested { box-shadow: 0 0 0 1.5px #f1f3f8; }
+.plan.glassy { background: radial-gradient(90% 70% at 50% 0%, var(--glass-lift), var(--glass) 75%); --ink: #f3f1ee; --muted: #b2aba4; --line: rgba(255, 255, 255, .14); color: var(--ink); box-shadow: none; }
+.plan.glassy.suggested { box-shadow: 0 0 0 1.5px #f3f1ee; }
 .plan .badge { position: absolute; top: 18px; right: 18px; }
 .plan h3 { font: 400 28px/1 var(--serif); }
 .plan .fee { font: 400 clamp(26px, 2.6vw, 34px)/1 var(--serif); }
@@ -120,7 +120,7 @@
 .assume { margin-top: var(--s2); }
 .assume > summary { cursor: pointer; color: var(--muted); font-size: 14.5px; text-decoration: underline; text-underline-offset: 3px; padding: 8px 0; }
 .assume[open] > summary { margin-bottom: var(--s3); }
-.result { display: grid; gap: var(--s3); align-content: start; padding: clamp(20px, 2.4vw, 28px); border-radius: var(--r-lg); background: var(--glass); color: #f1f3f8; --muted: #a9b0c0; }
+.result { display: grid; gap: var(--s3); align-content: start; padding: clamp(20px, 2.4vw, 28px); border-radius: var(--r-lg); background: var(--glass); color: #f3f1ee; --muted: #b2aba4; }
 .result .big { font: 400 clamp(52px, 6vw, 84px)/.95 var(--serif); }
 
 /* ---------- 7. talk ---------- */

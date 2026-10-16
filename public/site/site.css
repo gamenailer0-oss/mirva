@@ -1,7 +1,7 @@
 /* The shopper's site. Builds on brand.css. */
 
 /* The page opens in a dark room, so the bar above it is dark until the reader scrolls into daylight. */
-.nav.on-dark:not(.scrolled) { --ink: #f1f3f8; --muted: #a9b0c0; --line: rgba(255, 255, 255, .16); --accent: #f3f5f9; --on-accent: #0a0c11; --bg: #06070a; background: transparent; color: var(--ink); position: fixed; left: 0; right: 0; }
+.nav.on-dark:not(.scrolled) { --ink: #f3f1ee; --muted: #b2aba4; --line: rgba(255, 255, 255, .16); --accent: #f4f2ef; --on-accent: #0b0b0e; --bg: #0b0a0d; background: transparent; color: var(--ink); position: fixed; left: 0; right: 0; }
 .nav.on-dark { position: fixed; left: 0; right: 0; }
 
 /* ---------- hero ---------- */
@@ -10,8 +10,8 @@
 /* The line breaks where the thought does: "The mirror that / styles you." */
 .hero .display { font-size: clamp(44px, 6.1vw, 92px); }
 .hero .display em { display: block; }
-.hero-copy .lede { color: #b4bccb; }
-.hero-copy .fine { color: #8c94a6; }
+.hero-copy .lede { color: #c2bbb3; }
+.hero-copy .fine { color: #968f88; }
 .hero-stage { display: grid; justify-items: center; }
 .hero-glass { width: clamp(240px, 27vw, 360px); }
 .hero-glass .figure { position: absolute; inset: 9% 6% 0; width: 88%; height: 91%; }
@@ -28,11 +28,11 @@
 .hero-glass .spark { stroke-dasharray: 14 86; opacity: 0; animation: spark 5s linear infinite; }
 @keyframes spark { 0% { opacity: 1; stroke-dashoffset: 0; } 18% { opacity: 1; stroke-dashoffset: -100; } 20%, 100% { opacity: 0; stroke-dashoffset: -100; } }
 .hero-glass .halo .arc:not(.spark) { opacity: .55; }
-.hero-glass::before { content: ""; position: absolute; inset: auto 0 0; height: 46%; background: linear-gradient(transparent, rgba(6, 8, 13, .88)); z-index: 2; }
+.hero-glass::before { content: ""; position: absolute; inset: auto 0 0; height: 46%; background: linear-gradient(transparent, rgba(11, 10, 13, .88)); z-index: 2; }
 .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 0 9% 8%; }
 .hero-cap p { position: relative; height: 1.3em; }
 .hero-cap .c { position: absolute; left: 0; bottom: 0; white-space: nowrap; }
-.hero-cap .tag { font: 500 10px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #c8cedb; margin-bottom: 8px; }
+.hero-cap .tag { font: 500 10px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #d2cbc3; margin-bottom: 8px; }
 .hero-cap .line { font-size: clamp(20px, 2vw, 27px); line-height: 1.2; }
 
 /* ---------- try it here: the stylist, on a real store's rails ---------- */
@@ -95,6 +95,7 @@
 /* ---------- inner pages ---------- */
 .page-head { padding: clamp(120px, 16vw, 190px) 0 clamp(40px, 6vw, 72px); }
 .page-head .lede { margin-top: var(--s5); }
+.page-head .kicker + .display, .page-head .kicker + .title { margin-top: var(--s4); }
 .doc { padding-bottom: var(--s9); }
 .doc .note { padding: var(--s4) var(--s5); border-radius: var(--r-md); background: var(--card); font-size: 14.5px; color: var(--muted); max-width: var(--measure); margin-bottom: var(--s6); }
 .compare { width: 100%; border-collapse: collapse; font-size: 15.5px; }
@@ -115,7 +116,7 @@
 .waiting { display: grid; gap: var(--s4); padding: var(--s5); border-radius: var(--r-lg); background: var(--glass); color: var(--pearl); }
 .waiting ul { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
 .waiting li { flex: 0 0 96px; display: grid; gap: 6px; font-size: 12.5px; line-height: 1.25; }
-.waiting img { width: 96px; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; background: #1b2030; }
+.waiting img { width: 96px; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; background: #1e1d24; }
 .me-head { display: flex; flex-wrap: wrap; gap: var(--s5); justify-content: space-between; align-items: end; margin-bottom: var(--s7); }
 .allow { display: flex; gap: var(--s4); align-items: center; }
 .ring { width: 58px; height: 58px; transform: rotate(-90deg); }
@@ -130,7 +131,7 @@
 .piece img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: opacity var(--calm), transform 600ms var(--ease); }
 .piece .shot:hover img { transform: scale(1.02); }
 .piece .shot .badge { position: absolute; left: 8px; top: 8px; }
-.piece .flip { position: absolute; right: 8px; bottom: 8px; min-height: 30px; padding: 0 12px; border-radius: 999px; background: rgba(10, 12, 17, .72); color: var(--pearl); font-size: 12px; }
+.piece .flip { position: absolute; right: 8px; bottom: 8px; min-height: 30px; padding: 0 12px; border-radius: 999px; background: rgba(12, 11, 14, .72); color: var(--pearl); font-size: 12px; }
 .piece b { font-weight: 400; font-size: 15px; line-height: 1.3; }
 .piece .meta { font-size: 13px; color: var(--muted); }
 .piece .acts { display: flex; gap: var(--s4); }
@@ -139,7 +140,7 @@
 .piece .tick { position: absolute; right: 10px; top: 10px; width: 28px; height: 28px; border-radius: 50%; background: var(--panel); box-shadow: 0 0 0 1px var(--line); display: grid; place-items: center; font-size: 14px; }
 .piece.pick .tick { background: var(--ink); color: var(--panel); }
 .empty { padding: clamp(40px, 8vw, 90px) var(--s5); text-align: center; border-radius: var(--r-lg); background: var(--card); display: grid; gap: var(--s4); justify-items: center; }
-.askbar { position: sticky; bottom: 16px; z-index: 20; margin-top: var(--s6); display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; justify-content: space-between; padding: 12px 12px 12px 22px; border-radius: 999px; background: var(--glass); color: var(--pearl); box-shadow: 0 24px 60px -30px rgba(4, 7, 14, .8); }
+.askbar { position: sticky; bottom: 16px; z-index: 20; margin-top: var(--s6); display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; justify-content: space-between; padding: 12px 12px 12px 22px; border-radius: 999px; background: var(--glass); color: var(--pearl); box-shadow: 0 24px 60px -30px rgba(10, 8, 6, .8); }
 .askbar .btn { background: var(--pearl); color: var(--glass); }
 .askbar .link { color: var(--pearl); }
 .boardrow { display: grid; grid-template-columns: 1fr auto; gap: var(--s4); align-items: center; padding: var(--s5) 0; border-top: 1px solid var(--line); }
@@ -294,16 +295,16 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 /* "Add MIRVA to your home screen" (src/web/install.js): a card that rises once, after the first kept look. */
 .install-card {
   position: fixed; z-index: 80; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 460px; margin: 0 auto;
-  display: grid; gap: 12px; padding: 16px 16px 14px 18px; border-radius: 20px; background: #0a0c11; color: #f3f5f9;
-  box-shadow: 0 30px 70px -30px rgba(4, 7, 14, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
+  display: grid; gap: 12px; padding: 16px 16px 14px 18px; border-radius: 20px; background: #0b0b0e; color: #f4f2ef;
+  box-shadow: 0 30px 70px -30px rgba(10, 8, 6, .8); transform: translateY(24px); opacity: 0; transition: transform 260ms cubic-bezier(.2,.7,.2,1), opacity 260ms;
 }
 .install-card.in { transform: none; opacity: 1; }
 .install-card b { display: block; font: 400 19px/1.2 var(--serif); }
-.install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #c8cedb; }
+.install-card span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.45; color: #d2cbc3; }
 .install-acts { display: flex; justify-content: flex-end; gap: 8px; }
 .install-acts button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
-.install-later { background: none; color: #c8cedb; }
-.install-add { background: #f3f5f9; color: #0a0c11; }
+.install-later { background: none; color: #d2cbc3; }
+.install-add { background: #f4f2ef; color: #0b0b0e; }
 
 /* ---------- the account as an app, on a phone: four places along the bottom ---------- */
 .appbar { display: none; }
@@ -332,25 +333,25 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 
 /* ---------- home: the oval draws itself, then shows what MIRVA really makes ---------- */
 .oval-hero { position: relative; justify-self: center; width: clamp(240px, 27vw, 360px); margin: 0; display: grid; gap: 14px; }
-.oval-hero .oval { position: relative; aspect-ratio: 9 / 16; border-radius: 50%; overflow: hidden; isolation: isolate; background: radial-gradient(90% 60% at 50% 18%, #1b2030, #0a0c11 70%); box-shadow: 0 50px 110px -50px rgba(4, 7, 14, .9); }
+.oval-hero .oval { position: relative; aspect-ratio: 9 / 16; border-radius: 50%; overflow: hidden; isolation: isolate; background: radial-gradient(90% 60% at 50% 18%, #1e1d24, #0b0b0e 70%); box-shadow: 0 50px 110px -50px rgba(8, 6, 4, .9), 0 0 0 1px rgba(226, 201, 149, .06); }
 .oval img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; opacity: 0; animation: oval-look 18s var(--ease) infinite; }
 .oval .o1 { animation-delay: 1.6s; }
 .oval .o2 { animation-delay: 7.6s; }
 .oval .o3 { animation-delay: 13.6s; }
 @keyframes oval-look { 0% { opacity: 0; transform: scale(1.025); } 5%, 31% { opacity: 1; transform: none; } 35%, 100% { opacity: 0; } }
-.oval::after { content: ""; position: absolute; inset: auto 0 0; height: 42%; z-index: 1; background: linear-gradient(transparent, rgba(6, 8, 13, .86)); }
-.oval-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 0 16% 13%; text-align: center; color: #f3f5f9; }
+.oval::after { content: ""; position: absolute; inset: auto 0 0; height: 42%; z-index: 1; background: linear-gradient(transparent, rgba(11, 10, 13, .86)); }
+.oval-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 0 16% 13%; text-align: center; color: #f4f2ef; }
 .oval-cap p { position: relative; height: 1.35em; }
 .oval-cap .c { position: absolute; left: 0; right: 0; bottom: 0; white-space: nowrap; opacity: 0; animation: oval-look 18s var(--ease) infinite; }
 .oval-cap .c1 { animation-delay: 1.6s; } .oval-cap .c2 { animation-delay: 7.6s; } .oval-cap .c3 { animation-delay: 13.6s; }
-.oval-cap .tag { font: 500 9.5px/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #c8cedb; margin-bottom: 6px; }
+.oval-cap .tag { font: 500 9.5px/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #d2cbc3; margin-bottom: 6px; }
 .oval-cap .line { font-size: clamp(19px, 1.9vw, 25px); }
 .oval-line { position: absolute; z-index: 3; left: 0; top: 0; width: 100%; aspect-ratio: 9 / 16; height: auto; pointer-events: none; }
 .oval-line ellipse { fill: none; stroke: url(#mercury); stroke-width: 1.4; stroke-dasharray: 100; stroke-dashoffset: 100; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; transform: rotate(-90deg); animation: oval-draw 1.8s var(--ease) .2s forwards; }
 @keyframes oval-draw { to { stroke-dashoffset: 0; } }
 .oval-halo { position: absolute; z-index: 3; left: 18%; width: 64%; top: -9%; height: auto; overflow: visible; }
 .oval-halo path { fill: none; stroke: #e8ecf3; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: oval-draw 1.2s var(--ease) 1.4s forwards; opacity: .8; }
-.oval-hero figcaption { color: #8c94a6; text-align: center; max-width: 30ch; justify-self: center; }
+.oval-hero figcaption { color: #968f88; text-align: center; max-width: 30ch; justify-self: center; }
 @media (prefers-reduced-motion: reduce) {
   .oval .o1, .oval-cap .c1 { opacity: 1; animation: none; }
   .oval .o2, .oval .o3, .oval-cap .c2, .oval-cap .c3 { display: none; }
@@ -378,7 +379,7 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 .proof-arrow::after { content: ""; position: absolute; right: -1px; top: -4px; width: 9px; height: 9px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); transform: rotate(45deg); }
 .results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.8vw, 24px); }
 .results li { position: relative; display: grid; gap: 10px; align-content: start; }
-.results .store { position: absolute; right: 8px; top: 8px; width: 28%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; box-shadow: 0 0 0 2px var(--panel), 0 10px 22px -12px rgba(6, 9, 16, .6); background: var(--card); }
+.results .store { position: absolute; right: 8px; top: 8px; width: 28%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; box-shadow: 0 0 0 2px var(--panel), 0 10px 22px -12px rgba(12, 10, 8, .6); background: var(--card); }
 .proof-note { max-width: 78ch; margin-top: var(--s5); }
 @media (max-width: 700px) {
   .proof-row { grid-template-columns: minmax(0, 1fr); }

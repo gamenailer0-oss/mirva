@@ -1,5 +1,6 @@
 /* MIRVA on the web — the same quiet mirror, off the shop floor.
-   MIRVA has no colour of its own: ink on porcelain, pearl on glass, and one line of mercury light.
+   MIRVA has no colour of its own: ink on honed marble, pearl on smoky glass, one line of mercury light, and the warm
+   light of a fitting-room lamp (the same room the presentation models stand in).
    Colour arrives with the store (--accent is set per retailer where a page is prepared for one).
    Motion: only opacity and transform animate. One slow moment per page; everything else is quick. */
 
@@ -7,8 +8,10 @@
   --serif: "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
   --sans: "Albert Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --mark: "MIRVA Mark", "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif; /* the wordmark only */
-  --glass: #0a0c11;
-  --glass-lift: #1b2030;
+  --glass: #0b0b0e;
+  --glass-lift: #1e1d24;
+  --lamp: #e2c995; /* warm light, never a fill colour */
+  --brass: #9c7d47;
   --pearl: #f3f5f9;
   --mercury: linear-gradient(120deg, #8d95a6, #f6f8fb 32%, #c3c9d6 55%, #f1f3f7 72%, #7e8698);
   --ease: cubic-bezier(.2, .7, .2, 1);
@@ -22,33 +25,33 @@
 }
 
 :root, [data-mood="porcelain"] {
-  --bg: #e7eaf0;
-  --bg-glow: #f7f8fb;
-  --panel: #fcfdfe;
-  --card: #eef1f5;
-  --chip: #fff;
-  --ink: #0c1018;
-  --muted: #586172;
-  --line: rgba(12, 16, 24, .12);
-  --accent: #0c1018;
-  --on-accent: #fcfdfe;
-  --accent-text: #0c1018;
+  --bg: #ebe8e4;
+  --bg-glow: #f8f6f3;
+  --panel: #fdfcfa;
+  --card: #f2efeb;
+  --chip: #fffefd;
+  --ink: #14131a;
+  --muted: #5e5a62;
+  --line: rgba(20, 19, 26, .12);
+  --accent: #14131a;
+  --on-accent: #fdfcfa;
+  --accent-text: #14131a;
   --good: #1f6b4a;
   --warn: #8a5a12;
   --bad: #9b2c2c;
 }
 [data-mood="noir"] {
-  --bg: #06070a;
-  --bg-glow: #12151d;
-  --panel: #0f1117;
-  --card: #171a23;
-  --chip: #171a23;
-  --ink: #f1f3f8;
-  --muted: #9aa2b3;
+  --bg: #0b0a0d;
+  --bg-glow: #19171d;
+  --panel: #121116;
+  --card: #1a191f;
+  --chip: #1a191f;
+  --ink: #f3f1ee;
+  --muted: #a8a29c;
   --line: rgba(255, 255, 255, .13);
-  --accent: #f3f5f9;
-  --on-accent: #0a0c11;
-  --accent-text: #f3f5f9;
+  --accent: #f3f1ee;
+  --on-accent: #0b0a0d;
+  --accent-text: #f3f1ee;
   --good: #7fd1a8;
   --warn: #e3b866;
   --bad: #f09a9a;
@@ -164,7 +167,10 @@ button.chip:active { transform: scale(.97); }
 .card { background: var(--panel); border-radius: var(--r-lg); box-shadow: 0 0 0 1px var(--line); padding: clamp(22px, 3vw, 36px); }
 .card.flat { background: var(--card); box-shadow: none; }
 .panel { background: var(--panel); border-radius: var(--r-md); box-shadow: 0 0 0 1px var(--line); padding: var(--s5); }
-.dark { --bg: #06070a; --bg-glow: #12151d; --panel: #0f1117; --card: #171a23; --chip: #171a23; --ink: #f1f3f8; --muted: #9aa2b3; --line: rgba(255, 255, 255, .13); --accent: #f3f5f9; --on-accent: #0a0c11; --accent-text: #f3f5f9; --good: #7fd1a8; --bad: #f09a9a; background: radial-gradient(110% 80% at 50% 0%, #141824, #06070a 68%); color: var(--ink); }
+/* A dark room is a fitting room at night: smoky marble, two warm lamps, never a flat black. */
+.dark { --bg: #0b0a0d; --bg-glow: #19171d; --panel: #121116; --card: #1a191f; --chip: #1a191f; --ink: #f3f1ee; --muted: #a8a29c; --line: rgba(255, 255, 255, .13); --accent: #f3f1ee; --on-accent: #0b0a0d; --accent-text: #f3f1ee; --good: #7fd1a8; --bad: #f09a9a;
+  background: radial-gradient(60% 50% at 12% 0%, rgba(226, 201, 149, .13), transparent 72%), radial-gradient(48% 40% at 94% 6%, rgba(226, 201, 149, .08), transparent 70%), url(/brand/marble-dark.webp) 50% 0 / 1400px auto, radial-gradient(110% 80% at 50% 0%, #1b1920, #0b0a0d 68%);
+  color: var(--ink); }
 
 /* The Glass: a tall dark pane with a bevel of mercury. Always dark, whatever the page around it. */
 .glass { position: relative; aspect-ratio: 9 / 16; border-radius: var(--r-glass); overflow: hidden; color: var(--pearl); background: radial-gradient(90% 60% at 50% 16%, var(--glass-lift), var(--glass) 70%); box-shadow: 0 50px 110px -50px rgba(4, 7, 14, .8); isolation: isolate; }
@@ -315,4 +321,27 @@ summary { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   .btn:active, .chip:active { transform: none; }
   .skel::after { animation: none; }
+}
+
+/* ---------- the room: marble under the light pages, lamplight in the dark ones, and an arch where they meet ----------
+   The public pages stand in the same fitting room as the presentation models: honed marble by day, smoky marble at
+   night. Where a light room meets a dark one, the later room rises in an arch (the top of the oval mirror) with one
+   line of light along its rim, so the page flows instead of cutting. Only the public pages (body[data-page]). */
+body[data-page]:not(.dark) { background: url(/brand/marble-light.webp) 50% 0 / 1500px auto, var(--bg); }
+body[data-page].band { background: radial-gradient(120% 90% at 30% 0%, var(--bg-glow), transparent 62%), url(/brand/marble-light.webp) 50% 0 / 1500px auto, var(--bg); }
+body[data-page] .band { background: radial-gradient(70% 55% at 88% 0%, rgba(226, 201, 149, .16), transparent 70%), radial-gradient(120% 90% at 30% 0%, var(--bg-glow), transparent 62%); }
+body[data-page] .section, body[data-page] .hero { position: relative; overflow-x: clip; }
+body[data-page] :is(.hero.dark, .section.dark) + .section:not(.dark),
+body[data-page] .section:not(.dark) + .section.dark { isolation: isolate; --arch-h: clamp(34px, 7vw, 92px); --rim: rgba(246, 248, 251, .55); }
+body[data-page] .section:not(.dark) + .section.dark { --rim: rgba(226, 201, 149, .6); }
+body[data-page] :is(.hero.dark, .section.dark) + .section:not(.dark)::before,
+body[data-page] .section:not(.dark) + .section.dark::before {
+  content: ""; position: absolute; z-index: 0; left: 50%; top: 1px; width: 150%; height: var(--arch-h);
+  transform: translate(-50%, -100%); border-radius: 50% 50% 0 0 / 100% 100% 0 0; pointer-events: none;
+  background: var(--bg-glow); box-shadow: inset 0 1px 0 var(--rim), 0 -18px 40px -24px var(--rim);
+}
+body[data-page] :is(.hero.dark, .section.dark) + .section:not(.dark)::after,
+body[data-page] .section:not(.dark) + .section.dark::after {
+  content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: calc(var(--arch-h) * 3.2); pointer-events: none;
+  background: linear-gradient(var(--bg-glow), transparent);
 }
