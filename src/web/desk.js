@@ -164,6 +164,24 @@ function door(message) {
   );
 }
 
+// A member's tier at /hq: Private is chosen through an invitation; the founder can mark a teammate (the team's demo
+// allowance, lib/plans.mjs TEAM) or a tester here, or put them back to an ordinary member.
+function tierCell(m) {
+  if (m.tier === "private") return el("span", { class: "badge", text: "private" });
+  const pick = el("select", { class: "input", "aria-label": `Tier for ${m.name}`, style: "min-height:36px;padding:4px 10px;width:auto" },
+    [["member", "Member"], ["team", "Team (demos)"], ["tester", "Tester"]].map(([v, t]) => el("option", { value: v, text: t, selected: m.tier === v })));
+  pick.addEventListener("change", async () => {
+    try {
+      await api("/api/hq/members/tier", { id: m.id, tier: pick.value });
+      toast(`${m.name} is now ${pick.selectedOptions[0].text.toLowerCase()}.`);
+    } catch (e) {
+      toast(e.message);
+      pick.value = m.tier;
+    }
+  });
+  return pick;
+}
+
 const VIEWS = {
   // =================================================================== a store's console
   async overview() {
@@ -838,7 +856,7 @@ const VIEWS = {
       el("div", { class: "tbl-wrap", style: "margin-top:12px" },
         el("table", { class: "tbl" },
           el("thead", {}, el("tr", {}, ["Name", "Email", "Tier", "Joined", "Last seen", "Looks kept"].map((t, i) => el("th", { scope: "col", class: i === 5 ? "n" : "", text: t })))),
-          el("tbody", {}, members.length ? members.map((m) => el("tr", {}, el("td", { text: m.name }), el("td", { text: m.email }), el("td", {}, el("span", { class: "badge " + (m.tier === "private" ? "" : "soft"), text: m.tier })), el("td", { text: when(m.created) }), el("td", { text: m.seen ? when(m.seen) : "—" }), el("td", { class: "n", text: num(m.looks) }))) : el("tr", {}, el("td", { colSpan: 6, text: "No members yet." }))),
+          el("tbody", {}, members.length ? members.map((m) => el("tr", {}, el("td", { text: m.name }), el("td", { text: m.email }), el("td", {}, tierCell(m)), el("td", { text: when(m.created) }), el("td", { text: m.seen ? when(m.seen) : "—" }), el("td", { class: "n", text: num(m.looks) }))) : el("tr", {}, el("td", { colSpan: 6, text: "No members yet." }))),
         ),
       ),
     );
