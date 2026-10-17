@@ -441,3 +441,19 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 
 /* answers arrive: a bar grows from nothing when a vote comes in */
 @starting-style { .choice .bar i, .q-looks .bar i { transform: scaleX(0); } }
+
+/* ---------- her look on her phone, from the mirror's code (/p/<code>, src/web/pickup.js) ---------- */
+.pickup { padding-block: calc(24px + env(safe-area-inset-top)) 48px; display: grid; gap: 22px; max-width: 520px; }
+.pickup-body { display: grid; gap: 18px; }
+.pickup-body .title { font-size: clamp(32px, 9vw, 44px); }
+.pickup-frame { position: relative; margin: 0; border-radius: 26px; overflow: hidden; aspect-ratio: 9 / 16; max-height: 64svh; background: #141218;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .08); }
+.pickup-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.pickup-frame.waiting img { opacity: .35; filter: saturate(.7); }
+.pickup-frame.unveil img { animation: pickup-unveil 1s var(--ease); }
+@keyframes pickup-unveil { from { opacity: 0; transform: scale(1.04); } }
+.pickup-halo { position: absolute; left: 22%; right: 22%; top: 38%; height: 70px; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  border-top: 2px solid rgba(246, 248, 251, .9); filter: drop-shadow(0 0 10px rgba(226, 201, 149, .5)); animation: breathe 2.4s ease-in-out infinite; }
+.pickup-name { display: grid; gap: 2px; color: var(--muted); }
+.pickup-name b { color: var(--ink); font-weight: 500; }
+@media (prefers-reduced-motion: reduce) { .pickup-halo, .pickup-frame.unveil img { animation: none; } }

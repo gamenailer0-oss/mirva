@@ -265,6 +265,7 @@ function forgetPortraits() {
   S.portraits.clear();
   S.round = (S.round || 0) + 1; // a look still being made ahead for these portraits is let go when it comes back
   S.ahead?.clear();
+  hidePickup(); // the code on the real mirror belonged to her
   S.portrait = null;
   S.view = "mirror";
   $("#portrait").hidden = true;
@@ -1015,6 +1016,77 @@ function showPortrait(entry, pid) {
   markCards();
   renderDetail();
   prepareShare(entry, p);
+  pickupCode(p, entry);
+}
+
+// ---- the real mirror's code: her phone picks up the look (the founder's trial; lib/platform.mjs /api/pickup) ----
+// While a look is made: "Don't want to wait? Scan to see it on your phone." Once it is on: "Scan to share it with your
+// family." One code a look. Her portrait leaves the mirror only after a phone has opened the code (the mirror asks every
+// few seconds while the code is on the glass); her phone shows it, buzzes, and can send the page to her family.
+const pick = { pid: null, code: null, entry: null, sent: false, timer: 0, at: 0 };
+async function pickupCode(p, entry = null) {
+  if (document.documentElement.dataset.glass !== "real" || !p) return;
+  if (pick.pid !== p.id) {
+    clearInterval(pick.timer);
+    Object.assign(pick, { pid: p.id, code: null, entry: null, sent: false, at: Date.now() });
+    try {
+      const r = await api("/api/pickup", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ brand: S.brand.id, product: p.id }) });
+      if (pick.pid !== p.id) return;
+      pick.code = r.code;
+      await drawPickup(r.url);
+    } catch (e) {
+      return console.warn("No code for this look:", e);
+    }
+    pick.timer = setInterval(checkPickup, 3000);
+  }
+  if (entry) pick.entry = entry;
+  const words = $("#pickupWords");
+  if (words) words.textContent = pick.entry ? "Scan to share it with your family." : "Don’t want to wait? Scan to see it on your phone.";
+  checkPickup();
+}
+async function drawPickup(url) {
+  let box = $("#pickupCode");
+  if (!box) {
+    box = h("div", { id: "pickupCode", class: "pickup-code" }, h("canvas", { width: 132, height: 132, role: "img", "aria-label": "A code that opens this look on your phone" }), h("p", { id: "pickupWords" }));
+    $("#glass").append(box);
+  }
+  const { default: QRCode } = await import("qrcode");
+  await QRCode.toCanvas(box.querySelector("canvas"), url, { width: 132, margin: 1, errorCorrectionLevel: "L", color: { dark: "#0b0a0d", light: "#efe9e1" } });
+  box.hidden = false;
+}
+function hidePickup() {
+  clearInterval(pick.timer);
+  Object.assign(pick, { pid: null, code: null, entry: null, sent: false });
+  const box = $("#pickupCode");
+  if (box) box.hidden = true;
+}
+async function checkPickup() {
+  if (!pick.code || pick.sent) return;
+  if (Date.now() - pick.at > 6 * 60e3) return clearInterval(pick.timer);
+  if (!pick.entry) return; // nothing to send yet
+  const code = pick.code, entry = pick.entry;
+  try {
+    const status = await api("/api/pickup/" + code);
+    if (!status.opened || pick.code !== code) return;
+    pick.sent = true;
+    const blob = await (await fetch(entry.url)).blob();
+    const jpeg = blob.type === "image/jpeg" ? blob : await asJpeg(blob);
+    const res = await fetch(`/api/pickup/${code}/portrait`, { method: "POST", headers: { ...link.auth(), "content-type": "image/jpeg" }, body: jpeg, signal: link.timeout(30000) });
+    if (!res.ok) pick.sent = false;
+    else clearInterval(pick.timer);
+  } catch (e) {
+    pick.sent = false;
+    console.warn("The look did not reach her phone yet:", e);
+  }
+}
+async function asJpeg(blob) {
+  const bmp = await createImageBitmap(blob);
+  const c = document.createElement("canvas");
+  c.width = bmp.width;
+  c.height = bmp.height;
+  c.getContext("2d").drawImage(bmp, 0, 0);
+  bmp.close?.();
+  return new Promise((resolve, reject) => c.toBlob((b) => (b ? resolve(b) : reject(new Error("no picture"))), "image/jpeg", 0.9));
 }
 
 // On her own phone, Keep also sends the look to the family: her portrait beside the store's photo, in one picture. It is
@@ -1237,6 +1309,7 @@ async function modelShot(p, { retake = false } = {}) {
   S.shooting++;
   caption(line("putting"));
   familyNudge(p);
+  pickupCode(p);
   try {
     // A western top is tried over her own trousers, trousers under her own top: the half she keeps is read from her photo.
     const half = p.tradition === "west" ? ({ "upper body garment": "below", "lower body garment": "above" })[regionFor(p)] : null;

@@ -33,6 +33,7 @@ whoAmI().then(({ user }) => {
 if (page === "home") import("./home.js").then((m) => m.start());
 if (page === "account") import("./account.js").then((m) => m.start());
 if (page === "board") import("./board.js").then((m) => m.start());
+if (page === "pickup") import("./pickup.js").then((m) => m.start());
 
 // Membership: asking for an invitation to Private.
 const ask = $("#askPrivate");

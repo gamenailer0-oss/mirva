@@ -1508,3 +1508,45 @@ test("a store's console counts tries from its mirror, its website and the MIRVA 
   assert.ok(app.funnel.tried >= 2 && app.top.some((t) => t.product === pid), "the app view shows the pieces tried there");
   assert.equal(all.sales.tried, store.sales.tried, "sales are measured against the store's own tries, whatever the view");
 });
+
+// The real mirror's code (/api/pickup): her portrait reaches the server only after a phone has opened the code, only the
+// mirror (or member) that made the look may send it, and her phone and her family can then see it at /p/<code>.
+test("a look picked up by phone: nothing is sent before a phone opens it, and only by the mirror that made it", async () => {
+  const shopper = await member("pickup");
+  const made = await shopper.post("/api/pickup", { brand: "sapphire", product: A.id });
+  assert.equal(made.status, 200, JSON.stringify(made.body));
+  const { code, url } = made.body;
+  assert.match(code, /^[A-Z2-9]{10}$/);
+  assert.ok(url.endsWith("/p/" + code));
+  err(await shopper.post("/api/pickup", { brand: "sapphire", product: "no-such-piece" }), 400);
+
+  const jpeg = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(4000, 7)]);
+  const send = (who) => fetch(`${main.base}/api/pickup/${code}/portrait`, { method: "POST", body: jpeg, headers: { "content-type": "image/jpeg", "x-forwarded-for": who.ip, cookie: [...who.jar].map(([k, v]) => `${k}=${v}`).join("; ") } });
+  assert.equal((await send(shopper)).status, 409, "no phone has opened it: her portrait stays on the mirror");
+
+  const phone = visitor();
+  const opened = await phone.post(`/api/pickup/${code}/open`);
+  assert.equal(opened.status, 200);
+  assert.equal(opened.body.opened, true);
+  assert.equal(opened.body.portrait, null);
+  assert.equal(opened.body.look.name, A.name);
+
+  assert.equal((await send(await member("stranger"))).status, 403, "another account cannot put a picture on her look");
+  assert.equal((await send(shopper)).status, 200);
+  const ready = await phone.get(`/api/pickup/${code}`);
+  assert.equal(ready.body.portrait, `/api/pickup/${code}/portrait`);
+  const pic = await fetch(main.base + ready.body.portrait, { headers: { "x-forwarded-for": phone.ip } });
+  assert.equal(pic.status, 200);
+  assert.equal((await pic.arrayBuffer()).byteLength, jpeg.byteLength);
+  assert.equal((await fetch(`${main.base}/p/${code}`)).status, 200, "her phone's page opens");
+  err(await phone.get("/api/pickup/ABCDEFGHJK"), 404);
+
+  // A code made by someone not signed in (an open demo mirror) can never carry a picture: no mirror or account matches.
+  const stranger = visitor();
+  const open = await stranger.post("/api/pickup", { brand: "sapphire", product: A.id });
+  if (open.status === 200) {
+    await visitor().post(`/api/pickup/${open.body.code}/open`);
+    const r = await fetch(`${main.base}/api/pickup/${open.body.code}/portrait`, { method: "POST", body: jpeg, headers: { "content-type": "image/jpeg", "x-forwarded-for": stranger.ip } });
+    assert.equal(r.status, 403);
+  } else assert.equal(open.status, 401);
+});
