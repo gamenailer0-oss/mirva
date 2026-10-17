@@ -139,7 +139,8 @@ test("a portrait that cannot be finished is shown as it came, never withheld", (
 // Since 15 October 2026 every portrait says on the record whether her own face went back, and if not why, with the time
 // each part took: a friend's Android showed the engine's faces for a whole afternoon and nothing said why.
 test("each portrait records whether her own face went back, and how long each part took", () => {
-  assert.match(modelShot, /link\.track\("portrait", \{ product: p\.id, value: [^}]*meta: shotNote\(face, shotMs\) \}\)/);
+  // The note, then what the phone sent and how long the line took (up=, line=, light=1 on a slow line).
+  assert.match(modelShot, /link\.track\("portrait", \{ product: p\.id, value: [^}]*meta: `\$\{shotNote\(face, shotMs\)\} up=\$\{upKb\}k line=/);
   assert.match(main, /const shotNote = \(face, shotMs\) =>\s*.face=\$\{face\.how \|\| "\?"\} eng=\$\{face\.engine \|\| "decart"\}/, "which engine made it is on the record too");
   assert.match(main, /e=\$\{\(face\.cloud\.engine \/ 1000\)\.toFixed\(1\)\} o=\$\{\(face\.cloud\.outlines \/ 1000\)/, "and how long the engine and the outlines took in the cloud");
   assert.match(read("lib/platform.mjs"), /"backdrop", \/\/ the second, studio-wall pass/);

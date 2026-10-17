@@ -1325,7 +1325,7 @@ async function modelShot(p, { retake = false } = {}) {
   // A look at the frame before anything is spent: too dim and no later step can bring the colours back.
   let person;
   try {
-    person = await mirror.frameBlob(1024);
+    person = slowLine() ? await mirror.frameBlob(896, 0.84) : await mirror.frameBlob(1024);
   } catch (e) {
     console.error(e);
     return caption(friendly(e));
@@ -1353,7 +1353,8 @@ async function modelShot(p, { retake = false } = {}) {
     }
     const form = new FormData();
     form.append("person", person, "person.jpg");
-    form.append("reference", ref, "garment.jpg");
+    const sent = slowLine() ? await lighter(ref) : ref;
+    form.append("reference", sent, "garment.jpg");
     form.append("brand", S.brand.id);
     form.append("product", p.id);
     form.append("mode", "portrait");
@@ -1381,6 +1382,11 @@ async function modelShot(p, { retake = false } = {}) {
     if (guest) S.guestUsed = true; // her one portrait before joining
     if (shot.meta?.her && herKey) S.herOutlines = { key: herKey, her: shot.meta.her };
     const shotMs = performance.now() - shotFrom;
+    // Time beyond the engine and the saving is the line itself (sending her photo and the garment): when it passes six
+    // seconds the next pictures go lighter, for the rest of the visit.
+    const line = shotMs - (shot.meta?.ms?.engine || 0) - (shot.meta?.ms?.save || 0);
+    if (line > 6000) S.slowLine = true;
+    const upKb = Math.round((person.size + sent.size) / 1024);
     const slow = setTimeout(() => ticket === S.ticket && caption("Finishing your portrait."), 5000); // only the old way on the phone takes this long
     const face = {};
     const { blob, saved } = await finishPortrait(person, shot, { p, form, ticket }, face);
@@ -1388,7 +1394,7 @@ async function modelShot(p, { retake = false } = {}) {
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
     const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved };
     // value: seconds from asking to the finished picture; meta: whether her own face went back (and how), which engine, and the time of each part
-    link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) });
+    link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: `${shotNote(face, shotMs)} up=${upKb}k line=${Math.round(line / 100) / 10}${slowLine() ? " light=1" : ""}` });
     S.visit.portraits++;
     if (link.member) link.whoIsHere().then(showMember);
     S.portraits.set(p.id, entry);
@@ -1415,6 +1421,27 @@ async function modelShot(p, { retake = false } = {}) {
   } finally {
     S.shooting--;
   }
+}
+
+// ---- a slow line: lighter pictures ----
+// A phone on a slow line (as it says itself, or as the last portrait showed: S.slowLine) sends her photo at 896 pixels and
+// the garment at 900, both at 84% quality: about half the bytes. The engine works at 720p, so the portrait looks the same;
+// on the Rang Rasiya tries 6 to 13 seconds had gone on sending alone. Every portrait now records what it sent (up=).
+const slowLine = () => S.slowLine || (navigator.connection && (navigator.connection.saveData || /(^|-)2g|3g/.test(navigator.connection.effectiveType || "") || (navigator.connection.downlink > 0 && navigator.connection.downlink < 1.5)));
+async function lighter(blob) {
+  if (!blob || blob.size < 120 * 1024) return blob;
+  const bmp = await createImageBitmap(blob);
+  const scale = Math.min(1, 900 / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas");
+  c.width = Math.round(bmp.width * scale);
+  c.height = Math.round(bmp.height * scale);
+  const g = c.getContext("2d");
+  g.fillStyle = "#fff";
+  g.fillRect(0, 0, c.width, c.height);
+  g.drawImage(bmp, 0, 0, c.width, c.height);
+  bmp.close?.();
+  const out = await new Promise((resolve) => c.toBlob(resolve, "image/jpeg", 0.84));
+  return out && out.size < blob.size ? out : blob;
 }
 
 // ---- Complete the look (a trial, "outfit"; MIRVA_TRIALS) ----
