@@ -620,7 +620,9 @@ function syncGlass() {
 // The stylist's panel is tall while she chooses, folds to the three looks while one is on (so the glass grows), and
 // opens to the whole screen when she asks for it. Only the layout changes; every button does what it always did.
 const upright = matchMedia("(max-width: 700px) and (orientation: portrait)");
-const phoneApp = () => upright.matches && document.documentElement.dataset.glass !== "oval";
+// The real-mirror version (a tall screen behind two-way glass) is laid out like the phone app, one column, the glass first.
+const tall = matchMedia("(orientation: portrait)");
+const phoneApp = () => (upright.matches || (document.documentElement.dataset.glass === "real" && tall.matches)) && document.documentElement.dataset.glass !== "oval";
 const SHEETS = ["mini", "peek", "full"];
 let sheetWish = null; // the size she chose herself, until she picks a look
 function syncSheet() {
@@ -2043,6 +2045,14 @@ async function boot() {
   S.config = await api("/api/config");
   // MIRVA's own mirror is an oval. A store's paired mirror is told so by its console; "?glass=oval" shows it on any screen.
   if (S.config.glass === "oval" || new URLSearchParams(location.search).get("glass") === "oval") document.documentElement.dataset.glass = "oval";
+  // The real-mirror version (unlisted: "?glass=real", and only for an account with the "mirror" trial, MIRVA_TRIALS):
+  // black wherever nothing is shown, so two-way glass reads as a mirror, and her own picture kept in a corner.
+  if (new URLSearchParams(location.search).get("glass") === "real")
+    link.whoIsHere().then((m) => {
+      if (!m?.trials?.includes("mirror")) return;
+      document.documentElement.dataset.glass = "real";
+      syncSheet();
+    });
   mirror = new Mirror({ cam: $("#cam"), live: $("#live"), config: S.config });
   mirror.auth = link.auth; // so a live session is billed to the right mirror or member
   // An uploaded photo is shown from the mirror's own canvas, not through the video the camera uses: on some phones a

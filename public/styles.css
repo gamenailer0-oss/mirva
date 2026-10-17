@@ -1031,3 +1031,26 @@ a.chip { text-decoration: none; }
 .modes [data-mode="studio"] b::after { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0 2px 8px; border-radius: 50%; vertical-align: middle; background: #ff5a5f; box-shadow: 0 0 8px rgba(255, 90, 95, .8); }
 /* The store's name and "concept demo by MIRVA" in the corner of the glass stay readable over a bright room. */
 .glass:not([data-state="asleep"]) :is(.wordmark, .byline) { text-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 0 14px rgba(0, 0, 0, .45); }
+
+/* ---------- the real-mirror version ("?glass=real", the founder's trial; src/main.js boot) ----------
+   For a tall screen behind two-way mirror glass: whatever is black reads as a mirror, so everything not being shown is
+   black, words are a warm white (never a blue-white), and nothing glows where nothing is meant to be seen. Laid out like
+   the phone app. While a look is made and once it is on, her own live picture is kept small in a corner, like a video
+   call, with a light shadow behind it: the middle of the glass is the mirror (or the portrait), and she still sees
+   herself. */
+[data-glass="real"] {
+  --bg: #000; --bg-glow: #000; --panel: #070608; --card: #121114; --chip: #121114;
+  --ink: #efe9e1; --muted: #a39c95; --line: rgba(255, 255, 255, .1); --marble: none; --pearl: #efe9e1;
+  --accent-text: color-mix(in oklab, var(--accent) 40%, #efe9e1);
+  color-scheme: dark;
+}
+[data-glass="real"], [data-glass="real"] body { background: #000; }
+[data-glass="real"] .glass { background: #000; box-shadow: none; }
+[data-glass="real"] .glass::after { display: none; } /* the mercury bevel: the mirror has its own frame */
+[data-glass="real"] .veil { background: linear-gradient(0deg, rgba(0, 0, 0, .72), transparent 32%); }
+[data-glass="real"] .glass:is([data-state="thinking"], [data-state="portrait"]) :is(#cam, #still) {
+  inset: auto 4% 4% auto; width: 26%; height: auto; aspect-ratio: 9 / 16; z-index: 6; opacity: 1; border-radius: 18px;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .16), 0 0 46px rgba(226, 201, 149, .14);
+  transition: inset .5s var(--spring), width .5s var(--spring), border-radius .5s var(--spring);
+}
+[data-glass="real"] .glass.blind #cam { opacity: 1; }
