@@ -1041,7 +1041,7 @@ async function pickupCode(p, entry = null) {
   }
   if (entry) pick.entry = entry;
   const words = $("#pickupWords");
-  if (words) words.textContent = pick.entry ? "Scan to share it with your family." : "Don’t want to wait? Scan to see it on your phone.";
+  if (words) words.textContent = pick.entry ? "Scan to share it with your family. Double-tap the glass to hold it for 20 minutes." : "Don’t want to wait? Scan to see it on your phone.";
   checkPickup();
 }
 async function drawPickup(url) {
@@ -1077,6 +1077,31 @@ async function checkPickup() {
   } catch (e) {
     pick.sent = false;
     console.warn("The look did not reach her phone yet:", e);
+  }
+}
+// On the real mirror, a double tap on the glass holds the piece on it at the counter for twenty minutes (lib/platform.mjs
+// /api/hold): a card shows the short code she gives the staff, and the store's console lists it.
+function wireHold() {
+  let last = { at: 0, x: 0, y: 0 };
+  $("#glass").addEventListener("pointerup", (e) => {
+    if (document.documentElement.dataset.glass !== "real") return;
+    const close = e.timeStamp - last.at < 320 && Math.hypot(e.clientX - last.x, e.clientY - last.y) < 40;
+    last = close ? { at: 0, x: 0, y: 0 } : { at: e.timeStamp, x: e.clientX, y: e.clientY };
+    if (close) holdIt();
+  });
+}
+async function holdIt() {
+  const p = S.view === "portrait" && S.portrait ? S.products.find((x) => x.id === S.portrait.pid) : S.wearing;
+  if (!p) return;
+  try {
+    const r = await api("/api/hold", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ brand: S.brand.id, product: p.id, size: S.mem.size || "" }) });
+    navigator.vibrate?.(14);
+    $("#holdCard")?.remove();
+    const card = h("div", { id: "holdCard", class: "hold-card", role: "status" }, h("b", { text: `Held for you · ${r.minutes} minutes` }), h("span", { text: `Show code ${r.code} at the counter.` }));
+    $("#glass").append(card);
+    setTimeout(() => card.remove(), 12000);
+  } catch (e) {
+    caption(e.message || "I couldn’t hold it. Ask at the counter.");
   }
 }
 async function asJpeg(blob) {
@@ -2172,6 +2197,7 @@ async function boot() {
   $("#cam").after(mirror.canvas);
   wireMirror();
   wireUI();
+  wireHold();
   // The pose model blocks the page for a few seconds the first time it runs. Spend them while the
   // shopper is still reading the wake screen, so the camera never freezes under her afterwards.
   if (!navigator.connection?.saveData) setTimeout(warmUp, 1500);

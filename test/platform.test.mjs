@@ -1550,3 +1550,30 @@ test("a look picked up by phone: nothing is sent before a phone opens it, and on
     assert.equal(r.status, 403);
   } else assert.equal(open.status, 401);
 });
+
+// A double tap on the real mirror holds a piece at the counter for twenty minutes (/api/hold): one code per piece, the
+// store's console lists it, Done clears it, and another store's staff can neither see nor clear it.
+test("a piece held at the counter: one code a piece, listed for the store's staff, cleared by Done", async () => {
+  const shopper = await member("holder");
+  const first = await shopper.post("/api/hold", { brand: "sapphire", product: A.id, size: "M" });
+  assert.equal(first.status, 200, JSON.stringify(first.body));
+  assert.match(first.body.code, /^\d{4}$/);
+  assert.equal(first.body.minutes, 20);
+  assert.equal((await shopper.post("/api/hold", { brand: "sapphire", product: A.id })).body.code, first.body.code, "the same piece twice is one hold");
+  err(await shopper.post("/api/hold", { brand: "sapphire", product: "no-such-piece" }), 400);
+
+  const desk = await founder();
+  const listed = (await desk.get("/api/console/holds?brand=sapphire")).body.holds.find((h) => h.code === first.body.code);
+  assert.ok(listed && listed.name === A.name && listed.size === "M" && listed.minutes <= 20);
+
+  // Lawrencepur's own staff cannot see or clear Sapphire's hold.
+  const email = mailFor("lp-staff");
+  const made = await desk.post("/api/hq/retailers/user", { brand: "lawrencepur", name: "Lawrencepur Staff", email });
+  const other = visitor();
+  assert.equal((await other.post("/api/auth/signin", { email, password: made.body.password })).status, 200);
+  assert.ok(!(await other.get("/api/console/holds?brand=sapphire")).body.holds.some((h) => h.id === listed.id), "only its own store's holds");
+  err(await other.post("/api/console/holds/done", { id: listed.id }), 404);
+
+  assert.equal((await desk.post("/api/console/holds/done", { id: listed.id })).status, 200);
+  assert.ok(!(await desk.get("/api/console/holds?brand=sapphire")).body.holds.some((h) => h.id === listed.id), "Done clears it");
+});

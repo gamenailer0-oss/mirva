@@ -185,7 +185,7 @@ function tierCell(m) {
 const VIEWS = {
   // =================================================================== a store's console
   async overview() {
-    const o = await api(`/api/console/overview?brand=${S.brand}&days=${S.days}&place=${S.place}`);
+    const [o, { holds = [] }] = await Promise.all([api(`/api/console/overview?brand=${S.brand}&days=${S.days}&place=${S.place}`), api(`/api/console/holds?brand=${S.brand}`).catch(() => ({}))]);
     const f = o.funnel;
     const name = S.brands.find((b) => b.id === S.brand)?.name || S.brand;
     const spend = Object.fromEntries(o.spend.byKind.map((k) => [k.kind, k]));
@@ -199,6 +199,15 @@ const VIEWS = {
         el("button", { class: "chip", type: "button", text: "Print the week", onclick: () => (S.days === 7 ? print() : ((S.days = 7), go("overview"), setTimeout(print, 1200))) }),
       ),
       o.sample && el("p", { class: "sample", text: "Sample numbers. The seed script added a month of made-up visits so you can see the console at work. Real visits are counted beside them." }),
+      // Held at the counter from the mirror (a double tap): she will show the code. Done when it is sold or let go.
+      holds.length > 0 && panel("Held at the counter",
+        el("div", { class: "rows" }, holds.map((hd) => el("div", { class: "rowitem plain" },
+          el("div", { class: "row", style: "gap:12px;align-items:center" },
+            hd.image && el("img", { src: hd.image, alt: "", width: 44, height: 58, style: "width:44px;height:58px;object-fit:cover;border-radius:8px" }),
+            el("div", {}, el("div", { text: hd.name }), el("div", { class: "sub", text: `Code ${hd.code}${hd.size ? " · size " + hd.size : ""} · ${hd.minutes} min left` }))),
+          el("button", { class: "btn small", type: "button", text: "Done", onclick: async () => (await api("/api/console/holds/done", { id: hd.id }).catch((e) => toast(e.message)), go("overview")) }),
+        ))),
+      ),
       el("div", { class: "places" },
         el("div", { class: "row", role: "group", "aria-label": "Where the visits happened" }, PLACES.map(([id, label]) => el("button", { class: "chip" + (S.place === id ? " on" : ""), type: "button", "aria-pressed": String(S.place === id), text: label, onclick: () => ((S.place = id), go("overview")) }))),
         el("p", { class: "muted small", text: `Visits: ${num(o.places.store)} in the store · ${num(o.places.web)} on your website · ${num(o.places.app)} on the MIRVA app. Sales and a pilot’s target count the store only.` }),
