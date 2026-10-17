@@ -58,6 +58,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Look before calling a screen done**: start the dev server (preview `mirva`, port 4310), then
   `npm run look -- /retail /mirror` (add `--live` for the live site). Read the screenshots in `tools/shots/`.
   The mirror's own screens on a phone (fake camera, no portrait, free): `node scripts/walk.mjs [--size phone|tablet|mirror] [--live]`.
+- **Detail check** (taste skill's meter): `node ~/.claude/skills/taste-skill/scripts/inspect.mjs http://localhost:4310/`
+  (overflow, headline lines, text sizes, contrast; screenshots in `.taste-skill/inspect/`). Its style bans (no kickers,
+  no gradients, no shadows, no hairlines) are its house style, not MIRVA's: use it for measured faults only. After any
+  copy change in the pages run `node scripts/typeset.mjs` (printer's punctuation in text only; `--check` to list).
 - **Tests**: `npm test` (230 as of 2026-10-15). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
@@ -158,6 +162,18 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Store loads are limited to 6 an hour from one address** (`/api/preview`): reloading stores in bulk needs a wait.
   The importer asks a shop for prices in its own money (`?currency=`; a shop that sells abroad answered in dollars) and
   splits a name written as one word ("HussainRehar").
+
+- **A decoration spilled past the phone's edge** (2026-10-17): the arch between sections was wider than the screen and the
+  whole page laid out wider. `overflow-x: clip` on body did nothing on a phone (a body rule is handed to the viewport);
+  it works on each section. After any decoration that reaches past its box, shoot the phone and check the page width.
+- **The taste skill and the founder disagree** on gradients, shadows and small capital labels: the founder asked for
+  depth ("buttons too flat") and keeps MIRVA's labels. The founder's words win; the skill's meter is still useful.
+- **Studying other sites from this laptop**: the built-in browser's check was down, and in headless Chrome most luxury
+  houses showed a bot check, a maintenance page or a cookie wall (Aesop, Jacquemus, Loro Piana, Toteme; Sabyasachi
+  timed out); Elan rendered. Use `scratchpad/study.mjs`-style shots for public homepages only, and the taste skill's
+  own study (`references/research.md`, 247 sites) for patterns.
+- **Text under 11 px** had crept into captions on pictures (9.5 px) and the glass crest (8 px). The floor now: 11 px for
+  small capital labels, about 13 px for anything read; JS-made copy (src/) still has straight apostrophes (open).
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45

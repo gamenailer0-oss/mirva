@@ -25,11 +25,11 @@
 }
 
 :root, [data-mood="porcelain"] {
-  --bg: #e9e5df;
-  --bg-glow: #f6f3ee;
-  --panel: #f9f6f1;
-  --card: #efebe5;
-  --chip: #fcfaf6;
+  --bg: #e7e4e0;
+  --bg-glow: #f5f3f0;
+  --panel: #f7f5f2;
+  --card: #eeebe7;
+  --chip: #faf9f6;
   --ink: #14131a;
   --muted: #5e5a62;
   --line: rgba(20, 19, 26, .12);
@@ -145,7 +145,7 @@ td.n, th.n { overflow-wrap: normal; }
 .chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--chip); box-shadow: inset 0 0 0 1px var(--line); font-size: 14.5px; transition: transform var(--quick) var(--ease), background-color var(--quick), color var(--quick); }
 button.chip:active { transform: scale(.97); }
 .chip.on, .chip[aria-pressed="true"] { background: var(--ink); color: var(--panel); box-shadow: none; }
-.badge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--glass); color: var(--pearl); font: 500 10px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+.badge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--glass); color: var(--pearl); font: 500 10.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
 .badge.soft { background: var(--card); color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); }
 .badge.good { background: color-mix(in oklab, var(--good) 14%, var(--panel)); color: var(--good); }
 .badge.warn { background: color-mix(in oklab, var(--warn) 16%, var(--panel)); color: var(--warn); }
@@ -367,3 +367,10 @@ body[data-page] .section:not(.dark) + .section.dark::after {
 .chip { background: linear-gradient(180deg, var(--chip), color-mix(in oklab, var(--chip) 94%, #b9a98f)); box-shadow: inset 0 0 0 1px var(--line), inset 0 1px 0 rgba(255, 255, 255, .65), 0 1px 2px rgba(20, 16, 10, .07); }
 .chip.on, .chip[aria-pressed="true"] { background: linear-gradient(180deg, color-mix(in oklab, var(--ink) 82%, white), var(--ink) 65%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 6px 14px -8px rgba(20, 16, 10, .6); }
 .card { box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(20, 16, 10, .05), 0 24px 48px -36px rgba(20, 16, 10, .35); }
+
+/* ---------- the small things ----------
+   No paragraph ends on one lonely word; quotation marks hang outside the measure where the browser can; prices and
+   figures line up. Printer's punctuation in the pages comes from `node scripts/typeset.mjs`. */
+p, li, figcaption, dd, .lede, .fine { text-wrap: pretty; }
+blockquote, q { hanging-punctuation: first; }
+.price, .num, td, .compare { font-variant-numeric: lining-nums tabular-nums; }
