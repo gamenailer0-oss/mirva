@@ -219,7 +219,7 @@ async function pitch() {
   }
   const [{ pilot }, book] = await Promise.all([
     api("/api/plans").catch(() => ({})),
-    fetch(`/showcase/lookbook/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    data.brand.lookbook ? fetch(`/showcase/lookbook/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) : null,
   ]);
   const days = pilot?.days || 60;
   const { brand, facts, pictures, currency, takenAt } = data;
