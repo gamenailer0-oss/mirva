@@ -44,5 +44,5 @@ MIRVA_GUEST_SHOTS = "15"
 # Features tried on named accounts before anyone else: "<feature>:<user id>,<user id>; <feature>:...". "three" makes
 # all three looks at once; "mirror" opens the real-mirror version at /mirror?glass=real (both for the founder's habab
 # account only, 17 Oct 2026).
-MIRVA_TRIALS = "three:ofFemkEZc4e09IDa; mirror:ofFemkEZc4e09IDa"
+MIRVA_TRIALS = "three:ofFemkEZc4e09IDa; mirror:ofFemkEZc4e09IDa; outfit:ofFemkEZc4e09IDa"
 MIRVA_PAYMENTS = "off"

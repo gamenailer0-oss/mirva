@@ -16,5 +16,5 @@ test("a trial reaches only the accounts named for it", () => {
 
 test("the live setting names only the founder's habab account, for all three at once and the real mirror", () => {
   const line = readFileSync(new URL("../wrangler.toml", import.meta.url), "utf8").match(/^MIRVA_TRIALS = "(.*)"$/m)?.[1];
-  assert.equal(line, "three:ofFemkEZc4e09IDa; mirror:ofFemkEZc4e09IDa");
+  assert.equal(line, "three:ofFemkEZc4e09IDa; mirror:ofFemkEZc4e09IDa; outfit:ofFemkEZc4e09IDa");
 });

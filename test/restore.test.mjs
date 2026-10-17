@@ -61,7 +61,8 @@ test("after the backdrop pass the garment is the one first drawn, and then her h
 });
 
 test("no portrait is drawn from words alone: without the garment's picture she is shown the store's photo", () => {
-  const at = modelShot.indexOf("const [ref, worn] = await Promise.all([reference(p)");
+  // (With a piece that completes the look the garment picture is the pair: outfitPicture, which is null without both.)
+  const at = modelShot.indexOf("const [ref, worn] = await Promise.all([partner ? outfitPicture(p, partner) : reference(p)");
   assert.ok(at > 0);
   const after = modelShot.slice(at, at + 900);
   assert.match(after, /if \(!ref\) \{[\s\S]*?caption\(PHOTO_ONLY_LINE\), openPhoto\(p\);[\s\S]*?return;/);

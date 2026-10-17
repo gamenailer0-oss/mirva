@@ -1088,3 +1088,13 @@ a.chip { text-decoration: none; }
 }
 .hold-card b { font: 400 20px/1.2 var(--serif); }
 .hold-card span { font-size: 13px; color: #c9c2ba; }
+
+/* Complete the look (the "outfit" trial; src/main.js renderPartners): one or two small square tiles at the side of the
+   glass, the pieces that finish the one she chose. Chosen, a tile is ringed in light. */
+.outfit-tiles { position: absolute; z-index: 6; right: 3%; top: 50%; transform: translateY(-50%); display: grid; gap: 8px; justify-items: center; }
+.outfit-label { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #efe9e1; text-shadow: 0 1px 8px rgba(0, 0, 0, .7); }
+.outfit-tile { display: grid; gap: 3px; justify-items: center; color: #efe9e1; font-size: 10.5px; text-shadow: 0 1px 8px rgba(0, 0, 0, .7); }
+.outfit-tile img { width: 58px; height: 58px; object-fit: cover; object-position: top; border-radius: 12px; background: #1a191f;
+  box-shadow: 0 10px 22px -10px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .2); transition: transform .3s var(--spring), box-shadow .3s; }
+.outfit-tile:active img { transform: scale(.94); }
+.outfit-tile.on img { box-shadow: 0 0 0 2px #efe9e1, 0 0 18px rgba(226, 201, 149, .55); }

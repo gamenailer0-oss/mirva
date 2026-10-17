@@ -306,6 +306,8 @@ function startConversation() {
   S.shown = new Set();
   S.avoid = new Set();
   S.selected = null;
+  S.outfit = null;
+  $("#outfitTiles")?.remove();
   resetVisit();
   const kept = S.mem.saved[0];
   say(kept && S.mem.visits > 1 ? line("welcomeBack", { name: spoken(kept.name) }) : line("hello"));
@@ -810,6 +812,7 @@ function choose(p) {
   showGlass();
   S.selected = p;
   link.track("look_open", { product: p.id });
+  renderPartners();
   if (S.step === "looks") renderDetail();
   markCards();
   renderSolo();
@@ -1337,8 +1340,10 @@ async function modelShot(p, { retake = false } = {}) {
   pickupCode(p);
   try {
     // A western top is tried over her own trousers, trousers under her own top: the half she keeps is read from her photo.
-    const half = p.tradition === "west" ? ({ "upper body garment": "below", "lower body garment": "above" })[regionFor(p)] : null;
-    const [ref, worn] = await Promise.all([reference(p), half ? readWorn(person, half) : null]);
+    // With a piece that completes the look (the "outfit" trial), both halves are the store's, in one garment picture.
+    const partner = S.outfit?.for === p.id ? S.products.find((q) => q.id === S.outfit.with) : null;
+    const half = !partner && p.tradition === "west" ? ({ "upper body garment": "below", "lower body garment": "above" })[regionFor(p)] : null;
+    const [ref, worn] = await Promise.all([partner ? outfitPicture(p, partner) : reference(p), half ? readWorn(person, half) : null]);
     if (!ref) {
       // No picture of the garment could be made ready. A portrait drawn from its description would not be the store's
       // piece (the colours and embroidery would be invented), so none is made: she is shown the store's photo.
@@ -1353,6 +1358,7 @@ async function modelShot(p, { retake = false } = {}) {
     form.append("product", p.id);
     form.append("mode", "portrait");
     if (worn) form.append(worn.half === "below" ? "wornBelow" : "wornAbove", worn.name);
+    if (partner) form.append("with", partner.id);
     // The cloud's finish (lib/finish.mjs): the outlines of her face, hair and shoes come with the portrait, and are
     // laid back here in a tenth of a second (src/keep.js). The same photo as her last portrait needs no new outlines
     // of her. Her own room stays behind her, busy or not: the founder's call on 15 October 2026, after the studio wall
@@ -1409,6 +1415,79 @@ async function modelShot(p, { retake = false } = {}) {
   } finally {
     S.shooting--;
   }
+}
+
+// ---- Complete the look (a trial, "outfit"; MIRVA_TRIALS) ----
+// One or two pieces from the same store that finish a single top or bottom, as small square tiles at the side of the
+// glass. One tap puts the pair on her in one portrait: both pieces in one garment picture, top over bottom, and the
+// server's two-piece instruction (lib/prompt.mjs outfitPrompt). Tested 17 Oct: a coral tee and black jeans both went on.
+const NEUTRALS = new Set(["black", "white", "grey", "gray", "beige", "cream", "navy", "brown", "denim", "blue", "ivory", "taupe", "khaki"]);
+function partnersFor(p) {
+  if (!link.member?.trials?.includes("outfit") || p?.tradition !== "west") return [];
+  const half = regionFor(p);
+  if (half !== "upper body garment" && half !== "lower body garment") return [];
+  const want = half === "upper body garment" ? "lower body garment" : "upper body garment";
+  const loud = !NEUTRALS.has(colourFamily(p.colour));
+  return S.products
+    .filter((q) => q.id !== p.id && q.gender === p.gender && q.tradition === "west" && q.ref && !q.photoOnly && regionFor(q) === want)
+    .map((q) => ({ q, s: (NEUTRALS.has(colourFamily(q.colour)) ? (loud ? 3 : 1) : loud ? -1 : 1) - Math.abs((q.formality || 3) - (p.formality || 3)) }))
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 2)
+    .map((x) => x.q);
+}
+function renderPartners() {
+  $("#outfitTiles")?.remove();
+  const p = S.selected;
+  const pairs = p ? partnersFor(p) : [];
+  if (!pairs.length) return;
+  const on = (q) => S.outfit?.for === p.id && S.outfit.with === q.id;
+  const box = h(
+    "div",
+    { id: "outfitTiles", class: "outfit-tiles", role: "group", "aria-label": "Goes with it" },
+    h("span", { class: "outfit-label", text: "Goes with" }),
+    pairs.map((q) =>
+      h(
+        "button",
+        {
+          class: "outfit-tile" + (on(q) ? " on" : ""),
+          type: "button",
+          "aria-pressed": String(on(q)),
+          title: `${q.name}, ${money(q.price)}`,
+          onclick: () => {
+            const was = on(q);
+            S.outfit = was ? null : { for: p.id, with: q.id };
+            S.portraits.delete(p.id); // the next portrait of this piece is the pair, or the piece alone again
+            renderPartners();
+            if (S.mode === "model" && mirror.awake && !was) return modelShot(p);
+            caption(was ? "Just the one piece, then." : `With the ${q.name}. Tap Model to see the whole look.`);
+          },
+        },
+        h("img", { src: pic(q.image, 160), alt: "", loading: "lazy", decoding: "async" }),
+        h("span", { text: money(q.price) }),
+      ),
+    ),
+  );
+  $("#glass").append(box);
+}
+// Both pieces, top over bottom, on white: one garment picture for the engine.
+async function outfitPicture(p, q) {
+  const [a, b] = await Promise.all([reference(p), reference(q)]);
+  if (!a || !b) return null;
+  const [top, bottom] = regionFor(p) === "lower body garment" ? [b, a] : [a, b];
+  const [t, u] = await Promise.all([createImageBitmap(top), createImageBitmap(bottom)]);
+  const W = 600, gap = 24;
+  const th = Math.round((t.height / t.width) * W), uh = Math.round((u.height / u.width) * W);
+  const c = document.createElement("canvas");
+  c.width = W;
+  c.height = th + gap + uh;
+  const g = c.getContext("2d");
+  g.fillStyle = "#fff";
+  g.fillRect(0, 0, c.width, c.height);
+  g.drawImage(t, 0, 0, W, th);
+  g.drawImage(u, 0, th + gap, W, uh);
+  t.close?.();
+  u.close?.();
+  return new Promise((resolve) => c.toBlob((blob) => resolve(blob), "image/jpeg", 0.9));
 }
 
 // While a portrait is made on her own phone, a small card above the panel offers the family's view: with two looks kept,
