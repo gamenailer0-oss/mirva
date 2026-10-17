@@ -1236,6 +1236,7 @@ async function modelShot(p, { retake = false } = {}) {
   const dev = develop(p);
   S.shooting++;
   caption(line("putting"));
+  familyNudge(p);
   try {
     // A western top is tried over her own trousers, trousers under her own top: the half she keeps is read from her photo.
     const half = p.tradition === "west" ? ({ "upper body garment": "below", "lower body garment": "above" })[regionFor(p)] : null;
@@ -1292,6 +1293,12 @@ async function modelShot(p, { retake = false } = {}) {
     dev.cancel();
     showPortrait(entry, p.id);
     caption("This is you in it.");
+    // She asked, while it was made, to keep it: kept now, and with two kept the family question is one tap away.
+    if (S.keepWhenReady === p.id) {
+      S.keepWhenReady = null;
+      keep();
+      if (S.mem.saved.length >= 2) setTimeout(() => familyPop("ask", p), 1800);
+    }
     setTimeout(() => ticket === S.ticket && S.view === "portrait" && caption(afterUnveil(p)), 2600);
     // Her free portrait: the next step is to keep it, and that is joining.
     if (guest) setTimeout(() => ticket === S.ticket && S.view === "portrait" && askToJoin("Join free to keep this one and see the other two on you."), 6000);
@@ -1304,6 +1311,36 @@ async function modelShot(p, { retake = false } = {}) {
   } finally {
     S.shooting--;
   }
+}
+
+// While a portrait is made on her own phone, a small card above the panel offers the family's view: with two looks kept,
+// "Ask family" at once; with fewer, "Keep this one" when it is ready, so the question is one tap away after. Once a
+// look, never on a store's mirror (the real-mirror version offers a code to scan instead), gone by itself.
+function familyNudge(p) {
+  if (!phoneApp() || !link.member || document.documentElement.dataset.glass === "real") return;
+  S.nudged ||= new Set();
+  if (S.nudged.has(p.id)) return;
+  S.nudged.add(p.id);
+  familyPop(S.mem.saved.length >= 2 ? "ask" : "keep", p);
+}
+function familyPop(kind, p) {
+  $("#familyPop")?.remove();
+  const ask = kind === "ask";
+  const pop = h(
+    "div",
+    { id: "familyPop", class: "family-pop", role: "status" },
+    h("p", {}, h("b", { text: ask ? "Ask your family which one?" : "Want your family’s view?" }), h("span", { text: ask ? "They tap their favourite on WhatsApp. No app needed." : "Keep two looks, and your family votes on WhatsApp." })),
+    h(
+      "div",
+      { class: "family-acts" },
+      ask
+        ? h("button", { class: "primary small", type: "button", text: "Ask family", onclick: () => (pop.remove(), askFamily()) })
+        : h("button", { class: "primary small", type: "button", text: "Keep this one", onclick: () => ((S.keepWhenReady = p.id), pop.remove()) }),
+      h("button", { class: "textlink", type: "button", text: "Later", onclick: () => pop.remove() }),
+    ),
+  );
+  $("#app").append(pop);
+  setTimeout(() => pop.remove(), 14000);
 }
 
 // The "three" trial (MIRVA_TRIALS in wrangler.toml; the founder's own account, 17 Oct 2026): once the first look's
