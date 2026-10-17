@@ -214,6 +214,15 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Pre-cut each boutique's likely pieces before a store visit (~US$0.30 a store).
 - Measure the upload sizes (her photo, the garment picture): on the Rang Rasiya tries 6 to 13 s went beyond the engine.
 
+- **DECIDED 2026-10-17 (the founder; full list and build status in Claude's memory note `mirva-build-2026-10-17`):**
+  keep the name MIRVA; team pay is confidential (never in a playbook); registration after the first pilot, then the
+  startup application; trademark later; keys stay; live Studio is fast enough (Decart's fast mode, $0.04/s, live only,
+  not used); FASHN performance 14.3 s vs balanced 16.8 s vs Decart ~16 s, so Decart stays; FASHN calls at once queue
+  (three took 53-58 s). Team demos: the Team tier (lib/plans.mjs TEAM, set at /hq Members). Next to build, in order:
+  the team playbook additions; all three looks at once (founder's "habab" account only); the founder-only real-mirror
+  version (black, her live picture as a small corner window, scan-to-share and snap-and-stroll QRs, double tap to hold
+  20 min at the counter); a phone "Ask your family" pop-up and a ready signal on her phone; Complete the look in test;
+  smaller uploads on slow phones; then update every artifact. Later: boutique speed-ups, lookbooks.
 - **Asked 2026-10-17, waiting on the founder (nothing that costs money without a yes):** (1) a new name (ideas: Aarsi,
   Aina, Zeba, Mira; renaming is about half a day of code and text plus a new domain, best before the domain is bought and
   the first store signs); (2) "Complete the look": one or two small square tiles beside a single piece (top, trouser) from
