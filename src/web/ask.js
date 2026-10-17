@@ -1,7 +1,7 @@
 // Asking the people she trusts. One sheet: the question, whose pictures go out, how long it stays open; then the
 // link, with a picture of the looks made on her own phone, so WhatsApp shows it properly. Used by the account page
 // and by the mirror itself.
-import { el, api, toast, copy, money } from "./ui.js";
+import { el, api, toast, copy } from "./ui.js";
 import { pushState, turnOnPush, iphoneOutsideApp } from "./notify.js";
 
 const QUESTIONS = [
@@ -231,4 +231,3 @@ export async function drawCover({ title, by, looks, pictures }) {
   return new Promise((done) => c.toBlob(done, "image/jpeg", 0.86));
 }
 
-export const lookLine = (l) => [l.brandName, l.price ? money(l.price, l.currency) : ""].filter(Boolean).join(" · ");

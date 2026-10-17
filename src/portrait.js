@@ -6,8 +6,6 @@ import { SHOT_TYPE, unpackShot } from "../lib/shot.mjs";
 
 export const DIM_LINE = "It’s dim where you are. Face a window or a lamp, then try again.";
 export const BUSY_LINE = "The studio is busy. One more try.";
-export const BACKDROP_LINE = "Now on a studio backdrop.";
-
 // Below this mean brightness (0 to 255) a frame gives a murky portrait with muted cloth, and no later pass can
 // fix it (measured: docs/portrait-experiments.md, a frame at 38 against a usable one at 104).
 export const DIM = 60;
@@ -112,30 +110,3 @@ export async function requestShot(form, { headers = {}, timeout, onBusy, wait = 
   }
 }
 
-/**
- * Fades the picture in `img` over to `url` and resolves true when it has. Resolves false, changing nothing, if the
- * new picture will not load. The old picture stays under the new one, so the glass is never empty and there is no spinner.
- */
-export function crossfade(img, url, ms = 900) {
-  return new Promise((resolve) => {
-    const next = new Image();
-    next.onload = () => {
-      const ghost = img.cloneNode(false); // keeps the glass's own styling (it fills the glass)
-      ghost.removeAttribute("id");
-      ghost.classList.remove("unveil");
-      ghost.hidden = false;
-      ghost.src = url;
-      ghost.style.cssText = `opacity:0;z-index:2;pointer-events:none;transition:opacity ${ms}ms ease`;
-      img.after(ghost);
-      void ghost.offsetWidth;
-      ghost.style.opacity = "1";
-      setTimeout(() => {
-        img.src = url;
-        ghost.remove();
-        resolve(true);
-      }, ms + 80);
-    };
-    next.onerror = () => resolve(false);
-    next.src = url;
-  });
-}
