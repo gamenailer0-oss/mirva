@@ -218,7 +218,12 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   keep the name MIRVA; team pay is confidential (never in a playbook); registration after the first pilot, then the
   startup application; trademark later; keys stay; live Studio is fast enough (Decart's fast mode, $0.04/s, live only,
   not used); FASHN performance 14.3 s vs balanced 16.8 s vs Decart ~16 s, so Decart stays; FASHN calls at once queue
-  (three took 53-58 s). Team demos: the Team tier (lib/plans.mjs TEAM, set at /hq Members). Next to build, in order:
+  (three took 53-58 s). Team demos: the Team tier (lib/plans.mjs TEAM, set at /hq Members). SHIPPED 17 Oct: Team tier;
+  MIRVA_TRIALS (wrangler.toml, "<feature>:<user id>"; /api/me sends `trials`) with "three" (all three looks at once)
+  and "mirror" (/mirror?glass=real, black real-mirror version, her live picture as a corner window) on habab only; the
+  phone "Ask your family" card during the wait. STILL TO BUILD: on the real mirror, scan-to-share QR, snap-and-stroll
+  QR + "ready" signal on her phone (the hand-off must carry her portrait, stored only when she scans), double tap to
+  hold 20 min (holds + console list); Complete the look (test); slow-phone uploads; artifacts. Original order:
   the team playbook additions; all three looks at once (founder's "habab" account only); the founder-only real-mirror
   version (black, her live picture as a small corner window, scan-to-share and snap-and-stroll QRs, double tap to hold
   20 min at the counter); a phone "Ask your family" pop-up and a ready signal on her phone; Complete the look in test;
