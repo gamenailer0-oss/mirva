@@ -263,6 +263,8 @@ function applyBrand(brand) {
 function forgetPortraits() {
   for (const p of S.portraits.values()) URL.revokeObjectURL(p.url);
   S.portraits.clear();
+  S.round = (S.round || 0) + 1; // a look still being made ahead for these portraits is let go when it comes back
+  S.ahead?.clear();
   S.portrait = null;
   S.view = "mirror";
   $("#portrait").hidden = true;
@@ -1193,6 +1195,18 @@ async function modelShot(p, { retake = false } = {}) {
     showPortrait(cached, p.id);
     return caption("This is you in it.");
   }
+  // Already being made ahead (the "three" trial, below): wait for that one instead of making it again.
+  const ahead = !retake && S.ahead?.get(p.id);
+  if (ahead) {
+    caption("Almost ready.");
+    await ahead;
+    if (ticket !== S.ticket) return;
+    const ready = S.portraits.get(p.id);
+    if (ready) {
+      showPortrait(ready, p.id);
+      return caption("This is you in it.");
+    }
+  }
   if (mirror.presence.known && !mirror.presence.present) return caption("Step into the mirror so I can see you.");
   hidePortrait();
   let pass;
@@ -1247,6 +1261,7 @@ async function modelShot(p, { retake = false } = {}) {
     if (herKey && S.herOutlines?.key === herKey) form.append("her", "known");
     const shotFrom = performance.now();
     let shot = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout, onBusy: () => ticket === S.ticket && caption(pass.BUSY_LINE) });
+    makeTheOthers(p, person);
     // Her own half came back a different colour (a shirt that brought the model's jeans with it): once more, quietly,
     // inside the same wait. The better of the two is kept. A first portrait before joining is not made twice.
     if (worn && !shot.guest && ticket === S.ticket && (await wornChanged(worn, shot.blob))) {
@@ -1286,6 +1301,47 @@ async function modelShot(p, { retake = false } = {}) {
     caption(friendly(e));
   } finally {
     S.shooting--;
+  }
+}
+
+// The "three" trial (MIRVA_TRIALS in wrangler.toml; the founder's own account, 17 Oct 2026): once the first look's
+// portrait is back, the other two are made from the same photo, quietly, so tapping them shows them at once. They start
+// only after the first is back, so they never slow it (the engine takes requests one after another). Each counts as a
+// portrait, as usual.
+function makeTheOthers(first, person) {
+  if (!link.member?.trials?.includes("three") || S.step !== "looks") return;
+  S.ahead ||= new Map();
+  for (const { product: q } of S.looks) {
+    if (q.id === first.id || q.photoOnly || S.portraits.has(q.id) || S.ahead.has(q.id)) continue;
+    S.ahead.set(q.id, makeAhead(q, person).finally(() => S.ahead.delete(q.id)));
+  }
+}
+async function makeAhead(p, person) {
+  const round = S.round; // kept only if her portraits have not been cleared since (a new photo, a new shopper)
+  try {
+    const pass = await import("./portrait.js");
+    const half = p.tradition === "west" ? ({ "upper body garment": "below", "lower body garment": "above" })[regionFor(p)] : null;
+    const [ref, worn] = await Promise.all([reference(p), half ? readWorn(person, half) : null]);
+    if (!ref) return;
+    const form = new FormData();
+    form.append("person", person, "person.jpg");
+    form.append("reference", ref, "garment.jpg");
+    form.append("brand", S.brand.id);
+    form.append("product", p.id);
+    form.append("mode", "portrait");
+    if (worn) form.append(worn.half === "below" ? "wornBelow" : "wornAbove", worn.name);
+    form.append("finish", "cloud");
+    const t0 = performance.now();
+    const shot = await pass.requestShot(form, { headers: link.auth(), timeout: link.timeout });
+    const shotMs = performance.now() - t0;
+    const face = {};
+    const { blob, saved } = await finishPortrait(person, shot, { p, form, ticket: -1 }, face);
+    if (S.round !== round) return;
+    S.portraits.set(p.id, { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved });
+    S.visit.portraits++;
+    link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) + " ahead=1" });
+  } catch (e) {
+    console.warn("A look made ahead did not come; it is made when tapped.", e);
   }
 }
 

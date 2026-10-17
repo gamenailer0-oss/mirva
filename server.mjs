@@ -195,6 +195,7 @@ const app = await createApp({
     dailyUsd: Math.max(0, Number(process.env.MIRVA_DAILY_USD) || 0), // 0 = no ceiling, right for a laptop
     dailyPortraitUsd: process.env.MIRVA_DAILY_PORTRAIT_USD === undefined ? undefined : Math.max(0, Number(process.env.MIRVA_DAILY_PORTRAIT_USD) || 0),
     guestShots: Math.max(0, Number(process.env.MIRVA_GUEST_SHOTS) || 0), // free first portraits a day, when the mirror is not open
+    trials: process.env.MIRVA_TRIALS || "",
     setupKey: process.env.MIRVA_SETUP_KEY || "",
     hsts: PUBLIC_ORIGIN.startsWith("https://"),
   },

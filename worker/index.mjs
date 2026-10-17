@@ -88,6 +88,7 @@ async function start(env, origin) {
       dailyUsd: clamp(num(env.MIRVA_DAILY_USD, 5), 0, 1000), // live Studio, a day
       dailyPortraitUsd: clamp(num(env.MIRVA_DAILY_PORTRAIT_USD, 3), 0, 1000), // portraits and backdrops, a day
       guestShots: clamp(num(env.MIRVA_GUEST_SHOTS, 0), 0, 1000), // free first portraits a day, before joining
+      trials: String(env.MIRVA_TRIALS || ""), // features tried on named accounts first, e.g. "three:<user id>"
       setupKey: String(env.SETUP_KEY || ""),
       debugShots: false,
       kdf: "pbkdf2", // scrypt needs more processor time than a free edge request gets

@@ -41,4 +41,7 @@ MIRVA_DAILY_USD = "1"
 MIRVA_DAILY_PORTRAIT_USD = "2"
 # Free first portraits a day, for people who have not joined yet (one each, on their own browser). 0 turns it off.
 MIRVA_GUEST_SHOTS = "15"
+# Features tried on named accounts before anyone else: "<feature>:<user id>,<user id>; <feature>:...". "three" makes
+# all three looks at once (the founder asked it for his habab account only, 17 Oct 2026).
+MIRVA_TRIALS = "three:ofFemkEZc4e09IDa"
 MIRVA_PAYMENTS = "off"
