@@ -56,7 +56,7 @@ export async function api(path, body, wait = 15000) {
         await pause(RETRY[tries]);
         continue;
       }
-      throw new Error(navigator.onLine === false ? "You're offline. Check the connection and try again." : "That took too long. Try again.");
+      throw new Error(navigator.onLine === false ? "You’re offline. Check the connection and try again." : "That took too long. Try again.");
     }
     if (read && tries < RETRY.length && [502, 503, 504].includes(res.status)) {
       await pause(RETRY[tries]);
@@ -69,7 +69,7 @@ export async function api(path, body, wait = 15000) {
 
 // One bar across the top while the browser has no connection. Pages carry on; they catch up when it is back.
 export function connection() {
-  const show = () => $("#offline") || document.body.append(el("div", { id: "offline", class: "offline", role: "status", text: "You're offline. This page will catch up when the connection is back." }));
+  const show = () => $("#offline") || document.body.append(el("div", { id: "offline", class: "offline", role: "status", text: "You’re offline. This page will catch up when the connection is back." }));
   addEventListener("offline", show);
   addEventListener("online", () => {
     const bar = $("#offline");

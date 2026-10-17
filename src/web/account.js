@@ -234,7 +234,7 @@ function wardrobe() {
     : null;
   fill(view, 
     el("div", { class: "row", style: "justify-content:space-between;margin-bottom:24px" },
-      el("p", { class: "muted", text: S.picking ? "Tap the looks you can't choose between." : "Everything you kept, newest first." }),
+      el("p", { class: "muted", text: S.picking ? "Tap the looks you can’t choose between." : "Everything you kept, newest first." }),
       !S.picking && S.looks.length > 1 && el("button", { class: "btn ghost small", type: "button", text: "Ask for opinions", onclick: () => ((S.picking = true), wardrobe()) }),
     ),
     grid,
@@ -415,7 +415,7 @@ function winner(b, l) {
       el("p", { class: "muted num", text: [l.brandName, l.size && "Size " + l.size, money(l.price, l.currency)].filter(Boolean).join(" · ") }),
     ),
     el("div", { class: "stack close" },
-      l.whatsapp && el("a", { class: "btn wide wa", href: `https://wa.me/${l.whatsapp}?text=${encodeURIComponent(`Salaam. I'd like ${l.name}${l.size ? ", size " + l.size : ""}. Is it in stock? (from MIRVA)`)}`, target: "_blank", rel: "noopener", text: `Message ${l.brandName} on WhatsApp` }),
+      l.whatsapp && el("a", { class: "btn wide wa", href: `https://wa.me/${l.whatsapp}?text=${encodeURIComponent(`Salaam. I’d like ${l.name}${l.size ? ", size " + l.size : ""}. Is it in stock? (from MIRVA)`)}`, target: "_blank", rel: "noopener", text: `Message ${l.brandName} on WhatsApp` }),
       l.url && el("a", { class: l.whatsapp ? "btn ghost wide" : "btn wide", href: l.url, target: "_blank", rel: "noopener", text: `See it at ${l.brandName}` }),
       el("a", { class: "btn ghost wide", href: "/mirrors", text: "Find a MIRVA mirror" }),
       el("button", { class: "link muted", type: "button", text: "Close", onclick: () => sheet.close() }),
@@ -463,7 +463,7 @@ function you() {
           : el("p", { class: "fine", text: "Payments are not connected yet. MIRVA will write to you." }),
         payments === "test" && el("p", { class: "fine", text: "Test mode. No money moves; this only shows how joining will work." }),
       );
-    if (invite === "waiting") return el("p", { class: "muted", text: "You asked for an invitation to Private. If there's a place, it will appear here." });
+    if (invite === "waiting") return el("p", { class: "muted", text: "You asked for an invitation to Private. If there’s a place, it will appear here." });
     return el("a", { class: "link arrow", href: "/membership#private", text: "About MIRVA Private " });
   };
 

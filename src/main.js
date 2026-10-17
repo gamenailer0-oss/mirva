@@ -142,14 +142,14 @@ function askToJoin(words = "Join free to see this on you. It takes a minute.") {
   t.hidden = false;
 }
 const RESTING = "Try-on is resting just now. Please try again in a little while.";
-const FULL_LINE = "That's a full fitting. Tap Start over for the next one, or ask the staff.";
+const FULL_LINE = "That’s a full fitting. Tap Start over for the next one, or ask the staff.";
 const CAMERA_DOWN_LINE = "The camera has stopped. Tap Try the camera again, then pick a look.";
 // A store on a plan without live Studio (Assist): the Studio button stays, says where live is, and gives a portrait.
 const NO_LIVE_LINE = "Live Studio comes with a MIRVA mirror. Here is a portrait instead.";
 const noLive = () => S.config?.studio === false;
 const NOT_SENT_LINE = "No picture was sent. Tap a look whenever you are ready.";
 // A piece the store shows in its own photographs only (hand embroidery, a designer's wish): no look is made of it.
-const PHOTO_ONLY_LINE = "This piece is shown in the store's own photographs.";
+const PHOTO_ONLY_LINE = "This piece is shown in the store’s own photographs.";
 
 // ---------- before the first look ----------
 // A look is made from a picture of the shopper, and the engine that makes it runs abroad. She is told so in plain
@@ -224,7 +224,7 @@ function friendly(e) {
   if (e?.kind === "slow") return "The connection is slow. Check it, then tap a look to try again.";
   if (e?.kind === "busy") return "The studio is busy just now. Please try again in a little while.";
   if (e?.name === "NotAllowedError") return "The camera is blocked. Allow it in the address bar, or use a photo.";
-  if (e?.name === "NotFoundError" || e?.name === "OverconstrainedError") return "I can't find a camera. Use a photo instead.";
+  if (e?.name === "NotFoundError" || e?.name === "OverconstrainedError") return "I can’t find a camera. Use a photo instead.";
   if (e?.name === "NotReadableError") return "Another app is using the camera. Close it and try again.";
   if (e?.name === "TimeoutError" || e?.name === "AbortError") return "That took too long. Tap to try again.";
   if (/401|unauthor|invalid.*key/i.test(m)) return forShopper() ? RESTING : "The try-on engine refused the key. Check DECART_API_KEY in .env.";
@@ -508,7 +508,7 @@ function renderDetail() {
                 S.mem.size = z.label;
                 link.track(z.inStock ? "size_pick" : "size_missed", { product: p.id, meta: z.label });
                 memory.store(S.brand.id, S.mem);
-                caption(z.inStock ? line("size", { size: z.label }) : `${z.label} is sold out online. I'd ask the floor for it.`);
+                caption(z.inStock ? line("size", { size: z.label }) : `${z.label} is sold out online. I’d ask the floor for it.`);
                 renderDetail();
               },
             }),
@@ -730,7 +730,7 @@ async function garment(p) {
     // The cloth on its own when the product has a clean reference; the catalogue photo, model and all, when not.
     let res = p.ref ? await fetch(p.ref).catch(() => null) : null;
     if (!res?.ok) res = await fetch(pic(p.image, 768));
-    if (!res.ok) throw new Error("I couldn't load that garment's picture.");
+    if (!res.ok) throw new Error("I couldn’t load that garment’s picture.");
     S.garments.set(p.id, await res.blob());
   }
   return S.garments.get(p.id);
@@ -1297,7 +1297,7 @@ async function studio(p) {
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Live try-on is off. Add your Decart key to the .env file and restart.");
   // At home, live video is a Private perk: it costs by the second and no store is paying for it.
-  if (link.member && !link.member.tier.liveSecondsPerMonth) return (S.mode = "model"), caption("Live Studio is in MIRVA stores. At home, I'll make you a portrait."), modelShot(p);
+  if (link.member && !link.member.tier.liveSecondsPerMonth) return (S.mode = "model"), caption("Live Studio is in MIRVA stores. At home, I’ll make you a portrait."), modelShot(p);
   if (noLive()) return (S.mode = "model"), caption(NO_LIVE_LINE), modelShot(p);
   if (mirror.cameraDown) return caption(CAMERA_DOWN_LINE);
   if (fullFitting("live")) return caption(FULL_LINE);
@@ -1360,7 +1360,7 @@ function offerPortrait(p) {
 const ENDED = {
   camera: "The camera stopped, so I ended the live look.",
   hidden: "I ended the live look while this window was out of sight. Tap a look to carry on.",
-  nopicture: "That didn't come through. Tap the look to try again.",
+  nopicture: "That didn’t come through. Tap the look to try again.",
   visit: FULL_LINE,
 };
 
@@ -1470,7 +1470,7 @@ function wireMirror() {
   mirror.addEventListener("idle", ({ detail: { grace } }) => {
     const t = $("#toast");
     t.replaceChildren(
-      h("span", { text: `Still there? I'll pause the live look in ${grace} seconds.` }),
+      h("span", { text: `Still there? I’ll pause the live look in ${grace} seconds.` }),
       h("button", { type: "button", text: "Keep going", onclick: () => (mirror.touch(), (t.hidden = true)) }),
     );
     t.hidden = false;
@@ -1593,7 +1593,7 @@ async function askFamily() {
     const { askSheet } = await import("./web/ask.js");
     askSheet({ looks: chosen, by: link.member.user.name.split(" ")[0] });
   } catch {
-    caption("That didn't go through. Try again in a moment.");
+    caption("That didn’t go through. Try again in a moment.");
   }
 }
 
@@ -1619,7 +1619,7 @@ function openPhoto(piece) {
   const close = h("button", { class: "close", type: "button", text: "Close", onclick: () => ((box.hidden = true), box.classList.remove("one")) });
   const mine = !piece && (S.view === "portrait" ? S.portrait?.url : hasPicture() ? mirror.snapshot(600) : null);
   box.classList.toggle("one", !mine);
-  box.replaceChildren(close, fig(pic(p.image, 420), "The store's photo", p.name), mine ? fig(mine, "On you", "A likeness, not a fitting") : null); // the size the look card has already loaded
+  box.replaceChildren(close, fig(pic(p.image, 420), "The store’s photo", p.name), mine ? fig(mine, "On you", "A likeness, not a fitting") : null); // the size the look card has already loaded
   box.hidden = false;
   close.focus();
   link.track("compare", { product: p.id });
@@ -1680,7 +1680,7 @@ function openSizer() {
     const chest = Number($("#sizerChest").value), waist = Number($("#sizerWaist").value) || 0;
     if (!(chest >= 20 && chest <= 70)) return ($("#sizerMsg").textContent = "Chest in inches, between 20 and 70.");
     const label = sizeFor(S.brand.sizeChart, { chest, waist });
-    if (!label) return ($("#sizerMsg").textContent = "That is outside this store's chart. Ask the staff to measure you.");
+    if (!label) return ($("#sizerMsg").textContent = "That is outside this store’s chart. Ask the staff to measure you.");
     S.mem.measure = { chest, waist: waist || undefined };
     S.mem.size = label;
     memory.store(S.brand.id, S.mem);
@@ -1867,7 +1867,7 @@ function wireUI() {
     try {
       await mirror.usePhoto(file);
     } catch {
-      caption("I couldn't read that photo. Try a JPEG or PNG.");
+      caption("I couldn’t read that photo. Try a JPEG or PNG.");
     }
   });
   for (const b of $$("#modes button")) b.addEventListener("click", () => setMode(b.dataset.mode));
@@ -2070,7 +2070,7 @@ function unstick() {
   S.developing.cancel();
 }
 
-addEventListener("offline", () => caption("The connection dropped. Portraits and live looks will wait until it's back."));
+addEventListener("offline", () => caption("The connection dropped. Portraits and live looks will wait until it’s back."));
 addEventListener("online", () => caption("Back online. Tap a look to carry on."));
 
 boot().catch((e) => {

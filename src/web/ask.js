@@ -54,7 +54,7 @@ export function askSheet({ looks, by = "", onMade = () => {} }) {
       el("fieldset", { class: "ask-set" },
         el("legend", { class: "label", text: "What they see" }),
         anyPortrait && choice("pictures", "mine", "My portraits", "You, in each look.", pictures === "mine"),
-        choice("pictures", "store", "The store's photos", "The pieces on the store's model. Your pictures stay with you.", pictures === "store"),
+        choice("pictures", "store", "The store’s photos", "The pieces on the store’s model. Your pictures stay with you.", pictures === "store"),
       ),
       el("fieldset", { class: "ask-set ask-days" },
         el("legend", { class: "label", text: "Open for" }),
@@ -62,7 +62,7 @@ export function askSheet({ looks, by = "", onMade = () => {} }) {
         choice("days", "3", "Three days", "", true),
         choice("days", "7", "A week", "", false),
       ),
-      el("p", { class: "fine", text: "Anyone with the link can see these looks and answer until it closes. Send it to people you'd show them to." }),
+      el("p", { class: "fine", text: "Anyone with the link can see these looks and answer until it closes. Send it to people you’d show them to." }),
       el("div", { class: "ask-go" }, make),
     ),
   );
@@ -93,7 +93,7 @@ export function askSheet({ looks, by = "", onMade = () => {} }) {
 
 // Sending the link: WhatsApp first, the phone's own share sheet, a copy; then the offer to be told about answers.
 export async function shareSheet(board) {
-  const text = `${board.title} Tap the one you'd choose:`;
+  const text = `${board.title} Tap the one you’d choose:`;
   const wa = "https://wa.me/?text=" + encodeURIComponent(`${text} ${board.url}`);
   const tell = el("div", { class: "ask-tell", hidden: true });
   const sheet = sheetOf(
@@ -108,7 +108,7 @@ export async function shareSheet(board) {
   const state = await pushState();
   if (state === "off") {
     tell.append(el("button", { class: "link", type: "button", text: "Tell me on this phone when they answer", onclick: async (e) => {
-      if (await turnOnPush()) (e.target.replaceWith(el("p", { class: "fine", text: "You'll be told here when someone answers." })));
+      if (await turnOnPush()) (e.target.replaceWith(el("p", { class: "fine", text: "You’ll be told here when someone answers." })));
     } }));
     tell.hidden = false;
   } else if (state === "unsupported" && iphoneOutsideApp()) {
@@ -213,7 +213,7 @@ export async function drawCover({ title, by, looks, pictures }) {
   lines.forEach((line, i) => g.fillText(line, 64, 222 + i * 62));
   g.fillStyle = "#c8cedb";
   g.font = '400 23px "Albert Sans", "Avenir Next", sans-serif';
-  g.fillText("Tap the one you'd choose.", 64, 222 + lines.length * 62 + 26);
+  g.fillText("Tap the one you’d choose.", 64, 222 + lines.length * 62 + 26);
 
   // The mark: the oval mirror and its name.
   g.strokeStyle = "#f3f5f9";

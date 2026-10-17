@@ -80,12 +80,12 @@ async function start() {
     el("div", { class: "shell" },
       el("aside", { class: "side" },
         mark(),
-        el("p", { class: "where", text: desk === "hq" ? "Founder's desk" : "Store console" }),
+        el("p", { class: "where", text: desk === "hq" ? "Founder’s desk" : "Store console" }),
         el("nav", { "aria-label": "Sections" }, TABS.map(([id, label]) => el("button", { type: "button", "data-tab": id, onclick: () => go(id) }, el("span", { text: label }), el("span", { class: "count", hidden: true })))),
         el("div", { class: "who" },
           el("b", { text: S.me.name }),
           el("span", { text: S.me.email }),
-          desk === "console" && S.me.role === "founder" && el("a", { class: "link muted", href: "/hq", text: "Founder's desk" }),
+          desk === "console" && S.me.role === "founder" && el("a", { class: "link muted", href: "/hq", text: "Founder’s desk" }),
           el("button", { class: "link muted", type: "button", style: "text-align:left", text: "Sign out", onclick: async () => (await api("/api/auth/signout", {}), location.reload()) }),
         ),
       ),
@@ -126,7 +126,7 @@ function firstRun() {
       el("div", { class: "card" },
         mark(),
         el("div", { class: "stack close" },
-          el("p", { class: "kicker", text: "Founder's desk" }),
+          el("p", { class: "kicker", text: "Founder’s desk" }),
           el("h1", { class: "title", text: "Set it up." }),
           el("p", { class: "muted", text: "This happens once. The setup key is the one saved when MIRVA was deployed. Ten characters or more for the password." }),
         ),
@@ -152,12 +152,12 @@ function door(message) {
       el("div", { class: "card" },
         mark(),
         el("div", { class: "stack close" },
-          el("p", { class: "kicker", text: desk === "hq" ? "Founder's desk" : "Store console" }),
+          el("p", { class: "kicker", text: desk === "hq" ? "Founder’s desk" : "Store console" }),
           el("h1", { class: "title", text: "Sign in." }),
           message && el("p", { class: "muted", text: message }),
         ),
         form,
-        local && el("p", { class: "fine", text: desk === "hq" ? "On this machine, the founder's sign-in is in the file .data/first-run.txt." : "On this machine, the demo store's sign-in is in the file .data/demo-sign-ins.txt (run npm run seed to make it)." }),
+        local && el("p", { class: "fine", text: desk === "hq" ? "On this machine, the founder’s sign-in is in the file .data/first-run.txt." : "On this machine, the demo store’s sign-in is in the file .data/demo-sign-ins.txt (run npm run seed to make it)." }),
         el("a", { class: "link muted", href: desk === "hq" ? "/" : "/retail", text: "Back to the site" }),
       ),
     ),
@@ -183,7 +183,7 @@ const VIEWS = {
       o.sample && el("p", { class: "sample", text: "Sample numbers. The seed script added a month of made-up visits so you can see the console at work. Real visits are counted beside them." }),
       el("div", { class: "places" },
         el("div", { class: "row", role: "group", "aria-label": "Where the visits happened" }, PLACES.map(([id, label]) => el("button", { class: "chip" + (S.place === id ? " on" : ""), type: "button", "aria-pressed": String(S.place === id), text: label, onclick: () => ((S.place = id), go("overview")) }))),
-        el("p", { class: "muted small", text: `Visits: ${num(o.places.store)} in the store · ${num(o.places.web)} on your website · ${num(o.places.app)} on the MIRVA app. Sales and a pilot's target count the store only.` }),
+        el("p", { class: "muted small", text: `Visits: ${num(o.places.store)} in the store · ${num(o.places.web)} on your website · ${num(o.places.app)} on the MIRVA app. Sales and a pilot’s target count the store only.` }),
       ),
       el("div", { class: "tiles" },
         tile("Stepped up", num(f.visits), "shoppers who began", 0),
@@ -204,7 +204,7 @@ const VIEWS = {
             : empty("No try-ons yet in this period."),
         ),
         panel("Asked for, and not on the rail",
-          el("p", { class: "lead", text: o.missed.length ? "Sizes shoppers chose that were sold out." : "Nobody asked for a size you didn't have." }),
+          el("p", { class: "lead", text: o.missed.length ? "Sizes shoppers chose that were sold out." : "Nobody asked for a size you didn’t have." }),
           o.missed.length ? el("div", { class: "rows" }, o.missed.map((m) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: m.name }), el("div", { class: "sub", text: `Size ${m.size} · ${money(m.price)}` })), el("b", { class: "num", text: plural(m.asks, "ask") })))) : null,
         ),
       ),
@@ -241,7 +241,7 @@ const VIEWS = {
                 ),
                 hbars(o.sales.byStaff.map((s) => ({ label: s.name, value: s.pkr, note: `${num(s.n)} sale${s.n === 1 ? "" : "s"}` })), money),
               ]
-            : el("p", { class: "muted", text: "Nothing counted yet. When a shopper buys what she tried, tap Sold beside the piece on the mirror's tablet. It is counted here, with the name of whoever helped." }),
+            : el("p", { class: "muted", text: "Nothing counted yet. When a shopper buys what she tried, tap Sold beside the piece on the mirror’s tablet. It is counted here, with the name of whoever helped." }),
         ),
       ),
     );
@@ -310,7 +310,7 @@ const VIEWS = {
           el("span", { class: "badge " + (d.paired ? "good" : "warn"), text: d.paired ? (d.seen ? `Seen ${when(d.seen)}` : "Paired") : "Not paired yet" }),
         ),
         d.pair_code && el("div", { class: "stack close" },
-          el("p", { class: "muted small", text: "On the mirror's own browser, open this address. The code works once, for thirty minutes." }),
+          el("p", { class: "muted small", text: "On the mirror’s own browser, open this address. The code works once, for thirty minutes." }),
           el("p", { class: "code", text: d.pair_code }),
           el("p", { class: "mono", text: d.pairUrl }),
           el("button", { class: "btn ghost small", type: "button", style: "justify-self:start", text: "Copy the address", onclick: () => copy(d.pairUrl) }),
@@ -327,7 +327,7 @@ const VIEWS = {
             pick.onchange = async () => {
               try {
                 await api("/api/console/devices/glass", { id: d.id, glass: pick.value });
-                toast(pick.value === "oval" ? "This mirror now shows the oval. It changes the next time the mirror's page opens." : "This mirror now shows a plain glass.");
+                toast(pick.value === "oval" ? "This mirror now shows the oval. It changes the next time the mirror’s page opens." : "This mirror now shows a plain glass.");
               } catch (e) {
                 toast(e.message);
                 pick.value = d.glass === "oval" ? "oval" : "plain";
@@ -347,7 +347,7 @@ const VIEWS = {
       );
     fill(work(), 
       head("Mirrors"),
-      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "A mirror is any screen with a camera and a browser. Pairing ties it to your store, so its try-ons are counted here and nobody else's screen can spend on your account. Set a MIRVA mirror's glass to oval and its page keeps everything inside that outline." }),
+      el("p", { class: "muted", style: "margin-bottom:20px;max-width:62ch", text: "A mirror is any screen with a camera and a browser. Pairing ties it to your store, so its try-ons are counted here and nobody else’s screen can spend on your account. Set a MIRVA mirror’s glass to oval and its page keeps everything inside that outline." }),
       add,
       devices.length ? el("div", { class: "grid2" }, devices.map(card)) : empty("No mirrors yet. Add one above."),
     );
@@ -384,11 +384,11 @@ const VIEWS = {
     const extra = el("select", { name: "extraLiveMinutes" }, blocks.map((n) => el("option", { value: String(n), selected: n === L.extraLiveMinutes, text: n ? `${num(n)} minutes, up to ${money(n * L.liveMinutePkr)}` : "None" })));
     const hasLive = !!(m && m.live.included);
     const extraForm = el("form", { class: "panel form" },
-      el("h2", { text: "If the month's live minutes run out" }),
+      el("h2", { text: "If the month’s live minutes run out" }),
       hasLive
         ? [
             el("label", { class: "field" }, el("span", { text: "Extra live minutes you will pay for" }), extra),
-            el("p", { class: "fine", text: `Your ${L.plan.name} plan includes ${num(m.live.included)} live minutes a month for ${plural(L.plan.stores, "store")}. A live minute past them is ${money(L.liveMinutePkr)}, and you are billed only for the minutes used. With none agreed, live Studio rests when the plan's minutes are used and comes back on the 1st; portraits and the stylist carry on.` }),
+            el("p", { class: "fine", text: `Your ${L.plan.name} plan includes ${num(m.live.included)} live minutes a month for ${plural(L.plan.stores, "store")}. A live minute past them is ${money(L.liveMinutePkr)}, and you are billed only for the minutes used. With none agreed, live Studio rests when the plan’s minutes are used and comes back on the 1st; portraits and the stylist carry on.` }),
             el("p", { class: "formnote", role: "alert" }),
             el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
           ]
@@ -414,7 +414,7 @@ const VIEWS = {
             ],
             el("p", { class: "lead", style: hasLive ? "margin-top:18px" : "", text: `${num(m.portraits.used)} of ${num(m.portraits.included)} portraits` }),
             gauge(m.portraits.used, m.portraits.included, "portraits"),
-            m.portraits.stopped && el("p", { class: "formnote", text: "The month's portraits are used. The stylist still works." }),
+            m.portraits.stopped && el("p", { class: "formnote", text: "The month’s portraits are used. The stylist still works." }),
           ]
         : el("p", { class: "muted", text: "No plan is on record for this store yet, so there is nothing to count the month against. The daily budget below still applies." }),
     );
@@ -443,7 +443,7 @@ const VIEWS = {
       el("h2", { text: "Try it on, on your own website" }),
       el("p", { class: "muted small", text: "A button beside the add-to-cart on your product pages. The shopper sees herself in that piece without leaving your site. Portraits come from your plan, counted as one more mirror called Your website; live Studio stays in the mirror." }),
       field("Your websites, one to a line", el("textarea", { name: "sites", rows: 3, placeholder: "https://yourstore.com", value: w.sites.join("\n") })),
-      el("p", { class: "fine", text: "Only these addresses can open MIRVA with your store's portraits. Up to five." }),
+      el("p", { class: "fine", text: "Only these addresses can open MIRVA with your store’s portraits. Up to five." }),
       field("WhatsApp for shoppers", el("input", { name: "whatsapp", type: "tel", inputMode: "tel", placeholder: "+92 3xx xxxxxxx", value: w.whatsapp ? "+" + w.whatsapp : "" })),
       el("p", { class: "fine", text: "When a shopper has chosen with her family, MIRVA offers her a message to this number about the piece she chose." }),
       el("p", { class: "formnote", role: "alert" }),
@@ -477,7 +477,7 @@ const VIEWS = {
     const want = panel("Shoppers asking for a MIRVA mirror at your store",
       w.waitlist.count
         ? [el("p", { class: "lead", text: plural(w.waitlist.count, "shopper") }), hbars(w.waitlist.areas.map(([label, value]) => ({ label: label || "Not said", value })))]
-        : empty("Nobody has asked yet. Shoppers can ask on MIRVA's site for a mirror in the store they shop at, and you will see them here."),
+        : empty("Nobody has asked yet. Shoppers can ask on MIRVA’s site for a mirror in the store they shop at, and you will see them here."),
     );
     fill(work(), head("Website"), el("div", { class: "grid2" }, form, code), el("div", { class: "grid2" }, month, want));
   },
@@ -513,7 +513,7 @@ const VIEWS = {
       el("div", { class: "field" }, el("span", { text: "Mood of the tablet" }), el("div", { class: "row" }, ["porcelain", "noir"].map((m) => el("button", { class: "chip", type: "button", "data-mood-set": m, text: cap(m), onclick: () => ((state.mood = m), paint()) })))),
       field("Your colour", el("input", { type: "color", name: "accent", value: state.accent, style: "padding:4px;height:50px", oninput: (e) => ((state.accent = e.target.value), paint()) })),
       field("The line under your name", el("input", { name: "byline", value: state.byline, maxLength: 40, oninput: (e) => ((state.byline = e.target.value), paint()) })),
-      el("p", { class: "fine", text: "The mood is the stylist's panel under the glass: light (Porcelain) or dark (Noir). The glass itself is always dark. Your colour marks what the shopper is wearing and the one button that matters." }),
+      el("p", { class: "fine", text: "The mood is the stylist’s panel under the glass: light (Porcelain) or dark (Noir). The glass itself is always dark. Your colour marks what the shopper is wearing and the one button that matters." }),
       el("p", { class: "formnote", role: "alert" }),
       el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
     );
@@ -584,7 +584,7 @@ const VIEWS = {
       ),
       el("div", { class: "grid2" },
         panel("Needs you", el("ul", { class: "warns" }, needs.length ? needs.map((n) => el("li", { class: n.bad ? "bad" : "", text: n.text })) : el("li", { class: "ok", text: "Nothing is waiting." }))),
-        panel("Real try-on spend, day by day", chart(days, "pkr"), el("p", { class: "fine", text: "In rupees, at Decart's list price. Sample activity is left out." })),
+        panel("Real try-on spend, day by day", chart(days, "pkr"), el("p", { class: "fine", text: "In rupees, at Decart’s list price. Sample activity is left out." })),
       ),
       el("div", { class: "grid2" },
         panel("Stores", o.retailers.length ? el("div", { class: "rows" }, o.retailers.map((r) => el("div", { class: "rowitem plain" }, el("div", {}, el("div", { text: r.name }), el("div", { class: "sub", text: `${r.planName || cap(r.plan)} · ${plural(r.stores, "store")} · ${r.status}${r.month ? (r.month.live.included ? ` · ${num(r.month.live.usedMinutes)} of ${num(r.month.live.included)} live min` : "") + ` · ${num(r.month.portraits.used)} of ${num(r.month.portraits.included)} portraits` : ""}` })), el("b", { class: "num", text: money(r.monthly) })))) : empty("No stores yet.")),
@@ -706,14 +706,14 @@ const VIEWS = {
     const o = await api("/api/hq/overview");
     const { retail: plans } = await api("/api/plans");
     const brandOptions = () => o.system.brands.map((id) => el("option", { value: id, text: id }));
-    const load = el("form", { class: "toolbar" }, field("Load a store's catalogue (its Shopify address)", el("input", { name: "domain", placeholder: "store.com", required: true })), el("button", { class: "btn small", type: "submit", text: "Load it" }), el("p", { class: "formnote", role: "alert", style: "flex-basis:100%" }));
+    const load = el("form", { class: "toolbar" }, field("Load a store’s catalogue (its Shopify address)", el("input", { name: "domain", placeholder: "store.com", required: true })), el("button", { class: "btn small", type: "submit", text: "Load it" }), el("p", { class: "formnote", role: "alert", style: "flex-basis:100%" }));
     onSubmit(load, async (d) => {
       const s = await api("/api/preview", d, 40000);
       toast(`${s.name} is loaded.`);
       go("stores");
     });
     const plan = el("form", { class: "panel form" },
-      el("h2", { text: "Set a store's plan" }),
+      el("h2", { text: "Set a store’s plan" }),
       el("div", { class: "form-2" },
         field("Store", el("select", { name: "brand" }, brandOptions())),
         field("Plan", el("select", { name: "plan" }, Object.values(plans).map((p) => el("option", { value: p.id, text: `${p.name} · ${money(p.monthly)}` })))),
@@ -729,14 +729,14 @@ const VIEWS = {
     });
     // A pilot is one target agreed in writing. It starts counting the day it is saved here.
     const pilot = el("form", { class: "panel form" },
-      el("h2", { text: "Set a pilot's target" }),
+      el("h2", { text: "Set a pilot’s target" }),
       el("div", { class: "form-2" },
         field("Store", el("select", { name: "brand" }, brandOptions())),
         field("Measured in", el("select", { name: "metric" }, [["buy-share", "Try-on visits that end in a sale, %"], ["sales", "Sales counted"], ["kept", "Looks kept"]].map(([v, t]) => el("option", { value: v, text: t })))),
         field("Target", el("input", { name: "target", type: "number", min: 1, step: "0.1", required: true })),
         field("Days", el("input", { name: "days", type: "number", min: 7, max: 180, value: 60 })),
       ),
-      el("p", { class: "fine", text: "The store sees the target and the running figure on its Overview. Sales are what its staff count with Sold on the mirror's tablet. Setting a target again starts its count again." }),
+      el("p", { class: "fine", text: "The store sees the target and the running figure on its Overview. Sales are what its staff count with Sold on the mirror’s tablet. Setting a target again starts its count again." }),
       el("p", { class: "formnote", role: "alert" }),
       el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Start the pilot" }),
     );
@@ -747,18 +747,18 @@ const VIEWS = {
     });
     // A busy store can use an Assist month's portraits before the month is out. A pilot must not stop there.
     const portraits = el("form", { class: "panel form" },
-      el("h2", { text: "Add portraits to a store's month" }),
+      el("h2", { text: "Add portraits to a store’s month" }),
       el("div", { class: "form-2" },
         field("Store", el("select", { name: "brand" }, brandOptions())),
         field("Extra portraits a month (sold at Rs.3,000 for 100, or given)", el("input", { name: "extraPortraits", type: "number", min: 0, max: 20000, step: 100, value: 600, required: true })),
       ),
-      el("p", { class: "fine", text: "Added to the plan's own, every month, until you set it back to 0. Each one used costs you about Rs.5.5. A pilot's count is not touched." }),
+      el("p", { class: "fine", text: "Added to the plan’s own, every month, until you set it back to 0. Each one used costs you about Rs.5.5. A pilot’s count is not touched." }),
       el("p", { class: "formnote", role: "alert" }),
       el("button", { class: "btn small", type: "submit", style: "justify-self:start", text: "Save" }),
     );
     onSubmit(portraits, async (d) => {
       const made = await api("/api/hq/retailers/pilot", { brand: d.brand, extraPortraits: Math.round(Number(d.extraPortraits) || 0) });
-      toast(made.extraPortraits ? `That store now has ${num(made.extraPortraits)} extra portraits a month.` : "That store is back to its plan's portraits.");
+      toast(made.extraPortraits ? `That store now has ${num(made.extraPortraits)} extra portraits a month.` : "That store is back to its plan’s portraits.");
     });
     const user = el("form", { class: "panel form" },
       el("h2", { text: "Give someone at a store a console sign-in" }),
@@ -805,7 +805,7 @@ const VIEWS = {
       el("div", { class: "grid2" }, plan, user),
       el("div", { class: "grid2" }, pilot, portraits),
       o.system.stores &&
-        panel("Who can open each store's mirror",
+        panel("Who can open each store’s mirror",
           el("p", { class: "muted small", style: "max-width:62ch", text: "Listed: anyone can find and open it. By link only: it opens for people who have its address, and is not offered to the public. A store that has not agreed to a demo belongs in the second group." }),
           el("div", { class: "rows" }, o.system.stores.map((s) => el("div", { class: "rowitem plain" },
             el("div", {}, el("div", { text: s.name }), el("div", { class: "sub", text: s.id })),

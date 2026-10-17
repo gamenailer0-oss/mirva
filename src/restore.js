@@ -289,7 +289,7 @@ export async function restoreHead(original, result, { tight = false, debug = fal
     if (!blob) return asItCame("failed");
     return { blob, how: "restored", ...(debug ? { box: { x, y, side }, moved: f1 ? Math.hypot(f1.x - f0.x, f1.y - f0.y) / headPx : null } : {}) };
   } catch (e) {
-    console.warn("The shopper's own head could not be put back; the portrait is shown as it came.", e);
+    console.warn("The shopper’s own head could not be put back; the portrait is shown as it came.", e);
     return asItCame("failed");
   } finally {
     a?.close?.();

@@ -29,7 +29,7 @@ export async function turnOnPush() {
     if (!reg) return false;
     await navigator.serviceWorker.ready;
     if ((await Notification.requestPermission()) !== "granted") {
-      toast("Notifications are off for MIRVA. You can turn them on in the browser's site settings.");
+      toast("Notifications are off for MIRVA. You can turn them on in the browser’s site settings.");
       return false;
     }
     const sub = (await reg.pushManager.getSubscription()) || (await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64(key) }));

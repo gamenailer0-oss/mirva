@@ -264,13 +264,13 @@ export function line(key, x = {}) {
     case "picked":
       return x.stretch
         ? "Two inside your budget, and one just over it that is worth seeing."
-        : pick(["I've picked three. Tap one and I'll put it on you.", "Three for you. Tap one to see it on."]);
+        : pick(["I’ve picked three. Tap one and I’ll put it on you.", "Three for you. Tap one to see it on."]);
     case "pickedAsleep":
-      return "I've picked three. Turn on the mirror and tap one.";
+      return "I’ve picked three. Turn on the mirror and tap one.";
     case "less":
       return "Easier, then. Try these.";
     case "more":
-      return "Let's dress it up.";
+      return "Let’s dress it up.";
     case "cheaper":
       return "Kinder on the budget.";
     case "colour":
@@ -278,7 +278,7 @@ export function line(key, x = {}) {
     case "three":
       return "Three more.";
     case "none":
-      return "Nothing in the store fits all of that. Loosen one thing and I'll look again.";
+      return "Nothing in the store fits all of that. Loosen one thing and I’ll look again.";
     case "putting":
       return pick(["One moment.", "Putting it on you."]);
     case "wearing":
@@ -288,13 +288,13 @@ export function line(key, x = {}) {
     case "kept":
       return "Kept. It will be here when you come back.";
     case "size":
-      return `${x.size}. I'll remember that.`;
+      return `${x.size}. I’ll remember that.`;
     case "needMirror":
-      return "Turn on the mirror and I'll put this on you.";
+      return "Turn on the mirror and I’ll put this on you.";
     case "ended.cap":
       return "That was the full live session. Tap any look to bring it back.";
     case "ended.idle":
-      return "I've paused the live look. Tap one to carry on.";
+      return "I’ve paused the live look. Tap one to carry on.";
     case "ended.lost":
       return "The live look dropped. Tap a look to try again.";
     case "ended.user":
@@ -306,7 +306,7 @@ export function line(key, x = {}) {
     case "awake":
       return "There you are.";
     case "unsure":
-      return "Tell me the occasion, a budget or a colour, and I'll narrow it down.";
+      return "Tell me the occasion, a budget or a colour, and I’ll narrow it down.";
     default:
       return "";
   }

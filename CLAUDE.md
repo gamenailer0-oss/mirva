@@ -173,7 +173,12 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   timed out); Elan rendered. Use `scratchpad/study.mjs`-style shots for public homepages only, and the taste skill's
   own study (`references/research.md`, 247 sites) for patterns.
 - **Text under 11 px** had crept into captions on pictures (9.5 px) and the glass crest (8 px). The floor now: 11 px for
-  small capital labels, about 13 px for anything read; JS-made copy (src/) still has straight apostrophes (open).
+  small capital labels, about 13 px for anything read. The words the front end writes (src/) now use ’ too (79 strings);
+  new copy should be written with ’ “ ” from the start.
+- **The backslash pitfall again (2026-10-17):** a one-off script written through a bash heredoc lost `\` from `[^"\
+]`, so the
+  pattern refused every string with the letter n and changed only 15 of 79. It was rewritten with the Write tool. No
+  heredocs for code, ever, even one-offs.
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45

@@ -4,7 +4,7 @@
 
 import { SHOT_TYPE, unpackShot } from "../lib/shot.mjs";
 
-export const DIM_LINE = "It's dim where you are. Face a window or a lamp, then try again.";
+export const DIM_LINE = "It’s dim where you are. Face a window or a lamp, then try again.";
 export const BUSY_LINE = "The studio is busy. One more try.";
 export const BACKDROP_LINE = "Now on a studio backdrop.";
 

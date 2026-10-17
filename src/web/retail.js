@@ -68,7 +68,7 @@ async function retail() {
   // ----- plans: the decision on three cards, everything else behind "Every detail"
   const card = (p) =>
     el("article", { class: `plan${p.mirrors ? " glassy" : ""}`, "data-plan": p.id },
-      el("span", { class: "badge", hidden: true, text: "Where you'd start" }),
+      el("span", { class: "badge", hidden: true, text: "Where you’d start" }),
       el("h3", { text: p.name }),
       el("p", { class: "fee num" }, money(p.monthly), el("small", { text: "a store, a month" + (p.monthlyFromTenth ? ` · ${money(p.monthlyFromTenth)} from the tenth store` : "") })),
       el("p", { class: "fit", text: p.fit }),
@@ -117,7 +117,7 @@ async function retail() {
       `${plan.name} is ${money(fee)} a month here. ` +
       (users > plan.portraits ? `At these numbers more shoppers would use it than the plan has portraits for (${n(plan.portraits)}), so a larger plan would suit you better. ` : "") +
       (plan.share ? `Results also takes ${plan.share * 100}% of sales counted through MIRVA, left out here because it is only paid when those sales happen. ` : "") +
-      "If nothing changed at all, the cost to you is the monthly fee. We won't promise you an uplift; this shows how small it would have to be.";
+      "If nothing changed at all, the cost to you is the monthly fee. We won’t promise you an uplift; this shows how small it would have to be.";
   };
   calc.addEventListener("input", (e) => {
     if (e.target.name !== "plan") touched = true;
@@ -166,7 +166,7 @@ async function retail() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const domain = clean($("#tryInput").value);
-    if (!domain) return (note.textContent = "Type your store's web address first.");
+    if (!domain) return (note.textContent = "Type your store’s web address first.");
     note.textContent = "";
     busy($("button", form), async () => {
       try {
@@ -192,7 +192,7 @@ async function retail() {
       el("div", { class: "sent" },
         el("p", { class: "kicker", text: "Sent" }),
         el("p", { class: "title voice", text: "Thank you." }),
-        el("p", { class: "muted", text: "Your note is with the founder. You'll hear back within two working days, with a time to see MIRVA on your own catalogue." }),
+        el("p", { class: "muted", text: "Your note is with the founder. You’ll hear back within two working days, with a time to see MIRVA on your own catalogue." }),
         el("a", { class: "link arrow", href: "#yours", text: "Or see it on your catalogue now " }),
       ),
     );
@@ -210,8 +210,8 @@ async function pitch() {
     return fill(main,
       el("section", { class: "p-hero band" },
         el("div", { class: "wrap stack" },
-          el("h1", { class: "title", text: "We haven't read this store's catalogue yet." }),
-          el("p", { class: "lede", text: "Type the store's web address on the stores page and this page writes itself." }),
+          el("h1", { class: "title", text: "We haven’t read this store’s catalogue yet." }),
+          el("p", { class: "lede", text: "Type the store’s web address on the stores page and this page writes itself." }),
           el("a", { class: "btn", href: "/retail#yours", text: "Go to the stores page" }),
         ),
       ),
@@ -280,7 +280,7 @@ async function pitch() {
               ),
             ),
           ),
-          el("p", { class: "fine", style: "margin-top:16px", text: "Real results from MIRVA's try-on, untouched; your photo of each piece sits in its corner. The shopper was made for this page by the same engine, so no real person is shown. A likeness, not a fitting." }),
+          el("p", { class: "fine", style: "margin-top:16px", text: "Real results from MIRVA’s try-on, untouched; your photo of each piece sits in its corner. The shopper was made for this page by the same engine, so no real person is shown. A likeness, not a fitting." }),
         ),
       ),
     pictures.length > 2 &&

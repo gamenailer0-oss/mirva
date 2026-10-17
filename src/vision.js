@@ -139,7 +139,7 @@ export async function framing(source) {
   if (b === undefined) return { known: false, present: true };
   if (b === null) return { known: true, present: false, hint: "Step into the mirror so I can see you." };
   if (!b.shoulders) return { known: true, present: true, ok: false, hint: "A little further back, so I can see your shoulders." };
-  if (b.shoulderWidth > 0.62) return { known: true, present: true, ok: false, hint: "A step back and I'll see more of the outfit." };
+  if (b.shoulderWidth > 0.62) return { known: true, present: true, ok: false, hint: "A step back and I’ll see more of the outfit." };
   if (b.noseY < 0.04) return { known: true, present: true, ok: false, hint: "Tilt the camera up a touch. Your head is at the edge." };
   return { known: true, present: true, ok: true, fullBody: b.hips };
 }

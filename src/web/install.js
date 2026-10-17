@@ -33,7 +33,7 @@ export function offerInstall() {
   const title = document.createElement("b");
   title.textContent = "Keep MIRVA on your home screen";
   const line = document.createElement("span");
-  line.textContent = deferred ? "Your wardrobe and your questions, one tap away, and a nudge when the family answers." : "Tap Share, then Add to Home Screen. Your wardrobe is one tap away, and you'll be told when the family answers.";
+  line.textContent = deferred ? "Your wardrobe and your questions, one tap away, and a nudge when the family answers." : "Tap Share, then Add to Home Screen. Your wardrobe is one tap away, and you’ll be told when the family answers.";
   words.append(title, line);
   const acts = document.createElement("div");
   acts.className = "install-acts";

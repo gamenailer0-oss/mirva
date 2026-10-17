@@ -61,7 +61,7 @@ function draw(root) {
   const lead = b.tally ? Math.max(...Object.values(b.tally).map((t) => t.votes)) : 0;
   const chosen = b.decided && b.looks.find((l) => l.id === b.decided);
 
-  const nameBox = el("input", { class: "input", id: "voterName", placeholder: `Your name, so ${by} knows it's you`, maxLength: 30, autocomplete: "given-name", "aria-label": "Your name", value: b.myName || savedName() });
+  const nameBox = el("input", { class: "input", id: "voterName", placeholder: `Your name, so ${by} knows it’s you`, maxLength: 30, autocomplete: "given-name", "aria-label": "Your name", value: b.myName || savedName() });
 
   const vote = async (look, extra = {}) => {
     const name = nameBox.value.trim();
@@ -118,7 +118,7 @@ function draw(root) {
       el("h1", { class: "title", text: b.title }),
       chosen
         ? el("p", { class: "lede", text: `${by} has decided: ${chosen.name}. Thank you for helping.` })
-        : el("p", { class: "lede", text: b.closed ? (b.looks.length ? "Voting has closed. Here is how it went." : "Voting has closed.") : b.voted ? `Thank you. ${by} can see what you chose. Tap another to change your mind.` : "Tap the one you'd choose." }),
+        : el("p", { class: "lede", text: b.closed ? (b.looks.length ? "Voting has closed. Here is how it went." : "Voting has closed.") : b.voted ? `Thank you. ${by} can see what you chose. Tap another to change your mind.` : "Tap the one you’d choose." }),
       !b.closed && el("span", { class: "badge soft", text: closesIn(b.closes) }),
     ),
     !b.voted && !b.closed && el("div", { class: "board-name" }, nameBox),

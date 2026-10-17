@@ -48,7 +48,7 @@ export async function lookPicture({ portrait, store, name, brand, price }) {
     ctx.fillText(text, x + 18, H - BAND - 42);
   };
   tag("ME, BY MIRVA", 24);
-  if (b) tag("THE STORE'S PHOTO", W / 2 + 27);
+  if (b) tag("THE STORE’S PHOTO", W / 2 + 27);
   // the band: the piece, then the store and price, then MIRVA's mark
   ctx.fillStyle = "#f3f5f9";
   ctx.font = "italic 400 46px Newsreader, Georgia, serif";

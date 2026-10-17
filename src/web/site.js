@@ -39,9 +39,9 @@ const ask = $("#askPrivate");
 if (ask) {
   const note = $("#askNote");
   const say = (status) => {
-    if (status === "waiting") (ask.hidden = true), (note.textContent = "You're on the list. If there's a place for you, the invitation will be in your account.");
+    if (status === "waiting") (ask.hidden = true), (note.textContent = "You’re on the list. If there’s a place for you, the invitation will be in your account.");
     if (status === "invited") (ask.hidden = true), (note.textContent = "You have an invitation. Open your account to accept it.");
-    if (status === "joined") (ask.hidden = true), (note.textContent = "You're a Private member.");
+    if (status === "joined") (ask.hidden = true), (note.textContent = "You’re a Private member.");
   };
   whoAmI().then((me) => {
     if (!me.user) return (ask.textContent = "Join free, then ask"), ask.addEventListener("click", () => (location.href = "/account?join=1"));
@@ -66,6 +66,6 @@ if (wait)
     const out = await api("/api/waitlist", d);
     const note = $(".formnote", wait);
     note.classList.add("ok");
-    note.textContent = out.count > 1 ? `Done. You and ${out.count - 1} more in ${out.city} are waiting for one. We'll tell you the day it opens.` : `Done. We'll tell you the day one opens in ${out.city}.`;
+    note.textContent = out.count > 1 ? `Done. You and ${out.count - 1} more in ${out.city} are waiting for one. We’ll tell you the day it opens.` : `Done. We’ll tell you the day one opens in ${out.city}.`;
     $("[type=submit]", wait).disabled = true;
   });

@@ -402,7 +402,7 @@ export class Mirror extends EventTarget {
     c.width = Math.round(width * scale);
     c.height = Math.round(height * scale);
     c.getContext("2d").drawImage(this.canvas, 0, 0, c.width, c.height);
-    return new Promise((resolve, reject) => c.toBlob((b) => (b ? resolve(b) : reject(new Error("I couldn't take that picture."))), "image/jpeg", quality));
+    return new Promise((resolve, reject) => c.toBlob((b) => (b ? resolve(b) : reject(new Error("I couldn’t take that picture."))), "image/jpeg", quality));
   }
 
   // ---- the live look ------------------------------------------------------
