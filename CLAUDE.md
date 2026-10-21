@@ -200,22 +200,24 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 
 - **Printed the demo passwords again (22 Oct 2026)**: a "masked" node one-liner missed the table layout of
   `.data/demo-sign-ins.txt`. Read sign-ins only inside a script that never prints them (`tools/stores/desk-shots.mjs`).
-  The local demo accounts (store@ and shopper@mirva.demo) are to be reset with `npm run seed`.
+  The local demo accounts (store@ and shopper@mirva.demo) were reset with `node tools/stores/reset-demo.mjs` (`npm run
+  seed` never changes an existing account).
 
-## Audit of 22 Oct 2026 (open; continue here)
-- Done: three-at-once switched off (MIRVA_TRIALS); "fifteen seconds" made "about twenty seconds" (home, /retail).
-- Console (shots: `node tools/stores/desk-shots.mjs console|hq`): overview reads as bare numbers; plan: a one-line
-  plain summary at the top, the five funnel cards in one row with plain labels ("Shoppers who began"), the orphan
-  "Cost per try-on" moved into the cost card, the sidebar full height (it stops at 745 px), the cost card's values in
-  two clean columns, holds and the pilot target first when present. Catalogue: 66 rows with no grouping or photos for
-  half (imported pieces without pictures). Look and feel preview (desk.css .lf-tablet/.lf-chip) still uses the old cool
-  colours (#fcfdfe, #0c1018, #0f1117, #f1f3f8): warm them. HQ not yet shot.
-- Site: brand.css `--pearl` #f3f5f9 vs the mirror's warm #f4f2ef; the home band's headline runs to three lines on a
-  phone (shorten to "Their own rails, on you."). Live link check clean (10 pages).
-- The founder asked to "use the Claude dashboard artifact for the console side": the account has a "Dashboard" type
-  (https://claude.ai/artifact/GZLZthZ2sQjn7T16skfdeF); plan: mock the redesigned console in it first, then build.
-- Still to check: HQ, flows beyond the order one (store change mid-look, Start over, photo then camera, keep before
-  sign-in, ask family with one look), the founding team page artifact.
+## Audit of 22 Oct 2026 (done the same day)
+- Shipped: three-at-once off (MIRVA_TRIALS); portrait time said as about twenty seconds (home, /retail); changing store
+  lets go of the old store's piece; Studio away from a store mirror says it is in MIRVA stores and makes the portrait
+  (no join detour); console overview opens in plain words (src/web/desk.js inWords), five visit steps in one row, cost
+  per try-on in the cost card, busiest hour in words, look-and-feel preview warm; HQ shows store names (table and
+  forms) and its eight figures in two rows; home band headline two lines on a phone; site pearl warm (#f4f2ef).
+- Founding team page v2 (warm palette, fitting-room portraits, three stores said yes, Rs.25,000 founding pilot, link to
+  the Lahore Route). Its MP4 for WhatsApp (motion/team-intro) is still the old cool palette: re-record if wanted.
+- Not a bug: the desks' side menu looks short only in full-page screenshots (it is sticky).
+- The Dashboard artifact type reads a connector or an attached file; MIRVA's numbers live in D1, which no connector
+  here reads, so a dashboard would be a stale snapshot. Offered instead: a weekly store report built from a snapshot
+  once Naqshi, Baroque and Agha Noor have a week of visits. Shots of the desks: `node tools/stores/desk-shots.mjs console|hq`.
+- Demo passwords reset after being printed (tools/stores/reset-demo.mjs; local only, live has no demo accounts).
+- **The backtick pitfall, once more (22 Oct)**: a `node -e "…"` writing this very section held backticks, so bash ran
+  the quoted command (the desk shots started). Notes and patches go through the Edit or Write tools, never node -e.
 
 ## The mirror's way through (the founder, 22 Oct 2026; src/main.js `liveHere`, `syncPath`, `takeStep`, `storeFront`)
 - A photo has Model alone (the portrait starts at once, Studio hidden); a live camera has both, Studio first and lit
