@@ -309,6 +309,8 @@ export function line(key, x = {}) {
       return "I paused the live look while you were away. Tap Studio to carry on.";
     case "whichMode":
       return "A portrait of you in it, or live in the mirror?";
+    case "whichModeLive":
+      return "Live in the mirror, or a portrait to keep?";
     case "awake":
       return "There you are.";
     case "unsure":

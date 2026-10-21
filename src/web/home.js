@@ -17,11 +17,18 @@ export async function start() {
     return;
   }
   if (!Array.isArray(stores) || !stores.length) return;
-  // The home page is frozen as the founder approved it: its demo keeps the concept stores (formal, menswear, casual).
-  // The stores that said yes (`priority`) lead the mirror's own list instead.
-  stores = stores.filter((s) => !s.priority).slice(0, 4);
+  // The stores that said yes (`priority`: Naqshi, Baroque, Agha Noor) lead, and the first of them is open; the concept
+  // stores follow, so formal, menswear and casual are all still a tap away.
+  stores = stores.slice(0, 6);
+  // "Now in the mirror": each of their cards gets three pictures from its own rails.
+  for (const rail of $$("[data-cover]")) {
+    const store = stores.find((s) => s.id === rail.dataset.cover);
+    if (!store?.cover?.length) continue;
+    fill(rail, store.cover.slice(0, 3).map((src) => el("img", { src: pic(src, 360), alt: "", loading: "lazy", decoding: "async" })));
+    rail.classList.add("real");
+  }
 
-  const state = { store: (stores.find((s) => s.id === "sapphire") || stores[0]).id, occasion: "wedding" };
+  const state = { store: stores[0].id, occasion: "wedding" };
   const rails = new Map(); // store id -> its catalogue, asked for once
   const railsOf = (id) => {
     if (!rails.has(id))

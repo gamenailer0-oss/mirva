@@ -635,11 +635,87 @@ function syncGlass() {
     const on = (b.dataset.mode === "model" && S.view === "portrait") || (b.dataset.mode === "studio" && mirror.isLive && S.view !== "portrait");
     b.setAttribute("aria-pressed", String(on));
   }
+  // A photo has Model alone; a live camera has both, Studio first and lit where it can run here.
+  const studioBtn = $('#modes [data-mode="studio"]');
+  const live = liveHere();
+  studioBtn.hidden = onPhoto();
+  $("#modes").dataset.prefer = live ? "studio" : "model";
+  $("span", studioBtn).textContent = live ? "Live, in the mirror" : noLive() ? "With a MIRVA mirror" : "In MIRVA stores";
   $("#keepBtn").disabled = !canKeep();
   $("#keepBtn").textContent = keptAlready() ? "Kept" : "Keep";
   $("#meter").hidden = !(mirror.state === "live" && S.view !== "portrait");
   $("#hint").hidden = !(st === "awake" && $("#hint").textContent);
+  syncPath();
   syncSheet();
+}
+
+// ---------- the way through: choose a piece, see yourself, wear it (the founder, 22 Oct 2026) ----------
+// Whatever she taps first, the next step is plain. A piece chosen while the mirror is off waits on the wake screen with
+// "Next, see yourself in…"; a mirror turned on first asks for a piece; a piece and a mirror together offer the way to
+// wear it (a photo: the portrait, at once). A first visit also gets the three steps at the top of the stylist's panel,
+// lit as each comes next and each doing itself when tapped; they go once her first look is on. A store's mirror shows
+// them to every new shopper (Start over), a phone or laptop only until its first look.
+const GUIDED = "mirva:guided";
+const guideDone = () => {
+  if (link.pairedTo()) return !!S.guideDone;
+  try {
+    return localStorage.getItem(GUIDED) === "1";
+  } catch {
+    return !!S.guideDone;
+  }
+};
+function syncPath() {
+  const pending = mirror.awake ? null : S.pending;
+  $("#wakePiece").hidden = !pending;
+  $("#wake").classList.toggle("has-piece", !!pending);
+  if (pending && $("#wakePiece").dataset.id !== pending.id) {
+    $("#wakePiece").dataset.id = pending.id;
+    $("#wakePieceImg").src = pic(pending.image, 240);
+    $("#wakePieceName").textContent = pending.name;
+  }
+  const on = S.view === "portrait" || (mirror.isLive && hasPicture());
+  if (on && !guideDone()) {
+    S.guideDone = true;
+    try {
+      if (!link.pairedTo()) localStorage.setItem(GUIDED, "1");
+    } catch {}
+  }
+  const path = $("#path");
+  path.hidden = guideDone() || !S.brand;
+  if (path.hidden) return;
+  const piece = S.pending || S.selected;
+  const you = mirror.awake;
+  const state = { piece: piece ? "done" : "next", you: you ? "done" : piece ? "next" : "todo", wear: piece && you ? (S.developing || mirror.state === "connecting" ? "now" : "next") : "todo" };
+  const words = {
+    piece: piece ? piece.name : "Choose a piece",
+    you: you ? (onPhoto() ? "Your photo" : "The mirror is on") : "See yourself",
+    wear: state.wear === "now" ? "Putting it on you" : piece && you ? (onPhoto() ? "Wear it: a portrait" : liveHere() ? "Wear it live" : "Wear it: a portrait") : "Wear it",
+  };
+  for (const b of $$("button", path)) {
+    const s = state[b.dataset.step];
+    b.dataset.state = s;
+    b.setAttribute("aria-current", s === "next" ? "step" : "false");
+    $("span", b).textContent = words[b.dataset.step];
+  }
+}
+// Each step, tapped, does itself; a step that is not ready yet does the one before it.
+function takeStep(step) {
+  const piece = S.pending || S.selected;
+  if (step === "piece" || (!piece && step !== "you")) {
+    const looks = S.step === "looks" && S.looks.length;
+    showTab(looks ? "foryou" : "catalogue");
+    if (phoneApp()) setSheet(looks ? "peek" : "full");
+    caption(looks ? "Tap one of the three." : "Choose any piece, and I’ll put it on you.");
+    return;
+  }
+  if (step === "you" || !mirror.awake) {
+    if (phoneApp()) setSheet(null);
+    if (!mirror.awake) $("#wakeBtn").click();
+    return;
+  }
+  if (S.developing || mirror.state === "connecting") return;
+  choose(S.selected || piece);
+  if (!onPhoto() && !S.mode) setMode(liveHere() ? "studio" : "model");
 }
 
 // ---------- a phone held upright: the mirror as one screen (public/styles.css, "the mirror as a phone app") ----------
@@ -811,6 +887,7 @@ async function reference(p) {
 
 function needMirror(p) {
   S.pending = p;
+  syncGlass(); // the piece waits on the wake screen, and on a phone the panel folds so that screen is in sight
   caption(line("needMirror"));
   const btn = $("#wakeBtn");
   btn.classList.remove("nudge");
@@ -828,6 +905,14 @@ function showGlass() {
   glass.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
+// How a piece can be worn here (the founder, 22 Oct 2026). A photo is a still: only a portrait makes sense of it, so a
+// photo has Model alone. A live camera has both, and Studio (live, in the mirror) leads wherever live try-on can really
+// run for this visitor (a store's mirror with live minutes, a member whose plan has them). Elsewhere Model leads and
+// Studio stays in sight, saying where it is to be had.
+const onPhoto = () => mirror?.source?.kind === "photo";
+const liveHere = () =>
+  !onPhoto() && !!S.config?.live && !noLive() && !mustJoin("live") && !(link.member && !link.member.tier.liveSecondsPerMonth && !link.pairedTo());
+
 function choose(p) {
   mirror.touch();
   sheetWish = null;
@@ -842,15 +927,17 @@ function choose(p) {
   if (p.photoOnly) return syncGlass(), caption(PHOTO_ONLY_LINE), openPhoto(p);
   if (!mirror.awake) return needMirror(p);
   mirror.preload();
+  if (onPhoto()) return modelShot(p); // a photo: the portrait is the only way, so it is made at once
   if (S.mode === "studio") return studio(p);
   if (S.mode === "model") return modelShot(p);
   syncGlass();
-  caption(line("whichMode"));
+  caption(line(liveHere() ? "whichModeLive" : "whichMode"));
 }
 
 function setMode(mode) {
   const p = S.selected;
   if (!p || p.photoOnly) return;
+  if (mode === "studio" && onPhoto()) mode = "model";
   S.mode = mode;
   if (mode === "model") modelShot(p);
   else studio(p);
@@ -1693,9 +1780,11 @@ function wireMirror() {
     if (S.pending) {
       const p = S.pending;
       S.pending = null;
+      caption(""); // "Turn on the mirror and I'll put this on you" is done with
       choose(p);
     } else {
-      caption(S.step === "looks" && S.looks.length ? "There you are. Tap a look to begin." : line("awake"));
+      // The mirror came first: the next step is a piece.
+      caption(S.step === "looks" && S.looks.length ? "There you are. Tap a look to begin." : "There you are. Now choose a piece, or tell me what it’s for.");
     }
   });
   mirror.addEventListener("state", syncGlass);
@@ -2052,6 +2141,7 @@ function startOver() {
     S.mode = null;
     S.pending = null;
     S.agreed = false;
+    S.guideDone = false; // the next shopper is shown the way through too
     S.lane = "all";
     renderSaved();
     renderCatalogue();
@@ -2193,6 +2283,7 @@ function wireUI() {
     }
   });
   for (const b of $$("#modes button")) b.addEventListener("click", () => setMode(b.dataset.mode));
+  for (const b of $$("#path button")) b.addEventListener("click", () => takeStep(b.dataset.step));
   $("#keepBtn").addEventListener("click", keep);
   $("#offBtn").addEventListener("click", () => {
     if (S.view === "portrait") {
@@ -2356,7 +2447,6 @@ async function boot() {
   memory.setStoreMirror(!!link.pairedTo());
   memory.setOwner(link.member?.user.id);
   document.body.classList.toggle("shopper", forShopper()); // hides the cost meter and the Adapt sheet
-  if (noLive()) $('#modes [data-mode="studio"] span').textContent = "With a MIRVA mirror";
   if (!first.id) return noStore();
   await loadBrand(first.id);
   // A link to one piece (a store's website, a shared look): the mirror opens on it.

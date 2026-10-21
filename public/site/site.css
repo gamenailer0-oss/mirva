@@ -35,6 +35,32 @@
 .hero-cap .tag { font: 500 11px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #d2cbc3; margin-bottom: 8px; }
 .hero-cap .line { font-size: clamp(20px, 2vw, 27px); line-height: 1.2; }
 
+/* ---------- now in the mirror: the stores that said yes ----------
+   A card each: three pieces from the store's own rails under one arch, its name with a hairline in its own colour, one
+   line about it, and the way into its mirror. On a phone the cards are a row the thumb swipes. */
+.partners { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); }
+.partner {
+  display: grid; gap: 6px; align-content: start; min-width: 0; padding: 10px 10px 20px; border-radius: var(--r-lg);
+  color: inherit; text-decoration: none; background: var(--panel);
+  box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(20, 16, 10, .05), 0 24px 48px -36px rgba(20, 16, 10, .35);
+  transition: transform var(--calm) var(--ease), box-shadow var(--calm) var(--ease);
+}
+.partner:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px color-mix(in oklab, var(--store) 45%, var(--line)), 0 2px 4px rgba(20, 16, 10, .06), 0 30px 56px -34px rgba(20, 16, 10, .45); }
+.partner:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.partner-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; aspect-ratio: 9 / 8; margin-bottom: 12px; border-radius: calc(var(--r-lg) - 6px) calc(var(--r-lg) - 6px) 6px 6px; overflow: hidden; background: var(--card); }
+.partner-rail i, .partner-rail img { display: block; width: 100%; height: 100%; min-width: 0; background: var(--card); }
+.partner-rail img { object-fit: cover; object-position: top; }
+.partner-name { position: relative; padding: 0 10px 10px; font: 400 clamp(22px, 2vw, 27px)/1.1 var(--serif); }
+.partner-name::after { content: ""; position: absolute; left: 10px; bottom: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--store); }
+.partner-line { padding: 4px 10px 0; font-size: 14.5px; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
+.partner-go { margin: 10px 10px 0; font: 500 12px/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.partner-go::after { content: " →"; letter-spacing: 0; }
+@media (max-width: 760px) {
+  .partners { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 78%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; margin-inline: calc(-1 * clamp(20px, 5vw, 56px)); padding-inline: clamp(20px, 5vw, 56px); scroll-padding-inline: clamp(20px, 5vw, 56px); scrollbar-width: none; }
+  .partners::-webkit-scrollbar { display: none; }
+  .partner { scroll-snap-align: start; }
+}
+
 /* ---------- try it here: the stylist, on a real store's rails ---------- */
 .head { max-width: 22em; margin-bottom: clamp(36px, 5vw, 64px); }
 .head .lede { margin-top: var(--s5); }

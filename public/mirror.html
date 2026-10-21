@@ -113,6 +113,11 @@
         <div class="wake-main">
           <h2>The mirror that <em>styles you.</em></h2>
           <p class="wake-copy">Your camera becomes the mirror. A picture leaves it only when you ask for a look, and nothing is recorded.</p>
+          <!-- A piece chosen before the mirror is on: shown here, so the next step is plain (src/main.js syncPath). -->
+          <div id="wakePiece" class="wake-piece" hidden>
+            <img id="wakePieceImg" alt="" width="60" height="80">
+            <p><span>Next, see yourself in</span><b id="wakePieceName"></b></p>
+          </div>
           <button id="wakeBtn" class="primary" type="button">Turn on the mirror</button>
           <button id="photoBtn" class="textlink" type="button">or use a photo instead</button>
           <input id="photoInput" type="file" accept="image/*" hidden aria-label="Choose a photo of yourself">
@@ -159,6 +164,13 @@
       <span class="store-now"><i id="storeDot" aria-hidden="true"></i><span id="storeName"></span></span>
       <button id="storeBtn" class="textlink" type="button">Change store</button>
     </div>
+    <!-- A first visit's way through, in any order: each step lights when it is next and does itself when tapped; it goes
+         once her first look is on (src/main.js syncPath). -->
+    <ol id="path" class="path" aria-label="Three steps" hidden>
+      <li><button type="button" data-step="piece"><i>1</i><span>Choose a piece</span></button></li>
+      <li><button type="button" data-step="you"><i>2</i><span>See yourself</span></button></li>
+      <li><button type="button" data-step="wear"><i>3</i><span>Wear it</span></button></li>
+    </ol>
     <header class="tablet-head">
       <nav class="tabs" role="tablist" aria-label="Looks">
         <button role="tab" type="button" data-tab="foryou" class="on" aria-selected="true" aria-controls="foryou">For you</button>

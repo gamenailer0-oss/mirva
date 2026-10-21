@@ -1028,6 +1028,16 @@ a.chip { text-decoration: none; }
 .chip.quiet { background: none; box-shadow: none; }
 .look .shot { box-shadow: 0 1px 2px rgba(20, 16, 10, .08), 0 12px 24px -16px rgba(20, 16, 10, .35); }
 /* Studio is live: a small light beside its name, like a camera's, so the two choices tell themselves apart at a glance. */
+/* Where live try-on can run (a live camera, a store's mirror), Studio leads: first, and lit like the chosen control,
+   until a look is on and the pair becomes a switch. On a photo Studio is hidden and Model stands alone. */
+.modes[data-prefer="studio"] [data-mode="studio"] { order: -1; }
+.frame[data-dock="choose"] .modes[data-prefer="studio"] [data-mode="studio"],
+.frame[data-dock="choose"] .modes[data-prefer="model"] [data-mode="model"] {
+  background: linear-gradient(180deg, #fffdfa, var(--pearl) 70%); color: #0d0c10;
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0, 0, 0, .08), 0 0 0 1px rgba(226, 201, 149, .35), 0 10px 26px -10px rgba(226, 201, 149, .5), 0 4px 12px -4px rgba(0, 0, 0, .5);
+}
+.modes:has(> button[hidden]) { grid-template-columns: 1fr; }
+.modes button[hidden] { display: none; }
 .modes [data-mode="studio"] b::after { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0 2px 8px; border-radius: 50%; vertical-align: middle; background: #ff5a5f; box-shadow: 0 0 8px rgba(255, 90, 95, .8); }
 /* The store's name and "concept demo by MIRVA" in the corner of the glass stay readable over a bright room. */
 .glass:not([data-state="asleep"]) :is(.wordmark, .byline) { text-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 0 14px rgba(0, 0, 0, .45); }
@@ -1098,3 +1108,36 @@ a.chip { text-decoration: none; }
   box-shadow: 0 10px 22px -10px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .2); transition: transform .3s var(--spring), box-shadow .3s; }
 .outfit-tile:active img { transform: scale(.94); }
 .outfit-tile.on img { box-shadow: 0 0 0 2px #efe9e1, 0 0 18px rgba(226, 201, 149, .55); }
+
+/* ---------- the way through (src/main.js syncPath): a piece waiting on the wake screen, and a first visit's three steps ----------
+   On the glass, a piece chosen before the mirror is on: its picture, and the next step in MIRVA's voice. Nothing else
+   from the wake screen's introduction stays, so the buttons sit right under it. */
+.wake.has-piece h2, .wake.has-piece .wake-copy { display: none; }
+.wake-piece { display: flex; align-items: center; gap: 14px; margin: 0 0 6px; text-align: left; max-width: 100%; animation: rise var(--calm) var(--ease) both; }
+.wake-piece img { flex: none; width: 60px; height: 80px; object-fit: cover; object-position: top; border-radius: 12px; background: #1a191f;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .22), 0 12px 26px -12px rgba(0, 0, 0, .8), 0 0 30px rgba(226, 201, 149, .12); }
+.wake-piece p { margin: 0; display: grid; gap: 4px; min-width: 0; }
+.wake-piece span { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .72; }
+.wake-piece b { font: italic 400 clamp(20px, 7cqmin, 26px)/1.15 var(--serif); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* In the stylist's panel, a first visit's three steps: a number in a small ring, lit in ink when it comes next, a check
+   in the store's own colour once done (with what was chosen), and a hairline joining them. Each is a button. */
+.path { list-style: none; margin: 0 0 14px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; position: relative; }
+.path::before { content: ""; position: absolute; left: 18px; right: 18px; top: 17px; height: 1px; background: var(--line); }
+.path li { min-width: 0; position: relative; }
+.path button { width: 100%; display: grid; justify-items: start; gap: 7px; padding: 6px 4px 6px 6px; border: 0; border-radius: 12px; background: none; color: var(--muted); font: 400 12.5px/1.3 var(--sans); text-align: left; cursor: pointer; transition: background-color var(--quick), color var(--quick); }
+.path button:hover { background: color-mix(in oklab, var(--ink) 5%, transparent); }
+.path button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.path i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font: 500 11px/1 var(--sans); font-style: normal; background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); position: relative; z-index: 1; }
+.path span { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.path [data-state="next"], .path [data-state="now"] { color: var(--ink); }
+.path [data-state="next"] i, .path [data-state="now"] i { background: var(--ink); color: var(--panel); box-shadow: 0 0 0 4px color-mix(in oklab, var(--ink) 10%, transparent); }
+.path [data-state="next"] span { font-weight: 500; }
+.path [data-state="done"] { color: var(--ink); }
+.path [data-state="done"] i { color: transparent; background: var(--panel); box-shadow: inset 0 0 0 1px var(--accent-text); }
+.path [data-state="done"] i::after { content: ""; position: absolute; width: 9px; height: 5px; border: solid var(--accent-text); border-width: 0 0 1.6px 1.6px; transform: translateY(-1px) rotate(-45deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .path [data-state="next"] i { animation: path-breathe 2.4s var(--ease) infinite; }
+  @keyframes path-breathe { 50% { box-shadow: 0 0 0 7px color-mix(in oklab, var(--ink) 4%, transparent); } }
+}
+:root.phone-app .app[data-sheet="mini"] .path { display: none; }
