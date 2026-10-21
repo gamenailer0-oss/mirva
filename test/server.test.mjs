@@ -112,6 +112,17 @@ test("brands and catalogues are served", async () => {
   assert.equal((await fetch(base + "/api/unknown")).status, 404);
 });
 
+// They said yes (21 Oct 2026): listed for everyone, first on the list, and shown as styled by MIRVA, not a concept demo.
+test("Naqshi, Baroque and Agha Noor lead the public list of stores", async () => {
+  const brands = await (await fetch(base + "/api/brands")).json();
+  assert.deepEqual(brands.slice(0, 3).map((b) => b.id), ["naqshi", "baroque", "agha-noor"]);
+  assert.ok(brands.slice(3).every((b) => !b.priority), "the concept stores follow");
+  for (const id of ["naqshi", "baroque", "agha-noor"]) {
+    const { brand } = await (await fetch(base + "/api/brands/" + id)).json();
+    assert.ok(!brand.notice && brand.byline === "styled by MIRVA" && brand.visibility !== "unlisted", id);
+  }
+});
+
 test("paid calls refuse cleanly when there is no key", async () => {
   const token = await fetch(base + "/api/token", { method: "POST" });
   assert.equal(token.status, 503);

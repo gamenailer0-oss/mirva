@@ -17,7 +17,9 @@ export async function start() {
     return;
   }
   if (!Array.isArray(stores) || !stores.length) return;
-  stores = stores.slice(0, 4);
+  // The home page is frozen as the founder approved it: its demo keeps the concept stores (formal, menswear, casual).
+  // The stores that said yes (`priority`) lead the mirror's own list instead.
+  stores = stores.filter((s) => !s.priority).slice(0, 4);
 
   const state = { store: (stores.find((s) => s.id === "sapphire") || stores[0]).id, occasion: "wedding" };
   const rails = new Map(); // store id -> its catalogue, asked for once

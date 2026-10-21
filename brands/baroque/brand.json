@@ -12,7 +12,6 @@
     "cdn.shopify.com"
   ],
   "enhancePrompt": false,
-  "notice": "A preview prepared for Baroque by MIRVA, from Baroque’s own public catalogue.",
-  "visibility": "unlisted",
-  "invited": true
+  "invited": true,
+  "priority": 2
 }

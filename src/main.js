@@ -2347,7 +2347,8 @@ async function boot() {
   const want = query.get("brand") || link.pairedTo()?.brand || memory.lastBrand.get();
   // A store loaded from a link is not on the public list, so the link's own id is tried before any fallback.
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
-  const first = { id: brands.find((b) => b.id === want)?.id || linked || brands.find((b) => b.id === "sapphire")?.id || brands[0]?.id };
+  // With nothing named and nothing remembered, the first store on the list opens: the stores that said yes lead it.
+  const first = { id: brands.find((b) => b.id === want)?.id || linked || brands[0]?.id };
   const named = !!query.get("brand") && first.id === query.get("brand");
   if (link.embedded()) document.documentElement.dataset.embed = "1";
   else if (query.has("pair") || query.has("brand") || query.has("for") || query.has("p")) history.replaceState(null, "", location.pathname);
