@@ -445,6 +445,7 @@ function lookCard(p, extra = {}) {
     h("span", { class: "shot loading" }, h("img", { loading: "lazy", decoding: "async", src: pic(p.image, 420), alt: p.name, onload: arrived, onerror: arrived }), h("span", { class: "badge", text: base, hidden: !base })),
     h("span", { class: "name", text: p.name }),
     h("span", { class: "price", text: money(p.price) }),
+    extra.cloth && (p.fabric || p.cut) && !String(p.fabric).includes("%") && h("span", { class: "cloth", text: p.fabric || p.cut }),
     extra.why && h("span", { class: "why", text: extra.why }),
   );
 }
@@ -2104,13 +2105,41 @@ function openSizer() {
 }
 
 // ---------- catalogue tab ----------
+// The catalogue opens on the store itself (the founder, 22 Oct 2026: a dot and a name did not present a brand): three
+// pieces from three of its collections under its name, in its own colour, one line about it and what its rails hold.
+// Its collections follow with how many pieces each has, and every card says its cloth.
+function storeFront() {
+  const front = $("#storeFront");
+  const brand = S.brand;
+  if (!brand || !S.products.length) return void (front.hidden = true);
+  const seen = new Set(), cover = [];
+  for (const p of S.products) if (cover.length < 3 && !seen.has(p.lane)) (seen.add(p.lane), cover.push(p));
+  for (const p of S.products) if (cover.length < 3 && !cover.includes(p)) cover.push(p);
+  const prices = S.products.map((p) => p.price).filter(Boolean).sort((a, b) => a - b);
+  let from = "";
+  try {
+    from = brand.source ? new URL(brand.source).host.replace(/^(www|pk)\./, "") : "";
+  } catch {}
+  const facts = [`${S.products.length} pieces`, prices.length > 1 ? `${money(prices[0])} to ${money(prices.at(-1))}` : "", from && `from ${from}`].filter(Boolean).join(" · ");
+  front.replaceChildren(
+    h("div", { class: "sf-rail", "aria-hidden": "true" }, cover.map((p) => h("img", { src: pic(p.image, 360), alt: "", loading: "lazy", decoding: "async" }))),
+    h("div", { class: "sf-words" }, h("p", { class: "sf-mark", text: brand.wordmark || brand.name }), brand.tagline ? h("p", { class: "sf-line", text: brand.tagline }) : null),
+    h("p", { class: "sf-facts", text: facts }),
+  );
+  front.setAttribute("aria-label", `${brand.name}: ${brand.tagline || facts}`);
+  front.hidden = false;
+}
 function renderCatalogue() {
+  storeFront();
   const lanes = ["all", ...new Set(S.products.map((p) => p.lane))];
+  const count = (l) => (l === "all" ? S.products.length : S.products.filter((p) => p.lane === l).length);
   $("#lanes").replaceChildren(
-    ...lanes.map((l) => chip(l === "all" ? "Everything" : LANES[l] || l, () => ((S.lane = l), renderCatalogue()), S.lane === l ? "on" : "")),
+    ...lanes.map((l) =>
+      h("button", { class: `chip${S.lane === l ? " on" : ""}`, type: "button", onclick: () => ((S.lane = l), renderCatalogue()) }, l === "all" ? "Everything" : LANES[l] || l, h("span", { class: "chip-count", text: String(count(l)) })),
+    ),
   );
   const items = S.products.filter((p) => S.lane === "all" || p.lane === S.lane);
-  $("#grid").replaceChildren(...items.map((p) => lookCard(p)));
+  $("#grid").replaceChildren(...items.map((p) => lookCard(p, { cloth: true })));
   markCards();
 }
 

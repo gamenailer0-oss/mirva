@@ -1141,3 +1141,20 @@ a.chip { text-decoration: none; }
   @keyframes path-breathe { 50% { box-shadow: 0 0 0 7px color-mix(in oklab, var(--ink) 4%, transparent); } }
 }
 :root.phone-app .app[data-sheet="mini"] .path { display: none; }
+
+/* ---------- the store at the head of its catalogue (src/main.js storeFront) ----------
+   Three pieces from three of its collections, side by side under one rounded edge; its name in spaced capitals over
+   them, on a shade of the glass, with a hairline in its own colour; one line about it; then what the rails hold. */
+.store-front { display: grid; grid-template-areas: "art" "facts"; margin: 2px 0 16px; border-radius: var(--r-md, 14px); overflow: hidden; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 18px 36px -30px rgba(20, 16, 10, .45); }
+.sf-rail { grid-area: art; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; aspect-ratio: 16 / 8.5; }
+.sf-rail img { display: block; width: 100%; height: 100%; min-width: 0; object-fit: cover; object-position: 50% 14%; background: var(--card); }
+.sf-words { grid-area: art; align-self: end; display: grid; gap: 7px; padding: 46px 16px 14px; color: #f4f2ef;
+  background: linear-gradient(0deg, rgba(11, 10, 13, .88), rgba(11, 10, 13, .55) 48%, transparent); }
+.sf-mark { position: relative; margin: 0; padding-bottom: 10px; font: 500 18px/1 var(--serif); letter-spacing: .32em; text-transform: uppercase; text-shadow: 0 1px 12px rgba(0, 0, 0, .5); }
+.sf-mark::after { content: ""; position: absolute; left: 0; bottom: 0; width: 26px; height: 2px; border-radius: 2px; background: color-mix(in oklab, var(--accent) 72%, white); }
+.sf-line { margin: 0; max-width: 40ch; font-size: 13px; line-height: 1.4; opacity: .9; text-wrap: pretty; }
+.sf-facts { grid-area: facts; margin: 0; padding: 10px 14px 11px; font-size: 12px; line-height: 1.35; color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
+.chip .chip-count { margin-left: 7px; font-size: 11.5px; opacity: .55; font-variant-numeric: tabular-nums; }
+.chip.on .chip-count { opacity: .72; }
+.look .cloth { margin-top: -3px; font-size: 11.5px; line-height: 1.3; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+:root.phone-app .app[data-sheet="mini"] :is(.store-front, .look .cloth) { display: none !important; }
