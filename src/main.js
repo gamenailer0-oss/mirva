@@ -299,6 +299,9 @@ async function loadBrand(id) {
   const { brand, catalogue } = await api(`/api/brands/${id}`);
   if (mirror.isLive) mirror.stop("user");
   forgetPortraits();
+  // A piece chosen in the store she has left is not on these rails: the dock, the steps and the wake screen let it go.
+  S.selected = null;
+  S.pending = null;
   S.brand = brand;
   S.products = catalogue.products;
   S.addons = catalogue.addons || [];
@@ -318,6 +321,9 @@ async function loadBrand(id) {
   renderSaved();
   renderCatalogue();
   startConversation();
+  renderSolo();
+  renderPartners();
+  syncGlass();
 }
 
 // ---------- conversation ----------
@@ -1703,6 +1709,10 @@ async function makeAhead(p, person) {
 async function studio(p) {
   mirror.touch();
   if (p.photoOnly) return caption(PHOTO_ONLY_LINE);
+  // Away from a store's mirror, live video is not to be had by joining either (members have no live minutes): say so
+  // and make the portrait, rather than asking her to join for something joining would not give.
+  if (S.config.live && !noLive() && !link.pairedTo() && !liveHere() && !onPhoto())
+    return (S.mode = "model"), caption("Live Studio is in MIRVA stores. Here, I’ll make you a portrait."), modelShot(p);
   if (mustJoin()) return askToJoin();
   if (!mirror.awake) return needMirror(p);
   if (!S.config.live) return caption(forShopper() ? RESTING : "Live try-on is off. Add your Decart key to the .env file and restart.");

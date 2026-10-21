@@ -12,7 +12,7 @@
   --glass-lift: #1e1d24;
   --lamp: #e2c995; /* warm light, never a fill colour */
   --brass: #9c7d47;
-  --pearl: #f3f5f9;
+  --pearl: #f4f2ef; /* warm, as on the mirror: a blue-white reads as a screen */
   --mercury: linear-gradient(120deg, #8d95a6, #f6f8fb 32%, #c3c9d6 55%, #f1f3f7 72%, #7e8698);
   --ease: cubic-bezier(.2, .7, .2, 1);
   --quick: 140ms;

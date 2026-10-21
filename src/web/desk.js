@@ -182,6 +182,21 @@ function tierCell(m) {
   return pick;
 }
 
+// A store's overview in plain words, before any number (the founder, 22 Oct 2026: the console read as bare figures).
+// What happened, the piece they wanted most, the size they asked for that was sold out, and the one thing worth doing.
+function inWords(o, f, days) {
+  const period = days === 7 ? "this week" : `in the last ${days} days`;
+  if (!f.visits)
+    return { lead: `Nobody has used your mirror ${period} yet.`, notes: ["Pair a mirror under Mirrors, or open the mirror on a tablet in the store: the first visits show here the same day."] };
+  const lead = `${cap(period)}, ${num(f.visits)} shoppers stepped up to your mirror. ${num(f.tried)} tried a piece on and ${num(f.kept)} kept a look${f.sent ? `; ${num(f.sent)} sent one to their phone` : ""}.`;
+  const notes = [];
+  if (o.top[0]) notes.push(`Most wanted: ${o.top[0].name}, tried ${plural(o.top[0].tries, "time")}.`);
+  if (o.missed[0]) notes.push(`Worth restocking: size ${o.missed[0].size} in ${o.missed[0].name}, asked for ${plural(o.missed[0].asks, "time")} while it was sold out.`);
+  notes.push(o.sales.count ? `${plural(o.sales.count, "sale")} counted by your staff, ${money(o.sales.pkr)} in all.` : "When a shopper buys what she tried, tap Sold beside it on the mirror’s tablet, so this page can show what the mirror sells.");
+  return { lead, notes };
+}
+const hourName = (h) => (h === 0 ? "midnight" : h === 12 ? "noon" : h < 12 ? `${h} am` : `${h - 12} pm`);
+
 const VIEWS = {
   // =================================================================== a store's console
   async overview() {
@@ -208,17 +223,21 @@ const VIEWS = {
           el("button", { class: "btn small", type: "button", text: "Done", onclick: async () => (await api("/api/console/holds/done", { id: hd.id }).catch((e) => toast(e.message)), go("overview")) }),
         ))),
       ),
+      (() => {
+        const words = inWords(o, f, S.days);
+        return el("section", { class: "panel words" }, el("h2", { text: "In plain words" }), el("p", { class: "lead", text: words.lead }), el("ul", { class: "notes" }, words.notes.map((t) => el("li", { text: t }))));
+      })(),
       el("div", { class: "places" },
         el("div", { class: "row", role: "group", "aria-label": "Where the visits happened" }, PLACES.map(([id, label]) => el("button", { class: "chip" + (S.place === id ? " on" : ""), type: "button", "aria-pressed": String(S.place === id), text: label, onclick: () => ((S.place = id), go("overview")) }))),
         el("p", { class: "muted small", text: `Visits: ${num(o.places.store)} in the store · ${num(o.places.web)} on your website · ${num(o.places.app)} on the MIRVA app. Sales and a pilot’s target count the store only.` }),
       ),
-      el("div", { class: "tiles" },
-        tile("Stepped up", num(f.visits), "shoppers who began", 0),
-        tile("Saw three looks", num(f.briefed), pct(f.briefed, f.visits) + " of those", 1),
-        tile("Tried one on", num(f.tried), pct(f.tried, f.visits) + " of all", 2),
+      // The five steps of a visit, in order, each with its share of the step before.
+      el("div", { class: "tiles five" },
+        tile("Shoppers", num(f.visits), "stepped up to the mirror", 0),
+        tile("Saw three looks", num(f.briefed), pct(f.briefed, f.visits) + " of shoppers", 1),
+        tile("Tried one on", num(f.tried), pct(f.tried, f.visits) + " of shoppers", 2),
         tile("Kept a look", num(f.kept), pct(f.kept, f.tried) + " of those who tried", 3),
         tile("Sent to a phone", num(f.sent), pct(f.sent, f.kept) + " of those who kept", 4),
-        tile("Cost per try-on", money(o.spend.perVisitPkr), "what the pictures cost you", 5),
       ),
       el("div", { class: "grid2" },
         panel("Day by day", chart(o.byDay, "visits", "tries"), el("div", { class: "legend" }, el("span", {}, el("i", { class: "soft" }), "Stepped up"), el("span", {}, el("i"), "Try-ons"))),
@@ -240,12 +259,14 @@ const VIEWS = {
         panel("When they come",
           el("div", { class: "hours", role: "img", "aria-label": "Visits by hour of the day" }, Array.from({ length: 24 }, (_, h) => el("i", { class: (byHour.get(h) || 0) === peak ? "peak" : "", style: `height:${Math.round(((byHour.get(h) || 0) / peak) * 100)}%`, title: `${h}:00, ${num(byHour.get(h) || 0)} visits` }))),
           el("div", { class: "hours-axis" }, el("span", { text: "midnight" }), el("span", { text: "noon" }), el("span", { text: "11 pm" })),
+          o.hours.some((h) => h.visits) && el("p", { class: "muted small", text: `Busiest around ${hourName(Number(o.hours.reduce((a, b) => (b.visits > a.visits ? b : a)).hour))}: the hour to have someone near the mirror.` }),
         ),
         panel("What it cost to run",
           el("dl", { class: "kv" },
             el("dt", { text: "Portraits" }), el("dd", { class: "num", text: `${num(spend.portrait?.n)} · ${money(((spend.portrait?.usd || 0) + (spend.backdrop?.usd || 0)) * 277)}` }), // the studio backdrop is part of a portrait
             el("dt", { text: "Live looks" }), el("dd", { class: "num", text: `${num((spend.live?.seconds || 0) / 60)} min · ${money((spend.live?.usd || 0) * 277)}` }),
             el("dt", { text: "Together" }), el("dd", { class: "num", text: money(o.spend.pkr) }),
+            el("dt", { text: "Per try-on" }), el("dd", { class: "num", text: money(o.spend.perVisitPkr) }),
             o.plan && [el("dt", { text: "Plan" }), el("dd", { text: `${o.plan.name}, ${plural(o.plan.stores, "store")} (${o.plan.status})` })],
             // This calendar month at the store's paired mirrors, the way the plan is counted.
             o.plan && [el("dt", { text: "Live minutes this month" }), el("dd", { class: "num", text: o.plan.live.included ? `${num(o.plan.live.usedMinutes)} of ${num(o.plan.live.included)}${o.plan.live.extra ? `, plus ${num(o.plan.live.extra)} agreed` : ""}` : "None in this plan. Live Studio comes with a mirror." })],
@@ -599,7 +620,7 @@ const VIEWS = {
     fill(work(), 
       head("Today"),
       alerts,
-      el("div", { class: "tiles" },
+      el("div", { class: "tiles four" },
         tile("New enquiries", num(o.leads.new), `${num(o.leads.contacted + o.leads.demo)} in conversation`, 0),
         tile("Stores in pilot", num(o.pilots), `${num(o.leads.won)} won, ${num(o.leads.lost)} lost`, 1),
         tile("Monthly revenue", money(o.mrr), "from stores marked live", 2),
@@ -732,7 +753,7 @@ const VIEWS = {
   async stores() {
     const o = await api("/api/hq/overview");
     const { retail: plans } = await api("/api/plans");
-    const brandOptions = () => o.system.brands.map((id) => el("option", { value: id, text: id }));
+    const brandOptions = () => o.system.brands.map((id) => el("option", { value: id, text: (o.system.stores || []).find((s) => s.id === id)?.name || id }));
     const load = el("form", { class: "toolbar" }, field("Load a store’s catalogue (its Shopify address)", el("input", { name: "domain", placeholder: "store.com", required: true })), el("button", { class: "btn small", type: "submit", text: "Load it" }), el("p", { class: "formnote", role: "alert", style: "flex-basis:100%" }));
     onSubmit(load, async (d) => {
       const s = await api("/api/preview", d, 40000);
@@ -809,7 +830,8 @@ const VIEWS = {
       sheet.showModal();
     });
     const byBrand = new Map(o.retailers.map((r) => [r.brand, r]));
-    fill(work(), 
+    const named = new Map((o.system.stores || []).map((s) => [s.id, s.name])); // "Agha Noor", not "agha-noor"
+    fill(work(),
       head("Stores"),
       load,
       el("div", { class: "tbl-wrap", style: "margin-bottom:12px" },
@@ -818,7 +840,7 @@ const VIEWS = {
           el("tbody", {}, o.system.brands.map((id) => {
             const r = byBrand.get(id);
             return el("tr", {},
-              el("td", { text: r?.name || id }),
+              el("td", { text: r?.name || named.get(id) || id }),
               el("td", { text: r ? cap(r.plan) : "—" }),
               el("td", { class: "n", text: r ? num(r.stores) : "—" }),
               el("td", {}, r ? el("span", { class: "badge " + (r.status === "live" ? "good" : "soft"), text: r.status }) : "Catalogue only"),
