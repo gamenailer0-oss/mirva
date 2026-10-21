@@ -198,6 +198,17 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   the same design stitched and unstitched), perfumes and kids' wear filed as suits (Agha Noor), typos ("Embroided",
   "Emerled green", "Off White."). Read every chosen piece's line before writing a catalogue.
 
+## The mirror's way through (the founder, 22 Oct 2026; src/main.js `liveHere`, `syncPath`, `takeStep`, `storeFront`)
+- A photo has Model alone (the portrait starts at once, Studio hidden); a live camera has both, Studio first and lit
+  where live try-on can run for this visitor (`liveHere`: a store mirror, a member with live minutes), Model first
+  elsewhere with Studio saying "In MIRVA stores". Whatever she taps first, the next step is plain: a piece chosen before
+  the mirror is on waits on the wake screen ("Next, see yourself in…", the panel folds on a phone); a mirror turned on
+  first asks for a piece. A first visit gets three steps at the top of the panel (`#path`: choose a piece, see
+  yourself, wear it), gone after the first look (`mirva:guided` in localStorage; a store mirror shows them to every
+  shopper after Start over). The catalogue opens on the store's shopfront; collections carry counts; cards say their
+  cloth. Shots of every step, free: `node tools/stores/flow-shots.mjs --size=phone|laptop [--photo] [--fresh] [--brand=id] [--live]`.
+  Home: "Now in the mirror" band (Naqshi, Baroque, Agha Noor) and the try-it demo leads with them. test/flow.test.mjs.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
