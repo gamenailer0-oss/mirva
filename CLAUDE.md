@@ -65,7 +65,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (overflow, headline lines, text sizes, contrast; screenshots in `.taste-skill/inspect/`). Its style bans (no kickers,
   no gradients, no shadows, no hairlines) are its house style, not MIRVA's: use it for measured faults only. After any
   copy change in the pages run `node scripts/typeset.mjs` (printer's punctuation in text only; `--check` to list).
-- **Tests**: `npm test` (234 as of 2026-10-17). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (241 as of 2026-10-21). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
   site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
@@ -189,6 +189,15 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   changed only 15 of 79 strings. Then the `node -e` that wrote this very note mangled it the same way. Rewritten with
   the Write and Edit tools. No heredocs or `node -e` for anything holding a backslash, ever, even one-offs and notes.
 
+- **The garment cleaner sees faces in embroidery on hanger shots** (Agha Noor, 21 Oct 2026): with no model in the photo
+  it cut one shirt in half, painted a blue patch on a pink one and gave up on a third. A store that photographs on
+  hangers or flat gets its whole photo as the garment picture; always look at `refsheet.mjs` before shipping a store.
+  A model with raised arms is cut too low as well (Naqshi's Vilina): use a photo with a plain pose.
+- **`scripts/walk.mjs` takes `--brand=<id>` with an equals sign**; `--brand naqshi` silently walks Sapphire.
+- **A store's own catalogue copy needed reading, not trusting**: single-word names (Naqshi), codes (Baroque SF-/UF- for
+  the same design stitched and unstitched), perfumes and kids' wear filed as suits (Agha Noor), typos ("Embroided",
+  "Emerled green", "Off White."). Read every chosen piece's line before writing a catalogue.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
@@ -201,6 +210,14 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Five boutique pages** (unlisted, "not affiliated" footer), for walk-in visits: `/for/zarashahjahan-com`,
   `/for/hussainrehar-com`, `/for/sairashakira-com`, `/for/rangrasiya-com-pk`, `/for/sadaffawadkhan-com`; spares that load:
   Maryum N Maria, Ammara Khan, Republic Womenswear.
+- **Naqshi, Baroque, Agha Noor** (said yes to seeing their catalogues, 21 Oct 2026; link only, `invited: true`):
+  `/for/naqshi`, `/for/baroque`, `/for/agha-noor` and `/mirror?brand=<id>`. Built in like Sapphire (worker BUILT_IN,
+  committed brands/), chosen by hand from naqshiofficial.com (48 of 491), baroque.pk (49 of 789),
+  pk.aghanoorofficial.com (46 of 636). Scripts and steps: `tools/stores/README.md` (pull, curate with skip lists,
+  prepare-refs, refsheet). Garment pictures (public/refs/, not in git) are deployed from this laptop: redo them before a
+  ship from a fresh copy. Agha Noor shoots its pret on hangers with no model: its garment pictures are the whole photo
+  (`tools/stores/hanger-refs.mjs`, `refPin`), portraits keep the embroidery's place but leave the dupatta off and can
+  run a shade brighter; its own model photos would do better (ask them). Live portrait checked: 20.4 s, face kept.
 - **Lahore Route** (team sales playbook, 17 Oct 2026: staircase of five retailer steps by season, funnel, top 10 Lahore
   prospects with catalogue prices, channels, objections, three team pairs, Mon–Sat rhythm, gaps):
   https://claude.ai/artifact/5BiqCiGqdWpVpJaheyAXEa (source in the session scratchpad `route/`; private until shared).
