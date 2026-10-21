@@ -43,6 +43,7 @@ MIRVA_DAILY_PORTRAIT_USD = "2"
 MIRVA_GUEST_SHOTS = "15"
 # Features tried on named accounts before anyone else: "<feature>:<user id>,<user id>; <feature>:...". "three" makes
 # all three looks at once; "mirror" opens the real-mirror version at /mirror?glass=real (both for the founder's habab
-# account only, 17 Oct 2026).
-MIRVA_TRIALS = "three:ofFemkEZc4e09IDa; mirror:ofFemkEZc4e09IDa; outfit:ofFemkEZc4e09IDa"
+# account only, 17 Oct 2026). "three" was switched off on 22 Oct: three portraits at once queue at the engine and the
+# first one came back later.
+MIRVA_TRIALS = "mirror:ofFemkEZc4e09IDa; outfit:ofFemkEZc4e09IDa"
 MIRVA_PAYMENTS = "off"

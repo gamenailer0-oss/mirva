@@ -198,6 +198,25 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   the same design stitched and unstitched), perfumes and kids' wear filed as suits (Agha Noor), typos ("Embroided",
   "Emerled green", "Off White."). Read every chosen piece's line before writing a catalogue.
 
+- **Printed the demo passwords again (22 Oct 2026)**: a "masked" node one-liner missed the table layout of
+  `.data/demo-sign-ins.txt`. Read sign-ins only inside a script that never prints them (`tools/stores/desk-shots.mjs`).
+  The local demo accounts (store@ and shopper@mirva.demo) are to be reset with `npm run seed`.
+
+## Audit of 22 Oct 2026 (open; continue here)
+- Done: three-at-once switched off (MIRVA_TRIALS); "fifteen seconds" made "about twenty seconds" (home, /retail).
+- Console (shots: `node tools/stores/desk-shots.mjs console|hq`): overview reads as bare numbers; plan: a one-line
+  plain summary at the top, the five funnel cards in one row with plain labels ("Shoppers who began"), the orphan
+  "Cost per try-on" moved into the cost card, the sidebar full height (it stops at 745 px), the cost card's values in
+  two clean columns, holds and the pilot target first when present. Catalogue: 66 rows with no grouping or photos for
+  half (imported pieces without pictures). Look and feel preview (desk.css .lf-tablet/.lf-chip) still uses the old cool
+  colours (#fcfdfe, #0c1018, #0f1117, #f1f3f8): warm them. HQ not yet shot.
+- Site: brand.css `--pearl` #f3f5f9 vs the mirror's warm #f4f2ef; the home band's headline runs to three lines on a
+  phone (shorten to "Their own rails, on you."). Live link check clean (10 pages).
+- The founder asked to "use the Claude dashboard artifact for the console side": the account has a "Dashboard" type
+  (https://claude.ai/artifact/GZLZthZ2sQjn7T16skfdeF); plan: mock the redesigned console in it first, then build.
+- Still to check: HQ, flows beyond the order one (store change mid-look, Start over, photo then camera, keep before
+  sign-in, ask family with one look), the founding team page artifact.
+
 ## The mirror's way through (the founder, 22 Oct 2026; src/main.js `liveHere`, `syncPath`, `takeStep`, `storeFront`)
 - A photo has Model alone (the portrait starts at once, Studio hidden); a live camera has both, Studio first and lit
   where live try-on can run for this visitor (`liveHere`: a store mirror, a member with live minutes), Model first
