@@ -1,0 +1,2405 @@
+{
+ "takenAt": "2026-10-21T17:48:50.359Z",
+ "source": "https://www.naqshiofficial.com",
+ "chosenFrom": 491,
+ "products": [
+  {
+   "id": "8726759833834",
+   "name": "Onaifa",
+   "price": 220000,
+   "url": "https://www.naqshiofficial.com/products/onaifa-light-aqua-tissue-bridal-gown-lehenga-4pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaGownandShimmaryTissueLehengaFullFrontView.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaGownandShimmaryTissueLehengaFullFrontView.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaEmbroideredGownBodicewithDupattaPortrait.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaFlaredBridalGownwithOrganzaDupattaFrontLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaEmbroideredFlaredBridalGownBackView.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaBridalGownHorseEditorialFullLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/OnaifaLightAquaCutworkGownHorseEditorialSideView.jpg"
+   ],
+   "season": "Bridal",
+   "lane": "bridal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Tissue bridal gown lehenga, 4 piece",
+   "colour": "Light Aqua",
+   "fabric": "Tissue",
+   "description": "4-piece tissue bridal outfit: an embroidered gown, a lehenga and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 4-piece tissue bridal outfit: an embroidered gown, a lehenga and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8726759833834.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8726757245162",
+   "name": "Haneen",
+   "price": 220000,
+   "url": "https://www.naqshiofficial.com/products/haneen-skin-net-bridal-maxi-tail-lehenga-4pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinVNeckBridalMaxiwithAddaWorkClutchFrontLook.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinVNeckBridalMaxiwithAddaWorkClutchFrontLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinBridalMaxiBackSideViewwithTailLehenga.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinBridalMaxiwithFlowingNetDupattaEditorialView.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinBridalMaxiwithMatchingAddaWorkClutchPortrait.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinEmbroideredNetDupattaDrapedHorseEditorialShot.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaneenSkinEmbroideredNetMaxiwithTailLehengaSideLook.jpg"
+   ],
+   "season": "Bridal",
+   "lane": "bridal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Net bridal maxi tail lehenga, 4 piece",
+   "colour": "Skin",
+   "fabric": "Net",
+   "description": "4-piece net bridal outfit: an embroidered maxi, a lehenga and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": false
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 4-piece net bridal outfit: an embroidered maxi, a lehenga and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8726757245162.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8726756622570",
+   "name": "Haboor",
+   "price": 210000,
+   "url": "https://www.naqshiofficial.com/products/haboor-lilac-organza-bridal-choli-lehenga-4pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacBridalLehengawithOrganzaDupattaFrontLook.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacBridalLehengawithOrganzaDupattaFrontLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacBridalCholiwithFullyFlaredLehengaFrontLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacEmbroideredCholiLehengaFullFrontView.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacBridalLehengawithFlowingOrganzaDupattaBackLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacBridalLehengawithFlowingOrganzaDupattaSideLook.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/HaboorLilacCholiVNecklineAddaWorkandSequinDetail.jpg"
+   ],
+   "season": "Bridal",
+   "lane": "bridal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Organza bridal choli lehenga, 4 piece",
+   "colour": "Lilac",
+   "fabric": "Organza",
+   "description": "4-piece organza bridal outfit: an embroidered choli, a lehenga and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 4-piece organza bridal outfit: an embroidered choli, a lehenga and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8726756622570.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8726754951402",
+   "name": "Deebaj",
+   "price": 190000,
+   "url": "https://www.naqshiofficial.com/products/deebaj-blush-pink-net-tissue-bridal-maxi-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_0002_MTB07227.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_0002_MTB07227.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_0000_MTB07255.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_0001_MTB07244.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Deebaj_Blush_Pink_Bridal_Maxi_Full_Front_Look_with_Dupatta.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Deebaj_Blush_Pink_Bridal_Maxi_Full_Front_Look_with_Net_Dupatta.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Deebaj_Blush_Pink_Bridal_Maxi_Side_Profile_with_Dupatta.jpg"
+   ],
+   "season": "Bridal",
+   "lane": "bridal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Net tissue bridal maxi, 3 piece",
+   "colour": "Blush Pink",
+   "fabric": "Net",
+   "description": "3-piece net bridal outfit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net bridal outfit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8726754951402.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8562196742378",
+   "name": "Zeban",
+   "price": 230000,
+   "url": "https://www.naqshiofficial.com/products/zeban",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_02c885fe-89e4-4aa3-9cd3-d5982ec2776b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_02c885fe-89e4-4aa3-9cd3-d5982ec2776b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_b24851cb-ad41-4ff3-9bf8-9f89c562a069.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_b15d609f-6580-4463-ae85-91d512ce9081.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_3977dd4c-7c1c-4648-87e8-9fc377df9777.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_6dce4161-f45f-4407-9770-52c85cf8a052.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_a89ba3f0-50dd-4fb2-ab30-78375b3e75b8.jpg"
+   ],
+   "season": "Bridal",
+   "lane": "bridal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Bridal, 4 piece",
+   "colour": "Red",
+   "fabric": "Indian Raw Silk",
+   "description": "4-piece indian raw silk bridal outfit: an embroidered peshwas, a lehenga and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 4-piece indian raw silk bridal outfit: an embroidered peshwas, a lehenga and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8562196742378.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8562195759338",
+   "name": "Gul Kand",
+   "price": 240000,
+   "url": "https://www.naqshiofficial.com/products/gul-kand",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_5cc8b40c-6837-4eb8-8246-653d148976be.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_5cc8b40c-6837-4eb8-8246-653d148976be.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_32e63f5a-dbc8-4d46-8a98-55888e59c4d6.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_18584c8f-9476-4f86-8774-967812f8fa56.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_587fde06-10d4-415a-9234-b2a12611f418.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_060ccac8-ab3a-4cc5-9aac-878412cd8a12.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_d3434089-80a7-437e-aaa7-034b19d7190c.jpg"
+   ],
+   "season": "Bridal",
+   "lane": "bridal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Bridal, 3 piece",
+   "colour": "Red",
+   "fabric": "Indian Raw Silk",
+   "description": "3-piece indian raw silk bridal outfit: an embroidered blouse, a lehenga and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece indian raw silk bridal outfit: an embroidered blouse, a lehenga and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8562195759338.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8717364461802",
+   "name": "Yunra",
+   "price": 64990,
+   "url": "https://www.naqshiofficial.com/products/yunra-sand-brown-net-layered-maxi-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_26b22c1f-9095-4aaf-a7a6-3af69e2ccbe0.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_26b22c1f-9095-4aaf-a7a6-3af69e2ccbe0.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_7ebda2e6-aaf6-4a13-ab09-e7656d242348.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_c708cb0c-66b2-40b8-bd53-6e2b38fe20a2.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_51d994fa-e010-4a16-afa2-146644d76cba.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_1aba2537-8687-4f5d-b6ad-6fcfe8236e9f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_23fa8593-f302-4ded-aa4f-3808c4334df8.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Net layered maxi, 3 piece",
+   "colour": "Sand Brown",
+   "fabric": "Net & PK Raw Silk",
+   "description": "3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8717364461802.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8717363085546",
+   "name": "Viella",
+   "price": 74990,
+   "url": "https://www.naqshiofficial.com/products/viella-blue-crinkle-evening-maxi-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_cb412749-4935-410a-b9d8-db5566569d4e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_cb412749-4935-410a-b9d8-db5566569d4e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_3222017a-4dce-4fdb-bd19-412337c5be2e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_fe5ed03c-78af-40e2-8362-422096f7a4a4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_8dd334a5-0419-46f1-9885-79bca0d0b7d7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web7_c32b5cd7-8353-4ae2-ad11-db7b624aa037.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_32d9c6ca-cecd-4a07-b822-0e91ddf63d79.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle evening maxi, 3 piece",
+   "colour": "Blue",
+   "fabric": "Net & PK Raw Silk",
+   "description": "3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8717363085546.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8717361414378",
+   "name": "Sillage",
+   "price": 79990,
+   "url": "https://www.naqshiofficial.com/products/sillage-olive-green-crinkle-gown-maxi-4pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_ed4bac03-7c27-4f72-9e73-59a87b928e5d.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_ed4bac03-7c27-4f72-9e73-59a87b928e5d.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_1161b4d7-d602-4ea0-b572-deac7a3539f7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_286bd8e0-8df3-403f-b5e7-0189507c73e7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_3d493c5b-4714-43c4-b1b4-1f6ba9ee7284.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_73df7890-5547-4a39-af26-97f2f8600421.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_ae0f1018-6abc-4b7c-87da-b1a24ceafbba.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle gown maxi, 4 piece",
+   "colour": "Olive Green",
+   "fabric": "Net & PK Raw Silk",
+   "description": "4-piece net suit: an embroidered gown, trousers and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 4-piece net suit: an embroidered gown, trousers and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8717361414378.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8717357416682",
+   "name": "Rosemary",
+   "price": 84990,
+   "url": "https://www.naqshiofficial.com/products/rosemary-black-crinkle-evening-maxi-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_af05c86f-f534-4963-a148-92e0c1085518.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_af05c86f-f534-4963-a148-92e0c1085518.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_2a95b0d7-fe92-41e9-bb56-12fc2ff8c024.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_1ea58d24-1b78-490f-9daf-98406b9f0873.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_5aaab5b2-24fc-4001-8742-f0dd1c8ad83e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_445322ec-2701-43a5-870d-7ac5586c468e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_a830d089-1b76-48b9-88cc-5760e3b4be18.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle evening maxi, 3 piece",
+   "colour": "Black",
+   "fabric": "Net & PK Raw Silk",
+   "description": "3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8717357416682.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8717357089002",
+   "name": "Emma",
+   "price": 74990,
+   "url": "https://www.naqshiofficial.com/products/emma-plum-crinkle-evening-maxi-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_b78958e0-9e7e-4c36-b61b-b1371096fa13.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_b78958e0-9e7e-4c36-b61b-b1371096fa13.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_ac36f759-0467-4e0d-8f61-3774a2d7efd4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_e7be51e9-0f7d-4347-a686-d344d2d43a34.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_05de3296-371c-4315-a165-f31250c778b7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_aea27b2b-ce00-4b0f-b6c4-d1642633be60.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_a8a5b230-daef-4321-8b5e-c994d256ab43.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle evening maxi, 3 piece",
+   "colour": "Plum",
+   "fabric": "Net & PK Raw Silk",
+   "description": "3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8717357089002.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8717356171498",
+   "name": "Edmee",
+   "price": 64990,
+   "url": "https://www.naqshiofficial.com/products/edmee-skin-net-evening-shirt-maxi-4pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_71fa197d-8b4c-43d7-96ac-dd7805c40c0b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_71fa197d-8b4c-43d7-96ac-dd7805c40c0b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_21037bec-409e-49fd-a32d-041ebdf3de16.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_669eccfa-e3e5-493b-8673-0d68ef06f3fb.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_4f29fb5b-da8b-4595-b1fb-c32dbb20ad70.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_584e2932-6fec-41b1-8de8-81c2af62a2fb.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web7_78d9917e-4d2b-46b9-866a-8b34d311dd32.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Net evening shirt maxi, 4 piece",
+   "colour": "Skin",
+   "fabric": "Net & PK Raw Silk",
+   "description": "4-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 4-piece net suit: an embroidered maxi, trousers and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8717356171498.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8660432650474",
+   "name": "Tasbeel",
+   "price": 59990,
+   "url": "https://www.naqshiofficial.com/products/tasbeel-golden-raw-silk-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_bdf570d2-57dd-4097-97c0-32d5796c4d29.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_bdf570d2-57dd-4097-97c0-32d5796c4d29.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_06c9bd5b-530c-4892-b35c-25b8153270c8.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_9967dd8a-a966-4f6a-9fc0-7fe9a66cb2d6.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_e32056e5-46ca-4ae1-a8c6-a24412d50c8c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_030c103e-6454-48c7-b53f-1b6674b6eda5.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk, 3 piece",
+   "colour": "Golden",
+   "fabric": "Indian Raw Silk & Crinkle",
+   "description": "3-piece indian raw silk suit: a long shirt, culottes and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece indian raw silk suit: a long shirt, culottes and a dupatta.",
+   "ref": "/refs/naqshi/8660432650474.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8660433469674",
+   "name": "Zayrah",
+   "price": 62990,
+   "url": "https://www.naqshiofficial.com/products/zayrah-bottle-green-georgette-gown-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_d3fdad46-e589-4930-8a6a-fc8b664df390.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_d3fdad46-e589-4930-8a6a-fc8b664df390.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_46080c4b-2c01-4ece-8640-b442f6bf6ec5.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_afc21d2e-5bb0-408c-970e-74c4b82d15a3.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_4373c865-1888-40c8-a6f7-86926c721e79.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_99545d87-b97b-4a56-8f8a-a84f27e2c141.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Georgette gown, 3 piece",
+   "colour": "Bottle Green",
+   "fabric": "Indian Raw Silk & Crinkle",
+   "description": "3-piece indian raw silk suit: an embroidered gown, culottes and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece indian raw silk suit: an embroidered gown, culottes and a dupatta.",
+   "ref": "/refs/naqshi/8660433469674.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707747348714",
+   "name": "Zarsanga",
+   "price": 31990,
+   "url": "https://www.naqshiofficial.com/products/zarsanga-off-white-raw-silk-frock-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_5094011d-826e-45cd-9628-8a75f73a7cd3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_5094011d-826e-45cd-9628-8a75f73a7cd3.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_a39c203d-644f-43c9-bbc8-a470708c7804.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_231eab85-49a7-42b8-b0a9-152532b43b2c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_4459e42e-b7ed-4933-ba0a-a426a4a35de9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_7ce6087a-6c22-4cd1-8d11-e89033c501f6.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web7_ba988dd8-9ff1-48a1-ac5c-8b6f29811754.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk frock, 3 piece",
+   "colour": "Off White",
+   "fabric": "Net & Raw Silk",
+   "description": "3-piece net suit: an embroidered frock, a churidar and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered frock, a churidar and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707747348714.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707746955498",
+   "name": "Haniya",
+   "price": 31990,
+   "url": "https://www.naqshiofficial.com/products/haniya-bottle-green-raw-silk-frock-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_e127c4fa-870e-426c-bc1b-8f65e7cfb226.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_e127c4fa-870e-426c-bc1b-8f65e7cfb226.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_14338372-18ea-4c51-9691-681a134c6020.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_05574c3a-5345-4ff1-a479-1fffd368e61b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_57dd6c22-768b-45fd-bc80-cd155e1dc70a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_02e95c88-1ef5-475d-b724-0c8d03550ac6.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web7_482e74e0-2beb-4785-b071-9623f474a024.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk frock, 3 piece",
+   "colour": "Bottle Green",
+   "fabric": "Organza & Raw Silk",
+   "description": "3-piece organza suit: an embroidered frock, culottes and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece organza suit: an embroidered frock, culottes and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707746955498.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707745743082",
+   "name": "Ghina",
+   "price": 37990,
+   "url": "https://www.naqshiofficial.com/products/ghina-olive-green-raw-silk-frock-sharara-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_712d0ad9-c921-477c-94d3-28cd8c31d1e7.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_712d0ad9-c921-477c-94d3-28cd8c31d1e7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web7_f3d366fa-a48e-4e70-bcf7-ee2e14462ffe.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_c89e7551-44e4-4d72-a27d-66b5f3f30e97.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_6ad95150-ff8c-4f2b-b560-c647f3eb1f67.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_abb21f0d-09e0-4ac0-b04e-bacd81d2135e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_e5984ccf-71eb-4bca-a659-7022cdab65ee.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk frock sharara, 3 piece",
+   "colour": "Olive Green",
+   "fabric": "Organza & Raw Silk",
+   "description": "3-piece organza suit: an embroidered frock, a sharara and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": false
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece organza suit: an embroidered frock, a sharara and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707745743082.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707735585002",
+   "name": "Nislihan",
+   "price": 37990,
+   "url": "https://www.naqshiofficial.com/products/nislihan-rust-raw-silk-panelled-frock-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_c2920edc-2aa5-4404-b13c-6e83745da62a.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_c2920edc-2aa5-4404-b13c-6e83745da62a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_a82e1f0d-32bb-4d95-861b-cbb4948b7b2f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_21e1cb22-b47b-4100-8285-abe86273dba4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_6750bb86-dc36-4ce6-83d5-a864e3ce73a5.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_f6d047c0-5d20-4ae5-876d-0933dad6fa85.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_358d693d-ed00-49a2-9708-fb16ce3c9b75.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk panelled frock, 3 piece",
+   "colour": "Rust",
+   "fabric": "Net & Raw Silk",
+   "description": "3-piece net suit: an embroidered frock, trousers and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered frock, trousers and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707735585002.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707735191786",
+   "name": "Zoraida",
+   "price": 33990,
+   "url": "https://www.naqshiofficial.com/products/zoraida-shocking-pink-raw-silk-frock-sharara-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_cf0842eb-8780-49a6-8c97-0d23df61b38c.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_cf0842eb-8780-49a6-8c97-0d23df61b38c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_be92ed66-a701-40c1-a5a8-19ce0e4767cb.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_88c59d7e-d986-47a7-b45d-ea53ebef23bc.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web7_bc4632b8-80e8-4017-8688-2b846c43d2a9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_71679e95-c399-4b1b-b7de-581b32b2d1d5.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_8e8fa4be-85bd-4e2d-bd70-c2977167227f.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk frock sharara, 3 piece",
+   "colour": "Shocking Pink",
+   "fabric": "Net & Raw Silk",
+   "description": "3-piece net suit: an embroidered frock, a sharara and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered frock, a sharara and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707735191786.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707734995178",
+   "name": "Zarqand",
+   "price": 33990,
+   "url": "https://www.naqshiofficial.com/products/zarqand-pistachio-raw-silk-frock-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_a1124d76-33dd-4bfb-b863-517508b12a4e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_a1124d76-33dd-4bfb-b863-517508b12a4e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_2e552506-a3e0-4213-8684-51c932e2250f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_5961cf41-8444-4798-93d6-a26d81a16076.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_6aa00434-3aef-4beb-9cbd-41d11174404a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_e1e3faae-abb5-4c33-a5cb-136ba289154e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_bc42f106-05b0-443a-ba07-4cc47111c59a.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk frock, 3 piece",
+   "colour": "Pistachio",
+   "fabric": "Net & Raw Silk",
+   "description": "3-piece net suit: an embroidered frock, a churidar and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered frock, a churidar and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707734995178.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8707733848298",
+   "name": "Azba",
+   "price": 33990,
+   "url": "https://www.naqshiofficial.com/products/azba-peach-raw-silk-a-line-frock-sharara-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_d40f57e6-607b-4792-88bd-09dd6ad78000.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_d40f57e6-607b-4792-88bd-09dd6ad78000.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_ac26da27-c2ec-48f1-9e2f-86b46154fe32.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_c23b9213-212c-42df-937b-5e0f942cb653.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_ffc37a16-fc3f-4bd0-998d-c18639e4991e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_1daf155f-3db6-4304-a6fe-83bb42ed5867.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_fcfc58fe-2395-4cd5-941e-a59bb65ab51b.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Raw silk a line frock sharara, 3 piece",
+   "colour": "Peach",
+   "fabric": "Organza & Raw Silk",
+   "description": "3-piece organza suit: an embroidered frock, a sharara and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece organza suit: an embroidered frock, a sharara and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8707733848298.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702972068074",
+   "name": "Zahwa",
+   "price": 27490,
+   "url": "https://www.naqshiofficial.com/products/zahwa-golden-crinkle-boat-dress-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_e7ba673f-092d-4a51-8106-3980fb852dd4.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_e7ba673f-092d-4a51-8106-3980fb852dd4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_6a0e5896-af9f-40aa-a6aa-4e8cea8ddddc.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_859be11d-3323-4e51-8b51-c15aad281c1a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_1ab585df-cabd-4cac-8e6e-d2affb347a5c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_51859558-4949-45a1-be6a-870fe7529560.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_65fecaa7-07e5-4fa3-80f7-20ba8daf40ef.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle boat dress, 3 piece",
+   "colour": "Golden",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered shirt, culottes and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered shirt, culottes and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8702972068074.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702946410730",
+   "name": "Rayaleen",
+   "price": 27490,
+   "url": "https://www.naqshiofficial.com/products/rayaleen-rust-crinkle-a-line-set-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_1699ec4c-8361-4dac-b307-589d71655a1a.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_1699ec4c-8361-4dac-b307-589d71655a1a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_1ce18ccf-3276-47c9-af8d-2eebd10852c2.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_e1413c4d-8d02-4535-a283-01d0159f5b74.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_5d255a1a-8a11-40fc-9af1-fc83dd086f50.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_5dcbbb36-3338-478b-afd1-90b487741f22.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_7e27e315-318c-4f97-a2ee-135e19ce4fd1.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle a line set, 3 piece",
+   "colour": "Rust Orange",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered gown, trousers and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered gown, trousers and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8702946410730.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702911119594",
+   "name": "Navira",
+   "price": 30990,
+   "url": "https://www.naqshiofficial.com/products/navira-peach-crinkle-panel-set-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_4b31e346-6950-4d24-a37e-511525783a50.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_4b31e346-6950-4d24-a37e-511525783a50.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_014cb16e-5d97-4aea-bae4-d584eaa12e22.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_45f5eafc-320f-4a26-9515-ab444fc53ed6.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_71cfddf6-451b-4cee-8794-18aa3da8dcdd.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_7c9441a4-787a-4b89-bc0e-900c1f5fbd0f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_dff16a36-b427-4efc-9e5f-3646c0789052.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle panel set, 3 piece",
+   "colour": "Peach & Dark Grey",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered shirt, trousers and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered shirt, trousers and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8702911119594.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702868750570",
+   "name": "Moriah",
+   "price": 27490,
+   "url": "https://www.naqshiofficial.com/products/moriah-dark-grey-crinkle-bell-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_62b360c8-ab7d-4160-bcc2-b2ab4f035a54.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_62b360c8-ab7d-4160-bcc2-b2ab4f035a54.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_2f6c5a66-245f-4447-8922-5b24ba1f15bf.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_0ca23fc3-0bd3-4138-af12-0e57e4d804b5.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_5e14b54f-05ea-4ed1-9183-edbf9bc1cf96.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_cb2669ed-1bbd-41ae-ac52-9bcca0ace951.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_058896eb-8362-4b4d-9346-50a135c9a6be.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle bell suit, 3 piece",
+   "colour": "Dark Grey",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered shirt, culottes and a dupatta, sequinned and hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered shirt, culottes and a dupatta, sequinned and hand-embellished.",
+   "ref": "/refs/naqshi/8702868750570.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702831460586",
+   "name": "Aroob",
+   "price": 27490,
+   "url": "https://www.naqshiofficial.com/products/aroob-chocolate-crinkle-bell-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_a910ad8e-7d6b-40ba-b383-84ea97ba15ea.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_a910ad8e-7d6b-40ba-b383-84ea97ba15ea.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_b7f95792-7682-48df-b2b6-e0811a6b0984.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_8e6be329-64ec-4eac-81d9-88732761cbd0.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_e3554dfd-5103-482f-889c-f97d4c491c96.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_104b2211-2f92-4363-b52d-fa5305f0be71.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle bell suit, 3 piece",
+   "colour": "Chocolate Brown",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered shirt, culottes and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered shirt, culottes and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8702831460586.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702804721898",
+   "name": "Arfiya",
+   "price": 27490,
+   "url": "https://www.naqshiofficial.com/products/arfiya-green-crinkle-flow-gown-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_312349cb-7587-4d54-8347-e610fafc06d4.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_312349cb-7587-4d54-8347-e610fafc06d4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_58a040fb-f098-4927-aad2-7819b32bf93d.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_8175cc94-68c8-432b-9b84-fd2ab57ac212.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_bd149aba-ecac-47ae-af22-7c0998f6f637.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_bf03e899-ffbf-4653-b3bf-ce9de74b835b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_27a697de-0e08-470c-ab37-7b5be0a36c80.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle flow gown, 3 piece",
+   "colour": "Green",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered gown, culottes and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered gown, culottes and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8702804721898.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702443978986",
+   "name": "Alishma",
+   "price": 30990,
+   "url": "https://www.naqshiofficial.com/products/alishma-navy-blue-crinkle-panel-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_0affabe2-7410-45f5-a5a4-37d1134427ac.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_0affabe2-7410-45f5-a5a4-37d1134427ac.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_8d35dfaf-d174-4ffd-8c70-af63369838cd.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_5d55678d-f1f3-4fed-8e99-7a01d91c7509.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_a0a24c8c-c056-405c-b77a-03f7d85e01fc.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_7b3be2ed-f388-43aa-95e8-0d2bd2bc3545.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_7ff45bc0-e384-4970-a4ea-e95a60c706f0.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle panel suit, 3 piece",
+   "colour": "Navy Blue",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered shirt, a churidar and a dupatta, sequinned and cutwork",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered shirt, a churidar and a dupatta, sequinned and cutwork.",
+   "ref": "/refs/naqshi/8702443978986.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8702442045674",
+   "name": "Alanah",
+   "price": 30990,
+   "url": "https://www.naqshiofficial.com/products/alanah-off-white-crinkle-keyhole-gown-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_219cf656-1f64-42ef-9341-f99c13004c63.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_219cf656-1f64-42ef-9341-f99c13004c63.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_b8c24446-98b2-48a2-a60c-51c9d2eeb787.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_191cfc45-38ca-443c-b79b-79b3129595ae.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_de43774c-26dd-4654-996d-157ffa7fe1ad.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_00bca656-76a7-4bd5-8628-0de9da8243f4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_1dd0a2ee-2758-4b66-b738-413ccd3328c2.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Crinkle keyhole gown, 3 piece",
+   "colour": "Off White",
+   "fabric": "Crinkle & PK Raw Silk",
+   "description": "3-piece crinkle suit: an embroidered gown, trousers and a dupatta, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece crinkle suit: an embroidered gown, trousers and a dupatta, sequinned.",
+   "ref": "/refs/naqshi/8702442045674.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8700630401258",
+   "name": "Zivah",
+   "price": 24990,
+   "url": "https://www.naqshiofficial.com/products/zivah-sage-green-shiffly-organza-dress-2pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/07_00409aa8-730d-4b39-8adf-843a7e7b5feb.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/07_00409aa8-730d-4b39-8adf-843a7e7b5feb.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/01_aaad1561-8f06-47da-b2a7-794e8520866e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/02_68188379-c81b-4c3c-a2c0-806004fb03d8.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/03_f3b9188d-a604-4868-a576-01ac26a7f478.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/04_21d09fc4-6205-4937-92d7-069a4940308f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/05_dc203b29-4823-4d64-b0ee-cc69fea895dc.jpg"
+   ],
+   "season": "Luxury Pret",
+   "lane": "luxury",
+   "formality": 4.3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shiffly organza dress, 2 piece",
+   "colour": "Light Sage Green",
+   "fabric": "Organza & Raw Silk",
+   "description": "2-piece organza suit: a long shirt and trousers, cutwork and lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece organza suit: a long shirt and trousers, cutwork and lace-trimmed.",
+   "ref": "/refs/naqshi/8700630401258.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235852522",
+   "name": "Rakim",
+   "price": 17990,
+   "url": "https://www.naqshiofficial.com/products/rakim-dark-green-khaddar-trouser-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_92d95b2d-4020-479c-93f7-83640159843b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_92d95b2d-4020-479c-93f7-83640159843b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_7_b16cca48-2b39-471e-b66f-1071e7721c4d.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_aa5acf46-3740-4328-9a5a-f8cef3814a8b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_739e1afb-b02e-4d20-a3ca-11b23c0e69da.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_7575490b-eeea-4f08-9005-affa7071d756.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_7652f2e3-7329-4950-9180-d669834603be.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar trouser suit, 3 piece",
+   "colour": "Dark Green",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered long shirt, trousers and a dupatta, hand-embellished and cutwork",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered long shirt, trousers and a dupatta, hand-embellished and cutwork.",
+   "ref": "/refs/naqshi/8779235852522.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235721450",
+   "name": "Arzoyi",
+   "price": 16490,
+   "url": "https://www.naqshiofficial.com/products/arzoyi-bluish-purple-khaddar-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_fbf1a78a-88ad-4519-83ca-9872ca2aaca5.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_fbf1a78a-88ad-4519-83ca-9872ca2aaca5.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_e283b304-2b36-408f-aabf-631aa042ef00.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_2d7f8a36-1866-4a3d-b605-b1b1c2c07e11.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_3df112b7-a735-43df-8cf5-2edd81e14ac9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_3c2267f5-2bfa-4047-a1f8-c38aca46fdeb.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_7_bc75411a-3a67-425f-adc5-992544c31127.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar suit, 3 piece",
+   "colour": "Bluish Purple",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered long shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered long shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/naqshi/8779235721450.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235492074",
+   "name": "Mizal",
+   "price": 15990,
+   "url": "https://www.naqshiofficial.com/products/mizal-black-khaddar-culotte-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_cd7f875e-18d5-4906-9028-119124af48ce.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_cd7f875e-18d5-4906-9028-119124af48ce.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_abc454f7-dd4f-46da-a816-251140d91d9e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_729fc636-24e6-498e-92b9-d971eed788b5.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_160e70e3-fd30-4d11-afe4-6bfeb4d768e3.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_a45eafbf-2455-45b1-b27e-060df137021b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_75bd3389-ba10-46aa-82ca-bc24579eb9cc.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar culotte suit, 3 piece",
+   "colour": "Black",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered long shirt, culottes and a dupatta, hand-embellished and lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered long shirt, culottes and a dupatta, hand-embellished and lace-trimmed.",
+   "ref": "/refs/naqshi/8779235492074.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235361002",
+   "name": "Zuri",
+   "price": 17990,
+   "url": "https://www.naqshiofficial.com/products/zuri-maroon-khaddar-culotte-suit-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_dfba7e38-8d28-4c33-90db-f5af3ca0d966.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_dfba7e38-8d28-4c33-90db-f5af3ca0d966.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_039f1e14-0d2e-4b9b-bb37-690fd2998fad.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_6bc42427-60cc-40b4-b6cb-f6cd291c0eba.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_da891a0f-e429-45bf-b428-7bca787edea4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_e58dfb04-4317-46e0-a593-ec07d4faea53.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_2d198cc4-54e0-4a32-ad57-6c0eb533d427.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar culotte suit, 3 piece",
+   "colour": "Maroon",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, culottes and a dupatta, hand-embellished and lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, culottes and a dupatta, hand-embellished and lace-trimmed.",
+   "ref": "/refs/naqshi/8779235361002.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235229930",
+   "name": "Yaslin",
+   "price": 16990,
+   "url": "https://www.naqshiofficial.com/products/yaslin-dusty-pink-khaddar-culotte-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_38a6061d-1b95-48a3-a04b-2fb007dfdf1f.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_38a6061d-1b95-48a3-a04b-2fb007dfdf1f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_6b2dee8b-cecf-4940-8ea9-f0b82d4a2261.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_1a0daf62-5ec3-4a20-a1b4-333f7fbbb6dc.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_8a5b5e2e-62f9-4f1a-a17b-76ecc7601b40.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_04c6b641-5ff2-4e0b-8c85-e4f57b466d6a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_4ce43951-d134-4f2c-86c6-06426dc67ac9.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar culotte, 3 piece",
+   "colour": "Dusky Pink",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered long shirt, culottes and a dupatta, hand-embellished and lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered long shirt, culottes and a dupatta, hand-embellished and lace-trimmed.",
+   "ref": "/refs/naqshi/8779235229930.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235098858",
+   "name": "Trish",
+   "price": 15990,
+   "url": "https://www.naqshiofficial.com/products/trish-aqua-khaddar-trouser-set-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_6bfd1754-8873-49a6-b851-3073496ad91e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_6bfd1754-8873-49a6-b851-3073496ad91e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_df5fd79b-a244-4d55-acff-09fe9603150c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_df0da844-41ad-470e-b389-35aca79de6c9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_924112c8-66dc-4b34-b160-648798d1db31.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_09c87480-f8dd-44d7-aed3-b25797772837.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_cd32d371-3bde-446e-a867-26965b98a336.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar trouser set, 3 piece",
+   "colour": "Aqua",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered angrakha, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered angrakha, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/naqshi/8779235098858.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779235066090",
+   "name": "Muriel",
+   "price": 14990,
+   "url": "https://www.naqshiofficial.com/products/muriel-off-white-khaddar-culotte-set-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_93031197-e87b-4e31-84cf-95d84e0ed721.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_93031197-e87b-4e31-84cf-95d84e0ed721.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_e96c2361-5ffa-4853-8e7e-de71d6d319d2.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_8631b317-4c3a-4f28-aa6d-48e9c848d7a3.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_2a553df4-d67d-498c-932b-2fd541639406.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_92876a82-d64a-43c5-89cc-9f941e7473de.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_fb4b4b08-fe8a-4206-9f0f-7fc69b46e91b.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar culotte set, 3 piece",
+   "colour": "Off White",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered long shirt, culottes and a dupatta, hand-embellished and lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered long shirt, culottes and a dupatta, hand-embellished and lace-trimmed.",
+   "ref": "/refs/naqshi/8779235066090.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8779234967786",
+   "name": "Jamir",
+   "price": 13990,
+   "url": "https://www.naqshiofficial.com/products/jamir-bluish-zinc-khaddar-culotte-set-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_6210e134-4b9f-487e-b7ae-c6c6f2717640.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_1_6210e134-4b9f-487e-b7ae-c6c6f2717640.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_2_d51f20a4-76f2-487a-a445-650ae1cda5f9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_3_53efc45f-f79e-46da-9d6e-67186b9aa866.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_4_dbedd825-e4fc-4120-bd20-ccb6b593164a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_5_13b01d79-873d-4f7e-86a7-1f7deb707608.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web_6_526b6821-f8a7-4f38-aab5-f2fd2f3b0334.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Khaddar culotte set, 3 piece",
+   "colour": "Bluish Zinc",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, culottes and a dupatta, hand-embellished and cutwork",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, culottes and a dupatta, hand-embellished and cutwork.",
+   "ref": "/refs/naqshi/8779234967786.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770184151274",
+   "name": "Melissa",
+   "price": 17990,
+   "url": "https://www.naqshiofficial.com/products/melissa-zinc-blue-velvet-2pc-shirt-bell-bottom",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_8ed93890-084f-403c-b271-ced9fcc54813.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_8ed93890-084f-403c-b271-ced9fcc54813.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_9c30ed3f-fd8c-4add-b23a-473e39b58792.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_c9d20142-e6ad-4ed5-8045-cf2b261d6003.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_e5c59e46-633b-4ff4-a6fe-fe40bd44768e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_df371a9c-dab0-43e5-ae19-36b5da2d5f03.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_8a87bb65-e594-4f7c-8607-417ccda20199.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet shirt bell bottom, 2 piece",
+   "colour": "Zinc Blue",
+   "fabric": "Velvet",
+   "description": "2-piece velvet suit: an embroidered shirt and bell-bottoms",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece velvet suit: an embroidered shirt and bell-bottoms.",
+   "ref": "/refs/naqshi/8770184151274.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770184216810",
+   "name": "Winslow",
+   "price": 17990,
+   "url": "https://www.naqshiofficial.com/products/winslow-rust-velvet-3pc-cape-bell-bottom",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_316ba1a1-67d2-4250-82b9-e8673c345c83.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_316ba1a1-67d2-4250-82b9-e8673c345c83.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_2b82c096-ab13-45ce-82b0-06126792ad2b.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_d54ef81b-508c-4a37-92d4-094f468e50d0.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_ceee489e-904b-40b4-8dff-ca783f66f70a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_37ce89e2-4b8f-464b-8d1a-19abcc01b71d.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_299e7bae-eafb-4ae4-8d34-20237c259727.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet cape bell bottom, 3 piece",
+   "colour": "Rust",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered cape, bell-bottoms and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered cape, bell-bottoms and a dupatta.",
+   "ref": "/refs/naqshi/8770184216810.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770184380650",
+   "name": "Vilina",
+   "price": 11990,
+   "url": "https://www.naqshiofficial.com/products/vilina-skin-beige-velvet-2pc-shirt-bell-bottom",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_bf4b0dd4-e0cd-45e5-aae3-c8b1cbd5b42a.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_bf4b0dd4-e0cd-45e5-aae3-c8b1cbd5b42a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_7efb5297-c5c3-4258-b3ee-3993e56e8592.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_e04f1e85-a5d8-430f-8ad3-342de08d2738.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_5fe015f6-97f1-439a-bb98-ce253f431297.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_49cc69ca-9d94-4a4b-8324-4476e1505551.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_ab774d7d-3895-4c32-a76a-a8812442d115.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet shirt bell bottom, 2 piece",
+   "colour": "Skin Beige",
+   "fabric": "Velvet",
+   "description": "2-piece velvet suit: an embroidered long shirt and bell-bottoms, cutwork",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece velvet suit: an embroidered long shirt and bell-bottoms, cutwork.",
+   "ref": "/refs/naqshi/8770184380650.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770184478954",
+   "name": "Stevie",
+   "price": 15990,
+   "url": "https://www.naqshiofficial.com/products/stevie-black-velvet-3pc-gown-flary-pants",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_fc7e362d-9d4f-4e25-aaf8-04c6e8b7892e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_fc7e362d-9d4f-4e25-aaf8-04c6e8b7892e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_5fbd216e-a9c7-4ae5-bec6-a41b443712d6.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_f7c321aa-f3e4-47e3-9753-7487def4a0a4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_cc13f1fe-58bb-4dd2-bc55-170442770167.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_2b7edbb5-3a73-4e82-a14a-21a431970ef9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_c4dcae80-1c21-4e6a-80c0-081a1eaba2af.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet gown flared trousers, 3 piece",
+   "colour": "Black",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered gown, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered gown, trousers and a dupatta.",
+   "ref": "/refs/naqshi/8770184478954.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770184642794",
+   "name": "Adriana",
+   "price": 12990,
+   "url": "https://www.naqshiofficial.com/products/adriana-red-velvet-2pc-shirt-trouser",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_bcce0aeb-39a0-4dd5-8d50-7fb6b3166ff9.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_bcce0aeb-39a0-4dd5-8d50-7fb6b3166ff9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_5c83f8ce-bc7b-4c7d-a8b4-27cefd2e3bb3.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_0b302737-a39a-4887-a15c-04193c2bcfef.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_ccd38cf3-abe4-44a6-96f1-a75b88a2c80a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_1c2bcd34-c765-4d49-b662-775632a68d05.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_1ef5220f-69c8-4bfd-95c0-68e85c112e38.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet shirt trouser, 2 piece",
+   "colour": "Red",
+   "fabric": "Velvet",
+   "description": "2-piece velvet suit: a long shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece velvet suit: a long shirt and trousers.",
+   "ref": "/refs/naqshi/8770184642794.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770184708330",
+   "name": "Liorah",
+   "price": 15990,
+   "url": "https://www.naqshiofficial.com/products/liorah-tea-pink-velvet-2pc-cape-culotte",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_6b167a2d-6534-45ac-93c2-fa430d4e92df.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_6b167a2d-6534-45ac-93c2-fa430d4e92df.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_b04aa5d4-6994-4b6c-93c5-f4f15fe2b104.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_b92bc7ab-c1ee-4a06-822a-f4b531d27586.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_93520b55-f46b-4736-908f-233b38fa65e9.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_9e37067a-97bf-458d-bfa1-5e0ef5433d1c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_be2a142c-643e-4eee-9a5b-ba44a9fae7d0.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet cape culotte, 2 piece",
+   "colour": "Tea Pink",
+   "fabric": "Velvet",
+   "description": "2-piece velvet suit: an embroidered cape and culottes, sequinned",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece velvet suit: an embroidered cape and culottes, sequinned.",
+   "ref": "/refs/naqshi/8770184708330.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8770186477802",
+   "name": "Cynthia",
+   "price": 17990,
+   "url": "https://www.naqshiofficial.com/products/cynthia-mauve-velvet-3pc-shirt-plazo",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_f8ea49e2-e6d4-4f31-8c23-cea6b67b03b7.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_f8ea49e2-e6d4-4f31-8c23-cea6b67b03b7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_723798f3-53f4-41f2-a08a-f0104b51572f.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_cbb4934a-983c-4931-8fe3-0133873d8e27.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_a2e9b1dc-25ba-42a7-9f9e-74f2e0ac0658.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_98177b2e-8d98-41d5-9e0c-16f2c3d93157.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_712f4c29-e3a6-41a2-96ca-e9b43ed2abdd.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 3.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Velvet shirt palazzo, 3 piece",
+   "colour": "Mauve",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, a palazzo and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, a palazzo and a dupatta.",
+   "ref": "/refs/naqshi/8770186477802.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8763090665706",
+   "name": "Lakeysha",
+   "price": 12490,
+   "url": "https://www.naqshiofficial.com/products/lakeysha-aqua-green-karandi-winter-shirt-shalwar-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_82693b08-344d-42df-b8fb-b5819f904742.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_82693b08-344d-42df-b8fb-b5819f904742.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_4c346355-9d82-4c5c-b6f7-857bd289711c.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_0f6c1e6c-ad94-43d6-a5f4-a8d029abf9a2.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_e04527ef-3d11-46cb-ba86-a059e89a22f4.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_fd0fe828-737b-4389-bdab-41af558b83c0.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_97b64478-35a5-4db2-ab75-a699d460f07d.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Karandi winter shirt shalwar, 3 piece",
+   "colour": "Aqua Green",
+   "fabric": "Karandi",
+   "description": "3-piece karandi suit: an embroidered shirt, a shalwar and a dupatta, lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece karandi suit: an embroidered shirt, a shalwar and a dupatta, lace-trimmed.",
+   "ref": "/refs/naqshi/8763090665706.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8763086733546",
+   "name": "Zarar",
+   "price": 12490,
+   "url": "https://www.naqshiofficial.com/products/zarar-skin-karandi-winter-shirt-trouser-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_ded8e4e7-5fff-4dad-90c9-8cb77ad7ffab.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_ded8e4e7-5fff-4dad-90c9-8cb77ad7ffab.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_15962fac-8c6a-4512-8bce-c155bae4e954.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_1a2b5c53-f77f-4f86-8bb9-b0118067475e.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_a0bb81c9-6cb2-4729-8320-6346d8827de0.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_602d6e64-e4b9-431a-bf91-9f4474d1ba92.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_3bce7532-7f05-48f2-85ba-8b950641e8dc.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Karandi winter shirt trouser, 3 piece",
+   "colour": "Skin",
+   "fabric": "Karandi",
+   "description": "3-piece karandi suit: an embroidered shirt, trousers and a dupatta, lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece karandi suit: an embroidered shirt, trousers and a dupatta, lace-trimmed.",
+   "ref": "/refs/naqshi/8763086733546.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "8763084767466",
+   "name": "Mehaal",
+   "price": 12490,
+   "url": "https://www.naqshiofficial.com/products/mehaal-light-grey-karandi-winter-shirt-shalwar-3pc",
+   "image": "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_a41f06a7-f230-4d02-a780-7f1ba157a240.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web1_a41f06a7-f230-4d02-a780-7f1ba157a240.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web2_00ca5db5-8915-485f-a943-8c6ac72d426a.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web3_20a7f3cf-9994-4d76-a77b-a227598438ea.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web4_819bf967-8248-4339-b0a7-9f1b5705ce06.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web5_56587ff8-6aee-4f2c-99c6-7e25d15d76b7.jpg",
+    "https://cdn.shopify.com/s/files/1/0605/2082/5066/files/Web6_2ef5e405-a721-4d29-832c-952240dcd6d8.jpg"
+   ],
+   "season": "Casual Pret",
+   "lane": "casual",
+   "formality": 2.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Karandi winter shirt shalwar, 3 piece",
+   "colour": "Light Gray",
+   "fabric": "Karandi",
+   "description": "3-piece karandi suit: an embroidered shirt, a shalwar and a dupatta, lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece karandi suit: an embroidered shirt, a shalwar and a dupatta, lace-trimmed.",
+   "ref": "/refs/naqshi/8763084767466.jpg",
+   "refHow": "mask"
+  }
+ ],
+ "addons": []
+}

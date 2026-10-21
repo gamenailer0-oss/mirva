@@ -1,0 +1,18 @@
+{
+  "id": "agha-noor",
+  "name": "Agha Noor",
+  "wordmark": "AGHA NOOR",
+  "mood": "porcelain",
+  "accent": "#D89C30",
+  "tagline": "Hand-finished pret, from everyday cambric to festive silk",
+  "byline": "styled by MIRVA",
+  "currency": "Rs.",
+  "source": "https://pk.aghanoorofficial.com",
+  "imageHosts": [
+    "cdn.shopify.com"
+  ],
+  "enhancePrompt": false,
+  "notice": "A preview prepared for Agha Noor by MIRVA, from Agha Noor’s own public catalogue.",
+  "visibility": "unlisted",
+  "invited": true
+}

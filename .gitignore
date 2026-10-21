@@ -15,6 +15,9 @@ brands/*/
 !brands/sapphire/
 !brands/lawrencepur/
 !brands/outfitters/
+!brands/naqshi/
+!brands/baroque/
+!brands/agha-noor/
 
 # Fetched or built on install
 public/models/

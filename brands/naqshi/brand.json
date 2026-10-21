@@ -1,0 +1,18 @@
+{
+  "id": "naqshi",
+  "name": "Naqshi",
+  "wordmark": "NAQSHI",
+  "mood": "porcelain",
+  "accent": "#F08424",
+  "tagline": "Luxury pret, formals and bridal, ready to wear",
+  "byline": "styled by MIRVA",
+  "currency": "Rs.",
+  "source": "https://www.naqshiofficial.com",
+  "imageHosts": [
+    "cdn.shopify.com"
+  ],
+  "enhancePrompt": false,
+  "notice": "A preview prepared for Naqshi by MIRVA, from Naqshi’s own public catalogue.",
+  "visibility": "unlisted",
+  "invited": true
+}

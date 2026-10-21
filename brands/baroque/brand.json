@@ -1,0 +1,18 @@
+{
+  "id": "baroque",
+  "name": "Baroque",
+  "wordmark": "BAROQUE",
+  "mood": "noir",
+  "accent": "#C81E1E",
+  "tagline": "Formals, velvet and winter, stitched and unstitched",
+  "byline": "styled by MIRVA",
+  "currency": "Rs.",
+  "source": "https://baroque.pk",
+  "imageHosts": [
+    "cdn.shopify.com"
+  ],
+  "enhancePrompt": false,
+  "notice": "A preview prepared for Baroque by MIRVA, from Baroque’s own public catalogue.",
+  "visibility": "unlisted",
+  "invited": true
+}

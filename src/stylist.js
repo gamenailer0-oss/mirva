@@ -63,10 +63,13 @@ export const moodMatters = (products) => new Set(products.map((p) => p.tradition
 
 // The occasions a store can speak to: one whose most fitting piece is within reach of the occasion's formality.
 // A casual store has no wedding to offer; a tailor has no university.
+// The casual days (university, a weekend, travel, friends) are told apart by western garments (a jean, a tee, a jacket):
+// a store that sells eastern wear only (Naqshi, Baroque, Agha Noor) dresses weddings, Eid, dinners, work and every day.
 export function occasionsFor(products, reach = 1.2) {
   if (!products.length) return OCCASIONS;
   const have = products.map((p) => p.formality);
-  const fits = OCCASIONS.filter((o) => Math.min(...have.map((f) => Math.abs(f - o.formality))) <= reach);
+  const western = products.filter((p) => p.tradition === "west").length >= 3;
+  const fits = OCCASIONS.filter((o) => (western || !o.likes) && Math.min(...have.map((f) => Math.abs(f - o.formality))) <= reach);
   return fits.length ? fits : OCCASIONS;
 }
 
@@ -89,7 +92,10 @@ export function budgetSteps(products) {
     const step = n > 20000 ? 5000 : n > 8000 ? 2500 : 1000;
     return Math.ceil(n / step) * step;
   };
-  return [...new Set([round(at(0.35)), round(at(0.7)), round(at(0.92))])];
+  // A store with a few pieces far above the rest (Naqshi's bridal at Rs.190,000 and more, its formals at Rs.65,000 to
+  // 85,000) would offer "Under Rs.220,000", which leaves out nothing: there the top step stops below that jump.
+  const top = at(0.92) > 2.5 * at(0.7) ? at(0.85) : at(0.92);
+  return [...new Set([round(at(0.35)), round(at(0.7)), round(top)])];
 }
 
 const hash = (s) => {

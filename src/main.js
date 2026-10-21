@@ -75,7 +75,7 @@ const api = async (path, options) => {
   }
 };
 
-const LANES = { formal: "Formal", festive: "Festive", outfits: "Outfits", smart: "Smart casual", fusion: "Fusion", casual: "Casual", unstitched: "Unstitched", west: "Western", men: "Men", suits: "Suits", blazers: "Blazers", waistcoats: "Waistcoats", eastern: "Eastern", tees: "Tees", polos: "Polos", shirts: "Shirts", knitwear: "Knitwear", outerwear: "Jackets", denim: "Denim", trousers: "Trousers", dresses: "Dresses" };
+const LANES = { bridal: "Bridal", luxury: "Luxury pret", velvet: "Velvet", winter: "Winter", saree: "Sarees", kurta: "Kurtas", formal: "Formal", festive: "Festive", outfits: "Outfits", smart: "Smart casual", fusion: "Fusion", casual: "Casual", unstitched: "Unstitched", west: "Western", men: "Men", suits: "Suits", blazers: "Blazers", waistcoats: "Waistcoats", eastern: "Eastern", tees: "Tees", polos: "Polos", shirts: "Shirts", knitwear: "Knitwear", outerwear: "Jackets", denim: "Denim", trousers: "Trousers", dresses: "Dresses" };
 
 const S = {
   config: null,
@@ -239,9 +239,30 @@ function onAccent(hex) {
   const lum = (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
   return lum > 0.6 ? "#0b0d12" : "#ffffff";
 }
+// The store's colour as text on a light panel (the reason under a look, the ring round a chosen card). A light colour,
+// Naqshi's orange or Agha Noor's gold, would be too faint there (2.5:1), so it is darkened, its hue kept, until it
+// reads at 4.5:1. A dark mood lightens it in CSS instead.
+const luminance = (hex) => {
+  const n = parseInt(hex.replace("#", ""), 16);
+  const lin = (c) => ((c /= 255) <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
+};
+function readableOnLight(hex, ground = "#f7f5f2") {
+  const n = parseInt(hex.replace("#", ""), 16);
+  const rgb = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  const bg = luminance(ground);
+  for (let k = 1; k >= 0.2; k -= 0.02) {
+    const out = "#" + rgb.map((c) => Math.round(c * k).toString(16).padStart(2, "0")).join("");
+    if ((bg + 0.05) / (luminance(out) + 0.05) >= 4.5) return out;
+  }
+  return "#14131a";
+}
 function setAccent(hex) {
-  document.documentElement.style.setProperty("--accent", hex);
-  document.documentElement.style.setProperty("--on-accent", onAccent(hex));
+  const root = document.documentElement;
+  root.style.setProperty("--accent", hex);
+  root.style.setProperty("--on-accent", onAccent(hex));
+  if (root.dataset.mood === "noir" || root.dataset.glass === "real") root.style.removeProperty("--accent-text");
+  else root.style.setProperty("--accent-text", readableOnLight(hex));
   $("#accentInput").value = hex;
 }
 function applyBrand(brand) {
@@ -250,8 +271,10 @@ function applyBrand(brand) {
   $("#wordmark").textContent = brand.wordmark || brand.name;
   // "by MIRVA" is kept whole, so on a phone's narrow glass the line breaks as "concept demo / by MIRVA", never mid-phrase.
   const byline = $("#byline");
+  // A store that asked to see itself in MIRVA (brand.invited) is styled by MIRVA, not a concept demo; its notice still says
+  // what the preview is.
   if (brand.byline && !brand.notice) byline.textContent = brand.byline;
-  else byline.replaceChildren(brand.notice ? "concept demo " : "styled ", Object.assign(document.createElement("span"), { className: "by-who", textContent: "by MIRVA" }));
+  else byline.replaceChildren(brand.notice && !brand.invited ? "concept demo " : "styled ", Object.assign(document.createElement("span"), { className: "by-who", textContent: "by MIRVA" }));
   $("#wakeNotice").textContent = brand.notice || "";
   $("#storeName").textContent = brand.name;
   document.title = `MIRVA for ${brand.name}`;
@@ -2213,7 +2236,7 @@ function wireUI() {
     suggest();
   });
 
-  for (const b of $$("[data-mood-set]")) b.addEventListener("click", () => (document.documentElement.dataset.mood = b.dataset.moodSet));
+  for (const b of $$("[data-mood-set]")) b.addEventListener("click", () => ((document.documentElement.dataset.mood = b.dataset.moodSet), setAccent($("#accentInput").value)));
   $("#accentInput").addEventListener("input", (e) => setAccent(e.target.value));
   $("#fastToggle").addEventListener("change", (e) => (mirror.fast = e.target.checked));
   $("#cameraSelect").addEventListener("change", async (e) => {
@@ -2292,6 +2315,7 @@ async function boot() {
     link.whoIsHere().then((m) => {
       if (!m?.trials?.includes("mirror")) return;
       document.documentElement.dataset.glass = "real";
+      setAccent($("#accentInput").value); // the black glass lightens the store's colour as text, as a dark mood does
       syncSheet();
     });
   mirror = new Mirror({ cam: $("#cam"), live: $("#live"), config: S.config });

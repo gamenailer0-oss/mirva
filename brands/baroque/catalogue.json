@@ -1,0 +1,2245 @@
+{
+ "takenAt": "2026-10-21T17:48:50.509Z",
+ "source": "https://baroque.pk",
+ "chosenFrom": 789,
+ "products": [
+  {
+   "id": "15417045647427",
+   "name": "Embellished Net SF-4635",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embellished-net-sf-4635",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/19_2f8aad75-a738-4b0f-82bb-075a801a02ed.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/19_2f8aad75-a738-4b0f-82bb-075a801a02ed.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/20_8b2b5f74-5e40-4fcc-8af4-1a27ae8896e4.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/21_0edf11c9-95dc-4568-9311-7fb67d87fbae.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/22_4f2ac882-a3d7-4882-becf-1114cc94ef94.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Net",
+   "description": "3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15417045647427.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15417041911875",
+   "name": "Embellished Net SF-4632",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embellished-net-sf-4632",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/27_300c2a00-5d4e-425e-ae0c-95e21fdde161.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/27_300c2a00-5d4e-425e-ae0c-95e21fdde161.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/29_a390a49a-b2e4-4dbe-9187-05dc49dd6f93.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/28_df7613dd-b85e-4f1f-a07a-d947411cafb2.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/31_7908eab7-a4b7-45c8-96b5-4fd5ba161d99.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/30_6283a41b-d278-457c-a2a9-20b6c170cb22.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Net",
+   "description": "3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15417041911875.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15417036832835",
+   "name": "Embellished Net SF-4631",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embellished-net-sf-4631",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/23_4c09ef54-d1fa-4a98-81df-69bfb26a553e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/23_4c09ef54-d1fa-4a98-81df-69bfb26a553e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/25_41ad072c-fc6c-4c6f-9545-235d02f78d80.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/24_f6b776d7-e11f-4d8e-912a-e6d3a2c7027d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/26_4f4ce013-4b0b-4ac8-9002-21e185a60f1f.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Net",
+   "description": "3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15417036832835.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15417003343939",
+   "name": "Embellished Net SF-4630",
+   "price": 29950,
+   "url": "https://baroque.pk/products/embellished-net-sf-4630",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/7_fbb4b4b3-ca27-4718-83ea-399dcb1060a7.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/7_fbb4b4b3-ca27-4718-83ea-399dcb1060a7.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/10_484308c8-e149-4a73-b785-a19ef7ed2acd.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/8_d780a351-adec-4168-8c54-290a5340b6f4.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/9_fc870065-0c58-42de-8eff-e3e608f55945.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Net",
+   "description": "3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15417003343939.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15417053052995",
+   "name": "Embellished Net SF-4643",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embellished-net-sf-4643",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/84_334e7eb1-44ef-4d29-838c-856bb4a8016e.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/84_334e7eb1-44ef-4d29-838c-856bb4a8016e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/87_4e89cb2b-7807-4386-a7a3-5fa0cbf329e8.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/86_f71dbaab-39b6-4f83-ba88-467045a37468.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/85_db05e360-f8e3-4f2a-950a-54e7373dfe45.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Net",
+   "description": "3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15417053052995.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15417049088067",
+   "name": "Embellished Net SF-4640",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embellished-net-sf-4640",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/69_5ee15800-7e2e-4aeb-a048-e9840fe33d64.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/69_5ee15800-7e2e-4aeb-a048-e9840fe33d64.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/71_471ac1f1-0637-44c2-b151-d5f89050c0eb.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/73_da554157-5b51-49d2-b083-7f6005eae132.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/72_bc36f8f1-5a9c-45b2-b7e6-6583c2447eae.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/70_e3ca5068-c372-4f2b-a392-2d6e4c9cb233.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Net",
+   "description": "3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece net suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15417049088067.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15400654536771",
+   "name": "Plain Chiffon Frock PR-1399",
+   "price": 34950,
+   "url": "https://baroque.pk/products/plain-chiffon-frock-pr-1399",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/221_de5c36b5-06a7-48e3-946f-234f07ceba29.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/221_de5c36b5-06a7-48e3-946f-234f07ceba29.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/223_01e73d44-c0b4-4348-b33d-4dd466180ac0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/222_95a9d957-4605-4d2b-87a0-430265b3cef1.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Frock, 3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon frock: an embroidered frock, a sharara and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon frock: an embroidered frock, a sharara and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15400654536771.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15400675934275",
+   "name": "Plain Chiffon Frock PR-1400",
+   "price": 34950,
+   "url": "https://baroque.pk/products/plain-chiffon-frock-pr-1400",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/213_8f585e56-1874-4acc-bda0-4a9a1de0c7e0.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/213_8f585e56-1874-4acc-bda0-4a9a1de0c7e0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/216_8e18dc32-4d86-4f2b-885d-13fb5b0d4f63.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/214_33c84fb2-a704-407a-849a-e96a147c4cac.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/215_4ac9510f-0739-4c11-b46d-d00c2b34a3b2.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/220_625e86f7-4710-4bb7-8e71-d93f94fd28fb.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/218_36a4cb6c-2914-4b77-ae24-ec2a40ee9e51.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Frock, 3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon frock: an embroidered frock, a sharara and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon frock: an embroidered frock, a sharara and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15400675934275.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7616006881347",
+   "name": "Embroidered Chiffon SF-4388",
+   "price": 29950,
+   "url": "https://baroque.pk/products/embroidered-chiffon-sf-4388",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/143_37850ac7-8d5d-4e1b-b8a8-3b3c9bb683b2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/143_37850ac7-8d5d-4e1b-b8a8-3b3c9bb683b2.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/144_327459ea-61c2-40c8-bccb-76c20dcff96e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/147_00e88a1e-f62c-48c0-900c-832092ab03e8.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/156_0eebff1d-7fff-487d-9a5b-163b4c2e0586.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/146_7a148680-9d09-47c1-97e2-ff601b102f8f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/148_d7da420e-8716-43cd-9fdc-a744bdf5e68a.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon suit: an embroidered shirt, a sharara and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon suit: an embroidered shirt, a sharara and a dupatta.",
+   "ref": "/refs/baroque/7616006881347.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7616007602243",
+   "name": "Embroidered Chiffon SF-4389",
+   "price": 29950,
+   "url": "https://baroque.pk/products/embroidered-chiffon-sf-4389",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/158_94308966-9621-465d-9d45-367a0de53925.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/158_94308966-9621-465d-9d45-367a0de53925.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/160_c49934c9-478a-447e-8820-daeaa33416a7.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/168_4ae72a1e-991b-415a-82fb-386ab54c4695.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/164_856b7380-c309-4005-94f3-baaea0e4b64f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/161_a071f0d0-cf4f-4354-af46-430c63a305cd.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/159_13cdc7f2-f35d-4bc3-8de3-80298668853e.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon suit: an embroidered shirt, a sharara and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon suit: an embroidered shirt, a sharara and a dupatta.",
+   "ref": "/refs/baroque/7616007602243.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7536324149315",
+   "name": "Embroidered Raw Silk SF-4137",
+   "price": 19950,
+   "url": "https://baroque.pk/products/embroidered-raw-silk-sf-4137",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/64_3bc40f84-7151-403d-a81c-5aa016f404ef.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/64_3bc40f84-7151-403d-a81c-5aa016f404ef.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/65_ebdbb5ea-27de-4b89-93a2-7b222fc02413.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/66_c96b2399-6f6e-4e1c-8ef6-80ba0e0e2d5f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/68_ec395c18-c317-4a0b-8f31-ab7687e4ef27.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/67_50de2e13-07c3-4ecc-8f86-f350c17e14d0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/69_7ea069f4-fa01-4f7e-8a10-7b0e023af27b.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Raw Silk",
+   "description": "3-piece raw silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece raw silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/7536324149315.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7823313076291",
+   "name": "Embroidered Chiffon PR-1356",
+   "price": 22950,
+   "url": "https://baroque.pk/products/embroidered-chiffon-pr-1356",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/02_eb7ae022-2374-4836-a19f-e7baad1de145.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/02_eb7ae022-2374-4836-a19f-e7baad1de145.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/07_8edaa856-9155-4aba-a0b2-e3f1d90f861c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/04_41073c8d-17dc-4d4c-a1fe-781e15f3b496.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/06_8a874d8a-6406-4ab5-af5e-8c8b97305965.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/09_450c1d14-1d36-494b-93b5-a6864c9d1088.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/08_2a51a391-b9b2-4e93-95e7-baaf07242718.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon suit: an embroidered gown, trousers and a dupatta, lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon suit: an embroidered gown, trousers and a dupatta, lace-trimmed.",
+   "ref": "/refs/baroque/7823313076291.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7818642522179",
+   "name": "Embroidered Chiffon PR-1359",
+   "price": 22950,
+   "url": "https://baroque.pk/products/embroidered-chiffon-pr-1359",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/43_46461ef9-9d81-48ce-8a21-2c6dadabf52d.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/43_46461ef9-9d81-48ce-8a21-2c6dadabf52d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/48_4b22971a-13dc-4795-925c-e6685c90b9d3.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/50_c24ed04a-ac20-4646-8b2e-8f458e655931.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/44_d94b4b19-f0bc-4bee-9a12-9930755d8879.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/45_d3545117-af0c-49ca-9a20-717a1338fbb1.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/46_55310ea5-b86c-41cb-8117-0697d3ab1f31.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/7818642522179.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7808994082883",
+   "name": "Embroidered Chiffon PR-1315",
+   "price": 42950,
+   "url": "https://baroque.pk/products/embroidered-chiffon-pr-1315",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/22_4b0be471-a448-4be8-969c-8bd330898933.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/22_4b0be471-a448-4be8-969c-8bd330898933.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/18_329cf241-5f87-4ead-b169-b349f9d3a4ef.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/21_f947a3ee-29dc-4586-a281-edf7b06b436f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/19_3a1a6508-6540-469d-a289-25c4cb492cea.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/25_8fd1c889-7cbf-44e4-8a8e-6561bf68d195.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/24_131e8c9c-f2bf-404f-b118-9b35ed671d60.jpg"
+   ],
+   "season": "Formals",
+   "lane": "formal",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon suit: an embroidered frock, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon suit: an embroidered frock, trousers and a dupatta.",
+   "ref": "/refs/baroque/7808994082883.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15422389780547",
+   "name": "Embroidered Velvet PR-1412",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embroidered-velvet-pr-1412",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/131_45d579f1-a61d-45c0-873a-ae80a4c8a09b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/131_45d579f1-a61d-45c0-873a-ae80a4c8a09b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/129_5cd69205-8eae-41ab-bfdc-030eb0e4d2e5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/125_bd2580c0-dbb7-4f8a-9802-0f9d4a0ce0e5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/128_928febc1-3da0-475d-bd4f-ac51fe12e05e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/130_b2c713fc-234e-4a98-aafd-9c1f817216e8.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/121_735125d6-8b74-45f7-8100-c74fde6366d0.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15422389780547.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7500164038723",
+   "name": "Embroidered Velvet SF-4320",
+   "price": 39950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4320",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/31_3524fdaf-38b8-47fc-ba3a-0bb856fbfeb6.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/31_3524fdaf-38b8-47fc-ba3a-0bb856fbfeb6.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/28_fc33aa20-3855-4791-a1b0-4b58be6f01e5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/29_02f72ad6-a30f-47a4-a5a6-d343e07fe8c2.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/30_a006ac74-73d0-46a3-bde0-52228a266a07.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/27_fd14ed5d-3d5b-4dd4-a42b-b1d2c752d920.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/26_39e5f85f-98e0-4020-938a-8fac2541bea7.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/7500164038723.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15401711468611",
+   "name": "Embroidered Velvet SF-4548",
+   "price": 39950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4548",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/42_999ecda7-2181-41a0-bbf7-ae43003ef3dd.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/42_999ecda7-2181-41a0-bbf7-ae43003ef3dd.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/45_60ddfbdb-34f5-4c2b-989a-f42c5ea3e923.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/41_b5671a9f-ee58-467e-b565-5801ab0785ad.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/44_e671b8c5-794a-4cdc-8e24-4553c7366b22.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/47_b4bac93d-9aac-44f8-9b7d-83c048141f30.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/40_d1d414d2-7700-4701-b8e4-20681eede27f.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, a sharara and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, a sharara and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15401711468611.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15401708650563",
+   "name": "Embroidered Velvet SF-4547",
+   "price": 34950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4547",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/25_cdbd2984-3b02-45fa-9927-fc3797df4f8f.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/25_cdbd2984-3b02-45fa-9927-fc3797df4f8f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/26_5be0bf1e-de11-45f1-8b5f-3a550c08d584.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/29_99b7b96f-e8dd-4340-b91d-b19c7d66fb68.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/30_b6fb3000-084b-4774-b148-678536728399.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/28_1ced62e7-9577-4fcc-a57d-a1052d165e8a.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/34_17de22f4-f32c-4def-9f53-5dfa41b1f241.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/15401708650563.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15401708224579",
+   "name": "Embroidered Velvet SF-4546",
+   "price": 29950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4546",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/14_3529d3fc-07c1-46f0-9f94-e7e23aff1d03.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/14_3529d3fc-07c1-46f0-9f94-e7e23aff1d03.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/18_68b15945-212a-4aec-a89a-54972955fee9.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/15_2776bbe9-6964-496b-b768-0a1d902197ac.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/23_50e94a80-b6b2-4f12-843f-3a69af42b9bb.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/24_fbb320a0-25ad-44b3-a470-d6c840d3b9e4.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/16_ffa8cda2-83cc-4656-a0d4-2787e6b81ff5.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/15401708224579.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15401703276611",
+   "name": "Embroidered Velvet SF-4545",
+   "price": 29950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4545",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/1_de2f21f4-e8f2-4f91-b77c-84dd83dc69a3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/1_de2f21f4-e8f2-4f91-b77c-84dd83dc69a3.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/5_58ee5978-e7f4-44c8-9c74-605a7f7ab4fa.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/4_6296bd02-0c47-444c-a58f-64b01e958e4b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/3_c1842c28-9cf5-4dcb-8fd9-1d6c667a0af0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/6_afe9cc39-028e-46ce-bfa3-a74b0f2923d8.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/2_cd1fa9a2-8305-4b05-a0e6-af4281ef1c2a.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/15401703276611.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15401714810947",
+   "name": "Embroidered Velvet SF-4552",
+   "price": 29950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4552",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/101_405a9d65-31f5-45a2-a003-601e26019449.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/101_405a9d65-31f5-45a2-a003-601e26019449.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/103_f90904fb-0481-4b0f-ab9c-353c9b219d84.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/108_2bc0e1d8-e691-4ee3-b069-854d2b92c282.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/100_7cb39153-23ec-420b-808c-7136afc1f4a1.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/104_c60d9cfd-dbc1-44ae-9310-a3b83ff428eb.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/106_25e93676-0d3a-442c-a7ba-997a501e9c2e.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/15401714810947.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15401713664067",
+   "name": "Embroidered Velvet SF-4551",
+   "price": 39950,
+   "url": "https://baroque.pk/products/embroidered-velvet-sf-4551",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/66_8034143c-f093-41e9-a0ff-9a0949b92921.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/66_8034143c-f093-41e9-a0ff-9a0949b92921.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/72_957d52eb-b87d-412b-8589-05db5f64f6d4.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/68_7b71267e-de5d-495a-b4f0-bc3d2d71e4e0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/71_e166a0e1-2263-41fd-8cc3-495029997d87.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/79_eb8dc59d-8c48-4380-97f2-686ec07a8a0c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/70_08ab4276-779b-4d19-bcc7-91bb0be76065.jpg"
+   ],
+   "season": "Velvet",
+   "lane": "velvet",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Velvet",
+   "description": "3-piece velvet suit: an embroidered shirt, trousers and a dupatta, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece velvet suit: an embroidered shirt, trousers and a dupatta, hand-embellished.",
+   "ref": "/refs/baroque/15401713664067.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424759562307",
+   "name": "Embroidered Khaddar SF-4596",
+   "price": 18950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4596",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/176_69866c5c-b4ec-4c6c-aeb8-d2ac311b589f.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/176_69866c5c-b4ec-4c6c-aeb8-d2ac311b589f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/179_77ce7328-6113-4d2a-b554-32dc01af5bd3.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/178_385f4fb6-4f21-42e1-851e-189ace4a0869.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/173_8dfe64d8-26b1-4589-b06d-ef683a6b8447.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/174_4d055c45-83e8-4bf3-aec6-5a60a5798988.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/182_96bb171c-62b8-45d9-bbb5-fcd299dee386.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424759562307.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424756777027",
+   "name": "Embroidered Khaddar SF-4594",
+   "price": 19950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4594",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/183_85105a06-5870-436c-812f-4acd3b36a13c.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/183_85105a06-5870-436c-812f-4acd3b36a13c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/186_bc4d9328-8607-4ffa-9fbd-8036d05890d0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/184_25c0bd42-5b81-4f3c-b115-6a0fc8b534fb.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/188_7f64054c-4b4f-4c5a-8f5f-26bdf744a880.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/189_dc7ce52f-b0bf-4629-a8bf-30fa7d459465.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/187_bc37d64b-d9a8-468e-843e-8e051136ca01.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424756777027.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424752123971",
+   "name": "Embroidered Khaddar SF-4595",
+   "price": 18950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4595",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/200_d30c7e9b-264c-42fc-8216-4c932c63d1ef.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/200_d30c7e9b-264c-42fc-8216-4c932c63d1ef.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/205_e901ad4a-9561-4b85-9efe-5098f989b8f7.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/201_ab928ed9-b10c-4875-b8f2-5081e4c00b97.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/206_e37cd80d-66d6-4349-95f7-97f0ab60b063.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/204_951e2b36-d63d-4941-8aa3-fc9f11753031.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/209_1f0ef7c3-21c6-49da-ae6c-f385314f9b67.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424752123971.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424744751171",
+   "name": "Embroidered Khaddar SF-4586",
+   "price": 17950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4586",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/210_4149d932-e52a-49c0-bfc4-c33029e7af94.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/210_4149d932-e52a-49c0-bfc4-c33029e7af94.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/211_9216ba77-0e6d-4637-8bfa-a150154569dc.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/214_b9ee2866-1f81-4231-ac73-f4b25ac0881e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/215_c65ae4dc-9515-4f66-847a-289d5df30c0e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/216_d7bba8a9-d217-4eca-900d-e25ee5345582.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/212_c90b6537-1b4c-4903-825f-9e2458903e4b.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424744751171.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424787120195",
+   "name": "Embroidered Khaddar SF-4622",
+   "price": 17950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4622",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/142_b954d683-1313-4d9f-a99f-7afd6ffedb90.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/142_b954d683-1313-4d9f-a99f-7afd6ffedb90.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/144_87313a9d-2117-4167-b1bc-5b93ea39493e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/143_d7964dca-2620-497a-8f11-064144249633.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/146_3449aa24-902e-4c19-8777-36d942b6976b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/145_d3c5fba8-4ac9-4e4e-9f31-6dfef1a1201d.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424787120195.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424777945155",
+   "name": "Embroidered Khaddar SF-4618",
+   "price": 19950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4618",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/170_e16d0f37-ffce-4046-ab68-e786d83054b8.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/170_e16d0f37-ffce-4046-ab68-e786d83054b8.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/171_1924add7-64dc-41fa-a464-3be2fdacfb62.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/173_6acfcdb1-6bce-4247-beb2-69b5e0b51d25.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/172_3139c24b-0ea8-4357-bb10-68eff87b2288.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/174_b94b5f47-9dff-4d90-95c0-95de181147cf.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424777945155.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424771063875",
+   "name": "Embroidered Khaddar SF-4615",
+   "price": 17950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4615",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/175_79862650-13a3-413e-a1f7-69fda6c08bed.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/175_79862650-13a3-413e-a1f7-69fda6c08bed.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/180_86955d7e-f7dd-4125-a0c2-608c8f693f8c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/176_a796b89a-935d-4360-8876-04152b82786b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/177_8eeb45b6-efbe-4e8a-86aa-8ae4cc84a7ff.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/179_36d69102-7c6a-4db1-b846-1f70ff66e3db.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424771063875.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15424765263939",
+   "name": "Embroidered Khaddar SF-4598",
+   "price": 19950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4598",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/192_172cd3c1-2303-493f-a842-a7c56444a7f1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/192_172cd3c1-2303-493f-a842-a7c56444a7f1.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/196_ce5814a8-2907-4ede-8279-88715ca06548.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/193_0b5885eb-0839-431a-af44-0d5f76999a67.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/194_7cbecf9c-2cae-47e8-8756-50e17cd5fac1.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/197_7f8e01d8-75d3-4e19-8ce5-03b3d97c3d64.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/198_b3ce9798-1bf9-43b2-8996-601ed29718b6.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/15424765263939.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7495601487939",
+   "name": "Printed Viscose Silk SF-4307",
+   "price": 15950,
+   "url": "https://baroque.pk/products/printed-viscose-silk-sf-4307",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/52_64c91a28-9fa9-40d6-aa3d-e3027e715d1d.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/52_64c91a28-9fa9-40d6-aa3d-e3027e715d1d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/51_38d07ed2-d49f-40dc-b0d7-03cec5a9b353.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/53_0b122b95-5aa8-4db8-b9bb-2f1cd2921c8c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/54_57f8aaae-1caa-4873-97ee-2f66380b8b3c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/55_4fab9770-146a-409c-8021-f1aa8d9ab347.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/50_059cc12b-57b2-4fb6-814d-c4017b17948b.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Viscose Silk",
+   "description": "3-piece viscose silk suit: an embroidered shirt, trousers and a shawl",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    },
+    {
+     "label": "XXL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece viscose silk suit: an embroidered shirt, trousers and a shawl.",
+   "ref": "/refs/baroque/7495601487939.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7337141239875",
+   "name": "Embroidered Khaddar SF-4003",
+   "price": 19950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4003",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/108_09a22cf9-8aca-4862-8b8c-f1b9ad7a8fd5.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/108_09a22cf9-8aca-4862-8b8c-f1b9ad7a8fd5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/109_7dc0da4f-317f-4adc-b444-6837a6fe5e9f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/110_0a22edb7-51a1-484b-b0e0-5ad8fba00efe.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/111_55415734-4002-4455-907b-1026e7cc892d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/112_eefac9e3-8027-4c35-a237-04f287e3a4ef.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, a shalwar and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/7337141239875.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7534302199875",
+   "name": "Embroidered Khaddar SF-4346",
+   "price": 17950,
+   "url": "https://baroque.pk/products/embroidered-khaddar-sf-4346",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/2_93d80ae5-db9e-4f4f-8ab0-d279245b7262.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/2_93d80ae5-db9e-4f4f-8ab0-d279245b7262.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/1_d2fba265-0e4e-4c2a-bc18-7aa9bb90ae67.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/3_ef21b8ca-1362-4820-a99e-1f40a486b83d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/5_ac753ba0-e638-4816-935b-ff2bd89ee96d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/6_69f87567-cdd4-4dbd-8f95-796ad9c9b811.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/7_86233e1e-b97f-410b-b07b-d516601bd96a.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 3,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Khaddar",
+   "description": "3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddar suit: an embroidered shirt, trousers and a shawl, hand-embellished.",
+   "ref": "/refs/baroque/7534302199875.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "15411398017091",
+   "name": "Embroidered Viscose Silk SF-4619",
+   "price": 15950,
+   "url": "https://baroque.pk/products/embroidered-viscose-silk-sf-4619",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/162_a0dc9168-15ab-4c2c-8bf5-7f340edaf504.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/162_a0dc9168-15ab-4c2c-8bf5-7f340edaf504.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/163_cd20e483-86ad-46d2-b46b-c168e2d4794d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/167_42024f4d-dcce-4066-9bfd-21781fa1d3fa.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/164_6b15680b-1740-42c1-a2a0-24527731cf12.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/168_54097929-6d2b-4c4b-9146-b3304f1ecb17.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/166_77bb917f-0b17-4371-b5db-32e1085871ec.jpg"
+   ],
+   "season": "Winter",
+   "lane": "winter",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Viscose Silk",
+   "description": "3-piece viscose silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": false
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece viscose silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/15411398017091.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7660965756995",
+   "name": "Embroidered Lawn UF-4474",
+   "price": 8963,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4474",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/80_e05b2aa0-fa76-4fc0-9004-3217bab20ec6.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/80_e05b2aa0-fa76-4fc0-9004-3217bab20ec6.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/83_1df0becf-05b0-45cf-9755-e796a827586f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/84_c70bed13-ce17-4e76-8be7-fb29f50bf959.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/81_289b70df-d1e3-4e84-b890-1069b95a7c8a.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/86_fbf6d25a-fe69-4b88-b590-8758e6966eda.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/85_1790c407-e975-469f-ac17-e07c28b01ca6.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7660965756995.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7575159373891",
+   "name": "Embroidered Lawn UF-4395",
+   "price": 5370,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4395",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/37_10e4c054-edcb-4e65-b022-eca107416ff2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/37_10e4c054-edcb-4e65-b022-eca107416ff2.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/36_f170ac4b-ad55-4551-a751-06aa5513fd8e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/40_e81164ad-d3f8-4e18-9ad0-56368370f03f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/42_e5b98e4f-0604-494d-a9d1-4190d1e94946.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/39_8093e723-bec3-4e48-a3f4-42e8cde70481.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/41_9281d73c-a2f3-415d-9e84-dd67dec1a2ad.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7575159373891.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7449292341315",
+   "name": "Embroidered Lawn UF-4266",
+   "price": 12000,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4266",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/104_6f4726f0-35e5-429a-b4ca-0361f36888eb.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/104_6f4726f0-35e5-429a-b4ca-0361f36888eb.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/107_e78784f1-0a7e-4ad2-8de4-f0a13add4fb9.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/106_8bc61ae5-6638-4161-b82f-2df65f7de127.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/110_a2dc3061-fa1e-47fd-ad69-b1850bb4b14d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/112_2bd1a093-c1e6-4934-bf6a-6a4ab982a22e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/108_231a9d88-7ac7-4cac-812f-317cb8f70619.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7449292341315.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7443413401667",
+   "name": "Embroidered Lawn UF-4226",
+   "price": 7463,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4226",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/14_16733048-e6df-4097-90ac-ba9e205f5bd5.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/14_16733048-e6df-4097-90ac-ba9e205f5bd5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/15_20906b24-ab8f-45d5-9d5d-82e9f841ff96.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/18_22c31e7f-f72f-40b8-a229-731cd20ffa07.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/19_1552abff-181f-4683-baaf-5c4bf9b025a5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/17_8519ff3c-d931-4c04-ae7e-5097bc9fac90.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/16_8753d3de-28db-4dc9-b76d-828677968a60.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7443413401667.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7443413205059",
+   "name": "Embroidered Lawn UF-4225",
+   "price": 8213,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4225",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/08_b8a654cd-ccaa-4fe2-9bee-6e899bd86980.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/08_b8a654cd-ccaa-4fe2-9bee-6e899bd86980.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/09_88cc33fc-9001-4e8c-aef3-d556f8ed6ba1.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/10_038fb002-9ba4-482d-8318-d410874f7b56.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/11_dcc23115-f5ce-4a62-acef-e82acddcd369.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/13_797140c1-cda5-4fc0-9af5-087af60081c0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/12_807bcd7a-1ac0-4249-8fde-5ca93363a70e.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7443413205059.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7438360969283",
+   "name": "Embroidered Lawn UF-4212",
+   "price": 7665,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4212",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/28_de486aef-d9b2-4388-b840-07b6339a955a.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/28_de486aef-d9b2-4388-b840-07b6339a955a.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/29_460867e9-d79a-46a9-a19f-faec49a59256.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/32_ce286edc-ffd3-491e-9fa3-6ad2b2b2a0de.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/33_3245a323-3770-4db7-9392-6d33cadd0ff9.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/31_4f9a80da-fb2c-4381-8b63-633a4c68f5de.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/30_b99153d9-72db-4502-a00f-94014ed239f7.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7438360969283.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7438360641603",
+   "name": "Embroidered Lawn UF-4211",
+   "price": 5970,
+   "url": "https://baroque.pk/products/embroidered-lawn-uf-4211",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/01_4a37baaa-a1f1-40d7-9f39-2eb2d128490b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/01_4a37baaa-a1f1-40d7-9f39-2eb2d128490b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/02_e752ceb3-1f7a-44c4-aa08-6b703ac161c8.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/05_657fa9dc-ee81-4d9a-98dc-31b849b78cb5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/09_4aba191b-6f91-4a6c-b767-b9bc1466ffe5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/04_10a4a66d-db0d-41a9-8ff8-92359723d27c.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/06_aea8ba0b-434c-4a88-8ccc-d715a4d4263e.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7438360641603.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7366604030019",
+   "name": "Embroidered Printed Lawn UF-4073",
+   "price": 5970,
+   "url": "https://baroque.pk/products/embroidered-printed-lawn-uf-4073",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/67_662b9355-8ded-4c06-9291-53a42e792996.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/67_662b9355-8ded-4c06-9291-53a42e792996.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/68_e072fa3d-9681-4d8d-bbd7-65c6e5e3c9a9.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/69_e2243272-036e-49c6-9fb6-5f41edff7859.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/70_9ade07f6-1e21-43fc-9fa3-6ec1f4d463d1.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/71_f3e5769b-e286-4498-bac9-2400ad3a25d4.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/72_568557d9-7e2d-4f57-b1a0-d026b1160c70.jpg"
+   ],
+   "season": "Summer",
+   "lane": "unstitched",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": true,
+   "cut": "3 piece, unstitched",
+   "colour": "",
+   "fabric": "Printed Lawn",
+   "description": "3-piece printed lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [],
+   "prompt": "Substitute the outfit with a 3-piece printed lawn suit: an embroidered shirt, trousers and a dupatta, stitched and worn as a complete suit with the dupatta draped over one shoulder.",
+   "ref": "/refs/baroque/7366604030019.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7822199849027",
+   "name": "Embroidered Chiffon Saree EN-1394",
+   "price": 19950,
+   "url": "https://baroque.pk/products/embroidered-chiffon-saree-en-1394",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/189_32d055a3-1158-4a20-bed4-050ea3941722.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/189_32d055a3-1158-4a20-bed4-050ea3941722.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/191_1e4de9d8-e5e8-4249-a15b-aa467a9f9092.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/194_f1bbc882-9ea2-4309-a8cc-61efb35cc55d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/195_83d804f2-a96b-445f-b146-7dd3e923baa2.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/192_aac37bd3-ccee-459f-a905-1be7c551480e.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/193_7745a7d0-cd2a-4ac8-b300-8b89d22591bd.jpg"
+   ],
+   "season": "Formals",
+   "lane": "saree",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Saree",
+   "colour": "",
+   "fabric": "Chiffon",
+   "description": "chiffon saree, draped over one shoulder, with a fitted blouse, embroidered",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a chiffon saree, draped over one shoulder, with a fitted blouse, embroidered.",
+   "ref": "/refs/baroque/7822199849027.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7822192705603",
+   "name": "Plain Shamooz Silk Saree EN-1392",
+   "price": 19950,
+   "url": "https://baroque.pk/products/plain-shamooz-silk-saree-en-1392",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/167_5d5a50a5-b03b-4345-9f45-219b2d621602.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/167_5d5a50a5-b03b-4345-9f45-219b2d621602.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/169_50eea49d-792f-47e9-8520-e7e8f725cfe3.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/173_6c061aee-7540-4f36-a9f8-ee115264dda0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/171_e68981bf-d347-4532-893c-defcae0ff056.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/172_3d9aa330-f16e-4845-9f7a-c8eb3f459eaf.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/174_741f1b3d-0391-4dd7-9aaa-c11796e12bad.jpg"
+   ],
+   "season": "Formals",
+   "lane": "saree",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Saree",
+   "colour": "",
+   "fabric": "Shamooz Silk",
+   "description": "shamooz silk saree, draped over one shoulder, with a fitted blouse",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a shamooz silk saree, draped over one shoulder, with a fitted blouse.",
+   "ref": "/refs/baroque/7822192705603.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7822182547523",
+   "name": "Plain Shamooz Silk Saree EN-1391",
+   "price": 19950,
+   "url": "https://baroque.pk/products/plain-shamooz-silk-saree-en-1391",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/156_515b5569-6c1d-495e-8c25-de4ccdcf6601.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/156_515b5569-6c1d-495e-8c25-de4ccdcf6601.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/164_b75ad6dd-a093-4f7d-8350-e241a2e8ca3d.jpg"
+   ],
+   "season": "Formals",
+   "lane": "saree",
+   "formality": 5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Saree",
+   "colour": "",
+   "fabric": "Shamooz Silk",
+   "description": "shamooz silk saree, draped over one shoulder, with a fitted blouse",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a shamooz silk saree, draped over one shoulder, with a fitted blouse.",
+   "ref": "/refs/baroque/7822182547523.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7330757410883",
+   "name": "Embroidered Printed Lawn SF-550",
+   "price": 14950,
+   "url": "https://baroque.pk/products/embroidered-printed-lawn-sf-550",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/65_eb93f866-8d5a-4052-8632-cdf74937904b.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/65_eb93f866-8d5a-4052-8632-cdf74937904b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/66_0a8a22a5-efb0-4a21-aa2a-772dcb8233e0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/67_bc5f9b7a-2500-4f44-8a7b-cce225e58062.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/68_af8cbc9f-f10b-41e7-9cc2-77aa295f26a5.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/69_eafabde2-a81a-4e5e-bb4e-0a61ca514e87.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/70_eef93ec5-65a9-4726-8206-761e59208a41.jpg"
+   ],
+   "season": "Summer",
+   "lane": "casual",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Printed Lawn",
+   "description": "3-piece printed lawn suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece printed lawn suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/7330757410883.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7373231521859",
+   "name": "Embroidered Printed Lawn SF-4121",
+   "price": 14950,
+   "url": "https://baroque.pk/products/embroidered-printed-lawn-sf-4121",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/43_39fb2c05-a6fe-49dc-9a95-b08ef1cb94e0.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/43_39fb2c05-a6fe-49dc-9a95-b08ef1cb94e0.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/44_4c40de2b-40b4-4ee1-9be4-f889c96bfcaa.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/45_7a12e8d9-8e60-44a8-a9d8-74fe666ad078.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/46_3d49d161-3e68-491e-a8e7-4479c4df8fdf.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/47_c3fa9f66-ed14-44c2-9eb5-48e1a0bb19e7.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/48_5aa99bd5-0b8a-417c-91cc-9ba1890bb969.jpg"
+   ],
+   "season": "Summer",
+   "lane": "casual",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Printed Lawn",
+   "description": "3-piece printed lawn suit: an embroidered long shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece printed lawn suit: an embroidered long shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/7373231521859.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7373230243907",
+   "name": "Embroidered Printed Lawn SF-4120",
+   "price": 14450,
+   "url": "https://baroque.pk/products/embroidered-printed-lawn-sf-4120",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/39_36e0e32a-93dd-4c0c-9fe4-268d696c66aa.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/39_36e0e32a-93dd-4c0c-9fe4-268d696c66aa.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/40_7855e615-0dab-4d21-b64d-a2d7997fbfd3.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/41_a90e8711-bae3-415e-bb21-b58dfc942f6f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/42_42a4558a-7ad0-47ae-9a63-48f01ddf653d.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/48_76727f31-8aeb-4683-93e7-0eaf1cc3d3d4.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/49_91e3c3e0-b963-496b-ac11-be741e103f3a.jpg"
+   ],
+   "season": "Summer",
+   "lane": "casual",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Printed Lawn",
+   "description": "3-piece printed lawn suit: a printed shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece printed lawn suit: a printed shirt, trousers and a dupatta.",
+   "ref": "/refs/baroque/7373230243907.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "7750141116483",
+   "name": "Embroidered Lawn PR-1343",
+   "price": 6975,
+   "url": "https://baroque.pk/products/embroidered-lawn-pr-1343",
+   "image": "https://cdn.shopify.com/s/files/1/2277/5269/files/148_8345d870-ec1d-4d2a-9a8c-5a7406d1e356.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/148_8345d870-ec1d-4d2a-9a8c-5a7406d1e356.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/149_149d0b57-7dd6-4e09-9d98-4b837d3ed45b.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/154_8eaf9648-d741-490e-9d7c-3e71dd7ef278.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/152_648006aa-4935-4c2a-8ae3-08337d71e193.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/150_a7cec044-a754-4387-86d1-7c0d074dc02f.jpg",
+    "https://cdn.shopify.com/s/files/1/2277/5269/files/151_0fc2eb2c-3529-4ae0-9958-10d23d2af8a9.jpg"
+   ],
+   "season": "Summer",
+   "lane": "casual",
+   "formality": 2.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "",
+   "fabric": "Lawn",
+   "description": "3-piece lawn suit: an embroidered frock, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece lawn suit: an embroidered frock, trousers and a dupatta.",
+   "ref": "/refs/baroque/7750141116483.jpg",
+   "refHow": "mask"
+  }
+ ],
+ "addons": []
+}

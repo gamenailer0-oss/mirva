@@ -172,6 +172,29 @@ test("a casual store offers no wedding, and a formal one still has its weddings"
   assert.equal(moodMatters(cat.products), true);
 });
 
+// Naqshi, Baroque and Agha Noor (21 Oct 2026): eastern wear throughout, chosen by hand from their own sites.
+test("a store of eastern wear only is asked about weddings, Eid, dinners, work and every day, and dresses each", () => {
+  for (const store of ["naqshi", "baroque", "agha-noor"]) {
+    const c = JSON.parse(readFileSync(new URL(`../brands/${store}/catalogue.json`, import.meta.url), "utf8"));
+    const ids = occasionsFor(c.products).map((o) => o.id);
+    assert.deepEqual(ids, ["wedding", "eid", "dinner", "work", "everyday"], store);
+    for (const p of c.products) {
+      assert.ok(p.id && p.name && p.price > 0 && p.image.startsWith("https://cdn.shopify.com/") && p.prompt.startsWith("Substitute"), `${store} ${p.id} is complete`);
+      assert.equal(p.tradition, "east");
+      assert.ok(!p.sizes.length || p.sizes.filter((s) => s.inStock).length >= 3, `${store} ${p.name} has sizes to sell`);
+    }
+    for (const o of ids)
+      for (const m of MOODS) {
+        const picks = pickLooks(c.products, { who: "women", occasion: o, mood: m.id });
+        assert.equal(new Set(picks.map((k) => k.product.id)).size, 3, `${store}/${o}/${m.id}: three different pieces`);
+      }
+  }
+  // Naqshi's bridal (Rs.190,000 and more) sits far above its formals: the top budget step stops below that jump.
+  const naqshi = JSON.parse(readFileSync(new URL("../brands/naqshi/catalogue.json", import.meta.url), "utf8"));
+  assert.deepEqual(budgetSteps(naqshi.products), [20000, 40000, 80000]);
+  assert.deepEqual(budgetSteps(cat.products), [7000, 12500, 15000], "Sapphire's steps are as they were");
+});
+
 test("casual occasions pick different garments, not three of one kind", () => {
   for (const occasion of ["university", "weekend", "travel", "friends"])
     for (const who of ["women", "men"]) {

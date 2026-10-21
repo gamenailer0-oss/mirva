@@ -1,0 +1,2339 @@
+{
+ "takenAt": "2026-10-21T17:48:50.653Z",
+ "source": "https://pk.aghanoorofficial.com",
+ "chosenFrom": 636,
+ "products": [
+  {
+   "id": "10238706581760",
+   "name": "Pure Khaddi Silk Embroidered Suit MTO0008",
+   "price": 30000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-khaddi-silk-embroidered-mto0008",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at7.41.25PM_06f138ca-9d45-400a-b863-4afc4fd8688c.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at7.41.25PM_06f138ca-9d45-400a-b863-4afc4fd8688c.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.51PM_3_ba95fb54-8dbd-4ecc-87c2-65add1bb0592.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.52PM_492df789-e21f-48f8-9413-b6f000a812ed.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.53PM_1_576d2b9a-ec1f-457f-bcf2-b6d4594b6aa1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.52PM_2_9057395c-24bc-4827-9034-49c365d99fee.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.53PM_c663632a-3107-4cf6-ad2e-807dd91b497f.jpg"
+   ],
+   "season": "Made to Order",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Maroon",
+   "fabric": "Khaddi Silk",
+   "description": "3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10238706581760.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10238768578816",
+   "name": "Pure Sheesha Silk Embroidered Suit MTO0006",
+   "price": 38000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-sheesha-silk-embroidered-suit-mto0006",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at7.41.25PM_ec85371e-5cc4-4829-870f-01344ad83f38.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at7.41.25PM_ec85371e-5cc4-4829-870f-01344ad83f38.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_125a7cb5-d35d-4c57-825a-c9672b468374.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_0b893a6d-0e59-430b-9eb2-453043db3411.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_ddadd220-4dc2-4c5a-a757-aaba4e37624c.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_bbdd597f-8d04-4c0a-a655-c5ae1ab7925f.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_3af8d616-4f3b-4527-9085-8f6fb4a3e929.jpg"
+   ],
+   "season": "Made to Order",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Ice Blue",
+   "fabric": "Sheesha Silk",
+   "description": "3-piece sheesha silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece sheesha silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10238768578816.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10238785224960",
+   "name": "Pure Sheesha Silk Embroidered Suit MTO0005",
+   "price": 32000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-sheesha-silk-embroidered-suit-mto0005",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at7.41.25PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at7.41.25PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.17PM_ef59b94e-6f9c-478d-aaa5-3725cd7df9cb.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.19PM_7b8de489-d555-4448-9d95-9448dd348a90.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.18PM_c67f2c5d-0a17-4d8a-af0b-afaf447983ff.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.20PM_9c2a2b0e-5f94-4fcc-b6ee-0a18409dd635.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.21PM_1_b9a66049-3664-4034-a11b-52c34cdf391a.jpg"
+   ],
+   "season": "Made to Order",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Off White",
+   "fabric": "Sheesha Silk",
+   "description": "3-piece sheesha silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece sheesha silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10238785224960.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10238730371328",
+   "name": "Pure Sheesha Silk Embroidered Suit S115722",
+   "price": 28500,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-sheesha-silk-embroidered-suit-s115722",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.33PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.33PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.32PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.32PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.30PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.31PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-21at6.30.30PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Pistachio Green",
+   "fabric": "Sheesha Silk",
+   "description": "3-piece sheesha silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece sheesha silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10238730371328.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10228532281600",
+   "name": "Embroidered Kora Silk Suit S115690",
+   "price": 22500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-kora-silk-suit-s115690",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.29PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.29PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.36PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.35PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.36PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.36PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.44.35PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Lilac",
+   "fabric": "Kora Silk",
+   "description": "3-piece kora silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece kora silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10228532281600.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10228339540224",
+   "name": "Pure Khaddi Silk Embroidered Suit S115694",
+   "price": 32000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-khaddi-silk-embroidered-suit-s115694",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.34PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.34PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.39PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.40PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.41PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.41PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.43.40PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Peach",
+   "fabric": "Khaddi Silk",
+   "description": "3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10228339540224.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10219083956480",
+   "name": "Pure Khaddi Silk Embroidered Suit S115683",
+   "price": 30000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-khaddi-silk-embroidered-suit-s115683",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.56PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.56PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.58PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.57PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.58PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.59PM_8dbb8090-a73f-44f3-a918-95b45962140b.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-13at7.37.59PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Pistachio Green",
+   "fabric": "Khaddi Silk",
+   "description": "3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10219083956480.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10188347343104",
+   "name": "Pure Embroidered Chiffon Suit S115562",
+   "price": 28500,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-embroidered-chiffon-suit-s115562",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.46_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.46_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.47_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.47_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.48_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.48_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-29_at_7.06.48_PM_2.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Ferozi",
+   "fabric": "Chiffon",
+   "description": "3-piece chiffon suit: a shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece chiffon suit: a shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10188347343104.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9506014560512",
+   "name": "Pure Organza Embroidered Suit S114721",
+   "price": 22000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-organza-embroidered-suit-s114721",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM_3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM_4.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM_5.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-09_at_11.07.54_AM_6.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Navy Blue",
+   "fabric": "Organza",
+   "description": "3-piece organza suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece organza suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9506014560512.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9475005284608",
+   "name": "Pure Khaddi Silk Embroidered Suit S114604",
+   "price": 18000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-khaddi-silk-embroidered-s114604",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.15PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.15PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.15PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.16PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.16PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.17PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-09at5.16.17PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Off White",
+   "fabric": "Khaddi Silk",
+   "description": "3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9475005284608.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9670156419328",
+   "name": "Pure Khaddi Silk Embroidered Suit S115379",
+   "price": 32000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-khaddi-silk-embroidered-suit-s115379",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.33PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.33PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.37PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.36PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.38PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.38PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-12at7.54.37PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Baby Pink",
+   "fabric": "Khaddi Silk",
+   "description": "3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9670156419328.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9577919447296",
+   "name": "Pure Khaddi Silk Embroidered Suit S115040",
+   "price": 28000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-khaddi-silk-embroidered-suit-s115040",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.09PM_a3ed57e8-e4c4-495e-8f0f-fb761c95a1c6.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.09PM_a3ed57e8-e4c4-495e-8f0f-fb761c95a1c6.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.10PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.11PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.11PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.12PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-30at5.47.13PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Navy Blue",
+   "fabric": "Khaddi Silk",
+   "description": "3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece khaddi silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9577919447296.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9495634542848",
+   "name": "Pure Embroidered Silk Suit S114736",
+   "price": 36000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-embroidered-silk-suit-luxury-elegant-womens-formal-wear-s114736",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.29AM_1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.29AM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.29AM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.30AM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.29AM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.30AM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-06-25at11.21.30AM_3.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Black",
+   "fabric": "Silk",
+   "description": "3-piece silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9495634542848.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9465277481216",
+   "name": "Pure Printed Raw Silk Embroidered Suit S114516",
+   "price": 31500,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-pure-printed-raw-silk-embroidered-suit-s114516",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.48PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.48PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.49PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.49PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.49PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.50PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-05-29at3.28.50PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "festive",
+   "formality": 4.5,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Peach",
+   "fabric": "Raw Silk",
+   "description": "3-piece raw silk suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece raw silk suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9465277481216.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10235938275584",
+   "name": "Pure Sheesha Silk Embroidered Suit S115721",
+   "price": 24000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-pure-sheesha-silk-embroidered-suit-s115721",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.15PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.15PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.17PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.17PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.17PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.18PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.18PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Beige",
+   "fabric": "Sheesha Silk",
+   "description": "2-piece sheesha silk suit: an embroidered shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece sheesha silk suit: an embroidered shirt and trousers.",
+   "ref": "/refs/agha-noor/10235938275584.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10231387259136",
+   "name": "Pure Sheesha Silk Embroidered Suit S115708",
+   "price": 24000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-pure-sheesha-silk-embroidered-suit-s115708",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.42PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.42PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.44PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.42PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.43PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.43PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at9.27.40PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Grey",
+   "fabric": "Sheesha Silk",
+   "description": "2-piece sheesha silk suit: an embroidered shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece sheesha silk suit: an embroidered shirt and trousers.",
+   "ref": "/refs/agha-noor/10231387259136.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10231334699264",
+   "name": "Embroidered Kora Cotton Suit S115689",
+   "price": 22500,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-embroidered-kora-cotton-suit-s115689",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.18PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.18PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.20PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.19PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.21PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.21PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.19PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Black",
+   "fabric": "Kora Cotton",
+   "description": "3-piece kora cotton suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece kora cotton suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10231334699264.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10228493648128",
+   "name": "Embroidered Cambric Suit S115684",
+   "price": 10500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s115684",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.45PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.45PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.46PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.46PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.46PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.47PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-16at8.42.45PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Fuchsia Pink",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and trousers.",
+   "ref": "/refs/agha-noor/10228493648128.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10226064163072",
+   "name": "Embroidered Cambric Suit S115526",
+   "price": 10500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s115526",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_7d71bfc8-0b94-4bb1-aa3d-538f04b37296.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_7d71bfc8-0b94-4bb1-aa3d-538f04b37296.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_f48ef84a-cac2-4eab-9cfc-8c76db1466d3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_708aa098-f664-4817-9ab5-ef72076acfb9.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_b519abff-01bb-4170-846e-203d4bf00ee4.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_4cb355c5-f56b-4429-b246-41a7522b72ec.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Sky Blue",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and trousers.",
+   "ref": "/refs/agha-noor/10226064163072.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10193859281152",
+   "name": "Pure Sheesha Silk Embroidered Suit MTO0004",
+   "price": 30000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-pure-sheesha-silk-embroidered-suit-s115549-pre-order",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.15PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.15PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.15PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.16PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.17PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.16PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-02at8.05.18PM.jpg"
+   ],
+   "season": "Made to Order",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Light Pistachio",
+   "fabric": "Sheesha Silk",
+   "description": "2-piece sheesha silk suit: an embroidered shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece sheesha silk suit: an embroidered shirt and trousers.",
+   "ref": "/refs/agha-noor/10193859281152.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10192376070400",
+   "name": "Pure Sheesha Silk Embroidered Suit MTO0002",
+   "price": 24000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-pure-sheesha-silk-embroidered-suit-s115358-1",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.33PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.33PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.34PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.34PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.34PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.35PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-08at12.10.35PM_1.jpg"
+   ],
+   "season": "Made to Order",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Navy Blue",
+   "fabric": "Sheesha Silk",
+   "description": "2-piece sheesha silk suit: an embroidered shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece sheesha silk suit: an embroidered shirt and trousers.",
+   "ref": "/refs/agha-noor/10192376070400.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10192373383424",
+   "name": "Pure Organza Embroidered Suit MTO0001",
+   "price": 34000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-pure-organza-embroidered-suit-s115521",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.18PM_2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.18PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-26_at_9.16.18_PM_3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.19PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.19PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.19PM_1.jpg"
+   ],
+   "season": "Made to Order",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Sea Green",
+   "fabric": "Organza",
+   "description": "2-piece organza suit: an embroidered shirt and trousers, lace-trimmed",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece organza suit: an embroidered shirt and trousers, lace-trimmed.",
+   "ref": "/refs/agha-noor/10192373383424.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10207715295488",
+   "name": "Embroidered Cambric Suit S115613",
+   "price": 8500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s115613",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-07at11.08.39PM_2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-07at11.08.39PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-07at11.08.40PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-07at11.08.40PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-07at11.08.39PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-07at11.08.40PM_2.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Peach",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and trousers.",
+   "ref": "/refs/agha-noor/10207715295488.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10193868423424",
+   "name": "Pure Organza Embroidered Suit WS00415",
+   "price": 32000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-khaddi-silk-suit-ws00415-1",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-03_at_8.20.06_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-03_at_8.20.06_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-03_at_8.20.06_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-03_at_8.20.07_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-03_at_8.20.07_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-03_at_8.20.08_PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Off White",
+   "fabric": "Organza",
+   "description": "2-piece organza suit: a shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece organza suit: a shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10193868423424.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10183389348096",
+   "name": "Embroidered Cambric Suit S115535",
+   "price": 9500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s115535",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-26_at_9.16.12_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-26_at_9.16.12_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.13PM_3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.12PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.13PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.14PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-26at9.16.13PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Navy Blue",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and trousers.",
+   "ref": "/refs/agha-noor/10183389348096.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9573852512512",
+   "name": "Embroidered Cambric Suit S114937",
+   "price": 11500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s114937",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.13PM_305303f5-76f2-446b-a35f-9522ae45ac39.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.13PM_305303f5-76f2-446b-a35f-9522ae45ac39.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.13PM_1_f689541f-106a-473d-b789-e2aeb4548f54.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.14PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.14PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.14PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-20at6.39.14PM_3.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Purple",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a printed shirt and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a printed shirt and a dupatta.",
+   "ref": "/refs/agha-noor/9573852512512.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9527193633024",
+   "name": "Embroidered Cambric Suit S114824",
+   "price": 9500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s114824",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-07_at_5.50.52_PM_1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-07_at_5.50.52_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-07_at_5.50.51_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-07_at_5.50.50_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-07_at_5.50.51_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-07-07_at_5.50.52_PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Creamy White",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a printed shirt and a shalwar",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a printed shirt and a shalwar.",
+   "ref": "/refs/agha-noor/9527193633024.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9685582479616",
+   "name": "Embroidered Cambric Suit S115321",
+   "price": 9500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-embroidered-cambric-suit-s115321",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.33PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.33PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.34PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.34PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.35PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.35PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-09-18at5.49.36PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Lilac",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and trousers.",
+   "ref": "/refs/agha-noor/9685582479616.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9680786948352",
+   "name": "Pure Khaddi Silk Embroidered Suit S115401",
+   "price": 26000,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-pure-khaddi-silk-embroidered-suit-s115401",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.25_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.25_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.25_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.26_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.26_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.27_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-16_at_6.28.27_PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 3.8,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Pink",
+   "fabric": "Khaddi Silk",
+   "description": "2-piece khaddi silk suit: an embroidered shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece khaddi silk suit: an embroidered shirt and trousers.",
+   "ref": "/refs/agha-noor/9680786948352.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9658312491264",
+   "name": "Embroidered Cambric Suit S115314",
+   "price": 18000,
+   "url": "https://pk.aghanoorofficial.com/products/3-piece-embroided-cambric-suit-s115314",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.01_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.01_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.01_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.02_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.02_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.03_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-09-05_at_6.40.03_PM_63591edc-9e3a-4219-880f-750b079bda5f.jpg"
+   ],
+   "season": "Pret",
+   "lane": "outfits",
+   "formality": 2.6,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Baby Pink",
+   "fabric": "Cambric",
+   "description": "3-piece cambric suit: an embroidered shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece cambric suit: an embroidered shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9658312491264.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10236128067840",
+   "name": "Pure Embroidered Kora Cotton Shirt S114852",
+   "price": 12000,
+   "url": "https://pk.aghanoorofficial.com/products/pure-embroidered-kora-cotton-shirt-s114852",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.18PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.18PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.19PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.18PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.19PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.20PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at6.52.20PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Maroon",
+   "fabric": "Kora Cotton",
+   "description": "embroidered kora cotton kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a maroon pure embroidered kora cotton shirt s114852, shirt.",
+   "ref": "/refs/agha-noor/10236128067840.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10219038769408",
+   "name": "Digital Printed Lawn Shirt S115661",
+   "price": 4500,
+   "url": "https://pk.aghanoorofficial.com/products/digital-printed-lawn-shirt-s115661",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-13_at_7.38.06_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-13_at_7.38.06_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-13_at_7.38.06_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-13_at_7.38.07_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-13_at_7.38.07_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-10-13_at_7.38.07_PM_2.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Multi",
+   "fabric": "Lawn",
+   "description": "printed lawn kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a digital printed lawn shirt s115661, shirt.",
+   "ref": "/refs/agha-noor/10219038769408.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9457292411136",
+   "name": "Embroidered Kora Cotton Shirt S114471",
+   "price": 14000,
+   "url": "https://pk.aghanoorofficial.com/products/embroidered-kora-cotton-shirt-s114471",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.03_PM_b7e87c29-0da7-48f3-9301-5ac116f1b338.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.03_PM_b7e87c29-0da7-48f3-9301-5ac116f1b338.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.03_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.03_PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.03_PM_3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.04_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-21_at_7.35.04_PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Maroon",
+   "fabric": "Kora Cotton",
+   "description": "embroidered kora cotton kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a maroon embroidered kora cotton shirt s114471, shirt.",
+   "ref": "/refs/agha-noor/9457292411136.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9235058163968",
+   "name": "Look 117",
+   "price": 6000,
+   "url": "https://pk.aghanoorofficial.com/products/look-117",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2025-11-08_at_8.17.20_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2025-11-08_at_8.17.20_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2025-11-08_at_8.17.20_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2025-11-08_at_8.17.21_PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2025-11-08_at_8.17.21_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2025-11-08_at_8.17.21_PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Ferozi",
+   "fabric": "",
+   "description": "embroidered kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a ferozi look 117, shirt.",
+   "ref": "/refs/agha-noor/9235058163968.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9012890665216",
+   "name": "Look 36",
+   "price": 2750,
+   "url": "https://pk.aghanoorofficial.com/products/look-36",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WS-014A_2.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WS-014A_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WS-014A_3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WS-014A_4.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WS-014A_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Beige",
+   "fabric": "",
+   "description": "kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a beige look 36, shirt.",
+   "ref": "/refs/agha-noor/9012890665216.jpg",
+   "refHow": "mask"
+  },
+  {
+   "id": "9329545707776",
+   "name": "Embroidered Cambric Shirt WS00222",
+   "price": 5250,
+   "url": "https://pk.aghanoorofficial.com/products/embroidered-cambric-shirt-ws00197-copy",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-01-26at8.15.20PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-01-26at8.15.20PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-01-26at8.15.23PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-01-26at8.15.23PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-01-26at8.15.22PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Multi",
+   "fabric": "Cambric",
+   "description": "embroidered cambric kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the upper body garment with an embroidered cambric shirt ws00222, shirt.",
+   "ref": "/refs/agha-noor/9329545707776.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9551556870400",
+   "name": "Embroidered Kora Cotton Shirt S114887",
+   "price": 11600,
+   "url": "https://pk.aghanoorofficial.com/products/embroidered-kora-cotton-shirt-s114887",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.35PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.35PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.35PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.36PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.37PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.37PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-15at5.36.38PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Lilac",
+   "fabric": "Kora Cotton",
+   "description": "embroidered kora cotton kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a lilac embroidered kora cotton shirt s114887, shirt.",
+   "ref": "/refs/agha-noor/9551556870400.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9550195753216",
+   "name": "Embroidered Kora Cotton Shirt S114876",
+   "price": 11600,
+   "url": "https://pk.aghanoorofficial.com/products/embroidered-kora-cotton-shirt-s114876",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.20PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.20PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.21PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.21PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.21PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.22PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-07-14at5.55.22PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "kurta",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "Shirt",
+   "colour": "Pistachio Green",
+   "fabric": "Kora Cotton",
+   "description": "embroidered kora cotton kurta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": true
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the upper body garment with a pistachio green embroidered kora cotton shirt s114876, shirt.",
+   "ref": "/refs/agha-noor/9550195753216.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10235933720832",
+   "name": "Digital Printed Cambric Suit S115709",
+   "price": 8500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-digital-printed-cambric-suit-s115709",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.13PM_1.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.13PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.13PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.12PM_20a8196b-931c-4b44-966f-36675896d208.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.13PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.14PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-20at7.39.14PM_1.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Multi",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and a dupatta.",
+   "ref": "/refs/agha-noor/10235933720832.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10231324639488",
+   "name": "Digital Printed Cambric Suit S115693",
+   "price": 7500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-digital-printed-cambric-suit-s115693",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.33PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.33PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.35PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.37PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.38PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.39PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-17at7.24.34PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Multi",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt and a dupatta.",
+   "ref": "/refs/agha-noor/10231324639488.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10226060132608",
+   "name": "Digital Printed Embroidered Lawn Suit S115647",
+   "price": 6500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-digital-printed-embroidered-lawn-suit-s115647",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_fd5212e3-b5cf-42b5-a90f-629b186ccae3.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_fd5212e3-b5cf-42b5-a90f-629b186ccae3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_a5ba826c-17a6-448e-9f09-a3bf2458b721.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_f3df5f61-341e-4efb-9166-b8719948cd40.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_92163206-ff35-442b-8590-ccabc5cbda32.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_5abc04fb-32fd-4c33-b944-1f975306ecd8.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Multi",
+   "fabric": "Lawn",
+   "description": "2-piece lawn suit: an embroidered shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece lawn suit: an embroidered shirt and trousers.",
+   "ref": "/refs/agha-noor/10226060132608.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10226078875904",
+   "name": "Digital Printed Embroidered Lawn Suit S115663",
+   "price": 7500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-digital-printed-embroidered-lawn-suit-s115663",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_8829cdf4-48bc-42b8-85d1-19bff334733f.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_8829cdf4-48bc-42b8-85d1-19bff334733f.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_6d900a21-4b19-4b06-a97b-82bb9ecf09c3.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_d9797368-79a9-4c94-b156-910d0b5a7ec4.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_3367cded-2c4d-40c1-bb44-17371f314ddb.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_72f7bd95-1e83-4bf4-9299-9939cc2b413d.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_67c443d5-42bd-4daf-95e0-e12c7f00fcc0.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Multi",
+   "fabric": "Lawn",
+   "description": "2-piece lawn suit: an embroidered shirt and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece lawn suit: an embroidered shirt and a dupatta.",
+   "ref": "/refs/agha-noor/10226078875904.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10216569012480",
+   "name": "Hand Block Printed Kora Cotton Suit S115650",
+   "price": 12500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-hand-block-printed-kora-cotton-suit-s115650",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.22PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.22PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.23PM_2.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.23PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.23PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsAppImage2026-10-12at9.16.24PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Sky Blue",
+   "fabric": "Kora Cotton",
+   "description": "2-piece kora cotton suit: a printed shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": false
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece kora cotton suit: a printed shirt and trousers.",
+   "ref": "/refs/agha-noor/10216569012480.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "10213132992768",
+   "name": "Digital Printed Cambric Suit S115645",
+   "price": 9500,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-digital-printed-cambric-suit-s115645",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_73df0ee9-107e-4854-a4dd-103b14d8e0ac.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_73df0ee9-107e-4854-a4dd-103b14d8e0ac.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_7d16004c-101f-4c92-a337-9f2ca9eb62d5.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_22af5862-6483-4ff7-a342-1e6a92ad5f78.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_9d7adb2d-81fe-4117-9436-f41a9a8514c5.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_1b58d863-46e9-4c92-b917-6848014a8ad4.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/rn-image_picker_lib_temp_38f578de-df75-4979-bfb7-4940b9752c56.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "3 piece",
+   "colour": "Multi",
+   "fabric": "Cambric",
+   "description": "3-piece cambric suit: a shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 3-piece cambric suit: a shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/10213132992768.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9612176064768",
+   "name": "Digital Printed Lawn Suit S115163",
+   "price": 5950,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-digital-printed-lawn-suit-s115163",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-08-17_at_5.39.29_PM.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-08-17_at_5.39.29_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-08-17_at_5.39.29_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-08-17_at_5.39.30_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-08-17_at_5.39.30_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-08-17_at_5.39.30_PM_2.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Yellow",
+   "fabric": "Lawn",
+   "description": "2-piece lawn suit: a printed shirt and trousers",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": false
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": true
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece lawn suit: a printed shirt and trousers.",
+   "ref": "/refs/agha-noor/9612176064768.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  },
+  {
+   "id": "9441284227328",
+   "name": "Hand Block Print Cambric Suit S114319",
+   "price": 7700,
+   "url": "https://pk.aghanoorofficial.com/products/2-piece-hand-block-print-cambric-suit-s114319",
+   "image": "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.35_PM_ca23272f-1def-4e0a-bc33-820aa59fb545.jpg",
+   "images": [
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.35_PM_ca23272f-1def-4e0a-bc33-820aa59fb545.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.36_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.37_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.38_PM_1.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.38_PM.jpg",
+    "https://cdn.shopify.com/s/files/1/0252/1160/0992/files/WhatsApp_Image_2026-05-07_at_5.29.39_PM.jpg"
+   ],
+   "season": "Pret",
+   "lane": "casual",
+   "formality": 2.2,
+   "tradition": "east",
+   "gender": "women",
+   "unstitched": false,
+   "cut": "2 piece",
+   "colour": "Off White",
+   "fabric": "Cambric",
+   "description": "2-piece cambric suit: a shirt, trousers and a dupatta",
+   "sizes": [
+    {
+     "label": "XS",
+     "inStock": false
+    },
+    {
+     "label": "S",
+     "inStock": true
+    },
+    {
+     "label": "M",
+     "inStock": true
+    },
+    {
+     "label": "L",
+     "inStock": true
+    },
+    {
+     "label": "XL",
+     "inStock": false
+    }
+   ],
+   "prompt": "Substitute the outfit with a 2-piece cambric suit: a shirt, trousers and a dupatta.",
+   "ref": "/refs/agha-noor/9441284227328.jpg",
+   "refHow": "flat",
+   "refPin": "hanger shot: the store's whole photo is the garment picture (tools/stores/hanger-refs.mjs)"
+  }
+ ],
+ "addons": []
+}

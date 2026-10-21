@@ -222,18 +222,20 @@ async function pitch() {
     data.brand.lookbook ? fetch(`/showcase/lookbook/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) : null,
   ]);
   const days = pilot?.days || 60;
-  const { brand, facts, pictures, currency, takenAt } = data;
+  const { brand, facts, pictures, currency, takenAt, chosenFrom } = data;
   const read = new Date(takenAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   const rupees = (v) => money(v, currency);
   document.title = `Prepared for ${brand.name} — MIRVA`;
   document.documentElement.style.setProperty("--store", brand.accent || "#8d95a6");
   $("#navMirror").href = `/mirror?brand=${brand.id}`;
-  $("#disclaimer").textContent = `Prepared by MIRVA from ${brand.name}'s public catalogue, read on ${read}. MIRVA is not affiliated with or endorsed by ${brand.name}.`;
+  $("#disclaimer").textContent = brand.invited
+    ? `Prepared by MIRVA for ${brand.name}, from ${brand.name}’s public catalogue as it stood on ${read}. Prices and sizes are as the site showed them that day.`
+    : `Prepared by MIRVA from ${brand.name}’s public catalogue, read on ${read}. MIRVA is not affiliated with or endorsed by ${brand.name}.`;
 
   // What the catalogue itself says. Each card appears only when the fact behind it is there.
   const noticed = [];
   if (facts.unstitched)
-    noticed.push([`${facts.unstitched}`, `of your ${facts.products} pieces are unstitched.`, "Nobody can try on fabric. MIRVA shows each one as a finished suit, on the shopper, with the dupatta draped."]);
+    noticed.push([`${facts.unstitched}`, `of the ${facts.products} pieces here are unstitched.`, "Nobody can try on fabric. MIRVA shows each one as a finished suit, on the shopper, with the dupatta draped."]);
   if (facts.sizesOut)
     noticed.push([`${facts.withGap}`, `pieces had at least one size sold out online, ${facts.sizesOut} sizes in all.`, "The mirror tells you which of those sizes shoppers asked for, so you know what a gap really cost."]);
   if (facts.formal)
@@ -249,7 +251,9 @@ async function pitch() {
         el("div", { class: "stack" },
           el("p", { class: "kicker", "data-reveal": true, text: `Prepared for ${brand.name}` }),
           el("h1", { class: "display", "data-reveal": true, style: "--i:1" }, brand.name + ", ", el("em", { text: "in the mirror." })),
-          el("p", { class: "lede", "data-reveal": true, style: "--i:2", text: `We read your public catalogue on ${read}: ${facts.products} pieces, from ${rupees(facts.priceMin)} to ${rupees(facts.priceMax)}. This is what MIRVA would do with it.` }),
+          el("p", { class: "lede", "data-reveal": true, style: "--i:2", text: chosenFrom > facts.products
+            ? `We read your public catalogue on ${read} and chose ${facts.products} of its ${chosenFrom.toLocaleString("en-PK")} pieces, all in stock, from ${rupees(facts.priceMin)} to ${rupees(facts.priceMax)}. This is what MIRVA does with them.`
+            : `We read your public catalogue on ${read}: ${facts.products} pieces, from ${rupees(facts.priceMin)} to ${rupees(facts.priceMax)}. This is what MIRVA would do with it.` }),
           el("div", { class: "row", "data-reveal": true, style: "--i:3" },
             el("a", { class: "btn", href: `/mirror?brand=${brand.id}`, text: `Open the mirror as ${brand.name}` }),
             el("a", { class: "btn ghost", href: "/retail#talk", text: "Talk to the founder" }),

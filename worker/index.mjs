@@ -9,6 +9,12 @@ import lawrencepurBrand from "../brands/lawrencepur/brand.json";
 import lawrencepurCatalogue from "../brands/lawrencepur/catalogue.json";
 import outfittersBrand from "../brands/outfitters/brand.json";
 import outfittersCatalogue from "../brands/outfitters/catalogue.json";
+import naqshiBrand from "../brands/naqshi/brand.json";
+import naqshiCatalogue from "../brands/naqshi/catalogue.json";
+import baroqueBrand from "../brands/baroque/brand.json";
+import baroqueCatalogue from "../brands/baroque/catalogue.json";
+import aghaNoorBrand from "../brands/agha-noor/brand.json";
+import aghaNoorCatalogue from "../brands/agha-noor/catalogue.json";
 
 // Catalogues that ship with the code. Sapphire's, Lawrencepur's and Outfitters' are concept demos built from their public
 // sites, with no agreement behind them. The founder chose to show them publicly; the mirror labels each a concept
@@ -17,6 +23,11 @@ const BUILT_IN = {
   sapphire: { brand: sapphireBrand, catalogue: sapphireCatalogue },
   lawrencepur: { brand: lawrencepurBrand, catalogue: lawrencepurCatalogue },
   outfitters: { brand: outfittersBrand, catalogue: outfittersCatalogue },
+  // Naqshi, Baroque and Agha Noor said yes to seeing their own catalogues in MIRVA (21 Oct 2026): chosen and described
+  // by hand from their public sites, by link only (/for/<id>, /mirror?brand=<id>) until the founder lists them.
+  naqshi: { brand: naqshiBrand, catalogue: naqshiCatalogue },
+  baroque: { brand: baroqueBrand, catalogue: baroqueCatalogue },
+  "agha-noor": { brand: aghaNoorBrand, catalogue: aghaNoorCatalogue },
 };
 
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
