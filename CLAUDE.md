@@ -210,8 +210,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Five boutique pages** (unlisted, "not affiliated" footer), for walk-in visits: `/for/zarashahjahan-com`,
   `/for/hussainrehar-com`, `/for/sairashakira-com`, `/for/rangrasiya-com-pk`, `/for/sadaffawadkhan-com`; spares that load:
   Maryum N Maria, Ammara Khan, Republic Womenswear.
-- **Naqshi, Baroque, Agha Noor** (said yes to seeing their catalogues, 21 Oct 2026; link only, `invited: true`):
-  `/for/naqshi`, `/for/baroque`, `/for/agha-noor` and `/mirror?brand=<id>`. Built in like Sapphire (worker BUILT_IN,
+- **Naqshi, Baroque, Agha Noor** (said yes, 21 Oct 2026; `invited: true`, `priority` 1 to 3): listed for everyone and
+  first in the mirror's store list (lib/app.mjs /api/brands sorts by priority); a first visit to /mirror opens Naqshi;
+  no notice, so "styled by MIRVA"; the frozen home page's demo skips them (src/web/home.js). Pages: `/for/naqshi`,
+  `/for/baroque`, `/for/agha-noor` and `/mirror?brand=<id>`. Built in like Sapphire (worker BUILT_IN,
   committed brands/), chosen by hand from naqshiofficial.com (48 of 491), baroque.pk (49 of 789),
   pk.aghanoorofficial.com (46 of 636). Scripts and steps: `tools/stores/README.md` (pull, curate with skip lists,
   prepare-refs, refsheet). Garment pictures (public/refs/, not in git) are deployed from this laptop: redo them before a
