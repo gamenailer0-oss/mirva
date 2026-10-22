@@ -14,9 +14,8 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Ask once, then act: the founder wants finished work, fast, in small shipped steps, without long waits. Plain words,
   no jargon. Before a big change, say in a few lines what you understood, then do it.
 - Design is MIRVA's own: dark glass, the halo, Newsreader + Albert Sans, porcelain/noir, the marble room. No
-  gimmick graphics, no stock motion, only real MIRVA results as proof. **The metal is bronze** (the founder's mirror
-  concept, 23 Oct 2026; it was mercury silver): `--bronze` in brand.css and styles.css, the `#bronze` gradient in
-  mirror.html. **Motion is poised** (the founder, 23 Oct: "slimy and squishy... we are making it for elite and
+  gimmick graphics, no stock motion, only real MIRVA results as proof. **The metal stays mercury silver** (the founder,
+  23 Oct 2026: "don't delete the silver style"); bronze (`--bronze`) belongs to the MIRVA mirror object only. **Motion is poised** (the founder, 23 Oct: "slimy and squishy... we are making it for elite and
   elegant"): a press sinks 1 px (never a scale squash), moves 180–320 ms on `cubic-bezier(.4, 0, .2, 1)` with no tail
   or overshoot (`--spring` now holds that curve), panels hold firm at their ends (no rubber band), nothing in the
   interface breathes or pops. Only the mirror's halo clock (asleep, thinking) still moves on its own.
@@ -221,6 +220,18 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   mixed inline content in one span.
 - **The founder's word for bad motion is "slimy and squishy"**: spring tails, squashing presses, rubber-band stretch,
   breathing loops and arcs that pop. Default to poise (see the design rule above).
+- **Never redraw the founder's own design** (23 Oct): his mirror concept, redrawn as an SVG, was "awful". Use his
+  pictures (made sharp if needed) and build around them. And adding something new never removes what is there: the
+  bronze swap deleted the silver he liked. Add beside; ask before replacing a founder-chosen style.
+- **Every file was "no-cache" with no tag, so every visit downloaded everything again** (found 23 Oct, from "lag"):
+  now hashed pieces are immutable, pictures a day, the rest answers 304 (lib/app.mjs fileResponse; test in
+  server.test.mjs). A file the app loads by name (the pose thread) gets a hashed name through esbuild `define`.
+- **Pictures that wait for a script look broken on mobile data**: the partner cards waited for /api/brands. Fixed
+  pictures go into the page's HTML; scripts fill only what is still empty.
+- **A grid item that is itself a grid stretches its rows to the tallest neighbour** (align-content defaults to
+  stretch): the shorter "How it works" steps pushed their titles down. Use `align-content: start`.
+- **Git Bash rewrote "/" again** (a full-page shot got "Cannot navigate to invalid URL"): MSYS_NO_PATHCONV=1 on any
+  command with a path argument.
 - **Harvey was asked for as a "skill" but is a Python program** that sends mail and signs in to LinkedIn: read any
   repo before installing it, and install only the parts that are safe and useful (its playbooks).
 
@@ -260,9 +271,15 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - The founder's mirror concept (two picture sheets: a bronze pebble of smoked glass on a dark plinth, a line of warm
   light round the glass, finishes sand gold / matte black / pearl white, a pad on a stand beside it). Decided: keep the
   site and its marble room (the renders stand in the same warm room), add the mirror, take bronze as the metal.
-- Home hero: the oval is now the mirror, drawn in SVG (public/site/home.html `.mirror-obj`: body, plinth, shadow in one
-  static drawing; the glass is the portraits under a CSS mask of the same outline; `.m-line` draws once, `.m-glow`
-  fades in). Outline generator: session scratchpad `mirror-concept/shape.mjs` (one pebble scaled into each box).
+- Home hero (shipped 042f699, after the founder called the drawn SVG mirror "awful"): a photograph of the founder's
+  own mirror. Made sharp from the concept sheet's front view with fal nano-banana edit (scratchpad
+  `mirror-concept/render.mjs`, US$0.04, chosen render kept in tools/portrait-lab/models/mirror-front-render.png), then
+  `cutout.mjs`: crop, glass found by filling from its middle out to the line of light, glass 10–30% smoke, the wall
+  removed by growing the glass outline ring by ring (body + soft halo) and a fading floor glow under the plinth →
+  public/brand/mirva-mirror.webp (23 KB) and the glass box in percent for site.css `.mirror-glass`. Portraits sit
+  behind the glass, placed from MIRVA's own pose landmarks (`landmarks.mjs`): head top at 8% of the glass, feet at
+  95%, on the axis (`--h --w --l --t` per image). Only the women's showcase portraits have headroom; the men's touch
+  the top edge, so the hero shows khaddar, raw silk and sweatshirt. Caption under the mirror.
 - /retail `#mirror`: the concept pictures cut by scratchpad `mirror-concept/crop.mjs` into public/retail/mirror/,
   labelled "a design concept". The concept's pad beside the mirror implies the two-screen link (pad drives mirror)
   that is NOT built (docs/mirror-hardware.md: unit one is a wall-set 55-inch screen). Never promise the pad or sizes.
