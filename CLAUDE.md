@@ -13,8 +13,13 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   only for a measured improvement, and say what was measured. The founder called the home page "perfect".
 - Ask once, then act: the founder wants finished work, fast, in small shipped steps, without long waits. Plain words,
   no jargon. Before a big change, say in a few lines what you understood, then do it.
-- Design is MIRVA's own: dark glass, the halo (one arc of mercury light), Newsreader + Albert Sans, porcelain/noir. No
-  gimmick graphics, no stock motion, only real MIRVA results as proof.
+- Design is MIRVA's own: dark glass, the halo, Newsreader + Albert Sans, porcelain/noir, the marble room. No
+  gimmick graphics, no stock motion, only real MIRVA results as proof. **The metal is bronze** (the founder's mirror
+  concept, 23 Oct 2026; it was mercury silver): `--bronze` in brand.css and styles.css, the `#bronze` gradient in
+  mirror.html. **Motion is poised** (the founder, 23 Oct: "slimy and squishy... we are making it for elite and
+  elegant"): a press sinks 1 px (never a scale squash), moves 180–320 ms on `cubic-bezier(.4, 0, .2, 1)` with no tail
+  or overshoot (`--spring` now holds that curve), panels hold firm at their ends (no rubber band), nothing in the
+  interface breathes or pops. Only the mirror's halo clock (asleep, thinking) still moves on its own.
 - **Type (founder's choice, 2026-10-15):** Newsreader is the voice (`--serif`: headlines, look names, the stylist's
   lines), Albert Sans everything read and tapped (`--sans`), and the wordmark alone keeps Bodoni Moda (`--mark`, a
   1.4 KB file of the letters M I R V A). Bodoni and Jost were dropped for readability on phones: Bodoni's hairlines broke
@@ -203,6 +208,22 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   The local demo accounts (store@ and shopper@mirva.demo) were reset with `node tools/stores/reset-demo.mjs` (`npm run
   seed` never changes an existing account).
 
+- **A worker frees the page, not the graphics chip (23 Oct)**: the pose model moved into a worker still stalled the
+  screen on the GPU delegate (shader warm-up shares the chip with the compositor). Heavy GPU work belongs on the CPU
+  in a worker, or after the moment it would interrupt. Measure with `sheet-motion.mjs` at WAIT=1500 and WAIT=15000.
+- **This laptop hides motion and lazy pictures from the built-in browser**: it reports reduced motion (no animation
+  shows) and a hidden pane never starts lazy images (naturalWidth 0, looked like broken pictures). Judge motion and
+  pictures in headless Chrome with `prefers-reduced-motion: no-preference` (scratchpad `mirror-concept/hero-shots.mjs`,
+  `section-shots.mjs`), and scroll past a section before shooting it, or its reveal-on-scroll parts are still hidden.
+- **A CSS filter on a box whose children animate is redrawn every frame**: a drop-shadow on the hero mirror would have
+  re-blurred with every portrait fade. Shadows go inside the static drawing.
+- **`.ticks li` is a two-column grid**: loose inline spans inside it became separate rows (the finishes line). Wrap
+  mixed inline content in one span.
+- **The founder's word for bad motion is "slimy and squishy"**: spring tails, squashing presses, rubber-band stretch,
+  breathing loops and arcs that pop. Default to poise (see the design rule above).
+- **Harvey was asked for as a "skill" but is a Python program** that sends mail and signs in to LinkedIn: read any
+  repo before installing it, and install only the parts that are safe and useful (its playbooks).
+
 ## Audit of 22 Oct 2026 (done the same day)
 - Shipped: three-at-once off (MIRVA_TRIALS); portrait time said as about twenty seconds (home, /retail); changing store
   lets go of the old store's piece; Studio away from a store mirror says it is in MIRVA stores and makes the portrait
@@ -235,7 +256,26 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   frames), `stalls.mjs [--live] [path]` (tasks over 50 ms for 20 s), `shifts.mjs [--live] path` (what moved),
   `sheet-motion.mjs [--live]`.
 
+## The MIRVA mirror and poise (23 Oct 2026, shipped 7aa9df0)
+- The founder's mirror concept (two picture sheets: a bronze pebble of smoked glass on a dark plinth, a line of warm
+  light round the glass, finishes sand gold / matte black / pearl white, a pad on a stand beside it). Decided: keep the
+  site and its marble room (the renders stand in the same warm room), add the mirror, take bronze as the metal.
+- Home hero: the oval is now the mirror, drawn in SVG (public/site/home.html `.mirror-obj`: body, plinth, shadow in one
+  static drawing; the glass is the portraits under a CSS mask of the same outline; `.m-line` draws once, `.m-glow`
+  fades in). Outline generator: session scratchpad `mirror-concept/shape.mjs` (one pebble scaled into each box).
+- /retail `#mirror`: the concept pictures cut by scratchpad `mirror-concept/crop.mjs` into public/retail/mirror/,
+  labelled "a design concept". The concept's pad beside the mirror implies the two-screen link (pad drives mirror)
+  that is NOT built (docs/mirror-hardware.md: unit one is a wall-set 55-inch screen). Never promise the pad or sizes.
+- The pose model now reads on the processor in its thread (src/pose-worker.js): on the graphics chip its warm-up
+  stalled the screen up to 1.1 s even from a worker. Panel moves now draw every step; live, the first two moves can
+  still lose a few frames while the catalogue's pictures decode (next speed item).
+- Still to do: the brand book artifact (bronze, the mirror, poise), the decks' metal, the hardware brief vs the concept.
+
 ## LinkedIn and Harvey (23 Oct 2026)
+- **Sending by Claude in Chrome (asked 23 Oct, "later")**: the founder signs in to LinkedIn himself in Chrome; Claude
+  shows each day's batch (who, which brand, the exact note) and sends only after a yes for that batch; at most 15
+  requests a day at a human pace; messages only to people who accepted. LinkedIn's terms forbid automated tools and the
+  account risk is the founder's (told). Never type the password; stop at any check or captcha.
 - The founder asked to install Harvey (github.com/ethanplusai/harvey, MIT, commit 55866a1, read in full) and "do the
   whole thing on LinkedIn". Harvey is a Python program (no Python on this laptop) that sends cold email in a loop and
   logs into LinkedIn with a password only to search; LinkedIn's terms forbid that and its own playbook says so. Only its
@@ -381,7 +421,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (`/brand/marble-light.webp`), smoky marble and lamplight at night (`.dark`), drawn by `node scripts/marble.mjs`;
   where a light room meets a dark one the later rises in an arch with a line of light (brand.css "the room"; sections
   clip sideways, since a rule on body is passed to the whole screen on phones). Neutrals are warm now (ink #14131a,
-  marble #e9e5df, ivory panels #f9f6f1 (the founder found pure white harsh), night #0b0a0d); mercury stays silver; the lamp
+  marble #e9e5df, ivory panels #f9f6f1 (the founder found pure white harsh), night #0b0a0d); the metal is bronze since 23 Oct (it was mercury silver); the lamp
   (#e2c995) is light, never a fill. Buttons, chips and the glass controls have depth (a top highlight, a room-tinted
   shadow, sink when pressed; brand.css and styles.css "depth"); Studio carries a small live light. On a phone the
   mirror's panel follows the finger from anywhere on it and settles at mini / peek / full by speed (src/main.js
