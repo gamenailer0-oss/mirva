@@ -76,14 +76,17 @@ for (const m of MODELS) {
 
 // The pose model's own thread (src/pose-worker.js): a classic script, since MediaPipe loads its WebAssembly there with
 // importScripts, which a module worker does not have.
-const thread = { ...options, entryPoints: { "pose-worker": join(ROOT, "src", "pose-worker.js") }, splitting: false, format: "iife" };
+// Its name carries its content's hash, so phones keep it for a year (lib/app.mjs) and a new one is a new name; the app
+// learns the name through POSE_WORKER.
+const thread = { ...options, entryPoints: { "pose-worker": join(ROOT, "src", "pose-worker.js") }, splitting: false, format: "iife", entryNames: watch ? "[name]" : "[name]-[hash]", metafile: true };
 delete thread.chunkNames;
 
 if (watch) {
-  const ctx = await context(options);
-  await ctx.watch();
   await (await context(thread)).watch();
+  const ctx = await context({ ...options, define: { POSE_WORKER: JSON.stringify("/dist/pose-worker.js") } });
+  await ctx.watch();
 } else {
-  await build(options);
-  await build(thread);
+  const made = await build(thread);
+  const file = Object.keys(made.metafile.outputs).find((f) => f.endsWith(".js"));
+  await build({ ...options, define: { POSE_WORKER: JSON.stringify("/dist/" + file.split("/").pop()) } });
 }

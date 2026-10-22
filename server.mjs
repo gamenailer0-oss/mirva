@@ -8,6 +8,7 @@ import { existsSync, readFileSync, mkdirSync } from "node:fs";
 import { join, normalize, dirname, basename, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { lookup } from "node:dns/promises";
+import { createHash } from "node:crypto";
 import { json } from "./lib/http.mjs";
 import { openDb } from "./lib/db.mjs";
 import { memoryLimiter } from "./lib/auth.mjs";
@@ -147,7 +148,8 @@ async function assets(rel) {
   const file = normalize(join(PUBLIC, rel));
   if (file === PUBLIC || !file.startsWith(PUBLIC + sep)) return null;
   try {
-    return { body: await readFile(file) };
+    const body = await readFile(file);
+    return { body, etag: `W/"${body.length}-${createHash("sha1").update(body).digest("hex").slice(0, 16)}"` };
   } catch {
     return null;
   }

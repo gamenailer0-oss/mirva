@@ -49,7 +49,7 @@ async function load() {
 function inThread() {
   return new Promise((resolve, reject) => {
     if (typeof Worker !== "function" || typeof OffscreenCanvas !== "function" || typeof createImageBitmap !== "function") return reject(new Error("no worker"));
-    const thread = new Worker("/dist/pose-worker.js");
+    const thread = new Worker(typeof POSE_WORKER === "string" ? POSE_WORKER : "/dist/pose-worker.js"); // its hashed name, from scripts/build.mjs
     const waiting = new Map();
     let calls = 0, stopped = false;
     const detect = async (source) => {

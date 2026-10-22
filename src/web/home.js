@@ -21,7 +21,8 @@ export async function start() {
   // stores follow, so formal, menswear and casual are all still a tap away.
   stores = stores.slice(0, 6);
   // "Now in the mirror": each of their cards gets three pictures from its own rails.
-  for (const rail of $$("[data-cover]")) {
+  // The three partners' pictures are written into the page itself, so they load with it; only an empty rail is filled.
+  for (const rail of $$("[data-cover]:not(.real)")) {
     const store = stores.find((s) => s.id === rail.dataset.cover);
     if (!store?.cover?.length) continue;
     fill(rail, store.cover.slice(0, 3).map((src) => el("img", { src: pic(src, 360), alt: "", loading: "lazy", decoding: "async" })));

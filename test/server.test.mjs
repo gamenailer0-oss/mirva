@@ -89,6 +89,27 @@ test("the built bundle and the files the engines need are served", async () => {
   }
 });
 
+test("phones keep what never changes and are told when nothing else has (23 Oct 2026: every visit fetched it all)", async () => {
+  const { readdirSync } = await import("node:fs");
+  const chunk = readdirSync(join(ROOT, "public", "dist", "chunks")).find((f) => /-[A-Z0-9]{8}\.js$/.test(f));
+  const worker = readdirSync(join(ROOT, "public", "dist")).find((f) => /^pose-worker-.+\.js$/.test(f));
+  for (const path of [`/dist/chunks/${chunk}`, `/dist/${worker}`]) {
+    const res = await fetch(base + path);
+    assert.match(res.headers.get("cache-control"), /immutable/, path);
+    await res.arrayBuffer();
+  }
+  const first = await fetch(base + "/styles.css");
+  assert.equal(first.headers.get("cache-control"), "no-cache");
+  const tag = first.headers.get("etag");
+  assert.ok(tag, "a tag to check against");
+  await first.arrayBuffer();
+  const again = await fetch(base + "/styles.css", { headers: { "if-none-match": tag } });
+  assert.equal(again.status, 304);
+  const pic = await fetch(base + "/brand/mirva-mirror.webp");
+  assert.match(pic.headers.get("cache-control"), /max-age=86400/);
+  await pic.arrayBuffer();
+});
+
 test("the bundle never contains the permanent key", async () => {
   const js = await (await fetch(base + "/dist/app.js")).text();
   assert.doesNotMatch(js, /dct_[A-Za-z0-9_-]{20,}/);

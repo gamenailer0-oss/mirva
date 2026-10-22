@@ -24,10 +24,10 @@
 .r-hero .display em { display: block; }
 .r-hero .lede { color: #b4bccb; }
 
-/* The store's own photos hang on a line of bronze. One lifts, a thread of light runs down, and the oval shows her in it.
+/* The store's own photos hang on a line of mercury. One lifts, a thread of light runs down, and the oval shows her in it.
    Three turns of five seconds; for anyone who asks for less motion, the first turn holds still. */
 .from-rail { position: relative; justify-self: center; width: clamp(250px, 27vw, 360px); margin: 0; display: grid; gap: 0; --cycle: 15s; }
-.rail-bar { height: 1.5px; margin: 0 4%; border-radius: 2px; background: linear-gradient(90deg, transparent, #b89a74 14%, #ecd7b4 50%, #b89a74 86%, transparent); opacity: .85; }
+.rail-bar { height: 1.5px; margin: 0 4%; border-radius: 2px; background: linear-gradient(90deg, transparent, #cdc6be 14%, #f6f8fb 50%, #cdc6be 86%, transparent); opacity: .85; }
 .hangers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12%; padding: 0 8%; }
 .hangers li { position: relative; padding-top: 12px; opacity: .42; transform-origin: 50% 0; animation: hang-pick var(--cycle) var(--ease) infinite; }
 .hangers li::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 12px; background: #cdc6be; opacity: .8; }

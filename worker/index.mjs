@@ -125,7 +125,7 @@ async function start(env, origin) {
     },
     async assets(path) {
       const res = await env.ASSETS.fetch(new Request("https://assets.invalid/" + path.split("/").map(encodeURIComponent).join("/")));
-      return res.status === 200 ? { body: res.body, type: res.headers.get("content-type") || undefined } : null;
+      return res.status === 200 ? { body: res.body, type: res.headers.get("content-type") || undefined, etag: res.headers.get("etag") || undefined } : null;
     },
     imageCache: {
       async get(k) {

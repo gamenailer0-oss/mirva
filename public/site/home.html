@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="preload" href="/brand/mirva-mirror.webp" as="image" fetchpriority="high">
 <link rel="preload" href="/showcase/woman-khaddar.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="/brand.css">
 <link rel="stylesheet" href="/site/site.css">
@@ -64,39 +65,22 @@
         <p class="fine" data-reveal style="--i:4" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
       </div>
 
-      <!-- The MIRVA mirror (the founder's concept, 23 Oct 2026): a pebble of smoked glass in a bronze body on a dark
-           plinth, a line of warm light round the glass. Drawn, not photographed; the portraits in it are real. -->
+      <!-- The MIRVA mirror (the founder's design, 23 Oct 2026): a photograph of it with its glass see-through, and the real
+           portraits behind the glass, each placed by where the model stands (head under the curve, feet above the base). -->
       <figure class="oval-hero" data-reveal style="--i:2">
-        <div class="mirror-obj">
-        <svg class="m-body" viewBox="0 0 400 676" aria-hidden="true">
-          <defs>
-            <linearGradient id="bronze" x1="0" x2="1"><stop offset="0" stop-color="#47362a"/><stop offset=".16" stop-color="#8a6c4f"/><stop offset=".33" stop-color="#c4a684"/><stop offset=".5" stop-color="#8c6f52"/><stop offset=".7" stop-color="#b3946f"/><stop offset=".87" stop-color="#7c5f45"/><stop offset="1" stop-color="#43332a"/></linearGradient>
-            <linearGradient id="bronzeShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2dc" stop-opacity=".2"/><stop offset=".4" stop-color="#fff2dc" stop-opacity="0"/><stop offset="1" stop-color="#0b0806" stop-opacity=".34"/></linearGradient>
-            <linearGradient id="plinth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b322b"/><stop offset=".35" stop-color="#1c1714"/><stop offset="1" stop-color="#0e0b09"/></linearGradient>
-            <radialGradient id="floorGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f2c98c" stop-opacity=".22"/><stop offset="1" stop-color="#f2c98c" stop-opacity="0"/></radialGradient>
-            <filter id="mShadow" x="-30%" y="-20%" width="160%" height="150%"><feGaussianBlur stdDeviation="22"/></filter>
-          </defs>
-          <path d="M 185.28 40 C 310.4 36.28 384 67.9 384 139.2 L 378.48 576.3 C 376.64 632.1 347.2 660 273.6 660 L 126.4 660 C 52.8 660 23.36 632.1 21.52 576.3 L 16 114.4 C 16 58.6 82.24 40 185.28 40 Z" fill="#060402" opacity=".5" filter="url(#mShadow)"/>
-          <ellipse cx="200" cy="664" rx="190" ry="12" fill="url(#floorGlow)"/>
-          <rect x="66" y="622" width="268" height="42" rx="21" fill="url(#plinth)"/>
-          <path d="M 86 626 H 314" stroke="#6b5a4a" stroke-opacity=".55" stroke-width="1.2" stroke-linecap="round"/>
-          <path d="M 185.28 12 C 310.4 8.28 384 39.9 384 111.2 L 378.48 548.3 C 376.64 604.1 347.2 632 273.6 632 L 126.4 632 C 52.8 632 23.36 604.1 21.52 548.3 L 16 86.4 C 16 30.6 82.24 12 185.28 12 Z" fill="url(#bronze)"/>
-          <path d="M 185.28 12 C 310.4 8.28 384 39.9 384 111.2 L 378.48 548.3 C 376.64 604.1 347.2 632 273.6 632 L 126.4 632 C 52.8 632 23.36 604.1 21.52 548.3 L 16 86.4 C 16 30.6 82.24 12 185.28 12 Z" fill="url(#bronzeShade)"/>
-          <path d="M 187.52 44 C 293.6 40.67 356 68.96 356 132.75 L 351.32 523.79 C 349.76 573.71 324.8 598.67 262.4 598.67 L 137.6 598.67 C 75.2 598.67 50.24 573.71 48.68 523.79 L 44 110.56 C 44 60.64 100.16 44 187.52 44 Z" fill="#17120f" stroke="#2a2019" stroke-width="5"/>
-        </svg>
-        <div class="oval" aria-label="Three real MIRVA portraits: an embroidered khaddar suit, a navy suit, an embroidered sweatshirt.">
-          <img class="o1" src="/showcase/woman-khaddar.webp" alt="MIRVA portrait: a model in Sapphire's embroidered khaddar suit" width="720" height="1280" fetchpriority="high">
-          <img class="o2" src="/showcase/man-suit.webp" alt="MIRVA portrait: a model in Lawrencepur's navy suit" width="720" height="1280" loading="lazy">
-          <img class="o3" src="/showcase/woman-sweatshirt.webp" alt="MIRVA portrait: a model in Outfitters' embroidered quarter-zip sweatshirt, with her own jeans" width="720" height="1280" loading="lazy">
-          <div class="oval-cap" aria-hidden="true">
-            <p class="tag"><span class="c c1">Sapphire · Khaddar suit</span><span class="c c2">Lawrencepur · Navy suit</span><span class="c c3">Outfitters · Sweatshirt</span></p>
-            <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">For the office.</span><span class="c c3">And for the weekend.</span></p>
+        <div class="mirror-photo">
+          <div class="mirror-glass" aria-label="Three real MIRVA portraits: an embroidered khaddar suit, a raw silk suit, an embroidered sweatshirt.">
+            <img class="o1" src="/showcase/woman-khaddar.webp" alt="MIRVA portrait: a model in Sapphire's embroidered khaddar suit" width="720" height="1280" fetchpriority="high">
+            <img class="o2" src="/showcase/woman-rawsilk.webp" alt="MIRVA portrait: a model in Sapphire's embroidered raw silk suit" width="720" height="1280" loading="lazy">
+            <img class="o3" src="/showcase/woman-sweatshirt.webp" alt="MIRVA portrait: a model in Outfitters' embroidered quarter-zip sweatshirt, with her own jeans" width="720" height="1280" loading="lazy">
           </div>
+          <img class="mirror-body" src="/brand/mirva-mirror.webp" alt="" width="480" height="1056" fetchpriority="high">
         </div>
-        <svg class="m-glow" viewBox="0 0 400 676" aria-hidden="true"><defs><filter id="mGlow" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="6"/></filter></defs><path d="M 186.92 36.5 C 298.1 33.08 363.5 62.14 363.5 127.65 L 358.6 529.26 C 356.96 580.53 330.8 606.17 265.4 606.17 L 134.6 606.17 C 69.2 606.17 43.04 580.53 41.41 529.26 L 36.5 104.86 C 36.5 53.59 95.36 36.5 186.92 36.5 Z" filter="url(#mGlow)"/></svg>
-        <svg class="m-line" viewBox="0 0 400 676" aria-hidden="true"><path d="M 186.92 36.5 C 298.1 33.08 363.5 62.14 363.5 127.65 L 358.6 529.26 C 356.96 580.53 330.8 606.17 265.4 606.17 L 134.6 606.17 C 69.2 606.17 43.04 580.53 41.41 529.26 L 36.5 104.86 C 36.5 53.59 95.36 36.5 186.92 36.5 Z" pathLength="100"/></svg>
+        <div class="oval-cap" aria-hidden="true">
+          <p class="tag"><span class="c c1">Sapphire · Khaddar suit</span><span class="c c2">Sapphire · Raw silk suit</span><span class="c c3">Outfitters · Sweatshirt</span></p>
+          <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">For the mehndi.</span><span class="c c3">And for the weekend.</span></p>
         </div>
-        <figcaption class="fine">Real MIRVA portraits. The models are MIRVA’s own, made by AI; the clothes are real.</figcaption>
+        <figcaption class="fine">Real MIRVA portraits on MIRVA’s own AI models; the clothes are real.</figcaption>
       </figure>
     </div>
   </section>
@@ -111,19 +95,19 @@
       </div>
       <div class="partners">
         <a class="partner" href="/mirror?brand=naqshi" style="--store:#F08424" data-reveal>
-          <span class="partner-rail" data-cover="naqshi"><i></i><i></i><i></i></span>
+          <span class="partner-rail real" data-cover="naqshi"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0605%2F2082%2F5066%2Ffiles%2FOnaifaLightAquaGownandShimmaryTissueLehengaFullFrontView.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0605%2F2082%2F5066%2Ffiles%2FWeb1_26b22c1f-9095-4aaf-a7a6-3af69e2ccbe0.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0605%2F2082%2F5066%2Ffiles%2FWeb1_5094011d-826e-45cd-9628-8a75f73a7cd3.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"></span>
           <span class="partner-name">Naqshi</span>
           <span class="partner-line">Luxury pret, formals and bridal, ready to wear</span>
           <span class="partner-go">Open Naqshi’s mirror</span>
         </a>
         <a class="partner" href="/mirror?brand=baroque" style="--store:#C81E1E;--i:1" data-reveal>
-          <span class="partner-rail" data-cover="baroque"><i></i><i></i><i></i></span>
+          <span class="partner-rail real" data-cover="baroque"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F2277%2F5269%2Ffiles%2F19_2f8aad75-a738-4b0f-82bb-075a801a02ed.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F2277%2F5269%2Ffiles%2F131_45d579f1-a61d-45c0-873a-ae80a4c8a09b.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F2277%2F5269%2Ffiles%2F176_69866c5c-b4ec-4c6c-aeb8-d2ac311b589f.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"></span>
           <span class="partner-name">Baroque</span>
           <span class="partner-line">Formals, velvet and winter, stitched and unstitched</span>
           <span class="partner-go">Open Baroque’s mirror</span>
         </a>
         <a class="partner" href="/mirror?brand=agha-noor" style="--store:#D89C30;--i:2" data-reveal>
-          <span class="partner-rail" data-cover="agha-noor"><i></i><i></i><i></i></span>
+          <span class="partner-rail real" data-cover="agha-noor"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0252%2F1160%2F0992%2Ffiles%2FWhatsAppImage2026-10-21at7.41.25PM_06f138ca-9d45-400a-b863-4afc4fd8688c.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0252%2F1160%2F0992%2Ffiles%2FWhatsAppImage2026-10-20at7.39.15PM.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"><img src="/img?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0252%2F1160%2F0992%2Ffiles%2FWhatsAppImage2026-10-20at6.52.18PM.jpg&amp;w=360" alt="" width="360" height="540" loading="lazy" decoding="async"></span>
           <span class="partner-name">Agha Noor</span>
           <span class="partner-line">Hand-finished pret, from everyday cambric to festive silk</span>
           <span class="partner-go">Open Agha Noor’s mirror</span>
@@ -257,7 +241,7 @@
       </div>
       <div class="family-demo" data-reveal style="--i:2" aria-hidden="true">
         <div class="chat">
-          <p class="chat-top"><span class="chat-dot"></span>Family</p>
+          <p class="chat-top"><span class="chat-dot"></span>Family<span class="wa" role="img" aria-label="On WhatsApp"></span></p>
           <div class="bubble">
             <img src="/share/family-preview.jpg" alt="" width="1200" height="630" loading="lazy">
             <p class="bubble-site">mirva</p>
