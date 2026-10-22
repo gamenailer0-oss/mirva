@@ -13,7 +13,7 @@
   --mark: "MIRVA Mark", "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif; /* the wordmark only */
   --accent: #1e3fae;
   --on-accent: #fff;
-  --mercury: linear-gradient(120deg, #8d95a6, #f6f8fb 32%, #c3c9d6 55%, #f1f3f7 72%, #7e8698);
+  --bronze: linear-gradient(120deg, #6e543c, #e3cba5 32%, #a88763 55%, #efdcbc 72%, #6a5039); /* the mirror's metal (the founder's concept, 23 Oct 2026; it was mercury silver) */
   --glass: #0b0b0e;
   --pearl: #f4f2ef;
   --ease: cubic-bezier(.2, .7, .2, 1);
@@ -101,7 +101,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
   opacity: 0; transition: opacity var(--quick);
 }
 .kept:hover .drop, .kept .drop:focus-visible { opacity: 1; }
-@keyframes land { from { opacity: 0; transform: translateY(-10px) scale(.92); } }
+@keyframes land { from { opacity: 0; transform: translateY(-6px); } }
 .wardrobe-foot { display: flex; flex-direction: column; gap: 4px; align-items: center; }
 .rail-btn {
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
@@ -130,10 +130,10 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
   box-shadow: 0 40px 90px -45px rgba(12, 10, 8, .75), 0 2px 0 rgba(255,255,255,.06) inset;
   color: var(--pearl);
 }
-/* the bevel: a hair of mercury around the glass */
+/* the bevel: a hair of bronze around the glass, as on the MIRVA mirror */
 .glass::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: 12;
-  background: var(--mercury);
+  background: var(--bronze);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude;
   opacity: .85;
@@ -218,7 +218,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
 .halo path { fill: none; stroke-linecap: round; }
 .halo-track { stroke: rgba(255,255,255,.14); stroke-width: 1.2; }
 .halo-arc {
-  stroke: url(#mercury); stroke-width: 2.4; stroke-dasharray: 100; stroke-dashoffset: 0;
+  stroke: url(#bronze); stroke-width: 2.4; stroke-dasharray: 100; stroke-dashoffset: 0;
   transition: stroke-dashoffset .3s linear, stroke .4s, opacity .4s;
 }
 [data-state="asleep"] .halo-arc { animation: breathe 4.2s ease-in-out infinite; }
@@ -937,24 +937,26 @@ a.chip { text-decoration: none; }
 :root[data-embed] :is(.wardrobe, #keepBtn, #askBtn, #storeBar, #restartBtn) { display: none !important; }
 :root[data-embed].phone-app .stage { top: env(safe-area-inset-top); }
 
-/* ---------- touch in the mirror: every press answers at once and springs back; panels and sheets glide ---------- */
-:root { --spring: cubic-bezier(.32, .72, 0, 1); }
+/* ---------- touch in the mirror: poise (23 Oct 2026; the founder: "slimy and squishy... elite and elegant") ----------
+   A press sinks a control one pixel, firmly, instead of squashing it; a picture dims a touch. Moves are short and land
+   without a tail (--spring is a standard curve now; the name stays so every rule follows), and nothing stretches. */
+:root { --spring: cubic-bezier(.4, 0, .2, 1); }
 .chip, .look, .primary, .tool, .rail-btn, .mini-more, .tabs button, .dock button, .store-card, .solo .mini-more { -webkit-tap-highlight-color: transparent; }
-.chip { transition: transform .34s var(--spring), background-color .26s var(--spring), color .26s, box-shadow .26s; }
-.chip:active, .mini-more:active, .rail-btn:active, .dock button:active, .store-card:active { transform: scale(.95); transition-duration: 70ms; }
-.primary, .tool { transition: transform .34s var(--spring), background-color .2s, opacity .2s; }
-.primary:active, .tool:active { transform: scale(.95); transition-duration: 70ms; }
-.look .shot { transition: transform .34s var(--spring), box-shadow .2s; }
-.look:active .shot { transform: scale(.965); transition-duration: 70ms; }
-.pane:not([hidden]) { animation: pane-in .3s var(--spring); }
-@keyframes pane-in { from { opacity: 0; transform: translateY(6px); } }
+.chip { transition: transform 180ms var(--spring), background-color .2s var(--spring), color .2s, box-shadow .2s; }
+.chip:active, .mini-more:active, .rail-btn:active, .dock button:active, .store-card:active,
+.primary:active, .tool:active, .modes button:active, .glass-btn:active, .size:active, .addon:active, .ask button:active { transform: translateY(1px); transition-duration: 60ms; }
+.primary, .tool { transition: transform 180ms var(--spring), background-color .2s, opacity .2s; }
+.look .shot { transition: opacity 180ms var(--spring), box-shadow .2s; }
+.look:active .shot, .outfit-tile:active img { transform: none; opacity: .86; transition-duration: 60ms; }
+.pane:not([hidden]) { animation: pane-in .2s var(--spring); }
+@keyframes pane-in { from { opacity: 0; transform: translateY(4px); } }
 
 /* sheets slide in and out (browsers without this keep the rise above) */
 @supports (transition-behavior: allow-discrete) {
   .sheet, .sheet[open], :root.phone-app .sheet[open] { animation: none; }
-  .sheet { transition: opacity .28s var(--spring), transform .46s var(--spring), overlay .46s allow-discrete, display .46s allow-discrete; }
-  .sheet:not([open]) { opacity: 0; transform: translateY(14px) scale(.985); }
-  @starting-style { .sheet[open] { opacity: 0; transform: translateY(14px) scale(.985); } }
+  .sheet { transition: opacity .22s var(--spring), transform .3s var(--spring), overlay .3s allow-discrete, display .3s allow-discrete; }
+  .sheet:not([open]) { opacity: 0; transform: translateY(8px); }
+  @starting-style { .sheet[open] { opacity: 0; transform: translateY(8px); } }
   .sheet::backdrop { transition: opacity .28s, overlay .46s allow-discrete, display .46s allow-discrete; }
   @starting-style { .sheet[open]::backdrop { opacity: 0; } }
   :root.phone-app .sheet:not([open]) { opacity: 1; transform: translateY(100%); }
@@ -1052,7 +1054,7 @@ a.chip { text-decoration: none; }
 }
 [data-glass="real"], [data-glass="real"] body { background: #000; }
 [data-glass="real"] .glass { background: #000; box-shadow: none; }
-[data-glass="real"] .glass::after { display: none; } /* the mercury bevel: the mirror has its own frame */
+[data-glass="real"] .glass::after { display: none; } /* the bronze bevel: the mirror has its own frame */
 [data-glass="real"] .veil { background: linear-gradient(0deg, rgba(0, 0, 0, .72), transparent 32%); }
 [data-glass="real"] .glass:is([data-state="thinking"], [data-state="portrait"]) :is(#cam, #still) {
   inset: auto 4% 4% auto; width: 26%; height: auto; aspect-ratio: 9 / 16; z-index: 6; opacity: 1; border-radius: 18px;
@@ -1068,7 +1070,7 @@ a.chip { text-decoration: none; }
   display: flex; align-items: center; gap: 12px; padding: 12px 12px 12px 16px; border-radius: 18px;
   background: rgba(22, 20, 26, .94); color: #f3f1ee;
   box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .65), inset 0 1px 0 rgba(255, 255, 255, .1), 0 0 0 1px rgba(255, 255, 255, .06);
-  animation: family-up .46s var(--spring);
+  animation: family-up .3s var(--spring);
 }
 .family-pop p { flex: 1; min-width: 0; margin: 0; display: grid; gap: 2px; font-size: 12.5px; line-height: 1.35; color: #c9c2ba; }
 .family-pop b { font: 400 16px/1.2 var(--serif); color: #f3f1ee; }
@@ -1090,7 +1092,7 @@ a.chip { text-decoration: none; }
   position: absolute; z-index: 8; left: 50%; top: 16%; transform: translateX(-50%); display: grid; gap: 4px; justify-items: center;
   padding: 14px 22px; border-radius: 18px; text-align: center; white-space: nowrap; background: rgba(12, 11, 14, .86); color: #efe9e1;
   box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .7), 0 0 0 1px rgba(226, 201, 149, .35), 0 0 40px rgba(226, 201, 149, .18);
-  animation: family-up .46s var(--spring);
+  animation: family-up .3s var(--spring);
 }
 .hold-card b { font: 400 20px/1.2 var(--serif); }
 .hold-card span { font-size: 13px; color: #c9c2ba; }
@@ -1101,8 +1103,8 @@ a.chip { text-decoration: none; }
 .outfit-label { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #efe9e1; text-shadow: 0 1px 8px rgba(0, 0, 0, .7); }
 .outfit-tile { display: grid; gap: 3px; justify-items: center; color: #efe9e1; font-size: 10.5px; text-shadow: 0 1px 8px rgba(0, 0, 0, .7); }
 .outfit-tile img { width: 58px; height: 58px; object-fit: cover; object-position: top; border-radius: 12px; background: #1a191f;
-  box-shadow: 0 10px 22px -10px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .2); transition: transform .3s var(--spring), box-shadow .3s; }
-.outfit-tile:active img { transform: scale(.94); }
+  box-shadow: 0 10px 22px -10px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .2); transition: opacity .18s var(--spring), box-shadow .3s; }
+.outfit-tile:active img { opacity: .86; }
 .outfit-tile.on img { box-shadow: 0 0 0 2px #efe9e1, 0 0 18px rgba(226, 201, 149, .55); }
 
 /* ---------- the way through (src/main.js syncPath): a piece waiting on the wake screen, and a first visit's three steps ----------
@@ -1132,11 +1134,8 @@ a.chip { text-decoration: none; }
 .path [data-state="done"] { color: var(--ink); }
 .path [data-state="done"] i { color: transparent; background: var(--panel); box-shadow: inset 0 0 0 1px var(--accent-text); }
 .path [data-state="done"] i::after { content: ""; position: absolute; width: 9px; height: 5px; border: solid var(--accent-text); border-width: 0 0 1.6px 1.6px; transform: translateY(-1px) rotate(-45deg); }
-@media (prefers-reduced-motion: no-preference) {
-  /* a ring that breathes out from the next step: moved and faded on the graphics chip, never repainted */
-  .path [data-state="next"] i::before { content: ""; position: absolute; inset: -4px; border-radius: 50%; background: color-mix(in oklab, var(--ink) 9%, transparent); z-index: -1; animation: path-breathe 2.4s var(--ease) infinite; }
-  @keyframes path-breathe { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.22); opacity: .45; } }
-}
+/* the next step carries a still ring (it used to breathe; the founder asked for poise, 23 Oct 2026) */
+.path [data-state="next"] i::before { content: ""; position: absolute; inset: -4px; border-radius: 50%; background: color-mix(in oklab, var(--ink) 9%, transparent); z-index: -1; }
 :root.phone-app .app[data-sheet="mini"] .path { display: none; }
 
 /* ---------- the store at the head of its catalogue (src/main.js storeFront) ----------

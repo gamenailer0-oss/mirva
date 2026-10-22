@@ -64,7 +64,26 @@
         <p class="fine" data-reveal style="--i:4" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
       </div>
 
+      <!-- The MIRVA mirror (the founder's concept, 23 Oct 2026): a pebble of smoked glass in a bronze body on a dark
+           plinth, a line of warm light round the glass. Drawn, not photographed; the portraits in it are real. -->
       <figure class="oval-hero" data-reveal style="--i:2">
+        <div class="mirror-obj">
+        <svg class="m-body" viewBox="0 0 400 676" aria-hidden="true">
+          <defs>
+            <linearGradient id="bronze" x1="0" x2="1"><stop offset="0" stop-color="#47362a"/><stop offset=".16" stop-color="#8a6c4f"/><stop offset=".33" stop-color="#c4a684"/><stop offset=".5" stop-color="#8c6f52"/><stop offset=".7" stop-color="#b3946f"/><stop offset=".87" stop-color="#7c5f45"/><stop offset="1" stop-color="#43332a"/></linearGradient>
+            <linearGradient id="bronzeShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2dc" stop-opacity=".2"/><stop offset=".4" stop-color="#fff2dc" stop-opacity="0"/><stop offset="1" stop-color="#0b0806" stop-opacity=".34"/></linearGradient>
+            <linearGradient id="plinth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b322b"/><stop offset=".35" stop-color="#1c1714"/><stop offset="1" stop-color="#0e0b09"/></linearGradient>
+            <radialGradient id="floorGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f2c98c" stop-opacity=".22"/><stop offset="1" stop-color="#f2c98c" stop-opacity="0"/></radialGradient>
+            <filter id="mShadow" x="-30%" y="-20%" width="160%" height="150%"><feGaussianBlur stdDeviation="22"/></filter>
+          </defs>
+          <path d="M 185.28 40 C 310.4 36.28 384 67.9 384 139.2 L 378.48 576.3 C 376.64 632.1 347.2 660 273.6 660 L 126.4 660 C 52.8 660 23.36 632.1 21.52 576.3 L 16 114.4 C 16 58.6 82.24 40 185.28 40 Z" fill="#060402" opacity=".5" filter="url(#mShadow)"/>
+          <ellipse cx="200" cy="664" rx="190" ry="12" fill="url(#floorGlow)"/>
+          <rect x="66" y="622" width="268" height="42" rx="21" fill="url(#plinth)"/>
+          <path d="M 86 626 H 314" stroke="#6b5a4a" stroke-opacity=".55" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M 185.28 12 C 310.4 8.28 384 39.9 384 111.2 L 378.48 548.3 C 376.64 604.1 347.2 632 273.6 632 L 126.4 632 C 52.8 632 23.36 604.1 21.52 548.3 L 16 86.4 C 16 30.6 82.24 12 185.28 12 Z" fill="url(#bronze)"/>
+          <path d="M 185.28 12 C 310.4 8.28 384 39.9 384 111.2 L 378.48 548.3 C 376.64 604.1 347.2 632 273.6 632 L 126.4 632 C 52.8 632 23.36 604.1 21.52 548.3 L 16 86.4 C 16 30.6 82.24 12 185.28 12 Z" fill="url(#bronzeShade)"/>
+          <path d="M 187.52 44 C 293.6 40.67 356 68.96 356 132.75 L 351.32 523.79 C 349.76 573.71 324.8 598.67 262.4 598.67 L 137.6 598.67 C 75.2 598.67 50.24 573.71 48.68 523.79 L 44 110.56 C 44 60.64 100.16 44 187.52 44 Z" fill="#17120f" stroke="#2a2019" stroke-width="5"/>
+        </svg>
         <div class="oval" aria-label="Three real MIRVA portraits: an embroidered khaddar suit, a navy suit, an embroidered sweatshirt.">
           <img class="o1" src="/showcase/woman-khaddar.webp" alt="MIRVA portrait: a model in Sapphire's embroidered khaddar suit" width="720" height="1280" fetchpriority="high">
           <img class="o2" src="/showcase/man-suit.webp" alt="MIRVA portrait: a model in Lawrencepur's navy suit" width="720" height="1280" loading="lazy">
@@ -74,11 +93,9 @@
             <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">For the office.</span><span class="c c3">And for the weekend.</span></p>
           </div>
         </div>
-        <svg class="oval-line" viewBox="0 0 360 640" preserveAspectRatio="none" aria-hidden="true">
-          <defs><linearGradient id="mercury" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8d95a6"/><stop offset=".32" stop-color="#f6f8fb"/><stop offset=".55" stop-color="#c3c9d6"/><stop offset=".72" stop-color="#f1f3f7"/><stop offset="1" stop-color="#7e8698"/></linearGradient></defs>
-          <ellipse cx="180" cy="320" rx="318" ry="178" pathLength="100"/>
-        </svg>
-        <svg class="oval-halo" viewBox="0 0 200 44" aria-hidden="true"><path d="M14 38Q100 -8 186 38" pathLength="100"/></svg>
+        <svg class="m-glow" viewBox="0 0 400 676" aria-hidden="true"><defs><filter id="mGlow" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="6"/></filter></defs><path d="M 186.92 36.5 C 298.1 33.08 363.5 62.14 363.5 127.65 L 358.6 529.26 C 356.96 580.53 330.8 606.17 265.4 606.17 L 134.6 606.17 C 69.2 606.17 43.04 580.53 41.41 529.26 L 36.5 104.86 C 36.5 53.59 95.36 36.5 186.92 36.5 Z" filter="url(#mGlow)"/></svg>
+        <svg class="m-line" viewBox="0 0 400 676" aria-hidden="true"><path d="M 186.92 36.5 C 298.1 33.08 363.5 62.14 363.5 127.65 L 358.6 529.26 C 356.96 580.53 330.8 606.17 265.4 606.17 L 134.6 606.17 C 69.2 606.17 43.04 580.53 41.41 529.26 L 36.5 104.86 C 36.5 53.59 95.36 36.5 186.92 36.5 Z" pathLength="100"/></svg>
+        </div>
         <figcaption class="fine">Real MIRVA portraits. The models are MIRVA’s own, made by AI; the clothes are real.</figcaption>
       </figure>
     </div>

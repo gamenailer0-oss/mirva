@@ -60,11 +60,10 @@ export function flyTo(from, to) {
     .animate(
       [
         { transform: "translate(0,0) scale(1)", opacity: 0.95 },
-        { transform: `translate(${dx * 0.6}px,${dy * 0.6 - 30}px) scale(${(1 + s) / 2})`, opacity: 0.9, offset: 0.6 },
-        { transform: `translate(${dx}px,${dy}px) scale(${s})`, opacity: 0.2 },
+        { transform: `translate(${dx}px,${dy}px) scale(${s})`, opacity: 0.25 },
       ],
-      { duration: 620, easing: "cubic-bezier(.32,.72,0,1)" },
+      { duration: 420, easing: "cubic-bezier(.4,0,.2,1)" }, // straight and decisive (poise, 23 Oct 2026: no arc, no pop)
     )
     .finished.then(() => ghost.remove(), () => ghost.remove());
-  to.animate?.([{ transform: "scale(1)" }, { transform: "scale(1.12)" }, { transform: "scale(1)" }], { duration: 360, delay: 560, easing: "cubic-bezier(.32,.72,0,1)" });
+  to.animate?.([{ opacity: 1 }, { opacity: 0.55 }, { opacity: 1 }], { duration: 300, delay: 400, easing: "cubic-bezier(.4,0,.2,1)" });
 }

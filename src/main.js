@@ -738,7 +738,7 @@ let sheetWish = null; // the size she chose herself, until she picks a look
 // the phone laid out the whole screen, video and all, on every frame, and it stuttered). The layout changes once; the
 // panel then slides from where it was and the glass scales from its old size to its new one. A panel that shrinks keeps
 // its old height while it slides down, so no gap opens under it, and takes its new height when it lands.
-const SPRING = "cubic-bezier(.32, .72, 0, 1)";
+const SPRING = "cubic-bezier(.4, 0, .2, 1)"; // decisive, no tail (poise, 23 Oct 2026)
 let dragFrom = null; // where a dragged panel was let go, for the move that settles it
 let morphs = 0;
 // Stops the panel's move where it is (the next move starts from there) and gives it back its own height.
@@ -754,7 +754,7 @@ function morphSheet(change, from = null) {
   change();
   if (!phoneApp() || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const t1 = tablet.getBoundingClientRect(), g1 = glass.getBoundingClientRect(), d1 = dock.getBoundingClientRect();
-  const timing = { duration: 460, easing: SPRING };
+  const timing = { duration: 320, easing: SPRING };
   const run = ++morphs;
   const move = (el, keyframes, then) => {
     const a = el.animate(keyframes, { ...timing, fill: "forwards" });
@@ -848,8 +848,8 @@ function followFinger() {
     if (e.cancelable) e.preventDefault();
     const { mini, full } = sizes();
     let height = g.start - dy;
-    if (height > full) height = full + (height - full) * 0.25; // past the ends it gives a little, then holds
-    if (height < mini) height = mini - (mini - height) * 0.25;
+    if (height > full) height = full + (height - full) * 0.06; // past the ends it holds firm (it used to stretch)
+    if (height < mini) height = mini - (mini - height) * 0.06;
     app.style.setProperty("--drag-y", `${Math.round(g.full - height)}px`);
     g.now = height;
     g.trail.push([t.clientY, e.timeStamp]);

@@ -150,16 +150,14 @@ body.desk { background: var(--bg); font-size: 15.5px; }
 .lf-tablet[data-tone="noir"] .lf-chip.on { background: #f3f1ee; color: #121116; }
 .lf-go { justify-self: start; padding: 8px 16px; border-radius: 99px; font: 500 9.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
 
-/* a switch glides, and its knob stretches a little under the finger, as on a phone */
-.switch { transition: background-color .3s var(--spring, ease); -webkit-tap-highlight-color: transparent; }
-.switch::after { transition: transform .38s var(--spring, ease), width .22s var(--spring, ease); }
-.switch:active::after { width: 25px; }
-.switch[aria-checked="true"]:active::after { transform: translateX(13px); }
-.side nav button { transition: background-color .25s var(--spring, ease), transform .3s var(--spring, ease); }
-.side nav button:active { transform: scale(.97); transition-duration: 70ms; }
+/* a switch glides across and lands; a menu button sinks a pixel when pressed (poise, 23 Oct 2026: nothing stretches) */
+.switch { transition: background-color .2s var(--spring, ease); -webkit-tap-highlight-color: transparent; }
+.switch::after { transition: transform .2s var(--spring, ease); }
+.side nav button { transition: background-color .2s var(--spring, ease), transform .18s var(--spring, ease); }
+.side nav button:active { transform: translateY(1px); transition-duration: 60ms; }
 .tile, .panel { transition: box-shadow .3s; }
-.work > * { animation: desk-in .32s var(--spring, ease) both; }
-@keyframes desk-in { from { opacity: 0; transform: translateY(6px); } }
+.work > * { animation: desk-in .22s var(--spring, ease) both; }
+@keyframes desk-in { from { opacity: 0; transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .work > * { animation: none; } }
 
 /* the desk's shape while it opens */

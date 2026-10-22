@@ -7,7 +7,7 @@
 .ticks li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: baseline; }
 .ticks li::before { content: ""; width: 14px; height: 8px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(-45deg); opacity: .7; }
 .r-hero [data-reveal], .p-hero [data-reveal] { opacity: 1; transform: none; transition: none; animation: enter var(--slow) var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
-@keyframes enter { from { opacity: 0; transform: translateY(18px); } }
+@keyframes enter { from { opacity: 0; transform: translateY(10px); } }
 /* While a store's page is being prepared it holds a screen's height, so the footer is not pushed down when it arrives. */
 #main:has(.spinner-line) { min-height: 100svh; }
 .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -24,16 +24,16 @@
 .r-hero .display em { display: block; }
 .r-hero .lede { color: #b4bccb; }
 
-/* The store's own photos hang on a line of mercury. One lifts, a thread of light runs down, and the oval shows her in it.
+/* The store's own photos hang on a line of bronze. One lifts, a thread of light runs down, and the oval shows her in it.
    Three turns of five seconds; for anyone who asks for less motion, the first turn holds still. */
 .from-rail { position: relative; justify-self: center; width: clamp(250px, 27vw, 360px); margin: 0; display: grid; gap: 0; --cycle: 15s; }
-.rail-bar { height: 1.5px; margin: 0 4%; border-radius: 2px; background: linear-gradient(90deg, transparent, #cdc6be 14%, #f6f8fb 50%, #cdc6be 86%, transparent); opacity: .85; }
+.rail-bar { height: 1.5px; margin: 0 4%; border-radius: 2px; background: linear-gradient(90deg, transparent, #b89a74 14%, #ecd7b4 50%, #b89a74 86%, transparent); opacity: .85; }
 .hangers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12%; padding: 0 8%; }
 .hangers li { position: relative; padding-top: 12px; opacity: .42; transform-origin: 50% 0; animation: hang-pick var(--cycle) var(--ease) infinite; }
 .hangers li::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 12px; background: #cdc6be; opacity: .8; }
 .hangers img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; background: #171a23; }
 .hangers .h2 { animation-delay: 5s; } .hangers .h3 { animation-delay: 10s; }
-@keyframes hang-pick { 0% { opacity: .42; transform: none; } 4%, 30% { opacity: 1; transform: translateY(-4px) scale(1.06); } 36%, 100% { opacity: .42; transform: none; } }
+@keyframes hang-pick { 0% { opacity: .42; transform: none; } 4%, 30% { opacity: 1; transform: translateY(-4px); } 36%, 100% { opacity: .42; transform: none; } }
 .threads { display: block; width: 84%; height: 38px; margin: 0 auto; overflow: visible; }
 .threads path { fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 40 100; stroke-dashoffset: 40; opacity: 0; filter: drop-shadow(0 0 3px rgba(255, 255, 255, .7)); animation: thread var(--cycle) linear infinite; }
 .threads .t2 { animation-delay: 5s; } .threads .t3 { animation-delay: 10s; }
@@ -208,3 +208,25 @@
 
 /* the store site has two link groups beside its mark */
 @media (min-width: 901px) { .foot-grid { grid-template-columns: 2fr 1fr 1fr; } }
+
+/* ---------- the MIRVA mirror (the founder's design concept, 23 Oct 2026) ----------
+   Words and the showroom picture side by side; under them four views in a row (two by two on a phone). The concept
+   pictures sit on their own warm sand, so their tiles keep it. */
+.mirror-show { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.mirror-show > * { min-width: 0; }
+.mirror-scene { margin: 0; justify-self: center; width: min(100%, 380px); border-radius: 28px; overflow: hidden; background: #b9a28a; box-shadow: 0 40px 80px -40px rgba(40, 28, 16, .55), 0 0 0 1px var(--line); }
+.mirror-scene img { display: block; width: 100%; height: auto; }
+.mirror-views { grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.mirror-views li { display: grid; gap: 10px; }
+.mirror-views img { display: block; width: 100%; height: auto; aspect-ratio: 788 / 840; object-fit: cover; border-radius: 18px; background: #bba48b; }
+.mirror-views span { font: 500 11.5px/1.2 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.finish { white-space: nowrap; }
+.finish::before { content: ""; display: inline-block; width: .8em; height: .8em; margin-right: .35em; border-radius: 50%; vertical-align: -.05em; box-shadow: inset 0 0 0 1px rgba(20, 16, 12, .25); }
+.finish.sand::before { background: linear-gradient(135deg, #e0c7a3, #9c7a55); }
+.finish.black::before { background: linear-gradient(135deg, #4a4542, #1c1a19); }
+.finish.pearl::before { background: linear-gradient(135deg, #f6f2ec, #c9c1b8); }
+@media (max-width: 900px) {
+  .mirror-show { grid-template-columns: 1fr; }
+  .mirror-scene { width: min(100%, 290px); }
+  .mirror-views { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

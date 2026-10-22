@@ -226,7 +226,7 @@ async function pitch() {
   const read = new Date(takenAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   const rupees = (v) => money(v, currency);
   document.title = `Prepared for ${brand.name} — MIRVA`;
-  document.documentElement.style.setProperty("--store", brand.accent || "#8d95a6");
+  document.documentElement.style.setProperty("--store", brand.accent || "#a88763");
   $("#navMirror").href = `/mirror?brand=${brand.id}`;
   $("#disclaimer").textContent = brand.invited
     ? `Prepared by MIRVA for ${brand.name}, from ${brand.name}’s public catalogue as it stood on ${read}. Prices and sizes are as the site showed them that day.`

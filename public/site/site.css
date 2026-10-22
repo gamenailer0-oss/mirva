@@ -21,7 +21,7 @@
 .hero-glass .l3, .hero-cap .c3 { animation-delay: 10s; }
 /* One look every five seconds: a second to arrive, three to be worn, half a second to leave. */
 @keyframes wear {
-  0% { opacity: 0; transform: translateY(10px) scale(.985); }
+  0% { opacity: 0; transform: translateY(6px); }
   7%, 30% { opacity: 1; transform: none; }
   35%, 100% { opacity: 0; transform: none; }
 }
@@ -182,8 +182,8 @@
 .boardpage .brandmark { justify-self: center; }
 .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 280px)); justify-content: center; gap: clamp(12px, 2vw, 22px); max-width: 980px; margin-inline: auto; width: 100%; }
 .choice { display: grid; gap: 10px; text-align: left; align-content: start; }
-.choice .shot { position: relative; aspect-ratio: 3 / 4; border-radius: var(--r-md); overflow: hidden; background: var(--card); transition: transform var(--quick) var(--ease), box-shadow var(--calm); }
-.choice:active .shot { transform: scale(.985); }
+.choice .shot { position: relative; aspect-ratio: 3 / 4; border-radius: var(--r-md); overflow: hidden; background: var(--card); transition: opacity var(--quick) var(--ease), box-shadow var(--calm); }
+.choice:active .shot { opacity: .86; }
 .choice img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .choice.mine .shot { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
 .choice b { font-weight: 400; font-size: 15px; line-height: 1.3; }
@@ -282,7 +282,7 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 
 /* The first screen arrives on its own, without waiting for a script. */
 .hero [data-reveal], .page-head [data-reveal] { opacity: 1; transform: none; transition: none; animation: enter var(--slow) var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
-@keyframes enter { from { opacity: 0; transform: translateY(18px); } }
+@keyframes enter { from { opacity: 0; transform: translateY(10px); } }
 .boardbody { display: grid; gap: var(--s6); }
 
 /* Signing out. Beside the account button on a wide bar; a row of its own, with the wardrobe, in the phone menu. */
@@ -357,14 +357,31 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
   .allow .btn { display: none; } /* the Mirror is in the bar along the bottom */
 }
 
-/* ---------- home: the oval draws itself, then shows what MIRVA really makes ---------- */
-.oval-hero { position: relative; justify-self: center; width: clamp(240px, 27vw, 360px); margin: 0; display: grid; gap: 14px; }
-.oval-hero .oval { position: relative; aspect-ratio: 9 / 16; border-radius: 50%; overflow: hidden; isolation: isolate; background: radial-gradient(90% 60% at 50% 18%, #1e1d24, #0b0b0e 70%); box-shadow: 0 50px 110px -50px rgba(8, 6, 4, .9), 0 0 0 1px rgba(226, 201, 149, .06); }
+/* ---------- home: the MIRVA mirror lights up, then shows what MIRVA really makes ----------
+   The founder's concept (23 Oct 2026): a pebble of smoked glass in a bronze body on a dark plinth, with a line of warm
+   light round the glass. The body is one drawing; the glass is the portraits under a mask of the same outline; the line
+   draws itself once and its glow fades in; then it holds still. Only opacity, transform and one stroke draw move. */
+.oval-hero { position: relative; justify-self: center; width: clamp(260px, min(31vw, (100svh - 310px) * .59), 420px); margin: 0; display: grid; gap: 14px; }
+.mirror-obj { position: relative; aspect-ratio: 400 / 676; }
+@media (max-width: 900px) { .oval-hero { width: min(76vw, 330px); } }
+.mirror-obj > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.mirror-obj .oval {
+  position: absolute; left: 11%; top: 6.509%; width: 78%; height: 82.05%; overflow: hidden; isolation: isolate;
+  background: radial-gradient(90% 60% at 50% 18%, #241d18, #0e0b09 72%);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3Cpath d='M.46,0 C.8,-.006 1,.045 1,.16 L.985,.865 C.98,.955 .9,1 .7,1 L.3,1 C.1,1 .02,.955 .015,.865 L0,.12 C0,.03 .18,0 .46,0 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3Cpath d='M.46,0 C.8,-.006 1,.045 1,.16 L.985,.865 C.98,.955 .9,1 .7,1 L.3,1 C.1,1 .02,.955 .015,.865 L0,.12 C0,.03 .18,0 .46,0 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+/* the glass catches the room: one soft diagonal reflection, still */
+.mirror-obj .oval::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(118deg, rgba(255, 240, 220, .1) 0 14%, transparent 30% 58%, rgba(255, 240, 220, .05) 64%, transparent 72%); }
+.m-line path { fill: none; stroke: #fff0d4; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: oval-draw 1.6s cubic-bezier(.65, 0, .35, 1) .3s forwards; }
+.m-glow { opacity: 0; will-change: opacity; animation: m-glow 1s var(--ease) 1.7s forwards; }
+.m-glow path { fill: none; stroke: #f2c98c; stroke-width: 9; }
+@keyframes m-glow { to { opacity: .9; } }
 .oval img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; opacity: 0; animation: oval-look 18s var(--ease) infinite; }
 .oval .o1 { animation-delay: 1.6s; }
 .oval .o2 { animation-delay: 7.6s; }
 .oval .o3 { animation-delay: 13.6s; }
-@keyframes oval-look { 0% { opacity: 0; transform: scale(1.025); } 5%, 31% { opacity: 1; transform: none; } 35%, 100% { opacity: 0; } }
+@keyframes oval-look { 0% { opacity: 0; } 5%, 31% { opacity: 1; } 35%, 100% { opacity: 0; } }
 .oval::after { content: ""; position: absolute; inset: auto 0 0; height: 42%; z-index: 1; background: linear-gradient(transparent, rgba(11, 10, 13, .86)); }
 .oval-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 0 16% 13%; text-align: center; color: #f4f2ef; }
 .oval-cap p { position: relative; height: 1.35em; }
@@ -372,16 +389,13 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 .oval-cap .c1 { animation-delay: 1.6s; } .oval-cap .c2 { animation-delay: 7.6s; } .oval-cap .c3 { animation-delay: 13.6s; }
 .oval-cap .tag { font: 500 11px/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #d2cbc3; margin-bottom: 6px; }
 .oval-cap .line { font-size: clamp(19px, 1.9vw, 25px); }
-.oval-line { position: absolute; z-index: 3; left: 0; top: 0; width: 100%; aspect-ratio: 9 / 16; height: auto; pointer-events: none; }
-.oval-line ellipse { fill: none; stroke: url(#mercury); stroke-width: 1.4; stroke-dasharray: 100; stroke-dashoffset: 100; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; transform: rotate(-90deg); animation: oval-draw 1.8s var(--ease) .2s forwards; }
 @keyframes oval-draw { to { stroke-dashoffset: 0; } }
-.oval-halo { position: absolute; z-index: 3; left: 18%; width: 64%; top: -9%; height: auto; overflow: visible; }
-.oval-halo path { fill: none; stroke: #e8ecf3; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: oval-draw 1.2s var(--ease) 1.4s forwards; opacity: .8; }
 .oval-hero figcaption { color: #968f88; text-align: center; max-width: 30ch; justify-self: center; }
 @media (prefers-reduced-motion: reduce) {
   .oval .o1, .oval-cap .c1 { opacity: 1; animation: none; }
   .oval .o2, .oval .o3, .oval-cap .c2, .oval-cap .c3 { display: none; }
-  .oval-line ellipse, .oval-halo path { animation: none; stroke-dashoffset: 0; }
+  .m-line path { animation: none; stroke-dashoffset: 0; }
+  .m-glow { animation: none; opacity: 1; }
 }
 
 /* ---------- home: the proof ---------- */

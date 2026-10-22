@@ -14,10 +14,13 @@ const ready = (async () => {
       numPoses: 1,
       minPoseDetectionConfidence: 0.45,
     });
+  // The processor, not the graphics chip: from this thread the processor never holds the page, while the chip's warm-up
+  // stalled the screen itself (panel moves lost up to 1.1 s in the first seconds, measured 23 Oct 2026). A look takes
+  // well under a second here, and only a few are needed.
   try {
-    detector = await make("GPU");
-  } catch {
     detector = await make("CPU");
+  } catch {
+    detector = await make("GPU");
   }
   try {
     detector.detect(new ImageData(256, 256)); // the first look compiles the model: on a blank picture, once

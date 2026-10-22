@@ -1,5 +1,5 @@
 /* MIRVA on the web — the same quiet mirror, off the shop floor.
-   MIRVA has no colour of its own: ink on honed marble, pearl on smoky glass, one line of mercury light, and the warm
+   MIRVA has no colour of its own: ink on honed marble, pearl on smoky glass, one line of bronze light, and the warm
    light of a fitting-room lamp (the same room the presentation models stand in).
    Colour arrives with the store (--accent is set per retailer where a page is prepared for one).
    Motion: only opacity and transform animate. One slow moment per page; everything else is quick. */
@@ -13,11 +13,11 @@
   --lamp: #e2c995; /* warm light, never a fill colour */
   --brass: #9c7d47;
   --pearl: #f4f2ef; /* warm, as on the mirror: a blue-white reads as a screen */
-  --mercury: linear-gradient(120deg, #8d95a6, #f6f8fb 32%, #c3c9d6 55%, #f1f3f7 72%, #7e8698);
+  --bronze: linear-gradient(120deg, #6e543c, #e3cba5 32%, #a88763 55%, #efdcbc 72%, #6a5039); /* the mirror's metal (the founder's concept, 23 Oct 2026; it was mercury silver) */
   --ease: cubic-bezier(.2, .7, .2, 1);
   --quick: 140ms;
   --calm: 260ms;
-  --slow: 900ms;
+  --slow: 700ms;
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
   --r-sm: 10px; --r-md: 14px; --r-lg: 22px; --r-glass: 30px;
   --measure: 62ch;
@@ -172,13 +172,13 @@ button.chip:active { transform: scale(.97); }
   background: radial-gradient(60% 50% at 12% 0%, rgba(226, 201, 149, .13), transparent 72%), radial-gradient(48% 40% at 94% 6%, rgba(226, 201, 149, .08), transparent 70%), url(/brand/marble-dark.webp) 50% 0 / 1400px auto, radial-gradient(110% 80% at 50% 0%, #1b1920, #0b0a0d 68%);
   color: var(--ink); }
 
-/* The Glass: a tall dark pane with a bevel of mercury. Always dark, whatever the page around it. */
+/* The Glass: a tall dark pane with a bevel of bronze. Always dark, whatever the page around it. */
 .glass { position: relative; aspect-ratio: 9 / 16; border-radius: var(--r-glass); overflow: hidden; color: var(--pearl); background: radial-gradient(90% 60% at 50% 16%, var(--glass-lift), var(--glass) 70%); box-shadow: 0 50px 110px -50px rgba(4, 7, 14, .8); isolation: isolate; }
-.glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: var(--mercury); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; z-index: 5; }
+.glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: var(--bronze); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; z-index: 5; }
 .halo { position: absolute; top: 3.2%; left: 50%; width: 46%; transform: translateX(-50%); overflow: visible; z-index: 4; }
 .halo path { fill: none; stroke-linecap: round; }
 .halo .track { stroke: rgba(255, 255, 255, .16); stroke-width: 1.2; }
-.halo .arc { stroke: #f6f8fb; stroke-width: 2.4; }
+.halo .arc { stroke: #e3cba5; stroke-width: 2.4; }
 .halo.breathe .arc { animation: breathe 4.2s ease-in-out infinite; }
 .halo.think .arc { stroke-dasharray: 16 84; animation: travel 1.15s linear infinite; }
 @keyframes breathe { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
@@ -190,10 +190,10 @@ button.chip:active { transform: scale(.97); }
    four seconds; once it has, they wait for their turn (src/web/ui.js reveal). */
 [data-reveal] { transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
 @media (scripting: enabled) {
-  [data-reveal]:not(.in) { opacity: 0; transform: translateY(18px); animation: reveal-anyway 0s var(--reveal-wait, 4s) forwards; }
+  [data-reveal]:not(.in) { opacity: 0; transform: translateY(10px); animation: reveal-anyway 0s var(--reveal-wait, 4s) forwards; }
 }
 .js { --reveal-wait: 9999s; }
-:where(.js) [data-reveal]:not(.in) { opacity: 0; transform: translateY(18px); } /* browsers without (scripting) */
+:where(.js) [data-reveal]:not(.in) { opacity: 0; transform: translateY(10px); } /* browsers without (scripting) */
 @keyframes reveal-anyway { to { opacity: 1; transform: none; } }
 
 /* ---------- footer ---------- */
@@ -286,12 +286,15 @@ details.faq > div { padding: 0 0 24px; max-width: var(--measure); color: var(--m
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
 }
 
-/* ---------- touch: every press answers at once and springs back (only transform and opacity move) ---------- */
-:root { --spring: cubic-bezier(.32, .72, 0, 1); }
-.btn { transition: transform .34s var(--spring), opacity var(--quick), background-color var(--calm), box-shadow var(--calm); }
-.btn:active { transform: scale(.965); transition-duration: 70ms; }
-.chip { transition: transform .34s var(--spring), background-color var(--calm) var(--spring), color var(--calm), box-shadow var(--calm); }
-.chip:active { transform: scale(.94); transition-duration: 70ms; }
+/* ---------- touch: poise (23 Oct 2026; the founder: "slimy and squishy... we are making it for elite and elegant") ----------
+   A press no longer squashes a control: it sinks one pixel, firmly, and comes back in 180 ms. Every move is short and
+   decisive and lands without a tail (--spring is now a standard curve; the name stays so every rule follows it), and
+   nothing stretches, bounces or breathes. Only transform and opacity move. */
+:root { --spring: cubic-bezier(.4, 0, .2, 1); }
+.btn { transition: transform 180ms var(--spring), opacity var(--quick), background-color var(--calm), box-shadow var(--calm); }
+.btn:active { transform: translateY(1px); transition-duration: 60ms; }
+.chip { transition: transform 180ms var(--spring), background-color var(--calm) var(--spring), color var(--calm), box-shadow var(--calm); }
+.chip:active, button.chip:active { transform: translateY(1px); transition-duration: 60ms; }
 .nav-toggle, .link { transition: opacity var(--quick); }
 .nav-toggle:active, .link:active { opacity: .55; }
 summary { -webkit-tap-highlight-color: transparent; }
@@ -299,10 +302,10 @@ summary { -webkit-tap-highlight-color: transparent; }
 /* sheets slide in and out, and the dim behind them fades (browsers without this keep the rise above) */
 @supports (transition-behavior: allow-discrete) {
   dialog.sheet, dialog.sheet[open] { animation: none; }
-  dialog.sheet { transition: opacity .28s var(--spring), transform .46s var(--spring), overlay .46s allow-discrete, display .46s allow-discrete; }
-  dialog.sheet:not([open]) { opacity: 0; transform: translateY(14px) scale(.985); }
-  @starting-style { dialog.sheet[open] { opacity: 0; transform: translateY(14px) scale(.985); } }
-  dialog.sheet::backdrop { transition: opacity .28s, overlay .46s allow-discrete, display .46s allow-discrete; }
+  dialog.sheet { transition: opacity .22s var(--spring), transform .3s var(--spring), overlay .3s allow-discrete, display .3s allow-discrete; }
+  dialog.sheet:not([open]) { opacity: 0; transform: translateY(8px); }
+  @starting-style { dialog.sheet[open] { opacity: 0; transform: translateY(8px); } }
+  dialog.sheet::backdrop { transition: opacity .22s, overlay .3s allow-discrete, display .3s allow-discrete; }
   @starting-style { dialog.sheet[open]::backdrop { opacity: 0; } }
   @media (max-width: 700px) {
     dialog.sheet:not([open]) { opacity: 1; transform: translateY(100%); }
@@ -313,7 +316,7 @@ summary { -webkit-tap-highlight-color: transparent; }
 /* an answer opens and closes smoothly, at its own height */
 @supports (interpolate-size: allow-keywords) {
   details { interpolate-size: allow-keywords; }
-  details::details-content { block-size: 0; overflow: clip; transition: block-size .42s var(--spring), content-visibility .42s allow-discrete; }
+  details::details-content { block-size: 0; overflow: clip; transition: block-size .3s var(--spring), content-visibility .3s allow-discrete; }
   details[open]::details-content { block-size: auto; }
 }
 
