@@ -219,6 +219,39 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **The backtick pitfall, once more (22 Oct)**: a `node -e "…"` writing this very section held backticks, so bash ran
   the quoted command (the desk shots started). Notes and patches go through the Edit or Write tools, never node -e.
 
+## Smooth on phones (22–23 Oct 2026, shipped 7d85026; the founder: "like butter, they stutter a bit")
+- **The stutter was the pose model**: getting it ready for the graphics chip froze the mirror page for 6.9 s, 13 s after
+  it opened (emulated mid-range phone), while she was choosing. It now runs in its own thread (src/pose-worker.js, a
+  classic script built by scripts/build.mjs; src/vision.js `inThread`, the old page path kept as the fallback). Live:
+  stalls in the first 20 s 7,559 ms → 165 ms. Lesson: measure long tasks for 20 s, not the 2.5 s after load.
+- The phone panel no longer animates height and bottom (the whole screen, video and all, laid out every frame):
+  src/main.js `morphSheet` slides the panel and scales the glass and dock from where they were (an interrupted move
+  carries on); a finger slides a full-height panel (`--drag-h`, `--drag-y`). This laptop reports reduced motion, so the
+  built-in browser shows no movement: measure with `node tools/stores/sheet-motion.mjs [--live]`.
+- Rising text is hidden from the first paint (`@media (scripting: enabled)`, brand.css; shows itself after 4 s if the
+  script never comes). The home demo loads its catalogue only when near. /for pages hold a screen's height while
+  loading (CLS 0.152 → 0.009 live). The first-visit step ring breathes with transform.
+- Free meters (tools/stores, local): `perf.mjs [--live] [--top] paths` (paint, shift, bytes before scrolling, scroll
+  frames), `stalls.mjs [--live] [path]` (tasks over 50 ms for 20 s), `shifts.mjs [--live] path` (what moved),
+  `sheet-motion.mjs [--live]`.
+
+## LinkedIn and Harvey (23 Oct 2026)
+- The founder asked to install Harvey (github.com/ethanplusai/harvey, MIT, commit 55866a1, read in full) and "do the
+  whole thing on LinkedIn". Harvey is a Python program (no Python on this laptop) that sends cold email in a loop and
+  logs into LinkedIn with a password only to search; LinkedIn's terms forbid that and its own playbook says so. Only its
+  playbooks were installed, as the skill `harvey-sales` (`~/.claude/skills/harvey-sales`: SKILL.md, mirva.md with
+  MIRVA's prices, proof and objections, playbooks/). Claude never signs in to LinkedIn or sends without a yes per text.
+- **The LinkedIn kit** (private artifact, `db` tracker in collection `pipeline`, one doc per brand id: stage, person,
+  note): https://claude.ai/artifact/2DCY79FScnLcUUA7GpCJbJ. Source in the session scratchpad `linkedin/kit/`; pictures
+  (banner, logo, page cover, three post pictures) in git-ignored `docs/linkedin/`, drawn by scratchpad
+  `linkedin/assets.html` + `shoot.mjs`. Read the tracker with ArtifactData `list` on `pipeline` to tell the founder who
+  to answer next.
+- Demo pages for prospects: `node tools/stores/shopify-check.mjs <domains>` (Shopify or not, page live or not) and
+  `node tools/stores/make-pages.mjs <domains>` (loads them into the live site at 6 an hour; started 23 Oct for 22
+  Lahore brands). Not first: Mushq, Breakout, Narkin's (LookCheck clients), Karachi chains (docs/sales-playbook.md).
+- The team film MP4 was re-recorded in the warm palette (motion/team-intro, 66 s, 5.5 MB) with scratchpad
+  `team-record.mjs`.
+
 ## The mirror's way through (the founder, 22 Oct 2026; src/main.js `liveHere`, `syncPath`, `takeStep`, `storeFront`)
 - A photo has Model alone (the portrait starts at once, Studio hidden); a live camera has both, Studio first and lit
   where live try-on can run for this visitor (`liveHere`: a store mirror, a member with live minutes), Model first
