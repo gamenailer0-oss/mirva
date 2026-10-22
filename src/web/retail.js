@@ -259,11 +259,23 @@ async function pitch() {
             el("a", { class: "btn ghost", href: "/retail#talk", text: "Talk to the founder" }),
           ),
         ),
-        el("div", { class: "glass p-glass", "aria-hidden": "true", "data-reveal": true, style: "--i:2" },
-          haloSvg(),
-          el("div", { class: "tint" }),
-          el("div", { class: "crest" }, el("span", { class: "wm", text: brand.wordmark || brand.name.toUpperCase() }), el("span", { class: "by", text: "styled by MIRVA" })),
-        ),
+        // The MIRVA mirror (the founder's design) with the store's own photos changing in its glass. It used to be an empty
+        // pane with the store's name, which an owner read as broken (23 Oct 2026). Without pictures, the old pane stays.
+        pictures.length >= 3
+          ? el("figure", { class: "p-mirror", "data-reveal": true, style: "--i:2" },
+              el("div", { class: "mirror-photo" },
+                el("div", { class: "mirror-glass", "aria-label": `${brand.name}'s own photos, in the MIRVA mirror` },
+                  pictures.slice(0, 3).map((p, i) => picture({ class: `g${i + 1}`, src: p.image, alt: "", loading: i ? "lazy" : "eager", decoding: "async" })),
+                ),
+                el("img", { class: "mirror-body", src: "/brand/mirva-mirror.webp", alt: "", width: 480, height: 1056 }),
+              ),
+              el("figcaption", { class: "fine" }, el("span", { class: "wm", text: brand.wordmark || brand.name.toUpperCase() }), " · your own photos, in the MIRVA mirror"),
+            )
+          : el("div", { class: "glass p-glass", "aria-hidden": "true", "data-reveal": true, style: "--i:2" },
+              haloSvg(),
+              el("div", { class: "tint" }),
+              el("div", { class: "crest" }, el("span", { class: "wm", text: brand.wordmark || brand.name.toUpperCase() }), el("span", { class: "by", text: "styled by MIRVA" })),
+            ),
       ),
     ),
     looks.length >= 2 &&
