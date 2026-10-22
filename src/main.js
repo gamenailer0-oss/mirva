@@ -734,14 +734,60 @@ const tall = matchMedia("(orientation: portrait)");
 const phoneApp = () => (upright.matches || (document.documentElement.dataset.glass === "real" && tall.matches)) && document.documentElement.dataset.glass !== "oval";
 const SHEETS = ["mini", "peek", "full"];
 let sheetWish = null; // the size she chose herself, until she picks a look
+// The panel and the glass move on the phone's graphics chip (22 Oct 2026: they used to animate height and position, so
+// the phone laid out the whole screen, video and all, on every frame, and it stuttered). The layout changes once; the
+// panel then slides from where it was and the glass scales from its old size to its new one. A panel that shrinks keeps
+// its old height while it slides down, so no gap opens under it, and takes its new height when it lands.
+const SPRING = "cubic-bezier(.32, .72, 0, 1)";
+let dragFrom = null; // where a dragged panel was let go, for the move that settles it
+let morphs = 0;
+// Stops the panel's move where it is (the next move starts from there) and gives it back its own height.
+function stopSheet(...els) {
+  for (const el of els) for (const a of el.getAnimations()) if (a.id === "sheet") a.cancel();
+  $(".tablet").style.removeProperty("height");
+}
+function morphSheet(change, from = null) {
+  const tablet = $(".tablet"), dock = $("#dock");
+  // Measured as drawn, so a move that is interrupted halfway carries on from where it was.
+  const t0 = from || tablet.getBoundingClientRect(), g0 = glass.getBoundingClientRect(), d0 = dock.getBoundingClientRect();
+  stopSheet(tablet, glass, dock);
+  change();
+  if (!phoneApp() || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const t1 = tablet.getBoundingClientRect(), g1 = glass.getBoundingClientRect(), d1 = dock.getBoundingClientRect();
+  const timing = { duration: 460, easing: SPRING };
+  const run = ++morphs;
+  const move = (el, keyframes, then) => {
+    const a = el.animate(keyframes, { ...timing, fill: "forwards" });
+    a.id = "sheet";
+    a.onfinish = () => run === morphs && (then?.(), a.cancel());
+  };
+  if (g0.width && g1.width && (Math.abs(g0.top - g1.top) > 1 || Math.abs(g0.height - g1.height) > 1))
+    move(glass, [
+      { transformOrigin: "0 0", transform: `translate(${g0.left - g1.left}px, ${g0.top - g1.top}px) scale(${g0.width / g1.width}, ${g0.height / g1.height})` },
+      { transformOrigin: "0 0", transform: "none" },
+    ]);
+  if (d0.height && d1.height && Math.abs(d0.top - d1.top) > 1) move(dock, [{ transform: `translateY(${d0.top - d1.top}px)` }, { transform: "none" }]);
+  const dy = t0.top - t1.top;
+  if (Math.abs(dy) < 1) return;
+  if (dy > 0) return move(tablet, [{ transform: `translateY(${dy}px)` }, { transform: "none" }]);
+  tablet.style.height = `${t0.height}px`; // shrinking: it keeps its height while it slides down, so nothing opens under it
+  move(tablet, [{ transform: "none" }, { transform: `translateY(${-dy}px)` }], () => tablet.style.removeProperty("height"));
+}
 function syncSheet() {
   const app = $("#app");
   document.documentElement.classList.toggle("phone-app", phoneApp());
   if (!phoneApp()) return void delete app.dataset.sheet;
   const wearing = ["thinking", "portrait", "live"].includes(frame.dataset.state) || frame.dataset.dock !== "none";
   const next = sheetWish || (wearing ? "mini" : "peek");
-  if (app.dataset.sheet !== next) {
-    app.dataset.sheet = next;
+  const from = dragFrom;
+  dragFrom = null;
+  if (app.dataset.sheet !== next || from) {
+    morphSheet(() => {
+      app.classList.remove("dragging");
+      app.style.removeProperty("--drag-h");
+      app.style.removeProperty("--drag-y");
+      app.dataset.sheet = next;
+    }, from);
     if (next !== "full") $(".tablet").scrollTop = 0;
     // Folded, the row shows the piece she is wearing, wherever it sits in the catalogue. A catalogue card that was off
     // screen (content-visibility) is only laid out in the row a frame or two later, so it is waited for.
@@ -779,7 +825,7 @@ function followFinger() {
   tablet.addEventListener("touchstart", (e) => {
     if (!phoneApp() || e.touches.length !== 1) return void (g = null);
     const t = e.touches[0];
-    g = { x: t.clientX, y: t.clientY, start: tablet.getBoundingClientRect().height, decided: false, taking: false, trail: [[t.clientY, e.timeStamp]] };
+    g = { x: t.clientX, y: t.clientY, decided: false, taking: false, trail: [[t.clientY, e.timeStamp]] };
   }, { passive: true });
   tablet.addEventListener("touchmove", (e) => {
     if (!g) return;
@@ -791,6 +837,12 @@ function followFinger() {
       const full = app.dataset.sheet === "full";
       g.taking = dy > 0 ? tablet.scrollTop <= 0 : !full; // down from the top folds it; up grows it until it is full
       if (!g.taking) return void (g = null);
+      // While the finger holds it, the panel is drawn at its full height and slid: nothing is laid out again until it lets go.
+      // It is caught where it is drawn, even halfway through a move.
+      g.start = innerHeight - tablet.getBoundingClientRect().top + dy;
+      stopSheet(tablet);
+      g.full = sizes().full;
+      app.style.setProperty("--drag-h", `${Math.round(g.full)}px`);
       app.classList.add("dragging");
     }
     if (e.cancelable) e.preventDefault();
@@ -798,7 +850,7 @@ function followFinger() {
     let height = g.start - dy;
     if (height > full) height = full + (height - full) * 0.25; // past the ends it gives a little, then holds
     if (height < mini) height = mini - (mini - height) * 0.25;
-    app.style.setProperty("--drag", `${Math.round(height)}px`);
+    app.style.setProperty("--drag-y", `${Math.round(g.full - height)}px`);
     g.now = height;
     g.trail.push([t.clientY, e.timeStamp]);
     if (g.trail.length > 6) g.trail.shift();
@@ -810,9 +862,9 @@ function followFinger() {
     const aim = (g.now ?? g.start) - speed * 220;
     const s = sizes();
     const pick = Object.entries(s).sort((a, b) => Math.abs(a[1] - aim) - Math.abs(b[1] - aim))[0][0];
+    const height = g.now ?? g.start;
     g = null;
-    app.classList.remove("dragging");
-    app.style.removeProperty("--drag");
+    dragFrom = { top: innerHeight - height, left: 0, width: innerWidth, height }; // where it is on the screen now
     setSheet(pick);
   };
   tablet.addEventListener("touchend", settle);

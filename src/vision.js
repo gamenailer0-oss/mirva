@@ -4,13 +4,19 @@
 //  3. pausing a live look when the shopper walks away.
 // Everything runs in the browser. No picture leaves the device for this.
 
-let detector = null;
+let detector = null; // { detect(source) → the first person's landmarks, or null }
 let loading = null;
 let broken = false;
 
 async function load() {
   if (detector || broken) return detector;
   loading ??= (async () => {
+    try {
+      detector = await inThread();
+      return detector;
+    } catch (e) {
+      console.warn("The pose model's own thread did not start; it runs on the page instead.", e);
+    }
     try {
       const { FilesetResolver, PoseLandmarker } = await import("@mediapipe/tasks-vision");
       const files = await FilesetResolver.forVisionTasks("/dist/mp");
@@ -21,12 +27,14 @@ async function load() {
           numPoses: 1,
           minPoseDetectionConfidence: 0.45,
         });
+      let d;
       try {
-        detector = await make("GPU");
+        d = await make("GPU");
       } catch {
-        detector = await make("CPU");
+        d = await make("CPU");
       }
-      prime(detector);
+      prime(d);
+      detector = { detect: async (source) => d.detect(source).landmarks?.[0] || null };
     } catch (e) {
       console.warn("Pose detection is unavailable; MIRVA carries on without it.", e);
       broken = true;
@@ -34,6 +42,41 @@ async function load() {
     return detector;
   })();
   return loading;
+}
+
+// The model in its own thread (src/pose-worker.js), so getting it ready never holds the page still. Each picture goes
+// over as a copy (an ImageBitmap), so the caller's own picture stays usable.
+function inThread() {
+  return new Promise((resolve, reject) => {
+    if (typeof Worker !== "function" || typeof OffscreenCanvas !== "function" || typeof createImageBitmap !== "function") return reject(new Error("no worker"));
+    const thread = new Worker("/dist/pose-worker.js");
+    const waiting = new Map();
+    let calls = 0, stopped = false;
+    const detect = async (source) => {
+      if (stopped) throw new Error("the pose thread stopped");
+      const image = await createImageBitmap(source);
+      const id = ++calls;
+      return new Promise((answer, fail) => {
+        waiting.set(id, { answer, fail });
+        thread.postMessage({ id, image }, [image]);
+      });
+    };
+    thread.onmessage = ({ data }) => {
+      if (data.ready) return resolve({ detect });
+      if (data.broken) return thread.terminate(), reject(new Error(data.broken));
+      const call = waiting.get(data.id);
+      waiting.delete(data.id);
+      if (data.failed) call?.fail(new Error(data.failed));
+      else call?.answer(data.landmarks);
+    };
+    thread.onerror = (e) => {
+      e.preventDefault?.();
+      stopped = true;
+      for (const call of waiting.values()) call.fail(new Error("the pose thread stopped"));
+      waiting.clear();
+      reject(new Error(e.message || "the pose thread did not start"));
+    };
+  });
 }
 
 // The very first look compiles the model for the graphics chip, and the page cannot do anything
@@ -60,8 +103,7 @@ export async function body(source) {
   const d = await load();
   if (!d) return undefined; // undefined = cannot tell; null = looked and found nobody
   try {
-    const out = d.detect(source);
-    const lm = out.landmarks?.[0];
+    const lm = await d.detect(source);
     if (!lm) return null;
     const seen = (i) => (lm[i].visibility ?? 1) > 0.5;
     return {
@@ -92,7 +134,7 @@ export async function head(source) {
   const d = await load();
   if (!d) return undefined;
   try {
-    const lm = d.detect(source).landmarks?.[0];
+    const lm = await d.detect(source);
     if (!lm) return null;
     const W = source.width, H = source.height;
     const at = (i) => ({ x: lm[i].x * W, y: lm[i].y * H });

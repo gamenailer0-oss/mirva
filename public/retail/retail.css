@@ -8,6 +8,8 @@
 .ticks li::before { content: ""; width: 14px; height: 8px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(-45deg); opacity: .7; }
 .r-hero [data-reveal], .p-hero [data-reveal] { opacity: 1; transform: none; transition: none; animation: enter var(--slow) var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
 @keyframes enter { from { opacity: 0; transform: translateY(18px); } }
+/* While a store's page is being prepared it holds a screen's height, so the footer is not pushed down when it arrives. */
+#main:has(.spinner-line) { min-height: 100svh; }
 .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4); }
 

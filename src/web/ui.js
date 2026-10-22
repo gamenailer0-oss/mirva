@@ -117,7 +117,8 @@ export function toast(message) {
 // Sections come into view once, as the reader reaches them.
 export function reveal(root = document) {
   const nodes = $$("[data-reveal]:not(.in)", root);
-  if (!("IntersectionObserver" in window)) return nodes.forEach((n) => n.classList.add("in"));
+  // A page whose script came late has already shown them (public/brand.css "reveal on scroll"): they stay shown.
+  if (!("IntersectionObserver" in window) || (root === document && performance.now() > 3800)) return nodes.forEach((n) => n.classList.add("in"));
   const seen = new IntersectionObserver(
     (entries) => {
       for (const e of entries) if (e.isIntersecting) (e.target.classList.add("in"), seen.unobserve(e.target));

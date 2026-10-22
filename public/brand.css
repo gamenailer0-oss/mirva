@@ -184,9 +184,17 @@ button.chip:active { transform: scale(.97); }
 @keyframes breathe { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
 @keyframes travel { to { stroke-dashoffset: -100; } }
 
-/* ---------- reveal on scroll ---------- */
-.js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
-.js [data-reveal].in { opacity: 1; transform: none; }
+/* ---------- reveal on scroll ----------
+   Hidden from the first paint wherever scripts run (22 Oct 2026: they were hidden only once the page's script had
+   arrived, so they showed, vanished and came back: a flash). If the script never arrives they show themselves after
+   four seconds; once it has, they wait for their turn (src/web/ui.js reveal). */
+[data-reveal] { transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+@media (scripting: enabled) {
+  [data-reveal]:not(.in) { opacity: 0; transform: translateY(18px); animation: reveal-anyway 0s var(--reveal-wait, 4s) forwards; }
+}
+.js { --reveal-wait: 9999s; }
+:where(.js) [data-reveal]:not(.in) { opacity: 0; transform: translateY(18px); } /* browsers without (scripting) */
+@keyframes reveal-anyway { to { opacity: 1; transform: none; } }
 
 /* ---------- footer ---------- */
 .foot { padding: var(--s8) 0 var(--s7); border-top: 1px solid var(--line); }
@@ -254,7 +262,7 @@ details.faq > div { padding: 0 0 24px; max-width: var(--measure); color: var(--m
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .js [data-reveal] { opacity: 1; transform: none; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
 /* The mark and the menu button keep their size when the bar gets tight. */

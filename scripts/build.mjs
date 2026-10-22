@@ -74,9 +74,16 @@ for (const m of MODELS) {
   }
 }
 
+// The pose model's own thread (src/pose-worker.js): a classic script, since MediaPipe loads its WebAssembly there with
+// importScripts, which a module worker does not have.
+const thread = { ...options, entryPoints: { "pose-worker": join(ROOT, "src", "pose-worker.js") }, splitting: false, format: "iife" };
+delete thread.chunkNames;
+
 if (watch) {
   const ctx = await context(options);
   await ctx.watch();
+  await (await context(thread)).watch();
 } else {
   await build(options);
+  await build(thread);
 }

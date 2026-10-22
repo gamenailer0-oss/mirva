@@ -805,7 +805,6 @@ a.chip { text-decoration: none; }
 :root.phone-app .stage {
   position: absolute; z-index: 1; left: 0; right: 0; top: var(--top); bottom: var(--sheet); padding: 4px 14px 12px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  transition: bottom var(--calm) var(--ease);
 }
 :root.phone-app .frame, :root.phone-app .frame[data-shape="landscape"] {
   flex: 1; min-height: 0; width: 100%; height: auto; aspect-ratio: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
@@ -822,7 +821,6 @@ a.chip { text-decoration: none; }
   border: 0; border-radius: 22px 22px 0 0; padding: 0 16px calc(10px + env(safe-area-inset-bottom));
   background: var(--panel); box-shadow: 0 -1px 0 var(--line), 0 -24px 48px -30px rgba(12, 10, 8, .5);
   overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; contain: none;
-  transition: height var(--calm) var(--ease);
 }
 :root.phone-app .app[data-sheet="full"] .tablet { height: calc(100svh - 64px - env(safe-area-inset-top)); box-shadow: 0 -1px 0 var(--line), 0 -40px 80px -20px rgba(12, 10, 8, .55); }
 :root.phone-app .app[data-sheet="full"] .stage { bottom: clamp(292px, 42svh, 400px); }
@@ -948,8 +946,6 @@ a.chip { text-decoration: none; }
 .primary:active, .tool:active { transform: scale(.95); transition-duration: 70ms; }
 .look .shot { transition: transform .34s var(--spring), box-shadow .2s; }
 .look:active .shot { transform: scale(.965); transition-duration: 70ms; }
-:root.phone-app .tablet { transition: height .5s var(--spring); }
-:root.phone-app .stage { transition: bottom .5s var(--spring); }
 .pane:not([hidden]) { animation: pane-in .3s var(--spring); }
 @keyframes pane-in { from { opacity: 0; transform: translateY(6px); } }
 
@@ -995,11 +991,11 @@ a.chip { text-decoration: none; }
 .wait-fact.in { animation: rise .7s var(--ease); }
 @media (prefers-reduced-motion: reduce) { .reel img.on { animation: none; } }
 
-/* ---------- the panel follows the finger (src/main.js followFinger), then settles like the phone's own sheets ---------- */
-:root.phone-app .tablet { transition: height .46s var(--spring); }
-:root.phone-app .stage { transition: bottom .46s var(--spring); }
-:root.phone-app .app.dragging .tablet { height: var(--drag) !important; transition: none; }
-:root.phone-app .app.dragging .stage { bottom: min(var(--drag), clamp(292px, 42svh, 400px)) !important; transition: none; }
+/* ---------- the panel follows the finger (src/main.js followFinger), then settles like the phone's own sheets ----------
+   Its size changes are moved by src/main.js morphSheet on the graphics chip: the layout changes once and the panel, the
+   glass and the dock slide from where they were. While a finger holds it, the panel is drawn full height and slid. */
+:root.phone-app .tablet { will-change: transform; }
+:root.phone-app .app.dragging .tablet { height: var(--drag-h) !important; transform: translateY(var(--drag-y, 0)); }
 :root.phone-app .app.dragging .tablet * { pointer-events: none; }
 
 /* ---------- depth: a soft light from above on everything that can be pressed ----------
@@ -1137,8 +1133,9 @@ a.chip { text-decoration: none; }
 .path [data-state="done"] i { color: transparent; background: var(--panel); box-shadow: inset 0 0 0 1px var(--accent-text); }
 .path [data-state="done"] i::after { content: ""; position: absolute; width: 9px; height: 5px; border: solid var(--accent-text); border-width: 0 0 1.6px 1.6px; transform: translateY(-1px) rotate(-45deg); }
 @media (prefers-reduced-motion: no-preference) {
-  .path [data-state="next"] i { animation: path-breathe 2.4s var(--ease) infinite; }
-  @keyframes path-breathe { 50% { box-shadow: 0 0 0 7px color-mix(in oklab, var(--ink) 4%, transparent); } }
+  /* a ring that breathes out from the next step: moved and faded on the graphics chip, never repainted */
+  .path [data-state="next"] i::before { content: ""; position: absolute; inset: -4px; border-radius: 50%; background: color-mix(in oklab, var(--ink) 9%, transparent); z-index: -1; animation: path-breathe 2.4s var(--ease) infinite; }
+  @keyframes path-breathe { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.22); opacity: .45; } }
 }
 :root.phone-app .app[data-sheet="mini"] .path { display: none; }
 

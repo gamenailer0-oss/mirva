@@ -108,5 +108,9 @@ export async function start() {
       if (p) node.textContent = p.name;
     }
   }
-  show();
+  // The catalogue (about 70 KB) and the stylist's choosing wait until the demo is about a screen away, so the first
+  // screen loads and paints without them (22 Oct 2026: two long tasks, 443 ms, on a mid-range phone at load).
+  if (!("IntersectionObserver" in window)) return show();
+  const near = new IntersectionObserver((seen) => seen.some((e) => e.isIntersecting) && (near.disconnect(), show()), { rootMargin: "900px 0px" });
+  near.observe(box);
 }
