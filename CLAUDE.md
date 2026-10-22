@@ -303,6 +303,16 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (banner, logo, page cover, three post pictures) in git-ignored `docs/linkedin/`, drawn by scratchpad
   `linkedin/assets.html` + `shoot.mjs`. Read the tracker with ArtifactData `list` on `pipeline` to tell the founder who
   to answer next.
+- **Kit v3, audited 23 Oct for the founder's first LinkedIn day (Sat 24 Oct)** with harvey-sales, the linkedin-growth and
+  close-plan skills and a web check of LinkedIn's limits: free accounts get only 3–5 personal notes a month (200
+  chars), so notes go to the warm five; messages start with the person; one person per brand; the carousel
+  (docs/linkedin/mirva-carousel-how-it-works.pdf, 8 slides, scratchpad `linkedin/carousel.html` + `print.mjs`) is post
+  1; a 15-minute visit script; the one-page founding pilot (docs/linkedin/mirva-founding-pilot.pdf, from
+  `linkedin/one-pager.html`); a dated yes-to-live plan; the tracker gained next-touch dates and "due today".
+  21 of 22 new demo pages loaded (Ethnic no longer readable); Sana Safinaz and Zainab Chottani left out (Karachi).
+- **A store's demo page opens on the MIRVA mirror** with its own photos in the glass (src/web/retail.js `p-mirror`,
+  retail.css); it was an empty dark pane an owner would read as broken. Check a page as an owner sees it before
+  sending its link (scratchpad `mirror-concept/fullpage.mjs /for/<id> <live base>`).
 - Demo pages for prospects: `node tools/stores/shopify-check.mjs <domains>` (Shopify or not, page live or not) and
   `node tools/stores/make-pages.mjs <domains>` (loads them into the live site at 6 an hour; started 23 Oct for 22
   Lahore brands). Not first: Mushq, Breakout, Narkin's (LookCheck clients), Karachi chains (docs/sales-playbook.md).
