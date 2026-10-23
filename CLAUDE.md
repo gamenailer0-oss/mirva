@@ -69,7 +69,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (overflow, headline lines, text sizes, contrast; screenshots in `.taste-skill/inspect/`). Its style bans (no kickers,
   no gradients, no shadows, no hairlines) are its house style, not MIRVA's: use it for measured faults only. After any
   copy change in the pages run `node scripts/typeset.mjs` (printer's punctuation in text only; `--check` to list).
-- **Tests**: `npm test` (241 as of 2026-10-21). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (247 as of 2026-10-23). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
   site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
@@ -338,6 +338,18 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   shopper after Start over). The catalogue opens on the store's shopfront; collections carry counts; cards say their
   cloth. Shots of every step, free: `node tools/stores/flow-shots.mjs --size=phone|laptop [--photo] [--fresh] [--brand=id] [--live]`.
   Home: "Now in the mirror" band (Naqshi, Baroque, Agha Noor) and the try-it demo leads with them. test/flow.test.mjs.
+
+## Store limits set by HQ (23 Oct 2026, shipped bb79193; the founder: "a clean way not affecting the functionality")
+- /hq → Stores → "Limit a store’s month": the most portraits and live minutes a store may use a month, whatever its
+  plan allows. Kept in the store's `retailers.settings` as `capPortraits` / `capLiveMinutes` (absent = no limit);
+  `POST /api/hq/retailers/caps` (founder only; a number sets it, null or "" takes it off, a field left out is kept;
+  404 when the store has no plan yet). lib/platform.mjs `storeFrom` takes the smaller of plan and limit
+  (`liveLimitOf`), so a limit only ever lowers what the plan gives: the mirror refuses with the same "store-portraits"
+  / "store-live" it always used, 0 live minutes makes `/api/config` say no Studio, staff are never held. The month's
+  answer gained `cap` (null when none); the founder gets "store-cap" ("has reached your limit") instead of
+  "store-near"; the store's console says "set by MIRVA". test/safeguards.test.mjs holds it all.
+- Shots of the desks with a limit set locally: scratchpad `caps-local.mjs <brand> <portraits|null> <live|null>`
+  (signs in from .data, prints nothing secret), then `node tools/stores/desk-shots.mjs hq|console`.
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
