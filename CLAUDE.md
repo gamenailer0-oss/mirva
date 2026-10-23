@@ -280,6 +280,15 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   behind the glass, placed from MIRVA's own pose landmarks (`landmarks.mjs`): head top at 8% of the glass, feet at
   95%, on the axis (`--h --w --l --t` per image). Only the women's showcase portraits have headroom; the men's touch
   the top edge, so the hero shows khaddar, raw silk and sweatshirt. Caption under the mirror.
+- **The hero as the pitch (23 Oct, the founder: "make it self-explanatory... keep the bg in the mirror a light
+  color")**: the portraits in the glass are now light-room ones (models moved into the day room with room.mjs `day`,
+  then direct.mjs; public/showcase/day-khaddar|day-rawsilk|day-sweatshirt; faces kept 92–96%; placements from
+  scratchpad `mirror-concept/landmarks-day.json`). The glass carries `.mg-ui` (MIRVA + the occasion at the top, look
+  dots and an "Ask family" WhatsApp button at the foot, ink on the light room); wide screens (≥1100 px) get three
+  labels beside the mirror (`.mirror-notes`: her own face, the store's own piece named per look, one link) and hide the
+  caption under it; the copy gained the three steps and "Run a fashion store? See MIRVA on your own catalogue".
+  A max-content caption inside the figure's grid stretched the whole mirror once: the figure's column is
+  `minmax(0, 1fr)`. The link check now ignores MediaPipe's own "INFO:" console notes.
 - /retail `#mirror`: the concept pictures cut by scratchpad `mirror-concept/crop.mjs` into public/retail/mirror/,
   labelled "a design concept". The concept's pad beside the mirror implies the two-screen link (pad drives mirror)
   that is NOT built (docs/mirror-hardware.md: unit one is a wall-set 55-inch screen). Never promise the pad or sizes.
