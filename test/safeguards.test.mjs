@@ -360,6 +360,49 @@ test("an Assist store has no live Studio and is told where it is; its portraits 
   assert.equal((await app.platform.grant(dev.who, "live")).ok, true);
 });
 
+test("the founder can hold a store's month below its plan, field by field; empty takes the limit off, and nothing else changes", async () => {
+  const { app, db } = await makeApp();
+  const dev = await pair(db);
+  await plan(db, "sapphire", "studio", 1, "live"); // Mirror: 70 live minutes, 1,500 portraits
+  const boss = await signIn(app, db, "founder");
+  const caps = (body, who = boss) => call(app, "POST", "/api/hq/retailers/caps", { body: { brand: "sapphire", ...body }, headers: who.headers });
+  const config = async () => (await call(app, "GET", "/api/config", { headers: dev.header })).body;
+
+  assert.equal((await caps({ capPortraits: 10 }, await signIn(app, db, "retailer", "sapphire"))).status, 403, "only the founder");
+  assert.equal((await caps({ capPortraits: 1.5 })).status, 400);
+  assert.equal((await caps({ capPortraits: -1 })).status, 400);
+  assert.equal((await call(app, "POST", "/api/hq/retailers/caps", { body: { brand: "atelier", capPortraits: 5 }, headers: boss.headers })).status, 404, "a store with no plan on record");
+
+  const set = await caps({ capPortraits: 10, capLiveMinutes: 2 });
+  assert.deepEqual([set.status, set.body.capPortraits, set.body.capLiveMinutes, set.body.month.portraits.included, set.body.month.live.limit], [200, 10, 2, 10, 2]);
+  await portraitsUsed(db, dev.id, 9);
+  assert.equal((await app.platform.grant(dev.who, "portrait")).ok, true, "9 of 10");
+  await portraitsUsed(db, dev.id, 1);
+  assert.equal((await app.platform.grant(dev.who, "portrait")).limit, "store-portraits", "held at the founder's 10, not the plan's 1,500");
+  const live = await app.platform.grant(dev.who, "live");
+  assert.deepEqual([live.ok, live.seconds], [true, 120], "a look may run only to the limit's two minutes");
+  await liveUsed(db, dev.id, 120);
+  assert.equal((await app.platform.grant(dev.who, "live")).limit, "store-live", "told as a month used up, as before");
+  assert.equal((await config()).studio, true, "a limit reached is not the same as no Studio");
+  const needs = (await call(app, "GET", "/api/hq/overview", { headers: boss.headers })).body.needs;
+  assert.deepEqual(needs.map((n) => n.kind), ["store-cap"], "the founder hears it was their limit, not 'near the plan'");
+  assert.match(needs[0].text, /has reached your limit: 10 portraits and 2 live minutes this month/);
+
+  // Only the field sent changes; empty takes it off; a limit above the plan changes nothing.
+  assert.equal((await caps({ capLiveMinutes: "" })).body.capPortraits, 10);
+  assert.equal((await app.platform.grant(dev.who, "live")).ok, true, "back to the plan's 70 minutes");
+  assert.equal((await caps({ capPortraits: 5000 })).body.month.portraits.included, 1500, "never more than the plan");
+  const off = await caps({ capPortraits: null, capLiveMinutes: null });
+  assert.deepEqual([off.body.capPortraits, off.body.capLiveMinutes], [null, null]);
+  assert.equal(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).capPortraits, undefined);
+
+  // 0 live minutes: the mirror offers portraits from the start. Staff are never held.
+  await caps({ capLiveMinutes: 0 });
+  assert.equal((await config()).studio, false);
+  assert.equal((await app.platform.grant(dev.who, "live")).limit, "store-live");
+  assert.equal((await app.platform.grant({ kind: "staff", user: { id: "s1" } }, "live")).ok, true);
+});
+
 test("one mirror may start forty try-ons in an hour, and a refusal for any other reason does not use one up", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);
@@ -547,13 +590,13 @@ test("the overview shows the month: live minutes and portraits used, what the pl
   await portraitsUsed(db, dev.id, 30, { sample: 1 });
   let p = await overview();
   assert.deepEqual([p.id, p.name, p.monthly, p.mirrors], ["assist", "Assist", 60000, 0]);
-  assert.deepEqual(p.portraits, { used: 10, included: 1200, stopped: false });
+  assert.deepEqual(p.portraits, { used: 10, included: 1200, cap: null, stopped: false });
   assert.deepEqual([p.live.included, p.live.usedMinutes, p.live.stopped], [0, 0, true], "Assist has no live Studio to use");
 
   await plan(db, "sapphire", "studio", 1, "live");
   await liveUsed(db, dev.id, 75 * 60);
   p = await overview();
-  assert.deepEqual(p.live, { usedMinutes: 75, included: 70, extra: 0, limit: 70, over: 5, overPkr: 3000, stopped: true });
+  assert.deepEqual(p.live, { usedMinutes: 75, included: 70, extra: 0, limit: 70, cap: null, over: 5, overPkr: 3000, stopped: true });
   assert.equal(p.minutePkr, 600);
   await setSettings(db, "sapphire", { extraLiveMinutes: 20 });
   p = await overview();
@@ -562,8 +605,8 @@ test("the overview shows the month: live minutes and portraits used, what the pl
   assert.deepEqual([(await overview()).live.usedMinutes, (await overview()).live.over], [75.2, 6]);
 
   const stats = await call(app, "GET", "/api/console/limits", { headers: shop.headers });
-  assert.deepEqual(stats.body.month.live, { usedMinutes: 75.2, included: 70, extra: 20, limit: 90, over: 6, overPkr: 3600, stopped: false });
-  assert.deepEqual(stats.body.month.portraits, { used: 10, included: 1500, stopped: false });
+  assert.deepEqual(stats.body.month.live, { usedMinutes: 75.2, included: 70, extra: 20, limit: 90, cap: null, over: 6, overPkr: 3600, stopped: false });
+  assert.deepEqual(stats.body.month.portraits, { used: 10, included: 1500, cap: null, stopped: false });
 });
 
 // ===== 5. what the founder is told ============================================================
@@ -583,7 +626,7 @@ test("the founder is told about stores near or past their live minutes, with wha
   let o = await needs();
   assert.deepEqual(o.needs.map((n) => n.kind), ["store-near"]);
   assert.match(o.needs[0].text, /Sapphire has used 56 of its 70 live minutes this month \(80%\)\./);
-  assert.deepEqual(o.retailers[0].month.live, { usedMinutes: 56, included: 70, extra: 0, limit: 70, over: 0, overPkr: 0, stopped: false });
+  assert.deepEqual(o.retailers[0].month.live, { usedMinutes: 56, included: 70, extra: 0, limit: 70, cap: null, over: 0, overPkr: 0, stopped: false });
   assert.deepEqual([o.retailers[0].plan, o.retailers[0].planName], ["studio", "Mirror"]);
 
   await liveUsed(db, dev.id, 14 * 60);

@@ -59,7 +59,7 @@ body.desk { background: var(--bg); font-size: 15.5px; }
 .tbl-wrap { overflow-x: auto; border-radius: var(--r-md); box-shadow: 0 0 0 1px var(--line); background: var(--panel); }
 .tbl { width: 100%; border-collapse: collapse; font-size: 14.5px; }
 .tbl th { position: sticky; top: 0; background: var(--panel); text-align: left; padding: 13px 14px; font: 500 11px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); white-space: nowrap; }
-.tbl td { padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.tbl td { padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; overflow-wrap: break-word; } /* whole words; the wrap scrolls sideways */
 .tbl tr:last-child td { border-bottom: 0; }
 .tbl td.n, .tbl th.n { text-align: right; font-variant-numeric: tabular-nums; }
 .tbl img { width: 38px; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 5px; background: var(--card); }

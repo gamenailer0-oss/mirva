@@ -269,9 +269,10 @@ const VIEWS = {
             el("dt", { text: "Per try-on" }), el("dd", { class: "num", text: money(o.spend.perVisitPkr) }),
             o.plan && [el("dt", { text: "Plan" }), el("dd", { text: `${o.plan.name}, ${plural(o.plan.stores, "store")} (${o.plan.status})` })],
             // This calendar month at the store's paired mirrors, the way the plan is counted.
-            o.plan && [el("dt", { text: "Live minutes this month" }), el("dd", { class: "num", text: o.plan.live.included ? `${num(o.plan.live.usedMinutes)} of ${num(o.plan.live.included)}${o.plan.live.extra ? `, plus ${num(o.plan.live.extra)} agreed` : ""}` : "None in this plan. Live Studio comes with a mirror." })],
+            // A limit MIRVA set below the plan is the number that counts, and is said as MIRVA's.
+            o.plan && [el("dt", { text: "Live minutes this month" }), el("dd", { class: "num", text: !o.plan.live.included ? "None in this plan. Live Studio comes with a mirror." : o.plan.live.cap !== null && o.plan.live.cap < o.plan.live.included + o.plan.live.extra ? `${num(o.plan.live.usedMinutes)} of ${num(o.plan.live.cap)}, set by MIRVA` : `${num(o.plan.live.usedMinutes)} of ${num(o.plan.live.included)}${o.plan.live.extra ? `, plus ${num(o.plan.live.extra)} agreed` : ""}` })],
             o.plan && o.plan.live.over > 0 && [el("dt", { text: "Past the plan" }), el("dd", { class: "num", text: `${num(o.plan.live.over)} min · ${money(o.plan.live.overPkr)} at ${money(o.plan.minutePkr)} each` })],
-            o.plan && [el("dt", { text: "Portraits this month" }), el("dd", { class: "num", text: `${num(o.plan.portraits.used)} of ${num(o.plan.portraits.included)}` })],
+            o.plan && [el("dt", { text: "Portraits this month" }), el("dd", { class: "num", text: `${num(o.plan.portraits.used)} of ${num(o.plan.portraits.included)}${o.plan.portraits.cap !== null && o.plan.portraits.cap === o.plan.portraits.included ? ", set by MIRVA" : ""}` })],
             o.plan && [el("dt", { text: "Fee" }), el("dd", { class: "num", text: `${money(o.plan.monthly)} a month` })],
           ),
           o.plan && el("a", { class: "link muted small", href: "#limits", text: "Change the limits", onclick: (e) => (e.preventDefault(), go("limits")) }),
@@ -450,19 +451,23 @@ const VIEWS = {
       });
 
     const gauge = (used, of, label) => el("div", { class: "gauge", role: "img", "aria-label": `${num(used)} of ${num(of)} ${label} used`, style: `--v:${Math.min(1, used / Math.max(1, of))}` }, el("i"));
+    const capped = m && m.live.cap !== null && m.live.cap < m.live.included + m.live.extra; // MIRVA's limit, below the plan
     const month = el("section", { class: "panel" },
       el("h2", { text: "This month" }),
       m
         ? [
             hasLive && [
-              el("p", { class: "lead", text: `${num(m.live.usedMinutes)} of ${num(m.live.included)} live minutes` }),
+              el("p", { class: "lead", text: `${num(m.live.usedMinutes)} of ${num(capped ? m.live.cap : m.live.included)} live minutes` }),
               gauge(m.live.usedMinutes, m.live.limit, "live minutes"),
-              el("p", { class: "muted small", text: m.live.over ? `${num(m.live.over)} past the plan: ${money(m.live.overPkr)} at ${money(L.liveMinutePkr)} each.` : `${num(Math.max(0, Math.round((m.live.included - m.live.usedMinutes) * 10) / 10))} left in the plan${m.live.extra ? `, and ${num(m.live.extra)} more agreed` : ""}.` }),
+              el("p", { class: "muted small", text: capped
+                ? `${num(Math.max(0, Math.round((m.live.cap - m.live.usedMinutes) * 10) / 10))} left. MIRVA has set this store’s month at ${num(m.live.cap)} live minutes.`
+                : m.live.over ? `${num(m.live.over)} past the plan: ${money(m.live.overPkr)} at ${money(L.liveMinutePkr)} each.` : `${num(Math.max(0, Math.round((m.live.included - m.live.usedMinutes) * 10) / 10))} left in the plan${m.live.extra ? `, and ${num(m.live.extra)} more agreed` : ""}.` }),
               m.live.stopped && el("p", { class: "formnote", text: "Live Studio is resting for the month. Portraits and the stylist carry on." }),
             ],
             el("p", { class: "lead", style: hasLive ? "margin-top:18px" : "", text: `${num(m.portraits.used)} of ${num(m.portraits.included)} portraits` }),
             gauge(m.portraits.used, m.portraits.included, "portraits"),
             m.portraits.stopped && el("p", { class: "formnote", text: "The month’s portraits are used. The stylist still works." }),
+            m.portraits.cap !== null && m.portraits.cap === m.portraits.included && el("p", { class: "muted small", text: `MIRVA has set this store’s month at ${num(m.portraits.cap)} portraits.` }),
           ]
         : el("p", { class: "muted", text: "No plan is on record for this store yet, so there is nothing to count the month against. The daily budget below still applies." }),
     );
@@ -808,6 +813,41 @@ const VIEWS = {
       const made = await api("/api/hq/retailers/pilot", { brand: d.brand, extraPortraits: Math.round(Number(d.extraPortraits) || 0) });
       toast(made.extraPortraits ? `That store now has ${num(made.extraPortraits)} extra portraits a month.` : "That store is back to its plan’s portraits.");
     });
+    // The founder's own limit on a store's month: the most portraits and live minutes it may use, whatever its plan
+    // allows (lib/platform.mjs capOf). Empty is no limit of yours; choosing a store shows the limits it has now.
+    const monthOf = new Map(o.retailers.map((r) => [r.brand, r.month]));
+    const capPortraits = el("input", { name: "capPortraits", type: "number", min: 0, max: 100000, step: 10, placeholder: "No limit" });
+    const capLive = el("input", { name: "capLiveMinutes", type: "number", min: 0, max: 10000, step: 5, placeholder: "No limit" });
+    const capBrand = el("select", { name: "brand" }, brandOptions());
+    const showCaps = () => {
+      const m = monthOf.get(capBrand.value);
+      capPortraits.value = m?.portraits.cap ?? "";
+      capLive.value = m?.live.cap ?? "";
+    };
+    capBrand.addEventListener("change", showCaps);
+    showCaps();
+    const capsSaved = (made) => toast(made.capPortraits === null && made.capLiveMinutes === null ? "No limit of yours on that store now: its plan decides." : `Saved: ${made.capPortraits === null ? "no portrait limit" : `${num(made.capPortraits)} portraits`} and ${made.capLiveMinutes === null ? "no live limit" : `${num(made.capLiveMinutes)} live minutes`} a month at most.`);
+    const limits = el("form", { class: "panel form" },
+      el("h2", { text: "Limit a store’s month" }),
+      field("Store", capBrand),
+      el("div", { class: "form-2" },
+        field("Portraits a month", capPortraits),
+        field("Live minutes a month", capLive),
+      ),
+      el("p", { class: "fine", text: "The most it may use, whatever its plan allows. Its mirrors and its website stop at your limit or the plan’s, whichever comes first, and start again on the 1st; the stylist carries on. Empty means no limit of yours; 0 stops that kind of try-on there. Its staff’s demos are not counted." }),
+      el("p", { class: "formnote", role: "alert" }),
+      el("div", { class: "row" },
+        el("button", { class: "btn small", type: "submit", text: "Save the limits" }),
+        el("button", { class: "link muted", type: "button", text: "Take my limits off", onclick: async () => {
+          capsSaved(await api("/api/hq/retailers/caps", { brand: capBrand.value, capPortraits: null, capLiveMinutes: null }));
+          go("stores");
+        } }),
+      ),
+    );
+    onSubmit(limits, async (d) => {
+      capsSaved(await api("/api/hq/retailers/caps", { brand: d.brand, capPortraits: d.capPortraits === "" ? null : Number(d.capPortraits), capLiveMinutes: d.capLiveMinutes === "" ? null : Number(d.capLiveMinutes) }));
+      go("stores");
+    });
     const user = el("form", { class: "panel form" },
       el("h2", { text: "Give someone at a store a console sign-in" }),
       el("div", { class: "form-2" }, field("Store", el("select", { name: "brand" }, brandOptions())), field("Their name", el("input", { name: "name", required: true, maxLength: 80 })), field("Their email", el("input", { name: "email", type: "email", required: true }))),
@@ -831,12 +871,17 @@ const VIEWS = {
     });
     const byBrand = new Map(o.retailers.map((r) => [r.brand, r]));
     const named = new Map((o.system.stores || []).map((s) => [s.id, s.name])); // "Agha Noor", not "agha-noor"
+    // A store's month in one line: portraits and live minutes against what it may use, marked where your limit decides.
+    const usedLine = (m) =>
+      [`${num(m.portraits.used)} of ${num(m.portraits.included)} portraits${m.portraits.cap !== null && m.portraits.cap === m.portraits.included ? " (your limit)" : ""}`,
+        m.live.limit || m.live.cap !== null ? `${num(m.live.usedMinutes)} of ${num(m.live.limit)} live min${m.live.cap !== null && m.live.cap === m.live.limit ? " (your limit)" : ""}` : ""]
+        .filter(Boolean).join(" · ");
     fill(work(),
       head("Stores"),
       load,
       el("div", { class: "tbl-wrap", style: "margin-bottom:12px" },
         el("table", { class: "tbl" },
-          el("thead", {}, el("tr", {}, ["Store", "Plan", "Stores", "Stage", "A month", "Console users", "Open"].map((t, i) => el("th", { scope: "col", class: i === 2 || i === 4 ? "n" : "", text: t })))),
+          el("thead", {}, el("tr", {}, ["Store", "Plan", "Stores", "Stage", "A month", "Used this month", "Console users", "Open"].map((t, i) => el("th", { scope: "col", class: i === 2 || i === 4 ? "n" : "", text: t })))),
           el("tbody", {}, o.system.brands.map((id) => {
             const r = byBrand.get(id);
             return el("tr", {},
@@ -845,6 +890,7 @@ const VIEWS = {
               el("td", { class: "n", text: r ? num(r.stores) : "—" }),
               el("td", {}, r ? el("span", { class: "badge " + (r.status === "live" ? "good" : "soft"), text: r.status }) : "Catalogue only"),
               el("td", { class: "n", text: r ? money(r.monthly) : "—" }),
+              el("td", { class: "small", text: r?.month ? usedLine(r.month) : "—" }),
               el("td", { text: r?.users.map((u) => u.email).join(", ") || "—" }),
               el("td", {}, el("a", { href: `/console?brand=${id}`, text: "Console" }), " · ", el("a", { href: `/for/${id}`, text: "Their page" }), " · ", el("a", { href: `/mirror?brand=${id}`, text: "Mirror" })),
             );
@@ -853,6 +899,7 @@ const VIEWS = {
       ),
       el("div", { class: "grid2" }, plan, user),
       el("div", { class: "grid2" }, pilot, portraits),
+      el("div", { class: "grid2" }, limits),
       o.system.stores &&
         panel("Who can open each store’s mirror",
           el("p", { class: "muted small", style: "max-width:62ch", text: "Listed: anyone can find and open it. By link only: it opens for people who have its address, and is not offered to the public. A store that has not agreed to a demo belongs in the second group." }),
