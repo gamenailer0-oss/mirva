@@ -24,7 +24,8 @@ const page = await browser.newPage();
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
 let here = "";
 page.on("pageerror", (e) => note(here, `script error: ${String(e).slice(0, 160)}`));
-page.on("console", (m) => m.type() === "error" && !/Failed to load resource/.test(m.text()) && note(here, `console: ${m.text().slice(0, 160)}`));
+// MediaPipe prints its own start-up notes ("INFO: Created TensorFlow Lite XNNPACK delegate") through console.error.
+page.on("console", (m) => m.type() === "error" && !/Failed to load resource|^INFO: /.test(m.text()) && note(here, `console: ${m.text().slice(0, 160)}`));
 page.on("requestfailed", (r) => !/favicon|analytics/.test(r.url()) && note(here, `request failed: ${r.url().replace(base, "")} (${r.failure()?.errorText})`));
 page.on("response", (r) => {
   const u = r.url();

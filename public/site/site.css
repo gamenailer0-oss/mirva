@@ -363,8 +363,14 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
    placed by where its model stands (MIRVA's pose model): her head just under the curve, her feet just above the base,
    on the mirror's own axis. The mirror arrives first, then she appears in it; after that the looks follow each other
    by fading only. Nothing is masked, filtered or drawn while it moves. */
-.oval-hero { position: relative; justify-self: center; width: clamp(226px, min(26vw, (100svh - 380px) * .455), 330px); margin: 0; display: grid; gap: 10px; }
+.oval-hero { position: relative; justify-self: center; width: clamp(226px, min(26vw, (100svh - 380px) * .455), 330px); margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 @media (max-width: 900px) { .oval-hero { width: min(64vw, 270px); } }
+/* wide screens: the labels beside the mirror name the piece, so the caption under it goes and the mirror grows */
+@media (min-width: 1100px) {
+  .oval-hero { width: clamp(240px, min(24vw, (100svh - 260px) * .455), 330px); }
+  .oval-hero .oval-cap { display: none; }
+  .hero .oval-hero figcaption { width: max-content; max-width: 62ch; margin-top: -9%; }
+}
 .mirror-photo { position: relative; aspect-ratio: 480 / 1056; }
 .mirror-body { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
 /* the glass: its box in the photograph (scratchpad mirror-concept/cutout.mjs printed it) */
@@ -374,9 +380,51 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
   opacity: 0; animation: oval-look 18s var(--ease) infinite;
   -webkit-mask-image: linear-gradient(#000 92%, transparent); mask-image: linear-gradient(#000 92%, transparent);
 }
-.mirror-glass .o1 { --h: 100.47%; --w: 170%; --l: -34.23%; --t: -2.36%; animation-delay: 1.1s; }
-.mirror-glass .o2 { --h: 99.9%; --w: 169.02%; --l: -34%; --t: -2.4%; animation-delay: 7.1s; }
-.mirror-glass .o3 { --h: 99.05%; --w: 167.6%; --l: -33.55%; --t: -1.58%; animation-delay: 13.1s; }
+/* the light-room portraits (23 Oct 2026: the founder asked for a light room in the mirror), placed by landmarks-day.json */
+.mirror-glass .o1 { --h: 101.3%; --w: 171.39%; --l: -35.35%; --t: -2.65%; animation-delay: 1.1s; }
+.mirror-glass .o2 { --h: 99.21%; --w: 167.86%; --l: -32.96%; --t: -1.83%; animation-delay: 7.1s; }
+.mirror-glass .o3 { --h: 98.72%; --w: 167.03%; --l: -35.64%; --t: -1.64%; animation-delay: 13.1s; }
+/* the mirror's own few words, over her: MIRVA and the occasion at the top, the look and the family button at the foot.
+   The room in the glass is light, so they are ink; the button is ivory with WhatsApp's own mark. */
+.mg-ui { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 15% 6% 6%; pointer-events: none; text-align: center; }
+.mg-top { display: grid; justify-items: center; gap: 4px; width: 100%; }
+.mg-mark { font: 500 11px/1 var(--mark); letter-spacing: .34em; padding-left: .34em; color: #14131a; }
+.mg-for { position: relative; display: block; width: 100%; height: 1.3em; font: 500 11px/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: #4a4650; }
+.mg-for .c { position: absolute; left: 0; right: 0; top: 0; white-space: nowrap; opacity: 0; animation: oval-look 18s var(--ease) infinite; }
+.mg-for .c1 { animation-delay: 1.1s; } .mg-for .c2 { animation-delay: 7.1s; } .mg-for .c3 { animation-delay: 13.1s; }
+.mg-foot { display: grid; justify-items: center; gap: 7px; }
+.mg-dots { display: flex; gap: 5px; }
+.mg-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(249, 246, 241, .55); box-shadow: 0 0 0 1px rgba(20, 19, 26, .2); animation: mg-dot 18s var(--ease) infinite; }
+.mg-dots .d1 { animation-delay: 1.1s; } .mg-dots .d2 { animation-delay: 7.1s; } .mg-dots .d3 { animation-delay: 13.1s; }
+@keyframes mg-dot { 0% { background: rgba(249, 246, 241, .55); } 5%, 31% { background: #f9f6f1; box-shadow: 0 0 0 1px rgba(20, 19, 26, .5); } 35%, 100% { background: rgba(249, 246, 241, .55); } }
+.mg-ask { display: inline-flex; align-items: center; padding: 6px 10px 6px 8px; border-radius: 999px; background: rgba(249, 246, 241, .94); color: #14131a; font: 600 11px/1 var(--sans); white-space: nowrap; box-shadow: 0 8px 18px -10px rgba(10, 8, 6, .55); }
+.mg-ask.wa::before { margin-right: .4em; vertical-align: 0; }
+/* what is happening, said beside the mirror on a wide screen: three quiet labels with a hairline to the mirror */
+.mirror-notes { display: none; }
+@media (min-width: 1100px) {
+  .mirror-notes { display: block; list-style: none; margin: 0; padding: 0; }
+  .mirror-notes li { position: absolute; z-index: 3; width: 150px; font: 400 12.5px/1.4 var(--sans); color: #a8a097; opacity: 0; animation: note-in .6s var(--ease) forwards; }
+  .mirror-notes b { display: block; font: 400 17px/1.2 var(--serif); color: #f3f1ee; margin-bottom: 2px; }
+  .mirror-notes li::after { content: ""; position: absolute; top: .62em; width: 34px; height: 1px; background: rgba(243, 241, 238, .38); }
+  .mirror-notes li::before { content: ""; position: absolute; top: calc(.62em - 2px); width: 5px; height: 5px; border-radius: 50%; background: #f3f1ee; }
+  .n-face { right: 86%; top: 20%; text-align: right; padding-right: 46px; animation-delay: 1.2s !important; }
+  .n-face::after { right: 6px; } .n-face::before { right: 0; }
+  .n-piece { left: 86%; top: 42%; padding-left: 46px; animation-delay: 1.45s !important; }
+  .n-piece::after { left: 6px; } .n-piece::before { left: 0; }
+  .n-ask { left: 86%; top: 73%; padding-left: 46px; animation-delay: 1.7s !important; }
+  .n-ask::after { left: 6px; } .n-ask::before { left: 0; }
+}
+@keyframes note-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+/* the pitch beside it: three steps in one line, and a door for store owners */
+.mirror-notes .np { position: relative; display: block; height: 1.4em; font: italic 400 14px/1.4 var(--serif); color: #e9e2d8; }
+.mirror-notes .np .c { position: absolute; left: 0; right: 0; white-space: nowrap; opacity: 0; animation: oval-look 18s var(--ease) infinite; }
+.mirror-notes .np .c1 { animation-delay: 1.1s; } .mirror-notes .np .c2 { animation-delay: 7.1s; } .mirror-notes .np .c3 { animation-delay: 13.1s; }
+.hero-steps { list-style: none; margin: 6px 0 4px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font: 500 15px/1.3 var(--sans); color: #d9d2c9; }
+.hero-steps li { display: flex; align-items: center; gap: 10px; }
+.hero-steps i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font: 500 12.5px/1 var(--sans); font-style: normal; color: #f3f1ee; box-shadow: inset 0 0 0 1px rgba(243, 241, 238, .35); }
+.hero-store { font-size: 14.5px; color: #a8a097; }
+.hero-store a { color: #f3f1ee; text-underline-offset: 3px; }
+.hero-store a::after { content: " →"; }
 @keyframes oval-look { 0% { opacity: 0; } 5%, 31% { opacity: 1; } 35%, 100% { opacity: 0; } }
 /* the mirror itself arrives first, in the hero's own entrance */
 .hero .oval-hero[data-reveal] { animation-duration: 900ms; }
@@ -389,8 +437,11 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 .oval-cap .line { font-size: clamp(19px, 1.7vw, 23px); }
 .oval-hero figcaption { color: #8f877f; text-align: center; max-width: 32ch; justify-self: center; }
 @media (prefers-reduced-motion: reduce) {
-  .mirror-glass .o1, .oval-cap .c1 { opacity: 1; animation: none; }
-  .mirror-glass .o2, .mirror-glass .o3, .oval-cap .c2, .oval-cap .c3 { display: none; }
+  .mirror-glass .o1, .oval-cap .c1, .mg-for .c1 { opacity: 1; animation: none; }
+  .mirror-glass .o2, .mirror-glass .o3, .oval-cap .c2, .oval-cap .c3, .mg-for .c2, .mg-for .c3 { display: none; }
+  .mg-dots i { animation: none; } .mg-dots .d1 { background: #f9f6f1; }
+  .mirror-notes li, .mirror-notes .np .c1 { opacity: 1; animation: none; }
+  .mirror-notes .np .c2, .mirror-notes .np .c3 { display: none; }
 }
 
 /* ---------- home: the proof ---------- */
@@ -470,8 +521,7 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 .oval img { height: 100%; }
 @media (max-width: 700px) {
   .results { scroll-padding-inline: clamp(20px, 5vw, 56px); }
-  .oval-hero { margin-top: 56px; width: min(78vw, 320px); }
-  .oval-cap { padding: 0 12% 12%; }
+  .oval-hero { margin-top: 40px; width: min(78vw, 320px); }
 }
 /* the results show the person, not the empty studio above her */
 .proof .before img, .results li > img:first-child { aspect-ratio: 5 / 8; object-position: 50% 38%; }

@@ -21,7 +21,7 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <link rel="preload" href="/brand/mirva-mirror.webp" as="image" fetchpriority="high">
-<link rel="preload" href="/showcase/woman-khaddar.webp" as="image" fetchpriority="high">
+<link rel="preload" href="/showcase/day-khaddar.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="/brand.css">
 <link rel="stylesheet" href="/site/site.css">
 <link rel="modulepreload" href="/dist/site.js">
@@ -51,36 +51,53 @@
 </header>
 
 <main id="main">
-  <!-- 1. The mirror draws itself, then shows what it really makes -->
+  <!-- 1. The pitch: what MIRVA is, in three steps, beside the MIRVA mirror doing it -->
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div class="hero-copy stack">
         <p class="kicker" data-reveal>A new kind of fitting room</p>
         <h1 class="display" data-reveal style="--i:1">The mirror that <em>styles you.</em></h1>
         <p class="lede" data-reveal style="--i:2">Say what it’s for. MIRVA picks three looks from a store’s own rails and shows you in each one, in about twenty seconds.</p>
-        <div class="row" data-reveal style="--i:3">
+        <ol class="hero-steps" data-reveal style="--i:3" aria-label="How it works">
+          <li><i>1</i>Say the occasion</li>
+          <li><i>2</i>See three looks, on you</li>
+          <li><i>3</i>Ask the family on WhatsApp</li>
+        </ol>
+        <div class="row" data-reveal style="--i:4">
           <a class="btn" href="/mirror">Try it on yourself</a>
           <a class="btn ghost" href="#proof">See what it makes</a>
         </div>
-        <p class="fine" data-reveal style="--i:4" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
+        <p class="fine" data-reveal style="--i:5" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
+        <p class="hero-store" data-reveal style="--i:6">Run a fashion store? <a href="/retail#yours">See MIRVA on your own catalogue</a></p>
       </div>
 
-      <!-- The MIRVA mirror (the founder's design, 23 Oct 2026): a photograph of it with its glass see-through, and the real
-           portraits behind the glass, each placed by where the model stands (head under the curve, feet above the base). -->
+      <!-- The MIRVA mirror (the founder's design): a photograph of it with its glass see-through. Behind the glass, real
+           MIRVA portraits made in the light fitting room, each placed by where the model stands (head under the curve,
+           feet above the base); over them the mirror's own few words (the occasion, the look, the family button). On a
+           wide screen three labels say what is happening. -->
       <figure class="oval-hero" data-reveal style="--i:2">
         <div class="mirror-photo">
-          <div class="mirror-glass" aria-label="Three real MIRVA portraits: an embroidered khaddar suit, a raw silk suit, an embroidered sweatshirt.">
-            <img class="o1" src="/showcase/woman-khaddar.webp" alt="MIRVA portrait: a model in Sapphire's embroidered khaddar suit" width="720" height="1280" fetchpriority="high">
-            <img class="o2" src="/showcase/woman-rawsilk.webp" alt="MIRVA portrait: a model in Sapphire's embroidered raw silk suit" width="720" height="1280" loading="lazy">
-            <img class="o3" src="/showcase/woman-sweatshirt.webp" alt="MIRVA portrait: a model in Outfitters' embroidered quarter-zip sweatshirt, with her own jeans" width="720" height="1280" loading="lazy">
+          <div class="mirror-glass" aria-label="The MIRVA mirror showing three real MIRVA portraits: an embroidered khaddar suit for Eid, a raw silk suit for the mehndi, a sweatshirt for the weekend.">
+            <img class="o1" src="/showcase/day-khaddar.webp" alt="" width="720" height="1280" fetchpriority="high">
+            <img class="o2" src="/showcase/day-rawsilk.webp" alt="" width="720" height="1280" loading="lazy">
+            <img class="o3" src="/showcase/day-sweatshirt.webp" alt="" width="720" height="1280" loading="lazy">
+            <div class="mg-ui" aria-hidden="true">
+              <p class="mg-top"><span class="mg-mark">MIRVA</span><span class="mg-for"><span class="c c1">For Eid</span><span class="c c2">For the mehndi</span><span class="c c3">For the weekend</span></span></p>
+              <p class="mg-foot"><span class="mg-dots"><i class="d1"></i><i class="d2"></i><i class="d3"></i></span><span class="mg-ask wa">Ask family</span></p>
+            </div>
           </div>
           <img class="mirror-body" src="/brand/mirva-mirror.webp" alt="" width="480" height="1056" fetchpriority="high">
+          <ul class="mirror-notes" aria-hidden="true">
+            <li class="n-face"><b>Her own face</b>kept from her photo</li>
+            <li class="n-piece"><b>The store’s own piece</b><span class="np"><span class="c c1">Sapphire’s khaddar suit</span><span class="c c2">Sapphire’s raw silk suit</span><span class="c c3">Outfitters’ sweatshirt</span></span>from its rails, in her size</li>
+            <li class="n-ask"><b>One link</b>the family votes</li>
+          </ul>
         </div>
         <div class="oval-cap" aria-hidden="true">
           <p class="tag"><span class="c c1">Sapphire · Khaddar suit</span><span class="c c2">Sapphire · Raw silk suit</span><span class="c c3">Outfitters · Sweatshirt</span></p>
-          <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">For the mehndi.</span><span class="c c3">And for the weekend.</span></p>
+          <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">Your face. Their piece.</span><span class="c c3">In about twenty seconds.</span></p>
         </div>
-        <figcaption class="fine">Real MIRVA portraits on MIRVA’s own AI models; the clothes are real.</figcaption>
+        <figcaption class="fine">Real MIRVA portraits on MIRVA’s own AI models; pieces by Sapphire and Outfitters, shown as concept demos.</figcaption>
       </figure>
     </div>
   </section>
