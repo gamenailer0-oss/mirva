@@ -343,6 +343,9 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
 - System map: https://claude.ai/artifact/8iXrBqwLk8MrMbUV3AH7Lt
+- **Price calculator** (founder's own, private; 23 Oct): https://claude.ai/artifact/CNeJfKEiNftWJCp6wwg8KW. One store,
+  the whole business, price a deal, costs and prices; defaults copied from lib/plans.mjs (keep them in step when a price
+  or cost changes there). Source: session scratchpad `calc/index.html`; `calc/check.mjs` runs its sums on the defaults.
 - Engine test (real-face results): https://claude.ai/artifact/AL1fa9LpWBfZ5V5M7riPtp
 - **Founding team page** (intro film, eight seats, seat finder, 7-day missions, scorecard, first 30 days):
   https://claude.ai/artifact/3T6t6G6bLBuMA8z6YR6auk; its film as an MP4 for WhatsApp: `motion/team-intro/mirva-team-intro.mp4`
