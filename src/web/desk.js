@@ -537,10 +537,10 @@ const VIEWS = {
 
   async look() {
     const { brand } = await api(`/api/console/catalogue?brand=${S.brand}`);
-    const state = { mood: brand.mood || "porcelain", accent: brand.accent || "#0C1018", byline: brand.byline || "styled by MIRVA" };
+    const state = { mood: brand.mood || "porcelain", accent: brand.accent || "#0C1018", byline: brand.byline || "styled by MIRVA", name: brand.name };
     const glass = el("div", { class: "glass", "aria-hidden": "true" },
       svg('<path class="track" d="M14 38Q100 -8 186 38" pathLength="100"/><path class="arc" d="M14 38Q100 -8 186 38" pathLength="100"/>', "0 0 200 44", "halo breathe"),
-      el("div", { class: "crest" }, el("span", { class: "wm", text: brand.name.toUpperCase() }), el("span", { class: "by", id: "lfBy", text: state.byline })),
+      el("div", { class: "crest" }, el("span", { class: "wm", id: "lfName", text: brand.name.toUpperCase() }), el("span", { class: "by", id: "lfBy", text: state.byline })),
       el("span", { class: "pill", id: "lfPill", text: "On you" }),
     );
     // The mood is the stylist's panel under the glass (the glass itself is always dark), so the preview shows that panel.
@@ -559,10 +559,13 @@ const VIEWS = {
       const [r, g, b] = [1, 3, 5].map((i) => parseInt(state.accent.slice(i, i + 2), 16));
       pill.style.color = go.style.color = r * 0.299 + g * 0.587 + b * 0.114 > 150 ? "#0a0c11" : "#fff";
       $("#lfBy", glass).textContent = state.byline;
+      $("#lfName", glass).textContent = (state.name || brand.name).toUpperCase();
       for (const b of $$("[data-mood-set]", form)) b.classList.toggle("on", b.dataset.moodSet === state.mood);
     };
     const form = el("form", { class: "panel form" },
       el("h2", { text: "How MIRVA dresses for you" }),
+      // The founder can set the name as the store's sign reads (a shop loaded from its website may name itself in one word).
+      S.me.role === "founder" && field("The store’s name (only you can change it)", el("input", { name: "name", value: state.name, maxLength: 60, oninput: (e) => ((state.name = e.target.value), paint()) })),
       el("div", { class: "field" }, el("span", { text: "Mood of the tablet" }), el("div", { class: "row" }, ["porcelain", "noir"].map((m) => el("button", { class: "chip", type: "button", "data-mood-set": m, text: cap(m), onclick: () => ((state.mood = m), paint()) })))),
       field("Your colour", el("input", { type: "color", name: "accent", value: state.accent, style: "padding:4px;height:50px", oninput: (e) => ((state.accent = e.target.value), paint()) })),
       field("The line under your name", el("input", { name: "byline", value: state.byline, maxLength: 40, oninput: (e) => ((state.byline = e.target.value), paint()) })),

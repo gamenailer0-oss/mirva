@@ -953,6 +953,18 @@ test("a store types its size chart and the mirror is given it; nonsense is refus
   assert.deepEqual(await given(), []);
 });
 
+test("the founder can give a store its name as its sign reads; the store's own sign-in cannot", async () => {
+  const { app, db } = await makeApp({ openMirror: true });
+  const name = async () => (await call(app, "GET", "/api/brands/sapphire")).body.brand;
+  const shop = await signIn(app, db, "retailer", "sapphire");
+  const theirs = await call(app, "POST", "/api/console/brand", { body: { brand: "sapphire", name: "Not Sapphire", byline: "styled by MIRVA" }, headers: shop.headers });
+  assert.equal(theirs.status, 200);
+  assert.equal((await name()).name, "Sapphire", "a store's own sign-in leaves the name as it was");
+  const boss = await signIn(app, db, "founder");
+  assert.equal((await call(app, "POST", "/api/console/brand", { body: { brand: "sapphire", name: "  Sapphire Pakistan " }, headers: boss.headers })).status, 200);
+  assert.deepEqual([(await name()).name, (await name()).wordmark], ["Sapphire Pakistan", "SAPPHIRE PAKISTAN"]);
+});
+
 test("a paused store makes no try-ons at its mirrors or on its website, and the stylist still works", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);
