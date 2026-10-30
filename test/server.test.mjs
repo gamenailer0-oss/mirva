@@ -238,6 +238,16 @@ test("the laptop's room passes a store's tablet and its screen to each other, an
   const stranger = new WebSocket(`ws://localhost:${PORT}/api/link/socket?t=room-t.pad.9999999999999.forged`);
   const turned = await new Promise((resolve) => ((stranger.onopen = () => resolve(false)), (stranger.onerror = () => resolve(true))));
   assert.equal(turned, true, "a forged ticket never joins");
+  // a shopper's phone hands the mirror a photo, and nothing else: an order to the mirror from it never arrives
+  const phone = await open("phone");
+  phone.ws.send(JSON.stringify({ op: "choose", pid: "p2" }));
+  phone.ws.send(JSON.stringify({ op: "photo-start", id: "x1", type: "image/jpeg", parts: 1 }));
+  await until(() => glass.got.some((m) => m.includes('"op":"photo-start"')));
+  assert.ok(!glass.got.some((m) => m.includes('"pid":"p2"')), "the phone cannot drive the mirror");
+  assert.ok(!pad.got.some((m) => m.includes("photo-start")), "the photo goes to the screen only");
+  glass.ws.send(JSON.stringify({ t: "photo-ok", id: "x1" }));
+  await until(() => phone.got.includes('{"t":"photo-ok","id":"x1"}'));
+  phone.ws.close();
   glass.got.length = 0;
   pad.ws.close();
   await until(() => glass.got.some((m) => m.includes('"side":"pad","here":false')));

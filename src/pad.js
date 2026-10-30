@@ -70,7 +70,7 @@ export function openRoom({ side, onMessage, onPeer, onState }) {
         } catch {
           return;
         }
-        if (m.t === "peer") onPeer?.(!!m.here);
+        if (m.t === "peer") onPeer?.(!!m.here, m.side);
         else onMessage?.(m);
       };
       socket.onclose = (e) => {

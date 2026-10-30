@@ -2,7 +2,7 @@
 // D1 for the store, KV for portraits and loaded catalogues, the edge cache for product pictures.
 import { DurableObject } from "cloudflare:workers";
 import { createApp } from "../lib/app.mjs";
-import { across } from "../lib/link.mjs";
+import { across, audience, mayPass, SIDES } from "../lib/link.mjs";
 import { databaseLimiter } from "../lib/auth.mjs";
 import { createPush } from "../lib/push.mjs";
 import sapphireBrand from "../brands/sapphire/brand.json";
@@ -212,12 +212,12 @@ export class MirrorRoom extends DurableObject {
   }
 
   async fetch(request) {
-    const side = request.headers.get("x-mirva-side") === "pad" ? "pad" : "glass";
+    const side = SIDES.includes(request.headers.get("x-mirva-side")) ? request.headers.get("x-mirva-side") : "glass";
     const { 0: client, 1: server } = new WebSocketPair();
     // A newer screen or tablet takes the older one's place (4000: it stops trying again).
     for (const old of this.ctx.getWebSockets(side)) old.close(4000, "replaced");
     this.ctx.acceptWebSocket(server, [side]);
-    this.tell(across(side), { t: "peer", side, here: true });
+    for (const other of audience(side)) this.tell(other, { t: "peer", side, here: true });
     server.send(JSON.stringify({ t: "peer", side: across(side), here: this.ctx.getWebSockets(across(side)).length > 0 }));
     return new Response(null, { status: 101, webSocket: client });
   }
@@ -225,7 +225,8 @@ export class MirrorRoom extends DurableObject {
   webSocketMessage(ws, message) {
     if (typeof message !== "string" || message.length > 64000) return;
     const [side] = this.ctx.getTags(ws);
-    for (const peer of this.ctx.getWebSockets(across(side))) peer.send(message);
+    if (!mayPass(side, message)) return;
+    for (const other of audience(side)) for (const peer of this.ctx.getWebSockets(other)) peer.send(message);
   }
 
   webSocketClose(ws, code) {
@@ -234,7 +235,7 @@ export class MirrorRoom extends DurableObject {
       ws.close(code === 1005 ? 1000 : code, "bye");
     } catch {}
     // Said only when no other socket holds this side (a replaced one is followed by its newer one).
-    if (!this.ctx.getWebSockets(side).some((w) => w !== ws)) this.tell(across(side), { t: "peer", side, here: false });
+    if (!this.ctx.getWebSockets(side).some((w) => w !== ws)) for (const other of audience(side)) this.tell(other, { t: "peer", side, here: false });
   }
 
   webSocketError(ws) {

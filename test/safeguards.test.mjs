@@ -1019,6 +1019,13 @@ test("a store's tablet joins its mirror screen with the screen's one-use code; a
   const again = await join((await code()).body.code);
   assert.equal((await call(app, "POST", "/api/link/forget", { body: {}, headers: screen.header })).status, 200);
   assert.equal((await ticket(padHeader(again.body))).status, 401);
+  // the code on the glass for a shopper's own phone: the screen's room, as a phone, for ten minutes
+  assert.equal((await call(app, "POST", "/api/link/photo", { body: {} })).status, 401);
+  const photo = await call(app, "POST", "/api/link/photo", { body: {}, headers: screen.header });
+  assert.match(photo.body.url, /\/photo#.+\.phone\.\d+\./);
+  const phoneTicket = photo.body.url.split("#")[1];
+  assert.deepEqual(await app.checkLink(phoneTicket), { room: screen.id, side: "phone" });
+  assert.ok(Number(phoneTicket.split(".")[2]) - Date.now() > 9 * 60e3, "good for ten minutes");
   // an unpaired screen's tablet is let go with it
   const third = await join((await code()).body.code);
   await db.run("UPDATE devices SET token = NULL WHERE id = ?", screen.id);

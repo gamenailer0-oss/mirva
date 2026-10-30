@@ -2247,6 +2247,7 @@ function startOver(fromOtherSide = false) {
   S.developing?.cancel();
   if (atStore()) {
     if (mirror.isLive) mirror.stop("user");
+    if (mirror.source?.kind === "photo") mirror.sleep(); // a photo from her phone leaves with her
     forgetPortraits();
     S.mem = memory.load(S.brand.id);
     S.extras.clear();
@@ -2425,20 +2426,76 @@ const FROM_PAD = {
   ask: () => askFamily(),
   say: ({ text }) => caption(String(text || "").slice(0, 240)),
   track: ({ kind, data }) => link.track(String(kind || "").slice(0, 40), data && typeof data === "object" ? data : {}),
+  "photo-start": (m) => photoStart(m),
+  "photo-part": (m) => photoPart(m),
 };
+
+// A photo from a shopper's own phone (the code on the sleeping glass, /photo): it arrives in parts through the room,
+// is put together here and becomes the mirror's picture, as a photo chosen on the mirror would. She sent it to have a
+// look made, which is the agreement the mirror would otherwise ask for. Nothing of it is stored on the way.
+const PHOTO_MAX_PARTS = 200;
+let photoIn = null;
+function photoStart({ id, type, parts }) {
+  if (!(parts > 0 && parts <= PHOTO_MAX_PARTS) || !/^image\/(jpeg|png|webp)$/.test(String(type))) return;
+  photoIn = { id: String(id), type, parts, got: new Array(parts), have: 0 };
+  caption("A photo is on its way from your phone…");
+}
+async function photoPart({ id, i, data }) {
+  const p = photoIn;
+  if (!p || p.id !== String(id) || !(i >= 0 && i < p.parts) || typeof data !== "string" || p.got[i] !== undefined) return;
+  p.got[i] = data;
+  if (++p.have < p.parts) return;
+  photoIn = null;
+  try {
+    const bytes = Uint8Array.from(atob(p.got.join("")), (c) => c.charCodeAt(0));
+    await mirror.usePhoto(new Blob([bytes], { type: p.type }));
+    S.agreed = true;
+    link.track("photo_phone");
+    room?.send({ t: "photo-ok", id: p.id });
+    caption(padHere ? "Your photo is on the mirror. Choose a piece on the tablet." : "Your photo is on the mirror. Choose a piece, and I’ll put it on you.");
+  } catch {
+    room?.send({ t: "photo-failed", id: p.id });
+    caption("I couldn’t read that photo. Try another from your phone.");
+  }
+}
+// The code for her phone, in place of "use a photo" on a store's sleeping glass (a store screen has no gallery).
+let photoTimer = 0;
+async function offerPhotoCode() {
+  clearTimeout(photoTimer);
+  try {
+    const c = await api("/api/link/photo", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
+    let card = $("#photoCode");
+    if (!card) {
+      card = h("div", { id: "photoCode", class: "photo-code" },
+        h("canvas", { width: 96, height: 96, role: "img", "aria-label": "A code that opens your phone’s photos for this mirror" }),
+        h("p", {}, h("b", { text: "Or a photo from your phone" }), h("span", { text: "Scan, then choose a photo of yourself from your gallery." })),
+      );
+      $("#photoBtn").after(card);
+    }
+    const { default: QRCode } = await import("qrcode");
+    await QRCode.toCanvas(card.querySelector("canvas"), c.url, { width: 96, margin: 1, errorCorrectionLevel: "M", color: { dark: "#0b0a0d", light: "#efe9e1" } });
+    $("#photoBtn").hidden = true;
+    photoTimer = setTimeout(offerPhotoCode, 9 * 60e3); // a code is good for ten minutes
+  } catch {
+    $("#photoCode")?.remove();
+    $("#photoBtn").hidden = false;
+  }
+}
 
 function openGlassRoom() {
   side = "glass";
   // The code is asked for at once, beside the room's own joining (it came late when it waited for the room, 31 Oct).
   import("qrcode").catch(() => {});
   offerPadCode();
+  offerPhotoCode();
   room = padLink.openRoom({
     side: "glass",
     onMessage: (m) => {
       mirror.touch(); // a tap on the tablet is someone at the mirror
       FROM_PAD[m.op]?.(m);
     },
-    onPeer: (here) => {
+    onPeer: (here, who = "pad") => {
+      if (who !== "pad") return; // a shopper's phone handing over a photo does not change the screen
       padHere = here;
       clearTimeout(padGone);
       if (here) {
@@ -2538,6 +2595,7 @@ function openPadRoom() {
     onMessage: (m) => {
       if (m.t === "state") remote = m;
       if (m.t === "over") startOver(true);
+      if (m.t === "photo-ok") say("The photo is on the mirror. Choose a piece, then Model.");
       paintRemote();
     },
     onPeer: (here) => {

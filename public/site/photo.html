@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-mood="porcelain">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Send a photo of yourself from your phone to the MIRVA mirror in front of you.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0a0d">
+<title>Your photo, on the mirror — MIRVA</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="preload" href="/fonts/albert-sans-normal-300-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/brand.css">
+<link rel="stylesheet" href="/site/site.css">
+<link rel="modulepreload" href="/dist/site.js">
+</head>
+<body data-page="photo" class="dark">
+<main id="main" class="pickup photo-page wrap">
+  <a class="brandmark" href="/" aria-label="MIRVA, home">
+    <svg viewBox="0 0 32 40" aria-hidden="true"><rect x="8" y="12" width="16" height="25" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13Q16 0 29 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>MIRVA</span>
+  </a>
+  <h1 class="photo-title">Your photo, <em>on the mirror</em></h1>
+  <p class="photo-lead">Choose a photo of yourself standing, head to shoes, in good light. It goes straight to the mirror in front of you.</p>
+  <figure id="photoPreview" class="photo-preview" hidden><img alt="The photo you chose"></figure>
+  <label id="photoChoose" class="btn photo-choose" for="photoPick">Choose a photo</label>
+  <input id="photoPick" type="file" accept="image/*" hidden>
+  <p id="photoSays" class="photo-says" aria-live="polite"></p>
+  <p class="fine photo-fine">From the mirror it goes to MIRVA’s try-on engine, which runs abroad, to make your look. It is not kept, here or there.</p>
+  <noscript><p>This page needs JavaScript.</p></noscript>
+</main>
+<script type="module" src="/dist/site.js"></script>
+</body>
+</html>

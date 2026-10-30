@@ -14,7 +14,7 @@ import { openDb } from "./lib/db.mjs";
 import { memoryLimiter } from "./lib/auth.mjs";
 import { createApp } from "./lib/app.mjs";
 import { createPush, newPushKeys } from "./lib/push.mjs";
-import { across } from "./lib/link.mjs";
+import { across, audience, mayPass } from "./lib/link.mjs";
 import { WebSocketServer } from "ws";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -332,22 +332,22 @@ server.on("upgrade", async (req, socket, head) => {
     const room = rooms.get(seat.room) || {};
     rooms.set(seat.room, room);
     const tell = (side, message) => room[side]?.readyState === 1 && room[side].send(JSON.stringify(message));
-    room[seat.side]?.close(4000, "replaced"); // a newer screen or tablet takes the older one's place
+    room[seat.side]?.close(4000, "replaced"); // a newer screen, tablet or phone takes the older one's place
     room[seat.side] = ws;
-    tell(across(seat.side), { t: "peer", side: seat.side, here: true });
+    for (const other of audience(seat.side)) tell(other, { t: "peer", side: seat.side, here: true });
     tell(seat.side, { t: "peer", side: across(seat.side), here: room[across(seat.side)]?.readyState === 1 });
     ws.on("message", (data, binary) => {
       const text = String(data);
       if (binary || text.length > 64e3) return;
       if (text === "ping") return ws.send("pong");
-      const peer = room[across(seat.side)];
-      if (peer?.readyState === 1) peer.send(text);
+      if (!mayPass(seat.side, text)) return; // a shopper's phone only ever hands over a photo
+      for (const other of audience(seat.side)) if (room[other]?.readyState === 1) room[other].send(text);
     });
     ws.on("close", () => {
       if (room[seat.side] !== ws) return; // it was replaced: its newer one is there
       room[seat.side] = null;
-      tell(across(seat.side), { t: "peer", side: seat.side, here: false });
-      if (!room.glass && !room.pad) rooms.delete(seat.room);
+      for (const other of audience(seat.side)) tell(other, { t: "peer", side: seat.side, here: false });
+      if (!room.glass && !room.pad && !room.phone) rooms.delete(seat.room);
     });
   });
 });

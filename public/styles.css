@@ -1225,3 +1225,14 @@ a.chip { text-decoration: none; }
 .pad-code span { opacity: .8; }
 /* On the tablet the foot is the mirror's dock; the ask bar stays in its place under the stylist's words. */
 [data-side="pad"] .ask, [data-side="pad"] .glass-away .ask { position: static; }
+/* A store's sleeping glass with its tablet beside it: the tablet wakes it, so the glass says so instead of a button. */
+.wake-tablet { display: none; margin: 4px 0 0; padding: 10px 18px; border-radius: 999px; font-size: clamp(13px, 2.4cqmin, 20px); letter-spacing: .04em; box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset; }
+[data-side="glass"] .wake-tablet { display: block; }
+[data-side="glass"] #wakeBtn { display: none; }
+/* In place of "use a photo" on a store's glass: a code that opens her own phone's photos for this mirror. */
+.photo-code { display: flex; align-items: center; gap: 14px; margin-top: 10px; padding: 10px 16px 10px 10px; border-radius: 18px; text-align: left; background: rgba(11, 10, 13, .55); box-shadow: 0 0 0 1px rgba(255, 255, 255, .12) inset; font-size: 12.5px; line-height: 1.4; max-width: 340px; }
+.photo-code canvas { flex: none; width: 84px; height: 84px; border-radius: 10px; }
+.photo-code b { display: block; margin-bottom: 3px; font: 400 15px/1.2 var(--serif); }
+.photo-code span { opacity: .8; }
+[data-side="glass"] .photo-code { font-size: clamp(12.5px, 2cqmin, 18px); max-width: 46cqw; }
+[data-side="glass"] .photo-code canvas { width: clamp(84px, 13cqmin, 150px); height: clamp(84px, 13cqmin, 150px); }
