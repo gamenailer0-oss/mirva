@@ -384,7 +384,14 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   she agrees on the tablet (`padWear` -> `agreed()`), the screen only shows the line for 1.5 s (`FROM_PAD.mode`); a
   tablet is `atStore()` like the screen (asked per shopper, nothing kept, no other store). A founder signed in on the
   mirror's laptop is still the mirror (`screenOf`). The screen asks for its code at once (`openGlassRoom` early).
-- Checks: `node tools/stores/pad-walk.mjs` (local, fake camera, both sides shot), `node tools/stores/link-live-check.mjs`
+- **Store glass, 31 Oct (the founder)**: with its tablet joined, the sleeping glass says "Wake MIRVA from the tablet
+  beside it." instead of the button (`.wake-tablet`; a screen alone keeps its button). In place of "use a photo" a
+  store's glass shows a code (`POST /api/link/photo`, a "phone" ticket good for ten minutes): her phone opens `/photo`
+  (public/site/photo.html, src/web/photo.js), picks from her gallery, shrinks it (1600 px JPEG) and sends it in 48,000-
+  character parts through the room; the "phone" side reaches only the screen and only `{"op":"photo…` messages pass
+  (lib/link.mjs `audience`, `mayPass`). The screen puts it together (`photoStart`/`photoPart`) and uses it like a photo
+  chosen on the mirror; sending it is her agreement; Start over sleeps the mirror when its picture is a photo.
+- Checks: `node tools/stores/pad-walk.mjs` (local, fake camera, both sides shot, then a phone sends a photo), `node tools/stores/link-live-check.mjs`
   (live: adds a test mirror under Sapphire, pairs it and a tablet, relays through the Durable Object, removes it;
   31 Oct: tablet to screen ~0.25 s from Lahore). Tests in safeguards.test.mjs and server.test.mjs.
 - Studio's first seconds: a ring of light spreads on the floor of the glass (`.stand`, transform + opacity) with
