@@ -378,6 +378,12 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   screen's own buttons (src/main.js `FROM_PAD`), so try-on is unchanged; captions and events are relayed to the
   screen (`link.relayTo`); Start over on either side clears both. A tablet gone a minute: the screen shows its own
   stylist again. A new tablet: the store console's Mirrors page ("Connect a new tablet", QR sheet; "Let it go").
+- **Refined 31 Oct (the founder: "operate everything from the tab", "no other brand", "a flow like our site")**: the
+  tablet shows the site's three steps (read from the screen: `padPath`) and the mirror's own dock at its foot
+  (`#padDock`: Turn on the mirror while asleep; Studio and Model; Keep, Take off, Ask family), the ask bar stays in place;
+  she agrees on the tablet (`padWear` -> `agreed()`), the screen only shows the line for 1.5 s (`FROM_PAD.mode`); a
+  tablet is `atStore()` like the screen (asked per shopper, nothing kept, no other store). A founder signed in on the
+  mirror's laptop is still the mirror (`screenOf`). The screen asks for its code at once (`openGlassRoom` early).
 - Checks: `node tools/stores/pad-walk.mjs` (local, fake camera, both sides shot), `node tools/stores/link-live-check.mjs`
   (live: adds a test mirror under Sapphire, pairs it and a tablet, relays through the Durable Object, removes it;
   31 Oct: tablet to screen ~0.25 s from Lahore). Tests in safeguards.test.mjs and server.test.mjs.
@@ -394,6 +400,11 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   every 30 s behind the answer; a store asked for by name that this isolate has not seen is read first).
   `/api/brands` reads hidden pieces once (`hiddenByStore`, kept 30 s), `/api/me` asks "is there a founder" once.
   Live: /api/brands 1.3 s -> 0.47 s, /api/me 1.1 -> 0.53, /api/config 0.85 -> 0.5 (plain files ~0.5 from here).
+- **Desks (31 Oct)**: `db.many([[sql, ...p], …])` sends several reads in ONE trip (D1 batch at the edge; lib/db.mjs on
+  the laptop); platform `many()`. The founder's desk made 18 reads one after another (5.3 s) and a console overview 21
+  (6.4 s); now 3 and 2 trips (1.05 s and 0.75 s live), every console page 2 (0.75 s). Count trips locally with
+  `node --no-warnings tools/stores/count-reads.mjs`, time them live with `node tools/stores/desk-speed.mjs <store>`.
+  A new desk call reads in one go: never a read inside a loop or one `await` after another.
 - wrangler 4.156; zod (under Decart's SDK) 4.6.7; npm audit 0. Oct 2026 checks: GitHub's GhostAction workflow attack
   (this repo has no workflows and no keys in it), PHP CVE-2026-109618/9 (MIRVA runs no PHP), Cloudflare's D1 free
   caps are enforced (5 M rows read, 100 k written a day) and Workers may be 64 MiB.
