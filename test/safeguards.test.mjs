@@ -974,6 +974,11 @@ test("a store's tablet joins its mirror screen with the screen's one-use code; a
   const padHeader = (j) => ({ "x-mirva-pad": `${j.pad}.${j.token}` });
 
   assert.equal((await code({})).status, 401, "only a store's paired screen shows a code");
+  // the founder signed in on the laptop that is the mirror: it is still the mirror (31 Oct: no code appeared)
+  const boss = await signIn(app, db, "founder");
+  const signedIn = await code({ ...screen.header, ...boss.headers });
+  assert.equal(signedIn.status, 200);
+  assert.equal((await call(app, "POST", "/api/link/ticket", { body: {}, headers: { ...screen.header, ...boss.headers } })).body.side, "glass");
   const first = await code();
   assert.equal(first.status, 200);
   assert.match(first.body.url, new RegExp(`/mirror\\?pad=${first.body.code}$`));
