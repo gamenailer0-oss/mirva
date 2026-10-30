@@ -135,7 +135,9 @@ const caption = (text) => (side === "pad" ? room?.send({ op: "say", text }) : (r
 // True when a shopper is at the screen: a paired store mirror, or a member's own device.
 // Then nothing about keys, dollars or settings belongs on the glass.
 // On a public address that is everyone except the founder and a store's own staff.
-const forShopper = () => !!(link.pairedTo() || link.embedded() || link.member || (S.config?.open === false && !link.staff));
+const forShopper = () => !!(link.pairedTo() || side === "pad" || link.embedded() || link.member || (S.config?.open === false && !link.staff));
+// A store's own screen or its tablet: it belongs to nobody, so each shopper is asked and nothing of her stays.
+const atStore = () => !!link.pairedTo() || side === "pad";
 // On a public address a look is made only for a member, a paired store mirror, or staff, with one exception: someone
 // who has not joined may see one portrait of herself first (the server holds it for her if she then joins).
 const guestMay = () => S.config?.guest && !S.guestUsed;
@@ -163,7 +165,7 @@ const CONSENT_KEY = "mirva:consent";
 const consentFor = () => link.member?.user.id || "this-device";
 function hasAgreed() {
   if (S.agreed) return true;
-  if (link.pairedTo()) return false; // a store mirror belongs to nobody: each shopper is asked
+  if (atStore()) return false; // a store mirror belongs to nobody: each shopper is asked
   try {
     return localStorage.getItem(CONSENT_KEY) === consentFor();
   } catch {
@@ -173,7 +175,7 @@ function hasAgreed() {
 function agreed() {
   if (hasAgreed()) return Promise.resolve(true);
   const box = $("#consent");
-  const keeps = link.pairedTo() ? "This mirror keeps no pictures." : link.member ? "Your portraits stay in your wardrobe until you delete them." : "Nothing is kept.";
+  const keeps = atStore() ? "This mirror keeps no pictures." : link.member ? "Your portraits stay in your wardrobe until you delete them." : "Nothing is kept.";
   $("#consentCopy").textContent = `To show a piece on you, one picture from the mirror goes to our try-on engine, which runs abroad. It is used to make your look and for nothing else. ${keeps}`;
   return new Promise((resolve) => {
     const yes = $("#consentYes"), no = $("#consentNo");
@@ -184,7 +186,7 @@ function agreed() {
       if (box.open) box.close();
       if (ok) {
         S.agreed = true;
-        if (!link.pairedTo())
+        if (!atStore())
           try {
             localStorage.setItem(CONSENT_KEY, consentFor());
           } catch {}
@@ -619,6 +621,7 @@ const canKeepFor = (p) => !keptAlready() && ((S.view === "portrait" && S.portrai
 const canKeep = () => !keptAlready() && ((S.view === "portrait" && !!S.portrait) || (!!S.wearing && hasPicture()));
 
 function syncGlass() {
+  if (side === "pad") return paintRemote(); // the tablet's glass is the screen beside it
   let st = "awake";
   if (mirror.state === "asleep") st = "asleep";
   else if (S.developing) st = "thinking";
@@ -670,7 +673,7 @@ function syncGlass() {
 // them to every new shopper (Start over), a phone or laptop only until its first look.
 const GUIDED = "mirva:guided";
 const guideDone = () => {
-  if (link.pairedTo()) return !!S.guideDone;
+  if (atStore()) return !!S.guideDone;
   try {
     return localStorage.getItem(GUIDED) === "1";
   } catch {
@@ -690,7 +693,7 @@ function syncPath() {
   if (on && !guideDone()) {
     S.guideDone = true;
     try {
-      if (!link.pairedTo()) localStorage.setItem(GUIDED, "1");
+      if (!atStore()) localStorage.setItem(GUIDED, "1");
     } catch {}
   }
   const path = $("#path");
@@ -713,6 +716,7 @@ function syncPath() {
 }
 // Each step, tapped, does itself; a step that is not ready yet does the one before it.
 function takeStep(step) {
+  if (side === "pad") return padStep(step);
   const piece = S.pending || S.selected;
   if (step === "piece" || (!piece && step !== "you")) {
     const looks = S.step === "looks" && S.looks.length;
@@ -1001,6 +1005,7 @@ function choose(p) {
 }
 
 function setMode(mode) {
+  if (side === "pad") return padWear(mode);
   const p = S.selected;
   if (!p || p.photoOnly) return;
   if (mode === "studio" && onPhoto()) mode = "model";
@@ -2001,6 +2006,7 @@ function wireMirror() {
 
 // ---------- kept looks ----------
 function keep() {
+  if (side === "pad") return room?.send({ op: "keep" });
   const fromPortrait = S.view === "portrait" && S.portrait;
   const p = fromPortrait ? S.products.find((x) => x.id === S.portrait.pid) : S.wearing;
   if (!p || !canKeep()) return;
@@ -2239,7 +2245,7 @@ function startOver(fromOtherSide = false) {
   if (!fromOtherSide) room?.send(side === "pad" ? { op: "over" } : { t: "over" });
   S.ticket++; // whatever was still being made for the last shopper is dropped, not shown to the next
   S.developing?.cancel();
-  if (link.pairedTo()) {
+  if (atStore()) {
     if (mirror.isLive) mirror.stop("user");
     forgetPortraits();
     S.mem = memory.load(S.brand.id);
@@ -2403,7 +2409,15 @@ const FROM_PAD = {
     const p = S.products.find((x) => String(x.id) === String(pid));
     if (p) choose(p);
   },
-  mode: ({ mode }) => $(`#modes [data-mode="${mode === "studio" ? "studio" : "model"}"]`).click(),
+  // She agreed on the tablet (the picture is taken here): the glass says so for a moment, then the look begins.
+  mode: ({ mode, agreed: yes }) => {
+    const wear = () => $(`#modes [data-mode="${mode === "studio" ? "studio" : "model"}"]`).click();
+    if (!yes || S.agreed) return wear();
+    S.agreed = true;
+    link.track("consent");
+    caption("One picture of you goes to make this look. This mirror keeps none.");
+    setTimeout(wear, 1500);
+  },
   keep: () => $("#keepBtn").click(),
   off: () => $("#offBtn").click(),
   wake: () => mirror.awake || $("#wakeBtn").click(),
@@ -2415,6 +2429,9 @@ const FROM_PAD = {
 
 function openGlassRoom() {
   side = "glass";
+  // The code is asked for at once, beside the room's own joining (it came late when it waited for the room, 31 Oct).
+  import("qrcode").catch(() => {});
+  offerPadCode();
   room = padLink.openRoom({
     side: "glass",
     onMessage: (m) => {
@@ -2433,7 +2450,6 @@ function openGlassRoom() {
     },
     onState: (s) => {
       if (s === "replaced" || s === "unpaired") room?.close();
-      if (s === "open") offerPadCode();
     },
   });
 }
@@ -2473,8 +2489,9 @@ function showPadCode(on) {
   if (!on) clearTimeout(codeTimer);
 }
 
-// The tablet: what is on the mirror, and the few things to do about it. The rest of the tablet is the stylist and the
-// catalogue as they are on any mirror.
+// The tablet: the stylist, the catalogue and the three steps as on any MIRVA mirror, with what the mirror is doing at
+// its head and the mirror's own dock (how to wear it; Keep, Take off) at its foot, under her thumb. Everything is done
+// from here; the screen only shows. She agrees here, before her first picture; the glass says so for a moment.
 let remote = null; // the screen's last word about its glass
 let lineIs = "connecting";
 let screenHere = false;
@@ -2486,12 +2503,36 @@ function padChoose(p) {
   renderSolo();
   if (p.photoOnly) return openPhoto(p);
   room?.send({ op: "choose", pid: p.id });
+  paintRemote();
+}
+async function padWear(mode) {
+  if (!S.selected || S.selected.photoOnly) return padStep("piece");
+  if (!(await agreed())) return;
+  room?.send({ op: "mode", mode, agreed: true });
+}
+function padStep(step) {
+  if (step === "piece" || !S.selected) {
+    const looks = S.step === "looks" && S.looks.length;
+    showTab(looks ? "foryou" : "catalogue");
+    return say(looks ? "Tap one of the three." : "Choose any piece, and I’ll put it on you.");
+  }
+  if (step === "you" || !remote?.awake) return room?.send({ op: "wake" });
+  if (remote?.glass !== "thinking") padWear(remote?.modes.find((m) => m.mode === "studio" && !m.hidden) && remote?.prefer === "studio" ? "studio" : "model");
 }
 function openPadRoom() {
   side = "pad";
   document.documentElement.dataset.side = "pad";
   link.relayTo((kind, data) => room?.send({ op: "track", kind, data }));
-  $(".tablet").prepend(h("div", { id: "remote", class: "remote", role: "status" }, h("p", { class: "remote-line" }, h("i", { class: "remote-dot" }), h("span", { id: "remoteSays" })), h("div", { id: "remoteDo", class: "remote-do" })));
+  $(".tablet").prepend(h("div", { id: "remote", class: "remote", role: "status" }, h("p", { class: "remote-line" }, h("i", { class: "remote-dot" }), h("span", { id: "remoteSays" }))));
+  // The mirror's own dock moves to the foot of the tablet, with the one button a sleeping mirror needs.
+  $("#glassActions").append(h("button", { id: "padFamily", class: "glass-btn", type: "button", hidden: true, text: "Ask family", onclick: () => room?.send({ op: "ask" }) }));
+  $(".tablet").append(
+    h("div", { id: "padDock", class: "pad-dock", "data-dock": "none" },
+      h("p", { id: "padAgree", class: "pad-note", hidden: true, text: "Model or Studio sends one picture of you to make the look. This mirror keeps none." }),
+      h("button", { id: "padWake", class: "primary pad-wake", type: "button", hidden: true, text: "Turn on the mirror", onclick: () => room?.send({ op: "wake" }) }),
+      $("#dock"),
+    ),
+  );
   room = padLink.openRoom({
     side: "pad",
     onMessage: (m) => {
@@ -2514,26 +2555,53 @@ function openPadRoom() {
 }
 function paintRemote() {
   const says = $("#remoteSays");
-  const box = $("#remote");
-  if (!says) return;
+  const foot = $("#padDock");
+  if (!says || !foot) return;
   const live = lineIs === "open" && screenHere && remote;
-  box.dataset.here = live ? "yes" : "no";
+  $("#remote").dataset.here = live ? "yes" : "no";
   says.textContent =
     lineIs === "unpaired" ? "This tablet is no longer joined to a mirror. Scan the code on the mirror (or in the store’s console) to join it again."
     : lineIs === "replaced" ? "Another tablet now drives this mirror."
     : !live ? "Looking for the mirror…"
     : remote.say || (remote.awake ? "The mirror is on." : "The mirror is asleep.");
-  const send = (op, extra = {}) => () => room?.send({ op, ...extra });
-  const btn = (text, op, extra, strong = false, pressed) =>
-    h("button", { type: "button", class: strong ? "primary small" : "chip", text, onclick: send(op, extra), ...(pressed === undefined ? {} : { "aria-pressed": String(pressed) }) });
-  const doing = [];
-  if (live && !remote.awake) doing.push(btn("Turn on the mirror", "wake", {}, true));
-  if (live && remote.awake && remote.dock !== "none")
-    for (const m of remote.modes.filter((x) => !x.hidden)) doing.push(btn(m.mode === "studio" ? `Studio · ${m.label}` : "Model · a portrait", "mode", { mode: m.mode }, false, m.pressed));
-  if (live && remote.dock === "result") doing.push(btn(remote.keep.text, "keep", {}, true), btn("Take off", "off"));
-  if (live && remote.kept > 0) doing.push(btn("Ask family", "ask"));
-  $("#remoteDo").replaceChildren(...doing);
-  for (const b of $$("#remoteDo button")) if (b.textContent === "Kept" || (remote?.keep.disabled && b.textContent === remote.keep.text)) b.disabled = true;
+  // The dock as the screen has it: nothing, the two ways to wear the chosen piece, or the look on with Keep and Take off.
+  const awake = !!(live && remote.awake);
+  const dock = awake && S.selected && !S.selected.photoOnly ? (remote.dock === "result" ? "result" : "choose") : "none";
+  foot.dataset.dock = dock;
+  foot.dataset.busy = live && remote.glass === "thinking" ? "yes" : "no";
+  $("#padWake").hidden = !live || remote.awake;
+  $("#dock").hidden = dock === "none";
+  $("#glassActions").hidden = dock !== "result";
+  $("#padAgree").hidden = dock !== "choose" || !!S.agreed;
+  $("#padFamily").hidden = !(live && remote.kept > 0);
+  for (const b of $$("#modes button")) {
+    const m = live && remote.modes.find((x) => x.mode === b.dataset.mode);
+    b.hidden = !m || m.hidden;
+    b.setAttribute("aria-pressed", String(!!m?.pressed));
+    if (m?.label) $("span", b).textContent = m.label;
+  }
+  if (live) {
+    $("#keepBtn").disabled = remote.keep.disabled;
+    $("#keepBtn").textContent = remote.keep.text;
+  }
+  padPath();
+}
+// The three steps, as on any mirror, read from the screen: a piece chosen here, the mirror on there, the look on there.
+function padPath() {
+  const path = $("#path");
+  if (remote?.on) S.guideDone = true;
+  path.hidden = !!S.guideDone || !S.brand;
+  if (path.hidden) return;
+  const piece = S.selected;
+  const you = !!remote?.awake;
+  const state = { piece: piece ? "done" : "next", you: you ? "done" : piece ? "next" : "todo", wear: piece && you ? (remote?.glass === "thinking" ? "now" : "next") : "todo" };
+  const words = { piece: piece ? piece.name : "Choose a piece", you: you ? "The mirror is on" : "Turn on the mirror", wear: state.wear === "now" ? "Putting it on you" : "Wear it" };
+  for (const b of $$("button", path)) {
+    const s = state[b.dataset.step];
+    b.dataset.state = s;
+    b.setAttribute("aria-current", s === "next" ? "step" : "false");
+    $("span", b).textContent = words[b.dataset.step];
+  }
 }
 
 // ---------- wiring ----------
@@ -2567,6 +2635,7 @@ function wireUI() {
   for (const b of $$("#path button")) b.addEventListener("click", () => takeStep(b.dataset.step));
   $("#keepBtn").addEventListener("click", keep);
   $("#offBtn").addEventListener("click", () => {
+    if (side === "pad") return room?.send({ op: "off" });
     if (S.view === "portrait") {
       hidePortrait();
       caption(line("ended.user"));
@@ -2735,7 +2804,8 @@ async function boot() {
   if (link.embedded()) document.documentElement.dataset.embed = "1";
   else if (query.has("pair") || query.has("pad") || query.has("brand") || query.has("for") || query.has("p")) history.replaceState(null, "", location.pathname);
   showMember(await link.whoIsHere());
-  memory.setStoreMirror(!!link.pairedTo());
+  memory.setStoreMirror(!!link.pairedTo() || !!asPad);
+  if (link.pairedTo() && !link.embedded() && !asPad) openGlassRoom(); // early, so the tablet's code is on the glass at once
   memory.setOwner(link.member?.user.id);
   document.body.classList.toggle("shopper", forShopper()); // hides the cost meter and the Adapt sheet
   if (!first.id) return noStore();
@@ -2765,7 +2835,6 @@ async function boot() {
   if (paired) caption(paired.startsWith("!") ? paired.slice(1) : `This screen is now the mirror "${paired}".`);
   // The store's tablet and its screen find each other (a screen alone carries on as it always has).
   if (asPad) openPadRoom();
-  else if (link.pairedTo() && !link.embedded()) openGlassRoom();
   if (padNote) say(padNote);
   window.mirva = { S, mirror, visitLimits }; // a handle for the console while this is a prototype
   // On a phone the ask bar docks at the bottom of the screen once the glass has scrolled away (see styles.css).

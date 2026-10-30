@@ -378,15 +378,15 @@ a.chip { text-decoration: none; }
 .modes span { font-size: 11px; line-height: 1.2; letter-spacing: .04em; opacity: .8; }
 .modes button[aria-pressed="true"] { background: var(--pearl); color: #0d0c10; box-shadow: none; }
 /* Once a look is on, the choice folds into a switch and makes room for Keep and Take off: one row, 40px high. */
-.frame[data-dock="result"] .modes {
+:is(.frame, .pad-dock)[data-dock="result"] .modes {
   flex: none; gap: 0; padding: 3px; border-radius: 999px; background: rgba(13, 12, 15, .62);
   box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset;
 }
-.frame[data-dock="result"] .modes button { height: 34px; padding: 0 12px; border-radius: 999px; align-items: center; background: none; box-shadow: none; }
-.frame[data-dock="result"] .modes button:hover { background: rgba(255,255,255,.14); }
-.frame[data-dock="result"] .modes button[aria-pressed="true"] { background: var(--pearl); color: #0d0c10; }
-.frame[data-dock="result"] .modes b { font: 500 11.5px/1 var(--sans); letter-spacing: .13em; text-transform: uppercase; }
-.frame[data-dock="result"] .modes span { display: none; }
+:is(.frame, .pad-dock)[data-dock="result"] .modes button { height: 34px; padding: 0 12px; border-radius: 999px; align-items: center; background: none; box-shadow: none; }
+:is(.frame, .pad-dock)[data-dock="result"] .modes button:hover { background: rgba(255,255,255,.14); }
+:is(.frame, .pad-dock)[data-dock="result"] .modes button[aria-pressed="true"] { background: var(--pearl); color: #0d0c10; }
+:is(.frame, .pad-dock)[data-dock="result"] .modes b { font: 500 11.5px/1 var(--sans); letter-spacing: .13em; text-transform: uppercase; }
+:is(.frame, .pad-dock)[data-dock="result"] .modes span { display: none; }
 .glass-actions { flex: 1; min-width: 0; display: flex; gap: 8px; }
 .glass-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -1195,16 +1195,25 @@ a.chip { text-decoration: none; }
 [data-side="glass"] .seeing .reel-line { font-size: clamp(18px, 4.4cqmin, 44px); }
 /* The tablet: the stylist and the catalogue, with what is on the mirror at their head. It never shows a glass of its own. */
 [data-side="pad"] .app { grid-template-columns: minmax(0, 1fr); }
-[data-side="pad"] .stage, [data-side="pad"] .wardrobe, [data-side="pad"] #path, [data-side="pad"] .sheet-handle { display: none; }
+[data-side="pad"] .stage, [data-side="pad"] .wardrobe, [data-side="pad"] .sheet-handle { display: none; }
 [data-side="pad"] .app { height: auto; min-height: 100dvh; grid-template-rows: minmax(100dvh, auto); }
 [data-side="pad"] .tablet { border: 0; width: 100%; max-width: 760px; margin: 0 auto; min-height: 100dvh; padding-top: calc(20px + env(safe-area-inset-top)); }
 .remote { display: grid; gap: 12px; margin: 0 0 16px; padding: 14px 16px; border-radius: 18px; background: var(--card); box-shadow: 0 0 0 1px var(--line); }
 .remote-line { display: flex; align-items: flex-start; gap: 10px; margin: 0; font: italic 400 17px/1.3 var(--serif); }
 .remote-dot { flex: none; width: 8px; height: 8px; margin-top: .45em; border-radius: 50%; background: var(--muted); transition: background-color .32s cubic-bezier(.4, 0, .2, 1); }
 .remote[data-here="yes"] .remote-dot { background: #3f9f6b; }
-.remote-do { display: flex; flex-wrap: wrap; gap: 8px; }
-.remote-do:empty { display: none; }
-.remote-do [aria-pressed="true"] { background: var(--ink); color: var(--panel); }
+/* The tablet's foot: the mirror's own dock on its dark slab (as on a phone), held under her thumb as the stylist scrolls.
+   While the mirror is making the look it rests, as the dock on the glass does. */
+.pad-dock {
+  position: sticky; bottom: 0; z-index: 5; display: grid; gap: 8px; margin: auto -24px 0; padding: 14px 24px calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--panel) 22%);
+}
+.pad-dock[data-dock="none"]:has(#padWake[hidden]) { display: none; }
+.pad-dock .dock { position: static; width: auto; max-width: none; padding: 8px; border-radius: 24px; background: var(--glass); box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset, 0 20px 40px -28px rgba(12, 10, 8, .8); }
+.pad-dock[data-busy="yes"] .dock { opacity: .45; pointer-events: none; }
+.pad-dock .modes button { height: 64px; }
+.pad-wake { width: 100%; min-height: 56px; }
+.pad-note { margin: 0; font-size: 12.5px; line-height: 1.4; color: var(--muted); text-align: center; }
 /* The screen, while it has no tablet: a code for the store's own tablet, low on the sleeping glass. */
 .pad-code {
   position: absolute; right: 5%; bottom: 4%; z-index: 2; display: flex; align-items: center; gap: 14px; max-width: min(90%, 380px);
@@ -1214,3 +1223,5 @@ a.chip { text-decoration: none; }
 .pad-code canvas { flex: none; width: 92px; height: 92px; border-radius: 10px; }
 .pad-code b { display: block; margin-bottom: 3px; font: 400 16px/1.2 var(--serif); }
 .pad-code span { opacity: .8; }
+/* On the tablet the foot is the mirror's dock; the ask bar stays in its place under the stylist's words. */
+[data-side="pad"] .ask, [data-side="pad"] .glass-away .ask { position: static; }

@@ -46,6 +46,8 @@ function store(DB) {
       return { changes: Number(r.meta?.changes) || 0, lastId: Number(r.meta?.last_row_id) || 0 };
     },
     batch: async (list) => void (await DB.batch(list.map(([sql, ...p]) => bind(sql, p)))),
+    // Several reads in one trip to the database (it is in Milan: one after another, each cost about 0.3 s).
+    many: async (list) => (await DB.batch(list.map(([sql, ...p]) => bind(sql, p)))).map((r) => r.results || []),
   };
 }
 
