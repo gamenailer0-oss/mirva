@@ -11,7 +11,10 @@ directory = "./public"
 binding = "ASSETS"
 html_handling = "none"
 not_found_handling = "none"
-run_worker_first = true
+# Pages and the API run the server; scripts, styles, fonts, models and pictures are served straight from the file store
+# (free and unlimited on Cloudflare, and they no longer count toward the free plan's 100,000 server runs a day: about 30
+# files a visit did, 31 Oct 2026). Their headers are in public/_headers.
+run_worker_first = ["/*", "!/dist/*", "!/fonts/*", "!/models/*", "!/brand/*", "!/showcase/*", "!/refs/*", "!/icons/*", "!/share/*", "!/retail/mirror/*", "!/brand.css", "!/styles.css", "!/site/site.css", "!/desk/desk.css", "!/retail/retail.css", "!/favicon.svg"]
 
 [[d1_databases]]
 binding = "DB"

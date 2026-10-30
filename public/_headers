@@ -1,0 +1,34 @@
+# Files Cloudflare serves straight from its file store, without running the server (wrangler.toml run_worker_first
+# lists them): scripts, styles, fonts, models and pictures. They carry here what lib/app.mjs fileResponse gives the
+# files it serves. Pages and the API still run the server (their own headers, CSP included).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  X-Frame-Options: DENY
+
+# Script pieces carry their content's hash in their names: a name never changes meaning.
+/dist/chunks/*
+  Cache-Control: public, max-age=31536000, immutable
+/dist/pose-worker-*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Font files and the pose models never change under one name, and the models are large. fonts.css itself is always
+# checked (an installed phone once kept an old one: CLAUDE.md "Mistakes").
+/fonts/*.woff2
+  Cache-Control: public, max-age=2592000
+/models/*
+  Cache-Control: public, max-age=2592000
+
+# Pictures change rarely: a day, then served while checked.
+/brand/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/showcase/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/refs/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/icons/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/share/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/retail/mirror/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
