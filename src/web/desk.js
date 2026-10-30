@@ -352,6 +352,32 @@ const VIEWS = {
       await api("/api/console/devices", { ...d, brand: S.brand });
       go("mirrors");
     });
+    // A tablet beside a mirror holds the stylist and the catalogue, and the mirror becomes all glass (src/main.js "the
+    // store's tablet"). A new one is joined with a code shown here; it takes the old one's place.
+    const tabletCode = async (d) => {
+      let made;
+      try {
+        made = await api("/api/console/devices/tablet", { id: d.id });
+      } catch (e) {
+        return toast(e.message);
+      }
+      const canvas = el("canvas", { width: 220, height: 220, role: "img", "aria-label": "A code for the store’s tablet" });
+      const sheet = el("dialog", { class: "sheet" },
+        el("div", { class: "sheet-head" }, el("h2", { class: "subtitle", text: `A tablet for ${d.name}` })),
+        el("div", { class: "stack close" },
+          el("p", { class: "muted", text: "Scan this with the tablet that stands beside the mirror, or open the address on it. The tablet becomes the stylist and the catalogue, and the mirror becomes all glass. The code works once, for ten minutes; a new tablet takes the old one’s place." }),
+          canvas,
+          el("p", { class: "code", style: "font-size:18px;letter-spacing:.08em", text: made.code }),
+          el("p", { class: "mono", text: made.url }),
+          el("div", { class: "row" }, el("button", { class: "btn small", type: "button", text: "Copy the address", onclick: () => copy(made.url) }), el("button", { class: "link muted", type: "button", text: "Done", onclick: () => sheet.close() })),
+        ),
+      );
+      sheet.addEventListener("close", () => (sheet.remove(), go("mirrors")));
+      document.body.append(sheet);
+      sheet.showModal();
+      const { default: QRCode } = await import("qrcode");
+      await QRCode.toCanvas(canvas, made.url, { width: 220, margin: 1, color: { dark: "#14131a", light: "#f9f6f1" } });
+    };
     const card = (d) =>
       el("section", { class: "panel" },
         el("div", { class: "row", style: "justify-content:space-between" },
@@ -384,6 +410,13 @@ const VIEWS = {
             };
             return pick;
           })(),
+        ),
+        d.paired && el("div", { class: "row small", style: "gap:10px;justify-content:space-between;flex-wrap:wrap" },
+          el("span", { class: "muted", text: d.tablet_at ? `Tablet beside it: joined${d.tablet_seen ? `, seen ${when(d.tablet_seen)}` : ""}` : "Tablet beside it: none" }),
+          el("span", { class: "row", style: "gap:14px" },
+            el("button", { class: "link", type: "button", text: d.tablet_at ? "Connect a new tablet" : "Connect a tablet", onclick: () => tabletCode(d) }),
+            d.tablet_at && el("button", { class: "link muted", type: "button", text: "Let it go", onclick: async () => (await api("/api/console/devices/tablet", { id: d.id, letGo: true }).catch((e) => toast(e.message)), go("mirrors")) }),
+          ),
         ),
         el("div", { class: "row" },
           el("button", { class: "link", type: "button", text: d.paired ? "Unpair and make a new code" : "New code", onclick: async () => (await api("/api/console/devices/code", { id: d.id }).catch((e) => toast(e.message)), go("mirrors")) }),

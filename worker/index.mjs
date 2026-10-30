@@ -1,6 +1,8 @@
 // MIRVA on Cloudflare. The same app as server.mjs, given the edge's own parts:
 // D1 for the store, KV for portraits and loaded catalogues, the edge cache for product pictures.
+import { DurableObject } from "cloudflare:workers";
 import { createApp } from "../lib/app.mjs";
+import { across } from "../lib/link.mjs";
 import { databaseLimiter } from "../lib/auth.mjs";
 import { createPush } from "../lib/push.mjs";
 import sapphireBrand from "../brands/sapphire/brand.json";
@@ -170,6 +172,15 @@ export default {
       }
       ready ||= start(env, url.origin).catch((e) => ((ready = null), Promise.reject(e)));
       const { app, db } = await ready;
+      // A store's tablet or its mirror screen joining their room (lib/link.mjs): the ticket says which room and side.
+      if (url.pathname === "/api/link/socket") {
+        if (request.headers.get("upgrade") !== "websocket") return new Response("This address takes a WebSocket.", { status: 426 });
+        const seat = await app.checkLink(url.searchParams.get("t"));
+        if (!seat) return new Response("That ticket is not good, or it is old.", { status: 403 });
+        const forward = new Request(request);
+        forward.headers.set("x-mirva-side", seat.side);
+        return env.ROOMS.get(env.ROOMS.idFromName(seat.room)).fetch(forward);
+      }
       // Pages and files never wait for the catalogues; the calls, the mirror and the picture proxy (its list of allowed
       // hosts comes from them) do. Catalogues can change in another isolate (see storesFor).
       if (url.pathname.startsWith("/api/") || url.pathname === "/mirror" || url.pathname === "/img") await storesFor(url, env, db, ctx).catch(() => {});
@@ -188,3 +199,51 @@ export default {
     ctx.waitUntil(Promise.allSettled([app.sweep(), limiter.sweep()]));
   },
 };
+
+// A store's tablet and its mirror screen, joined (lib/link.mjs): one room to a screen, holding one screen and one
+// tablet. Each message from one side goes to the other as it is. The room sleeps between messages (WebSocket
+// hibernation) and answers the sides' "ping" without waking, so a quiet store costs nothing.
+export class MirrorRoom extends DurableObject {
+  constructor(ctx, env) {
+    super(ctx, env);
+    ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("ping", "pong"));
+  }
+
+  async fetch(request) {
+    const side = request.headers.get("x-mirva-side") === "pad" ? "pad" : "glass";
+    const { 0: client, 1: server } = new WebSocketPair();
+    // A newer screen or tablet takes the older one's place (4000: it stops trying again).
+    for (const old of this.ctx.getWebSockets(side)) old.close(4000, "replaced");
+    this.ctx.acceptWebSocket(server, [side]);
+    this.tell(across(side), { t: "peer", side, here: true });
+    server.send(JSON.stringify({ t: "peer", side: across(side), here: this.ctx.getWebSockets(across(side)).length > 0 }));
+    return new Response(null, { status: 101, webSocket: client });
+  }
+
+  webSocketMessage(ws, message) {
+    if (typeof message !== "string" || message.length > 64000) return;
+    const [side] = this.ctx.getTags(ws);
+    for (const peer of this.ctx.getWebSockets(across(side))) peer.send(message);
+  }
+
+  webSocketClose(ws, code) {
+    const [side] = this.ctx.getTags(ws);
+    try {
+      ws.close(code === 1005 ? 1000 : code, "bye");
+    } catch {}
+    // Said only when no other socket holds this side (a replaced one is followed by its newer one).
+    if (!this.ctx.getWebSockets(side).some((w) => w !== ws)) this.tell(across(side), { t: "peer", side, here: false });
+  }
+
+  webSocketError(ws) {
+    this.webSocketClose(ws, 1011);
+  }
+
+  tell(side, message) {
+    const text = JSON.stringify(message);
+    for (const ws of this.ctx.getWebSockets(side))
+      try {
+        ws.send(text);
+      } catch {}
+  }
+}

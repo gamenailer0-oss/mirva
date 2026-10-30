@@ -47,3 +47,13 @@ MIRVA_GUEST_SHOTS = "15"
 # first one came back later.
 MIRVA_TRIALS = "mirror:ofFemkEZc4e09IDa; outfit:ofFemkEZc4e09IDa"
 MIRVA_PAYMENTS = "off"
+
+# The room a store's tablet and its mirror screen talk through (worker/index.mjs MirrorRoom). The free plan takes
+# SQLite-backed Durable Objects; the room keeps nothing, it only passes messages between the two.
+[[durable_objects.bindings]]
+name = "ROOMS"
+class_name = "MirrorRoom"
+
+[[migrations]]
+tag = "rooms-1"
+new_sqlite_classes = ["MirrorRoom"]

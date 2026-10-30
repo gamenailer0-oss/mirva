@@ -90,7 +90,12 @@ export function newVisit() {
   visit = null;
 }
 
+// A store's tablet hands what happened to its screen, which counts it as the mirror's own (src/pad.js).
+let relay = null;
+export const relayTo = (send) => (relay = send);
+
 export function track(kind, data = {}) {
+  if (relay) return relay(kind, data);
   if (!brand) return;
   if (!visit) {
     visit = Math.random().toString(36).slice(2, 12) + Date.now().toString(36);

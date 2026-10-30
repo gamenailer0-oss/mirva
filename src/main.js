@@ -27,6 +27,7 @@ import { OCCASIONS, MOODS, budgetSteps, pickLooks, parseAsk, line, colourFamily,
 import { facelessReference, warmUp } from "./vision.js";
 import * as memory from "./memory.js";
 import * as link from "./link.js";
+import * as padLink from "./pad.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -106,6 +107,9 @@ const S = {
   refs: new Map(),
 };
 let mirror;
+// A store's tablet beside its screen (see "the store's tablet and its screen" below): which side this is, if either.
+let side = null; // "glass" on a store's paired screen, "pad" on its tablet
+let room = null;
 
 const glass = $("#glass");
 const frame = $("#frame");
@@ -125,7 +129,8 @@ function replay(node, text) {
   node.classList.add("in");
 }
 const say = (text) => replay($("#say"), text);
-const caption = (text) => replay($("#caption"), text);
+// On a store's tablet the glass is the screen beside it, so what MIRVA would say on the glass is said there.
+const caption = (text) => (side === "pad" ? room?.send({ op: "say", text }) : (replay($("#caption"), text), sendState()));
 
 // True when a shopper is at the screen: a paired store mirror, or a member's own device.
 // Then nothing about keys, dollars or settings belongs on the glass.
@@ -654,6 +659,7 @@ function syncGlass() {
   $("#hint").hidden = !(st === "awake" && $("#hint").textContent);
   syncPath();
   syncSheet();
+  sendState();
 }
 
 // ---------- the way through: choose a piece, see yourself, wear it (the founder, 22 Oct 2026) ----------
@@ -731,7 +737,7 @@ function takeStep(step) {
 const upright = matchMedia("(max-width: 700px) and (orientation: portrait)");
 // The real-mirror version (a tall screen behind two-way glass) is laid out like the phone app, one column, the glass first.
 const tall = matchMedia("(orientation: portrait)");
-const phoneApp = () => (upright.matches || (document.documentElement.dataset.glass === "real" && tall.matches)) && document.documentElement.dataset.glass !== "oval";
+const phoneApp = () => side !== "pad" && (upright.matches || (document.documentElement.dataset.glass === "real" && tall.matches)) && document.documentElement.dataset.glass !== "oval";
 const SHEETS = ["mini", "peek", "full"];
 let sheetWish = null; // the size she chose herself, until she picks a look
 // The panel and the glass move on the phone's graphics chip (22 Oct 2026: they used to animate height and position, so
@@ -973,6 +979,7 @@ const liveHere = () =>
   !onPhoto() && !!S.config?.live && !noLive() && !mustJoin("live") && !(link.member && !link.member.tier.liveSecondsPerMonth && !link.pairedTo());
 
 function choose(p) {
+  if (side === "pad") return padChoose(p);
   mirror.touch();
   sheetWish = null;
   navigator.vibrate?.(8);
@@ -2227,7 +2234,9 @@ function showTab(name) {
 // ---------- the next shopper ----------
 // "Start over". In a store it is the next shopper: nothing of the last one stays on the glass, and the visit's count
 // starts again. The mirror does the same by itself when nobody has been in front of it, or touched it, for a while.
-function startOver() {
+function startOver(fromOtherSide = false) {
+  // A store's tablet and its screen start over together, whichever side it began on (the screen does it by itself too).
+  if (!fromOtherSide) room?.send(side === "pad" ? { op: "over" } : { t: "over" });
   S.ticket++; // whatever was still being made for the last shopper is dropped, not shown to the next
   S.developing?.cancel();
   if (link.pairedTo()) {
@@ -2352,6 +2361,181 @@ async function openAdapt() {
   $("#adapt").showModal();
 }
 
+// ---------- the store's tablet and its screen (the founder, 30 Oct 2026; lib/link.mjs, src/pad.js) ----------
+// A store can stand a tablet beside its mirror screen. While the screen has no tablet it shows a code for one; the tablet
+// that scans it becomes the stylist and the catalogue, and the screen becomes all glass. A tap on the tablet is done on
+// the screen by the screen's own buttons, so a look is made exactly as it is on one screen alone. A screen whose tablet
+// has been gone for a minute shows its own stylist again, so the mirror never stands there unable to be used.
+const PAD_GRACE_MS = 60e3;
+let padHere = false;
+let padGone = 0;
+let lastState = "";
+let stateTimer = 0;
+
+// The screen: what the glass is doing, told to the tablet whenever it changes.
+function sendState(force = false) {
+  if (side !== "glass" || !padHere || !room) return;
+  clearTimeout(stateTimer);
+  stateTimer = setTimeout(() => {
+    const st = {
+      t: "state",
+      awake: !!mirror.awake,
+      glass: glass.dataset.state,
+      dock: frame.dataset.dock,
+      on: (S.view === "portrait" ? S.portrait?.pid : S.wearing?.id) ?? null,
+      selected: S.selected?.id ?? null,
+      modes: $$("#modes button").map((b) => ({ mode: b.dataset.mode, pressed: b.getAttribute("aria-pressed") === "true", hidden: b.hidden, label: $("span", b)?.textContent || "" })),
+      keep: { disabled: $("#keepBtn").disabled, text: $("#keepBtn").textContent },
+      say: $("#caption").textContent,
+      kept: S.mem?.saved.length || 0,
+    };
+    const text = JSON.stringify(st);
+    if (!force && text === lastState) return;
+    lastState = text;
+    room.send(st);
+  }, 80);
+}
+
+// The screen: what the tablet asks for, done by the screen's own buttons and functions.
+const FROM_PAD = {
+  hello: () => sendState(true),
+  choose: ({ pid }) => {
+    const p = S.products.find((x) => String(x.id) === String(pid));
+    if (p) choose(p);
+  },
+  mode: ({ mode }) => $(`#modes [data-mode="${mode === "studio" ? "studio" : "model"}"]`).click(),
+  keep: () => $("#keepBtn").click(),
+  off: () => $("#offBtn").click(),
+  wake: () => mirror.awake || $("#wakeBtn").click(),
+  over: () => startOver(true),
+  ask: () => askFamily(),
+  say: ({ text }) => caption(String(text || "").slice(0, 240)),
+  track: ({ kind, data }) => link.track(String(kind || "").slice(0, 40), data && typeof data === "object" ? data : {}),
+};
+
+function openGlassRoom() {
+  side = "glass";
+  room = padLink.openRoom({
+    side: "glass",
+    onMessage: (m) => {
+      mirror.touch(); // a tap on the tablet is someone at the mirror
+      FROM_PAD[m.op]?.(m);
+    },
+    onPeer: (here) => {
+      padHere = here;
+      clearTimeout(padGone);
+      if (here) {
+        document.documentElement.dataset.side = "glass";
+        showPadCode(false);
+        sendState(true);
+        syncSheet();
+      } else padGone = setTimeout(() => !padHere && (delete document.documentElement.dataset.side, syncSheet(), offerPadCode()), PAD_GRACE_MS);
+    },
+    onState: (s) => {
+      if (s === "replaced" || s === "unpaired") room?.close();
+      if (s === "open") offerPadCode();
+    },
+  });
+}
+
+// The screen, while it has no tablet: a code on the sleeping glass, for the store's own tablet to scan. It is shown only
+// asleep and only until a tablet has joined (a tablet joining later is done from the store's console), so a shopper is
+// never handed the mirror's controls.
+let codeTimer = 0;
+async function offerPadCode() {
+  clearTimeout(codeTimer);
+  if (side !== "glass" || padHere) return;
+  try {
+    const c = await api("/api/link/code", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
+    if (c.paired || padHere) return showPadCode(false);
+    await drawPadCode(c.url);
+    codeTimer = setTimeout(offerPadCode, 9 * 60e3); // a code is good for ten minutes
+  } catch {
+    showPadCode(false);
+  }
+}
+async function drawPadCode(url) {
+  let box = $("#padCode");
+  if (!box) {
+    box = h("div", { id: "padCode", class: "pad-code", hidden: true },
+      h("canvas", { width: 112, height: 112, role: "img", "aria-label": "A code for the store’s tablet" }),
+      h("p", {}, h("b", { text: "The store’s tablet" }), h("span", { text: "Scan this with it, and the tablet becomes the stylist beside this mirror." })),
+    );
+    $("#wake").append(box);
+  }
+  const { default: QRCode } = await import("qrcode");
+  await QRCode.toCanvas(box.querySelector("canvas"), url, { width: 112, margin: 1, errorCorrectionLevel: "M", color: { dark: "#0b0a0d", light: "#efe9e1" } });
+  showPadCode(true);
+}
+function showPadCode(on) {
+  const box = $("#padCode");
+  if (box) box.hidden = !on;
+  if (!on) clearTimeout(codeTimer);
+}
+
+// The tablet: what is on the mirror, and the few things to do about it. The rest of the tablet is the stylist and the
+// catalogue as they are on any mirror.
+let remote = null; // the screen's last word about its glass
+let lineIs = "connecting";
+let screenHere = false;
+function padChoose(p) {
+  S.selected = p;
+  renderPartners();
+  if (S.step === "looks") renderDetail();
+  markCards();
+  renderSolo();
+  if (p.photoOnly) return openPhoto(p);
+  room?.send({ op: "choose", pid: p.id });
+}
+function openPadRoom() {
+  side = "pad";
+  document.documentElement.dataset.side = "pad";
+  link.relayTo((kind, data) => room?.send({ op: "track", kind, data }));
+  $(".tablet").prepend(h("div", { id: "remote", class: "remote", role: "status" }, h("p", { class: "remote-line" }, h("i", { class: "remote-dot" }), h("span", { id: "remoteSays" })), h("div", { id: "remoteDo", class: "remote-do" })));
+  room = padLink.openRoom({
+    side: "pad",
+    onMessage: (m) => {
+      if (m.t === "state") remote = m;
+      if (m.t === "over") startOver(true);
+      paintRemote();
+    },
+    onPeer: (here) => {
+      screenHere = here;
+      if (here) room.send({ op: "hello" });
+      paintRemote();
+    },
+    onState: (s) => {
+      lineIs = s;
+      if (s === "unpaired") padLink.forget();
+      paintRemote();
+    },
+  });
+  paintRemote();
+}
+function paintRemote() {
+  const says = $("#remoteSays");
+  const box = $("#remote");
+  if (!says) return;
+  const live = lineIs === "open" && screenHere && remote;
+  box.dataset.here = live ? "yes" : "no";
+  says.textContent =
+    lineIs === "unpaired" ? "This tablet is no longer joined to a mirror. Scan the code on the mirror (or in the store’s console) to join it again."
+    : lineIs === "replaced" ? "Another tablet now drives this mirror."
+    : !live ? "Looking for the mirror…"
+    : remote.say || (remote.awake ? "The mirror is on." : "The mirror is asleep.");
+  const send = (op, extra = {}) => () => room?.send({ op, ...extra });
+  const btn = (text, op, extra, strong = false, pressed) =>
+    h("button", { type: "button", class: strong ? "primary small" : "chip", text, onclick: send(op, extra), ...(pressed === undefined ? {} : { "aria-pressed": String(pressed) }) });
+  const doing = [];
+  if (live && !remote.awake) doing.push(btn("Turn on the mirror", "wake", {}, true));
+  if (live && remote.awake && remote.dock !== "none")
+    for (const m of remote.modes.filter((x) => !x.hidden)) doing.push(btn(m.mode === "studio" ? `Studio · ${m.label}` : "Model · a portrait", "mode", { mode: m.mode }, false, m.pressed));
+  if (live && remote.dock === "result") doing.push(btn(remote.keep.text, "keep", {}, true), btn("Take off", "off"));
+  if (live && remote.kept > 0) doing.push(btn("Ask family", "ask"));
+  $("#remoteDo").replaceChildren(...doing);
+  for (const b of $$("#remoteDo button")) if (b.textContent === "Kept" || (remote?.keep.disabled && b.textContent === remote.keep.text)) b.disabled = true;
+}
+
 // ---------- wiring ----------
 function wireUI() {
   $("#wakeBtn").addEventListener("click", async () => {
@@ -2389,7 +2573,7 @@ function wireUI() {
     } else mirror.stop("user");
   });
   $("#shapeBtn").addEventListener("click", () => mirror.setShape(mirror.shape === "portrait" ? "landscape" : "portrait"));
-  $("#restartBtn").addEventListener("click", startOver);
+  $("#restartBtn").addEventListener("click", () => startOver());
   $("#photoPeek").addEventListener("click", () => openPhoto());
   $("#camBtn").addEventListener("click", () => mirror.sleep());
   $("#compareBtn").addEventListener("click", openCompare);
@@ -2518,10 +2702,11 @@ async function boot() {
   wireHold();
   // The pose model blocks the page for a few seconds the first time it runs. Spend them while the
   // shopper is still reading the wake screen, so the camera never freezes under her afterwards.
-  if (!navigator.connection?.saveData) setTimeout(warmUp, 1500);
+  const query = new URLSearchParams(location.search);
+  // A store's tablet has no camera to warm: it is the stylist beside a screen (see "the store's tablet and its screen").
+  if (!navigator.connection?.saveData && !query.has("pad") && !(padLink.padOf() && !link.pairedTo())) setTimeout(warmUp, 1500);
   const brands = await api("/api/brands");
   // A store's console can pair this screen (…/mirror?pair=CODE) and a link can name the store (…/mirror?brand=id).
-  const query = new URLSearchParams(location.search);
   let paired = "";
   if (query.get("pair")) {
     try {
@@ -2532,14 +2717,23 @@ async function boot() {
   }
   // The server tells a store mirror what one visit may use, and it could not know this screen was one when it was asked.
   if (paired && !paired.startsWith("!")) Object.assign(S.config, await api("/api/config").catch(() => ({})));
-  const want = query.get("brand") || link.pairedTo()?.brand || memory.lastBrand.get();
+  // A store's tablet: the code its mirror screen shows (…/mirror?pad=CODE), or the joining it already has.
+  let padNote = "";
+  if (query.get("pad"))
+    try {
+      await padLink.join(query.get("pad"));
+    } catch (e) {
+      padNote = e.message;
+    }
+  const asPad = !link.pairedTo() && !link.embedded() ? padLink.padOf() : null;
+  const want = query.get("brand") || link.pairedTo()?.brand || asPad?.brand || memory.lastBrand.get();
   // A store loaded from a link is not on the public list, so the link's own id is tried before any fallback.
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
   // With nothing named and nothing remembered, the first store on the list opens: the stores that said yes lead it.
   const first = { id: brands.find((b) => b.id === want)?.id || linked || brands[0]?.id };
   const named = !!query.get("brand") && first.id === query.get("brand");
   if (link.embedded()) document.documentElement.dataset.embed = "1";
-  else if (query.has("pair") || query.has("brand") || query.has("for") || query.has("p")) history.replaceState(null, "", location.pathname);
+  else if (query.has("pair") || query.has("pad") || query.has("brand") || query.has("for") || query.has("p")) history.replaceState(null, "", location.pathname);
   showMember(await link.whoIsHere());
   memory.setStoreMirror(!!link.pairedTo());
   memory.setOwner(link.member?.user.id);
@@ -2560,7 +2754,7 @@ async function boot() {
   syncGlass();
   // A paired mirror belongs to one store. Anywhere else the shopper chooses: the store's name heads the tablet with a
   // way to change it, and the picker opens by itself the first time, unless a link has already named the store.
-  const choice = !link.pairedTo() && brands.length > 1;
+  const choice = !link.pairedTo() && !asPad && brands.length > 1;
   $("#storeBar").hidden = !choice;
   let chosen = named;
   try {
@@ -2569,6 +2763,10 @@ async function boot() {
   } catch {}
   if (choice && !chosen) openStores();
   if (paired) caption(paired.startsWith("!") ? paired.slice(1) : `This screen is now the mirror "${paired}".`);
+  // The store's tablet and its screen find each other (a screen alone carries on as it always has).
+  if (asPad) openPadRoom();
+  else if (link.pairedTo() && !link.embedded()) openGlassRoom();
+  if (padNote) say(padNote);
   window.mirva = { S, mirror, visitLimits }; // a handle for the console while this is a prototype
   // On a phone the ask bar docks at the bottom of the screen once the glass has scrolled away (see styles.css).
   if ("IntersectionObserver" in window)

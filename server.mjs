@@ -14,6 +14,8 @@ import { openDb } from "./lib/db.mjs";
 import { memoryLimiter } from "./lib/auth.mjs";
 import { createApp } from "./lib/app.mjs";
 import { createPush, newPushKeys } from "./lib/push.mjs";
+import { across } from "./lib/link.mjs";
+import { WebSocketServer } from "ws";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(ROOT, "public");
@@ -317,6 +319,38 @@ const server = http.createServer(async (req, res) => {
 });
 server.requestTimeout = 120e3;
 server.headersTimeout = 20e3;
+
+// A store's tablet and its mirror screen, joined (lib/link.mjs): the rooms are kept in memory here, one screen and one
+// tablet to a room, and each message from one side goes to the other as it is. (At the edge it is a Durable Object.)
+const rooms = new Map();
+const sockets = new WebSocketServer({ noServer: true, maxPayload: 64e3 });
+server.on("upgrade", async (req, socket, head) => {
+  const url = new URL(req.url, "http://localhost");
+  const seat = url.pathname === "/api/link/socket" ? await app.checkLink(url.searchParams.get("t")).catch(() => null) : null;
+  if (!seat) return socket.end("HTTP/1.1 403 Forbidden\r\nconnection: close\r\n\r\n");
+  sockets.handleUpgrade(req, socket, head, (ws) => {
+    const room = rooms.get(seat.room) || {};
+    rooms.set(seat.room, room);
+    const tell = (side, message) => room[side]?.readyState === 1 && room[side].send(JSON.stringify(message));
+    room[seat.side]?.close(4000, "replaced"); // a newer screen or tablet takes the older one's place
+    room[seat.side] = ws;
+    tell(across(seat.side), { t: "peer", side: seat.side, here: true });
+    tell(seat.side, { t: "peer", side: across(seat.side), here: room[across(seat.side)]?.readyState === 1 });
+    ws.on("message", (data, binary) => {
+      const text = String(data);
+      if (binary || text.length > 64e3) return;
+      if (text === "ping") return ws.send("pong");
+      const peer = room[across(seat.side)];
+      if (peer?.readyState === 1) peer.send(text);
+    });
+    ws.on("close", () => {
+      if (room[seat.side] !== ws) return; // it was replaced: its newer one is there
+      room[seat.side] = null;
+      tell(across(seat.side), { t: "peer", side: seat.side, here: false });
+      if (!room.glass && !room.pad) rooms.delete(seat.room);
+    });
+  });
+});
 
 // Housekeeping every six hours: portraits nobody kept, expired sessions, closed boards.
 setTimeout(() => app.sweep().catch(() => {}), 5000).unref(); // once, soon after starting, then every six hours

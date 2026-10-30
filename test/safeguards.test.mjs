@@ -965,6 +965,61 @@ test("the founder can give a store its name as its sign reads; the store's own s
   assert.deepEqual([(await name()).name, (await name()).wordmark], ["Sapphire Pakistan", "SAPPHIRE PAKISTAN"]);
 });
 
+test("a store's tablet joins its mirror screen with the screen's one-use code; a newer tablet replaces it; tickets are signed and short", async () => {
+  const { app, db } = await makeApp();
+  const screen = await pair(db);
+  const code = (headers = screen.header) => call(app, "POST", "/api/link/code", { body: {}, headers });
+  const join = (c) => call(app, "POST", "/api/link/join", { body: { code: c } });
+  const ticket = (headers) => call(app, "POST", "/api/link/ticket", { body: {}, headers });
+  const padHeader = (j) => ({ "x-mirva-pad": `${j.pad}.${j.token}` });
+
+  assert.equal((await code({})).status, 401, "only a store's paired screen shows a code");
+  const first = await code();
+  assert.equal(first.status, 200);
+  assert.match(first.body.url, new RegExp(`/mirror\\?pad=${first.body.code}$`));
+  assert.equal(first.body.paired, false);
+  assert.equal((await join("NOTACODE")).status, 404);
+  const tablet = await join(first.body.code.toLowerCase());
+  assert.deepEqual([tablet.status, tablet.body.brand], [200, "sapphire"]);
+  assert.equal((await join(first.body.code)).status, 404, "a code is good once");
+  assert.deepEqual((await code()).body, { paired: true }, "a screen with a tablet shows no code (a shopper is never handed it)");
+
+  const asPad = await ticket(padHeader(tablet.body));
+  assert.equal(asPad.body.side, "pad");
+  assert.deepEqual(await app.checkLink(asPad.body.ticket), { room: screen.id, side: "pad" }, "the tablet's room is its screen's");
+  assert.deepEqual(await app.checkLink((await ticket(screen.header)).body.ticket), { room: screen.id, side: "glass" });
+  assert.equal((await ticket({})).status, 401);
+  assert.equal((await ticket({ "x-mirva-pad": `${tablet.body.pad}.wrong` })).status, 401);
+
+  // a signature that does not match, a side that is not one, an old ticket
+  const [room, side, expires, sig] = asPad.body.ticket.split(".");
+  assert.equal(await app.checkLink(`${room}.glass.${expires}.${sig}`), null);
+  assert.equal(await app.checkLink(`${room}.door.${expires}.${sig}`), null);
+  assert.equal(await app.checkLink(`${room}.${side}.${Number(expires) - 120e3}.${sig}`), null);
+
+  // a newer tablet, joined from the store's console, takes the place of the older, which can no longer join
+  const shop = await signIn(app, db, "retailer", "sapphire");
+  const fromConsole = (body, who = shop) => call(app, "POST", "/api/console/devices/tablet", { body: { id: screen.id, ...body }, headers: who.headers });
+  assert.equal((await fromConsole({}, await signIn(app, db, "retailer", "atelier"))).status, 404, "another store's console cannot");
+  const second = await join((await fromConsole({})).body.code);
+  assert.equal(second.status, 200);
+  assert.equal((await ticket(padHeader(tablet.body))).status, 401);
+  assert.equal((await ticket(padHeader(second.body))).status, 200);
+  const listed = (await call(app, "GET", "/api/console/devices?brand=sapphire", { headers: shop.headers })).body.devices.find((d) => d.id === screen.id);
+  assert.ok(listed.tablet_seen, "the console sees the screen's tablet");
+  // the console lets the tablet go; so can the screen
+  assert.equal((await fromConsole({ letGo: true })).status, 200);
+  assert.equal((await ticket(padHeader(second.body))).status, 401);
+  assert.equal((await code()).body.paired, false, "a screen without a tablet shows its code again");
+  const again = await join((await code()).body.code);
+  assert.equal((await call(app, "POST", "/api/link/forget", { body: {}, headers: screen.header })).status, 200);
+  assert.equal((await ticket(padHeader(again.body))).status, 401);
+  // an unpaired screen's tablet is let go with it
+  const third = await join((await code()).body.code);
+  await db.run("UPDATE devices SET token = NULL WHERE id = ?", screen.id);
+  assert.equal((await ticket(padHeader(third.body))).status, 401);
+});
+
 test("a paused store makes no try-ons at its mirrors or on its website, and the stylist still works", async () => {
   const { app, db } = await makeApp();
   const dev = await pair(db);

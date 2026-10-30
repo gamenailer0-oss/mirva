@@ -18,7 +18,7 @@ let server;
 before(async () => {
   server = spawn(process.execPath, ["server.mjs"], {
     cwd: ROOT,
-    env: { ...process.env, PORT: String(PORT), DECART_API_KEY: "", MIRVA_DATA: DATA },
+    env: { ...process.env, PORT: String(PORT), DECART_API_KEY: "", FAL_KEY: "", MIRVA_DATA: DATA },
     stdio: ["ignore", "pipe", "pipe"],
   });
   await new Promise((resolve, reject) => {
@@ -208,4 +208,38 @@ test("error replies never leak internals", async () => {
   const res = await fetch(base + "/api/brands/..%2f..%2fetc");
   const text = await res.text();
   assert.doesNotMatch(text, /at .*\(|node:internal|D:\\|\/Mirva\//);
+});
+
+test("the laptop's room passes a store's tablet and its screen to each other, and turns a stranger away", async () => {
+  const { linkTicket } = await import("../lib/link.mjs");
+  // With no keys at all, the server signs with its local key (lib/app.mjs).
+  const open = async (side) => {
+    const ws = new WebSocket(`ws://localhost:${PORT}/api/link/socket?t=${encodeURIComponent(await linkTicket("mirva-local", "room-t", side))}`);
+    const got = [];
+    ws.onmessage = (e) => got.push(String(e.data));
+    await new Promise((resolve, reject) => ((ws.onopen = resolve), (ws.onerror = reject)));
+    return { ws, got };
+  };
+  const until = async (seen) => {
+    for (let i = 0; i < 100 && !seen(); i++) await new Promise((r) => setTimeout(r, 20));
+    assert.ok(seen());
+  };
+  const glass = await open("glass");
+  await until(() => glass.got.some((m) => m.includes('"here":false')));
+  const pad = await open("pad");
+  await until(() => glass.got.some((m) => m.includes('"side":"pad","here":true')));
+  await until(() => pad.got.some((m) => m.includes('"side":"glass","here":true')));
+  pad.ws.send(JSON.stringify({ op: "choose", pid: "p1" }));
+  await until(() => glass.got.includes('{"op":"choose","pid":"p1"}'));
+  glass.ws.send(JSON.stringify({ t: "state", awake: true }));
+  await until(() => pad.got.includes('{"t":"state","awake":true}'));
+  pad.ws.send("ping");
+  await until(() => pad.got.includes("pong"));
+  const stranger = new WebSocket(`ws://localhost:${PORT}/api/link/socket?t=room-t.pad.9999999999999.forged`);
+  const turned = await new Promise((resolve) => ((stranger.onopen = () => resolve(false)), (stranger.onerror = () => resolve(true))));
+  assert.equal(turned, true, "a forged ticket never joins");
+  glass.got.length = 0;
+  pad.ws.close();
+  await until(() => glass.got.some((m) => m.includes('"side":"pad","here":false')));
+  glass.ws.close();
 });
