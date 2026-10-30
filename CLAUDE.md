@@ -69,7 +69,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (overflow, headline lines, text sizes, contrast; screenshots in `.taste-skill/inspect/`). Its style bans (no kickers,
   no gradients, no shadows, no hairlines) are its house style, not MIRVA's: use it for measured faults only. After any
   copy change in the pages run `node scripts/typeset.mjs` (printer's punctuation in text only; `--check` to list).
-- **Tests**: `npm test` (247 as of 2026-10-23). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (250 as of 2026-10-30). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
   site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
@@ -234,6 +234,21 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   command with a path argument.
 - **Harvey was asked for as a "skill" but is a Python program** that sends mail and signs in to LinkedIn: read any
   repo before installing it, and install only the parts that are safe and useful (its playbooks).
+- **Windows emptied the session scratchpad (found 30 Oct)**: the mirror cut-out scripts, the calculator's and the
+  LinkedIn kit's sources ("session scratchpad" below) are gone; the published artifacts are safe (read them back with
+  the Artifact tool). Tools worth keeping go in `tools/` (git-ignored, but on D:), sources in `docs/`.
+- **The hero's glass was a rounded box, the mirror's glass a pebble** (the founder: "lines overlapping in mirror"):
+  the portrait spilled past the line of light at three corners. The glass is now a clip-path traced from the
+  photograph (`node tools/stores/glass-shape.mjs`); look at a cut-out with its parts taken apart
+  (`tools/stores/mirror-closeup.mjs`), not only as a whole. Small marks on a picture (look dots) land on a face or
+  hair at some widths: check every width (`tools/stores/hero-shots.mjs`).
+- **`img.decode()` never settles for a hidden picture**: a shot script hung on it; race it with a timeout.
+- **A stroke drawn with dash offset and `vector-effect: non-scaling-stroke` stops short when scaled up**: the
+  standing ring's back was missing on a 1080 screen and fine on a phone. Animate transform and opacity instead.
+- **`npm i` while a `wrangler dev` runs fails half-way (EBUSY) and breaks wrangler**: stop workerd first.
+- **platform.mjs `denied` is set only by a sign-in check**: a handler without one returns `fail(…)`, never `denied`.
+- **Store names come from how a shop names itself** ("beygumbano"): the founder can set it on a store's Look and feel
+  page (`node tools/stores/rename-live.mjs <id> "<Name>"`).
 
 ## Audit of 22 Oct 2026 (done the same day)
 - Shipped: three-at-once off (MIRVA_TRIALS); portrait time said as about twenty seconds (home, /retail); changing store
@@ -351,6 +366,38 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - Shots of the desks with a limit set locally: scratchpad `caps-local.mjs <brand> <portraits|null> <live|null>`
   (signs in from .data, prints nothing secret), then `node tools/stores/desk-shots.mjs hq|console`.
 
+## The store's tablet and its screen (30 Oct 2026, shipped 5e36fa6; the founder's plan: "the mirror shows a qr and the tablet beside it pairs with it")
+- A paired store screen opens a room (lib/link.mjs): a Durable Object `MirrorRoom` at the edge (worker/index.mjs,
+  wrangler.toml `ROOMS`, migration `rooms-1`, free plan: SQLite-backed, hibernating WebSockets, "ping" answered
+  without waking) and an in-memory map in server.mjs (`ws` package). Each side joins with a ticket from
+  `POST /api/link/ticket` (HMAC with the server's key, one minute; `app.checkLink`). Tables `pads`, `pad_codes`.
+- The flow: the sleeping glass shows a QR (`#padCode`) only while the screen has no tablet; the tablet opens
+  `/mirror?pad=CODE` (`POST /api/link/join`, one use, ten minutes) and becomes `data-side="pad"` (stylist +
+  catalogue, a `#remote` bar with turn on / Model / Studio / Keep / Take off / Ask family); the screen becomes
+  `data-side="glass"` (all glass, words sized for two metres). The tablet's taps are done on the screen by the
+  screen's own buttons (src/main.js `FROM_PAD`), so try-on is unchanged; captions and events are relayed to the
+  screen (`link.relayTo`); Start over on either side clears both. A tablet gone a minute: the screen shows its own
+  stylist again. A new tablet: the store console's Mirrors page ("Connect a new tablet", QR sheet; "Let it go").
+- Checks: `node tools/stores/pad-walk.mjs` (local, fake camera, both sides shot), `node tools/stores/link-live-check.mjs`
+  (live: adds a test mirror under Sapphire, pairs it and a tablet, relays through the Durable Object, removes it;
+  31 Oct: tablet to screen ~0.25 s from Lahore). Tests in safeguards.test.mjs and server.test.mjs.
+- Studio's first seconds: a ring of light spreads on the floor of the glass (`.stand`, transform + opacity) with
+  "Stand in the light, arms a little away from you."; it warms when the pose check finds her in place
+  (`me.place`), and the glass's foot words step aside meanwhile. vision.js `framing` also says "A step to the middle".
+- The plan (hardware, shapes, webcam, LookCheck, an easy yes, next to build): the doc "MIRVA in a real store",
+  https://claude.ai/artifact/FVT7zhC4NwJq1jREAw6RqD (private until shared from its Share menu).
+
+## Speed at the edge (30 Oct 2026, shipped 2792fda, 327a706)
+- The live D1 database is in Milan (EEUR): each read costs about 0.4 s from Pakistan. Keep reads off the hot path.
+- A new isolate used to read 27 catalogues from KV one after another before answering anything, even `/`: now in
+  parallel, and pages and files never wait for them (worker `storesFor`: read once, then looked at again at most
+  every 30 s behind the answer; a store asked for by name that this isolate has not seen is read first).
+  `/api/brands` reads hidden pieces once (`hiddenByStore`, kept 30 s), `/api/me` asks "is there a founder" once.
+  Live: /api/brands 1.3 s -> 0.47 s, /api/me 1.1 -> 0.53, /api/config 0.85 -> 0.5 (plain files ~0.5 from here).
+- wrangler 4.156; zod (under Decart's SDK) 4.6.7; npm audit 0. Oct 2026 checks: GitHub's GhostAction workflow attack
+  (this repo has no workflows and no keys in it), PHP CVE-2026-109618/9 (MIRVA runs no PHP), Cloudflare's D1 free
+  caps are enforced (5 M rows read, 100 k written a day) and Workers may be 64 MiB.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
@@ -366,6 +413,10 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Five boutique pages** (unlisted, "not affiliated" footer), for walk-in visits: `/for/zarashahjahan-com`,
   `/for/hussainrehar-com`, `/for/sairashakira-com`, `/for/rangrasiya-com-pk`, `/for/sadaffawadkhan-com`; spares that load:
   Maryum N Maria, Ammara Khan, Republic Womenswear.
+- **Beygum Bano** (30 Oct 2026, the founder: "add dynasty"): its "Dynasty, Untamed" collection showed at LAAM Fashion
+  Week (24 Oct) but is not in its online shop yet; `/for/beygumbano-com` is its shop as it is (79 pieces, graphic
+  sweatshirts and tees, Rs.7,500 to 9,350), renamed "Beygum Bano". Reload it when Dynasty goes online. (HSY also has a
+  collection called "The Dynasty": six made-to-order bridal pieces, no prices online.)
 - **Naqshi, Baroque, Agha Noor** (said yes, 21 Oct 2026; `invited: true`, `priority` 1 to 3): listed for everyone and
   first in the mirror's store list (lib/app.mjs /api/brands sorts by priority); a first visit to /mirror opens Naqshi;
   no notice, so "styled by MIRVA"; the frozen home page's demo skips them (src/web/home.js). Pages: `/for/naqshi`,
