@@ -187,6 +187,20 @@ button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-h
   background: linear-gradient(0deg, rgba(10,9,12,.72), rgba(10,9,12,.34) 45%, rgba(10,9,12,.5));
 }
 .seeing.on { opacity: 1; }
+/* where to stand: a ring of light on the floor of the glass. It forms once as Studio opens, spreading out from the
+   middle across the floor (the halo is MIRVA's clock; only transform and opacity move), and warms to lamplight when the
+   pose check finds her in place. (Drawn as a growing stroke, its back stayed unfinished on a large screen.) */
+.stand { position: absolute; left: 50%; bottom: 4.5%; width: min(58%, 40cqh); aspect-ratio: 4 / 1; overflow: visible; opacity: 0; transform: translateX(-50%) scaleX(.12); }
+.stand path { fill: none; stroke: rgba(243, 241, 238, .8); stroke-width: 1.4; vector-effect: non-scaling-stroke; transition: stroke .32s cubic-bezier(.4, 0, .2, 1); }
+.seeing.on .stand { animation: stand-in 1.6s cubic-bezier(.4, 0, .2, 1) .15s forwards; }
+.seeing[data-place="held"] .stand path { stroke: #e2c995; }
+.seeing[data-place="held"] .stand { filter: drop-shadow(0 0 7px rgba(226, 201, 149, .6)); }
+@keyframes stand-in { 40% { opacity: 1; } to { opacity: 1; transform: translateX(-50%) scaleX(1); } }
+/* while Studio opens, the step and its one cue speak alone: the notes and the line at the foot of the glass step aside
+   (the ring lies where they sit, and the cue would say the same thing twice) */
+.glass-bottom { transition: opacity .32s cubic-bezier(.4, 0, .2, 1); }
+.glass:has(.seeing.on) .glass-bottom { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .seeing.on .stand { animation: none; opacity: 1; transform: translateX(-50%); } }
 .seeing-words { position: absolute; left: 10%; right: 10%; bottom: 31%; display: flex; flex-direction: column; gap: 10px; text-align: center; }
 .seeing .reel-line { font-size: clamp(16px, 5.6cqmin, 26px); min-height: 1.2em; -webkit-line-clamp: 3; }
 /* a swap inside a live look: a light pass over the picture while the new garment takes */

@@ -1095,6 +1095,9 @@ function develop(p) {
 }
 
 // The wait in Studio: she keeps seeing herself, a little dimmed, with the step and the pose check's cue.
+// Studio's first seconds: a ring of light forms on the floor of the glass and shows her where to stand, with one line on
+// how (the founder, 30 Oct 2026). It warms when the pose check finds her in it; a cue from the check replaces the line.
+const STAND_LINE = "Stand in the light, arms a little away from you.";
 function seeHerself() {
   S.developing?.cancel();
   const box = $("#seeing");
@@ -1107,12 +1110,14 @@ function seeHerself() {
   }, 3400);
   const slow = setTimeout(() => step("Taking a little longer than usual"), 10000);
   step(steps[0]);
-  replay($("#seeingHint"), framingCue());
+  replay($("#seeingHint"), framingCue() || STAND_LINE);
+  box.dataset.place = mirror.presence.known && mirror.presence.ok ? "held" : "seek";
   box.hidden = false;
   requestAnimationFrame(() => box.classList.add("on"));
   const me = {
     kind: "studio",
-    hint: (text) => replay($("#seeingHint"), text || ""),
+    hint: (text) => replay($("#seeingHint"), text || STAND_LINE),
+    place: (f) => (box.dataset.place = f.known && f.ok ? "held" : "seek"),
     queue(place) {
       clearInterval(timer);
       clearTimeout(slow);
@@ -1952,6 +1957,7 @@ function wireMirror() {
   mirror.addEventListener("presence", ({ detail: f }) => {
     $("#hint").textContent = f.known && (!f.present || f.ok === false) ? f.hint : "";
     S.developing?.hint?.($("#hint").textContent);
+    S.developing?.place?.(f);
     syncGlass();
   });
   mirror.addEventListener("ended", ({ detail: { reason, elapsed, grant } }) => {

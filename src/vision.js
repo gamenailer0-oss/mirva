@@ -183,5 +183,6 @@ export async function framing(source) {
   if (!b.shoulders) return { known: true, present: true, ok: false, hint: "A little further back, so I can see your shoulders." };
   if (b.shoulderWidth > 0.62) return { known: true, present: true, ok: false, hint: "A step back and I’ll see more of the outfit." };
   if (b.noseY < 0.04) return { known: true, present: true, ok: false, hint: "Tilt the camera up a touch. Your head is at the edge." };
+  if (Math.abs(b.shoulderX - 0.5) > 0.2) return { known: true, present: true, ok: false, hint: "A step to the middle of the mirror." };
   return { known: true, present: true, ok: true, fullBody: b.hips };
 }
