@@ -55,13 +55,33 @@ const stamps = new Map();
 async function refreshBrands(env, db) {
   const rows = await db.all("SELECT id, at FROM stores");
   const live = new Set(rows.map((r) => r.id));
-  for (const { id, at } of rows) {
-    if (stamps.get(id) === at) continue;
-    const entry = await env.FILES.get("store:" + id, "json");
-    if (entry?.brand && entry?.catalogue) (brands.set(id, entry), stamps.set(id, at));
-  }
+  // All at once: one after another, a new isolate spent seconds here (27 stores, Oct 2026) and every page waited.
+  await Promise.all(
+    rows
+      .filter(({ id, at }) => stamps.get(id) !== at)
+      .map(async ({ id, at }) => {
+        const entry = await env.FILES.get("store:" + id, "json");
+        if (entry?.brand && entry?.catalogue) (brands.set(id, entry), stamps.set(id, at));
+      }),
+  );
   for (const [id, entry] of Object.entries(BUILT_IN)) if (!live.has(id) && !brands.has(id)) brands.set(id, entry);
   for (const id of [...brands.keys()]) if (!live.has(id) && !BUILT_IN[id]) (brands.delete(id), stamps.delete(id));
+}
+
+// The catalogues are read once by a new isolate, then looked at again at most every half minute, behind the answer:
+// the database is in Milan, so a read before every call added a fifth of a second to each one from Pakistan.
+// A store asked for by name that this isolate has not seen yet (loaded a moment ago elsewhere) is read before answering.
+const STORES_FRESH_MS = 30e3;
+let storesAt = 0;
+let storesReading = null;
+const readStores = (env, db) =>
+  (storesReading ||= refreshBrands(env, db)
+    .then(() => void (storesAt = Date.now()))
+    .finally(() => (storesReading = null)));
+async function storesFor(url, env, db, ctx) {
+  const id = url.pathname.match(/^\/api\/(?:brands|cloth)\/([a-z0-9-]+)/)?.[1] || url.searchParams.get("brand");
+  if (!storesAt || (id && !brands.has(id))) return readStores(env, db);
+  if (Date.now() - storesAt > STORES_FRESH_MS) ctx.waitUntil(readStores(env, db).catch(() => {}));
 }
 
 async function start(env, origin) {
@@ -79,7 +99,6 @@ async function start(env, origin) {
     usdToPkr: 277,
   };
   const limiter = databaseLimiter(db);
-  await refreshBrands(env, db);
   const app = await createApp({
     // Phone notifications: the signing key is two secrets (VAPID_PUBLIC_KEY, VAPID_PRIVATE_JWK). Without them, none are sent.
     push: createPush({ publicKey: env.VAPID_PUBLIC_KEY, privateJwk: env.VAPID_PRIVATE_JWK, subject: env.MIRVA_PUSH_SUBJECT || "mailto:founder@mirva.local" }),
@@ -151,8 +170,9 @@ export default {
       }
       ready ||= start(env, url.origin).catch((e) => ((ready = null), Promise.reject(e)));
       const { app, db } = await ready;
-      // Catalogues can change in another isolate; the list is one cheap query away.
-      if (url.pathname.startsWith("/api/") || url.pathname === "/mirror") await refreshBrands(env, db).catch(() => {});
+      // Pages and files never wait for the catalogues; the calls, the mirror and the picture proxy (its list of allowed
+      // hosts comes from them) do. Catalogues can change in another isolate (see storesFor).
+      if (url.pathname.startsWith("/api/") || url.pathname === "/mirror" || url.pathname === "/img") await storesFor(url, env, db, ctx).catch(() => {});
       return await app.fetch(request, { ip: request.headers.get("cf-connecting-ip") || "edge", host: undefined, later: (p) => ctx.waitUntil(p.catch(() => {})) });
     } catch (e) {
       console.error(e);
@@ -163,7 +183,8 @@ export default {
   // Housekeeping, every six hours: portraits nobody kept, expired sessions, old throttle counters.
   async scheduled(_event, env, ctx) {
     ready ||= start(env, String(env.MIRVA_PUBLIC_ORIGIN || "https://mirva.invalid"));
-    const { app, limiter } = await ready;
+    const { app, db, limiter } = await ready;
+    await readStores(env, db).catch(() => {}); // the founder's notes name stores
     ctx.waitUntil(Promise.allSettled([app.sweep(), limiter.sweep()]));
   },
 };
