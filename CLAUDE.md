@@ -270,6 +270,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
     only when opened as one (`?pad=CODE`, then its own address `?tablet`); `pad-walk.mjs` now checks the same device at
     plain `/mirror` is the phone app. Lesson: anything a store device remembers must be switched on by how the page is
     opened, not by what the browser happens to hold.
+  - **wrangler 4.156 turned `pages project create` into a Worker deploy**: run inside D:/Mirva it read wrangler.toml and redeployed the live site (same committed code, smoke test passed, no harm). Run any Pages command from a folder outside the repo; wrangler looks for a config in every parent folder.
 
 ## Audit of 22 Oct 2026 (done the same day)
 - Shipped: three-at-once off (MIRVA_TRIALS); portrait time said as about twenty seconds (home, /retail); changing store
@@ -531,6 +532,7 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   prospects with catalogue prices, channels, objections, three team pairs, Mon–Sat rhythm, gaps):
   https://claude.ai/artifact/5BiqCiGqdWpVpJaheyAXEa (source in the session scratchpad `route/`; private until shared).
 - Motion experiments (local only, not to be pushed): `motion/`.
+- **Short link** (31 Oct): https://mirva.pages.dev forwards every address (path and query kept, 302 so it can later point at a bought domain) to the live site. A Cloudflare Pages project "mirva" holding only `_redirects` (source tools/short-link/site). Deploy it from a folder OUTSIDE D:/Mirva (copy it to the scratchpad): `npx --prefix D:/Mirva wrangler pages deploy site --project-name mirva --branch main`. The browser then shows the long address; a domain of their own (mirva.pk or similar, the founder buys it) is the real fix.
 
 ## Open (suggested 2026-10-16, not built; the founder chooses)
 - Founder: close and reopen the mirror after each ship; replace the pasted keys; share the team page from its Share menu
