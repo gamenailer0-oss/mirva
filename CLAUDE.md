@@ -468,7 +468,7 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   sneakers under a formal (her own shoes are kept on purpose): formals go on the formal model. One placement for all
   three (`tools/stores/place-hero.mjs` reads head and axis identical). Shots: `LOOK=2 node tools/stores/hero-shots.mjs`,
   `node tools/stores/hero-mirror-phone.mjs 360`. The hero now names Naqshi and Baroque (the founder's checklist says
-  ask them before naming them anywhere: confirm).
+  ask them before naming them anywhere): the founder confirmed on 31 Oct that both are fine with it.
 - **Videos** in `motion/hero-videos/` (never pushed: .git/info/exclude has motion/): Flow project
   https://flow.google.com/project/b93d2445-9471-44a9-9ebe-2390f4f315cd, founder's own sign-in in Chrome. takes/t01–t13
   (16:9) and v01–v02 (9:16), originals' names in names.txt (the hash in a download's name finds its tile); sheets/
