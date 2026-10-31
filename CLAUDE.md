@@ -478,8 +478,25 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   since a murmur in no language gives a film away); `endcard.mjs` draws the end card in MIRVA's fonts. Flaws found and
   cut around: t13 a ghost hand after 4.3 s and nonsense text on the tablet's header (blur it), v01/v02 her real self
   lifts a green dupatta after 3.3 s, t09 cuts to another shot. Flow's 1080p upscale is clearly sharper (one at a time,
-  ~5 min each; t13-1080.mp4 done). The founder asked for **Omni 1.1 Flash** for the rest (selected in Flow's model list,
-  16:9/9:16 in the same menu); the vertical reflection shot was asked of it at 10:00 PKT.
+  ~2–5 min each, one at a time; `bash motion/hero-videos/take-1080.sh` waits for the next one and files it by the id in
+  its name). The founder asked for **Omni 1.1 Flash** for the rest (Flow's model list, 16:9/9:16 in the same menu): it
+  followed "her real self stays in ivory, only the reflection wears it" where Veo had her lift a real dupatta, but its
+  first reflections showed a CCTV dome on the fitting-room ceiling (named away: "plain ceiling, only two downlights, no
+  cameras") and its takes come back all but silent (the cut lays the mirror takes' room tone under them).
+  **Finished films** (motion/hero-videos/films/, 1080p from Flow's upscales with `cut.mjs <film> --hd`, 720p copies
+  beside them for WhatsApp): mirva-hero-1080p.mp4 (32 s: mirror wakes, walk in, tablet tap (Omni t14), reflection,
+  zari, wearing it, family, end card), mirva-short-1080p.mp4 (12 s), mirva-vertical-1080p.mp4 and -2 (10 s, Omni). Say
+  they are AI-made when posting (each carries Google's SynthID mark); they show a concept, never a store that has one.
+- **Live wake check**: the live mirror wakes after the 12 s cap in headless walks from this laptop because its line
+  brings the pose files slowly (13 MB engine in 26 s, 5.8 MB model in 44 s, Cloudflare cache HIT); locally it is ready
+  in a second. Headless live walks need `WAIT=60000` before judging the pose check (`tools/stores/pose-live-check.mjs`).
+- **Type and ground** (discussion only, nothing built): https://claude.ai/artifact/DHJeDrrk1tA8t9Bf9qg9Mp (source
+  docs/type-and-ground/, `node docs/type-and-ground/build.mjs`). Five wordmarks, four headline voices at phone width,
+  three grounds; recommended: Bodoni Moda 600 wordmark, Newsreader one weight up, "marble as a place". Measured: the
+  marble is 28/31 KB and lowers ink's contrast only 14.7 → 13.9 : 1, so the choice is taste.
+- **Site polish, measured only** (link check clean; text meant to be read is ≥ 13 px on phones; the inspector's "+10%
+  covered" is the calculator inside a closed disclosure): /mirrors now shows the mirror's design concept beside the
+  waiting list and lists Naqshi, Baroque and Agha Noor (it still listed the three concept demos).
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
@@ -518,6 +535,9 @@ improvements, few words; notes and mistakes here; a checklist at the end.
 ## Open (suggested 2026-10-16, not built; the founder chooses)
 - Founder: close and reopen the mirror after each ship; replace the pasted keys; share the team page from its Share menu
   before sending it. (Decart: a new account's key went live 2026-10-16 00:22 PKT; Decart makes portraits again.)
+- (31 Oct) The mirror page starts fetching the 19 MB pose files 1.5 s after it opens (`warmUp`), even if she never
+  turns the camera on: heavy on mobile data. Fetching them at the first tap of "Turn on the mirror" or a chosen piece
+  would spare most visits; try-on is frozen, so the founder decides (measure first-look time on a slow line).
 - Warm the cloud cut for the three looks while she reads them (src/main.js `S.step === "looks"` warms only pieces with a
   prepared `ref`): 2 to 4 s off a boutique piece's first tap, US$0.025 a piece once.
 - Pre-cut each boutique's likely pieces before a store visit (~US$0.30 a store).
