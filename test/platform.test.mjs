@@ -143,6 +143,15 @@ async function signInFounder(srv) {
 let founderDesk;
 const founder = () => (founderDesk ||= signInFounder(main));
 
+// A store's paired mirror: every call carries its device header, as the mirror's own calls do.
+async function storeMirror(brand) {
+  const made = await (await founder()).post("/api/console/devices", { brand, name: "Test mirror", store: "Test" });
+  const c = visitor();
+  const paired = await c.post("/api/pair", { code: made.body.code });
+  const auth = { "x-mirva-device": `${paired.body.device}.${paired.body.token}` };
+  return { ...c, get: (p, h) => c.get(p, { ...auth, ...h }), post: (p, b, h) => c.post(p, b, { ...auth, ...h }) };
+}
+
 const addLook = async (c, product, size) => (await c.post("/api/wardrobe", { brand: "sapphire", product: product.id, size })).body.look;
 const SHORT_CODE = /^[ABCDEFGHJKMNPQRSTUVWXYZ2-9]+$/; // the readable alphabet: no 0, O, 1, I or L
 const lead = (extra = {}) => ({ name: "Sana Malik", company: `Atelier ${++counter}`, email: mailFor("lead"), ...extra });
@@ -1464,6 +1473,10 @@ test("a store's website gets a pass only when the store named it and has signed,
   const plain = await raw("/mirror");
   assert.match(plain.headers["content-security-policy"], /frame-ancestors 'none'/);
   assert.equal(plain.headers["x-frame-options"], "DENY");
+  // A screen stood on its side holds its own mirror page in a turned frame: MIRVA's own pages may frame it, nobody else's.
+  const turned = await raw("/mirror?framed=1");
+  assert.match(turned.headers["content-security-policy"], /frame-ancestors 'self'/);
+  assert.equal(turned.headers["x-frame-options"], "SAMEORIGIN");
   assert.equal((await raw("/embed.js")).headers["cross-origin-resource-policy"], "cross-origin", "other sites may load the one script");
   // A bad address is refused, and a store user cannot name websites for another store.
   err(await desk.post("/api/console/website", { brand: "lawrencepur", sites: "not a website" }), 400, /address like/);
@@ -1512,7 +1525,8 @@ test("a store's console counts tries from its mirror, its website and the MIRVA 
 // The real mirror's code (/api/pickup): her portrait reaches the server only after a phone has opened the code, only the
 // mirror (or member) that made the look may send it, and her phone and her family can then see it at /p/<code>.
 test("a look picked up by phone: nothing is sent before a phone opens it, and only by the mirror that made it", async () => {
-  const shopper = await member("pickup");
+  err(await (await member("pickup")).post("/api/pickup", { brand: "sapphire", product: A.id }), 403); // a real-mirror feature
+  const shopper = await founder();
   const made = await shopper.post("/api/pickup", { brand: "sapphire", product: A.id });
   assert.equal(made.status, 200, JSON.stringify(made.body));
   const { code, url } = made.body;
@@ -1541,20 +1555,17 @@ test("a look picked up by phone: nothing is sent before a phone opens it, and on
   assert.equal((await fetch(`${main.base}/p/${code}`)).status, 200, "her phone's page opens");
   err(await phone.get("/api/pickup/ABCDEFGHJK"), 404);
 
-  // A code made by someone not signed in (an open demo mirror) can never carry a picture: no mirror or account matches.
-  const stranger = visitor();
-  const open = await stranger.post("/api/pickup", { brand: "sapphire", product: A.id });
-  if (open.status === 200) {
-    await visitor().post(`/api/pickup/${open.body.code}/open`);
-    const r = await fetch(`${main.base}/api/pickup/${open.body.code}/portrait`, { method: "POST", body: jpeg, headers: { "content-type": "image/jpeg", "x-forwarded-for": stranger.ip } });
-    assert.equal(r.status, 403);
-  } else assert.equal(open.status, 401);
+  // Someone not signed in (an open demo mirror) gets no code at all.
+  assert.ok([401, 403].includes((await visitor().post("/api/pickup", { brand: "sapphire", product: A.id })).status));
 });
 
 // A double tap on the real mirror holds a piece at the counter for twenty minutes (/api/hold): one code per piece, the
 // store's console lists it, Done clears it, and another store's staff can neither see nor clear it.
 test("a piece held at the counter: one code a piece, listed for the store's staff, cleared by Done", async () => {
-  const shopper = await member("holder");
+  // Only the store's own mirror holds its pieces: a shopper's account or another store's mirror cannot fill its counter.
+  err(await (await member("holder")).post("/api/hold", { brand: "sapphire", product: A.id }), 403);
+  err(await (await storeMirror("lawrencepur")).post("/api/hold", { brand: "sapphire", product: A.id }), 403);
+  const shopper = await storeMirror("sapphire");
   const first = await shopper.post("/api/hold", { brand: "sapphire", product: A.id, size: "M" });
   assert.equal(first.status, 200, JSON.stringify(first.body));
   assert.match(first.body.code, /^\d{4}$/);

@@ -411,6 +411,31 @@ const VIEWS = {
             return pick;
           })(),
         ),
+        // A screen stood on its side to be tall: its page and its camera are turned back upright on the mirror.
+        el("label", { class: "row small", style: "gap:10px" },
+          el("span", { class: "muted", text: "Stands" }),
+          (() => {
+            const pick = el("select", { class: "input", style: "min-height:36px;width:auto;max-width:100%", "aria-label": `How ${d.name} stands` },
+              el("option", { value: "upright", text: "Upright" }),
+              el("option", { value: "right", text: "On its side, top to the right (a laptop, camera and all)" }),
+              el("option", { value: "left", text: "On its side, top to the left (a laptop, camera and all)" }),
+              el("option", { value: "right:screen", text: "On its side, top to the right (its webcam upright)" }),
+              el("option", { value: "left:screen", text: "On its side, top to the left (its webcam upright)" }),
+            );
+            pick.value = d.turn || "upright";
+            pick.onchange = async () => {
+              try {
+                await api("/api/console/devices/turn", { id: d.id, turn: pick.value });
+                d.turn = pick.value;
+                toast(pick.value === "upright" ? "This mirror stands upright." : "This mirror now stands on its side. It turns the next time the mirror’s page opens.");
+              } catch (e) {
+                toast(e.message);
+                pick.value = d.turn || "upright";
+              }
+            };
+            return pick;
+          })(),
+        ),
         d.paired && el("div", { class: "row small", style: "gap:10px;justify-content:space-between;flex-wrap:wrap" },
           el("span", { class: "muted", text: d.tablet_at ? `Tablet beside it: joined${d.tablet_seen ? `, seen ${when(d.tablet_seen)}` : ""}` : "Tablet beside it: none" }),
           el("span", { class: "row", style: "gap:14px" },

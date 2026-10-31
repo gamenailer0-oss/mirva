@@ -51,6 +51,7 @@ export class Mirror extends EventTarget {
     this.live = live;
     this.config = config;
     this.shape = "portrait";
+    this.turn = 0; // degrees the camera's frame is turned to stand upright, for a screen stood on its side (#drawTurned)
     this.state = "asleep"; // asleep | awake | connecting | live
     this.enhance = false;
     this.fast = false;
@@ -330,6 +331,7 @@ export class Mirror extends EventTarget {
   #draw = () => {
     const src = this.source;
     if (!src) return;
+    if (src.kind === "camera" && this.turn) return this.#drawTurned(src);
     const sw = src.el.videoWidth || src.el.width;
     const sh = src.el.videoHeight || src.el.height;
     const { width: W, height: H } = this.canvas;
@@ -352,6 +354,38 @@ export class Mirror extends EventTarget {
       this.ctx.fillRect(0, 0, 1, 1);
     }
   };
+
+  // A screen stood on its side carries its camera round with it, so she arrives sideways: the frame is turned back
+  // upright here, before anything reads it (the glass, the pose check, the Model picture and Studio all use this canvas).
+  // `turn` is how far the frame turns to stand: -90 (anticlockwise) for a screen turned right, 90 for one turned left.
+  // A wide camera stood tall fills a tall glass with all its pixels, where upright it was cropped.
+  #drawTurned(src) {
+    const rw = src.el.videoWidth;
+    const rh = src.el.videoHeight;
+    const { width: W, height: H } = this.canvas;
+    if (!rw || !rh) return;
+    const [sw, sh] = [rh, rw]; // the frame's size once upright
+    const scale = Math.max(W / sw, H / sh);
+    const cw = W / scale;
+    const ch = H / scale;
+    const ctx = this.ctx;
+    ctx.save();
+    if (src.flip) {
+      ctx.translate(W, 0);
+      ctx.scale(-1, 1);
+    }
+    ctx.scale(scale, scale);
+    ctx.translate(-(sw - cw) / 2, -(sh - ch) / 2); // cover-crop, centred
+    if (this.turn < 0) {
+      ctx.translate(0, rw); // a camera point (x, y) lands at (y, rw - x)
+      ctx.rotate(-Math.PI / 2);
+    } else {
+      ctx.translate(rh, 0); // a camera point (x, y) lands at (rh - y, x)
+      ctx.rotate(Math.PI / 2);
+    }
+    ctx.drawImage(src.el, 0, 0);
+    ctx.restore();
+  }
 
   // Who is in the mirror. Costs nothing and runs on this device.
   #schedule() {

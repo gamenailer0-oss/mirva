@@ -57,6 +57,12 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
 }
+/* A screen stood on its side whose window is still wide: the mirror's page stands in a tall frame, turned against the
+   screen's own turn (src/main.js standTurned). A screen whose top went right shows the page turned anticlockwise. */
+html[data-turned] body { background: #000; }
+.turned-frame { position: fixed; top: 0; left: 0; width: 100vh; height: 100vw; border: 0; transform-origin: 0 0; }
+.turned-frame[data-turn="right"] { transform: translateY(100vh) rotate(-90deg); }
+.turned-frame[data-turn="left"] { transform: translateX(100vw) rotate(90deg); }
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 :focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; border-radius: 6px; }
@@ -1193,6 +1199,12 @@ a.chip { text-decoration: none; }
 [data-side="glass"] .hint, [data-side="glass"] .toast { font-size: clamp(13px, 2.2cqmin, 22px); padding: .6em 1.1em; }
 [data-side="glass"] .wake h2 { font-size: clamp(28px, 8cqmin, 76px); }
 [data-side="glass"] .seeing .reel-line { font-size: clamp(18px, 4.4cqmin, 44px); }
+/* A narrower screen of glass (a laptop stood on its side is 768 wide, a 720p screen hung tall 720) meets the phone rules,
+   which stack a glass of 62% of the height over the stylist: with its tablet beside it, the glass fills the screen again. */
+@media (max-width: 980px) {
+  [data-side="glass"] body { overflow: hidden; }
+  [data-side="glass"] .glass, [data-side="glass"] .frame[data-shape="landscape"] .glass { position: absolute; inset: 0; height: auto; aspect-ratio: auto; }
+}
 /* The tablet: the stylist and the catalogue, with what is on the mirror at their head. It never shows a glass of its own. */
 [data-side="pad"] .app { grid-template-columns: minmax(0, 1fr); }
 [data-side="pad"] .stage, [data-side="pad"] .wardrobe, [data-side="pad"] .sheet-handle { display: none; }

@@ -503,6 +503,26 @@ test("a store sets a mirror's glass to oval, and that mirror alone is told", asy
   assert.deepEqual(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).glass, {});
 });
 
+// A screen stood on its side (a laptop turned, a wide screen hung tall): the store says which way, and only that mirror
+// is told (also with someone signed in on it). Its page's frame headers: test/platform.test.mjs (the embed test).
+test("a store says a mirror stands on its side, and that mirror alone is told", async () => {
+  const { app, db } = await makeApp();
+  const dev = await pair(db);
+  const second = await pair(db, "sapphire", "Back mirror");
+  const staff = await signIn(app, db, "retailer", "sapphire");
+  const turn = async (d = dev, extra = {}) => (await call(app, "GET", "/api/config", { headers: { ...d.header, ...extra } })).body.turn;
+  const set = (value, id = dev.id) => call(app, "POST", "/api/console/devices/turn", { headers: staff.headers, body: { id, turn: value } });
+  assert.equal(await turn(), "upright");
+  assert.deepEqual([(await set("right")).status, await turn(), await turn(second)], [200, "right", "upright"]);
+  assert.equal(await turn(dev, { cookie: staff.headers.cookie }), "right", "someone signed in on the mirror's laptop still gets its turn");
+  assert.equal((await call(app, "GET", "/api/console/devices?brand=sapphire", { headers: staff.headers })).body.devices[0].turn, "right");
+  assert.deepEqual([(await set("left:screen")).status, await turn()], [200, "left:screen"]);
+  assert.equal((await set("upside-down")).status, 400);
+  assert.equal(await turn(), "left:screen");
+  await call(app, "POST", "/api/console/devices/remove", { headers: staff.headers, body: { id: dev.id } });
+  assert.deepEqual(JSON.parse((await db.get("SELECT settings FROM retailers WHERE brand = 'sapphire'")).settings).turn, {});
+});
+
 test("a shorter idle wait never lengthens a short one", async () => {
   const { app, db } = await makeApp({ config: { live: true, model: "test", sessionSeconds: 180, idleSeconds: 30, ratePerSecond: 0.02, shotPrice: 0.02, usdToPkr: 277 } });
   const dev = await pair(db);

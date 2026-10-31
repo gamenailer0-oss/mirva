@@ -2803,9 +2803,40 @@ function noStore() {
   $("#wakeBtn").disabled = true;
 }
 
+// A screen stood on its side to be a tall mirror: a laptop turned on its edge (screen and camera go round together), or a
+// wide screen hung tall with a webcam of its own standing upright (":screen"). Its store's console says which way
+// (S.config.turn); "?turn=right|left|right:screen|left:screen|upright" on the screen itself says it for this screen alone.
+const TURN_KEY = "mirva:turn";
+const TURNS = ["right", "left", "right:screen", "left:screen"];
+function turnOfScreen(query) {
+  const asked = query.get("turn");
+  try {
+    if (TURNS.includes(asked)) localStorage.setItem(TURN_KEY, asked);
+    else if (asked) localStorage.removeItem(TURN_KEY);
+    const kept = localStorage.getItem(TURN_KEY);
+    if (TURNS.includes(kept)) return kept;
+  } catch {}
+  return TURNS.includes(S.config.turn) ? S.config.turn : null;
+}
+// The window is still wide on a screen stood tall (the computer was not told to turn its display): the page stands in a
+// tall frame turned the other way, where everything is laid out as on any tall screen. Turned with CSS alone, the page
+// would still be laid out wide, since the window's own size decides its layout.
+function standTurned(turn) {
+  const u = new URL(location.href);
+  u.searchParams.set("framed", "1");
+  const frame = h("iframe", { class: "turned-frame", "data-turn": turn.split(":")[0], src: u.pathname + u.search, title: "MIRVA", allow: "camera; autoplay; fullscreen; screen-wake-lock" });
+  document.documentElement.dataset.turned = "1";
+  document.body.replaceChildren(frame);
+  frame.focus();
+  history.replaceState(null, "", location.pathname); // a one-use code (?pair=) went to the frame; a reload must not spend it twice
+}
+
 async function boot() {
   registerWorker(); // notifications, and MIRVA as an app on the home screen
   S.config = await api("/api/config");
+  const asked = new URLSearchParams(location.search);
+  const turn = asked.has("pad") ? null : turnOfScreen(asked);
+  if (turn && !asked.has("framed") && window.top === window && innerWidth > innerHeight) return standTurned(turn);
   // MIRVA's own mirror is an oval. A store's paired mirror is told so by its console; "?glass=oval" shows it on any screen.
   if (S.config.glass === "oval" || new URLSearchParams(location.search).get("glass") === "oval") document.documentElement.dataset.glass = "oval";
   // The real-mirror version (unlisted: "?glass=real", and only for an account with the "mirror" trial, MIRVA_TRIALS):
@@ -2819,6 +2850,9 @@ async function boot() {
     });
   mirror = new Mirror({ cam: $("#cam"), live: $("#live"), config: S.config });
   mirror.auth = link.auth; // so a live session is billed to the right mirror or member
+  // A camera that went round with its screen brings her in sideways: turned back the other way (a screen turned right,
+  // its top edge to the right, turns the picture anticlockwise).
+  if (turn && !turn.endsWith(":screen")) mirror.turn = turn.startsWith("right") ? -90 : 90;
   // An uploaded photo is shown from the mirror's own canvas, not through the video the camera uses: on some phones a
   // video fed by a canvas shows nothing when the picture never changes, and the glass stayed empty under "There you are".
   mirror.canvas.id = "still";
