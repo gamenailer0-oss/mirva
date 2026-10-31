@@ -69,7 +69,7 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   (overflow, headline lines, text sizes, contrast; screenshots in `.taste-skill/inspect/`). Its style bans (no kickers,
   no gradients, no shadows, no hairlines) are its house style, not MIRVA's: use it for measured faults only. After any
   copy change in the pages run `node scripts/typeset.mjs` (printer's punctuation in text only; `--check` to list).
-- **Tests**: `npm test` (250 as of 2026-10-30). A test comparing two clocks must allow seconds, not milliseconds.
+- **Tests**: `npm test` (251 as of 2026-10-31). A test comparing two clocks must allow seconds, not milliseconds.
 - **A live portrait, timed** (about US$0.06): `node tools/eval/live-shot.mjs <photo> sapphire PRWCASTV106W_999 [--studio]`
   prints the cloud's own times (engine, her outlines, saving) and the outline route's. The Chrome rig against the live
   site gets connection resets from this laptop; Node's fetch does not. Local portraits' records:
@@ -250,6 +250,21 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **Store names come from how a shop names itself** ("beygumbano"): the founder can set it on a store's Look and feel
   page (`node tools/stores/rename-live.mjs <id> "<Name>"`).
 
+- **Mistakes of 31 Oct (the night list)**:
+  - Changed a helper's arguments (`shapeIt(field, value, plain)`) and missed its third caller (remove a mirror), so a
+    test failed. When a helper's arguments change, grep every caller first.
+  - Put a page-header test in safeguards.test.mjs, whose app serves no pages (`assets: null`), so it got the 404's DENY.
+    Header tests for pages go in platform.test.mjs (a real server; see the embed test).
+  - Read a montage wrongly and "found" a mirror flip that was not there. Checked the mirror's own canvas against a
+    fixed feature of the source (her watch, the dupatta's side) and all was right: judge from the canvas, not a
+    re-processed screenshot.
+  - Ran `cd X && a & b & c &`: only `a` ran in X and the others failed. Use `(cd X && b) &` for each.
+  - ffmpeg `drawtext` segfaults here (no fontconfig): write words in Chrome (endcard.mjs) instead.
+  - In Flow, Enter after Escape left the prompt unsent: click "Start generation". A page script longer than 45 s times
+    out the Chrome tool (the downloads still went through): keep each script short.
+  - Veo prompts that did not say "no voices" may carry a murmur: those shots play the mirror takes' room tone.
+  - The phone rules (below 980 px) still apply to a store screen that narrow: a new screen size needs its glass side shot.
+
 ## Audit of 22 Oct 2026 (done the same day)
 - Shipped: three-at-once off (MIRVA_TRIALS); portrait time said as about twenty seconds (home, /retail); changing store
   lets go of the old store's piece; Studio away from a store mirror says it is in MIRVA stores and makes the portrait
@@ -415,6 +430,50 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - wrangler 4.156; zod (under Decart's SDK) 4.6.7; npm audit 0. Oct 2026 checks: GitHub's GhostAction workflow attack
   (this repo has no workflows and no keys in it), PHP CVE-2026-109618/9 (MIRVA runs no PHP), Cloudflare's D1 free
   caps are enforced (5 M rows read, 100 k written a day) and Workers may be 64 MiB.
+
+## The night list of 31 Oct 2026 (shipped 2c0a59f, e8c3152; the founder slept and gave every permission)
+The founder's asks: test, then clear what slows us; realistic MIRVA hero videos in Flow (Veo / Omni), "no AI slop";
+attack the site and fix what gives; a laptop stood on its side as a portrait mirror, run from the tablet; premium
+clothes for the hero's models; a discussion (no build) on a bolder font and plain colours instead of marble; tasteful
+improvements, few words; notes and mistakes here; a checklist at the end.
+- **Attack** (`node tools/stores/attack.mjs`: a throwaway server on port 4398, no keys, temp data; `--live`: gentle
+  read-only probes): hidden files, headers, cross-site, who-may-do-what, injection, stored scripts (puppeteer), SSRF
+  through /img and /api/preview, odd bodies, rooms and forged tickets, sessions, load (3,000 page loads 200 at a time,
+  1,000 store lists, 400 slow clients, password guessing). Local 106 held, live 55 held. A code review (subagent) found
+  two real holes, fixed: holds and pick-ups (`/api/hold`, `/api/pickup`) took the store from the request, so any
+  shopper's account could put holds in any store's console (now `realMirror`: that store's own mirror, the founder, or
+  the "mirror" trial); `/api/preview` (load a store from its website, open to owners on /retail) now also has a day's
+  ceiling across everyone (40, `preview:everyone`) so many addresses cannot fill the 200 store places; staff are not held.
+  Known, left: on the laptop host the importer's private-address check is checked then fetched (DNS rebinding could slip
+  between); the live Worker cannot reach private networks. Handoffs stay open (public pieces only, never in a console).
+- **A screen stood on its side** (console → Mirrors → "Stands"; `?turn=right|left|right:screen|left:screen|upright` on
+  one screen, kept in localStorage `mirva:turn`; "right" = its top edge went to the right; ":screen" = only the screen
+  turned, a webcam of its own stands upright). Kept in `retailers.settings.turn[deviceId]` (lib/platform.mjs `TURNS`,
+  `turnOf`), sent by /api/config even when someone is signed in on the screen (`screenOf` is exported for that).
+  src/mirror.js `#drawTurned` turns the camera frame upright on the mirror's own canvas, so the glass, pose check,
+  Model and Studio all get her standing (the upright path is untouched). src/main.js `standTurned`: a window that is
+  still wide holds `/mirror?framed=1` in a tall iframe turned against the screen (styles.css `.turned-frame`); inside
+  it every tall-screen rule holds. lib/app.mjs lets only MIRVA's own pages frame the mirror, and only with `framed`.
+  Checks: `node tools/stores/turn-walk.mjs right|left [--os]` (fake camera that sees her sideways, shot as she sees it),
+  `TURN=right node tools/stores/pad-walk.mjs` (turned screen + tablet + phone photo), `turn-flip-check.mjs` (reads the
+  canvas). Also fixed for it: below 980 px the phone rules held the glass at 62% even with a tablet joined.
+- **Hero clothes**: public/showcase/day-onaifa|day-pr1315|day-sf4635.webp (Naqshi Onaifa, Baroque PR-1315 chiffon,
+  Baroque SF-4635 net), all on `room/formal-day.png` with direct.mjs (faces 92–97%). The casual model keeps her white
+  sneakers under a formal (her own shoes are kept on purpose): formals go on the formal model. One placement for all
+  three (`tools/stores/place-hero.mjs` reads head and axis identical). Shots: `LOOK=2 node tools/stores/hero-shots.mjs`,
+  `node tools/stores/hero-mirror-phone.mjs 360`. The hero now names Naqshi and Baroque (the founder's checklist says
+  ask them before naming them anywhere: confirm).
+- **Videos** in `motion/hero-videos/` (never pushed: .git/info/exclude has motion/): Flow project
+  https://flow.google.com/project/b93d2445-9471-44a9-9ebe-2390f4f315cd, founder's own sign-in in Chrome. takes/t01–t13
+  (16:9) and v01–v02 (9:16), originals' names in names.txt (the hash in a download's name finds its tile); sheets/
+  (four frames a take); films/mirva-hero.mp4 (31 s: mirror wakes, she walks in, taps the tablet, sees herself in
+  emerald, zari close up, wears it, family on the phone, end card) and mirva-short.mp4 (12 s); `node
+  motion/hero-videos/cut.mjs <film>` cuts them (0.6 s dissolves; shots of her face play the mirror takes' room tone,
+  since a murmur in no language gives a film away); `endcard.mjs` draws the end card in MIRVA's fonts. Flaws found and
+  cut around: t13 a ghost hand after 4.3 s and nonsense text on the tablet's header (blur it), v01/v02 her real self
+  lifts a green dupatta after 3.3 s, t09 cuts to another shot. Flow's 1080p upscale is clearly sharper (one at a time,
+  ~5 min each; t13-1080.mp4 done). The founder asked for **Omni 1.1 Flash** for the rest (selected in Flow's model list,
+  16:9/9:16 in the same menu); the vertical reflection shot was asked of it at 10:00 PKT.
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
