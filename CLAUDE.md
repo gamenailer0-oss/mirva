@@ -264,6 +264,12 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
     out the Chrome tool (the downloads still went through): keep each script short.
   - Veo prompts that did not say "no voices" may carry a murmur: those shots play the mirror takes' room tone.
   - The phone rules (below 980 px) still apply to a store screen that narrow: a new screen size needs its glass side shot.
+  - **The blunder the founder caught**: a phone that had once scanned the tablet code (the founder used his phone as the
+    tab) opened `/mirror` as the store's tablet every time after, "waiting for a mirror", because the joining was kept
+    in localStorage and read on every start. Store features must never leak into the phone app: a device is the tablet
+    only when opened as one (`?pad=CODE`, then its own address `?tablet`); `pad-walk.mjs` now checks the same device at
+    plain `/mirror` is the phone app. Lesson: anything a store device remembers must be switched on by how the page is
+    opened, not by what the browser happens to hold.
 
 ## Audit of 22 Oct 2026 (done the same day)
 - Shipped: three-at-once off (MIRVA_TRIALS); portrait time said as about twenty seconds (home, /retail); changing store

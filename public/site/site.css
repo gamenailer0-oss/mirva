@@ -511,6 +511,9 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 
 /* ---------- home: near you ---------- */
 .wait { display: grid; gap: var(--s4); }
+/* /mirrors: the MIRVA mirror (the concept picture /retail shows) beside the waiting list. */
+.mirror-concept { margin: 0; display: grid; gap: var(--s3); justify-items: center; align-self: start; }
+.mirror-concept img { width: min(100%, 360px); height: auto; border-radius: var(--r-lg); }
 .wait .formnote.ok { color: var(--good); }
 .store-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(12px, 2vw, 20px); }
 .store-list a { display: grid; gap: 6px; padding: 22px 24px; border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); transition: box-shadow var(--quick), transform var(--quick) var(--ease); }
