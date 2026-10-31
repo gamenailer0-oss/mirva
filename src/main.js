@@ -2864,8 +2864,12 @@ async function boot() {
   // The pose model blocks the page for a few seconds the first time it runs. Spend them while the
   // shopper is still reading the wake screen, so the camera never freezes under her afterwards.
   const query = new URLSearchParams(location.search);
+  // This device is a store's tablet only when it is opened as one: the code on the mirror (…/mirror?pad=CODE), or the
+  // tablet's own address it is left on afterwards (…/mirror?tablet). Opened any other way it is MIRVA's phone app as it
+  // always was, even on a phone once used as a tablet (the founder's phone, 31 Oct 2026, kept waiting for a mirror).
+  const opensAsPad = query.has("pad") || query.has("tablet");
   // A store's tablet has no camera to warm: it is the stylist beside a screen (see "the store's tablet and its screen").
-  if (!navigator.connection?.saveData && !query.has("pad") && !(padLink.padOf() && !link.pairedTo())) setTimeout(warmUp, 1500);
+  if (!navigator.connection?.saveData && !opensAsPad) setTimeout(warmUp, 1500);
   const brands = await api("/api/brands");
   // A store's console can pair this screen (…/mirror?pair=CODE) and a link can name the store (…/mirror?brand=id).
   let paired = "";
@@ -2886,7 +2890,7 @@ async function boot() {
     } catch (e) {
       padNote = e.message;
     }
-  const asPad = !link.pairedTo() && !link.embedded() ? padLink.padOf() : null;
+  const asPad = opensAsPad && !link.pairedTo() && !link.embedded() ? padLink.padOf() : null;
   const want = query.get("brand") || link.pairedTo()?.brand || asPad?.brand || memory.lastBrand.get();
   // A store loaded from a link is not on the public list, so the link's own id is tried before any fallback.
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
@@ -2894,7 +2898,9 @@ async function boot() {
   const first = { id: brands.find((b) => b.id === want)?.id || linked || brands[0]?.id };
   const named = !!query.get("brand") && first.id === query.get("brand");
   if (link.embedded()) document.documentElement.dataset.embed = "1";
-  else if (query.has("pair") || query.has("pad") || query.has("brand") || query.has("for") || query.has("p")) history.replaceState(null, "", location.pathname);
+  // A tablet stays on its own address, so a reload or a restored tab opens it as the tablet again.
+  else if (asPad) history.replaceState(null, "", location.pathname + "?tablet");
+  else if (query.has("pair") || query.has("pad") || query.has("brand") || query.has("for") || query.has("p") || query.has("tablet")) history.replaceState(null, "", location.pathname);
   showMember(await link.whoIsHere());
   memory.setStoreMirror(!!link.pairedTo() || !!asPad);
   if (link.pairedTo() && !link.embedded() && !asPad) openGlassRoom(); // early, so the tablet's code is on the glass at once
