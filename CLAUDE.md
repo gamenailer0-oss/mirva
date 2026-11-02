@@ -542,6 +542,10 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   - The founding offer (Rs.25,000 pilot, then 30% off for a year) spread to five documents without ever reaching
     lib/plans.mjs. A price goes into lib/plans.mjs first, then into documents. Now `FOUNDING` there (2 Nov), held by
     test/economics.test.mjs, and limited to Assist: "30% off any plan" would have left a Mirror store at 40% kept.
+    Then the founder (2 Nov, "make it work first; Decart needs topping up, so not all money back"): the first five
+    stores pay Rs.12,500 to start (kept; covers try-ons at a 400-portrait monthly cap set at /hq) and Rs.12,500 more
+    only if the target is met; then Assist at Rs.15,000 a month (400 portraits) for 12 months. A founding mirror price
+    waits for unit one's quote. PDFs reprinted (`docs/sales/pilot/print.mjs`); agreement 5.1 and 13.7 follow.
 - Showing the parked films locally: `tools/films-demo` is a git worktree of `films-preview` with a local tweak (the
   film is the hero, both films loop with no controls); preview `films-demo`, port 4320, no keys (no try-on costs).
   Remove with `git worktree remove --force tools/films-demo` and the entry in `.claude/launch.json`.

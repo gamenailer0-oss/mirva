@@ -24,9 +24,10 @@ test("the pilot, extra portraits and a member's free portraits are priced above 
 });
 
 test("the founding offer still pays for itself", () => {
-  const plan = RETAIL_PLANS[FOUNDING.plan];
-  const pilotCost = (costOf(plan) * PILOT.days) / 30;
-  assert.ok(FOUNDING.pilotPkr > pilotCost, `a founding pilot used to the full covers its portraits: Rs.${FOUNDING.pilotPkr} against Rs.${Math.round(pilotCost)}`);
-  const fee = plan.monthly * (1 - FOUNDING.discount);
-  assert.ok(1 - costOf(plan) / fee >= 0.5, `${plan.name} at the founding price keeps half its fee: Rs.${fee} against Rs.${Math.round(costOf(plan))}`);
+  const portrait = COST.portraitUsd * USD_TO_PKR;
+  const pilotCost = FOUNDING.pilot.portraitsPerMonth * portrait * (PILOT.days / 30);
+  assert.ok(FOUNDING.pilot.startPkr >= pilotCost, `the kept half covers a capped pilot's portraits: Rs.${FOUNDING.pilot.startPkr} against Rs.${Math.round(pilotCost)}`);
+  const assist = FOUNDING.assist;
+  const kept = 1 - (assist.portraits * portrait) / assist.monthly;
+  assert.ok(kept >= 0.5, `founding Assist keeps half its fee: ${Math.round(kept * 100)}% of Rs.${assist.monthly}`);
 });
