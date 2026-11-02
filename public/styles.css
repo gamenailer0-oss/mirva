@@ -1189,6 +1189,9 @@ a.chip { text-decoration: none; }
    two-way mirror keeps its own shape. */
 [data-side="glass"] .app { grid-template-columns: minmax(0, 1fr); }
 [data-side="glass"] .wardrobe, [data-side="glass"] .tablet, [data-side="glass"] #dock { display: none; }
+/* A screen with its tablet answers the tablet alone (the founder, 3 Nov 2026): nothing on the glass is a control. */
+[data-side="glass"] .tool-row, [data-side="glass"] #photoPeek { display: none; }
+[data-side="glass"] .stage { pointer-events: none; }
 [data-side="glass"] .stage { padding: 0; }
 [data-side="glass"] .frame, [data-side="glass"] .frame[data-shape="landscape"] { width: 100vw; height: 100dvh; aspect-ratio: auto; max-width: none; }
 [data-side="glass"]:not([data-glass]) .glass { border-radius: 0; box-shadow: none; }

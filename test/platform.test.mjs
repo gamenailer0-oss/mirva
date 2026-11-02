@@ -1484,6 +1484,15 @@ test("a store's website gets a pass only when the store named it and has signed,
   assert.equal((await ask(site)).status, 403, "and when the store is no longer signed, its website gets no new pass");
 });
 
+test("a store's tablet address arrives laid out as the tablet; the mirror anywhere else is MIRVA's app", async () => {
+  const marked = (body) => /<html[^>]*data-side="pad"/.test(body);
+  assert.ok(marked((await raw("/mirror?tablet")).body), "the tablet's own address");
+  assert.ok(marked((await raw("/mirror?pad=ABC123")).body), "the code its mirror shows");
+  assert.equal(marked((await raw("/mirror")).body), false, "plain /mirror is the phone app");
+  assert.equal(marked((await raw("/mirror?brand=naqshi")).body), false);
+  assert.equal(marked((await raw("/?tablet")).body), false, "only the mirror page is ever marked");
+});
+
 test("the founder's WhatsApp stays off the store site until the founder switches it on", async () => {
   const desk = await founder();
   assert.equal((await visitor().get("/api/contact")).body.whatsapp, null);

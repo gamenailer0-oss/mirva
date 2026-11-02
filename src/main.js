@@ -2503,7 +2503,7 @@ function openGlassRoom() {
         showPadCode(false);
         sendState(true);
         syncSheet();
-      } else padGone = setTimeout(() => !padHere && (delete document.documentElement.dataset.side, syncSheet(), offerPadCode()), PAD_GRACE_MS);
+      } else padGone = setTimeout(() => !padHere && offerPadCode(), PAD_GRACE_MS);
     },
     onState: (s) => {
       if (s === "replaced" || s === "unpaired") room?.close();
@@ -2520,6 +2520,10 @@ async function offerPadCode() {
   if (side !== "glass" || padHere) return;
   try {
     const c = await api("/api/link/code", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
+    // A screen with a tablet is only the glass, even while the tablet sleeps or its line drops: nothing on it can be
+    // chosen, it answers the tablet alone (the founder, 3 Nov 2026). Only a screen with no tablet shows its own stylist,
+    // with the code that gives it one. The screen remembers which it is, so its next start is laid out right at once.
+    glassOnly(c.paired);
     if (c.paired || padHere) return showPadCode(false);
     await drawPadCode(c.url);
     codeTimer = setTimeout(offerPadCode, 9 * 60e3); // a code is good for ten minutes
@@ -2539,6 +2543,16 @@ async function drawPadCode(url) {
   const { default: QRCode } = await import("qrcode");
   await QRCode.toCanvas(box.querySelector("canvas"), url, { width: 112, margin: 1, errorCorrectionLevel: "M", color: { dark: "#0b0a0d", light: "#efe9e1" } });
   showPadCode(true);
+}
+const TABLET_KEY = "mirva:screen-tablet";
+function glassOnly(on) {
+  try {
+    if (on) localStorage.setItem(TABLET_KEY, "1");
+    else localStorage.removeItem(TABLET_KEY);
+  } catch {}
+  if (on) document.documentElement.dataset.side = "glass";
+  else if (!padHere) delete document.documentElement.dataset.side;
+  syncSheet();
 }
 function showPadCode(on) {
   const box = $("#padCode");
@@ -2868,6 +2882,11 @@ async function boot() {
   // tablet's own address it is left on afterwards (…/mirror?tablet). Opened any other way it is MIRVA's phone app as it
   // always was, even on a phone once used as a tablet (the founder's phone, 31 Oct 2026, kept waiting for a mirror).
   const opensAsPad = query.has("pad") || query.has("tablet");
+  // A store's screen that has its tablet is laid out as the glass from its first moment, not after its room answers
+  // (offerPadCode asks the server again and corrects it).
+  try {
+    if (link.pairedTo() && !link.embedded() && !opensAsPad && localStorage.getItem(TABLET_KEY)) document.documentElement.dataset.side = "glass";
+  } catch {}
   // A store's tablet has no camera to warm: it is the stylist beside a screen (see "the store's tablet and its screen").
   if (!navigator.connection?.saveData && !opensAsPad) setTimeout(warmUp, 1500);
   const brands = await api("/api/brands");
@@ -2891,6 +2910,8 @@ async function boot() {
       padNote = e.message;
     }
   const asPad = opensAsPad && !link.pairedTo() && !link.embedded() ? padLink.padOf() : null;
+  // The server laid a tablet's address out as the tablet before this script ran; a device that is not one is the app.
+  if (!asPad && document.documentElement.dataset.side === "pad") delete document.documentElement.dataset.side;
   const want = query.get("brand") || link.pairedTo()?.brand || asPad?.brand || memory.lastBrand.get();
   // A store loaded from a link is not on the public list, so the link's own id is tried before any fallback.
   const linked = want && !brands.some((b) => b.id === want) ? await api(`/api/brands/${want}`).then(() => want, () => "") : "";
