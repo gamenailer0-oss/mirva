@@ -67,6 +67,7 @@
           <a class="btn" href="/mirror">Try it on yourself</a>
           <a class="btn ghost" href="#proof">See what it makes</a>
         </div>
+        <button class="link play film-open" type="button" data-reveal style="--i:4">Watch it in 12 seconds</button>
         <p class="fine" data-reveal style="--i:5" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
         <p class="hero-store" data-reveal style="--i:6">Run a fashion store? <a href="/retail#yours">See MIRVA on your own catalogue</a></p>
       </div>
@@ -101,6 +102,13 @@
       </figure>
     </div>
   </section>
+
+  <!-- The 12-second film, opened from the hero's "Watch it" (made with AI; 1.3 MB, fetched only when opened). -->
+  <dialog class="film-box" id="filmBox" aria-label="MIRVA in 12 seconds">
+    <video src="/film/mirva-12s.mp4" data-poster="/film/mirva-12s.webp" width="1280" height="720" controls playsinline preload="none"></video>
+    <form method="dialog"><button class="film-close" aria-label="Close">×</button></form>
+    <p class="fine">A film of the MIRVA mirror, made with AI.</p>
+  </dialog>
 
   <!-- 1b. The stores that said yes (21 Oct 2026): their own rails, one tap into each one's mirror. Pictures from
        /api/brands (src/web/home.js); without a script the cards still open the mirrors. -->
@@ -207,12 +215,20 @@
         <p class="kicker" data-reveal>How it works</p>
         <h2 class="title" data-reveal style="--i:1">Say what it’s for. <em>See what it picks.</em></h2>
       </div>
+      <!-- The MIRVA mirror in a film (made with AI, 10 s, 0.36 MB): nothing is fetched until it nears the screen, and it
+           plays only while seen; with reduced motion or data saver it waits for a tap (src/web/home.js films). -->
+      <div class="how-grid">
+      <figure class="how-film" data-reveal>
+        <video src="/film/mirva-how.mp4" data-poster="/film/mirva-how.webp" width="540" height="960" muted loop playsinline preload="none" aria-label="A film of the MIRVA mirror: she stands before it and sees herself in the look"></video>
+        <figcaption class="fine">The MIRVA mirror, a film made with AI.</figcaption>
+      </figure>
       <ol class="how" data-reveal>
         <li><b>Say the occasion.</b><span>A wedding, Eid, work, university, the weekend. Three taps, or one sentence.</span></li>
         <li><b>See three looks.</b><span>From what that store really has, in your size, with one honest reason for each.</span></li>
         <li><b>Wear them.</b><span>As a portrait in about twenty seconds, or live in a MIRVA mirror as you turn.</span></li>
         <li><b>Ask, then buy.</b><span>Keep the ones you like, send one link to the family, and take the winner to the store.</span></li>
       </ol>
+      </div>
 
       <div class="try card" id="try" data-reveal>
         <div class="try-ask">
