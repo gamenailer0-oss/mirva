@@ -511,11 +511,30 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   in marketing only with that store's yes; no invented numbers, quotes or reviews; a real shopper's portrait only with
   her written yes; never promise hardware or anything not built; say the films and models are AI-made; the site and
   try-on are not changed for a sale without the founder's yes.
+- Built on 2 Nov (the founder: "it's a yes... do what you find best for MIRVA... I want it to happen in real life"):
+  research doc (9 sections, 158 dated sources) https://claude.ai/artifact/MeLQbEjaF1D5YUzg4BBQDv · the plan
+  https://claude.ai/artifact/T82nNRsMPmc5PRYwQVrxWM · founding pilot pack https://claude.ai/artifact/QXfiioGtZQChaGVUK1CpXx
+  · marketing, four weeks https://claude.ai/artifact/2dH5KsQSyrbSy9X3se7ynw · **the sales desk**
+  https://claude.ai/artifact/Gst2cwcbNfwDDkWF4guKft (the founder's daily page: Today, Stores, This week; its `db`
+  holds collections `stores` (13: three founding, ten next), `tasks`, `posts`, `weeks`; read and move them with
+  ArtifactData, never in the page source).
+- Routines (all free, run from D:/Mirva): `node docs/sales/pilot/print.mjs [store]` (the two-page founding-pilot PDF per
+  store, overflow-checked); `node docs/sales/report/weekly.mjs <store> [--to YYYY-MM-DD] [--days 7]` (the Saturday
+  report: one A4 page and the WhatsApp text, from the console's own counts, store tablets only, sample = 0; `--local
+  --sample` checks the layout on seeded data); `node docs/sales/brands/pagecheck.mjs <ids>` (a store's /for page on a
+  phone: answers, pictures loaded, no sideways spill, no errors); `node docs/sales/marketing/shoot.mjs [page.html]`
+  (Instagram slides to PNG). The founding-pilot target wording must match the console's three measures: looks kept,
+  sales counted, share of try-on visits that buy.
+- Before the first fee: a company customer may hold back income tax (4% if the vendor is on FBR's Active Taxpayer List,
+  8% if not), Punjab taxable-service providers must register with PRA, and not issuing a tax invoice costs Rs.500,000
+  (KPMG, Jul 2026). The founder sees a tax practitioner first (desk task, 6 Nov). Not legal or tax advice.
 - Counting real use: leave out `events.sample = 1`, the founder's, testers' and team's accounts, and paired test
   devices. A visit starts at her first action, so page views are not counted anywhere.
 - Mistakes:
   - Six research helpers at once (about 300k tokens each) hit the session limit; their notes were saved first. Run at
-    most two or three helpers at a time.
+    most two or three helpers at a time. It hit again at 20:00 with three running: the report writer, told to "write
+    the file early and in parts", left 8 of 9 sections on disk; the two brand helpers had written nothing. Every helper
+    writes its file early and in parts, and small lookups are done directly, not by a helper.
   - D1 refuses a UNION of more than about five SELECTs ("too many terms in compound SELECT"): put several counts in one
     row with sub-selects.
   - The preview tool reads `.claude/launch.json` from the main checkout: a config added only inside a worktree was not
