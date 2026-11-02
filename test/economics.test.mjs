@@ -3,7 +3,7 @@
 // kept 35% and 28%; this holds the line for any later change of price or cost.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { RETAIL_PLANS, COST, USD_TO_PKR, PILOT, EXTRAS, MEMBER_TIERS } from "../lib/plans.mjs";
+import { RETAIL_PLANS, COST, USD_TO_PKR, PILOT, FOUNDING, EXTRAS, MEMBER_TIERS } from "../lib/plans.mjs";
 
 const costOf = (plan) => (plan.liveMinutes * 60 * COST.liveUsdPerSecond + plan.portraits * COST.portraitUsd) * USD_TO_PKR;
 
@@ -21,4 +21,12 @@ test("the pilot, extra portraits and a member's free portraits are priced above 
   assert.ok(PILOT.feePkr > pilotCost * 1.5, `the pilot's fee covers its portraits with room: Rs.${PILOT.feePkr} against Rs.${Math.round(pilotCost)}`);
   assert.ok(EXTRAS.portraitBlockPkr / EXTRAS.portraitBlock >= COST.portraitUsd * USD_TO_PKR * 1.8, "extra portraits are sold at about twice what they cost");
   assert.ok(MEMBER_TIERS.member.portraitsPerMonth * COST.portraitUsd * USD_TO_PKR < 100, "a free member costs under Rs.100 a month in portraits");
+});
+
+test("the founding offer still pays for itself", () => {
+  const plan = RETAIL_PLANS[FOUNDING.plan];
+  const pilotCost = (costOf(plan) * PILOT.days) / 30;
+  assert.ok(FOUNDING.pilotPkr > pilotCost, `a founding pilot used to the full covers its portraits: Rs.${FOUNDING.pilotPkr} against Rs.${Math.round(pilotCost)}`);
+  const fee = plan.monthly * (1 - FOUNDING.discount);
+  assert.ok(1 - costOf(plan) / fee >= 0.5, `${plan.name} at the founding price keeps half its fee: Rs.${fee} against Rs.${Math.round(costOf(plan))}`);
 });

@@ -499,6 +499,34 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   covered" is the calculator inside a closed disclosure): /mirrors now shows the mirror's design concept beside the
   waiting list and lists Naqshi, Baroque and Agha Noor (it still listed the three concept demos).
 
+## Sales and marketing (from 2 Nov 2026)
+- Claude is MIRVA's head of sales and marketing (the founder's brief: `docs/sales/START-PROMPT.md`). Everything for
+  sales lives in git-ignored `docs/sales/`: `important-points.md` (a running log, newest first), `real-numbers.md` (the
+  only shopper numbers we may show anyone, with the query that counts them), `research_notes/` and `reports/` (sourced
+  research), then the plan and the pilot pack as they come. Shared pieces are private artifacts; the research doc is
+  https://claude.ai/artifact/MeLQbEjaF1D5YUzg4BBQDv. Private details (contacts, numbers) stay in docs/, never here.
+- Rules: every price from lib/plans.mjs; ask before anything that costs money, is sent or posted, or opens an account;
+  show each batch of messages and send only after a yes for that batch; LinkedIn by hand (or Claude in Chrome after a
+  yes: at most 15 a day, never a password, stop at any check); no partnership claims; name Naqshi, Baroque or Agha Noor
+  in marketing only with that store's yes; no invented numbers, quotes or reviews; a real shopper's portrait only with
+  her written yes; never promise hardware or anything not built; say the films and models are AI-made; the site and
+  try-on are not changed for a sale without the founder's yes.
+- Counting real use: leave out `events.sample = 1`, the founder's, testers' and team's accounts, and paired test
+  devices. A visit starts at her first action, so page views are not counted anywhere.
+- Mistakes:
+  - Six research helpers at once (about 300k tokens each) hit the session limit; their notes were saved first. Run at
+    most two or three helpers at a time.
+  - D1 refuses a UNION of more than about five SELECTs ("too many terms in compound SELECT"): put several counts in one
+    row with sub-selects.
+  - The preview tool reads `.claude/launch.json` from the main checkout: a config added only inside a worktree was not
+    found, and it silently started the `mirva` config instead.
+  - The founding offer (Rs.25,000 pilot, then 30% off for a year) spread to five documents without ever reaching
+    lib/plans.mjs. A price goes into lib/plans.mjs first, then into documents. Now `FOUNDING` there (2 Nov), held by
+    test/economics.test.mjs, and limited to Assist: "30% off any plan" would have left a Mirror store at 40% kept.
+- Showing the parked films locally: `tools/films-demo` is a git worktree of `films-preview` with a local tweak (the
+  film is the hero, both films loop with no controls); preview `films-demo`, port 4320, no keys (no try-on costs).
+  Remove with `git worktree remove --force tools/films-demo` and the entry in `.claude/launch.json`.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
