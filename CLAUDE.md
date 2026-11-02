@@ -166,6 +166,11 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
 - **An engine out of credit looks like "slow" to the founder**: Decart ran out at 23:31 PKT on 2026-10-15 and FASHN made
   every portrait after (`eng=fashn` in `meta`; flag `tryon-credit` = `out`). First check on any "slow" or "wrong" report:
   `SELECT * FROM flags` and the last portraits' `meta`.
+  Ran out again on 2 Nov 2026 near 23:52 PKT ("Studio stopped working"): a 54 s live look dropped ("lost"), then three
+  Studio tries failed after their token was given; a portrait at 23:54 still came from Decart. Studio has no second
+  engine, so it simply fails; portraits fall to FASHN. Free check: `node tools/decart-credits.mjs` (asks Decart's
+  `GET /v1/credits`, prints `{"credits":N}`, never the key); a 402 "Insufficient credits" from
+  `node tools/decart-portrait-check.mjs` confirms it (US$0.02 only when credit is there).
 - **Store loads are limited to 6 an hour from one address** (`/api/preview`): reloading stores in bulk needs a wait.
   The importer asks a shop for prices in its own money (`?currency=`; a shop that sells abroad answered in dollars) and
   splits a name written as one word ("HussainRehar").
