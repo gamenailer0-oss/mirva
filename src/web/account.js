@@ -11,7 +11,7 @@ const TABS = ["wardrobe", "opinions", "you"];
 const S = { me: null, tab: TABS.includes(params.get("tab")) ? params.get("tab") : "wardrobe", looks: [], boards: [], picking: false, picked: new Set() };
 
 export async function start() {
-  S.me = await whoAmI(true);
+  S.me = await whoAmI(); // the same answer the page's header asked for, not a second trip (3 Nov 2026)
   if (S.me.user && S.me.user.role !== "member") return (location.href = S.me.user.role === "founder" ? "/hq" : "/console");
   if (params.get("reset")) return door("reset");
   if (!S.me.user) return door(params.get("join") || claimCode ? "join" : "signin");

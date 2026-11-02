@@ -2288,10 +2288,10 @@ function resetByItself() {
 // opens (unless a link named the store), and one tap away afterwards.
 const STORE_CHOSEN = "mirva:store-chosen";
 const WHO = { men: "Menswear", women: "Womenswear" };
-async function openStores() {
-  let brands;
+async function openStores(given = null) {
+  let brands = given; // the list the mirror opened with, so the first picker costs no second trip
   try {
-    brands = await api("/api/brands");
+    brands ||= await api("/api/brands");
   } catch (e) {
     return caption(friendly(e));
   }
@@ -2722,7 +2722,7 @@ function wireUI() {
   $("#askBtn").addEventListener("click", askFamily);
   wireSheet();
   $("#adaptBtn").addEventListener("click", openAdapt);
-  $("#storeBtn").addEventListener("click", openStores);
+  $("#storeBtn").addEventListener("click", () => openStores());
   for (const b of $$(".tabs button")) b.addEventListener("click", () => showTab(b.dataset.tab));
   $(".tabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -2950,7 +2950,7 @@ async function boot() {
     chosen ||= !!sessionStorage.getItem(STORE_CHOSEN);
     if (named) sessionStorage.setItem(STORE_CHOSEN, "1");
   } catch {}
-  if (choice && !chosen) openStores();
+  if (choice && !chosen) openStores(brands);
   if (paired) caption(paired.startsWith("!") ? paired.slice(1) : `This screen is now the mirror "${paired}".`);
   // The store's tablet and its screen find each other (a screen alone carries on as it always has).
   if (asPad) openPadRoom();
