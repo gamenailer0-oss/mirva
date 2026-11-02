@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="MIRVA for stores: a stylist that picks three looks from your own catalogue and shows the shopper in each one. A 60-day pilot, money back if it misses.">
+<meta name="description" content="MIRVA for stores: a stylist that picks three looks from your own catalogue and shows the shopper in each one. A 60-day pilot: half to start, the second half only if it works.">
 <meta name="theme-color" content="#06070a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MIRVA for stores">
 <meta property="og:title" content="MIRVA for stores: your rails, on her">
-<meta property="og:description" content="Three looks from your own catalogue, on the shopper, in about twenty seconds. Sixty days, one store, your money back if it misses.">
+<meta property="og:description" content="Three looks from your own catalogue, on the shopper, in about twenty seconds. Sixty days, one store: half to start, the second half only if it works.">
 <meta property="og:image" content="/share/mirva.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/brand.css">
 <link rel="stylesheet" href="/retail/retail.css">
 <link rel="modulepreload" href="/dist/retail.js">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MIRVA for stores","serviceType":"AI styling and virtual try-on for clothing stores","areaServed":"PK","provider":{"@type":"Organization","@id":"{{origin}}/#mirva","name":"MIRVA","url":"{{origin}}/"},"offers":{"@type":"Offer","name":"60-day pilot","price":"50000","priceCurrency":"PKR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MIRVA for stores","serviceType":"AI styling and virtual try-on for clothing stores","areaServed":"PK","provider":{"@type":"Organization","@id":"{{origin}}/#mirva","name":"MIRVA","url":"{{origin}}/"},"offers":{"@type":"Offer","name":"60-day founding pilot, first payment","price":"12500","priceCurrency":"PKR"}}</script>
 </head>
 <body data-page="retail">
 <a class="skip" href="#main">Skip to the page</a>
@@ -170,9 +170,11 @@
     <div class="wrap split">
       <div class="stack">
         <p class="kicker" data-reveal>The pilot</p>
-        <h2 class="title" data-reveal style="--i:1">Sixty days. One store. <em>Your money back if it misses.</em></h2>
+        <h2 class="title" data-reveal style="--i:1">Sixty days. One store. <em>The second half only if it works.</em></h2>
         <p class="lede" data-reveal style="--i:2">Before either of us signs for longer, we agree one target in writing and measure it in one of your stores, on your own tablets.</p>
-        <p class="pilot-fee" data-reveal style="--i:3"><b class="num" id="pilotFee">Rs.50,000</b><span>paid in advance, returned in full if the target is missed</span></p>
+        <!-- The founding offer, from lib/plans.mjs FOUNDING (filled in by src/web/retail.js; these words are its fallback). -->
+        <p class="pilot-fee" data-reveal style="--i:3"><b class="num" id="foundStart">Rs.12,500</b><span>to start, and <b id="foundTarget">Rs.12,500</b> more only if your target is met. For our first <span id="foundStores">five</span> stores.</span></p>
+        <p class="fine pilot-after" data-reveal style="--i:3" id="foundAfter">Then Assist at Rs.15,000 a month for your first year, half the list price, with 400 portraits a month. After the founding stores the pilot is Rs.50,000 in advance, returned in full if the target is missed.</p>
         <div class="row" data-reveal style="--i:4">
           <a class="btn" href="#talk">Ask about a pilot</a>
           <a class="btn ghost wa" href="#talk" data-whatsapp hidden>WhatsApp the founder</a>
@@ -181,7 +183,7 @@
       <ol class="steps" data-reveal style="--i:1">
         <li><div><b>Before day one.</b><p class="muted">We load your catalogue, agree the target and train your staff, in twenty minutes.</p></div></li>
         <li><div><b>Days 1 to 60.</b><p class="muted">You see the numbers every day in your console. We go through them with you every week.</p></div></li>
-        <li><div><b>Day 60.</b><p class="muted">A written result. Hit, and you choose a plan. Missed, and the fee comes back.</p></div></li>
+        <li><div><b>Day 60.</b><p class="muted">A written result. Hit, and the second half is due and you choose a plan. Missed, and nothing more is due.</p></div></li>
       </ol>
     </div>
   </section>

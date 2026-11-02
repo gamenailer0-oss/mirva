@@ -10,7 +10,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { hashPassword, verifyPassword, passwordProblem } from "../lib/auth.mjs";
-import { monthlyFee, tierOf, MEMBER_TIERS, RETAIL_PLANS } from "../lib/plans.mjs";
+import { monthlyFee, tierOf, MEMBER_TIERS, RETAIL_PLANS, FOUNDING } from "../lib/plans.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const { products } = JSON.parse(readFileSync(join(ROOT, "brands/sapphire/catalogue.json"), "utf8"));
@@ -216,6 +216,8 @@ test("the price list is public", async () => {
   assert.deepEqual(r.body.retail, JSON.parse(JSON.stringify(RETAIL_PLANS)));
   assert.equal(r.body.tiers.member.price, 0);
   assert.equal(r.body.payments, "test");
+  // The founding offer the store pages show comes from the same one place (the founder, 3 Nov 2026).
+  assert.deepEqual(r.body.founding, JSON.parse(JSON.stringify(FOUNDING)));
 });
 
 test("joining makes a member, signs them in, and never returns the password or its hash", async () => {

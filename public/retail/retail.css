@@ -76,7 +76,8 @@
 
 /* ---------- 4. pilot ---------- */
 .pilot-fee { display: grid; gap: 6px; padding: 18px 0; border-block: 1px solid var(--line); max-width: 34ch; }
-.pilot-fee b { font: 400 clamp(36px, 4vw, 52px)/1 var(--serif); }
+.pilot-fee > b { font: 400 clamp(36px, 4vw, 52px)/1 var(--serif); }
+.pilot-fee span b { font-weight: 500; color: var(--ink); }
 .pilot-fee span { color: var(--muted); font-size: 15px; line-height: 1.45; }
 .steps { display: grid; gap: var(--s5); counter-reset: s; }
 .steps li { display: grid; grid-template-columns: 44px 1fr; gap: var(--s4); }

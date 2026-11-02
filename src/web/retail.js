@@ -57,13 +57,23 @@ const SHOWN = ["assist", "studio", "flagship"]; // Results is told in a line und
 const feeFor = (plan, stores) => (plan.monthlyFromTenth && stores >= 10 ? 9 * plan.monthly + (stores - 9) * plan.monthlyFromTenth : stores * plan.monthly);
 const n = (x) => Number(x).toLocaleString("en-PK");
 
+// What follows a founding pilot, and the way in once the founding places are taken.
+const foundingAfter = (founding, pilot, plans) =>
+  `Then Assist at ${money(founding.assist.monthly)} a month for your first year${plans?.assist?.monthly === 2 * founding.assist.monthly ? ", half the list price" : ""}, with ${n(founding.assist.portraits)} portraits a month.` +
+  (pilot ? ` After the founding stores the pilot is ${money(pilot.feePkr)} in advance, returned in full if the target is missed.` : "");
+
 async function retail() {
   whatsapp("Hello, I run a store and I would like to see MIRVA on our catalogue.");
-  const { retail: plans, extras, pilot } = await api("/api/plans");
+  const { retail: plans, extras, pilot, founding } = await api("/api/plans");
   let touched = false;
 
-  // ----- the pilot, from the one place its terms are kept
-  if (pilot) $("#pilotFee").textContent = money(pilot.feePkr);
+  // ----- the pilot, from the one place its terms are kept: the founding offer, then the pilot after it
+  if (founding) {
+    $("#foundStart").textContent = money(founding.pilot.startPkr);
+    $("#foundTarget").textContent = money(founding.pilot.onTargetPkr);
+    $("#foundStores").textContent = founding.stores === 5 ? "five" : String(founding.stores);
+    $("#foundAfter").textContent = foundingAfter(founding, pilot, plans);
+  }
 
   // ----- plans: the decision on three cards, everything else behind "Every detail"
   const card = (p) =>
@@ -217,7 +227,7 @@ async function pitch() {
       ),
     );
   }
-  const [{ pilot }, book] = await Promise.all([
+  const [{ pilot, founding, retail: plans }, book] = await Promise.all([
     api("/api/plans").catch(() => ({})),
     data.brand.lookbook ? fetch(`/showcase/lookbook/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) : null,
   ]);
@@ -317,14 +327,14 @@ async function pitch() {
       el("div", { class: "wrap split" },
         el("div", { class: "stack" },
           el("p", { class: "kicker", "data-reveal": true, text: "The pilot" }),
-          el("h2", { class: "title", "data-reveal": true, style: "--i:1" }, `${days === 60 ? "Sixty" : days} days. One store. `, el("em", { text: "Your money back if it misses." })),
-          el("p", { class: "lede", "data-reveal": true, style: "--i:2", text: `We agree one target in writing before day one, and run MIRVA in one of your stores on your own tablets.${pilot ? ` ${money(pilot.feePkr)} in advance, returned in full if the target is missed.` : ""}` }),
+          el("h2", { class: "title", "data-reveal": true, style: "--i:1" }, `${days === 60 ? "Sixty" : days} days. One store. `, el("em", { text: founding ? "The second half only if it works." : "Your money back if it misses." })),
+          el("p", { class: "lede", "data-reveal": true, style: "--i:2", text: `We agree one target in writing before day one, and run MIRVA in one of your stores on your own tablets.${founding ? ` For our first ${founding.stores === 5 ? "five" : founding.stores} stores: ${money(founding.pilot.startPkr)} to start, and ${money(founding.pilot.onTargetPkr)} more only if your target is met. ${foundingAfter(founding, null, plans)}` : pilot ? ` ${money(pilot.feePkr)} in advance, returned in full if the target is missed.` : ""}` }),
           el("div", { class: "row", "data-reveal": true, style: "--i:3" }, el("a", { class: "btn", href: "/retail#talk", text: "Ask about a pilot" }), el("a", { class: "link arrow", href: "/retail#plans", text: "See the plans " })),
         ),
         el("ol", { class: "steps", "data-reveal": true, style: "--i:1" },
           el("li", {}, el("div", {}, el("b", { text: "Before day one." }), el("p", { class: "muted", text: "Your catalogue is already loaded. We agree the one target and set MIRVA up on your tablets." }))),
           el("li", {}, el("div", {}, el("b", { text: `Days 1 to ${days}.` }), el("p", { class: "muted", text: "You see the numbers every day in your console. We go through them with you every week." }))),
-          el("li", {}, el("div", {}, el("b", { text: `Day ${days}.` }), el("p", { class: "muted", text: "A written result against the target. Hit, and you choose a plan. Missed, and the fee comes back." }))),
+          el("li", {}, el("div", {}, el("b", { text: `Day ${days}.` }), el("p", { class: "muted", text: founding ? "A written result against the target. Hit, and the second half is due and you choose a plan. Missed, and nothing more is due." : "A written result against the target. Hit, and you choose a plan. Missed, and the fee comes back." }))),
         ),
       ),
     ),
