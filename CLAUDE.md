@@ -50,6 +50,12 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   `node -e "<print the key from .env>" | npx wrangler secret put FAL_KEY`; topped up 2026-10-15; the key cannot read
   its balance, and a call dearer than what is left answers 403 "User is locked. Reason: TOP_UP"), `GEMINI_API_KEY` and
   `OPENAI_API_KEY` (no billing on either yet). All three were pasted in chat by the founder; they chose to replace them later.
+- **ElevenLabs** (voice; added 3 Nov 2026, the founder: "just add the SDK"): `@elevenlabs/elevenlabs-js` in package.json,
+  the client in `scripts/elevenlabs.mjs` (laptop tools only; nothing on the site or the Worker uses it). The key
+  (`ELEVENLABS_API_KEY`, ends e889) was put in git-ignored `.env.local` by `npx -y @elevenlabs/cli@latest onboard init`
+  (sign-in by the founder in the browser); `.env.local` was NOT ignored before, so it was added to .gitignore first.
+  Verify with `npx -y @elevenlabs/cli@latest onboard check --answered --env-path .env.local`; never open the file.
+  Speech uses credits: no test clip without the founder's yes. Not yet a Worker secret.
 - Sign-ins live in files only: `.data/first-run.txt` (local founder), `.data/demo-sign-ins.txt` (demo accounts),
   `.data/live-founder.txt` (live founder, reset 2026-10-15). Point the founder to the file; never print a password.
 - When grepping files that hold passwords, hide values (a grep that prints a whole line will print the password).
@@ -557,6 +563,43 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   film is the hero, both films loop with no controls); preview `films-demo`, port 4320, no keys (no try-on costs).
   Remove with `git worktree remove --force tools/films-demo` and the entry in `.claude/launch.json`.
 
+## 3 Nov 2026 (the founder: "multi check… the tablet becomes the web app first… the mirror should only be mirror…
+## go for the video things… remove ai gen thing… update pricing… in other artifacts"; shipped 05f78f8 → the WebP fix)
+- **Decart ran out (2 Nov ~23:52)**; a new account's key (1,000 credits) is in `.env` and the Worker secret. Free check:
+  `node tools/decart-credits.mjs`. Studio has no second engine, so it simply fails when Decart is empty.
+- **The tablet never shows the phone app**: lib/app.mjs marks `/mirror?tablet` and `?pad=` pages `data-side="pad"` on
+  the server (no inline scripts are allowed by the CSP); src/main.js drops the mark when the device is not a tablet.
+  Test: platform.test.mjs "a store's tablet address arrives laid out as the tablet".
+- **A screen with a tablet is only glass**, even while the tablet sleeps: `/api/link/code` answers `paired: true`, and
+  src/main.js `glassOnly()` keeps `data-side="glass"` (hint `mirva:screen-tablet` in the screen's localStorage, read
+  only on a paired screen, corrected by the server on every start). Only a screen with no tablet shows its own
+  stylist and the code. Nothing on the glass is a control (styles.css: `.tool-row`, `#photoPeek` hidden, the stage
+  ignores touches); the tablet's commands still work because FROM_PAD uses `.click()`.
+  Checks: `SIZE=1366x768 GONE=1 node tools/stores/pad-walk.mjs` (laptop-sized screen; tablet away 70 s).
+- **Home hero = the 12-second film** (public/film/mirva-12s.mp4, 1.1 MB, no sound track; poster preloaded) and the
+  portrait film in How it works (0.36 MB): both muted loops with no player, played only while seen, a tap pauses, data
+  saver keeps the picture. The founder asked to remove "made with AI": the hero says "The MIRVA mirror, a design
+  concept." (still honest: no store has one), How it works has no caption. First paint unchanged (1.16 s). The mirror
+  hero with real portraits is gone from `/` (still on /retail and the /for pages). The films still say AI-made when
+  posted on social media (platform rules).
+- **Founding prices on the store pages**: /api/plans carries `founding` (lib/plans.mjs FOUNDING); /retail's pilot
+  section and every /for page show Rs.12,500 to start + Rs.12,500 only on target, then Assist Rs.15,000 for a year;
+  the Rs.50,000 pilot after the first five. Artifacts brought in line: store deck (pilot + pricing slides), price
+  calculator (founding pilot with a "target met" tick, founding Assist, storage key `mirva-calc-2` so old saved
+  Rs.25,000 is not restored), Lahore Route, LinkedIn kit, founding team page, "MIRVA in a real store", and the sales
+  plan / pilot pack / marketing docs ("money back" is not the founding offer). harvey-sales `mirva.md` updated; the
+  23 Oct one-pager PDF with Rs.25,000 moved to `docs/linkedin/superseded/` (send `docs/sales/pilot/out/…-<store>.pdf`).
+- **Speed list (the founder's 31 tips) measured**: already done or not needed for MIRVA (compression br, caching,
+  self-hosted fonts, lazy pictures, pages per script, indexes, parallel reads, time limits on every outside call,
+  every package used, slow-phone tests). Fixed: store pictures through /img at 720 px and under are WebP (a 360 px
+  card 55.9 → 45.6 KB; try-on's 768 px+ garment pictures unchanged), and two repeated calls (the mirror's store list,
+  the account page's sign-in check). Not done, for later: D1 read replicas closer to Pakistan; a real-user speed beacon.
+- Mistakes: (1) `openStores` gained a parameter and its click handler passed the click event as the list; caught by
+  grepping callers before shipping (the 31 Oct lesson worked). (2) Shopify chooses WebP or JPEG by the Accept header,
+  but the cache between the edge and Shopify keeps one copy per address: the first live check still got JPEG. A WebP
+  request now carries `mirva=webp` (Shopify ignores it). Any format chosen by a header needs its own address.
+  (3) A heredoc-free rule held: every patch with quotes went through Write/Edit or a script file.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
@@ -590,7 +633,7 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   prospects with catalogue prices, channels, objections, three team pairs, Mon–Sat rhythm, gaps):
   https://claude.ai/artifact/5BiqCiGqdWpVpJaheyAXEa (source in the session scratchpad `route/`; private until shared).
 - Motion experiments (local only, not to be pushed): `motion/`.
-- **Films on the home page, PARKED (2 Nov; the founder: "unsure, don't apply, don't discard")**: local git branch `films-preview` (never pushed): a "Watch it in 12 seconds" button opening the 12 s film, the portrait film in How it works, and `/?hero=film` (the film in the hero's place) to compare. Films fetched only when near or opened; measured first paint unchanged (1.2 s). To show it again: `git switch films-preview`, `node scripts/build.mjs`, open localhost:4310; back with `git switch main` and a build. Ship only on the founder's word.
+- **Films on the home page: LIVE since 3 Nov** (see "3 Nov 2026" below; the branch `films-preview` was merged).
 - **Short link** (31 Oct): https://mirva.pages.dev forwards every address (path and query kept, 302 so it can later point at a bought domain) to the live site. A Cloudflare Pages project "mirva" holding only `_redirects` (source tools/short-link/site). Deploy it from a folder OUTSIDE D:/Mirva (copy it to the scratchpad): `npx --prefix D:/Mirva wrangler pages deploy site --project-name mirva --branch main`. The browser then shows the long address; a domain of their own (mirva.pk or similar, the founder buys it) is the real fix.
 
 ## Open (suggested 2026-10-16, not built; the founder chooses)
