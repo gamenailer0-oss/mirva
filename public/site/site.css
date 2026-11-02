@@ -500,18 +500,11 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
   .how-film { width: min(62vw, 240px); justify-self: center; }
 }
 @media (max-width: 520px) { .how-grid .how { grid-template-columns: minmax(0, 1fr); } }
-.film-open { color: var(--pearl, #f4f2ef); display: inline-flex; align-items: center; gap: 10px; justify-self: start; }
-.film-open::before { content: ""; width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent currentColor; }
-.film-box { width: min(92vw, 1100px); max-height: 92vh; padding: 0; border: 0; border-radius: var(--r-lg); background: #0b0a0d; color: #f4f2ef; overflow: visible; }
-.film-box::backdrop { background: rgba(11, 10, 13, .82); }
-.film-box video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--r-lg) var(--r-lg) 0 0; background: #000; }
-.film-box .fine { margin: 0; padding: 10px 16px 14px; color: rgba(244, 242, 239, .7); }
-.film-box form { position: absolute; top: -46px; right: 0; margin: 0; }
-.film-close { width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(244, 242, 239, .14); color: #f4f2ef; font: 300 26px/1 var(--sans); cursor: pointer; }
-/* The founder's idea to compare (/?hero=film): the 12-second film in the hero's place. */
+/* The hero: the 12-second film of the MIRVA mirror (the founder, 3 Nov 2026). A tap pauses it (src/web/home.js). */
 .film-hero { margin: 0; display: grid; gap: 10px; }
+.film-hero video, .how-film video { cursor: pointer; }
 .film-hero video { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: var(--r-lg); background: #000; }
-.hero-grid.has-film { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+.hero-grid.has-film { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
 @media (max-width: 900px) { .hero-grid.has-film { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- home: the family, in WhatsApp ---------- */

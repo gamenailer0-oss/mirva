@@ -20,8 +20,7 @@
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<link rel="preload" href="/brand/mirva-mirror.webp" as="image" fetchpriority="high">
-<link rel="preload" href="/showcase/day-onaifa.webp" as="image" fetchpriority="high">
+<link rel="preload" href="/film/mirva-12s.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="/brand.css">
 <link rel="stylesheet" href="/site/site.css">
 <link rel="modulepreload" href="/dist/site.js">
@@ -51,9 +50,9 @@
 </header>
 
 <main id="main">
-  <!-- 1. The pitch: what MIRVA is, in three steps, beside the MIRVA mirror doing it -->
+  <!-- 1. The pitch: what MIRVA is, in three steps, beside a film of the MIRVA mirror doing it -->
   <section class="hero dark">
-    <div class="wrap hero-grid">
+    <div class="wrap hero-grid has-film">
       <div class="hero-copy stack">
         <p class="kicker" data-reveal>A new kind of fitting room</p>
         <h1 class="display" data-reveal style="--i:1">The mirror that <em>styles you.</em></h1>
@@ -67,48 +66,18 @@
           <a class="btn" href="/mirror">Try it on yourself</a>
           <a class="btn ghost" href="#proof">See what it makes</a>
         </div>
-        <button class="link play film-open" type="button" data-reveal style="--i:4">Watch it in 12 seconds</button>
         <p class="fine" data-reveal style="--i:5" id="heroFine">Free for shoppers. Your first portrait needs no account.</p>
         <p class="hero-store" data-reveal style="--i:6">Run a fashion store? <a href="/retail#yours">See MIRVA on your own catalogue</a></p>
       </div>
 
-      <!-- The MIRVA mirror (the founder's design): a photograph of it with its glass see-through. Behind the glass, real
-           MIRVA portraits made in the light fitting room, each placed by where the model stands (head under the curve,
-           feet above the base); over them the mirror's own few words (the occasion, the look, the family button). On a
-           wide screen three labels say what is happening. -->
-      <figure class="oval-hero" data-reveal style="--i:2">
-        <div class="mirror-photo">
-          <div class="mirror-glass" aria-label="The MIRVA mirror showing three real MIRVA portraits: Naqshi’s embroidered Onaifa for a wedding, Baroque’s embroidered chiffon for Eid, Baroque’s embellished net for a dinner.">
-            <img class="o1" src="/showcase/day-onaifa.webp" alt="" width="720" height="1280" fetchpriority="high">
-            <img class="o2" src="/showcase/day-pr1315.webp" alt="" width="720" height="1280" loading="lazy">
-            <img class="o3" src="/showcase/day-sf4635.webp" alt="" width="720" height="1280" loading="lazy">
-            <div class="mg-ui" aria-hidden="true">
-              <p class="mg-top"><span class="mg-mark">MIRVA</span><span class="mg-for"><span class="c c1">For a wedding</span><span class="c c2">For Eid</span><span class="c c3">For a dinner</span></span></p>
-              <p class="mg-foot"><span class="mg-ask wa">Ask family</span></p>
-            </div>
-          </div>
-          <img class="mirror-body" src="/brand/mirva-mirror.webp" alt="" width="480" height="1056" fetchpriority="high">
-          <ul class="mirror-notes" aria-hidden="true">
-            <li class="n-face"><b>Her own face</b>kept from her photo</li>
-            <li class="n-piece"><b>The store’s own piece</b><span class="np"><span class="c c1">Naqshi’s Onaifa</span><span class="c c2">Baroque’s chiffon</span><span class="c c3">Baroque’s net</span></span>from its rails, in her size</li>
-            <li class="n-ask"><b>One link</b>the family votes</li>
-          </ul>
-        </div>
-        <div class="oval-cap" aria-hidden="true">
-          <p class="tag"><span class="c c1">Naqshi · Onaifa</span><span class="c c2">Baroque · Embroidered chiffon</span><span class="c c3">Baroque · Embellished net</span></p>
-          <p class="voice line"><span class="c c1">This is you in it.</span><span class="c c2">Your face. Their piece.</span><span class="c c3">In about twenty seconds.</span></p>
-        </div>
-        <figcaption class="fine">Real MIRVA portraits on MIRVA’s own AI model, in pieces by Naqshi and Baroque.</figcaption>
+      <!-- The MIRVA mirror in a 12-second film (the founder chose it for the hero, 3 Nov 2026). Its picture is there at
+           once; the film plays muted in a loop from src/web/home.js (not on data saver), and a tap pauses it. -->
+      <figure class="film-hero" data-reveal style="--i:2">
+        <video src="/film/mirva-12s.mp4" poster="/film/mirva-12s.webp" width="1280" height="720" muted loop playsinline preload="metadata" aria-label="A film of the MIRVA mirror: it wakes in a fitting room, a shopper chooses on the tablet beside it and sees herself in the look"></video>
+        <figcaption class="fine">The MIRVA mirror, a design concept.</figcaption>
       </figure>
     </div>
   </section>
-
-  <!-- The 12-second film, opened from the hero's "Watch it" (made with AI; 1.3 MB, fetched only when opened). -->
-  <dialog class="film-box" id="filmBox" aria-label="MIRVA in 12 seconds">
-    <video src="/film/mirva-12s.mp4" data-poster="/film/mirva-12s.webp" width="1280" height="720" controls playsinline preload="none"></video>
-    <form method="dialog"><button class="film-close" aria-label="Close">×</button></form>
-    <p class="fine">A film of the MIRVA mirror, made with AI.</p>
-  </dialog>
 
   <!-- 1b. The stores that said yes (21 Oct 2026): their own rails, one tap into each one's mirror. Pictures from
        /api/brands (src/web/home.js); without a script the cards still open the mirrors. -->
@@ -215,12 +184,11 @@
         <p class="kicker" data-reveal>How it works</p>
         <h2 class="title" data-reveal style="--i:1">Say what it’s for. <em>See what it picks.</em></h2>
       </div>
-      <!-- The MIRVA mirror in a film (made with AI, 10 s, 0.36 MB): nothing is fetched until it nears the screen, and it
-           plays only while seen; with reduced motion or data saver it waits for a tap (src/web/home.js films). -->
+      <!-- The MIRVA mirror in a 10-second film (0.36 MB): nothing is fetched until it nears the screen, it plays only
+           while seen (not on data saver), and a tap pauses it (src/web/home.js films). -->
       <div class="how-grid">
       <figure class="how-film" data-reveal>
         <video src="/film/mirva-how.mp4" data-poster="/film/mirva-how.webp" width="540" height="960" muted loop playsinline preload="none" aria-label="A film of the MIRVA mirror: she stands before it and sees herself in the look"></video>
-        <figcaption class="fine">The MIRVA mirror, a film made with AI.</figcaption>
       </figure>
       <ol class="how" data-reveal>
         <li><b>Say the occasion.</b><span>A wedding, Eid, work, university, the weekend. Three taps, or one sentence.</span></li>
