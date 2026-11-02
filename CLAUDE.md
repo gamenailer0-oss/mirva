@@ -532,6 +532,7 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   prospects with catalogue prices, channels, objections, three team pairs, Mon–Sat rhythm, gaps):
   https://claude.ai/artifact/5BiqCiGqdWpVpJaheyAXEa (source in the session scratchpad `route/`; private until shared).
 - Motion experiments (local only, not to be pushed): `motion/`.
+- **Films on the home page, PARKED (2 Nov; the founder: "unsure, don't apply, don't discard")**: local git branch `films-preview` (never pushed): a "Watch it in 12 seconds" button opening the 12 s film, the portrait film in How it works, and `/?hero=film` (the film in the hero's place) to compare. Films fetched only when near or opened; measured first paint unchanged (1.2 s). To show it again: `git switch films-preview`, `node scripts/build.mjs`, open localhost:4310; back with `git switch main` and a build. Ship only on the founder's word.
 - **Short link** (31 Oct): https://mirva.pages.dev forwards every address (path and query kept, 302 so it can later point at a bought domain) to the live site. A Cloudflare Pages project "mirva" holding only `_redirects` (source tools/short-link/site). Deploy it from a folder OUTSIDE D:/Mirva (copy it to the scratchpad): `npx --prefix D:/Mirva wrangler pages deploy site --project-name mirva --branch main`. The browser then shows the long address; a domain of their own (mirva.pk or similar, the founder buys it) is the real fix.
 
 ## Open (suggested 2026-10-16, not built; the founder chooses)
