@@ -170,7 +170,9 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   Studio tries failed after their token was given; a portrait at 23:54 still came from Decart. Studio has no second
   engine, so it simply fails; portraits fall to FASHN. Free check: `node tools/decart-credits.mjs` (asks Decart's
   `GET /v1/credits`, prints `{"credits":N}`, never the key); a 402 "Insufficient credits" from
-  `node tools/decart-portrait-check.mjs` confirms it (US$0.02 only when credit is there).
+  `node tools/decart-portrait-check.mjs` confirms it (US$0.02 only when credit is there). Fixed 3 Nov: a new account's
+  key (the founder pasted it in chat; 1,000 credits) set in `.env` by a script that prints nothing, then `wrangler secret
+  put DECART_API_KEY`; a live portrait came back `engine=decart` in 19.7 s.
 - **Store loads are limited to 6 an hour from one address** (`/api/preview`): reloading stores in bulk needs a wait.
   The importer asks a shop for prices in its own money (`?currency=`; a shop that sells abroad answered in dollars) and
   splits a name written as one word ("HussainRehar").
