@@ -623,6 +623,25 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   age, Decart's and fal.ai's retention (in writing), liability and courts.
 - Decart credit 6 Nov: 860 of 1,000 (Studio used about 0.8 credit a second: about 17 minutes of Studio left).
 
+## graphify: MIRVA as one knowledge graph (installed 7 Nov 2026, the founder: "install graphify… all of MIRVA data")
+- What: github.com/Graphify-Labs/graphify (moved from safishamsi/graphify; Apache-2.0, ~143k stars), PyPI `graphifyy`
+  0.9.103, read in full first (no telemetry; no .env reading; it calls an outside AI only when GEMINI/OPENAI/… keys are
+  in the environment, and none are), published by the repo's own GitHub workflow (PyPI attestation). Installed with
+  `uv tool install "graphifyy==0.9.103"` (its own Python under AppData\Roaming\uv\tools; `C:\Users\LENOVO\.local\bin`
+  is not on PATH: call `C:/Users/LENOVO/.local/bin/graphify.exe`). `graphify install` added the `/graphify` skill
+  (~/.claude/skills/graphify) and a 4-line note in ~/.claude/CLAUDE.md. NOT installed: `graphify claude install` (a
+  hook before every Read/Grep/Glob/Bash call, ~0.2–0.5 s each on Windows); offered to the founder.
+- The graph: `graphify-out/` (git-ignored: it holds private notes; the repo is public): graph.html (open in a browser),
+  GRAPH_REPORT.md, graph.json. Built with git's ignore rules off (`graphify-out/.graphify_build.json` = {"gitignore":
+  false}) so docs/ is in; `.graphifyignore` keeps out secrets, sign-ins, the database, backups, libraries, built files,
+  models, every picture/film/font, the test faces (tools/portrait-lab), tools/camera-lab, the films-demo worktree,
+  kl.html, store catalogues, the simulation's run outputs and generated copies in docs/**/out/. Check what went in with
+  scratchpad-style `graph-files.mjs` (counts by folder; "private files found: none").
+- Keep it fresh: `graphify.exe update .` after code changes (free, local, ~20 s); `/graphify . --update` after notes or
+  pages change (the document pass runs on Claude: one helper agent per ~22 changed documents). Ask it things:
+  `graphify.exe query "<question>"`, `path "A" "B"`, `explain "X"`.
+- First build, 7 Nov: 144 code files (AST, free) + 86 documents (4 helper agents, about 1M tokens; three stopped at the usage limit and were resumed): 1,875 nodes, 3,993 links, 115 groups, named after their most connected member. It flagged stale offers in docs/sales/plan-2026-11.md and the stores carousel (fixed) and the old local deck copy tools/deck-pitch (the live deck artifact is current).
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU

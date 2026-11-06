@@ -38,3 +38,7 @@ public/_lab/
 backups/
 
 # screenshots from npm run look
+.env.local
+
+# graphify's knowledge graph of MIRVA (built locally, may hold private notes): never in the public repo
+graphify-out/

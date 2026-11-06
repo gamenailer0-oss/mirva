@@ -1,0 +1,60 @@
+# What graphify (the knowledge-graph tool, installed 7 Nov 2026) leaves out of MIRVA's graph, on top of .gitignore
+# (which already keeps out keys, passwords, docs/, tools/ with the test faces, backups and the models).
+# Pictures, films and fonts: heavy, and pictures would each cost an AI reading.
+motion/
+.taste-skill/
+public/showcase/
+public/film/
+public/fonts/
+public/icons/
+public/share/
+public/brand/
+public/retail/mirror/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+*.mov
+*.woff2
+*.ico
+*.pdf
+# Store catalogues (product data, not MIRVA's own code) and generated or lock files.
+brands/
+package-lock.json
+graphify-out/
+# The graph is built with git's ignore rules switched off (graphify-out/.graphify_build.json "gitignore": false) so
+# the private docs/ folder is in it. Everything else git ignores stays out, by name: secrets, sign-ins, the database,
+# backups, downloaded libraries, built files, models, store pictures, and the test faces.
+.env
+.env.*
+!.env.example
+.dev.vars
+.data/
+backups/
+node_modules/
+.cache/
+.wrangler/
+.claude/
+public/dist/
+public/models/
+public/refs/
+public/_lab/
+worker/schema.sql
+tools/portrait-lab/
+tools/camera-lab/
+tools/films-demo/
+tools/shots/
+tools/short-link/
+# What .git/info/exclude keeps out (graphify does not read that file): a saved copy of someone else's page.
+kl.html
+# Output files of the October market-simulation runs (the simulation's own notes in tools/sim/ stay), and drawings
+# (each would take one AI reading of its own; mirror-hardware.svg is told in mirror-hardware.md).
+tools/sim/r1/
+tools/sim/r2/
+tools/sim/r3/
+*.svg
+# Generated copies inside docs/ (each is built from a source beside it).
+docs/**/out/
+docs/type-and-ground/index.html
