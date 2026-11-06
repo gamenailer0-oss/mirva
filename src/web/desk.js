@@ -264,7 +264,8 @@ const VIEWS = {
         panel("What it cost to run",
           el("dl", { class: "kv" },
             el("dt", { text: "Portraits" }), el("dd", { class: "num", text: `${num(spend.portrait?.n)} · ${money(((spend.portrait?.usd || 0) + (spend.backdrop?.usd || 0)) * 277)}` }), // the studio backdrop is part of a portrait
-            el("dt", { text: "Live looks" }), el("dd", { class: "num", text: `${num((spend.live?.seconds || 0) / 60)} min · ${money((spend.live?.usd || 0) * 277)}` }),
+            // Under a minute is said in seconds, so a cost never sits beside "0 min".
+            el("dt", { text: "Live looks" }), el("dd", { class: "num", text: `${(spend.live?.seconds || 0) < 60 ? `${num(spend.live?.seconds)} s` : `${num(spend.live.seconds / 60)} min`} · ${money((spend.live?.usd || 0) * 277)}` }),
             el("dt", { text: "Together" }), el("dd", { class: "num", text: money(o.spend.pkr) }),
             el("dt", { text: "Per try-on" }), el("dd", { class: "num", text: money(o.spend.perVisitPkr) }),
             o.plan && [el("dt", { text: "Plan" }), el("dd", { text: `${o.plan.name}, ${plural(o.plan.stores, "store")} (${o.plan.status})` })],

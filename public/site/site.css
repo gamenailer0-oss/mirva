@@ -537,6 +537,8 @@ dialog.sheet.winner[open] { display: flex; flex-direction: column; gap: var(--s5
 .store-list a:hover { box-shadow: 0 0 0 1px var(--ink); transform: translateY(-1px); }
 .store-list b { font: 400 24px/1.15 var(--serif); }
 .store-list span { font-size: 14.5px; color: var(--muted); }
+.store-list .go { margin-top: 6px; font: 500 12px/1.2 var(--sans); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.store-list .go::after { content: " →"; }
 .store-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(12px, 2vw, 20px); }
 .store-list a { display: grid; gap: 6px; padding: 22px 24px; border-radius: var(--r-lg); background: var(--panel); box-shadow: 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); transition: box-shadow var(--quick), transform var(--quick) var(--ease); }
 .store-list a:hover { box-shadow: 0 0 0 1px var(--ink); transform: translateY(-1px); }

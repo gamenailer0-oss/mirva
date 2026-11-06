@@ -27,8 +27,8 @@ async function whatsapp(text) {
 // not claims about anyone's business.
 const SEGMENTS = {
   formal: {
-    say: "The sale happens at the fitting room, and on a Saturday there is a queue for it. The mirror gives every shopper a first fitting without a room.",
-    plan: "studio",
+    say: "The sale happens at the fitting room, and on a Saturday there is a queue for it. MIRVA gives every shopper a first fitting without a room: on your own tablets first, in the MIRVA mirror next.",
+    plan: "assist", // every store starts on tablets (the founding pilot is Assist; the founder, 2 Nov 2026)
     sum: { stores: 1, visitors: 120, share: 15, conversion: 18, ticket: 22000 },
   },
   casual: {
@@ -43,7 +43,7 @@ const SEGMENTS = {
   },
   boutique: {
     say: "Your clients send a photo to their family before they decide, then go home to wait. MIRVA makes that photo, and the family answers while she is still with you.",
-    plan: "studio",
+    plan: "assist",
     sum: { stores: 1, visitors: 25, share: 40, conversion: 20, ticket: 45000 },
   },
   unstitched: {
