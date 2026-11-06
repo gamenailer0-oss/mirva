@@ -553,7 +553,7 @@ a.chip { text-decoration: none; }
 .ask input::placeholder { color: var(--muted); }
 .ask button { width: 38px; height: 38px; border-radius: 50%; background: var(--ink); color: var(--panel); display: grid; place-items: center; flex: none; transition: transform var(--quick) var(--ease); }
 .ask button:active { transform: scale(.92); }
-.notice { margin: 8px 4px 0; font-size: 11.5px; line-height: 1.4; color: var(--muted); }
+.notice { margin: 8px 4px 0; font-size: 12.5px; line-height: 1.4; color: var(--muted); }
 
 /* ---------- sheets ---------- */
 .sheet {
@@ -1215,6 +1215,8 @@ a.chip { text-decoration: none; }
 [data-side="pad"] .tablet { border: 0; width: 100%; max-width: 760px; margin: 0 auto; min-height: 100dvh; padding-top: calc(20px + env(safe-area-inset-top)); }
 .remote { display: grid; gap: 12px; margin: 0 0 16px; padding: 14px 16px; border-radius: 18px; background: var(--card); box-shadow: 0 0 0 1px var(--line); }
 .remote-line { display: flex; align-items: flex-start; gap: 10px; margin: 0; font: italic 400 17px/1.3 var(--serif); }
+.remote-line > span { flex: 1; min-width: 0; }
+.remote-full { flex: none; margin: -4px 0 -4px auto; font-style: normal; }
 .remote-dot { flex: none; width: 8px; height: 8px; margin-top: .45em; border-radius: 50%; background: var(--muted); transition: background-color .32s cubic-bezier(.4, 0, .2, 1); }
 .remote[data-here="yes"] .remote-dot { background: #3f9f6b; }
 /* The tablet's foot: the mirror's own dock on its dark slab (as on a phone), held under her thumb as the stylist scrolls.

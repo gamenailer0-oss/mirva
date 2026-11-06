@@ -2482,8 +2482,30 @@ async function offerPhotoCode() {
   }
 }
 
+// A store's screen and its tablet stay lit while MIRVA is open on them, so a demo or a day in the store never goes dark
+// in the middle of a look (the founder, 6 Nov 2026). A browser lets go of the lock whenever the page is hidden, so it is
+// asked for again on return, and on a touch (Safari grants it only then).
+let awakeLock = null;
+async function stayLit() {
+  if (!("wakeLock" in navigator) || awakeLock || document.visibilityState !== "visible") return;
+  try {
+    awakeLock = await navigator.wakeLock.request("screen");
+    awakeLock.addEventListener("release", () => (awakeLock = null));
+  } catch {}
+}
+function keepLit() {
+  stayLit();
+  document.addEventListener("visibilitychange", stayLit);
+  addEventListener("pointerdown", stayLit, { passive: true });
+}
+// Full screen, as a store device should be. Browsers allow it only from a tap or a click on the device itself.
+const fullScreen = () => !document.fullscreenElement && document.fullscreenEnabled && document.documentElement.requestFullscreen?.().catch(() => {});
+
 function openGlassRoom() {
   side = "glass";
+  keepLit();
+  // Nothing on the glass is a control, so a click anywhere on it is the presenter's: it puts the mirror full screen.
+  addEventListener("click", fullScreen);
   // The code is asked for at once, beside the room's own joining (it came late when it waited for the room, 31 Oct).
   import("qrcode").catch(() => {});
   offerPadCode();
@@ -2593,8 +2615,12 @@ function padStep(step) {
 function openPadRoom() {
   side = "pad";
   document.documentElement.dataset.side = "pad";
+  keepLit();
   link.relayTo((kind, data) => room?.send({ op: "track", kind, data }));
-  $(".tablet").prepend(h("div", { id: "remote", class: "remote", role: "status" }, h("p", { class: "remote-line" }, h("i", { class: "remote-dot" }), h("span", { id: "remoteSays" }))));
+  // The mirror's line at the head of the tablet, and a way to put the tablet itself full screen (no address bar).
+  const full = h("button", { id: "padFull", class: "chip remote-full", type: "button", text: "Full screen", hidden: !document.fullscreenEnabled, onclick: fullScreen });
+  document.addEventListener("fullscreenchange", () => (full.hidden = !document.fullscreenEnabled || !!document.fullscreenElement));
+  $(".tablet").prepend(h("div", { id: "remote", class: "remote" }, h("p", { class: "remote-line" }, h("i", { class: "remote-dot" }), h("span", { id: "remoteSays", role: "status" }), full)));
   // The mirror's own dock moves to the foot of the tablet, with the one button a sleeping mirror needs.
   $("#glassActions").append(h("button", { id: "padFamily", class: "glass-btn", type: "button", hidden: true, text: "Ask family", onclick: () => room?.send({ op: "ask" }) }));
   $(".tablet").append(

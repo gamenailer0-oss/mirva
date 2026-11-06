@@ -121,7 +121,7 @@ td.n, th.n { overflow-wrap: normal; }
 /* ---------- navigation ---------- */
 .nav { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: var(--s5); padding: 14px clamp(20px, 5vw, 56px); background: color-mix(in oklab, var(--bg) 88%, transparent); border-bottom: 1px solid transparent; transition: border-color var(--calm), background-color var(--calm); }
 .nav.scrolled { border-bottom-color: var(--line); background: var(--bg); }
-.brandmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 500 15px/1 var(--mark); letter-spacing: .34em; }
+.brandmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 500 15px/1 var(--mark); letter-spacing: .34em; padding-block: 10px; margin-block: -10px; } /* a 45 px tap, laid out as before */
 .brandmark svg { width: 20px; height: 25px; }
 .nav-links { display: flex; gap: var(--s5); margin-left: auto; }
 .nav-links a { text-decoration: none; font-size: 14.5px; padding: 10px 2px; color: var(--muted); transition: color var(--quick); }

@@ -44,9 +44,12 @@ export function openRoom({ side, onMessage, onPeer, onState }) {
   let closed = false;
   let beat = 0;
   let waiting = 0;
+  let dialing = false;
+  let heard = 0; // when the room last said anything (a pong counts)
   const headers = () => (side === "pad" && pad ? { "x-mirva-pad": `${pad.pad}.${pad.token}` } : link.auth());
   async function connect() {
-    if (closed || ws) return;
+    if (closed || ws || dialing) return;
+    dialing = true;
     clearTimeout(waiting);
     onState?.("connecting");
     try {
@@ -58,11 +61,19 @@ export function openRoom({ side, onMessage, onPeer, onState }) {
       ws = socket;
       socket.onopen = () => {
         tries = 0;
+        heard = Date.now();
         onState?.("open");
         clearInterval(beat);
-        beat = setInterval(() => socket.readyState === 1 && socket.send("ping"), 25e3); // keeps phone networks from dropping a quiet line
+        // A ping keeps phone networks from dropping a quiet line; a line that has not answered for a minute is dead
+        // though it still looks open (a tablet that slept), and is replaced.
+        beat = setInterval(() => {
+          if (ws !== socket || socket.readyState !== 1) return;
+          if (Date.now() - heard > 60e3) return drop();
+          socket.send("ping");
+        }, 25e3);
       };
       socket.onmessage = (e) => {
+        heard = Date.now();
         if (e.data === "pong") return;
         let m;
         try {
@@ -74,8 +85,9 @@ export function openRoom({ side, onMessage, onPeer, onState }) {
         else onMessage?.(m);
       };
       socket.onclose = (e) => {
+        if (ws !== socket) return; // a line this side already let go of (see drop)
         clearInterval(beat);
-        if (ws === socket) ws = null;
+        ws = null;
         onPeer?.(false);
         if (e.code === 4000) return onState?.("replaced");
         retry();
@@ -83,6 +95,8 @@ export function openRoom({ side, onMessage, onPeer, onState }) {
     } catch {
       ws = null;
       retry();
+    } finally {
+      dialing = false;
     }
   }
   function retry() {
@@ -91,9 +105,31 @@ export function openRoom({ side, onMessage, onPeer, onState }) {
     clearTimeout(waiting);
     waiting = setTimeout(connect, Math.min(15000, 800 * 2 ** tries++));
   }
+  // Let go of a line that looks open but no longer answers, and dial again at once.
+  function drop() {
+    const old = ws;
+    ws = null;
+    clearInterval(beat);
+    try {
+      old?.close(1000);
+    } catch {}
+    onPeer?.(false);
+    tries = 0;
+    connect();
+  }
   const again = () => !closed && !ws && ((tries = 0), connect());
-  addEventListener("online", again);
-  document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && again());
+  // Back on screen (a tablet or a screen that slept): a line that is down is dialled again at once, and one that looks
+  // open is asked to answer within four seconds, so a tap is never sent into a dead line (the founder, 6 Nov 2026).
+  function woke() {
+    if (closed) return;
+    if (!ws) return again();
+    const socket = ws;
+    const asked = Date.now();
+    if (socket.readyState === 1) socket.send("ping");
+    setTimeout(() => ws === socket && heard < asked && drop(), 4000);
+  }
+  addEventListener("online", woke);
+  document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && woke());
   connect();
   return {
     send: (m) => ws?.readyState === 1 && (ws.send(JSON.stringify(m)), true),
