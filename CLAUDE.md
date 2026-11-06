@@ -559,6 +559,9 @@ improvements, few words; notes and mistakes here; a checklist at the end.
     stores pay Rs.12,500 to start (kept; covers try-ons at a 400-portrait monthly cap set at /hq) and Rs.12,500 more
     only if the target is met; then Assist at Rs.15,000 a month (400 portraits) for 12 months. A founding mirror price
     waits for unit one's quote. PDFs reprinted (`docs/sales/pilot/print.mjs`); agreement 5.1 and 13.7 follow.
+- **Social media set-up (4 Nov)**: the kit `docs/social/setup.md` (every name, bio and step, the founder opens
+  the accounts) and pictures `docs/social/out/` (`node docs/social/shoot.mjs`). A signed-out check cannot tell whether an
+  Instagram or TikTok name is free (429 / unreliable): the sign-up screen decides.
 - Showing the parked films locally: `tools/films-demo` is a git worktree of `films-preview` with a local tweak (the
   film is the hero, both films loop with no controls); preview `films-demo`, port 4320, no keys (no try-on costs).
   Remove with `git worktree remove --force tools/films-demo` and the entry in `.claude/launch.json`.
@@ -599,6 +602,26 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   but the cache between the edge and Shopify keeps one copy per address: the first live check still got JPEG. A WebP
   request now carries `mirva=webp` (Shopify ignores it). Any format chosen by a header needs its own address.
   (3) A heredoc-free rule held: every patch with quotes went through Write/Edit or a script file.
+
+## 6 Nov 2026: the whole site checked before the founder's presentation (shipped 3342d14, 167ac6d, 608047d)
+- Checked every page on a phone and a laptop (scratchpad `audit.mjs`: script errors, failed requests, pictures,
+  sideways spill, text under 12 px, taps under 36 px; `sheets.mjs`: one contact sheet per page), the mirror's steps
+  (flow-shots), the tablet and its mirror (pad-walk), the console and HQ (desk-shots), then the same live. Clean.
+- **Tablet and mirror for presenting**: src/pad.js, a side that comes back on screen pings its room and must hear back
+  within 4 s, and a line silent for a minute is replaced (a slept tablet's line can look open and swallow taps);
+  `node --no-warnings tools/stores/pad-deaf.mjs` holds it (a healthy line is kept; a deaf one is replaced and the next
+  tap reaches the mirror). The glass and the tablet hold a screen wake lock (`keepLit`); a click anywhere on the glass
+  puts it full screen (nothing else on the glass is a control); the tablet's status bar has a Full screen button.
+- Fixed: /retail showed formal-wear houses and boutiques the Mirror (Rs.110,000) as "Where you'd start"; every kind
+  of store now starts on Assist (the founding pilot is Assist, no mirror is sold before unit one's quote). /mirrors
+  store cards say "Open <store>'s mirror". Console: under a minute of live looks reads in seconds. The logo's tap is
+  45 px; the mirror's price note 12.5 px; the home privacy link a standard link.
+- **Privacy and terms were live drafts full of brackets**: facts put in (date; fal.ai and Cloudflare named; the untrue
+  Google Fonts and email rows removed; no phone placeholders; Studio's two-minute cap from wrangler.toml); the note no
+  longer says MIRVA is closed. Still bracketed for the founder or a lawyer: a contact email, legal name and address,
+  how long anonymous activity, sign-in records and backups are kept (nothing deletes them on a schedule today), the
+  age, Decart's and fal.ai's retention (in writing), liability and courts.
+- Decart credit 6 Nov: 860 of 1,000 (Studio used about 0.8 credit a second: about 17 minutes of Studio left).
 
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
