@@ -697,8 +697,8 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   **Every new artifact goes on its shelf there, in the same turn it is made.**
 - The LinkedIn step-by-step was merged into the LinkedIn kit (its first section, "Start here"; the kit is dateless now).
 - The founder chose to delete five old pages (LinkedIn step by step, Typefaces, Operating Handbook, Master Strategy,
-  Wearit storyboard); this session cannot confirm a delete, so they wait for him (listed under "To delete" in the
-  Library). The 15 Oct font decision itself stays recorded above in this file.
+  Wearit storyboard); this session cannot confirm a delete, so he deleted them himself the same day. Their links in
+  older notes here are dead. The 15 Oct font decision itself stays recorded above in this file.
 
 ## Where things are
 - **Start at the MIRVA Library**: https://claude.ai/artifact/WaRrchGzCobvzYyvmde3xR
