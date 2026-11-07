@@ -673,6 +673,15 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   the halo, answers aloud, three looks, keep, family link) drawn as an arch (silver edge, a line of warm light inside);
   "Four moments in the mirror" scroll scene with a dark arch; Model/Studio arches; the store; ballot; stockists in
   arches; small print; back cover. Check: `node .work/heroes/tools/try-edition.mjs` (all pass).
+- **7 · `signature.html` "Signature"** (the founder: "hero like 1, the rest like edition, the founder's quote, the big
+  MIRVA at the end flickering like an illuminated sign… keep it one family… suggest more flow"): three acts. Act one,
+  Maison's film full screen; as she scrolls (a 200svh run, sticky) it closes into the arched mirror (clip-path
+  inset with arch radii, JS per frame), its copy fades, the silver edge and lamp line appear, and the room lights from
+  night to porcelain only at the end (masthead turns light at the same moment). Act two, the edition (shared
+  `edition.css`, extracted from edition.html). Founder's letter as a big pull quote “I’ll ask at home.” (a DRAFT in
+  his name). Act three, the footer at night: MIRVA in its own letters as a sign that switches on letter by letter
+  with flickers, holds, a letter flickering every 6–13 s, with a faint reflection; Bodoni Moda is the one display
+  face. Check: `node .work/heroes/tools/try-edition.mjs signature.html`.
 - **Voice**: ElevenLabs "Lily" (pFZP5JQG7iQjIQuC4Bku), 7 lines in `site/audio/` (`tools/voice.mjs`, about 650 credits;
   account had 10,000). Played only on a tap; labelled "made with AI for this page". The mirror never speaks today:
   never present the voice as a mirror feature.
