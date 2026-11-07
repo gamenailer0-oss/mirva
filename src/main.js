@@ -164,6 +164,7 @@ const PHOTO_ONLY_LINE = "This piece is shown in the store’s own photographs.";
 const CONSENT_KEY = "mirva:consent";
 const consentFor = () => link.member?.user.id || "this-device";
 function hasAgreed() {
+  if (mirror?.source?.demo) return true; // MIRVA's own model (the one-tap demo): no picture of her leaves
   if (S.agreed) return true;
   if (atStore()) return false; // a store mirror belongs to nobody: each shopper is asked
   try {
@@ -996,6 +997,8 @@ function choose(p) {
   renderSolo();
   if (p.photoOnly) return syncGlass(), caption(PHOTO_ONLY_LINE), openPhoto(p);
   if (!mirror.awake) return needMirror(p);
+  // the one-tap demo's model wears only her own side of the store: a men's piece brings MIRVA's male model in
+  if (mirror.source?.demo && mirror.source.demo !== whoWears(p)) return useModel(p);
   mirror.preload();
   if (onPhoto()) return modelShot(p); // a photo: the portrait is the only way, so it is made at once
   if (S.mode === "studio") return studio(p);
@@ -1580,7 +1583,8 @@ async function modelShot(p, { retake = false } = {}) {
     // For a member the server keeps the portrait, so Keep can put it in the wardrobe.
     const entry = { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved };
     // value: seconds from asking to the finished picture; meta: whether her own face went back (and how), which engine, and the time of each part
-    link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: `${shotNote(face, shotMs)} up=${upKb}k line=${Math.round(line / 100) / 10}${slowLine() ? " light=1" : ""}` });
+    // a portrait of MIRVA's own model (the one-tap demo) is nobody's try, so a store's numbers never count it
+    if (!mirror.source?.demo) link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: `${shotNote(face, shotMs)} up=${upKb}k line=${Math.round(line / 100) / 10}${slowLine() ? " light=1" : ""}` });
     S.visit.portraits++;
     if (link.member) link.whoIsHere().then(showMember);
     S.portraits.set(p.id, entry);
@@ -1768,7 +1772,7 @@ async function makeAhead(p, person) {
     if (S.round !== round) return;
     S.portraits.set(p.id, { url: URL.createObjectURL(blob), thumb: await thumbOf(blob), saved });
     S.visit.portraits++;
-    link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) + " ahead=1" });
+    if (!mirror.source?.demo) link.track("portrait", { product: p.id, value: Math.round((shotMs + (face.ms || 0)) / 100) / 10, meta: shotNote(face, shotMs) + " ahead=1" });
   } catch (e) {
     console.warn("A look made ahead did not come; it is made when tapped.", e);
   }
@@ -1855,6 +1859,7 @@ const ENDED = {
 
 function wireMirror() {
   mirror.addEventListener("awake", () => {
+    if (demoNext) (mirror.source.demo = demoNext), (demoNext = null); // the model's photo woke it (useModel)
     forgetPortraits(); // a new picture of her makes the old portraits stale
     syncGlass();
     if (S.pending) {
@@ -2482,6 +2487,39 @@ async function offerPhotoCode() {
   }
 }
 
+// ---------- the one-tap demo (7 Nov 2026, the founder's pick of the new ideas) ----------
+// For a store owner, or anyone with no one to photograph: MIRVA's own model (an AI-made person, the "before" pictures of
+// the site) stands in for her photo, and the portrait is made as from any photo. Only the model's picture carries
+// `demo` (set as it wakes the mirror), so consent is not asked for it, its portraits are not counted as anyone's try,
+// and the first picture of her own (camera or photo) is asked about as always.
+const MODELS = { women: "/showcase/before-woman.webp", men: "/showcase/before-man.webp" };
+let demoNext = null;
+const whoWears = (p) => (p?.gender === "men" ? "men" : "women");
+// the piece a one-tap demo opens on: the shopfront's first, with its garment picture ready when there is one
+function demoPiece() {
+  const mine = S.products.filter((q) => !q.photoOnly && q.gender === S.brief.who);
+  return mine.find((q) => q.ref) || mine[0] || null;
+}
+async function useModel(p) {
+  const who = p ? whoWears(p) : S.brief.who === "men" ? "men" : "women";
+  try {
+    const r = await fetch(MODELS[who]);
+    if (!r.ok) throw new Error(String(r.status));
+    const blob = await r.blob();
+    const wasAwake = mirror.awake;
+    if (p && !wasAwake) S.pending = p; // the wake handler puts a waiting piece on her
+    demoNext = who;
+    await mirror.usePhoto(blob);
+    demoNext = null;
+    if (!mirror.source.demo) mirror.source.demo = who;
+    if (p && wasAwake) choose(p);
+    else if (!p) caption("This is MIRVA’s model, standing in for you. Choose any piece to see it on her.");
+  } catch {
+    demoNext = null;
+    caption("The model’s picture didn’t load. Try again.");
+  }
+}
+
 // A store's screen and its tablet stay lit while MIRVA is open on them, so a demo or a day in the store never goes dark
 // in the middle of a look (the founder, 6 Nov 2026). A browser lets go of the lock whenever the page is hidden, so it is
 // asked for again on return, and on a touch (Safari grants it only then).
@@ -2719,6 +2757,7 @@ function wireUI() {
   });
   $("#camRetry").addEventListener("click", () => mirror.retryCamera());
   $("#photoBtn").addEventListener("click", () => $("#photoInput").click());
+  $("#modelBtn").addEventListener("click", () => useModel(S.selected || S.pending || null));
   $("#photoInput").addEventListener("change", async (e) => {
     const file = e.target.files?.[0];
     e.target.value = "";
@@ -2947,7 +2986,7 @@ async function boot() {
   if (link.embedded()) document.documentElement.dataset.embed = "1";
   // A tablet stays on its own address, so a reload or a restored tab opens it as the tablet again.
   else if (asPad) history.replaceState(null, "", location.pathname + "?tablet");
-  else if (query.has("pair") || query.has("pad") || query.has("brand") || query.has("for") || query.has("p") || query.has("tablet")) history.replaceState(null, "", location.pathname);
+  else if (query.has("pair") || query.has("pad") || query.has("brand") || query.has("for") || query.has("p") || query.has("tablet") || query.has("demo")) history.replaceState(null, "", location.pathname);
   showMember(await link.whoIsHere());
   memory.setStoreMirror(!!link.pairedTo() || !!asPad);
   if (link.pairedTo() && !link.embedded() && !asPad) openGlassRoom(); // early, so the tablet's code is on the glass at once
@@ -2957,7 +2996,11 @@ async function boot() {
   await loadBrand(first.id);
   // A link to one piece (a store's website, a shared look): the mirror opens on it.
   const piece = query.get("p") && S.products.find((x) => String(x.id) === query.get("p"));
-  if (piece) requestAnimationFrame(() => choose(piece));
+  // The one-tap demo (…/mirror?brand=id&demo, the store pages' "See it on our model"): MIRVA's model in the named piece,
+  // or the shopfront's first. Never on a store's own mirror or tablet, where each shopper is the one in the glass.
+  $("#modelBtn").hidden = atStore();
+  if (query.has("demo") && !atStore()) useModel(piece || demoPiece());
+  else if (piece) requestAnimationFrame(() => choose(piece));
   // "See them on you" on the home page names the occasion the reader chose there: the conversation carries on from it.
   const occasion = OCCASIONS.find((o) => o.id === query.get("for"));
   if (occasion) {

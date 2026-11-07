@@ -184,7 +184,7 @@ async function retail() {
         const { facts, currency } = await api("/api/pitch/" + store.id);
         $("#tryName").textContent = `${store.name} is in the mirror.`;
         $("#tryFacts").textContent = `${facts.products} pieces read from your public catalogue just now, from ${money(facts.priceMin, currency)} to ${money(facts.priceMax, currency)}.`;
-        $("#tryMirror").href = `/mirror?brand=${store.id}`;
+        $("#tryMirror").href = `/mirror?brand=${store.id}&demo`; // one tap: their own piece on MIRVA's model
         $("#tryPitch").href = `/for/${store.id}`;
         $("#tryReady").hidden = false;
         $("#tryMirror").focus({ preventScroll: true });
@@ -265,8 +265,10 @@ async function pitch() {
             ? `We read your public catalogue on ${read} and chose ${facts.products} of its ${chosenFrom.toLocaleString("en-PK")} pieces, all in stock, from ${rupees(facts.priceMin)} to ${rupees(facts.priceMax)}. This is what MIRVA does with them.`
             : `We read your public catalogue on ${read}: ${facts.products} pieces, from ${rupees(facts.priceMin)} to ${rupees(facts.priceMax)}. This is what MIRVA would do with it.` }),
           el("div", { class: "row", "data-reveal": true, style: "--i:3" },
-            el("a", { class: "btn", href: `/mirror?brand=${brand.id}`, text: `Open the mirror as ${brand.name}` }),
-            el("a", { class: "btn ghost", href: "/retail#talk", text: "Talk to the founder" }),
+            // one tap: the store's own piece on MIRVA's model, in about twenty seconds (src/main.js useModel)
+            el("a", { class: "btn", href: `/mirror?brand=${brand.id}&demo`, text: "See it on our model" }),
+            el("a", { class: "btn ghost", href: `/mirror?brand=${brand.id}`, text: "Try it on yourself" }),
+            el("a", { class: "link arrow", href: "/retail#talk", text: "Talk to the founder" }),
           ),
         ),
         // The MIRVA mirror (the founder's design) with the store's own photos changing in its glass. It used to be an empty
