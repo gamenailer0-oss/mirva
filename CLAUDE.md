@@ -644,6 +644,21 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   `graphify.exe query "<question>"`, `path "A" "B"`, `explain "X"`.
 - First build, 7 Nov: 144 code files (AST, free) + 86 documents (4 helper agents, about 1M tokens; three stopped at the usage limit and were resumed): 1,875 nodes, 3,993 links, 115 groups, named after their most connected member. It flagged stale offers in docs/sales/plan-2026-11.md and the stores carousel (fixed) and the old local deck copy tools/deck-pitch (the live deck artifact is current).
 
+## Five hero designs (7 Nov 2026, the founder: "5 diff options in a local host… as a top tier fashion brand would make")
+- Local only, never deployed: `.work/heroes/` (git-ignored). Preview `heroes` (port 4330, `serve.mjs`: pages from
+  `site/`, fonts, films and pictures straight from `public/`). `/` is the choosing page (each design as laptop and
+  phone), `compare.html?d=<file>&w=laptop|phone` puts Marble and Plain side by side; each design carries a review bar
+  (‹ › and Marble/Plain; `?bare=1` hides it).
+- The five, same words and real portraits: 1 `maison.html` (the 12-s film full screen, name centred; a phone gets the
+  tall film), 2 `cover.html` (magazine masthead, one cover portrait, three cover lines), 3 `mirror.html` (the
+  founder's mirror photograph lit on the wall; occasion chips make the glass think with the halo, then show three
+  looks; Keep; WhatsApp share), 4 `reveal.html` (before/after slider: before-woman and woman-khaddar line up exactly),
+  5 `looks.html` (three silver-edged arches, hearts, an example family vote).
+- Checks (free): `node .work/heroes/tools/try.mjs` (42 interactions + spill/pictures/links at 360/768/1024/1920),
+  `shots.mjs <page> [widths] [--plain] [--full]`, `sizes.mjs [WxH…]` (one sheet per size, `GROUND=plain`).
+- Marble is quiet by design (as on the live site); on Maison the film covers the first screen, so the ground shows
+  only below it.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
