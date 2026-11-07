@@ -26,6 +26,8 @@ Live: https://mirva.gamenailer0-1a9.workers.dev · Repo (PUBLIC): github.com/gam
   `node scripts/fonts.mjs` (one file per Newsreader weight, since a file of every weight is 270 KB). The comparison
   page: https://claude.ai/artifact/EAJTFBFD88LAB37gwRDt4S. Canvas pictures (share card, family card) must
   `document.fonts.load` before drawing.
+- **Disk (7 Nov 2026, the founder):** use the D: drive. Scratch files, shots, downloads and renders go in git-ignored
+  `.work/` (not the session scratchpad, which is on C:); the npm cache is `D:\Cache\npm`. C: is nearly full.
 - The founder's phone number is never published on the site (the /hq WhatsApp switch is theirs to turn on).
 - Sapphire, Lawrencepur and Outfitters are shown only as "concept demo by MIRVA"; no partnership is claimed.
 - `docs/` (handbook, checklists) is git-ignored and private. Never put it in the repo.
