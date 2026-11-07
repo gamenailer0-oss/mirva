@@ -658,6 +658,25 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   `shots.mjs <page> [widths] [--plain] [--full]`, `sizes.mjs [WxH…]` (one sheet per size, `GROUND=plain`).
 - Marble is quiet by design (as on the live site); on Maison the film covers the first screen, so the ground shows
   only below it.
+- **Later 7 Nov: each became a whole home page** (the founder: "full main page… so I feel what MIRVA is… fonts, voice,
+  motion: your best"). Each tells the same story (fitting, three looks, the houses Naqshi/Baroque/Agha Noor with their
+  own photos in `site/img/`, Naqshi's own Onaifa photo beside MIRVA's portrait, family vote, privacy, answers, stores'
+  way in, footer) in its own type: Maison Cormorant Garamond (scroll scene: her photo then three looks; manifesto;
+  stylist's voice), Cover Bodoni Moda (contents, feature with drop cap and pull quote, photo essay with drift, diptych,
+  ballot, stockists, founder's letter: a DRAFT in his name, barcode back cover), Mirror Newsreader/Albert (the mirror's
+  life as a scroll scene: asleep, ask, think, her; Model vs Studio; the tablet; voice per occasion), Before and after
+  Instrument Serif (Her/Him slider sets, face/hair/shoes lenses, a 20 s dial), Three looks Italiana (collection tabs by
+  occasion, hearts into a wardrobe bar that follows the page, vote). Fonts come from Google Fonts here; a chosen one
+  would be self-hosted before going live.
+- **Voice**: ElevenLabs "Lily" (pFZP5JQG7iQjIQuC4Bku), 7 lines in `site/audio/` (`tools/voice.mjs`, about 650 credits;
+  account had 10,000). Played only on a tap; labelled "made with AI for this page". The mirror never speaks today:
+  never present the voice as a mirror feature.
+- Shared tools in `site/kit.js`: `[data-rv]` reveals (rise, fade, wipe, side, line; lazy images inside are fetched 1.5
+  screens early), `[data-seq]` one-by-one, `[data-scene]`/`[data-step]` pinned scenes (`data-at`), `[data-say]` voice,
+  and a review-bar **Motion** switch (on by default: this laptop asks for reduced motion, which would hide everything).
+  Phone pinned scenes need a full-width night backdrop behind the pinned picture and `overflow-x: clip` on the section,
+  or the words pass over it and the page scrolls sideways. Checks: `try.mjs` (all pass), `voice-check.mjs`,
+  `shots.mjs --full` (walks the page first) and `slice.mjs` (a full page as columns).
 
 ## 7 Nov 2026: the founder's answers, and the list they set (shipped 66fadc4)
 - Every open question was asked as multiple choice and answered (memory note `mirva-answers-2026-11-07`): never re-ask.
@@ -719,7 +738,9 @@ improvements, few words; notes and mistakes here; a checklist at the end.
 - **Beygum Bano** (30 Oct 2026, the founder: "add dynasty"): its "Dynasty, Untamed" collection showed at LAAM Fashion
   Week (24 Oct) but is not in its online shop yet; `/for/beygumbano-com` is its shop as it is (79 pieces, graphic
   sweatshirts and tees, Rs.7,500 to 9,350), renamed "Beygum Bano". Reload it when Dynasty goes online. (HSY also has a
-  collection called "The Dynasty": six made-to-order bridal pieces, no prices online.)
+  collection called "The Dynasty": six made-to-order bridal pieces, no prices online.) **Correction, 7 Nov (the
+  founder):** the "Dynasty" in sales is its own offline brand (no online shop, met through its marketing manager), not
+  Beygum Bano's line: never send /for/beygumbano-com to them. Their plan: docs/sales/dynasty-meeting.md.
 - **Naqshi, Baroque, Agha Noor** (said yes, 21 Oct 2026; `invited: true`, `priority` 1 to 3): listed for everyone and
   first in the mirror's store list (lib/app.mjs /api/brands sorts by priority); a first visit to /mirror opens Naqshi;
   no notice, so "styled by MIRVA"; the frozen home page's demo skips them (src/web/home.js). Pages: `/for/naqshi`,
