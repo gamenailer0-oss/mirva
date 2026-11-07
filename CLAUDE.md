@@ -668,6 +668,11 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   Instrument Serif (Her/Him slider sets, face/hair/shoes lenses, a 20 s dial), Three looks Italiana (collection tabs by
   occasion, hearts into a wardrobe bar that follows the page, vote). Fonts come from Google Fonts here; a chosen one
   would be self-hosted before going live.
+- **6 · `edition.html` "The edition"** (the founder: "a combo of 2 and 3, the style of 2, the scrolling of 3, in the arch
+  mirror of 2"): Cover story's porcelain/ink/Bodoni/red folios; the hero is the mirror asked by occasion (thinks with
+  the halo, answers aloud, three looks, keep, family link) drawn as an arch (silver edge, a line of warm light inside);
+  "Four moments in the mirror" scroll scene with a dark arch; Model/Studio arches; the store; ballot; stockists in
+  arches; small print; back cover. Check: `node .work/heroes/tools/try-edition.mjs` (all pass).
 - **Voice**: ElevenLabs "Lily" (pFZP5JQG7iQjIQuC4Bku), 7 lines in `site/audio/` (`tools/voice.mjs`, about 650 credits;
   account had 10,000). Played only on a tap; labelled "made with AI for this page". The mirror never speaks today:
   never present the voice as a mirror feature.
