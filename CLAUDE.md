@@ -659,6 +659,33 @@ improvements, few words; notes and mistakes here; a checklist at the end.
 - Marble is quiet by design (as on the live site); on Maison the film covers the first screen, so the ground shows
   only below it.
 
+## 7 Nov 2026: the founder's answers, and the list they set (shipped 66fadc4)
+- Every open question was asked as multiple choice and answered (memory note `mirva-answers-2026-11-07`): never re-ask.
+- **One-tap demo** (the founder's pick of the new ideas): `/mirror?brand=<id>&demo` puts the shopfront's first piece
+  (one with a garment picture ready) on MIRVA's own model (`public/showcase/before-woman.webp`, `before-man.webp`) and
+  makes the portrait; the wake screen has "or see it on MIRVA's model"; /for pages lead with "See it on our model",
+  /retail's store loader's button too. src/main.js `useModel`: only the model's picture carries `mirror.source.demo`
+  (set in the awake handler), so consent is skipped for it alone, its portraits send no "portrait" event (never a
+  store's try; the cost is still in `usage`), a men's piece swaps in the male model, and her own camera or photo asks
+  for consent as always. Off on store mirrors and tablets (`atStore()`). For a visitor it spends the one free guest
+  portrait. Check, free (the portrait request is caught): `node tools/stores/demo-check.mjs <brand> [--live]`
+  (`WAIT=12000` live; the request starts a few seconds later there).
+- **The 19 MB pose files, measured** (`node tools/stores/pose-timing.mjs [read s]`: a local proxy is the phone's line,
+  since Chrome's throttling skips the pose thread). She reads 20 s, then taps Turn on: slow 4G (1.6 Mbps) ready 81 s
+  after the tap today vs 99 s if fetched on the tap; good 4G (9 Mbps) 3.4 s vs 20.6 s. A visit that leaves after 20 s
+  costs 4.1 MB (slow) or 18.2 MB (good) today vs 0.6 MB. The founder decides; the middle way is fetching at her first
+  tap of anything (a piece, a store), not 1.5 s after opening.
+- **Mirror quote**: `docs/mirror/` (`node docs/mirror/print.mjs` -> a 2-page PDF and the glass outline SVG at
+  399 × 1200 mm; `quote-request.md` has the message and Lahore leads found online, unchecked). Follows the founder's
+  concept (freestanding bronze pebble, tablet beside it, no touch screen), not the 9 Oct wall-set brief.
+- **LinkedIn, step by step** (for a first-timer; points into the kit): https://claude.ai/artifact/XCYvLsKsnBJFXB8rYyWYDa
+  (source `.work/linkedin-guide/index.html`). The kit's own day plan is still dated 24 Oct (LAAM week).
+- `tools/deck-pitch` refreshed from the live store deck (15 slides, founding prices).
+- Mistakes: (1) the backslash pitfall a sixth time (a `node - <<'EOF'` patch with a `\n` in a template string); patches
+  with backslashes go through Edit. (2) A home-made slow line (proxy) ended answers before their last bytes, so pages
+  looked broken (ERR_CONTENT_LENGTH_MISMATCH) and the first numbers were nonsense: test a rig on a known-good page and
+  read its errors before trusting a number from it.
+
 ## Where things are
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
