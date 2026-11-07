@@ -686,7 +686,22 @@ improvements, few words; notes and mistakes here; a checklist at the end.
   looked broken (ERR_CONTENT_LENGTH_MISMATCH) and the first numbers were nonsense: test a rig on a known-good page and
   read its errors before trusting a number from it.
 
+## Later on 7 Nov: the founder's calls, and the artifacts put in order
+- **The pose files ("camera files")**: the founder wants the fastest mirror and does not mind data, so they stay as
+  today (fetched 1.5 s after the mirror opens). Do not defer them.
+- **Mirror quotation**: parked for later (docs/mirror/ is ready). **LinkedIn**: moved to the "MIRVA Lahore sales
+  strategy" session (handoff sent 7 Nov); this session no longer guides LinkedIn.
+- **The MIRVA Library** (pinned in the founder's sidebar): https://claude.ai/artifact/WaRrchGzCobvzYyvmde3xR, source
+  `.work/library/index.html`. The founder's one door to every page: three daily (Sales Desk, LinkedIn, /hq), then
+  shelves (selling, product, brand and design, team, on this laptop), folded "to delete" and other projects (MENVA).
+  **Every new artifact goes on its shelf there, in the same turn it is made.**
+- The LinkedIn step-by-step was merged into the LinkedIn kit (its first section, "Start here"; the kit is dateless now).
+- The founder chose to delete five old pages (LinkedIn step by step, Typefaces, Operating Handbook, Master Strategy,
+  Wearit storyboard); this session cannot confirm a delete, so they wait for him (listed under "To delete" in the
+  Library). The 15 Oct font decision itself stays recorded above in this file.
+
 ## Where things are
+- **Start at the MIRVA Library**: https://claude.ai/artifact/WaRrchGzCobvzYyvmde3xR
 - Brand book (Design System artifact): https://claude.ai/artifact/5FEd4btv1XadDjTEpmXi45
 - Store deck: https://claude.ai/artifact/VGtivpPzbe7YL7RdxxStcd · Team deck: https://claude.ai/artifact/Tb4VBmLUY83DTNdawGvjkU
 - System map: https://claude.ai/artifact/8iXrBqwLk8MrMbUV3AH7Lt
